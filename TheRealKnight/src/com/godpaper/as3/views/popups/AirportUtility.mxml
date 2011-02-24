@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:validation="com.adobe.cairngorm.validation.*"
+			   xmlns:utils="com.godpaper.as3.utils.*"
+			   xmlns:parsley="http://www.spicefactory.org/parsley"
+			   creationComplete="titlewindow1_creationCompleteHandler(event)">
+	<s:controlBarContent>
+		<s:HGroup width="100%"
+				  horizontalAlign="center">
+			<s:Button label="OK"
+					  click="button1_clickHandler(event)"
+					  enabled="{validatorGroup.isValid}"/>
+		</s:HGroup>
+	</s:controlBarContent>
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.cairngorm.validation.ValidatorGroup;
+			import com.godpaper.as3.configs.IndicatorConfig;
+			import com.godpaper.as3.messages.ConductMessage;
+			import com.godpaper.as3.model.plugin.MochiModel;
+
+			import mx.events.FlexEvent;
+			//
+			[Inject]
+			[Bindable]
+			public var mochiModel:MochiModel;
+			//
+			/*********************************************************
+			 * The dispatcher function injected so that we can request the
+			 * feed and Invoke the command by dispatching a Message.
+			 */
+			[MessageDispatcher]             
+			public var dispatcher:Function;
+			//
+			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				this.closeButton.visible=false;
+			}
+
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				mochiModel.name=playerNameTI.text;
+				//close popup
+				IndicatorConfig.airportUtility=false;
+				//
+				/*******************************************************
+				 * This function get's executed when the button is clicked to
+				 * request the feed.  Notice that there is no reference to the command
+				 * nor the model.  This view has no reason to know who or how will get the
+				 * data.  Is it from a local database, is it from a feed, is it an XML local
+				 * file.  That is all irrelevant to this view, all it does is say it wants
+				 * the data and dispatches a message to request it.  Parsley takes over from
+				 * there.
+				 */
+				dispatcher(new ConductMessage("Conduct oneself"));
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<parsley:Configure/>
+		<s:RadioButtonGroup id="radiogroupOfMode"/>
+		<s:RadioButtonGroup id="radiogroupOfTurn"/>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<validation:ValidatorGroup id="validatorGroup"
+								   preValidation="true">
+			<validation:validators>
+				<mx:StringValidator id="playerNameValidator"
+									source="{ playerNameTI }"
+									required="true"
+									minLength="3"
+									property="text"
+									triggerEvent="change"/>
+				<utils:GeneralValidator id="modeValidator"
+									   source="{ radiogroupOfMode }"
+									   required="true"
+									   property="selectedValue"
+									   acceptedValues="['hVSc','hVSh']"/>
+				<utils:GeneralValidator id="turnValidator"
+									   source="{ radiogroupOfTurn }"
+									   required="true"
+									   property="selectedValue"
+									   acceptedValues="['you','he']"/>
+			</validation:validators>
+		</validation:ValidatorGroup>
+	</fx:Declarations>
+
+	<s:Form width="100%"
+			height="100%">
+		<s:FormItem label="Player name:"
+					required="true"
+					toolTip="Input your  name here.">
+			<s:helpContent>
+				<s:Label>
+				</s:Label>
+			</s:helpContent>
+			<s:TextInput id="playerNameTI"
+						 width="100%"/>
+		</s:FormItem>
+		<s:FormItem label="Play mode:"
+					required="true"
+					toolTip="Determine play mode here.">
+			<s:helpContent>
+				<s:Label>
+				</s:Label>
+			</s:helpContent>
+			<s:HGroup>
+				<s:RadioButton label="Human vs Computer"
+							   groupName="radiogroupOfMode"
+							   selected="true"
+							   value="hVSc"/>
+				<s:RadioButton label="Human vs Human"
+							   groupName="radiogroupOfMode"
+							   value="hVSh"/>
+			</s:HGroup>
+		</s:FormItem>
+		<s:FormItem label="Turn first:"
+					required="true"
+					toolTip="Determine who's turn first here.">
+			<s:helpContent>
+				<s:Label>
+				</s:Label>
+			</s:helpContent>
+			<s:HGroup>
+				<s:RadioButton label="You"
+							   groupName="radiogroupOfTurn"
+							   selected="true"
+							   value="you"/>
+				<s:RadioButton label="Your opponent"
+							   groupName="radiogroupOfTurn"
+							   value="he"/>
+			</s:HGroup>
+		</s:FormItem>
+
+	</s:Form>
+</s:TitleWindow>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects 
+		 xmlns="http://www.spicefactory.org/parsley"
+		 xmlns:log="http://www.spicefactory.org/parsley/flex/logging"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://www.spicefactory.org/parsley 
+    http://www.spicefactory.org/parsley/schema/2.4/parsley-core.xsd 
+    http://www.spicefactory.org/parsley/flex/logging 
+    http://www.spicefactory.org/parsley/schema/2.4/parsley-logging-flex.xsd"
+		 >
+	<log:target level="error">
+		<log:filter>org.spicefactory.*</log:filter>        
+	</log:target>
+	<log:target level="warn">
+	</log:target>
+	<log:target level="info">
+		<log:filter>com.lookbackon.AI.searching.*</log:filter>    
+	</log:target>
+	<log:target level="debug">
+	</log:target>
+	<!-- other object definitions -->
+
+</objects>

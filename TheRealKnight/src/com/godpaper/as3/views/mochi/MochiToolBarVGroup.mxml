@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:parsley="http://www.spicefactory.org/parsley">
+	<fx:Script>
+		<![CDATA[
+			import com.godpaper.as3.configs.GameConfig;
+			import com.godpaper.as3.configs.PluginConfig;
+			import com.godpaper.as3.messages.LevelUpMessage;
+			import com.godpaper.as3.model.plugin.MochiModel;
+
+			import mochi.as3.MochiCoins;
+			import mochi.as3.MochiScores;
+			import mochi.as3.MochiSocial;
+
+			import mx.core.FlexGlobals;
+			//
+			private var loginWidgetShowed:Boolean=false;
+			//
+			[Inject][Bindable]
+			public var mochiModel:MochiModel;
+			//
+			protected function tollgateIconView_addedToStageHandler(event:Event):void
+			{
+				getIconSerials(SWFLoader(event.target)).gotoAndStop(GameConfig.gameStateManager.level);
+				tollgateSWFLoader.toolTip = GameConfig.tollgateTips[GameConfig.gameStateManager.level-1];
+			}
+
+			//
+			protected function store_addedToStageHandler(event:Event):void
+			{
+				getIconSerials(SWFLoader(event.target)).gotoAndStop(8);
+			}
+			//
+			protected function leaderboard_addedToStageHandler(event:Event):void
+			{
+				getIconSerials(SWFLoader(event.target)).gotoAndStop(6);
+			}
+			//
+			protected function login_addedToStageHandler(event:Event):void
+			{
+				getIconSerials(SWFLoader(event.target)).gotoAndStop(7);
+			}
+
+			//
+			protected function store_clickHandler(event:MouseEvent):void
+			{
+				MochiCoins.showStore({clip: FlexGlobals.topLevelApplication._mochiClip});
+			}
+			//
+			protected function leaderboard_clickHandler(event:MouseEvent):void
+			{
+				MochiScores.showLeaderboard({boardID:PluginConfig.mochiBoardID});
+				//leader board ad here.
+//				MochiAd.showInterLevelAd({clip:FlexGlobals.topLevelApplication._mochiClip,
+//					id:mochiModel.gameID});
+			}
+			//
+			protected function login_clickHandler(event:MouseEvent):void
+			{
+				//
+				if (!loginWidgetShowed)
+				{
+					MochiSocial.showLoginWidget({x: FlexGlobals.topLevelApplication.width / 2 - 100, y: FlexGlobals.topLevelApplication.height / 2});
+					//
+					loginWidgetShowed=true;
+				}
+				else
+				{
+					MochiSocial.hideLoginWidget();
+					//
+					loginWidgetShowed=false;
+				}
+			}
+			//
+			protected function getIconSerials(target:SWFLoader):MovieClip
+			{
+				// computer agent level initialization.
+				var iconMC:MovieClip=Loader(DisplayObjectContainer(target.content).getChildAt(0)).content as MovieClip;
+				return iconMC;
+			}
+			//parsley message handler
+			[MessageHandler]
+			public function levelUpHandler(message:LevelUpMessage):void
+			{
+				getIconSerials(tollgateSWFLoader).gotoAndStop(GameConfig.gameStateManager.level);
+				tollgateSWFLoader.toolTip = GameConfig.tollgateTips[GameConfig.gameStateManager.level-1];
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<parsley:Configure/>
+	</fx:Declarations>
+
+	<mx:SWFLoader 
+				  id="tollgateSWFLoader"
+				  right="0"
+				  top="0"
+				  source="{PluginConfig.mochiIcons}"
+				  addedToStage="tollgateIconView_addedToStageHandler(event)"
+				  maxHeight="50"
+				  maxWidth="50"
+				  />
+	<mx:SWFLoader right="0"
+				  top="0"
+				  source="{PluginConfig.mochiIcons}"
+				  addedToStage="store_addedToStageHandler(event)"
+				  maxHeight="50"
+				  maxWidth="50"
+				  click="store_clickHandler(event)"
+				  toolTip="mochi store"/>
+	<mx:SWFLoader right="0"
+				  top="0"
+				  source="{PluginConfig.mochiIcons}"
+				  addedToStage="leaderboard_addedToStageHandler(event)"
+				  maxHeight="50"
+				  maxWidth="50"
+				  click="leaderboard_clickHandler(event)"
+				  toolTip="mochi leader board"
+				  />
+	<mx:SWFLoader right="0"
+				  top="0"
+				  source="{PluginConfig.mochiIcons}"
+				  addedToStage="login_addedToStageHandler(event)"
+				  maxHeight="50"
+				  maxWidth="50"
+				  click="login_clickHandler(event)"
+				  toolTip="mochi login"/>
+</s:VGroup>

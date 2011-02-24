@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:UIComponent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				xmlns:parsley="http://www.spicefactory.org/parsley"
+				creationComplete="creationCompleteHandler(event)"
+				>
+	<fx:Script>
+		<![CDATA[
+			import com.godpaper.as3.configs.PluginConfig;
+			import com.godpaper.as3.model.plugin.MochiModel;
+			import com.godpaper.as3.utils.LogUtil;
+
+			import mochi.as3.MochiCoins;
+			import mochi.as3.MochiServices;
+			import mochi.as3.MochiSocial;
+
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			import mx.logging.ILogger;
+			//
+//			[Bindable]
+//			private var mochiModel:MochiModel = MochiModel.getInstance();
+			[Inject][Bindable]
+			public var mochiModel:MochiModel;
+			//
+			private static const LOG:ILogger = LogUtil.getLogger(MochiUIComponent);
+
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				// 
+				FlexGlobals.topLevelApplication._mochiClip = new MovieClip();
+				//
+				this.addChild(FlexGlobals.topLevelApplication._mochiClip);
+				//
+				FlexGlobals.topLevelApplication._mochiClip.addEventListener(Event.ADDED_TO_STAGE,mochiClipOnStage);
+			}
+
+			private function mochiClipOnStage(event:Event):void
+			{
+				MochiSocial.addEventListener(MochiSocial.LOGGED_IN,logginHandler);
+				MochiCoins.addEventListener(MochiCoins.ITEM_OWNED,itemOwendHandler);
+				MochiCoins.addEventListener(MochiCoins.ITEM_NEW,itemNewHandler);
+				//
+				MochiServices.connect(PluginConfig.mochiGameID,FlexGlobals.topLevelApplication._mochiClip,onMochiServiceConnectionError);
+			}
+			//
+			private function logginHandler(event:Object):void
+			{
+				// receive {name: name, uid: uid, profileImgURL: profileImgURL, hasCoins: True, userProperties: { hitPoints: 120 }}
+				LOG.info("Mochi loggin {0}",event.name);
+			}
+			//
+			private function itemOwendHandler(event:Object):void
+			{
+				// receive {id: id, count: count}
+//				trace("Player owns " + event.count + " of " + event.id);
+				//
+				mochiModel.storeItemsRegister.insert(event.id,event.count);
+			}
+			//
+			private function itemNewHandler(event:Object):void
+			{
+				// receive {id: id, count: count}
+//				trace("Player just bought " + event.count + " of " + event.id);
+				//
+				mochiModel.storeItemsRegister.insert(event.id,event.count);
+			}
+			private function onMochiServiceConnectionError(status:String):void
+			{
+				Alert.show("Re-connect MochiService?",status,Alert.YES|Alert.NO,null,onCloseHandler);
+			}
+
+			private function onCloseHandler(event:CloseEvent):void
+			{
+				//re-connect mochi service.\
+				if(event.detail==Alert.YES)
+				{
+					FlexGlobals.topLevelApplication._mochiClip.dispatchEvent(new Event(Event.ADDED_TO_STAGE));
+				}
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<parsley:Configure/>
+	</fx:Declarations>
+</mx:UIComponent>
