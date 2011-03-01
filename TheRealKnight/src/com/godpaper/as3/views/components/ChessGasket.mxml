@@ -15,7 +15,7 @@
 		<![CDATA[
 			import com.godpaper.as3.configs.GameConfig;
 			import com.godpaper.as3.configs.GasketConfig;
-			import com.godpaper.as3.consts.CcjConstants;
+			import com.godpaper.as3.consts.DefaultConstants;
 			import com.godpaper.as3.model.ChessPiecesModel;
 			import com.godpaper.as3.model.plugin.MochiModel;
 
@@ -55,7 +55,7 @@
 				if (mochiModel.hasCheckIndicator && GameConfig.gameStateManager.isRunning)
 				{
 					//Notice:after apply move ture flag changed immidiatly,but check indicator ongoing.
-					if (CcjConstants.FLAG_BLUE == GameConfig.turnFlag)
+					if (DefaultConstants.FLAG_BLUE == GameConfig.turnFlag)
 					{
 						GameConfig.chessPieceManager.indicateCheck(chessPiecesModel.pieces, chessPiecesModel.BLUE_MARSHAL);
 					}
@@ -73,7 +73,7 @@
 				if (mochiModel.hasCheckIndicator && GameConfig.gameStateManager.isRunning)
 				{
 					//Notice:turn flag change after remove piece at apply move behavior.
-					if (CcjConstants.FLAG_BLUE == GameConfig.turnFlag)
+					if (DefaultConstants.FLAG_BLUE == GameConfig.turnFlag)
 					{
 						GameConfig.chessPieceManager.indicateCheck(chessPiecesModel.pieces, chessPiecesModel.RED_MARSHAL);
 					}

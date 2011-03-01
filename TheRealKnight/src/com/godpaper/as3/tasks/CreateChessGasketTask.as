@@ -5,11 +5,8 @@ package com.godpaper.as3.tasks
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.adobe.cairngorm.task.Task;
-	import com.godpaper.as3.business.factory.ChessFactoryBase;
-	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.consts.CcjConstants;
+	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.model.ChessGasketsModel;
 
 	import flash.geom.Point;
@@ -18,8 +15,6 @@ package com.godpaper.as3.tasks
 
 	import mx.core.FlexGlobals;
 	import mx.core.IVisualElement;
-
-	import spark.components.Application;
 
 	/**
 	 * CreateChessGasketTask.as class.

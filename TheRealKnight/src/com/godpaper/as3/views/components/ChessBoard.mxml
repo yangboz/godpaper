@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/halo" 
-		 xmlns:degrafa="com.degrafa.*" 
-		 xmlns:repeaters="com.degrafa.geometry.repeaters.*" 
-		 xmlns:paint="com.degrafa.paint.*" 
-		 xmlns:geometry="com.degrafa.geometry.*" 
-		 xmlns:transform="com.degrafa.transform.*"
-		 width="450" height="500"
-		 >
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/halo" 
+				   xmlns:degrafa="com.degrafa.*" 
+				   xmlns:repeaters="com.degrafa.geometry.repeaters.*" 
+				   xmlns:paint="com.degrafa.paint.*" 
+				   xmlns:geometry="com.degrafa.geometry.*" 
+				   xmlns:transform="com.degrafa.transform.*"
+				   width="450" height="500"
+				   >
 	<fx:Script>
 		<![CDATA[
-			import com.godpaper.as3.consts.CcjConstants;
+			import com.godpaper.as3.consts.DefaultConstants;
 			import mx.graphics.SolidColorStroke;
 		]]>
 	</fx:Script>
@@ -23,21 +23,21 @@
 		<degrafa:strokes>
 			<paint:SolidStroke id="blackStroke" color="#000" weight="2"/>
 		</degrafa:strokes>-->
-		<!-- Horizontal lines and Vertical lines. -->
-		<!--<degrafa:GeometryGroup>
-			<repeaters:HorizontalLineRepeater count="{CcjConstants.BOARD_V_LINES}" stroke="{blackStroke}" x="0" x1="{CcjConstants.BOARD_WIDTH}" y="0" moveOffsetY="{CcjConstants.BOARD_LATTICE}"/> 
-			<repeaters:VerticalLineRepeater count="{CcjConstants.BOARD_H_LINES}" stroke="{blackStroke}" y="0" y1="{CcjConstants.BOARD_HEIGHT}" x="0" moveOffsetX="{CcjConstants.BOARD_LATTICE}"/> -->
+	<!-- Horizontal lines and Vertical lines. -->
+	<!--<degrafa:GeometryGroup>
+		<repeaters:HorizontalLineRepeater count="{DefaultConstants.BOARD_V_LINES}" stroke="{blackStroke}" x="0" x1="{DefaultConstants.BOARD_WIDTH}" y="0" moveOffsetY="{DefaultConstants.BOARD_LATTICE}"/>
+		<repeaters:VerticalLineRepeater count="{DefaultConstants.BOARD_H_LINES}" stroke="{blackStroke}" y="0" y1="{DefaultConstants.BOARD_HEIGHT}" x="0" moveOffsetX="{DefaultConstants.BOARD_LATTICE}"/> -->
 	<!--</degrafa:GeometryGroup> -->
-		<!-- Intersect lines . -->
-		<!--<degrafa:GeometryGroup>
-			<geometry:Line x="{CcjConstants.BOARD_LATTICE*3}" y="0" x1="{CcjConstants.BOARD_LATTICE*5}" y1="{CcjConstants.BOARD_LATTICE*2}" stroke="{blackStroke}">
-			</geometry:Line>
-			<geometry:Line x="{CcjConstants.BOARD_LATTICE*5}" y="0" x1="{CcjConstants.BOARD_LATTICE*3}" y1="{CcjConstants.BOARD_LATTICE*2}" stroke="{blackStroke}">
-			</geometry:Line>
-			<geometry:Line x="{CcjConstants.BOARD_LATTICE*3}" y="{CcjConstants.BOARD_HEIGHT}" x1="{CcjConstants.BOARD_LATTICE*5}" y1="{CcjConstants.BOARD_HEIGHT-100*CcjConstants.BOARD_SCALE_XY}" stroke="{blackStroke}">
-			</geometry:Line>
-			<geometry:Line x="{CcjConstants.BOARD_LATTICE*5}" y="{CcjConstants.BOARD_HEIGHT}" x1="{CcjConstants.BOARD_LATTICE*3}" y1="{CcjConstants.BOARD_HEIGHT-100*CcjConstants.BOARD_SCALE_XY}" stroke="{blackStroke}">
-			</geometry:Line>
-		</degrafa:GeometryGroup>
-	</degrafa:Surface>-->
+	<!-- Intersect lines . -->
+	<!--<degrafa:GeometryGroup>
+		<geometry:Line x="{DefaultConstants.BOARD_LATTICE*3}" y="0" x1="{DefaultConstants.BOARD_LATTICE*5}" y1="{DefaultConstants.BOARD_LATTICE*2}" stroke="{blackStroke}">
+		</geometry:Line>
+		<geometry:Line x="{DefaultConstants.BOARD_LATTICE*5}" y="0" x1="{DefaultConstants.BOARD_LATTICE*3}" y1="{DefaultConstants.BOARD_LATTICE*2}" stroke="{blackStroke}">
+		</geometry:Line>
+		<geometry:Line x="{DefaultConstants.BOARD_LATTICE*3}" y="{DefaultConstants.BOARD_HEIGHT}" x1="{DefaultConstants.BOARD_LATTICE*5}" y1="{DefaultConstants.BOARD_HEIGHT-100*DefaultConstants.BOARD_SCALE_XY}" stroke="{blackStroke}">
+		</geometry:Line>
+		<geometry:Line x="{DefaultConstants.BOARD_LATTICE*5}" y="{DefaultConstants.BOARD_HEIGHT}" x1="{DefaultConstants.BOARD_LATTICE*3}" y1="{DefaultConstants.BOARD_HEIGHT-100*DefaultConstants.BOARD_SCALE_XY}" stroke="{blackStroke}">
+		</geometry:Line>
+	</degrafa:GeometryGroup>
+</degrafa:Surface>-->
 </s:BorderContainer>

@@ -1,17 +1,17 @@
 package com.godpaper.as3.model.vos.ccjVO
 {
 	import com.godpaper.as3.consts.CcjConstants;
-	import com.godpaper.as3.consts.CcjPiecesConstants;
+	import com.godpaper.as3.consts.DefaultPiecesConstants;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.utils.LogUtil;
-	
+
 	import mx.logging.ILogger;
 	import com.godpaper.as3.impl.AbstractChessVO;
 
 	/**
-	 * 
+	 *
 	 * @author knight.zhou
-	 * 
+	 *
 	 */	
 	public class KnightVO extends AbstractChessVO
 	{
@@ -88,3 +88,4 @@ package com.godpaper.as3.model.vos.ccjVO
 		}
 	}
 }
+

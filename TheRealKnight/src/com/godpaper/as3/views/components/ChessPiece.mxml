@@ -9,7 +9,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.as3.configs.GameConfig;
-			import com.godpaper.as3.consts.CcjConstants;
+			import com.godpaper.as3.consts.DefaultConstants;
 			import com.godpaper.as3.model.ChessPiecesModel;
 			import com.godpaper.as3.model.plugin.MochiModel;
 			import com.lookbackon.AI.FSM.Message;
@@ -52,7 +52,7 @@
 			[MessageHandler]
 			public function checkHandler(message:Message):void
 			{
-				if (CcjConstants.FLAG_BLUE == flag)
+				if (DefaultConstants.FLAG_BLUE == flag)
 				{
 					//filter on moves.
 					agent.fsm.changeState(agent.defenseState);

@@ -5,7 +5,7 @@ package com.godpaper.as3.model.vos.ccjVO
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
-	
+
 	import mx.logging.ILogger;
 	import com.godpaper.as3.impl.AbstractChessVO;
 
@@ -83,3 +83,4 @@ package com.godpaper.as3.model.vos.ccjVO
 		}
 	}
 }
+

@@ -1,17 +1,17 @@
 package com.godpaper.as3.model.vos.ccjVO
 {
-	import com.godpaper.as3.consts.CcjConstants;
-	import com.godpaper.as3.consts.CcjPiecesConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.consts.DefaultPiecesConstants;
+	import com.godpaper.as3.impl.AbstractChessVO;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.utils.LogUtil;
-	
+
 	import mx.logging.ILogger;
-	import com.godpaper.as3.impl.AbstractChessVO;
 
 	/**
-	 * 
+	 *
 	 * @author Knight.zhou
-	 * 
+	 *
 	 */	
 	public class OfficalVO extends AbstractChessVO
 	{
@@ -65,22 +65,22 @@ package com.godpaper.as3.model.vos.ccjVO
 			//about legal moves.
 			//Notice:serveral admental(防守将问题)
 			//TODO:
-			if(flag==CcjConstants.FLAG_RED)
+			if(flag==DefaultConstants.FLAG_RED)
 			{
 				this.defends = 
-				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().redPieces));
+					this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().redPieces));
 			}
-			if(flag==CcjConstants.FLAG_BLUE)
+			if(flag==DefaultConstants.FLAG_BLUE)
 			{
 				this.defends = 
-				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
+					this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
 			}
 			//about attacked captures.
-			if(flag==CcjConstants.FLAG_RED)
+			if(flag==DefaultConstants.FLAG_RED)
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().bluePieces);
 			}
-			if(flag==CcjConstants.FLAG_BLUE)
+			if(flag==DefaultConstants.FLAG_BLUE)
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
@@ -90,3 +90,4 @@ package com.godpaper.as3.model.vos.ccjVO
 		}
 	}
 }
+

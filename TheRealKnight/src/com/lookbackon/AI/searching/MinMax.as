@@ -1,8 +1,7 @@
 package com.lookbackon.AI.searching
 {
 	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.consts.CcjConstants;
-	import com.godpaper.as3.consts.CcjPiecesConstants;
+	import com.godpaper.as3.consts.DefaultPiecesConstants;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
@@ -209,8 +208,8 @@ package com.lookbackon.AI.searching
 		{
 //			return MathUtil.transactRandomNumberInRange(0,100);
 			//Todo:doEvaluation about assumpted conductVO;
-			var importantValue:int = CcjPiecesConstants[conductVO.target.type].important.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
-			var fuzzyImportValue:int = CcjPiecesConstants[conductVO.target.type].convertedImportant.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
+			var importantValue:int = DefaultPiecesConstants[conductVO.target.type].important.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
+			var fuzzyImportValue:int = DefaultPiecesConstants[conductVO.target.type].convertedImportant.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
 			//TODO:dynamic omenVO value to be calculated. 
 			//precies evaluation value.
 			trace("evaluation value: ",importantValue+fuzzyImportValue);

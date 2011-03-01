@@ -1,14 +1,12 @@
 package com.godpaper.as3.model.vos.ccjVO
 {
-	import com.godpaper.as3.consts.CcjConstants;
-	import com.godpaper.as3.consts.CcjPiecesConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.impl.AbstractChessVO;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.as3.utils.MathUtil;
 	import com.lookbackon.ds.BitBoard;
 
 	import mx.logging.ILogger;
-	import com.godpaper.as3.impl.AbstractChessVO;
 
 	/**
 	 * <strong>Positive Rays</strong></p>
@@ -61,11 +59,11 @@ package com.godpaper.as3.model.vos.ccjVO
 			}
 			LOG.debug("occupies:{0}",this.occupies.dump());
 			//about legal moves.
-			if(flag==CcjConstants.FLAG_RED)
+			if(flag==DefaultConstants.FLAG_RED)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().redPieces));
 			}
-			if(flag==CcjConstants.FLAG_BLUE)
+			if(flag==DefaultConstants.FLAG_BLUE)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
 			}
@@ -91,11 +89,11 @@ package com.godpaper.as3.model.vos.ccjVO
 				LOG.debug("moves:{0}",this.moves.dump());
 			}
 			//about attacked captures.
-			if(flag==CcjConstants.FLAG_RED)
+			if(flag==DefaultConstants.FLAG_RED)
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().bluePieces);
 			}
-			if(flag==CcjConstants.FLAG_BLUE)
+			if(flag==DefaultConstants.FLAG_BLUE)
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
@@ -125,7 +123,7 @@ package com.godpaper.as3.model.vos.ccjVO
 			{
 				for(var m:int=mountIndex-1;m>=0;m--)
 				{
-					if(this.flag==CcjConstants.FLAG_BLUE)
+					if(this.flag==DefaultConstants.FLAG_BLUE)
 					{
 						if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,m)) break;
 						if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,m))
@@ -166,7 +164,7 @@ package com.godpaper.as3.model.vos.ccjVO
 			{
 				for(var m:int=mountIndex-1;m>=0;m--)
 				{
-					if(this.flag==CcjConstants.FLAG_BLUE)
+					if(this.flag==DefaultConstants.FLAG_BLUE)
 					{
 						if(ChessPiecesModel.getInstance().bluePieces.getBitt(m,colIndex)) break;
 						if(ChessPiecesModel.getInstance().redPieces.getBitt(m,colIndex))
@@ -207,7 +205,7 @@ package com.godpaper.as3.model.vos.ccjVO
 			{
 				for(var m:int=mountIndex+1;m<this.column;m++)
 				{
-					if(this.flag==CcjConstants.FLAG_BLUE)
+					if(this.flag==DefaultConstants.FLAG_BLUE)
 					{
 						if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,m)) break;
 						if(ChessPiecesModel.getInstance().redPieces.getBitt(rowIndex,m))
@@ -248,7 +246,7 @@ package com.godpaper.as3.model.vos.ccjVO
 			{
 				for(var m:int=mountIndex+1;m<this.row;m++)
 				{
-					if(this.flag==CcjConstants.FLAG_BLUE)
+					if(this.flag==DefaultConstants.FLAG_BLUE)
 					{
 						if(ChessPiecesModel.getInstance().bluePieces.getBitt(m,colIndex)) break;
 						if(ChessPiecesModel.getInstance().redPieces.getBitt(m,colIndex))

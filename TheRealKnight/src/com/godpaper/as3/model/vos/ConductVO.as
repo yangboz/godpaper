@@ -1,8 +1,6 @@
 package com.godpaper.as3.model.vos
 {
 	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.consts.CcjConstants;
-	import com.godpaper.as3.consts.CcjPiecesConstants;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;

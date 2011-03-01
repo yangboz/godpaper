@@ -27,8 +27,6 @@
     <classEntry path="com.godpaper.as3.configs.IndicatorConfig"/>
     <classEntry path="com.godpaper.as3.configs.PieceConfig"/>
     <classEntry path="com.godpaper.as3.configs.PluginConfig"/>
-    <classEntry path="com.godpaper.as3.consts.CcjConstants"/>
-    <classEntry path="com.godpaper.as3.consts.CcjPiecesConstants"/>
     <classEntry path="com.godpaper.as3.consts.DefaultConstants"/>
     <classEntry path="com.godpaper.as3.consts.ZobristConstants"/>
     <classEntry path="com.godpaper.as3.core.IChessFactory"/>
@@ -40,13 +38,12 @@
     <classEntry path="com.godpaper.as3.core.IGameStateManager"/>
     <classEntry path="com.godpaper.as3.core.IPosition"/>
     <classEntry path="com.godpaper.as3.core.IXray"/>
-    <classEntry path="com.godpaper.as3.errors.CcjErrors"/>
+    <classEntry path="com.godpaper.as3.errors.DefaultErrors"/>
     <classEntry path="com.godpaper.as3.impl.AbstractChessGasket"/>
     <classEntry path="com.godpaper.as3.impl.AbstractChessPiece"/>
     <classEntry path="com.godpaper.as3.impl.AbstractChessVO"/>
     <classEntry path="com.godpaper.as3.impl.ChessBoardDefault"/>
     <classEntry path="com.godpaper.as3.impl.ChessPieceManagerBase"/>
-    <classEntry path="com.godpaper.as3.impl.CustomPreloaderDefault"/>
     <classEntry path="com.godpaper.as3.impl.GameStateManagerDefault"/>
     <classEntry path="com.godpaper.as3.messages.ConductMessage"/>
     <classEntry path="com.godpaper.as3.messages.LevelUpMessage"/>
@@ -63,13 +60,8 @@
     <classEntry path="com.godpaper.as3.model.vos.PositionVO"/>
     <classEntry path="com.godpaper.as3.model.vos.ZobristKeyVO"/>
     <classEntry path="com.godpaper.as3.model.vos.ccjVO.BishopVO"/>
-    <classEntry path="com.godpaper.as3.model.vos.ccjVO.CannonVO"/>
-    <classEntry path="com.godpaper.as3.model.vos.ccjVO.KnightVO"/>
-    <classEntry path="com.godpaper.as3.model.vos.ccjVO.MarshalVO"/>
     <classEntry path="com.godpaper.as3.model.vos.ccjVO.OfficalVO"/>
-    <classEntry path="com.godpaper.as3.model.vos.ccjVO.PawnVO"/>
     <classEntry path="com.godpaper.as3.model.vos.ccjVO.RookVO"/>
-    <classEntry path="com.godpaper.as3.model.vos.twhVO.ChessVO"/>
     <classEntry path="com.godpaper.as3.services.ConductService"/>
     <classEntry path="com.godpaper.as3.services.IConductService"/>
     <classEntry path="com.godpaper.as3.tasks.ChessTaskBase"/>
@@ -263,16 +255,14 @@
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/A simplex approach for the tunning of a chess evaluation function.pdf" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/A simplex approach for the tunning of a chess evaluation function.pdf"/>
     <resourceEntry destPath="com/lookbackon/AI/learning/adaBoost/A Quick Introduction About AdaBoost.pdf" sourcePath="com/lookbackon/AI/learning/adaBoost/A Quick Introduction About AdaBoost.pdf"/>
     <resourceEntry destPath="org/generalrelativity/.DS_Store" sourcePath="org/generalrelativity/.DS_Store"/>
-    <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/NelderMeadSimplex.foo" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/NelderMeadSimplex.foo"/>
     <resourceEntry destPath="com/lookbackon/AI/learning/tcs-learn.pdf" sourcePath="com/lookbackon/AI/learning/tcs-learn.pdf"/>
+    <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/NelderMeadSimplex.foo" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/NelderMeadSimplex.foo"/>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/fuzzy/Fuzzy Chess Tactics.pdf" sourcePath="com/lookbackon/AI/evaluation/fuzzy/Fuzzy Chess Tactics.pdf"/>
     <resourceEntry destPath="com/godpaper/as3/configs/logConfig.xml" sourcePath="com/godpaper/as3/configs/logConfig.xml"/>
-    <resourceEntry destPath="assets/icon_toll_gate.swf" sourcePath="assets/icon_toll_gate.swf"/>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/Adaptive Extensions of the Nelder and Mead Simplex Method.pdf" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/Adaptive Extensions of the Nelder and Mead Simplex Method.pdf"/>
     <resourceEntry destPath="com/lookbackon/AI/learning/adaBoost/Application of Variant of AdaBoost-Based Machine Learning.pdf" sourcePath="com/lookbackon/AI/learning/adaBoost/Application of Variant of AdaBoost-Based Machine Learning.pdf"/>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/Nelder-Mead simplex method.pdf" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/Nelder-Mead simplex method.pdf"/>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/heuristical/HeuristicEvaluationFunctionsForGeneralGamePlaying.pdf" sourcePath="com/lookbackon/AI/evaluation/heuristical/HeuristicEvaluationFunctionsForGeneralGamePlaying.pdf"/>
-    <resourceEntry destPath="assets/icon_toll_gate.fla" sourcePath="assets/icon_toll_gate.fla"/>
   </includeResources>
   <namespaceManifests/>
 </flexLibProperties>

@@ -4,11 +4,11 @@
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
 				indeterminate="true" 
 				labelPlacement="center"
-			    label="{CcjConstants.INDICATION_THINK}"
+				label="{DefaultConstants.INDICATION_THINK}"
 				>
 	<fx:Script>
 		<![CDATA[
-			import com.godpaper.as3.consts.CcjConstants;
+			import com.godpaper.as3.consts.DefaultConstants;
 		]]>
 	</fx:Script>
 	<fx:Declarations>

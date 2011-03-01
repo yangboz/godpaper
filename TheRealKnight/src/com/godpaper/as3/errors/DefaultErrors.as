@@ -4,12 +4,12 @@ package com.godpaper.as3.errors
 
 	/**
 	 *
-	 * Customize errors occured at CCJ.
+	 * Customize errors occured at Default.
 	 *
 	 * @author Knight.zhou
 	 *
 	 */	
-	public class CcjErrors extends Error
+	public class DefaultErrors extends Error
 	{
 		//--------------------------------------------------------------------------
 		//
@@ -28,7 +28,7 @@ package com.godpaper.as3.errors
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CcjErrors(message:String="", id:int=0)
+		public function DefaultErrors(message:String="", id:int=0)
 		{
 			//TODO: implement function
 			super(message, id);

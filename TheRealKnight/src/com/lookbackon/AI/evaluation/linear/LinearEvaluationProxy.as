@@ -1,11 +1,10 @@
 package com.lookbackon.AI.evaluation.linear
 {
-	import com.lookbackon.AI.evaluation.IEvaluation;
-	import com.godpaper.as3.consts.CcjConstants;
-	import com.godpaper.as3.consts.CcjPiecesConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
+	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.lookbackon.ds.BitBoard;
 
 	import flash.utils.Proxy;
@@ -70,20 +69,20 @@ package com.lookbackon.AI.evaluation.linear
 		{
 			//TODO: implement function
 			//Material
-			var M:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_MARSHAL] as BitBoard;
-			var m:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_MARSHAL] as BitBoard;
-			var R:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_ROOK] as BitBoard;
-			var r:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_ROOK] as BitBoard;
-			var K:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_KNIGHT] as BitBoard;
-			var k:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_KNIGHT] as BitBoard;
-			var O:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_OFFICAL] as BitBoard;
-			var o:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_OFFICAL] as BitBoard;
-			var C:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_CANNON] as BitBoard;
-			var c:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_CANNON] as BitBoard;
-			var P:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_PAWN] as BitBoard;
-			var p:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_PAWN] as BitBoard;
-			var B:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.RED_BISHOP] as BitBoard;
-			var b:BitBoard = ChessPiecesModel.getInstance()[CcjConstants.BLUE_BISHOP] as BitBoard;
+			var M:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_MARSHAL] as BitBoard;
+			var m:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_MARSHAL] as BitBoard;
+			var R:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_ROOK] as BitBoard;
+			var r:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_ROOK] as BitBoard;
+			var K:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_KNIGHT] as BitBoard;
+			var k:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_KNIGHT] as BitBoard;
+			var O:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_OFFICAL] as BitBoard;
+			var o:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_OFFICAL] as BitBoard;
+			var C:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_CANNON] as BitBoard;
+			var c:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_CANNON] as BitBoard;
+			var P:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_PAWN] as BitBoard;
+			var p:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_PAWN] as BitBoard;
+			var B:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_BISHOP] as BitBoard;
+			var b:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_BISHOP] as BitBoard;
 
 			var T_red:int = M.celled*133
 				+B.celled*166

@@ -7,8 +7,8 @@ package com.godpaper.as3.tasks
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.consts.CcjConstants;
-	import com.godpaper.as3.consts.CcjPiecesConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.consts.DefaultPiecesConstants;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
@@ -87,11 +87,11 @@ package com.godpaper.as3.tasks
 				var removedPiece:ChessPiece = cGasket.getElementAt(0) as ChessPiece;
 				var removedIndex:int = GameConfig.chessPieceManager.calculatePieceIndex(removedPiece);
 				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
-				if(ChessPiece(cGasket.getElementAt(0)).label==CcjPiecesConstants.BLUE_MARSHAL.label)
+				if(ChessPiece(cGasket.getElementAt(0)).label==DefaultPiecesConstants.BLUE_MARSHAL.label)
 				{
 					GameConfig.gameStateManager.humanWin();	
 				}
-				if(ChessPiece(cGasket.getElementAt(0)).label==CcjPiecesConstants.RED_MARSHAL.label)
+				if(ChessPiece(cGasket.getElementAt(0)).label==DefaultPiecesConstants.RED_MARSHAL.label)
 				{
 					GameConfig.gameStateManager.computerWin();
 				}
@@ -100,7 +100,7 @@ package com.godpaper.as3.tasks
 				//set eat off value.
 				GameConfig.chessPieceManager.eatOffs.push(removedPiece);
 				//remove pieces data.
-				if(GameConfig.turnFlag==CcjConstants.FLAG_RED)
+				if(GameConfig.turnFlag==DefaultConstants.FLAG_RED)
 				{
 					//clean this bit at bluePieces.
 					ChessPiecesModel.getInstance().blues.splice(removedIndex,1);

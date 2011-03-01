@@ -1,19 +1,22 @@
 package com.godpaper.as3.business.factory
 {
 	import com.godpaper.as3.configs.BoardConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IChessGasket;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessVO;
-	import com.godpaper.as3.errors.CcjErrors;
+	import com.godpaper.as3.errors.DefaultErrors;
+	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.views.components.ChessGasket;
+	import com.godpaper.as3.views.components.ChessPiece;
 
 	import flash.geom.Point;
 
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.Logger;
-	import com.godpaper.as3.core.IChessFactory;
 
 	//--------------------------------------------------------------------------
 	//
@@ -35,7 +38,11 @@ package com.godpaper.as3.business.factory
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-
+		protected var chessPieceLabel:String="";
+		protected var chessPieceValue:int=0;
+		protected var chessPieceType:String="";
+		protected var chessPieceSource:Object;
+		protected var chessPieceScale:Number=1;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -76,7 +83,45 @@ package com.godpaper.as3.business.factory
 		 */
 		public function createChessPiece(position:Point, flag:int=0):IChessPiece
 		{
-			throw new Error(CcjErrors.INITIALIZE_VIRTUAL_FUNCTION);
+			//view
+			var simpleChessPiece:ChessPiece = new ChessPiece();
+			simpleChessPiece.label=this.chessPieceLabel;
+			simpleChessPiece.name=this.chessPieceLabel;
+			simpleChessPiece.type=chessPieceType;
+			//			simpleChessPiece.swfLoader.source = String("./assets/").concat(chessPieceType,".swf");
+			simpleChessPiece.swfLoader.source=this.chessPieceSource;
+			simpleChessPiece.swfLoader.scaleX=this.chessPieceScale;
+			simpleChessPiece.swfLoader.scaleY=this.chessPieceScale;
+			//set flag to identify.
+			simpleChessPiece.flag=DefaultConstants.FLAG_BLUE;
+			//
+			if (this.chessPieceLabel!="")
+			{
+				if (this.chessPieceType.indexOf(DefaultConstants.RED)!=-1)//red
+				{
+					simpleChessPiece.flag=DefaultConstants.FLAG_RED; 
+					//					ChessPiecesModel.getInstance().redPieces.setBitt(position.y,position.x,true);
+					ChessPiecesModel.getInstance()[simpleChessPiece.type].setBitt(position.y, position.x, true);
+					//push to reds collection.
+					ChessPiecesModel.getInstance().reds.push(simpleChessPiece);
+				}
+				else //blue
+				{
+					//simpleChessPiece.enabled = false;
+					//					ChessPiecesModel.getInstance().bluePieces.setBitt(position.y,position.x,true);
+					ChessPiecesModel.getInstance()[simpleChessPiece.type].setBitt(position.y, position.x, true);
+					//push to blues collection.
+					ChessPiecesModel.getInstance().blues.push(simpleChessPiece);
+				}
+			}
+			//avoid duplicate usless components.
+			if (this.chessPieceLabel!="")
+			{
+				//data
+				simpleChessPiece.position=position;
+				LOG.debug("Anew chess piece created!");
+				return simpleChessPiece as IChessPiece;
+			}
 			return null;
 		}
 
@@ -104,7 +149,7 @@ package com.godpaper.as3.business.factory
 		 */
 		public function generateChessVO(conductVO:ConductVO):IChessVO
 		{
-			throw new Error(CcjErrors.INITIALIZE_VIRTUAL_FUNCTION);
+			throw new Error(DefaultErrors.INITIALIZE_VIRTUAL_FUNCTION);
 			return null;
 		}
 
@@ -116,7 +161,7 @@ package com.godpaper.as3.business.factory
 		 */
 		public function generateOmenVO(conductVO:ConductVO):OmenVO
 		{
-			throw new Error(CcjErrors.INITIALIZE_VIRTUAL_FUNCTION);
+			throw new Error(DefaultErrors.INITIALIZE_VIRTUAL_FUNCTION);
 			return null;
 		}
 		//--------------------------------------------------------------------------

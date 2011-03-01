@@ -5,7 +5,7 @@ package com.godpaper.as3.impl
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.configs.PieceConfig;
-	import com.godpaper.as3.consts.CcjConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.IGameStateManager;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.PositionVO;
@@ -115,11 +115,11 @@ package com.godpaper.as3.impl
 			//agent initialization.
 			agent=new GameAgent("CCJGameAgent", FlexGlobals.topLevelApplication as IVisualElement);
 			//logic condition who's turn now at first.
-			if (GameConfig.turnFlag == CcjConstants.FLAG_BLUE)
+			if (GameConfig.turnFlag == DefaultConstants.FLAG_BLUE)
 			{
 				isComputerTurnNow();
 			}
-			else if (GameConfig.turnFlag == CcjConstants.FLAG_RED)
+			else if (GameConfig.turnFlag == DefaultConstants.FLAG_RED)
 			{
 				isHumanTurnNow();
 			}

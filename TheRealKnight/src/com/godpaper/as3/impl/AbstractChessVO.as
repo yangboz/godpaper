@@ -1,10 +1,10 @@
 package com.godpaper.as3.impl
 {
-	import com.godpaper.as3.errors.CcjErrors;
+	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
-	
+
 	import mx.logging.ILogger;
 	import com.godpaper.as3.core.IChessVO;
 
@@ -29,19 +29,19 @@ package com.godpaper.as3.impl
 	 * The attacking piece threatens two units, one behind the other, </p>
 	 * on the same rank, file or diagonal. This double threat has lacked a good descriptive name. </p>
 	 * We suggest ‘X-Ray’ attack.</p>
-	 * 
+	 *
 	 * The classical approach works ray-wise and uses pre-calculated ray-attacks </p>
 	 * for each of the eight ray-directions and each of the 64 squares. </p>
 	 * It has to distinguish between positive and negative directions, </p>
 	 * because it has to bitscan the ray-attack intersection with the occupancy in different orders. </p>
 	 * That usually don't cares for getting line- or piece attacks, </p>
 	 * since one likely unrolls all directions needed for a particular line or piece - otherwise one may rely on a generalized bitscan.</p>
-	 * 
+	 *
 	 * @see http://chessprogramming.wikispaces.com/X-ray+Attacks
 	 * @see http://chessprogramming.wikispaces.com/Classical+Approach
-	 * 
+	 *
 	 * @author Knight.zhou
-	 * 
+	 *
 	 */	
 	public class AbstractChessVO extends BitBoard implements IChessVO
 	{
@@ -68,7 +68,7 @@ package com.godpaper.as3.impl
 		//
 		//--------------------------------------------------------------------------
 		/**
-		 * 
+		 *
 		 * @param the width value of bitboard;
 		 * @param the height value of bitboard;
 		 * @param the rowIndex of destination point;
@@ -101,9 +101,9 @@ package com.godpaper.as3.impl
 			return _occupies;
 		}
 		/**
-		 * 
+		 *
 		 * @param value occupied by red/blue pieces.
-		 * 
+		 *
 		 */		
 		public function set occupies(value:BitBoard):void
 		{
@@ -118,9 +118,9 @@ package com.godpaper.as3.impl
 			return _moves;
 		}
 		/**
-		 * 
+		 *
 		 * @param value legal moves by red/blue pieces.
-		 * 
+		 *
 		 */		
 		public function set moves(value:BitBoard):void
 		{
@@ -135,9 +135,9 @@ package com.godpaper.as3.impl
 			return _captures;
 		}
 		/**
-		 * 
+		 *
 		 * @param value attacked by red/blue pieces.
-		 * 
+		 *
 		 */		
 		public function set captures(value:BitBoard):void
 		{
@@ -152,9 +152,9 @@ package com.godpaper.as3.impl
 			return _defends;
 		}
 		/**
-		 * 
+		 *
 		 * @param value "marshal" defends by blue pieces.
-		 * 
+		 *
 		 */		
 		public function set defends(value:BitBoard):void
 		{
@@ -169,7 +169,7 @@ package com.godpaper.as3.impl
 		//  initialization
 		//----------------------------------
 		/**
-		 * 
+		 *
 		 * @param the rowIndex you wanna set bit flag.
 		 * @param the colIndex you wanna set big flag.
 		 * @param the flag you wanna set(red is 0,blue is 1).
@@ -178,19 +178,19 @@ package com.godpaper.as3.impl
 		virtual public function initialization( rowIndex:int, colIndex:int,flag:int=0):void
 		{
 			//TODO: override function.
-			throw new CcjErrors(CcjErrors.INITIALIZE_VIRTUAL_FUNCTION);
+			throw new DefaultErrors(DefaultErrors.INITIALIZE_VIRTUAL_FUNCTION);
 		}
-			
+
 		//----------------------------------
 		//  X-ray attacks
 		//----------------------------------
 		//west
 		/**
-		 * 
+		 *
 		 * @param rowIndex current piece's row index.
 		 * @param colIndex current piece's column index.
 		 * @return legal moves prototype is bit board under west direction.
-		 * 
+		 *
 		 */	
 		virtual public function getWest(rowIndex:int, colIndex:int):BitBoard
 		{
@@ -198,11 +198,11 @@ package com.godpaper.as3.impl
 			return bb;
 		}
 		/**
-		 * 
+		 *
 		 * @param rowIndex current piece's row index.
 		 * @param colIndex current piece's column index.
 		 * @return legal moves prototype is bit board under north direction.
-		 * 
+		 *
 		 */	
 		//north
 		virtual public function getNorth(rowIndex:int, colIndex:int):BitBoard
@@ -211,11 +211,11 @@ package com.godpaper.as3.impl
 			return bb;
 		}
 		/**
-		 * 
+		 *
 		 * @param rowIndex current piece's row index.
 		 * @param colIndex current piece's column index.
 		 * @return legal moves prototype is bit board under east direction.
-		 * 
+		 *
 		 */	
 		//east
 		virtual public function getEast(rowIndex:int, colIndex:int):BitBoard
@@ -224,11 +224,11 @@ package com.godpaper.as3.impl
 			return bb;
 		}
 		/**
-		 * 
+		 *
 		 * @param rowIndex current piece's row index.
 		 * @param colIndex current piece's column index.
 		 * @return legal moves prototype is bit board under south direction.
-		 * 
+		 *
 		 */	
 		//south
 		virtual public function getSouth(rowIndex:int, colIndex:int):BitBoard
@@ -238,3 +238,4 @@ package com.godpaper.as3.impl
 		}
 	}
 }
+

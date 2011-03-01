@@ -7,12 +7,12 @@
 			   chromeColor="#FF0000"
 			   creationComplete="titlewindow1_creationCompleteHandler(event)"
 			   symbolColor="#FF0000"
-			   title="{CcjConstants.INDICATION_CHECK}">
+			   title="{DefaultConstants.INDICATION_CHECK}">
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.as3.configs.IndicatorConfig;
-			import com.godpaper.as3.consts.CcjConstants;
-			import com.godpaper.as3.consts.CcjPiecesConstants;
+			import com.godpaper.as3.consts.DefaultConstants;
+			import com.godpaper.as3.consts.DefaultPiecesConstants;
 			import com.lookbackon.AI.FSM.Message;
 
 			import mx.events.FlexEvent;
@@ -43,7 +43,7 @@
 				_timer.start();
 				//broad cast check message.
 				var message:Message=new Message();
-				message.priority=CcjPiecesConstants.BLUE_MARSHAL.strength;
+				message.priority=DefaultPiecesConstants.BLUE_MARSHAL.strength;
 //				message.data = chessPieceModel.BLUE_MARSHAL
 				dispatcher(message);
 			}

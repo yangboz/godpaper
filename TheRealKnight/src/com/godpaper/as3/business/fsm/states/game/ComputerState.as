@@ -7,7 +7,7 @@ package com.godpaper.as3.business.fsm.states.game
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.IndicatorConfig;
-	import com.godpaper.as3.consts.CcjConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.AI.FSM.IAgent;
@@ -84,7 +84,7 @@ package com.godpaper.as3.business.fsm.states.game
 		{
 			//TODO: implement function
 			//hold turn flag
-			GameConfig.turnFlag=CcjConstants.FLAG_BLUE;
+			GameConfig.turnFlag=DefaultConstants.FLAG_BLUE;
 			//about view
 			CursorManager.setBusyCursor();
 			//

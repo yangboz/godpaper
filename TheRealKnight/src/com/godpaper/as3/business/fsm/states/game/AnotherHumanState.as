@@ -7,7 +7,7 @@ package com.godpaper.as3.business.fsm.states.game
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.IndicatorConfig;
-	import com.godpaper.as3.consts.CcjConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
 
@@ -63,7 +63,7 @@ package com.godpaper.as3.business.fsm.states.game
 		override public function enter():void
 		{
 			//hold turn flag
-			GameConfig.turnFlag = CcjConstants.FLAG_GREEN;
+			GameConfig.turnFlag = DefaultConstants.FLAG_GREEN;
 			//TODO:logicly decide read out transition on this stage.(Opponent/Network transform wating).
 			IndicatorConfig.readOut=false;
 			//about view

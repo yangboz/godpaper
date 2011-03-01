@@ -6,7 +6,7 @@ package com.lookbackon.AI.searching
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.consts.CcjConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.LogUtil;
@@ -188,7 +188,7 @@ package com.lookbackon.AI.searching
 			LOG.debug("depth:{0}",depth.toString());
 			if(willNoneMove(gamePosition))
 			{
-				if(gamePosition.color==CcjConstants.FLAG_RED)
+				if(gamePosition.color==DefaultConstants.FLAG_RED)
 				{
 					//
 					this.processDone = true;
@@ -209,14 +209,14 @@ package com.lookbackon.AI.searching
 				//
 				return doEvaluation(bestMove,gamePosition);
 			}
-			if(gamePosition.color==CcjConstants.FLAG_RED)
+			if(gamePosition.color==DefaultConstants.FLAG_RED)
 			{
 				bestValue = int.MIN_VALUE;
 			}else
 			{
 				bestValue = int.MAX_VALUE;
 			}
-			if(gamePosition.color==CcjConstants.FLAG_RED)
+			if(gamePosition.color==DefaultConstants.FLAG_RED)
 			{
 				orderingMoves = generateMoves(ChessPiecesModel.getInstance().reds);
 				//pluge to death.
@@ -245,7 +245,7 @@ package com.lookbackon.AI.searching
 				tempValue = miniMax(ChessPiecesModel.getInstance().gamePosition,depth-1);
 				unmakeMove(tempMove);
 				//
-				if(gamePosition.color==CcjConstants.FLAG_RED)
+				if(gamePosition.color==DefaultConstants.FLAG_RED)
 				{
 					bestValue = Math.max(tempValue,bestValue);
 					//

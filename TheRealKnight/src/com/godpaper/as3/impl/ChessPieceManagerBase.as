@@ -1,17 +1,15 @@
 package com.godpaper.as3.impl
 {
 	import com.adobe.cairngorm.task.ParallelTask;
-	import com.adobe.cairngorm.task.SequenceTask;
 	import com.adobe.cairngorm.task.TaskEvent;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.configs.PieceConfig;
-	import com.godpaper.as3.consts.CcjConstants;
-	import com.godpaper.as3.consts.CcjPiecesConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessPieceManager;
-	import com.godpaper.as3.errors.CcjErrors;
+	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesMemento;
 	import com.godpaper.as3.model.ChessPiecesModel;
@@ -29,10 +27,8 @@ package com.godpaper.as3.impl
 	import com.godpaper.as3.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
 
-	import de.polygonal.ds.Array2;
 	import de.polygonal.math.PM_PRNG;
 
-	import mx.core.ClassFactory;
 	import mx.logging.ILogger;
 
 	import spark.filters.GlowFilter;
@@ -260,7 +256,7 @@ package com.godpaper.as3.impl
 			//
 			LOG.debug(chessPiecesModel.allPieces.dump());
 			//roll back pieces data.
-			if (GameConfig.turnFlag == CcjConstants.FLAG_RED)
+			if (GameConfig.turnFlag == DefaultConstants.FLAG_RED)
 			{
 				chessPiecesModel.blues.push(eattenPiece);
 			}
@@ -317,7 +313,7 @@ package com.godpaper.as3.impl
 			for each( var index:int in currentRemovedPieceIndexs)
 			{
 				//remove pieces data.
-				if (GameConfig.turnFlag == CcjConstants.FLAG_RED)
+				if (GameConfig.turnFlag == DefaultConstants.FLAG_RED)
 				{
 					//clean this bit at bluePieces.
 					//notice array splice without copy
@@ -350,7 +346,7 @@ package com.godpaper.as3.impl
 		 */
 		public function noneMove():int
 		{
-			if (GameConfig.turnFlag == CcjConstants.FLAG_BLUE)
+			if (GameConfig.turnFlag == DefaultConstants.FLAG_BLUE)
 			{
 				GameConfig.gameStateManager.humanWin();
 			}
@@ -396,7 +392,7 @@ package com.godpaper.as3.impl
 					return j;
 				}
 			}
-			throw new CcjErrors(CcjErrors.INVALID_CHESS_PIECE_INDEX);
+			throw new DefaultErrors(DefaultErrors.INVALID_CHESS_PIECE_INDEX);
 			return -1;
 		}
 
@@ -462,7 +458,7 @@ package com.godpaper.as3.impl
 		public function indicateCheckmate(gamePosition:PositionVO):Boolean
 		{
 			var checkmated:Boolean;
-			if (gamePosition.color == CcjConstants.FLAG_BLUE)
+			if (gamePosition.color == DefaultConstants.FLAG_BLUE)
 			{
 				checkmated=ChessPiecesModel.getInstance().BLUE_MARSHAL.isEmpty;
 			}
@@ -500,7 +496,7 @@ package com.godpaper.as3.impl
 				//Trigger in-turn system .
 				if (GameConfig.gameStateManager.isRunning)
 				{
-					if (GameConfig.turnFlag == CcjConstants.FLAG_RED)
+					if (GameConfig.turnFlag == DefaultConstants.FLAG_RED)
 					{
 						GameConfig.gameStateManager.isComputerTurnNow();
 					}

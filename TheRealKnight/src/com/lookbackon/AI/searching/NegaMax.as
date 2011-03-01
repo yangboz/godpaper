@@ -1,7 +1,7 @@
 package com.lookbackon.AI.searching
 {
 	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.consts.CcjConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.LogUtil;
@@ -156,7 +156,7 @@ package com.lookbackon.AI.searching
 		 */
 		override public function doEvaluation(conductVO:ConductVO, gamePosition:PositionVO):int
 		{
-			if (GameConfig.turnFlag == CcjConstants.FLAG_BLUE)
+			if (GameConfig.turnFlag == DefaultConstants.FLAG_BLUE)
 			{
 				positionEvaluated=super.doEvaluation(conductVO, gamePosition);
 			}

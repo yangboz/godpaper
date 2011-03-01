@@ -1,6 +1,6 @@
 package com.godpaper.as3.model.plugin
 {
-	import com.godpaper.as3.errors.CcjErrors;
+	import com.godpaper.as3.errors.DefaultErrors;
 
 	import de.polygonal.ds.HashMap;
 

@@ -6,25 +6,9 @@ package com.godpaper.as3.model
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.consts.CcjConstants;
-	import com.godpaper.as3.errors.CcjErrors;
-	import com.godpaper.as3.model.vos.ConductVO;
-	import com.godpaper.as3.model.vos.PositionVO;
-	import com.godpaper.as3.model.vos.ccjVO.BishopVO;
-	import com.godpaper.as3.model.vos.ccjVO.CannonVO;
-	import com.godpaper.as3.model.vos.ccjVO.KnightVO;
-	import com.godpaper.as3.model.vos.ccjVO.MarshalVO;
-	import com.godpaper.as3.model.vos.ccjVO.OfficalVO;
-	import com.godpaper.as3.model.vos.ccjVO.PawnVO;
-	import com.godpaper.as3.model.vos.ccjVO.RookVO;
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.as3.views.components.ChessPiece;
-	import com.lookbackon.ds.BitBoard;
+	import com.godpaper.as3.errors.DefaultErrors;
 
 	import de.polygonal.ds.Array2;
-
-	import mx.collections.ArrayCollection;
-	import mx.logging.ILogger;
 
 
 	/**
@@ -87,7 +71,7 @@ package com.godpaper.as3.model
 			}
 			else
 			{
-				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
+				throw new DefaultErrors(DefaultErrors.INITIALIZE_SINGLETON_CLASS);
 			}
 		}
 		//--------------------------------------------------------------------------

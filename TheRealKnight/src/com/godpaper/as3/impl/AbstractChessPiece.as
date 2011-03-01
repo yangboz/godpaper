@@ -6,7 +6,7 @@ package com.godpaper.as3.impl
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.business.fsm.ChessAgent;
-	import com.godpaper.as3.consts.CcjConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.model.ChessPiecesModel;
@@ -41,7 +41,7 @@ package com.godpaper.as3.impl
 		//
 		//--------------------------------------------------------------------------
 		//
-		private var textColor:String=CcjConstants.COLOR_BLUE; //default is blue.
+		private var textColor:String=DefaultConstants.COLOR_BLUE; //default is blue.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -108,9 +108,9 @@ package com.godpaper.as3.impl
 		{
 			_flag=value;
 			//
-			if (value != CcjConstants.FLAG_BLUE)
+			if (value != DefaultConstants.FLAG_BLUE)
 			{
-				this.textColor=CcjConstants.COLOR_RED;
+				this.textColor=DefaultConstants.COLOR_RED;
 				this.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 			}
 		}

@@ -5,8 +5,8 @@ package
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.adobe.cairngorm.contract.Contract;
 	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.impl.CustomPreloaderDefault;
 	import com.godpaper.as3.model.ChessPiecesModel;
 
 	import flash.display.MovieClip;
@@ -34,6 +34,7 @@ package
 		SequentialTaskGroup;
 		CairngormPopUpSupport;
 		ContextBuilderTag;
+		Contract;//for pre-condition compile;
 		//--------------------------------------------------------------------------
 		//
 		//  Variables

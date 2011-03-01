@@ -11,7 +11,7 @@ package com.godpaper.as3.business.fsm
 	import com.godpaper.as3.business.fsm.states.game.ComputerWinState;
 	import com.godpaper.as3.business.fsm.states.game.HumanState;
 	import com.godpaper.as3.business.fsm.states.game.HumanWinState;
-	import com.godpaper.as3.consts.CcjConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.lookbackon.AI.FSM.Agent;
 	import com.lookbackon.AI.searching.ISearching;
 
@@ -65,12 +65,12 @@ package com.godpaper.as3.business.fsm
 			//TODO: implement function
 			super(name, carrier);
 			//
-			this.humanState = new HumanState(this,null,CcjConstants.STATE_HUMAN);
-			this.computerState = new ComputerState(this,null,CcjConstants.STATE_COMPUTER);
-			this.anotherHumanState = new AnotherHumanState(this,null,CcjConstants.STATE_ANOTHER_HUMAN);
-			this.humanWinState = new HumanWinState(this,null,CcjConstants.STATE_HUMAN_WIN);
-			this.computerWinState = new ComputerWinState(this,null,CcjConstants.STATE_COMPUTER_WIN);
-			this.anotherHumanWinState = new AnotherHumanWinState(this,null,CcjConstants.STATE_ANOTHER_HUMAN_WIN);
+			this.humanState = new HumanState(this,null,DefaultConstants.STATE_HUMAN);
+			this.computerState = new ComputerState(this,null,DefaultConstants.STATE_COMPUTER);
+			this.anotherHumanState = new AnotherHumanState(this,null,DefaultConstants.STATE_ANOTHER_HUMAN);
+			this.humanWinState = new HumanWinState(this,null,DefaultConstants.STATE_HUMAN_WIN);
+			this.computerWinState = new ComputerWinState(this,null,DefaultConstants.STATE_COMPUTER_WIN);
+			this.anotherHumanWinState = new AnotherHumanWinState(this,null,DefaultConstants.STATE_ANOTHER_HUMAN_WIN);
 		}     	
 		//--------------------------------------------------------------------------
 		//

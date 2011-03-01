@@ -1,8 +1,7 @@
 package com.godpaper.as3.model.vos
 {
 	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.consts.CcjConstants;
-	
+
 	import de.polygonal.ds.Array2;
 
 	/**
@@ -25,13 +24,13 @@ package com.godpaper.as3.model.vos
 		//--------------------------------------------------------------------------
 //		public var threat:int = 0;		//The number of pieces this piece can kill, now point;
 //		public var threaten:int = 0;	//The number of pieces which can kill this piece, now point.
-		
+
 //		public var newThreat:int = 0;	//The number of pieces this piece can kill, new point;
 //		public var newThreaten:int = 0;//The number of pieces which can kill this piece, new point;
-		
+
 //		public var killed:int = 0;		//The number of pieces was killed by this piece.
 //		public var moved:int;			//The times of this piece was moved;
-		
+
 		//Calculating the strength of the pieces is the simplest method to measure the current board status. Since
 		//different kinds of pieces have different attacking power and defensive power, their values are different. The
 		//King is the most important piece. Its value is much larger than the total power of all other pieces. The values of
@@ -107,7 +106,7 @@ package com.godpaper.as3.model.vos
 		//--------------------------------------------------------------------------
 		/**
 		 * Prints out all elements (for debug/demo purposes).
-		 * 
+		 *
 		 * @return A human-readable representation of the structure.
 		 */
 		public function dump():String
@@ -123,6 +122,7 @@ package com.godpaper.as3.model.vos
 			s += "\n}";
 			return s;
 		}
-		
+
 	}
 }
+

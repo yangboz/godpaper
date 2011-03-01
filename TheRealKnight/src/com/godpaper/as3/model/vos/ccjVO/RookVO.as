@@ -1,21 +1,21 @@
 package com.godpaper.as3.model.vos.ccjVO
 {
-	import com.godpaper.as3.consts.CcjConstants;
-	import com.godpaper.as3.consts.CcjPiecesConstants;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.consts.DefaultPiecesConstants;
+	import com.godpaper.as3.impl.AbstractChessVO;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.ZobristKeysModel;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
-	
+
 	import flash.geom.Point;
-	
+
 	import mx.logging.ILogger;
-	import com.godpaper.as3.impl.AbstractChessVO;
-	
+
 	/**
-	 * 
+	 *
 	 * @author Knight.zhou
-	 * 
+	 *
 	 */	
 	public class RookVO extends AbstractChessVO
 	{
@@ -63,11 +63,11 @@ package com.godpaper.as3.model.vos.ccjVO
 			//about legal moves.
 //			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
 //			LOG.info("bluePieces:{0}",ChessPositionModelLocator.getInstance().bluePieces.dump());
-			if(flag==CcjConstants.FLAG_RED)
+			if(flag==DefaultConstants.FLAG_RED)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().redPieces));
 			}
-			if(flag==CcjConstants.FLAG_BLUE)
+			if(flag==DefaultConstants.FLAG_BLUE)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().bluePieces));
 			}
@@ -76,7 +76,7 @@ package com.godpaper.as3.model.vos.ccjVO
 			//
 			blocker = this.occupies.xor(this.moves);
 //			trace("blocker.reverse():",blocker.reverse().dump());
-		    
+
 			LOG.debug("blocker.isEmpty:{0}",blocker.isEmpty.toString());
 			if(!blocker.isEmpty)
 			{
@@ -95,17 +95,17 @@ package com.godpaper.as3.model.vos.ccjVO
 			}
 			//about attacked captures.
 			//TODO:(find Cannon moutain.)
-			if(flag==CcjConstants.FLAG_RED)
+			if(flag==DefaultConstants.FLAG_RED)
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().bluePieces);
 			}
-			if(flag==CcjConstants.FLAG_BLUE)
+			if(flag==DefaultConstants.FLAG_BLUE)
 			{
 				this.captures = this.moves.and(ChessPiecesModel.getInstance().redPieces);
 			}
 			LOG.debug("captures:{0}",this.captures.dump());
 		}	
-		
+
 		//----------------------------------
 		//  X-ray attacks
 		//----------------------------------
@@ -115,7 +115,7 @@ package com.godpaper.as3.model.vos.ccjVO
 			var bb:BitBoard = new BitBoard(this.column,this.row);
 			for(var w:int=colIndex-1;w>=0;w--)
 			{
-				if(this.flag==CcjConstants.FLAG_BLUE)
+				if(this.flag==DefaultConstants.FLAG_BLUE)
 				{
 					if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,w)) break;
 					//notice rook's blocker issue.
@@ -144,7 +144,7 @@ package com.godpaper.as3.model.vos.ccjVO
 			var bb:BitBoard = new BitBoard(this.column,this.row);
 			for(var n:int=rowIndex-1;n>=0;n--)
 			{
-				if(this.flag==CcjConstants.FLAG_BLUE)
+				if(this.flag==DefaultConstants.FLAG_BLUE)
 				{
 					if(ChessPiecesModel.getInstance().bluePieces.getBitt(n,colIndex)) break;
 					//notice rook's blocker issue.
@@ -173,7 +173,7 @@ package com.godpaper.as3.model.vos.ccjVO
 			var bb:BitBoard = new BitBoard(this.column,this.row);
 			for(var e:int=colIndex+1;e<this.column;e++)
 			{
-				if(this.flag==CcjConstants.FLAG_BLUE)
+				if(this.flag==DefaultConstants.FLAG_BLUE)
 				{
 					if(ChessPiecesModel.getInstance().bluePieces.getBitt(rowIndex,e)) break;
 					//notice rook's blocker issue.
@@ -202,7 +202,7 @@ package com.godpaper.as3.model.vos.ccjVO
 			var bb:BitBoard = new BitBoard(this.column,this.row);
 			for(var s:int=rowIndex+1;s<this.row;s++)
 			{
-				if(this.flag==CcjConstants.FLAG_BLUE)
+				if(this.flag==DefaultConstants.FLAG_BLUE)
 				{
 					if(ChessPiecesModel.getInstance().bluePieces.getBitt(s,colIndex)) break;
 					//notice rook's blocker issue.
@@ -227,3 +227,4 @@ package com.godpaper.as3.model.vos.ccjVO
 		}
 	}
 }
+

@@ -1,7 +1,7 @@
 package com.godpaper.as3.model
 {
 	import com.godpaper.as3.consts.ZobristConstants;
-	import com.godpaper.as3.errors.CcjErrors;
+	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.vos.ZobristKeyVO;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.ZobristHashTable;
@@ -64,7 +64,7 @@ package com.godpaper.as3.model
 					instance=this;
 				}
 			} else {
-				throw new CcjErrors(CcjErrors.INITIALIZE_SINGLETON_CLASS);
+				throw new DefaultErrors(DefaultErrors.INITIALIZE_SINGLETON_CLASS);
 			}
 			//static constructor block
 			//ref:http://mediocrechess.blogspot.com/2007/01/guide-zobrist-keys.html

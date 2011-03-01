@@ -8,7 +8,6 @@ package com.godpaper.as3.tasks
 	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.as3.business.factory.ChessFactoryBase;
 	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.consts.CcjConstants;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
