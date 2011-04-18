@@ -11,7 +11,7 @@
               <crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="framework_4.5.0.17689.swz"/>
             </crossDomainRsls>
           </libraryPathEntry>
-          <libraryPathEntry index="6" kind="3" linkType="4" path="${PROJECT_FRAMEWORKS}/libs/osmf.swc" useDefaultLinkType="true">
+          <libraryPathEntry index="8" kind="3" linkType="4" path="${PROJECT_FRAMEWORKS}/libs/osmf.swc" useDefaultLinkType="true">
             <crossDomainRsls>
               <crossDomainRslEntry autoExtract="true" policyFileUrl="http://fpdownload.adobe.com/pub/swz/crossdomain.xml" rslUrl="http://fpdownload.adobe.com/pub/swz/flex/4.5.0.17689/osmf_1.0.0.16316.swz"/>
               <crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="osmf_1.0.0.16316.swz"/>
@@ -33,6 +33,12 @@
             <crossDomainRsls>
               <crossDomainRslEntry autoExtract="true" policyFileUrl="http://fpdownload.adobe.com/pub/swz/crossdomain.xml" rslUrl="http://fpdownload.adobe.com/pub/swz/flex/4.5.0.17689/sparkskins_4.5.0.17689.swz"/>
               <crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="sparkskins_4.5.0.17689.swz"/>
+            </crossDomainRsls>
+          </libraryPathEntry>
+          <libraryPathEntry index="9" kind="3" linkType="4" path="${PROJECT_FRAMEWORKS}/libs/spark_dmv.swc" useDefaultLinkType="true">
+            <crossDomainRsls>
+              <crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="spark_4.5.0.19786_4.5.0.0.swf"/>
+              <crossDomainRslEntry autoExtract="true" policyFileUrl="http://fpdownload.adobe.com/pub/swz/crossdomain.xml" rslUrl="http://fpdownload.adobe.com/pub/swz/flex/4.5.0.19786/spark_4.5.0.19786_4.5.0.0.swf"/>
             </crossDomainRsls>
           </libraryPathEntry>
           <libraryPathEntry index="2" kind="3" linkType="4" path="${PROJECT_FRAMEWORKS}/libs/textLayout.swc" useDefaultLinkType="true">
