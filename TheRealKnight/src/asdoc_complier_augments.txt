@@ -1,0 +1,19 @@
+################################################################################################
+#ASDOC will help you against the code error under strict statement.
+#Notice:Not support included action script file;
+#Notice:exclude-sources compile argument did not real skip the defined files.
+#ASDOC errors in our project as list:
+##Error: with static type flash.filesystem:File.(Adobe bugs);
+##Error: with flash.events.KeyboardEvent.(replace event.controlKey with event.ctrlKey);
+################################################################################################
+#Actual ASDOC compiler arguments as follows:
+-source-path "src"
+-doc-sources "src/com/lookbackon"
+-output "asdoc"
+-lenient
+-library-path "libs"
+-library-path "C:\Program Files\Adobe\Adobe Flash Builder 4\sdks\4.0.0AIR2\frameworks\libs"
+-library-path "C:\Program Files\Adobe\Adobe Flash Builder 4\sdks\4.0.0AIR2\frameworks\libs\air"
+-templates-path "C:\Program Files\Adobe\Adobe Flash Builder 4\sdks\4.0.0AIR2\asdoc\templates_godpaper"
+-window-title "GODPAPER Board Game Action Script API Document" 
+-footer "Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER."

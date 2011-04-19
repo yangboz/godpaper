@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../override.css" type="text/css"><meta name="keywords" content="Array2,de.polygonal.ds.Array2,_size,_table,bitCount,cellCount,celled,data,data,height,maxSize,size,size,size,size,width,appendCol,appendRow,clear,clear,clear,clear,clear,contains,contains,contains,contains,containsKey,dump,dump,dump,fill,find,find,getArray,getBit,getCol,getIterator,getIterator,getIterator,getIterator,getKeySet,getRow,gett,hasNext,hasNext,hashInt,hashString,insert,insert,isEmpty,isEmpty,isEmpty,isEmpty,next,next,prependCol,prependRow,remove,remove,resize,resize,setAll,setBit,setCol,setRow,setXs,setYs,sett,shiftDown,shiftLeft,shiftRight,shiftUp,start,start,toArray,toArray,toArray,toArray,toString,toString,toString,toString,transpose"><title>de.polygonal.ds.Array2</title></head><body><script language="javascript" type="text/javascript" src="../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'Array2 - GODPAPER Board Game Action Script API Document';
+				var baseRef = '../../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">API Documentation</td><td class="titleTableTopNav" align="right"><a href="../../../package-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../class-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../all-index-A.html" onclick="loadClassListFrame('../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../index.html?de/polygonal/ds/Array2.html&amp;de/polygonal/ds/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">Array2</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Array2"); titleBar_setSubNav(false,true,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">de.polygonal.ds</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  Array2</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">Array2  <img src="../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr><tr><td class="classHeaderTableLabel">Implements</td><td> <a href="../../../de/polygonal/ds/Collection.html">Collection</a></td></tr></table><p></p><p></p><p></p>
+	 A two-dimensional array.
+	 <p></p><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#celled" class="signatureLink">celled</a> : int<div class="summaryTableDescription">[read-only] 
+		 
+		 </div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#height" class="signatureLink">height</a> : int<div class="summaryTableDescription">
+		 Indicates the height (rows).</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#size" class="signatureLink">size</a> : int<div class="summaryTableDescription">[read-only] 
+		 
+		 The total number of items.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#width" class="signatureLink">width</a> : int<div class="summaryTableDescription">
+		 Indicates the width (colums).</div></td><td class="summaryTableOwnerCol">Array2</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#Array2()" class="signatureLink">Array2</a>(w:int, h:int)</div><div class="summaryTableDescription">
+		 Initializes a two-dimensional array to match a given width and
+		 height.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#appendCol()" class="signatureLink">appendCol</a>(a:Array):void</div><div class="summaryTableDescription">
+		 Appends a new column.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#appendRow()" class="signatureLink">appendRow</a>(a:Array):void</div><div class="summaryTableDescription">
+		 Appends a new row.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#clear()" class="signatureLink">clear</a>():void</div><div class="summaryTableDescription">
+		 
+		 Clears all items.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#contains()" class="signatureLink">contains</a>(obj:*):Boolean</div><div class="summaryTableDescription">
+		 
+		 Determines if the collection contains a given item.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#dump()" class="signatureLink">dump</a>():String</div><div class="summaryTableDescription">
+		 Prints out all elements (for debug/demo purposes).</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#fill()" class="signatureLink">fill</a>(obj:*):void</div><div class="summaryTableDescription">
+		 Writes a given value into each cell of the two-dimensional array.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getArray()" class="signatureLink">getArray</a>():Array</div><div class="summaryTableDescription">
+		 Grants access to the the linear array which is used internally to
+		 store the data in the two-dimensional array.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getCol()" class="signatureLink">getCol</a>(x:int):Array</div><div class="summaryTableDescription">
+		 Extracts a column from a given index.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getIterator()" class="signatureLink">getIterator</a>():<a href="../../../de/polygonal/ds/Iterator.html">Iterator</a></div><div class="summaryTableDescription">
+		 
+		 Initializes an iterator object pointing to the first item in the
+		 collection.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getRow()" class="signatureLink">getRow</a>(y:int):Array</div><div class="summaryTableDescription">
+		 Extracts a row from a given index.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#gett()" class="signatureLink">gett</a>(x:int, y:int):*</div><div class="summaryTableDescription">
+		 Reads a value from a given x/y index.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isEmpty()" class="signatureLink">isEmpty</a>():Boolean</div><div class="summaryTableDescription">
+		 
+		 Checks if the collection is empty.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#prependCol()" class="signatureLink">prependCol</a>(a:Array):void</div><div class="summaryTableDescription">
+		 Prepends a new column.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#prependRow()" class="signatureLink">prependRow</a>(a:Array):void</div><div class="summaryTableDescription">
+		 Prepends a new row.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#resize()" class="signatureLink">resize</a>(w:int, h:int):void</div><div class="summaryTableDescription">
+		 Resizes the array to match the given width and height.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setCol()" class="signatureLink">setCol</a>(x:int, a:Array):void</div><div class="summaryTableDescription">
+		 Inserts new values into a complete column of the two-dimensional
+		 array.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setRow()" class="signatureLink">setRow</a>(y:uint, a:Array):void</div><div class="summaryTableDescription">
+		 Inserts new values into a complete row of the two-dimensional array.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#sett()" class="signatureLink">sett</a>(x:int, y:int, obj:*):void</div><div class="summaryTableDescription">
+		 Writes a value into a cell at the given x/y index.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setXs()" class="signatureLink">setXs</a>(y:int, objs:Array):void</div><div class="summaryTableDescription">
+		 Writes values horiztontally.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setYs()" class="signatureLink">setYs</a>(x:int, objs:Array):void</div><div class="summaryTableDescription">
+		 Writes values vertically.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#shiftDown()" class="signatureLink">shiftDown</a>():void</div><div class="summaryTableDescription">
+		 Shifts all rows down by one row.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#shiftLeft()" class="signatureLink">shiftLeft</a>():void</div><div class="summaryTableDescription">
+		 Shifts all columns by one column to the left.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#shiftRight()" class="signatureLink">shiftRight</a>():void</div><div class="summaryTableDescription">
+		 Shifts all columns by one column to the right.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#shiftUp()" class="signatureLink">shiftUp</a>():void</div><div class="summaryTableDescription">
+		 Shifts all rows up by one row.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#toArray()" class="signatureLink">toArray</a>():Array</div><div class="summaryTableDescription">
+		 
+		 Converts the collection into an array.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#toString()" class="signatureLink">toString</a>():String</div><div class="summaryTableDescription">
+		 Prints out a string representing the current object.</div></td><td class="summaryTableOwnerCol">Array2</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#transpose()" class="signatureLink">transpose</a>():void</div><div class="summaryTableDescription">
+		 Flips rows with cols and vice versa.</div></td><td class="summaryTableOwnerCol">Array2</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="celled"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">celled</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>celled:int</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+		 
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get celled():int</code><br/></div><a name="propertyDetail"></a><a name="height"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">height</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>height:int</code><p></p><p></p><p>
+		 Indicates the height (rows).
+		 If a new height is set, the two-dimensional array is resized
+		 accordingly. The minimum value is 2.
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get height():int</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set height(value:int):void</code><br/></div><a name="propertyDetail"></a><a name="size"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">size</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>size:int</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+		 
+		 The total number of items.
+		 
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get size():int</code><br/></div><a name="propertyDetail"></a><a name="width"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">width</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>width:int</code><p></p><p></p><p>
+		 Indicates the width (colums).
+		 If a new width is set, the two-dimensional array is resized
+		 accordingly. The minimum value is 2.
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get width():int</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set width(value:int):void</code><br/></div><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="Array2()"></a><a name="Array2(int,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">Array2</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function Array2(w:int, h:int)</code><p></p><p>
+		 Initializes a two-dimensional array to match a given width and
+		 height. The smallest possible size is a 1x1 matrix. The initial value
+		 of all elements is null.
+		 
+		 </p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">w</span>:int</code> &mdash; The width  (equals number of colums).
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">h</span>:int</code> &mdash; The height (equals number of rows).
+		 </td></tr></table></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="appendCol()"></a><a name="appendCol(Array)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">appendCol</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function appendCol(a:Array):void</code><p></p><p></p><p>
+		 Appends a new column. If the new column doesn't match the current
+		 height, the inserted column gets truncated or widened to match the
+		 existing height.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">a</span>:Array</code> &mdash; The column to append.
+		 </td></tr></table></p></div><a name="appendRow()"></a><a name="appendRow(Array)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">appendRow</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function appendRow(a:Array):void</code><p></p><p></p><p>
+		 Appends a new row. If the new row doesn't match the current width,
+		 the inserted row gets truncated or widened to match the existing
+		 width.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">a</span>:Array</code> &mdash; The row to append.
+		 </td></tr></table></p></div><a name="clear()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">clear</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function clear():void</code><p></p><p></p><p>
+		 
+		 Clears all items.
+		 </p></div><a name="contains()"></a><a name="contains(any)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">contains</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function contains(obj:*):Boolean</code><p></p><p></p><p>
+		 
+		 Determines if the collection contains a given item.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">obj</span>:*</code> &mdash; The item to search for.
+		 
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; True if the item exists, otherwise false.
+		 </td></tr></table></div><a name="dump()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">dump</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function dump():String</code><p></p><p></p><p>
+		 Prints out all elements (for debug/demo purposes).
+		 
+		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>String</code> &mdash; A human-readable representation of the structure.
+		 </td></tr></table></div><a name="fill()"></a><a name="fill(any)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">fill</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function fill(obj:*):void</code><p></p><p></p><p>
+		 Writes a given value into each cell of the two-dimensional array. If
+		 the obj parameter if of type Class, the method creates individual
+		 instances of this class for all array cells.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">obj</span>:*</code> &mdash; The item to be written into each cell.
+		 </td></tr></table></p></div><a name="getArray()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getArray():Array</code><p></p><p></p><p>
+		 Grants access to the the linear array which is used internally to
+		 store the data in the two-dimensional array. Use with care for
+		 advanced operations.
+		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code></td></tr></table></div><a name="getCol()"></a><a name="getCol(int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getCol</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getCol(x:int):Array</code><p></p><p></p><p>
+		 Extracts a column from a given index.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">x</span>:int</code> &mdash; The column index.
+		 
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; An array storing the values of the column.
+		 </td></tr></table></div><a name="getIterator()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getIterator</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getIterator():<a href="../../../de/polygonal/ds/Iterator.html">Iterator</a></code><p></p><p></p><p>
+		 
+		 Initializes an iterator object pointing to the first item in the
+		 collection.
+		 
+		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../de/polygonal/ds/Iterator.html">Iterator</a></code> &mdash; An iterator object.
+		 </td></tr></table></div><a name="getRow()"></a><a name="getRow(int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getRow</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getRow(y:int):Array</code><p></p><p></p><p>
+		 Extracts a row from a given index.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">y</span>:int</code> &mdash; The row index.
+		 
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; An array storing the values of the row.
+		 </td></tr></table></div><a name="gett()"></a><a name="gett(int,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">gett</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function gett(x:int, y:int):*</code><p></p><p></p><p>
+		 Reads a value from a given x/y index. No boundary check is done, so
+		 you have to make sure that the input coordinates do not exceed the
+		 width or height of the two-dimensional array.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">x</span>:int</code> &mdash; The x index (column).
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">y</span>:int</code> &mdash; The y index (row).
+		 
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>*</code> &mdash; The value at the given x/y index.
+		 </td></tr></table></div><a name="isEmpty()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isEmpty</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function isEmpty():Boolean</code><p></p><p></p><p>
+		 
+		 Checks if the collection is empty.
+		 
+		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; True if empty, otherwise false.
+		 </td></tr></table></div><a name="prependCol()"></a><a name="prependCol(Array)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">prependCol</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function prependCol(a:Array):void</code><p></p><p></p><p>
+		 Prepends a new column. If the new column doesn't match the current
+		 height, the inserted column gets truncated or widened to match the
+		 existing height.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">a</span>:Array</code> &mdash; The column to prepend.
+		 </td></tr></table></p></div><a name="prependRow()"></a><a name="prependRow(Array)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">prependRow</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function prependRow(a:Array):void</code><p></p><p></p><p>
+		 Prepends a new row. If the new row doesn't match the current width,
+		 the inserted row gets truncated or widened to match the existing
+		 width.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">a</span>:Array</code> &mdash; The row to prepend.
+		 </td></tr></table></p></div><a name="resize()"></a><a name="resize(int,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">resize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function resize(w:int, h:int):void</code><p></p><p></p><p>
+		 Resizes the array to match the given width and height. If the new
+		 size is smaller than the existing size, values are lost because of
+		 truncation, otherwise all values are preserved. The minimum size
+		 is a 1x1 matrix.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">w</span>:int</code> &mdash; The new width (cols).
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">h</span>:int</code> &mdash; The new height (rows).
+		 </td></tr></table></p></div><a name="setCol()"></a><a name="setCol(int,Array)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setCol</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function setCol(x:int, a:Array):void</code><p></p><p></p><p>
+		 Inserts new values into a complete column of the two-dimensional
+		 array. The new column is truncated if it exceeds the existing height.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">x</span>:int</code> &mdash; The column index.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">a</span>:Array</code> &mdash; The column's new values.
+		 </td></tr></table></p></div><a name="setRow()"></a><a name="setRow(uint,Array)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setRow</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function setRow(y:uint, a:Array):void</code><p></p><p></p><p>
+		 Inserts new values into a complete row of the two-dimensional array. 
+		 The new row is truncated if it exceeds the existing width.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">y</span>:uint</code> &mdash; The row index.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">a</span>:Array</code> &mdash; The row's new values.
+		 </td></tr></table></p></div><a name="sett()"></a><a name="sett(int,int,any)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">sett</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function sett(x:int, y:int, obj:*):void</code><p></p><p></p><p>
+		 Writes a value into a cell at the given x/y index. Because of
+		 performance reasons no boundary check is done, so you have to make
+		 sure that the input coordinates do not exceed the width or height of
+		 the two-dimensional array.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">x</span>:int</code> &mdash;   The x index (column).
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">y</span>:int</code> &mdash;   The y index (row).
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">obj</span>:*</code> &mdash; The item to be written into the cell.
+		 </td></tr></table></p></div><a name="setXs()"></a><a name="setXs(int,Array)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setXs</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function setXs(y:int, objs:Array):void</code><p></p><p></p><p>
+		 Writes values horiztontally. 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">y</span>:int</code> &mdash; The y index (row).
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">objs</span>:Array</code> &mdash; The items to be writtten into the cell.
+		 
+		 </td></tr></table></p></div><a name="setYs()"></a><a name="setYs(int,Array)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setYs</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function setYs(x:int, objs:Array):void</code><p></p><p></p><p>
+		 Writes values vertically. 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">x</span>:int</code> &mdash; x index (column).
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">objs</span>:Array</code> &mdash; The items to be writtten into the cell.
+		 
+		 </td></tr></table></p></div><a name="shiftDown()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">shiftDown</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function shiftDown():void</code><p></p><p></p><p>
+		 Shifts all rows down by one row. Rows are wrapped, so the last row
+		 is not lost but appended to the topmost row.
+		 </p></div><a name="shiftLeft()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">shiftLeft</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function shiftLeft():void</code><p></p><p></p><p>
+		 Shifts all columns by one column to the left. Columns are wrapped,
+		 so the column at index 0 is not lost but appended to the rightmost
+		 column.
+		 </p></div><a name="shiftRight()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">shiftRight</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function shiftRight():void</code><p></p><p></p><p>
+		 Shifts all columns by one column to the right. Columns are wrapped,
+		 so the column at the last index is not lost but appended to the
+		 leftmost column.
+		 </p></div><a name="shiftUp()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">shiftUp</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function shiftUp():void</code><p></p><p></p><p>
+		 Shifts all rows up by one row. Rows are wrapped, so the first row
+		 is not lost but appended to bottommost row.
+		 </p></div><a name="toArray()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function toArray():Array</code><p></p><p></p><p>
+		 
+		 Converts the collection into an array.
+		 
+		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; An array.
+		 </td></tr></table></div><a name="toString()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function toString():String</code><p></p><p></p><p>
+		 Prints out a string representing the current object.
+		 
+		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>String</code> &mdash; A string representing the current object.
+		 </td></tr></table></div><a name="transpose()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">transpose</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function transpose():void</code><p></p><p></p><p>
+		 Flips rows with cols and vice versa.
+		 </p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.</footer><br/>Tue Mar 1 2011, 04:20 PM +08:00  </center></div></body></html><!--Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.<br/>Tue Mar 1 2011, 04:20 PM +08:00  -->

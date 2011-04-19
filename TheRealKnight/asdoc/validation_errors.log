@@ -1,0 +1,39 @@
+Text for description in com.lookbackon.AI.fuzzyLogicSystem:FuzzyRule is not valid.
+org.xml.sax.SAXParseException: Attribute name "variable" associated with an element type "linguistic" must be followed by the ' = ' character.
+
+Text for description in com.lookbackon.AI.searching:SearchingBase is not valid.
+No matching start tag.
+
+Text for description in com.lookbackon.ds:BitBoard is not valid.
+No matching start tag.
+
+Text for description in com.lookbackon.ds:ZobristHashTable is not valid.
+No matching start tag.
+
+Text for example in org.generalrelativity.thread:GreenThread is not valid.
+org.xml.sax.SAXParseException: The element type "IRunnable" must be terminated by the matching end-tag "</IRunnable>".
+
+Text for description in com.godpaper.as3.consts:DefaultPiecesConstants is not valid.
+No matching start tag.
+
+Text for description in com.godpaper.as3.model.vos:ConductVO is not valid.
+No matching start tag.
+
+Text for description in com.godpaper.as3.tasks:CreateChessVoTask is not valid.
+org.xml.sax.SAXParseException: Element type "conduct" must be followed by either attribute specifications, ">" or "/>".
+
+Text for description in de.polygonal.math.null is not valid.
+org.xml.sax.SAXParseException: The entity name must immediately follow the '&' in the entity reference.
+
+Text for description in com.lookbackon.AI.searching:SearchingBase/SearchingBase is not valid.
+No matching start tag.
+
+Text for description in com.lookbackon.AI.searching:SearchingBase/makeMove is not valid.
+No matching start tag.
+
+Text for description in com.lookbackon.AI.searching:SearchingBase/orderingMoves/get is not valid.
+No matching start tag.
+
+Text for description in com.lookbackon.ds:ZobristHashTable/xor is not valid.
+No matching start tag.
+
