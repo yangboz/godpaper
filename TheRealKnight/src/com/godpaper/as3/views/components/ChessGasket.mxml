@@ -17,7 +17,7 @@
 			import com.godpaper.as3.configs.GasketConfig;
 			import com.godpaper.as3.consts.DefaultConstants;
 			import com.godpaper.as3.model.ChessPiecesModel;
-			import com.godpaper.as3.model.plugin.MochiModel;
+			import com.godpaper.as3.plugins.mochi.MochiModel;
 
 			import spark.events.ElementExistenceEvent;
 			//--------------------------------------------------------------------------

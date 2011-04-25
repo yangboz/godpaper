@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ButtonBar xmlns:fx="http://ns.adobe.com/mxml/2009"
+			 xmlns:s="library://ns.adobe.com/flex/spark"
+			 xmlns:mx="library://ns.adobe.com/flex/mx"
+			 width="100%"
+			 height="50"
+			 requireSelection="true"
+			 skinClass="com.godpaper.as3.views.plugin.PluginButtonBarSkin"
+			 change="changeHandler(event)"
+			 xmlns:parsley="http://www.spicefactory.org/parsley">
+	<s:dataProvider>
+		<s:ArrayList>
+			<fx:Object label="baby"
+					   toolTip="baby intelligence"
+					   enabled="true"
+					   icon="{icon_tollgate_01}"/>
+			<fx:Object label="store"
+					   toolTip="store"
+					   enabled="true"
+					   icon="@Embed('com/godpaper/as3/views/plugin/icons/store_50x50.png')"/>
+			<fx:Object label="leadboard"
+					   toolTip="leader board"
+					   enabled="true"
+					   icon="@Embed('com/godpaper/as3/views/plugin/icons/coin_50x50.png')"/>
+			<fx:Object label="account"
+					   toolTip="account login"
+					   enabled="true"
+					   icon="@Embed('com/godpaper/as3/views/plugin/icons/account_50x50.png')"/>
+		</s:ArrayList>
+	</s:dataProvider>
+	<fx:Script>
+		<![CDATA[
+			import com.godpaper.as3.configs.GameConfig;
+			import com.godpaper.as3.messages.LevelUpMessage;
+			import com.godpaper.as3.plugins.IPlug;
+			
+			import mx.core.FlexGlobals;
+			
+			import spark.components.ButtonBarButton;
+			import spark.events.IndexChangeEvent;
+			//tollgate icon class here
+			[Bindable]
+			[Embed(source="com/godpaper/as3/views/plugin/icons/tollgate01_50x50.png")]
+			private var icon_tollgate_01:Class;
+			[Bindable]
+			[Embed(source="com/godpaper/as3/views/plugin/icons/tollgate02_50x50.png")]
+			private var icon_tollgate_02:Class;
+			[Bindable]
+			[Embed(source="com/godpaper/as3/views/plugin/icons/tollgate03_50x50.png")]
+			private var icon_tollgate_03:Class;
+			[Bindable]
+			[Embed(source="com/godpaper/as3/views/plugin/icons/tollgate04_50x50.png")]
+			private var icon_tollgate_04:Class;
+			//
+			private var icon_tollgates:Array=[icon_tollgate_01, icon_tollgate_02, icon_tollgate_03, icon_tollgate_04];
+
+			//parsley message handler
+			[MessageHandler]
+			public function levelUpHandler(message:LevelUpMessage):void
+			{
+				var btnBarBtn:ButtonBarButton=this.dataGroup.getElementAt(0) as ButtonBarButton;
+//				btnBarBtn.setStyle("icon", icon_tollgates[GameConfig.gameStateManager.level - 1]);
+				btnBarBtn.skin["iconImage"]["source"]=icon_tollgates[GameConfig.gameStateManager.level - 1];
+				btnBarBtn.toolTip=GameConfig.tollgateTips[GameConfig.gameStateManager.level - 1];
+			}
+
+			protected function changeHandler(event:IndexChangeEvent):void
+			{
+				// TODO Auto-generated method stub
+				switch (event.newIndex)
+				{
+					case 0: //tollgate
+						iPlug.showData();
+						break;
+					case 1: //store
+						iPlug.showStore();
+						break;
+					case 2: //coin,leadboard
+						iPlug.showLeaderboard({boardID: iPlug.data.boardID});
+						break;
+					case 3: //account
+						//
+						iPlug.showLoginWidget();
+						break;
+					default:
+						break;
+				}
+			}
+			//
+			protected function get iPlug():IPlug
+			{
+				return IPlug(FlexGlobals.topLevelApplication.pluginUIComponent.provider);
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<parsley:Configure>
+		</parsley:Configure>
+	</fx:Declarations>
+</s:ButtonBar>

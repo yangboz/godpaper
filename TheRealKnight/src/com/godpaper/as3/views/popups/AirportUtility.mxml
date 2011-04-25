@@ -19,7 +19,7 @@
 			import com.adobe.cairngorm.validation.ValidatorGroup;
 			import com.godpaper.as3.configs.IndicatorConfig;
 			import com.godpaper.as3.messages.ConductMessage;
-			import com.godpaper.as3.model.plugin.MochiModel;
+			import com.godpaper.as3.plugins.mochi.MochiModel;
 
 			import mx.events.FlexEvent;
 			//

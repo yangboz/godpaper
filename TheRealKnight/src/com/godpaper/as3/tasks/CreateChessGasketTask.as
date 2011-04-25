@@ -86,7 +86,7 @@ package com.godpaper.as3.tasks
 			}
 			//mochi uicomponent at the top of game ui.
 			FlexGlobals.topLevelApplication.setElementIndex(
-				FlexGlobals.topLevelApplication.mochiUIComponent,
+				FlexGlobals.topLevelApplication.pluginUIComponent,
 				FlexGlobals.topLevelApplication.numElements-1
 				);
 			//

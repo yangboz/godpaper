@@ -6,7 +6,7 @@ package com.godpaper.as3.services
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.model.plugin.MochiModel;
+	import com.godpaper.as3.plugins.mochi.MochiModel;
 
 	import flash.events.NetStatusEvent;
 	import flash.net.GroupSpecifier;

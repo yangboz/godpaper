@@ -8,17 +8,19 @@ package
 	import com.adobe.cairngorm.contract.Contract;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.model.ChessPiecesModel;
-
+	import com.godpaper.as3.views.plugin.PluginButtonBar;
+	
 	import flash.display.MovieClip;
-
+	
+	import mx.core.UIComponent;
 	import mx.events.FlexEvent;
-
+	
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.Logger;
 	import org.spicefactory.lib.task.SequentialTaskGroup;
 	import org.spicefactory.parsley.flex.tag.builder.ContextBuilderTag;
 	import org.spicefactory.parsley.popup.CairngormPopUpSupport;
-
+	
 	import spark.components.Application;
 
 	/**
@@ -35,13 +37,16 @@ package
 		CairngormPopUpSupport;
 		ContextBuilderTag;
 		Contract;//for pre-condition compile;
+		PluginButtonBar;
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//Mochi media support.
-		public var _mochiClip:MovieClip;
+//		//Mochi media support.
+//		public var _mochiClip:MovieClip;
+		//Plugin stage support.
+		public var pluginStage:MovieClip;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

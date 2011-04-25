@@ -26,7 +26,6 @@
     <classEntry path="com.godpaper.as3.configs.GasketConfig"/>
     <classEntry path="com.godpaper.as3.configs.IndicatorConfig"/>
     <classEntry path="com.godpaper.as3.configs.PieceConfig"/>
-    <classEntry path="com.godpaper.as3.configs.PluginConfig"/>
     <classEntry path="com.godpaper.as3.consts.DefaultConstants"/>
     <classEntry path="com.godpaper.as3.consts.ZobristConstants"/>
     <classEntry path="com.godpaper.as3.core.IChessFactory"/>
@@ -54,7 +53,7 @@
     <classEntry path="com.godpaper.as3.model.HistoryTableModel"/>
     <classEntry path="com.godpaper.as3.model.OpeningBookModel"/>
     <classEntry path="com.godpaper.as3.model.ZobristKeysModel"/>
-    <classEntry path="com.godpaper.as3.model.plugin.MochiModel"/>
+    <classEntry path="com.godpaper.as3.plugins.mochi.MochiModel"/>
     <classEntry path="com.godpaper.as3.model.vos.ConductVO"/>
     <classEntry path="com.godpaper.as3.model.vos.OmenVO"/>
     <classEntry path="com.godpaper.as3.model.vos.PositionVO"/>
@@ -84,8 +83,7 @@
     <classEntry path="com.godpaper.as3.views.components.ChessBoard"/>
     <classEntry path="com.godpaper.as3.views.components.ChessGasket"/>
     <classEntry path="com.godpaper.as3.views.components.ChessPiece"/>
-    <classEntry path="com.godpaper.as3.views.mochi.MochiUIComponent"/>
-    <classEntry path="com.godpaper.as3.views.mochi.SubmitScoreAndNextRound"/>
+    <classEntry path="com.godpaper.as3.views.plugin.SubmitScoreAndNextRound"/>
     <classEntry path="com.godpaper.as3.views.popups.AirportUtility"/>
     <classEntry path="com.godpaper.as3.views.popups.CheckIndicatory"/>
     <classEntry path="com.godpaper.as3.views.popups.ThinkIndicatory"/>
@@ -245,10 +243,19 @@
     <classEntry path="org.generalrelativity.thread.event.GreenThreadEvent"/>
     <classEntry path="org.generalrelativity.thread.process.AbstractProcess"/>
     <classEntry path="org.generalrelativity.thread.util.ThreadUtil"/>
-    <classEntry path="com.godpaper.as3.views.mochi.MochiButtonBar"/>
-    <classEntry path="com.godpaper.as3.views.mochi.MochiButtonBarSkin"/>
-    <classEntry path="com.godpaper.as3.views.mochi.MochiButtonBarButtonSkin"/>
     <classEntry path="com.godpaper.as3.utils.HTMLToolTip"/>
+    <classEntry path="com.godpaper.as3.plugins.IPlug"/>
+    <classEntry path="com.godpaper.as3.plugins.IPlugData"/>
+    <classEntry path="com.godpaper.as3.plugins.PluginUIComponent"/>
+    <classEntry path="com.godpaper.as3.plugins.mochi.MochiPlugin"/>
+    <classEntry path="com.godpaper.as3.plugins.come2play.Come2PlayPlugin"/>
+    <classEntry path="com.godpaper.as3.plugins.come2play.Come2PlayModel"/>
+    <classEntry path="com.godpaper.as3.plugins.nonoba.NonobaPlugin"/>
+    <classEntry path="com.godpaper.as3.plugins.nonoba.NonobaModel"/>
+    <classEntry path="com.godpaper.as3.plugins.kongregate.KongregatePlugin"/>
+    <classEntry path="com.godpaper.as3.plugins.kongregate.KongregateModel"/>
+    <classEntry path="com.godpaper.as3.plugins.whirled.WhirledPlugin"/>
+    <classEntry path="com.godpaper.as3.plugins.photon.PhotonPlugin"/>
   </includeClasses>
   <includeResources>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.foo" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.foo"/>

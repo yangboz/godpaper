@@ -9,7 +9,7 @@ features.  This is a MXML implementation, but this can also be declared in and X
 		   xmlns:mx="library://ns.adobe.com/flex/mx" 
 		   xmlns:model="com.godpaper.as3.model.*" 
 		   xmlns:plugin="com.godpaper.as3.model.plugin.*"
-		   xmlns:spicefactory="http://www.spicefactory.org/parsley"
+		   xmlns:spicefactory="http://www.spicefactory.org/parsley" xmlns:mochi="com.godpaper.as3.plugins.mochi.*"
 		   >
 	<fx:Script>
 		<![CDATA[
@@ -19,7 +19,7 @@ features.  This is a MXML implementation, but this can also be declared in and X
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
-		<plugin:MochiModel/>
+		<mochi:MochiModel/>
 		<!---
 		Here is the Service that we ask Parsley to use.  Since this service implements
 		IRssService, Parsley figures out that it should inject this service whenever
