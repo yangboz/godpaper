@@ -19,13 +19,8 @@
 			import com.adobe.cairngorm.validation.ValidatorGroup;
 			import com.godpaper.as3.configs.IndicatorConfig;
 			import com.godpaper.as3.messages.ConductMessage;
-			import com.godpaper.as3.plugins.mochi.MochiModel;
 
 			import mx.events.FlexEvent;
-			//
-			[Inject]
-			[Bindable]
-			public var mochiModel:MochiModel;
 			//
 			/*********************************************************
 			 * The dispatcher function injected so that we can request the
@@ -43,7 +38,7 @@
 			protected function button1_clickHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
-				mochiModel.name=playerNameTI.text;
+//				mochiModel.name=playerNameTI.text;
 				//close popup
 				IndicatorConfig.airportUtility=false;
 				//

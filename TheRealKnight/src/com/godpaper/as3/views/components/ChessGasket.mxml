@@ -17,18 +17,16 @@
 			import com.godpaper.as3.configs.GasketConfig;
 			import com.godpaper.as3.consts.DefaultConstants;
 			import com.godpaper.as3.model.ChessPiecesModel;
-			import com.godpaper.as3.plugins.mochi.MochiModel;
-
+			import com.godpaper.as3.plugins.IPlug;
+			
+			import mx.core.FlexGlobals;
+			
 			import spark.events.ElementExistenceEvent;
 			//--------------------------------------------------------------------------
 			//
 			//  Variables
 			//
 			//--------------------------------------------------------------------------
-			//mochi model
-			[Inject]
-			[Bindable]
-			public var mochiModel:MochiModel;
 			//
 			[Bindable]
 			private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
@@ -52,7 +50,7 @@
 			{
 				super.elementAddHandler(event);
 				//check indicate handler.
-				if (mochiModel.hasCheckIndicator && GameConfig.gameStateManager.isRunning)
+				if (iPlug.data.hasCheckIndicator && GameConfig.gameStateManager.isRunning)
 				{
 					//Notice:after apply move ture flag changed immidiatly,but check indicator ongoing.
 					if (DefaultConstants.FLAG_BLUE == GameConfig.turnFlag)
@@ -70,7 +68,7 @@
 			override protected function elementRemoveHandler(event:ElementExistenceEvent):void
 			{
 				//
-				if (mochiModel.hasCheckIndicator && GameConfig.gameStateManager.isRunning)
+				if (iPlug.data.hasCheckIndicator && GameConfig.gameStateManager.isRunning)
 				{
 					//Notice:turn flag change after remove piece at apply move behavior.
 					if (DefaultConstants.FLAG_BLUE == GameConfig.turnFlag)
@@ -82,6 +80,12 @@
 						GameConfig.chessPieceManager.indicateCheck(chessPiecesModel.pieces, chessPiecesModel.BLUE_MARSHAL);
 					}
 				}
+			}
+			
+			//
+			protected function get iPlug():IPlug
+			{
+				return IPlug(FlexGlobals.topLevelApplication.pluginUIComponent.provider);
 			}
 		]]>
 	</fx:Script>

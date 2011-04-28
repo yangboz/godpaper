@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<impl:AbstractChessPiece xmlns:fx="http://ns.adobe.com/mxml/2009" 
-						 xmlns:s="library://ns.adobe.com/flex/spark" 
-						 xmlns:mx="library://ns.adobe.com/flex/mx" 
+<impl:AbstractChessPiece xmlns:fx="http://ns.adobe.com/mxml/2009"
+						 xmlns:s="library://ns.adobe.com/flex/spark"
+						 xmlns:mx="library://ns.adobe.com/flex/mx"
 						 xmlns:impl="com.godpaper.as3.impl.*"
 						 xmlns:parsley="http://www.spicefactory.org/parsley"
 						 width="50"
@@ -10,17 +10,17 @@
 		<![CDATA[
 			import com.godpaper.as3.configs.GameConfig;
 			import com.godpaper.as3.consts.DefaultConstants;
-			import com.godpaper.as3.model.ChessPiecesModel;
-			import com.godpaper.as3.plugins.mochi.MochiModel;
+			import com.godpaper.as3.plugins.IPlug;
 			import com.lookbackon.AI.FSM.Message;
+			
+			import mx.core.FlexGlobals;
+
 			//--------------------------------------------------------------------------
 			//
 			//  Variables
 			//
 			//--------------------------------------------------------------------------
-			[Inject]
-			[Bindable]
-			public var mochiModel:MochiModel;
+
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -58,6 +58,7 @@
 					agent.fsm.changeState(agent.defenseState);
 				}
 			}
+
 			//--------------------------------------------------------------------------
 			//
 			//  Protected methods
@@ -67,17 +68,22 @@
 			{
 				super.mouseDownHandler(event);
 				//indicate gasket can fill with chess piece.
-				if (mochiModel.hasCaptureIndicator)
+				if (iPlug.data.hasCaptureIndicator)
 				{
 					GameConfig.chessPieceManager.indicateGaskets(this.chessVO.moves);
 				}
+			}
+
+			//
+			protected function get iPlug():IPlug
+			{
+				return IPlug(FlexGlobals.topLevelApplication.pluginUIComponent.provider);
 			}
 			//--------------------------------------------------------------------------
 			//
 			//  Private methods
 			//
 			//--------------------------------------------------------------------------
-
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -87,6 +93,5 @@
 	<!-- Place visual elements (e.g., components,popups) here -->
 	<mx:SWFLoader id="swfLoader"
 				  verticalCenter="0"
-				  horizontalCenter="0"
-				  />
+				  horizontalCenter="0"/>
 </impl:AbstractChessPiece>

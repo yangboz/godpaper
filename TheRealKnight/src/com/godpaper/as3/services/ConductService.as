@@ -6,13 +6,14 @@ package com.godpaper.as3.services
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.plugins.mochi.MochiModel;
 
 	import flash.events.NetStatusEvent;
 	import flash.net.GroupSpecifier;
 	import flash.net.NetConnection;
 	import flash.net.NetGroup;
-
+	import com.godpaper.as3.plugins.IPlug;
+	
+	import mx.core.FlexGlobals;
 
 	/**
 	 * ConductService.as class.
@@ -37,8 +38,6 @@ package com.godpaper.as3.services
 
 		private var _connected:Boolean=false;
 
-		[Inject]
-		public var mochiModel:MochiModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -85,7 +84,7 @@ package com.godpaper.as3.services
 			var message:Object=new Object();
 			message.sender=netGroup.convertPeerIDToGroupAddress(nc.nearID);
 			//
-			message.user=mochiModel.name;
+//			message.user=iPlug.data.name;
 			message.text=value;
 			//
 			netGroup.post(message);
@@ -133,7 +132,12 @@ package com.godpaper.as3.services
 			//
 			user="user" + Math.round(Math.random() * 10000);
 		}
-
+		
+		//
+		protected function get iPlug():IPlug
+		{
+			return IPlug(FlexGlobals.topLevelApplication.pluginUIComponent.provider);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods

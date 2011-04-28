@@ -53,7 +53,6 @@
     <classEntry path="com.godpaper.as3.model.HistoryTableModel"/>
     <classEntry path="com.godpaper.as3.model.OpeningBookModel"/>
     <classEntry path="com.godpaper.as3.model.ZobristKeysModel"/>
-    <classEntry path="com.godpaper.as3.plugins.mochi.MochiModel"/>
     <classEntry path="com.godpaper.as3.model.vos.ConductVO"/>
     <classEntry path="com.godpaper.as3.model.vos.OmenVO"/>
     <classEntry path="com.godpaper.as3.model.vos.PositionVO"/>
@@ -226,16 +225,6 @@
     <classEntry path="de.polygonal.ds.sort.sLinkedMergeSort"/>
     <classEntry path="de.polygonal.ds.sort.sLinkedMergeSortCmp"/>
     <classEntry path="de.polygonal.math.PM_PRNG"/>
-    <classEntry path="mochi.as3.MochiAd"/>
-    <classEntry path="mochi.as3.MochiCoins"/>
-    <classEntry path="mochi.as3.MochiDigits"/>
-    <classEntry path="mochi.as3.MochiEventDispatcher"/>
-    <classEntry path="mochi.as3.MochiEvents"/>
-    <classEntry path="mochi.as3.MochiInventory"/>
-    <classEntry path="mochi.as3.MochiScores"/>
-    <classEntry path="mochi.as3.MochiServices"/>
-    <classEntry path="mochi.as3.MochiSocial"/>
-    <classEntry path="mochi.as3.MochiUserData"/>
     <classEntry path="org.generalrelativity.thread.GreenThread"/>
     <classEntry path="org.generalrelativity.thread.IRunnable"/>
     <classEntry path="org.generalrelativity.thread.diagnostic.GreenThreadDiagnostic"/>
@@ -247,7 +236,6 @@
     <classEntry path="com.godpaper.as3.plugins.IPlug"/>
     <classEntry path="com.godpaper.as3.plugins.IPlugData"/>
     <classEntry path="com.godpaper.as3.plugins.PluginUIComponent"/>
-    <classEntry path="com.godpaper.as3.plugins.mochi.MochiPlugin"/>
     <classEntry path="com.godpaper.as3.plugins.come2play.Come2PlayPlugin"/>
     <classEntry path="com.godpaper.as3.plugins.come2play.Come2PlayModel"/>
     <classEntry path="com.godpaper.as3.plugins.nonoba.NonobaPlugin"/>
