@@ -12,7 +12,7 @@ package com.godpaper.as3.configs
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Jan 19, 2011 2:20:20 PM
-	 */   	 
+	 */   	
 	public class BoardConfig
 	{		
 		//--------------------------------------------------------------------------
