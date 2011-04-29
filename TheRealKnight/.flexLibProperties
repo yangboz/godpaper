@@ -236,14 +236,6 @@
     <classEntry path="com.godpaper.as3.plugins.IPlug"/>
     <classEntry path="com.godpaper.as3.plugins.IPlugData"/>
     <classEntry path="com.godpaper.as3.plugins.PluginUIComponent"/>
-    <classEntry path="com.godpaper.as3.plugins.come2play.Come2PlayPlugin"/>
-    <classEntry path="com.godpaper.as3.plugins.come2play.Come2PlayModel"/>
-    <classEntry path="com.godpaper.as3.plugins.nonoba.NonobaPlugin"/>
-    <classEntry path="com.godpaper.as3.plugins.nonoba.NonobaModel"/>
-    <classEntry path="com.godpaper.as3.plugins.kongregate.KongregatePlugin"/>
-    <classEntry path="com.godpaper.as3.plugins.kongregate.KongregateModel"/>
-    <classEntry path="com.godpaper.as3.plugins.whirled.WhirledPlugin"/>
-    <classEntry path="com.godpaper.as3.plugins.photon.PhotonPlugin"/>
   </includeClasses>
   <includeResources>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.foo" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.foo"/>
