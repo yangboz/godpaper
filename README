@@ -1,41 +1,16 @@
-<h2>About</h2>
-A flash board game framework named GODPAPER(code name:"the real knight") by as3 language.
-This wiki is dedicated to all the unsung heroes of the world, those who the absence of which
-would degrade all our lives to the point where the sweet release of death would seem
-preferable to continuing this mortal existence. Ironically, the absence of those I refer to
-would all but guarantee this outcome!
-I of course refer here to the constants of the physical world:
-G, the gravitational constant, whose vigilance secures us to this very world;
-O, oops;
-D,electric displacement field,also called the electric flux density;
-P,kilogram meter per second (kg m/s);
-A,area;
-P,pascal (Pa);
-E,the electric constant, which gives rise to the properties of the electromagnetic fields our technology depends upon;
-R,Electrical resistance;
-<h2>Games under "GODPAPER" framework</h2>
-<a href="http://www.mochimedia.com/games/_v331/">http://www.mochimedia.com/games/_v331/</a>
-<a href="http://www.mochimedia.com/games/_v801648/">http://www.mochimedia.com/games/_v801648/</a>
-<h2>Main features</h2>
-This wiki is for programmers. More precisely, it’s for programmers who favor the “learn by example” approach.
-I don’t know about you, but I’ve ready plenty of flash games where all they present are fragments of applications and small, contrived bits of code to illustrate a given point. Now, without question, that is sometimes precisely what you want. Oftentimes, however, what you really want is a whole application that is explained in its entirety so you can see how all the pieces fit together as you explore it little by little. This is precisely what this wiki seeks to do.
-<h3>Simply setting</h3>
-<script src="https://gist.github.com/870317.js?file=Board%2CPiece%2CGasket%26%26Plugin%20Setting"></script>
-
-<h3>Game configuration</h3>
-<script src="https://gist.github.com/870325.js?file=Game%20configuration"></script>
-<h3>Global logging</h3>
-<script src="https://gist.github.com/875713.js?file=The%20system%20unique%20logging"></script>
-<h3>The ChessVO</h3>
-<script src="https://gist.github.com/875717.js?file=The%20ChessVO"></script>
-<h3>The ChessPiecesManager</h3>
-<script src="https://gist.github.com/875708.js?file=The%20ChessPiecesManager"></script>
-<h2>Are you looking for other helps?</h2>
-<h3>BitBoard</h3>
-@see:<a href="http://blog.lookbackon.com/2010/04/08/bitboards/">http://blog.lookbackon.com/2010/04/08/bitboards/</a>
-<h3>Board Representation</h3>
-@see:<a href="http://chessprogramming.wikispaces.com/Board+Representation/">http://chessprogramming.wikispaces.com/Board+Representation/</a>
-<h3>MoveGeneration</h3>
-@see:<a href="http://chessprogramming.wikispaces.com/Move+Generation">http://chessprogramming.wikispaces.com/Move+Generation</a>
-<h2>Conclusion</h2>
-This just about wraps up introducing the GODPAPER framework, thanks very much for your time. I hope you enjoyed it and remember we only scratched the surface of some of the fantastic effects that can be made with the framework. Please do check out the GODPAPER framework website at <a href="http://www.godpaper.com">www.godpaper.com</a> for some fantastic examples of the framework and how others have taken it to the next level with Flex integration!
+/*====================================================================
+Copyright (C) 2010 GODPAPER <Knight.zhou>
+ 
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+ 
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+=====================================================================*/
