@@ -84,7 +84,7 @@ package com.godpaper.as3.tasks
 					ChessGasketsModel.getInstance().gaskets.sett(h,v,cGasket);
 				}
 			}
-			//mochi uicomponent at the top of game ui.
+			//plugin uicomponent at the top of game ui.
 			FlexGlobals.topLevelApplication.setElementIndex(
 				FlexGlobals.topLevelApplication.pluginUIComponent,
 				FlexGlobals.topLevelApplication.numElements-1
