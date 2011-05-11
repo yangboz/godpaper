@@ -76,7 +76,6 @@ package com.godpaper.as3.plugins
 		//--------------------------------------------------------------------------
 		public function PluginUIComponent()
 		{
-			//TODO: implement function
 			super();
 			//
 			this.addEventListener(FlexEvent.CREATION_COMPLETE,creationCompleteHandler);

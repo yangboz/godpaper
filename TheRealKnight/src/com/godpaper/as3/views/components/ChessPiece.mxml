@@ -68,9 +68,13 @@
 			{
 				super.mouseDownHandler(event);
 				//indicate gasket can fill with chess piece.
+				if (iPlug.data.hasMoveIndicator)
+				{
+					GameConfig.chessPieceManager.indicateGasketsMove(this.chessVO.moves);
+				}
 				if (iPlug.data.hasCaptureIndicator)
 				{
-					GameConfig.chessPieceManager.indicateGaskets(this.chessVO.moves);
+					GameConfig.chessPieceManager.indicateGasketsCapture(this.chessVO.captures);
 				}
 			}
 

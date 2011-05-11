@@ -171,8 +171,8 @@ package com.godpaper.as3.impl
 //			LOG.info("move validate begin at:{0}",beginTime);
 			//chess piece change state(view).
 //			conductVO.target.agent.getFSM().changeState(conductVO.target.attackState);
-			//TODO:
-			//chess piece move (logic) check.
+			//TODO:chess piece move (logic) check.
+			//
 			result=Boolean(conductVO.target.chessVO.moves.getBitt(conductVO.previousPosition.y, conductVO.previousPosition.x));
 //			LOG.info("doMoveValidation result:{0}",result);
 			//end
@@ -364,7 +364,7 @@ package com.godpaper.as3.impl
 		 */
 		public function willNoneMove(gamePosition:PositionVO):Boolean
 		{
-			//TODO:
+			//TODO:function implementation.
 			return false;
 		}
 
@@ -401,7 +401,7 @@ package com.godpaper.as3.impl
 		 * @param legalMoves current chess piece's legal moves.
 		 *
 		 */
-		public function indicateGaskets(legalMoves:BitBoard):void
+		public function indicateGasketsMove(legalMoves:BitBoard):void
 		{
 			//@see Main.application1_creationCompleteHandler.createGasket().
 			for (var v:int=0; v < BoardConfig.yLines; v++)
@@ -410,11 +410,32 @@ package com.godpaper.as3.impl
 				{
 					if (legalMoves.getBitt(v, h))
 					{
-						(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[new GlowFilter()];
+						(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).setStyle("backgroundColor", 0xff0000);
 					}
 					else
 					{
+						(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).clearStyle("backgroundColor");
 						(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[];
+					}
+				}
+			}
+		}
+		
+		/**
+		 * @see Main.application1_creationCompleteHandler.createGasket().
+		 * @param legalMoves current chess piece's legal moves.
+		 *
+		 */
+		public function indicateGasketsCapture(legalCaptures:BitBoard):void
+		{
+			//@see Main.application1_creationCompleteHandler.createGasket().
+			for (var v:int=0; v < BoardConfig.yLines; v++)
+			{
+				for (var h:int=0; h < BoardConfig.xLines; h++)
+				{
+					if (legalCaptures.getBitt(v, h))
+					{
+						(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[new GlowFilter()];
 					}
 				}
 			}
@@ -429,7 +450,7 @@ package com.godpaper.as3.impl
 		 */
 		public function indicateCheck(pieces:Vector.<ChessPiece>, marshal:BitBoard):Boolean
 		{
-			//TODO:
+			//TODO:should check kill itself logic.
 			var totalCaptures:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 			for (var i:int=0; i < pieces.length; i++)
 			{

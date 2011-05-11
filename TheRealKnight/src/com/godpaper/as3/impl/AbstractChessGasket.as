@@ -200,7 +200,7 @@ package com.godpaper.as3.impl
 			var emptyLegalMoves:BitBoard=new BitBoard(9, 10);
 			emptyLegalMoves.clear();
 			//empty indicate effect.
-			GameConfig.chessPieceManager.indicateGaskets(emptyLegalMoves);
+			GameConfig.chessPieceManager.indicateGasketsMove(emptyLegalMoves);
 		}
 
 		//
