@@ -9,6 +9,7 @@ package
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
+	import com.lookbackon.ds.aStar.AStar;
 	
 	import flash.display.MovieClip;
 	
@@ -38,13 +39,13 @@ package
 		ContextBuilderTag;
 		Contract;//for pre-condition compile;
 		PluginButtonBar;
+		//
+		AStar;
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-//		//Mochi media support.
-//		public var _mochiClip:MovieClip;
 		//Plugin stage support.
 		public var pluginStage:MovieClip;
 		//----------------------------------
@@ -70,9 +71,7 @@ package
 		//--------------------------------------------------------------------------
 		public function ApplicationBase()
 		{
-			//TODO: implement function
 			super();
-
 			//
 			this.addEventListener(FlexEvent.PREINITIALIZE,preinitializeHandler);
 			this.addEventListener(FlexEvent.INITIALIZE,initializeHandler);

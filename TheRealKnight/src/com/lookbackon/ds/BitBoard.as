@@ -1,5 +1,8 @@
 package com.lookbackon.ds
 {
+	import com.godpaper.as3.errors.DefaultErrors;
+	import com.lookbackon.ds.aStar.AStarNode;
+	
 	import de.polygonal.ds.BitVector;
 
 	/**
@@ -18,9 +21,9 @@ package com.lookbackon.ds
 	 * Possible increased documentation requirements.</p>
 	 * @see http://blog.lookbackon.com/?p=371
 	 * @author Knight.zhou
-	 *
+	 * @history 05/16/2011 added the implementation of IAStar;
 	 */	
-	public class BitBoard extends BitVector implements IBitBoard
+	public class BitBoard extends BitVector implements IBitBoard,IAStar
 	{
 		//--------------------------------------------------------------------------
 		//
@@ -29,6 +32,10 @@ package com.lookbackon.ds
 		//--------------------------------------------------------------------------
 		private var _column:int;
 		private var _row:int;
+		//extened variables for IAStar.
+		private var _startNode:AStarNode;
+		private var _endNode:AStarNode;
+		private var _nodes:Array;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -49,6 +56,17 @@ package com.lookbackon.ds
 			this._row = row;
 			//TODO: implement function
 			super(column*row);
+			//extended variables for IAStar.
+			_nodes = new Array();
+			//
+			for(var i:int = 0; i < this.column; i++)
+			{
+				_nodes[i] = new Array();
+				for(var j:int = 0; j < this.row; j++)
+				{
+					_nodes[i][j] = new AStarNode(i, j);
+				}
+			}
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -68,6 +86,23 @@ package com.lookbackon.ds
 		public function get row():int
 		{
 			return _row;
+		}
+		//----------------------------------
+		//  IAStar
+		//----------------------------------
+		/**
+		 * Returns the end node.
+		 */
+		public function get endNode():AStarNode
+		{
+			return _endNode;
+		}
+		/**
+		 * Returns the start node.
+		 */
+		public function get startNode():AStarNode
+		{
+			return _startNode;
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -212,10 +247,12 @@ package com.lookbackon.ds
 			if(index>=0&&index<=_column*_row)
 			{
 				this.setBit(index,b);
+				//esp for IAStar.
+				this.setWalkable(column,row,b);
 			}else
 			{
 				return;//Maybe handle this illegal operation.
-				throw new CcjErrors(CcjErrors.INVALID_CHESS_VO);
+				throw new DefaultErrors(DefaultErrors.INVALID_CHESS_VO);
 			}
 		}
 		//----------------------------------
@@ -336,6 +373,47 @@ package com.lookbackon.ds
 			}
 			result = result.concat("\n","}","]");
 			return result;
+		}
+		//----------------------------------
+		//  IAStar
+		//----------------------------------
+		/**
+		 * Returns the node at the given coords.
+		 * @param x The x coord.
+		 * @param y The y coord.
+		 */
+		public function getNode(x:int, y:int):AStarNode
+		{
+			return _nodes[x][y] as AStarNode;
+		}
+		/**
+		 * Sets the node at the given coords as the end node.
+		 * @param x The x coord.
+		 * @param y The y coord.
+		 */
+		public function setEndNode(x:int, y:int):void
+		{
+			_endNode = _nodes[x][y] as AStarNode;
+		}
+		
+		/**
+		 * Sets the node at the given coords as the start node.
+		 * @param x The x coord.
+		 * @param y The y coord.
+		 */
+		public function setStartNode(x:int, y:int):void
+		{
+			_startNode = _nodes[x][y] as AStarNode;
+		}
+		
+		/**
+		 * Sets the node at the given coords as walkable or not.
+		 * @param x The x coord.
+		 * @param y The y coord.
+		 */
+		public function setWalkable(x:int, y:int, value:Boolean):void
+		{
+			_nodes[x][y].walkable = value;
 		}
 	}
 }
