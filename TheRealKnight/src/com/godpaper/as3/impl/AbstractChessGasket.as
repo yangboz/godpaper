@@ -167,7 +167,8 @@ package com.godpaper.as3.impl
 		{
 			this._conductVO =new ConductVO();
 			_conductVO.target=event.dragInitiator as IChessPiece;
-			_conductVO.previousPosition=this.position;
+			_conductVO.previousPosition=(event.dragInitiator as ChessPiece).position;
+			_conductVO.nextPosition=this.position;
 			if (GameConfig.chessPieceManager.doMoveValidation(_conductVO))
 			{
 				DragManager.acceptDragDrop(event.currentTarget as IUIComponent);

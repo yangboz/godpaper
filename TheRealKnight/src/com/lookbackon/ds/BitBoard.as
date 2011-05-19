@@ -2,7 +2,7 @@ package com.lookbackon.ds
 {
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.lookbackon.ds.aStar.AStarNode;
-	
+
 	import de.polygonal.ds.BitVector;
 
 	/**
@@ -248,11 +248,41 @@ package com.lookbackon.ds
 			{
 				this.setBit(index,b);
 				//esp for IAStar.
-				this.setWalkable(column,row,b);
+				this.setWalkable(column,row,!b);
 			}else
 			{
 				return;//Maybe handle this illegal operation.
 				throw new DefaultErrors(DefaultErrors.INVALID_CHESS_VO);
+			}
+		}
+		/**
+		 * @inheritDoc
+		 */		
+		override public function setAll():void
+		{
+			super.setAll();
+			//esp for IAStar.
+			for(var w:int=0;w<_column;w++)
+			{
+				for(var h:int=0;h<_row;h++)
+				{
+					this.setWalkable(w,h,false);
+				}
+			}
+		}
+		/**
+		 * @inheritDoc
+		 */
+		override public function clear():void
+		{
+			super.clear();
+			//esp for IAStar.
+			for(var w:int=0;w<_column;w++)
+			{
+				for(var h:int=0;h<_row;h++)
+				{
+					this.setWalkable(w,h,true);
+				}
 			}
 		}
 		//----------------------------------
@@ -395,7 +425,7 @@ package com.lookbackon.ds
 		{
 			_endNode = _nodes[x][y] as AStarNode;
 		}
-		
+
 		/**
 		 * Sets the node at the given coords as the start node.
 		 * @param x The x coord.
@@ -405,7 +435,7 @@ package com.lookbackon.ds
 		{
 			_startNode = _nodes[x][y] as AStarNode;
 		}
-		
+
 		/**
 		 * Sets the node at the given coords as walkable or not.
 		 * @param x The x coord.

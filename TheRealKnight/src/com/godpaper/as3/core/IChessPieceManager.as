@@ -10,6 +10,9 @@ package com.godpaper.as3.core
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
+	
+	import flash.geom.Point;
+
 	/**
 	 * The interface of chess piece manager,which one delegate all kinds of chess piece command execution.
 	 * @author yangboz

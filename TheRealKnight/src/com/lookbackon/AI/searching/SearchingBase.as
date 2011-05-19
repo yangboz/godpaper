@@ -211,7 +211,7 @@ package com.lookbackon.AI.searching
 			_evaluation=value;
 		}
 		//----------------------------------
-		//  threadDone(native)
+		//  processDone(native)
 		//----------------------------------
 		public function get processDone():Boolean
 		{

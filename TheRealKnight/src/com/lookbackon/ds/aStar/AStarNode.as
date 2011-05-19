@@ -1,5 +1,7 @@
 package com.lookbackon.ds.aStar
 {
+	import mx.utils.ObjectUtil;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -59,7 +61,10 @@ package com.lookbackon.ds.aStar
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		public function toString():String
+		{
+			return ObjectUtil.toString(this);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

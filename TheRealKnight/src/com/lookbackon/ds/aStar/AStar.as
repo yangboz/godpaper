@@ -1,26 +1,28 @@
 package com.lookbackon.ds.aStar
 {
 	import com.lookbackon.ds.BitBoard;
+	
+	import org.generalrelativity.thread.process.AbstractProcess;
 
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	
+
 	/**
-	 * In computer science, A* (pronounced "A star" ( listen)) is a computer algorithm that is widely used in pathfinding and graph traversal, 
-	 * the process of plotting an efficiently traversable path between points, called nodes. 
-	 * Noted for its performance and accuracy, it enjoys widespread use. 
-	 * Peter Hart, Nils Nilsson and Bertram Raphael first described the algorithm in 1968.[1] 
-	 * It is an extension of Edsger Dijkstra's 1959 algorithm. A* achieves better performance (with respect to time) by using heuristics.   	
+	 * In computer science, A* (pronounced "A star" ( listen)) is a computer algorithm that is widely used in pathfinding and graph traversal,
+	 * the process of plotting an efficiently traversable path between points, called nodes.
+	 * Noted for its performance and accuracy, it enjoys widespread use.
+	 * Peter Hart, Nils Nilsson and Bertram Raphael first described the algorithm in 1968.[1]
+	 * It is an extension of Edsger Dijkstra's 1959 algorithm. A* achieves better performance (with respect to time) by using heuristics.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created May 13, 2011 1:34:05 PM
 	 * @see http://www.policyalmanac.org/games/aStarTutorial.htm
 	 */   	 
-	public class AStar
+	public class AStar extends AbstractProcess
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -39,10 +41,12 @@ package com.lookbackon.ds.aStar
 		private var _straightCost:Number = 1;
 		private var _diagCost:Number = Math.SQRT2;
 		//		private var _diagCost:Number = 2;
+		//flag whether this process done.
+		private var _processDone:Boolean;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -57,34 +61,30 @@ package com.lookbackon.ds.aStar
 		{
 			return _closed.concat(_open);
 		}
-		//--------------------------------------------------------------------------
 		//
-		//  Protected properties
-		//
-		//-------------------------------------------------------------------------- 
-		
-		//--------------------------------------------------------------------------
-		//
-		//  Constructor
-		//
-		//--------------------------------------------------------------------------
-		public function AStar()
+		public function get heuristic():Function
 		{
-		}     	
-		//--------------------------------------------------------------------------
+			return _heuristic;
+		}
+		public function set heuristic(value:Function):void
+		{
+			_heuristic = value;
+		}
 		//
-		//  Public methods
-		//
-		//--------------------------------------------------------------------------
 		/**
-		 * 
-		 * @param AStarBitBoard data source.
-		 * @return AStarBitBoard path finding result
-		 * 
+		 * @return AStarBitBoard data source.
 		 */		
-		public function findPath(grid:BitBoard):Boolean
+		public function get grid():BitBoard
 		{
-			_grid = grid;
+			return _grid;
+		}
+		/**
+		 * @param value AStarBitBoard data source.
+		 */		
+		public function set grid(value:BitBoard):void
+		{
+			_grid = value;
+			//preparde data
 			_open = new Array();
 			_closed = new Array();
 			
@@ -94,27 +94,97 @@ package com.lookbackon.ds.aStar
 			_startNode.g = 0;
 			_startNode.h = _heuristic(_startNode);
 			_startNode.f = _startNode.g + _startNode.h;
-			
-			return search();
+		}
+		//----------------------------------
+		//  processDone(native)
+		//----------------------------------
+		public function get processDone():Boolean
+		{
+			return _processDone;
+		}
+		public function set processDone(value:Boolean):void
+		{
+			_processDone = value;
+		}
+		//--------------------------------------------------------------------------
+		//
+		//  Protected properties
+		//
+		//-------------------------------------------------------------------------- 
+
+		//--------------------------------------------------------------------------
+		//
+		//  Constructor
+		//
+		//--------------------------------------------------------------------------
+		public function AStar(isSelfManaging:Boolean=false)
+		{
+			//default execute run,to be overrided.
+			//			this.run();
+			super(isSelfManaging);
+		}     	
+		//--------------------------------------------------------------------------
+		//
+		//  Public methods
+		//
+		//--------------------------------------------------------------------------
+		//Heuristic funcs
+		public function manhattan(node:AStarNode):Number
+		{
+			return Math.abs(node.x - _endNode.x) * _straightCost + Math.abs(node.y + _endNode.y) * _straightCost;
+		}
+		//
+		public function euclidian(node:AStarNode):Number
+		{
+			var dx:Number = node.x - _endNode.x;
+			var dy:Number = node.y - _endNode.y;
+			return Math.sqrt(dx * dx + dy * dy) * _straightCost;
+		}
+		//
+		public function diagonal(node:AStarNode):Number
+		{
+			var dx:Number = Math.abs(node.x - _endNode.x);
+			var dy:Number = Math.abs(node.y - _endNode.y);
+			var diag:Number = Math.min(dx, dy);
+			var straight:Number = dx + dy;
+			return _diagCost * diag + _straightCost * (straight - 2 * diag);
+		}
+		/**
+		 *@inheritDoc
+		 */		
+		//virtual functions.
+		/**
+		 * Like all informed search algorithms, it first searches the routes that appear to be most likely to lead towards the goal.
+		 * @return current step goal searching result.
+		 *
+		 */		
+		override public function run():void
+		{
+			//ready to search.
+			this.search();
+		}
+		/**
+		 *@inheritDoc
+		 */
+		//return thread calculate precentage.
+		override public function get percentage():Number
+		{
+			return processDone ? 1 : 0.33;
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		/**
-		 * Like all informed search algorithms, it first searches the routes that appear to be most likely to lead towards the goal. 
-		 * @return current step goal searching result.
-		 * 
-		 */		
+		//
 		private function search():Boolean
-		{
+		{	
 			var node:AStarNode = _startNode;
 			while(node != _endNode)
 			{
@@ -170,13 +240,16 @@ package com.lookbackon.ds.aStar
 				_closed.push(node);
 				if(_open.length == 0)
 				{
-					trace("no path found @ AStar search!");
+					//trace("no path found @ AStar search!");
+					this.processDone = true;
 					return false;
 				}
 				_open.sortOn("f", Array.NUMERIC);
 				node = _open.shift() as AStarNode;
 			}
+			//
 			buildPath();
+			this.processDone = true;
 			return true;
 		}
 		//
@@ -215,28 +288,7 @@ package com.lookbackon.ds.aStar
 			}
 			return false;
 		}
-		//
-		private function manhattan(node:AStarNode):Number
-		{
-			return Math.abs(node.x - _endNode.x) * _straightCost + Math.abs(node.y + _endNode.y) * _straightCost;
-		}
-		//
-		private function euclidian(node:AStarNode):Number
-		{
-			var dx:Number = node.x - _endNode.x;
-			var dy:Number = node.y - _endNode.y;
-			return Math.sqrt(dx * dx + dy * dy) * _straightCost;
-		}
-		//
-		private function diagonal(node:AStarNode):Number
-		{
-			var dx:Number = Math.abs(node.x - _endNode.x);
-			var dy:Number = Math.abs(node.y - _endNode.y);
-			var diag:Number = Math.min(dx, dy);
-			var straight:Number = dx + dy;
-			return _diagCost * diag + _straightCost * (straight - 2 * diag);
-		}
-		
 	}
-	
+
 }
+
