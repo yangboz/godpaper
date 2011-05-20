@@ -21,6 +21,7 @@ package com.lookbackon.ds.aStar
 	 * @playerVersion 9.0
 	 * Created May 13, 2011 1:34:05 PM
 	 * @see http://www.policyalmanac.org/games/aStarTutorial.htm
+	 * @see http://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html
 	 */   	 
 	public class AStar extends AbstractProcess
 	{		

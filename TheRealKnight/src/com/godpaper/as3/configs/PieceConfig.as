@@ -1,5 +1,6 @@
 package com.godpaper.as3.configs
 {
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -12,16 +13,17 @@ package com.godpaper.as3.configs
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Jan 30, 2011 2:18:35 PM
-	 */   	 
+	 */
 	public class PieceConfig
-	{		
+	{
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
 		private static var _factory:Class;
-		private static var _skin:Class;
+		private static var _usingDragProxy:Boolean;
+
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -31,17 +33,18 @@ package com.godpaper.as3.configs
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//
-		public static function get skin():Class
+		//	
+		public static function get usingDragProxy():Boolean
 		{
-			return _skin;
+			return _usingDragProxy;
 		}
 
-		public static function set skin(value:Class):void
+		public static function set usingDragProxy(value:Boolean):void
 		{
-			_skin = value;
+			_usingDragProxy=value;
 		}
-		//	
+
+		//
 		public static function get factory():Class
 		{
 			return _factory;
@@ -49,8 +52,9 @@ package com.godpaper.as3.configs
 
 		public static function set factory(value:Class):void
 		{
-			_factory = value;
+			_factory=value;
 		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -64,7 +68,7 @@ package com.godpaper.as3.configs
 		//--------------------------------------------------------------------------
 		public function PieceConfig()
 		{
-		}     	
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods

@@ -215,5 +215,26 @@ package com.godpaper.as3.utils
 			if(r>=n) throw new Error("Invalid parameter!!!");
 			return factorial(n)/factorial(n-r);
 		}
+		/**
+		 *
+		 * @param n number of blanket elements.
+		 * @param r number of picking elements from blanket.
+		 * @return the premutated number with picked elements.
+		 *
+		 */		
+		public static function randomPremutate(n:Array,r:Number):Array
+		{
+			if(r>=n.length) throw new Error("Invalid parameter!!!");
+			var blanket:Array = n.concat();
+			var result:Array = [];
+			var seed:int;
+			for(var i:int=0;i<r;i++)
+			{
+				seed = MathUtil.transactRandomNumberInRange(0,blanket.length-1);
+				result.push(blanket[seed]);
+				blanket.splice(seed,1);
+			}
+			return result;
+		}
 	}
 }

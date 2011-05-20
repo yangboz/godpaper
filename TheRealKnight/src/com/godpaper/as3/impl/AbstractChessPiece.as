@@ -6,24 +6,27 @@ package com.godpaper.as3.impl
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.business.fsm.ChessAgent;
+	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.OmenVO;
-
+	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
-
+	
+	import mx.controls.Image;
+	import mx.controls.SWFLoader;
 	import mx.core.IUIComponent;
 	import mx.events.FlexEvent;
 	import mx.logging.ILogger;
 	import mx.managers.DragManager;
-
+	
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.LogUtil;
 	import org.spicefactory.lib.logging.Logger;
-
+	
 	import spark.components.Group;
 
 	/**
@@ -42,6 +45,8 @@ package com.godpaper.as3.impl
 		//--------------------------------------------------------------------------
 		//
 		private var textColor:String=DefaultConstants.COLOR_BLUE; //default is blue.
+		//pre-define this swf loader for playing the drag proxy(image/movie) effect. 
+		public var swfLoader:SWFLoader;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -169,7 +174,6 @@ package com.godpaper.as3.impl
 		//--------------------------------------------------------------------------
 		public function AbstractChessPiece()
 		{
-			//TODO: implement function
 			super();
 			//
 			this.addEventListener(FlexEvent.CREATION_COMPLETE,creationCompleteHandler);
@@ -188,7 +192,6 @@ package com.godpaper.as3.impl
 		//creationCompleteHandler
 		protected function creationCompleteHandler(event:FlexEvent):void
 		{
-			// TODO Auto-generated method stub
 			// finite state machine initialization.
 			this.agent=new ChessAgent(this.name, this, null);
 			//fsm enter to default state.
@@ -203,7 +206,14 @@ package com.godpaper.as3.impl
 		//mouseDownHandler
 		protected function mouseDownHandler(event:MouseEvent):void
 		{
-			DragManager.doDrag(event.currentTarget as IUIComponent, null, event);
+			//handle the drag image/movie effect.
+			if(PieceConfig.usingDragProxy)
+			{
+				var imageProxy:Image = new Image();
+				imageProxy.source = this.swfLoader.source;
+			}
+			//
+			DragManager.doDrag(event.currentTarget as IUIComponent, null, event,imageProxy);
 			// remove event listener
 			//				this.removeEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
 			//				LOG.debug("occupies:{0}",this.chessVO.occupies.dump());
