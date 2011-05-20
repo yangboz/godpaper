@@ -14,6 +14,6 @@
 -library-path "libs"
 -library-path "C:\Flex\flex_sdk_4.1.0.16032\frameworks\libs"
 -library-path "C:\Flex\flex_sdk_4.1.0.16032\frameworks\libs\air"
--templates-path "C:\Program Files\Adobe\Adobe Flash Builder Burrito\sdks\4.5.0\asdoc\templates_godpaper"
+-templates-path "C:\Program Files\Adobe\Adobe Flash Builder 4.5\sdks\4.5.0\asdoc\templates_godpaper"
 -window-title "GODPAPER Board Game Action Script API Document" 
 -footer "Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER."

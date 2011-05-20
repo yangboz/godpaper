@@ -173,7 +173,7 @@ package com.godpaper.as3.impl
 //			conductVO.target.agent.getFSM().changeState(conductVO.target.attackState);
 			//TODO:chess piece move (logic) check.
 			//
-			result=Boolean(conductVO.target.chessVO.moves.getBitt(conductVO.previousPosition.y, conductVO.previousPosition.x));
+			result=Boolean(conductVO.target.chessVO.moves.getBitt(conductVO.nextPosition.y, conductVO.nextPosition.x));
 //			LOG.info("doMoveValidation result:{0}",result);
 			//end
 //			var endTime:uint = new Date().getMilliseconds();
