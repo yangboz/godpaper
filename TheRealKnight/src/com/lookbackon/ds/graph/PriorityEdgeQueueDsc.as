@@ -1,90 +1,112 @@
-package com.godpaper.as3.model.vos
+package com.lookbackon.ds.graph
 {
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import de.polygonal.ds.Array2;
-	
+
 	/**
-	 * PositionVO.as class.   	
-	 * @author Knight.zhou
+	 * PriorityEdgeQueueDsc.as class.
+	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jul 9, 2010 4:19:38 PM
-	 */   	 
-	public class PositionVO
-	{		
+	 * Created Jun 1, 2011 6:19:31 PM
+	 */
+	public class PriorityEdgeQueueDsc
+	{
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		public var board:Array2;
-		public var color:int;
-		public var marshalFaceToFace:Boolean;//esp for chinese chess.
-		public var check:Boolean;
+		private var edgList_:Array /* of Edge*/;
+		private var priList_:Array /* of int */;
+
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		public function get length():int
+		{
+			return priList_.length;
+		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PositionVO()
+		public function PriorityEdgeQueueDsc()
 		{
-		}     	
+			edgList_=[];
+			priList_=[];
+		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		/**
-		 * Prints out all elements (for debug/demo purposes).
-		 * 
-		 * @return A human-readable representation of the structure.
-		 */
-		public function dump():String
+		public function insert(edg:Edge, priority:int):void
 		{
-			var s:String = "PositionVO";
-			s += "\n{";
-			s += "\n" + "\t";
-			s += "board:"+board.dump()+"\t";
-			s += "\n" + "\t";
-			s += "color:"+color.toString()+"\t";
-			s += "\n" + "\t";
-			s += "check:"+check.toString()+"\t";
-			s += "\n" + "\t";
-			s += "marshalFaceToFace:"+marshalFaceToFace.toString()+"\t";
-			s += "\n}";
-			return s;
+			var l:int=priList_.length;
+			for (var i:int=0; i < l; i++)
+			{
+				if (priority >= priList_[i])
+				{
+					priList_.splice(i, 0, priority);
+					edgList_.splice(i, 0, edg);
+					break;
+				}
+			}
+			if (i == l)
+			{
+				priList_.push(priority);
+				edgList_.push(edg);
+			}
 		}
+
+		public function pop():Array
+		{
+			return [edgList_.pop(), priList_.pop()];
+		}
+
+		public function popObj():Edge
+		{
+			priList_.pop();
+			return edgList_.pop();
+		}
+
+		public function popPriority():int
+		{
+			edgList_.pop();
+			return priList_.pop();
+		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 	}
-	
+
 }

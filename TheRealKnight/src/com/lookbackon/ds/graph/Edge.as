@@ -1,30 +1,29 @@
-package com.godpaper.as3.model.vos
+package com.lookbackon.ds.graph
 {
+	import mx.utils.ObjectUtil;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import de.polygonal.ds.Array2;
 	
 	/**
-	 * PositionVO.as class.   	
-	 * @author Knight.zhou
+	 * Edge.as class.   	
+	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jul 9, 2010 4:19:38 PM
+	 * Created Jun 1, 2011 5:59:11 PM
 	 */   	 
-	public class PositionVO
+	public class Edge
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		public var board:Array2;
-		public var color:int;
-		public var marshalFaceToFace:Boolean;//esp for chinese chess.
-		public var check:Boolean;
+		public var src:int;//source vertext
+		public var dst:int;//destinate vertext
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -46,9 +45,11 @@ package com.godpaper.as3.model.vos
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PositionVO()
+		public function Edge(src:int=-1,dst:int=-1)
 		{
-		}     	
+			this.src = src;
+			this.dst = dst;
+		}    	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -58,21 +59,17 @@ package com.godpaper.as3.model.vos
 		 * Prints out all elements (for debug/demo purposes).
 		 * 
 		 * @return A human-readable representation of the structure.
-		 */
+		 */		
 		public function dump():String
 		{
-			var s:String = "PositionVO";
-			s += "\n{";
-			s += "\n" + "\t";
-			s += "board:"+board.dump()+"\t";
-			s += "\n" + "\t";
-			s += "color:"+color.toString()+"\t";
-			s += "\n" + "\t";
-			s += "check:"+check.toString()+"\t";
-			s += "\n" + "\t";
-			s += "marshalFaceToFace:"+marshalFaceToFace.toString()+"\t";
-			s += "\n}";
+			var s:String = "GraphEdge";
+			s += "["+this.src + "---->"+this.dst+"]";
 			return s;
+		}
+		//
+		public function toString():String
+		{
+			return ObjectUtil.toString(this);
 		}
 		//--------------------------------------------------------------------------
 		//
