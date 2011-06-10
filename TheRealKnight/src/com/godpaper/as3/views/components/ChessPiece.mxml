@@ -58,7 +58,11 @@
 					agent.fsm.changeState(agent.defenseState);
 				}
 			}
-
+			//
+			override public function toString():String
+			{
+				return this.label+this.position.toString();
+			}
 			//--------------------------------------------------------------------------
 			//
 			//  Protected methods

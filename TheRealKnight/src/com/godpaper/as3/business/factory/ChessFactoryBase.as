@@ -119,7 +119,7 @@ package com.godpaper.as3.business.factory
 			{
 				//data
 				simpleChessPiece.position=position;
-				LOG.debug("Anew chess piece created!");
+				LOG.debug("Anew chess piece created@{0}",position);
 				return simpleChessPiece as IChessPiece;
 			}
 			return null;

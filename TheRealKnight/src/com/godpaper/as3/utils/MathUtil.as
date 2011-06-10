@@ -219,12 +219,12 @@ package com.godpaper.as3.utils
 		 *
 		 * @param n number of blanket elements.
 		 * @param r number of picking elements from blanket.
-		 * @return the premutated number with picked elements.
+		 * @return one of posibilities of the premutated number with picked elements.
 		 *
 		 */		
 		public static function randomPremutate(n:Array,r:Number):Array
 		{
-			if(r>=n.length) throw new Error("Invalid parameter!!!");
+			if(r>n.length) throw new Error("Invalid parameter!!!");
 			var blanket:Array = n.concat();
 			var result:Array = [];
 			var seed:int;
@@ -233,6 +233,54 @@ package com.godpaper.as3.utils
 				seed = MathUtil.transactRandomNumberInRange(0,blanket.length-1);
 				result.push(blanket[seed]);
 				blanket.splice(seed,1);
+			}
+			return result;
+		}
+		/**
+		 * 
+		 * @param n number of blanket elements.
+		 * @param r number of picking elements from blanket.
+		 * @param s whether the picked elements is successional.
+		 * @return all of posibilities of the premutated number with picked elements.
+		 * 
+		 */		
+		public static function randomPremutates(n:Array,r:Number,s:Boolean=true):Array
+		{
+			if(r>n.length) throw new Error("Invalid parameter!!!");
+			var blanket:Array = n.concat();
+			var result:Array = [];
+			var seed:int;
+			if(s)
+			{
+				var beginIndex:int = 0;
+				var endIndex:int;
+				var groupIndex:int=0;
+				for(var j:int=0;j<blanket.length;j++)
+				{
+					beginIndex = j;
+					endIndex = beginIndex+r;
+					result[groupIndex]= [];
+					if(endIndex<=blanket.length)
+					{
+						for(var k:int=beginIndex;k<endIndex;k++)
+						{
+							if(blanket[k]==null)
+							{
+								break;
+							}
+							result[groupIndex].push(blanket[k]);
+							//increase the group index.
+							if(k==endIndex-1)
+							{
+								groupIndex++;
+							}
+						}
+					}
+				}
+			}else
+			{
+				//result to combination blew up.
+				throw new Error("Not implement yet!");
 			}
 			return result;
 		}

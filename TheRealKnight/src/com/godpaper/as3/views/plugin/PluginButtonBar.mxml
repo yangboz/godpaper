@@ -17,15 +17,15 @@
 			<fx:Object label="store"
 					   toolTip="store"
 					   enabled="true"
-					   icon="@Embed('com/godpaper/as3/views/plugin/icons/store_50x50.png')"/>
+					   icon="{icon_store}"/>
 			<fx:Object label="leadboard"
 					   toolTip="leader board"
 					   enabled="true"
-					   icon="@Embed('com/godpaper/as3/views/plugin/icons/coin_50x50.png')"/>
+					   icon="{icon_coin}"/>
 			<fx:Object label="account"
 					   toolTip="account login"
 					   enabled="true"
-					   icon="@Embed('com/godpaper/as3/views/plugin/icons/account_50x50.png')"/>
+					   icon="{icon_account}"/>
 		</s:ArrayList>
 	</s:dataProvider>
 	<fx:Script>
@@ -40,17 +40,27 @@
 			import spark.events.IndexChangeEvent;
 			//tollgate icon class here
 			[Bindable]
-			[Embed(source="com/godpaper/as3/views/plugin/icons/tollgate01_50x50.png")]
+			[Embed(source="/com/godpaper/as3/views/plugin/icons/tollgate01_50x50.png")]
 			private var icon_tollgate_01:Class;
 			[Bindable]
-			[Embed(source="com/godpaper/as3/views/plugin/icons/tollgate02_50x50.png")]
+			[Embed(source="/com/godpaper/as3/views/plugin/icons/tollgate02_50x50.png")]
 			private var icon_tollgate_02:Class;
 			[Bindable]
-			[Embed(source="com/godpaper/as3/views/plugin/icons/tollgate03_50x50.png")]
+			[Embed(source="/com/godpaper/as3/views/plugin/icons/tollgate03_50x50.png")]
 			private var icon_tollgate_03:Class;
 			[Bindable]
-			[Embed(source="com/godpaper/as3/views/plugin/icons/tollgate04_50x50.png")]
+			[Embed(source="/com/godpaper/as3/views/plugin/icons/tollgate04_50x50.png")]
 			private var icon_tollgate_04:Class;
+			//
+			[Bindable]
+			[Embed(source="/com/godpaper/as3/views/plugin/icons/store_50x50.png")]
+			private var icon_store:Class;
+			[Bindable]
+			[Embed(source="/com/godpaper/as3/views/plugin/icons/coin_50x50.png")]
+			private var icon_coin:Class;
+			[Bindable]
+			[Embed(source="/com/godpaper/as3/views/plugin/icons/account_50x50.png")]
+			private var icon_account:Class;
 			//
 			private var icon_tollgates:Array=[icon_tollgate_01, icon_tollgate_02, icon_tollgate_03, icon_tollgate_04];
 
