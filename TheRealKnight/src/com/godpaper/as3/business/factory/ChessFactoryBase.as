@@ -1,6 +1,7 @@
 package com.godpaper.as3.business.factory
 {
 	import com.godpaper.as3.configs.BoardConfig;
+	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IChessGasket;
@@ -12,9 +13,9 @@ package com.godpaper.as3.business.factory
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.views.components.ChessGasket;
 	import com.godpaper.as3.views.components.ChessPiece;
-
+	
 	import flash.geom.Point;
-
+	
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.Logger;
 
@@ -42,7 +43,6 @@ package com.godpaper.as3.business.factory
 		protected var chessPieceValue:int=0;
 		protected var chessPieceType:String="";
 		protected var chessPieceSource:Object;
-		protected var chessPieceScale:Number=1;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -90,8 +90,8 @@ package com.godpaper.as3.business.factory
 			simpleChessPiece.type=chessPieceType;
 			//			simpleChessPiece.swfLoader.source = String("./assets/").concat(chessPieceType,".swf");
 			simpleChessPiece.swfLoader.source=this.chessPieceSource;
-			simpleChessPiece.swfLoader.scaleX=this.chessPieceScale;
-			simpleChessPiece.swfLoader.scaleY=this.chessPieceScale;
+			simpleChessPiece.swfLoader.scaleX= PieceConfig.scaleX;
+			simpleChessPiece.swfLoader.scaleY= PieceConfig.scaleY;
 			//set flag to identify.
 			simpleChessPiece.flag=DefaultConstants.FLAG_BLUE;
 			//

@@ -211,6 +211,8 @@ package com.godpaper.as3.impl
 			{
 				var imageProxy:Image = new Image();
 				imageProxy.source = this.swfLoader.source;
+				imageProxy.scaleX = PieceConfig.scaleX;
+				imageProxy.scaleY = PieceConfig.scaleY;
 			}
 			//
 			DragManager.doDrag(event.currentTarget as IUIComponent, null, event,imageProxy);
