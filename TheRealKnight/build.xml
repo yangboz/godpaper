@@ -133,7 +133,7 @@
 						  includes="*"
 						  append="true"/>
 
-			<include-file name="RegressionResult.foo"
+			<!--<include-file name="RegressionResult.foo"
 						  path="${SOURCE_DIR}/com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.foo"/>
 			<include-file name="Adaptive Extensions of the Nelder and Mead Simplex Method.pdf"
 						  path="${SOURCE_DIR}/com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/Adaptive Extensions of the Nelder and Mead Simplex Method.pdf"/>
@@ -156,7 +156,7 @@
 			<include-file name="logConfig.xml"
 						  path="${SOURCE_DIR}/com/godpaper/as3/configs/logConfig.xml"/>
 			<include-file name="HeuristicEvaluationFunctionsForGeneralGamePlaying.pdf"
-						  path="${SOURCE_DIR}/com/lookbackon/AI/evaluation/heuristical/HeuristicEvaluationFunctionsForGeneralGamePlaying.pdf"/>
+						  path="${SOURCE_DIR}/com/lookbackon/AI/evaluation/heuristical/HeuristicEvaluationFunctionsForGeneralGamePlaying.pdf"/>-->
 		</compc>
 	</target>
 

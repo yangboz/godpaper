@@ -251,7 +251,7 @@ package com.lookbackon.ds
 			}
 			nodes_=[];
 			edges_=[];
-			trace("GraphEx after clear:", dump());
+			trace("GraphBoard after clear:", dump());
 		}
 		//--------------------------------------------------------------------------
 		//

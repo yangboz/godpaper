@@ -73,6 +73,10 @@ package com.godpaper.as3.core
 		//  isAnotherHumanTurnNow
 		//----------------------------------
 		function isAnotherHumanTurnNow():void;
+		//----------------------------------
+		//  getRolePlaying
+		//----------------------------------
+		function getRolePlaying(flagMask:uint):Boolean;
 	}
 }
 

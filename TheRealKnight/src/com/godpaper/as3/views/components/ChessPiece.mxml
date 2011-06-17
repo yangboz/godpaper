@@ -5,7 +5,8 @@
 						 xmlns:impl="com.godpaper.as3.impl.*"
 						 xmlns:parsley="http://www.spicefactory.org/parsley"
 						 width="50"
-						 height="50">
+						 height="50"
+						 >
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.as3.configs.GameConfig;
@@ -61,7 +62,7 @@
 			//
 			override public function toString():String
 			{
-				return this.label+this.position.toString();
+				return this.label.concat(this.position.x,this.position.y);
 			}
 			//--------------------------------------------------------------------------
 			//

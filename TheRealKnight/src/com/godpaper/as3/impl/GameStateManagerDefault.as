@@ -13,12 +13,13 @@ package com.godpaper.as3.impl
 	import com.godpaper.as3.tasks.CleanUpPiecesBitboardTask;
 	import com.godpaper.as3.tasks.CreateChessPieceTask;
 	import com.godpaper.as3.tasks.CreateChessVoTask;
+	import com.godpaper.as3.utils.BitFlagUtil;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.MiniMax;
 	import com.lookbackon.AI.searching.RandomWalk;
 	import com.lookbackon.AI.searching.ShortSighted;
-
+	
 	import mx.core.FlexGlobals;
 	import mx.core.IVisualElement;
 	import mx.logging.ILogger;
@@ -51,10 +52,15 @@ package com.godpaper.as3.impl
 		//game phase
 		//Masks for bits inside the 'flags' var
 		//which store the state of Boolean game phase properties.
-		public const PHASE_OPENING:uint=1 << 0;
-		public const PHASE_MIDDLE:uint=1 << 1;
-		public const PHASE_ENDING:uint=1 << 2;
-
+		public static const PHASE_OPENING:uint=1 << 0;
+		public static const PHASE_MIDDLE:uint=1 << 1;
+		public static const PHASE_ENDING:uint=1 << 2;
+		//turn now flag.
+		public static const TURN_NOW_COMPUTER:uint = 1<<0;
+		public static const TURN_NOW_HUMAN:uint = 1<<1;
+		public static const TURN_NOW_ANOTHER_HUMAN:uint = 1<<2;
+		// A value to indicate the current players role.
+		protected var _roles:uint = 0; 
 		//--------------------------------------------------------------------------
 		//
 		//  Properties
@@ -71,11 +77,13 @@ package com.godpaper.as3.impl
 		public function get phase():uint
 		{
 			var gamePhase:uint=PHASE_OPENING;
-			if (chessPieceModel.gamePosition.board.celled <= 14 && chessPieceModel.gamePosition.board.celled >= 6)
+			if ( chessPieceModel.gamePosition.board.celled <= chessPieceModel.gamePosition.board.size/2
+				&& chessPieceModel.gamePosition.board.celled >= chessPieceModel.gamePosition.board.size/3 )
 			{
 				gamePhase=PHASE_MIDDLE;
 			}
-			if (chessPieceModel.gamePosition.board.celled < 6 && chessPieceModel.gamePosition.board.celled >= 1)
+			if (chessPieceModel.gamePosition.board.celled < chessPieceModel.gamePosition.board.size/3 
+				&& chessPieceModel.gamePosition.board.celled >= 1)
 			{
 				gamePhase=PHASE_ENDING;
 			}
@@ -193,6 +201,8 @@ package com.godpaper.as3.impl
 		//----------------------------------
 		public function isComputerTurnNow():void
 		{
+			//set turn now flag at frist.
+			_roles = TURN_NOW_COMPUTER;
 			//delegate fsm transition to computer state.
 			agent.fsm.changeState(agent.computerState);
 		}
@@ -202,6 +212,8 @@ package com.godpaper.as3.impl
 		//----------------------------------
 		public function isHumanTurnNow():void
 		{
+			//set turn now flag at frist.
+			_roles = TURN_NOW_HUMAN;
 			//delegate fsm transition to computer state.
 			agent.fsm.changeState(agent.humanState);
 		}
@@ -211,8 +223,18 @@ package com.godpaper.as3.impl
 		//----------------------------------
 		public function isAnotherHumanTurnNow():void
 		{
+			//set turn now flag at frist.
+			_roles = TURN_NOW_ANOTHER_HUMAN;
 			//delegate fsm transition to another human state.
 			agent.fsm.changeState(agent.anotherHumanState);
+		}
+		
+		//----------------------------------
+		//  isAnotherHumanTurnNow
+		//----------------------------------
+		public function getRolePlaying(flagMask:uint):Boolean
+		{
+			return BitFlagUtil.isSet(_roles,flagMask);
 		}
 	}
 }

@@ -48,6 +48,8 @@ package
 		//--------------------------------------------------------------------------
 		//Plugin stage support.
 		public var pluginStage:MovieClip;
+		//Default mochi dashboard hint.
+		public var _mochiads_game_id:String = "c7278f158e32f9a0";
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -133,7 +135,6 @@ package
 		 */		
 		protected function creationCompleteHandler(event:FlexEvent):void
 		{
-//			// TODO Auto-generated method stub
 //			//create chess gaskets.
 //			//create chess piece
 //			//create chess pieces' chessVO;
@@ -151,7 +152,6 @@ package
 		 */		
 		protected function applicationCompleteHandler(event:FlexEvent):void
 		{
-			// TODO Auto-generated method stub
 			//GameManager start.
 			GameConfig.gameStateManager.start();
 			//

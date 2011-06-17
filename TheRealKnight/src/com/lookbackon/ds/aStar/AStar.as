@@ -40,8 +40,8 @@ package com.lookbackon.ds.aStar
 		private var _heuristic:Function = euclidian;
 		//		private var _heuristic:Function = diagonal;
 		private var _straightCost:Number = 1;
-		private var _diagCost:Number = Math.SQRT2;
-		//		private var _diagCost:Number = 2;
+//		private var _diagCost:Number = Math.SQRT2;
+		private var _diagCost:Number = 2;
 		//flag whether this process done.
 		private var _processDone:Boolean;
 		//----------------------------------
@@ -130,11 +130,26 @@ package com.lookbackon.ds.aStar
 		//
 		//--------------------------------------------------------------------------
 		//Heuristic funcs
+		/**
+		 * The standard heuristic for a square grid is the Manhattan distance.  
+		 * On a square grid that allows 4 directions of movement, use Manhattan distance (L1).
+		 * @param node AStarNode carried some node info.
+		 * @return Manhattan distance
+		 * @see http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
+		 */		
 		public function manhattan(node:AStarNode):Number
 		{
 			return Math.abs(node.x - _endNode.x) * _straightCost + Math.abs(node.y + _endNode.y) * _straightCost;
 		}
 		//
+		/**
+		 * The standard heuristic for a square grid is the Euclidean distance.  
+		 * On a square grid that allows any direction of movement, you might or might not want Euclidean distance (L2). 
+		 * If A* is finding paths on the grid but you are allowing movement not on the grid, you may want to consider other representations of the map.
+		 * @param node AStarNode carried some node info.
+		 * @return Euclidean distance
+		 * @see http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
+		 */
 		public function euclidian(node:AStarNode):Number
 		{
 			var dx:Number = node.x - _endNode.x;
@@ -142,6 +157,13 @@ package com.lookbackon.ds.aStar
 			return Math.sqrt(dx * dx + dy * dy) * _straightCost;
 		}
 		//
+		/**
+		 * The standard heuristic for a square grid is the Diagonal distance.  
+		 * On a square grid that allows 8 directions of movement, use Diagonal distance (L∞).
+		 * @param node AStarNode carried some node info.
+		 * @return Diagonal distance
+		 * @see http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
+		 */
 		public function diagonal(node:AStarNode):Number
 		{
 			var dx:Number = Math.abs(node.x - _endNode.x);
