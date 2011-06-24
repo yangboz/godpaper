@@ -12,7 +12,6 @@ features.  This is a MXML implementation, but this can also be declared in and X
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.as3.commands.ConductCommand;
-			import com.godpaper.as3.services.ConductService;
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -32,7 +31,7 @@ features.  This is a MXML implementation, but this can also be declared in and X
 		Using the singleton aproach the declaration should be:
 		<services:ConductService />
 		-->    
-		<spicefactory:DynamicObject type="{ConductService}"/>
+		<!--<spicefactory:DynamicObject type="{ConductService}"/>-->
 		<!---
 		This is the declaration for the Dynamic Command. DynamicCommands are created automatically
 		when a message of the type of the parameter received by the execute method is dispatched.
