@@ -1,103 +1,106 @@
-package com.godpaper.as3.tasks
+package com.godpaper.as3.model.pools
 {
+	import com.godpaper.as3.views.components.ChessGasket;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.core.IChessFactory;
-	import com.godpaper.as3.model.ChessGasketsModel;
 	
-	import flash.geom.Point;
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
-	
-	import mx.core.FlexGlobals;
-	import mx.core.IVisualElement;
-
 	/**
-	 * CreateChessGasketTask.as class.
+	 * Reusing objects reduces the need to instantiate objects, which can be expensive. 
+	 * It also reduces the chances of the garbage collector running, which can slow down your application. 
+	 * The following code illustrates the object pooling technique:  	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Nov 30, 2010 11:54:25 AM
+	 * Created Jul 2, 2011 10:59:45 AM
+	 * @see http://help.adobe.com/en_US/as3/mobile/WS948100b6829bd5a6-19cd3c2412513c24bce-8000.html
 	 */   	 
-	public class CreateChessGasketTask extends ChessTaskBase
+	public class ChessGasketsPool
 	{		
+		private static var MAX_VALUE:uint; 
+		private static var GROWTH_VALUE:uint; 
+		private static var counter:uint; 
+		private static var pool:Vector.<ChessGasket>; 
+		private static var currentSprite:ChessGasket; 
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CreateChessGasketTask()
-		{
-			//TODO: implement function
-			super();
-		}     	
+		   	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
+		//
+		public static function initialize( maxPoolSize:uint, growthValue:uint ):void 
+		{ 
+			MAX_VALUE = maxPoolSize; 
+			GROWTH_VALUE = growthValue; 
+			counter = maxPoolSize; 
+			
+			var i:uint = maxPoolSize; 
+			
+			pool = new Vector.<ChessGasket>(MAX_VALUE); 
+			while( --i > -1 ) 
+				pool[i] = new ChessGasket(); 
+		} 
+		//
+		public static function get():ChessGasket 
+		{ 
+			if ( counter > 0 ) 
+				return currentSprite = pool[--counter]; 
+			
+			var i:uint = GROWTH_VALUE; 
+			while( --i > -1 ) 
+				pool.unshift ( new ChessGasket() ); 
+			counter = GROWTH_VALUE; 
+			return get(); 
+			
+		} 
+		//
+		public static function dispose(disposed:ChessGasket):void 
+		{ 
+			pool[counter++] = disposed; 
+		} 
 
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function performTask():void
-		{
-			var className:String = getQualifiedClassName(factory);
-			var implementation:Object = getDefinitionByName(className);
-			var realFactoy:IChessFactory  = new implementation();
-			//create chess gaskets.
-			for(var v:int=0;v<BoardConfig.yLines;v++)
-			{
-				for(var h:int=0;h<BoardConfig.xLines;h++)
-				{
-					var cGasket:IVisualElement = 
-						FlexGlobals.topLevelApplication.addElement( realFactoy.createChessGasket(new Point(h,v)) );
-					//
-					ChessGasketsModel.getInstance().gaskets.sett(h,v,cGasket);
-				}
-			}
-			//plugin uicomponent at the top of game ui.
-			FlexGlobals.topLevelApplication.setElementIndex(
-				FlexGlobals.topLevelApplication.pluginUIComponent,
-				FlexGlobals.topLevelApplication.numElements-1
-				);
-			//
-			this.complete();
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 	}
-
+	
 }
-

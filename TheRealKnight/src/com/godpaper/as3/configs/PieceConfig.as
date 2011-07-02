@@ -13,7 +13,8 @@ package com.godpaper.as3.configs
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Jan 30, 2011 2:18:35 PM
-	 * @history 06172011 added scaleX/Y properties.
+	 * @history 06/17/2011 added scaleX/Y properties.
+	 * @history 07/02/2011 added maxPoolSize(BLUE/RED),growthValue properties;
 	 */
 	public class PieceConfig
 	{
@@ -26,7 +27,9 @@ package com.godpaper.as3.configs
 		private static var _usingDragProxy:Boolean;
 		private static var _scaleX:Number=1.0;
 		private static var _scaleY:Number=1.0;
-
+		//ObjectPool
+		private static var _maxPoolSizeBlue:uint=16;
+		private static var _maxPoolSizeRed:uint=16;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -79,7 +82,31 @@ package com.godpaper.as3.configs
 		{
 			_scaleX=value;
 		}
-
+		//
+		public static function get growthValue():uint
+		{
+			return _maxPoolSizeBlue>>1;
+		}
+		//
+		public static function get maxPoolSizeBlue():uint
+		{
+			return _maxPoolSizeBlue;
+		}
+		
+		public static function set maxPoolSizeBlue(value:uint):void
+		{
+			_maxPoolSizeBlue = value;
+		}
+		//
+		public static function get maxPoolSizeRed():uint
+		{
+			return _maxPoolSizeRed;
+		}
+		
+		public static function set maxPoolSizeRed(value:uint):void
+		{
+			_maxPoolSizeRed = value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

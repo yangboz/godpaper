@@ -12,6 +12,7 @@ package com.godpaper.as3.configs
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Feb 15, 2011 2:35:39 PM
+	 * @history 07/02/2011 added maxPoolSize,growthValue properties;
 	 */   	 
 	public class GasketConfig
 	{		
@@ -26,6 +27,8 @@ package com.godpaper.as3.configs
 		private static var _backgroundAlpha:Number=0.0;
 		private static var _contentBackgroundAlpha:Number=0.0;
 		private static var _borderAlpha:Number=1;
+		//ObjectPool
+		private static var _maxPoolSize:uint=100;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -94,6 +97,21 @@ package com.godpaper.as3.configs
 		public static function set width(value:Number):void
 		{
 			_width = value;
+		}
+		//
+		public static function get growthValue():uint
+		{
+			return maxPoolSize>>1;
+		}
+		//
+		public static function get maxPoolSize():uint
+		{
+			return _maxPoolSize;
+		}
+		
+		public static function set maxPoolSize(value:uint):void
+		{
+			_maxPoolSize = value;
 		}
 		//--------------------------------------------------------------------------
 		//

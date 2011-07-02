@@ -1,103 +1,89 @@
-package com.godpaper.as3.tasks
+package com.godpaper.as3.utils
 {
+	import flash.utils.Dictionary;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.core.IChessFactory;
-	import com.godpaper.as3.model.ChessGasketsModel;
 	
-	import flash.geom.Point;
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
-	
-	import mx.core.FlexGlobals;
-	import mx.core.IVisualElement;
-
 	/**
-	 * CreateChessGasketTask.as class.
+	 * One of the problems with the Singleton design pattern (there are many) is that 
+	 * it encapsulates the single instance nature of the pattern within the class, 
+	 * when very often the requirement for only one instance is not a feature of the class 
+	 * but a feature of the application that is using the class.
+	 * So I created this factory function to create and manage a single instance of any class. 
+	 * There is no need to modify the class itself, just ask the function for an instance of the class 
+	 * and it will always return the same instance.
+	 * var a:SomeClass = SingletonFactory.produce( SomeClass );
+	 * You can still create additional instances of the class using the new operator, 
+	 * but if you use the singletonFactory function to get an instance it will always 
+	 * return the same instance.    	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Nov 30, 2010 11:54:25 AM
+	 * Created Jul 2, 2011 9:48:38 AM
 	 */   	 
-	public class CreateChessGasketTask extends ChessTaskBase
+	public class SingletonFactory
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-
+		private static var instances:Dictionary = new Dictionary(false);
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CreateChessGasketTask()
-		{
-			//TODO: implement function
-			super();
-		}     	
+		     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-
+		/**
+		 * Used to create a singleton from a class without adapting the 
+		 * class itself. This function returns the same instance of the
+		 * class every time it is called. This function only works with
+		 * classes that don't require parameters in the constructor.
+		 * @see http://code.google.com/p/bigroom/source/browse/trunk/src/uk/co/bigroom/utils/singletonFactory.as
+		 * @param type The class you want a singleton from
+		 * @return the singleton instance of the class
+		 */
+		public static function produce(type:Class):*
+		{
+			return (type in instances) ? instances[type] : instances[type] = new type();
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function performTask():void
-		{
-			var className:String = getQualifiedClassName(factory);
-			var implementation:Object = getDefinitionByName(className);
-			var realFactoy:IChessFactory  = new implementation();
-			//create chess gaskets.
-			for(var v:int=0;v<BoardConfig.yLines;v++)
-			{
-				for(var h:int=0;h<BoardConfig.xLines;h++)
-				{
-					var cGasket:IVisualElement = 
-						FlexGlobals.topLevelApplication.addElement( realFactoy.createChessGasket(new Point(h,v)) );
-					//
-					ChessGasketsModel.getInstance().gaskets.sett(h,v,cGasket);
-				}
-			}
-			//plugin uicomponent at the top of game ui.
-			FlexGlobals.topLevelApplication.setElementIndex(
-				FlexGlobals.topLevelApplication.pluginUIComponent,
-				FlexGlobals.topLevelApplication.numElements-1
-				);
-			//
-			this.complete();
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 	}
-
+	
 }
-

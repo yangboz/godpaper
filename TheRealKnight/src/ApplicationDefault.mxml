@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<app:ApplicationBase xmlns:fx="http://ns.adobe.com/mxml/2009"
+					 xmlns:s="library://ns.adobe.com/flex/spark"
+					 xmlns:mx="library://ns.adobe.com/flex/mx"
+					 xmlns:app="*"
+					 xmlns:parsley="http://www.spicefactory.org/parsley"
+					 xmlns:impl="com.godpaper.as3.impl.*"
+					 xmlns:popup="com.adobe.cairngorm.popup.*"
+					 xmlns:popups="com.godpaper.as3.views.popups.*"
+					 xmlns:taskC="com.adobe.cairngorm.task.*"
+					 xmlns:tasks="com.godpaper.as3.tasks.*"
+					 xmlns:taskP="org.spicefactory.lib.task.*"
+					 xmlns:mochi="com.godpaper.as3.views.mochi.*"
+					 xmlns:plugins="com.godpaper.as3.plugins.*"
+					 xmlns:plugin="com.godpaper.as3.views.plugin.*"
+					 xmlns:components="com.godpaper.as3.views.components.*"
+					 width="400" height="450"
+					 >
+	<fx:Script>
+		<![CDATA[
+			import com.godpaper.as3.business.factory.ChessFactoryBase;
+			import com.godpaper.as3.configs.CCJContextConfig;
+			import com.godpaper.as3.configs.IndicatorConfig;
+			import com.godpaper.as3.configs.PieceConfig;
+			import com.lookbackon.AI.searching.*;
+			
+			import mx.events.FlexEvent;
+			import mx.logging.LogEventLevel;
+			
+			//--------------------------------------------------------------------------
+			//
+			//  Variables
+			//
+			//--------------------------------------------------------------------------
+			
+			//----------------------------------
+			//  CONSTANTS
+			//----------------------------------
+			//
+//			override protected function preinitializeHandler(event:FlexEvent):void
+//			{
+//				//about board:
+//				BoardConfig.xLines=4;
+//				BoardConfig.yLines=4;
+//				BoardConfig.xOffset=100;
+//				BoardConfig.yOffset=100;
+//				BoardConfig.width=300;
+//				BoardConfig.height=300;
+//				BoardConfig.xScale=1;
+//				BoardConfig.yScale=1;
+//				BoardConfig.xAdjust=50;
+//				BoardConfig.yAdjust=25;
+//				//about piece:
+//				PieceConfig.factory=ThoChessFactory;
+//				PieceConfig.usingDragProxy=true;
+//				PieceConfig.scaleX = 0.4;
+//				PieceConfig.scaleY = 0.4;
+//				//about gasket:
+//				GasketConfig.borderVisible=false;
+//			}
+			
+			//	
+//			override protected function initializeHandler(event:FlexEvent):void
+//			{
+//				//number of tollgate tips would be matched with tollgates!
+//				GameConfig.tollgates=[RandomWalk];
+//				GameConfig.tollgateTips=["baby intelligence"];
+//				GameConfig.turnFlag=DefaultConstants.FLAG_RED; //human first.
+//				//
+//				GameConfig.playMode=GameConfig.HUMAN_VS_COMPUTER;
+//				//
+//				GameConfig.chessPieceManager = new ThoChessPieceManager();
+//			}
+			
+			//
+			override protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				startUpSequenceTask.start();
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<!---
+		The context for bootstrapping the whole Parsley framework.
+		-->
+		<parsley:ContextBuilder config="{CCJContextConfig}"/>
+		
+		<!---
+		The system unique logging component provider LOG.debug/info/warn/error/fatal avenues.
+		-->
+		<s:TraceTarget id="traceTarget" fieldSeparator="-&gt;" includeCategory="true"
+					   includeDate="false" includeLevel="true" includeTime="true"
+					   level="{LogEventLevel.DEBUG}">
+			<s:filters>
+				[
+				com.lookbackon.AI.searching.*,
+				*
+				]
+			</s:filters>
+		</s:TraceTarget>
+		<!-- Popups here -->
+		<parsley:PopUp center="true" modal="true" open="{IndicatorConfig.airportUtility}">
+			<popups:AirportUtility/>
+		</parsley:PopUp>
+		
+		<popup:PopUpWrapper center="true" modal="true" open="{IndicatorConfig.readOut}">
+			<popups:ThinkIndicatory/>
+		</popup:PopUpWrapper>
+		
+		<parsley:PopUp center="true" modal="true" open="{IndicatorConfig.check}">
+			<popups:CheckIndicatory/>
+		</parsley:PopUp>
+		
+		<parsley:PopUp center="true" modal="true" open="{IndicatorConfig.submitScore}">
+			<plugin:SubmitScoreAndNextRound id="submitScoreAndNamePopup"/>
+		</parsley:PopUp>
+		
+		<!-- Controllers here -->
+		
+		<!-- Tasks -->
+		<taskC:SequenceTask id="startUpSequenceTask" label="startUp">
+			<tasks:CreateChessGasketTask id="ccgTask" label="create chess gasket"
+										 factory="{PieceConfig.factory}"/>
+			<tasks:CreateChessPieceTask id="ccpTask" label="create chess piece" factory="{PieceConfig.factory}"/>
+			<tasks:CreateChessVoTask id="ccvTask" label="create chess VO" factory="{PieceConfig.factory}"/>
+		</taskC:SequenceTask>
+		
+		<!--<task:SequenceTask id="cleanUp" label="cleanUp">
+		<tasks:CleanUpChessPieceTask label="clean up chess pieces"/>
+		<tasks:CleanUpPiecesBitboardTask label="clean up pieces bitboard"/>
+		</task:SequenceTask>-->
+		<taskP:SequentialTaskGroup id="cleanUpSequenceTask" autoStart="false">
+			
+		</taskP:SequentialTaskGroup>
+		
+		<!-- Services here -->
+	</fx:Declarations>
+</app:ApplicationBase>

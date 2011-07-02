@@ -6,6 +6,7 @@ package
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.contract.Contract;
+	import com.degrafa.geometry.RegularRectangle;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
@@ -41,6 +42,10 @@ package
 		PluginButtonBar;
 		//
 		AStar;
+		//Degrafa
+		RegularRectangle;
+		//
+		ApplicationDefault;
 		//--------------------------------------------------------------------------
 		//
 		//  Variables

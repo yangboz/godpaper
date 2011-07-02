@@ -14,9 +14,9 @@
   </compiler>
   <applications>
     <application path="TheRealKnight.as"/>
+    <application path="ApplicationDefault.mxml"/>
   </applications>
   <modules/>
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
 </actionScriptProperties>
-

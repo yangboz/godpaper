@@ -1,6 +1,7 @@
 package com.godpaper.as3.business.factory
 {
 	import com.godpaper.as3.configs.BoardConfig;
+	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.IChessFactory;
@@ -9,6 +10,9 @@ package com.godpaper.as3.business.factory
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.pools.BlueChessPiecesPool;
+	import com.godpaper.as3.model.pools.ChessGasketsPool;
+	import com.godpaper.as3.model.pools.RedChessPiecesPool;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.views.components.ChessGasket;
@@ -66,7 +70,10 @@ package com.godpaper.as3.business.factory
 		//--------------------------------------------------------------------------
 		public function ChessFactoryBase()
 		{
-			//
+			//The ObjectPool class creates a pool of new objects at the initialization of the application. 
+			ChessGasketsPool.initialize(GasketConfig.maxPoolSize,GasketConfig.growthValue);
+			BlueChessPiecesPool.initialize(PieceConfig.maxPoolSizeBlue,PieceConfig.growthValue);
+			RedChessPiecesPool.initialize(PieceConfig.maxPoolSizeRed,PieceConfig.growthValue);
 		}
 
 		//--------------------------------------------------------------------------
@@ -84,7 +91,15 @@ package com.godpaper.as3.business.factory
 		public function createChessPiece(position:Point, flag:int=0):IChessPiece
 		{
 			//view
-			var simpleChessPiece:ChessPiece = new ChessPiece();
+			var simpleChessPiece:ChessPiece;
+			if (this.chessPieceType.indexOf(DefaultConstants.RED)!=-1)//red
+			{
+				simpleChessPiece = RedChessPiecesPool.get();
+			}else
+			{
+				simpleChessPiece = BlueChessPiecesPool.get();
+			}
+			//
 			simpleChessPiece.label=this.chessPieceLabel;
 			simpleChessPiece.name=this.chessPieceLabel;
 			simpleChessPiece.type=chessPieceType;
@@ -133,7 +148,9 @@ package com.godpaper.as3.business.factory
 		 */
 		public function createChessGasket(position:Point):IChessGasket
 		{
-			var myChessGasket:ChessGasket=new ChessGasket();
+			//
+//			var myChessGasket:ChessGasket=new ChessGasket();
+			var myChessGasket:ChessGasket= ChessGasketsPool.get();
 			myChessGasket.position=position;
 			myChessGasket.x=position.x * BoardConfig.xOffset - myChessGasket.width / 2 + BoardConfig.xAdjust;
 			myChessGasket.y=position.y * BoardConfig.yOffset + BoardConfig.yAdjust;
