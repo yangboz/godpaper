@@ -251,6 +251,11 @@
     <classEntry path="com.lookbackon.ds.IConnex"/>
     <classEntry path="com.godpaper.as3.utils.SingletonFactory"/>
     <classEntry path="com.godpaper.as3.model.pools.ChessGasketsPool"/>
+    <classEntry path="com.godpaper.as3.core.IPiecesBox"/>
+    <classEntry path="com.godpaper.as3.impl.AbstractPicecesBox"/>
+    <classEntry path="com.godpaper.as3.core.IType"/>
+    <classEntry path="com.godpaper.as3.tasks.FillInPiecesBoxTask"/>
+    <classEntry path="com.godpaper.as3.views.components.PiecesBox"/>
   </includeClasses>
   <includeResources>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.foo" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.foo"/>

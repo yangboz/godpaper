@@ -1,5 +1,8 @@
 package com.godpaper.as3.configs
 {
+	import com.godpaper.as3.core.IPiecesBox;
+	import com.godpaper.as3.model.vos.ConductVO;
+	import com.godpaper.as3.views.components.PiecesBox;
 
 	//--------------------------------------------------------------------------
 	//
@@ -30,6 +33,11 @@ package com.godpaper.as3.configs
 		//ObjectPool
 		private static var _maxPoolSizeBlue:uint=16;
 		private static var _maxPoolSizeRed:uint=16;
+		//PiecesBox data
+		private static var _bluePieces:Vector.<ConductVO> = new Vector.<ConductVO>;
+		private static var _redPieces:Vector.<ConductVO> = new Vector.<ConductVO>;
+		private static var _bluePiecesBox:IPiecesBox;
+		private static var _redPiecesBox:IPiecesBox;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -40,6 +48,36 @@ package com.godpaper.as3.configs
 		//
 		//-------------------------------------------------------------------------- 
 		//	
+		public static function get redPiecesBox():IPiecesBox
+		{
+			return _redPiecesBox;
+		}
+
+		public static function set redPiecesBox(value:IPiecesBox):void
+		{
+			_redPiecesBox = value;
+		}
+		//
+		public static function get bluePiecesBox():IPiecesBox
+		{
+			return _bluePiecesBox;
+		}
+
+		public static function set bluePiecesBox(value:IPiecesBox):void
+		{
+			_bluePiecesBox = value;
+		}
+		//
+		public static function get redPieces():Vector.<ConductVO>
+		{
+			return _redPieces;
+		}
+		//
+		public static function get bluePieces():Vector.<ConductVO>
+		{
+			return _bluePieces;
+		}
+		//
 		public static function get usingDragProxy():Boolean
 		{
 			return _usingDragProxy;
@@ -96,6 +134,11 @@ package com.godpaper.as3.configs
 		public static function set maxPoolSizeBlue(value:uint):void
 		{
 			_maxPoolSizeBlue = value;
+			//for loop initialize the blue pieces
+			for(var i:int=0;i<value;i++)
+			{
+				_bluePieces.push(new ConductVO());
+			}
 		}
 		//
 		public static function get maxPoolSizeRed():uint
@@ -106,6 +149,11 @@ package com.godpaper.as3.configs
 		public static function set maxPoolSizeRed(value:uint):void
 		{
 			_maxPoolSizeRed = value;
+			//for loop initialize the blue pieces
+			for(var i:int=0;i<value;i++)
+			{
+				_redPieces.push(new ConductVO());
+			}
 		}
 		//--------------------------------------------------------------------------
 		//

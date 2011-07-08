@@ -22,8 +22,10 @@
 			import com.godpaper.as3.configs.CCJContextConfig;
 			import com.godpaper.as3.configs.IndicatorConfig;
 			import com.godpaper.as3.configs.PieceConfig;
+			import com.godpaper.as3.consts.DefaultConstants;
+			import com.godpaper.as3.views.components.PiecesBox;
 			import com.lookbackon.AI.searching.*;
-
+			
 			import mx.events.FlexEvent;
 			import mx.logging.LogEventLevel;
 
@@ -32,7 +34,7 @@
 			//  Variables
 			//
 			//--------------------------------------------------------------------------
-
+			
 			//----------------------------------
 			//  CONSTANTS
 			//----------------------------------
@@ -73,9 +75,12 @@
 //			}
 
 			//
+			/**
+			 * Should override this method to prepare the pieces boxes data.
+			 */
 			override protected function creationCompleteHandler(event:FlexEvent):void
 			{
-				// TODO Auto-generated method stub
+				// Kick off this start task.
 				startUpSequenceTask.start();
 			}
 		]]>
@@ -137,9 +142,9 @@
 			<tasks:CreateChessGasketTask id="ccgTask"
 										 label="create chess gasket"
 										 factory="{PieceConfig.factory}"/>
-			<tasks:CreateChessPieceTask id="ccpTask"
-										label="create chess piece"
-										factory="{PieceConfig.factory}"/>
+			<tasks:FillInPiecesBoxTask id="fpbTask"
+									   label="fill in the chess pieces box"
+									   factory="{PieceConfig.factory}"/>
 			<tasks:CreateChessVoTask id="ccvTask"
 									 label="create chess VO"
 									 factory="{PieceConfig.factory}"/>
@@ -156,7 +161,5 @@
 
 		<!-- Services here -->
 	</fx:Declarations>
-	<!---
-	Vistual elements at stage here.
-	-->
+
 </app:ApplicationBase>

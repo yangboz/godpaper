@@ -46,6 +46,7 @@ package
 		RegularRectangle;
 		//
 		ApplicationDefault;
+		ApplicationDefaulter;
 		//--------------------------------------------------------------------------
 		//
 		//  Variables

@@ -1,53 +1,62 @@
-package com.godpaper.as3.tasks
+package com.godpaper.as3.impl
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.as3.configs.PieceConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.IPiecesBox;
+	import com.godpaper.as3.model.pools.BlueChessPiecesPool;
+	import com.godpaper.as3.model.pools.RedChessPiecesPool;
+	import com.godpaper.as3.utils.LogUtil;
 	
-	import mx.core.IUIComponent;
+	import mx.events.FlexEvent;
+	import mx.logging.ILogger;
+	
+	import spark.components.BorderContainer;
+	import spark.components.Group;
 
 
 	/**
-	 * Abstract the ChessTask struct including the assign/assignee and trackment.
+	 * AbstractPicecesBox.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jan 27, 2011 4:09:26 PM
-	 */   	 
-	public class ChessTaskBase extends Task
-	{		
+	 * Created Jul 8, 2011 12:00:37 PM
+	 */
+	public class AbstractPicecesBox extends BorderContainer implements IPiecesBox
+	{
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _factory:Class;//The task's assignee.
+		private var _type:String;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
+		private static const LOG:ILogger=LogUtil.getLogger(AbstractPicecesBox);
 
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//
-		public function get factory():Class
+		//----------------------------------
+		//  type(RED/BLUE...)
+		//----------------------------------
+		public function get type():String
 		{
-			if(null==_factory)
-			{
-				return PieceConfig.factory;
-			}
-			return _factory;
+			return _type;
 		}
-		public function set factory(value:Class):void
+
+		public function set type(value:String):void
 		{
-			_factory = value;
+			_type=value;
 		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -59,10 +68,13 @@ package com.godpaper.as3.tasks
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessTaskBase()
+		public function AbstractPicecesBox()
 		{
 			super();
-		}     	
+			//
+			this.addEventListener(FlexEvent.CREATION_COMPLETE, creationCompleteHandler);
+		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -74,14 +86,32 @@ package com.godpaper.as3.tasks
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-
+		protected function creationCompleteHandler(event:FlexEvent):void
+		{
+			if (PieceConfig.bluePieces.length)
+			{
+				if (type == DefaultConstants.BLUE)
+				{
+					BlueChessPiecesPool.initialize(PieceConfig.maxPoolSizeBlue, PieceConfig.growthValue);
+					//store this reference
+					PieceConfig.bluePiecesBox = this;
+				}
+			}
+			if (PieceConfig.redPieces.length)
+			{
+				if (type == DefaultConstants.RED)
+				{
+					RedChessPiecesPool.initialize(PieceConfig.maxPoolSizeRed, PieceConfig.growthValue);
+					//store this reference
+					PieceConfig.redPiecesBox = this;
+				}
+			}
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-
 	}
 
 }
-

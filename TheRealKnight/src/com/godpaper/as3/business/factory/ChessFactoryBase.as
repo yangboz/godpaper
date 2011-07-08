@@ -72,8 +72,15 @@ package com.godpaper.as3.business.factory
 		{
 			//The ObjectPool class creates a pool of new objects at the initialization of the application. 
 			ChessGasketsPool.initialize(GasketConfig.maxPoolSize,GasketConfig.growthValue);
-			BlueChessPiecesPool.initialize(PieceConfig.maxPoolSizeBlue,PieceConfig.growthValue);
-			RedChessPiecesPool.initialize(PieceConfig.maxPoolSizeRed,PieceConfig.growthValue);
+			//Maybe this pools has been initialized in some places(PiecesBox).
+			if(!BlueChessPiecesPool.initialized)
+			{
+				BlueChessPiecesPool.initialize(PieceConfig.maxPoolSizeBlue,PieceConfig.growthValue);
+			}
+			if(!RedChessPiecesPool.initialized)
+			{
+				RedChessPiecesPool.initialize(PieceConfig.maxPoolSizeRed,PieceConfig.growthValue);
+			}
 		}
 
 		//--------------------------------------------------------------------------
@@ -134,7 +141,7 @@ package com.godpaper.as3.business.factory
 			{
 				//data
 				simpleChessPiece.position=position;
-				LOG.debug("Anew chess piece created@{0}",position);
+				LOG.debug("Anew chess piece has been created@{0}",position);
 				return simpleChessPiece as IChessPiece;
 			}
 			return null;

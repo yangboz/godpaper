@@ -26,6 +26,7 @@ package com.godpaper.as3.model.pools
 		private static var counter:uint; 
 		private static var pool:Vector.<ChessPiece>; 
 		private static var currentSprite:ChessPiece; 
+		private static var _initialized:Boolean = false;
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
@@ -41,7 +42,11 @@ package com.godpaper.as3.model.pools
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		//
+		public static function get initialized():Boolean
+		{
+			return _initialized;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -71,6 +76,8 @@ package com.godpaper.as3.model.pools
 			pool = new Vector.<ChessPiece>(MAX_VALUE); 
 			while( --i > -1 ) 
 				pool[i] = new ChessPiece(); 
+			//
+			_initialized = true;
 		} 
 		//
 		public static function get():ChessPiece 
