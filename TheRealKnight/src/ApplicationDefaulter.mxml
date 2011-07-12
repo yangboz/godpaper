@@ -82,6 +82,8 @@
 			{
 				// Kick off this start task.
 				startUpSequenceTask.start();
+				//
+				super.creationCompleteHandler(event);
 			}
 		]]>
 	</fx:Script>

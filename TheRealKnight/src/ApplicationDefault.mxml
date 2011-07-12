@@ -77,6 +77,8 @@
 			{
 				// TODO Auto-generated method stub
 				startUpSequenceTask.start();
+				//
+				super.creationCompleteHandler(event);
 			}
 		]]>
 	</fx:Script>

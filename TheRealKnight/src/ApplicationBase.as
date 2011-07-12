@@ -9,6 +9,7 @@ package
 	import com.degrafa.geometry.RegularRectangle;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.utils.VersionController;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
 	import com.lookbackon.ds.aStar.AStar;
 	
@@ -148,6 +149,8 @@ package
 //			this.startUpSequenceTask.start();
 //			//init data struct.@see ChessPieceModel dump info.
 //			this.dumpFootSprint();
+			//Add version control context menu.
+			VersionController.getInstance(this);
 		}
 		//  application1_applicationCompleteHandler
 		/**

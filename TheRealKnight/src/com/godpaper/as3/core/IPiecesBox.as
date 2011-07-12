@@ -1,6 +1,8 @@
 package com.godpaper.as3.core
 {
 	import com.godpaper.as3.model.vos.ConductVO;
+	
+	import flash.geom.Rectangle;
 
 	//--------------------------------------------------------------------------
 	//
@@ -9,7 +11,7 @@ package com.godpaper.as3.core
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * You can put chess pieces inside the box.
+	 * You can put chess pieces inside the box constrainted by the fixed area.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -22,7 +24,8 @@ package com.godpaper.as3.core
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		function set childrenArea(value:Rectangle):void;
+		function get childrenArea():Rectangle;
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

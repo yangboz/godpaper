@@ -11,7 +11,11 @@ package com.godpaper.as3.impl
 	import com.godpaper.as3.model.pools.BlueChessPiecesPool;
 	import com.godpaper.as3.model.pools.RedChessPiecesPool;
 	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.as3.utils.MathUtil;
 	
+	import flash.geom.Rectangle;
+	
+	import mx.core.IVisualElement;
 	import mx.events.FlexEvent;
 	import mx.logging.ILogger;
 	
@@ -34,6 +38,7 @@ package com.godpaper.as3.impl
 		//
 		//--------------------------------------------------------------------------
 		private var _type:String;
+		private var _childrenArea:Rectangle;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -56,7 +61,18 @@ package com.godpaper.as3.impl
 		{
 			_type=value;
 		}
-
+		//----------------------------------
+		//  childrenArea
+		//----------------------------------
+		public function get childrenArea():Rectangle
+		{
+			return _childrenArea;
+		}
+		
+		public function set childrenArea(value:Rectangle):void
+		{
+			_childrenArea = value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -73,14 +89,16 @@ package com.godpaper.as3.impl
 			super();
 			//
 			this.addEventListener(FlexEvent.CREATION_COMPLETE, creationCompleteHandler);
+			//
+			_childrenArea = new Rectangle(0,0,this.width,this.height);
 		}
-
+	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

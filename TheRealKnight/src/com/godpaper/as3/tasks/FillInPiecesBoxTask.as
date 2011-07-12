@@ -113,11 +113,13 @@ package com.godpaper.as3.tasks
 		//--------------------------------------------------------------------------
 		protected function getRandomX(sponsor:PiecesBox):Number
 		{
-			return MathUtil.transactRandomNumberInRange(20,sponsor.width-20);
+//			return MathUtil.transactRandomNumberInRange(0,sponsor.width);
+			return MathUtil.transactRandomNumberInRange(sponsor.childrenArea.x,(sponsor.childrenArea.x+sponsor.childrenArea.width));
 		}
 		protected function getRandomY(sponsor:PiecesBox):Number
 		{
-			return MathUtil.transactRandomNumberInRange(20,sponsor.height-20);
+//			return MathUtil.transactRandomNumberInRange(0,sponsor.height);
+			return MathUtil.transactRandomNumberInRange(sponsor.childrenArea.x,(sponsor.childrenArea.y+sponsor.childrenArea.height));
 		}
 		//--------------------------------------------------------------------------
 		//
