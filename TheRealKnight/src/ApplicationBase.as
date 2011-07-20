@@ -8,9 +8,11 @@ package
 	import com.adobe.cairngorm.contract.Contract;
 	import com.degrafa.geometry.RegularRectangle;
 	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.utils.VersionController;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
+	import com.lookbackon.ds.NumberBoard;
 	import com.lookbackon.ds.aStar.AStar;
 	
 	import flash.display.MovieClip;
@@ -41,13 +43,16 @@ package
 		ContextBuilderTag;
 		Contract;//for pre-condition compile;
 		PluginButtonBar;
-		//
+		//DataStruct
 		AStar;
+		NumberBoard;
 		//Degrafa
 		RegularRectangle;
-		//
+		//Implements
 		ApplicationDefault;
 		ApplicationDefaulter;
+		//MVCs
+		ChessBoardModel;
 		//--------------------------------------------------------------------------
 		//
 		//  Variables

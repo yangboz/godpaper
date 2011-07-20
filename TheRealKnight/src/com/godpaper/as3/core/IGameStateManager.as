@@ -36,6 +36,12 @@ package com.godpaper.as3.core
 		//
 		function get isRunning():Boolean;
 		function set isRunning(value:Boolean):void;
+		//----------------------------------
+		//  game side info
+		//----------------------------------
+		function get isBlueSide():Boolean;
+		function get isRedSide():Boolean;
+		function get isGreenSide():Boolean;
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods

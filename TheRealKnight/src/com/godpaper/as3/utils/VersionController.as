@@ -40,8 +40,8 @@ package com.godpaper.as3.utils
 		//  CONSTANTS
 		//----------------------------------
 		public static const CODE_NAME:String = "GODPAPER::TheRealKnight";
-		public static const BUILD_DATE: String = "20110712";
-		public static const BUILD_NUMBER: String = "89";
+		public static const BUILD_DATE: String = '20110720';
+		public static const BUILD_NUMBER: String = '119';
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -93,7 +93,7 @@ package com.godpaper.as3.utils
 		{
 			//	super.updateDisplayList( unscaledWidth, unscaledHeight ); 
 			var cm:ContextMenu=new ContextMenu();
-			var value:String=CODE_NAME.concat("_",BUILD_DATE,"_",BUILD_NUMBER);
+			var value:String= CODE_NAME.concat("_",BUILD_DATE,"_",BUILD_NUMBER);
 			var cmi:ContextMenuItem=new ContextMenuItem(value);
 			cm.customItems.push(cmi);
 			cm.hideBuiltInItems();

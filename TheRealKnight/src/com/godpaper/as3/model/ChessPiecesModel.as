@@ -122,6 +122,10 @@ package com.godpaper.as3.model
 		//----------------------------------
 		//  gamePosition
 		//----------------------------------
+		/**
+		 * return the current game positon information.
+		 */	
+		[Deprecated(replacement="BoardModel.status", since="TheRealKnight_4.1.0.16076_20110718_100")]
 		public function get gamePosition():PositionVO
 		{
 			var _gamePosition:PositionVO=new PositionVO();
@@ -135,7 +139,6 @@ package com.godpaper.as3.model
 			_gamePosition.color=DefaultConstants.FLAG_BLUE;
 			return _gamePosition;
 		}
-
 		//----------------------------------
 		//  allPieces
 		//----------------------------------

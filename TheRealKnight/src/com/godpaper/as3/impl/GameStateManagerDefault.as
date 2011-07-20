@@ -7,6 +7,7 @@ package com.godpaper.as3.impl
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.IGameStateManager;
+	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.tasks.CleanUpChessPieceTask;
@@ -26,7 +27,7 @@ package com.godpaper.as3.impl
 
 	/**
 	 * A player manager class to maintain turn-based game.
-	 *
+	 * Include sort of properties and methods for identifying game status.
 	 * @author Knight.zhou
 	 *
 	 */
@@ -37,8 +38,9 @@ package com.godpaper.as3.impl
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//
+		//Model refs
 		private var chessPieceModel:ChessPiecesModel=ChessPiecesModel.getInstance();
+		private var chessBoardModel:ChessBoardModel=ChessBoardModel.getInstance();
 		//
 		private var _isRunning:Boolean;
 		//
@@ -77,13 +79,13 @@ package com.godpaper.as3.impl
 		public function get phase():uint
 		{
 			var gamePhase:uint=PHASE_OPENING;
-			if ( chessPieceModel.gamePosition.board.celled <= chessPieceModel.gamePosition.board.size/2
-				&& chessPieceModel.gamePosition.board.celled >= chessPieceModel.gamePosition.board.size/3 )
+			if ( chessBoardModel.status.board.celled <= chessBoardModel.status.board.size/2
+				&& chessBoardModel.status.board.celled >= chessBoardModel.status.board.size/3 )
 			{
 				gamePhase=PHASE_MIDDLE;
 			}
-			if (chessPieceModel.gamePosition.board.celled < chessPieceModel.gamePosition.board.size/3 
-				&& chessPieceModel.gamePosition.board.celled >= 1)
+			if (chessBoardModel.status.board.celled < chessBoardModel.status.board.size/3 
+				&& chessBoardModel.status.board.celled >= 1)
 			{
 				gamePhase=PHASE_ENDING;
 			}
@@ -108,6 +110,27 @@ package com.godpaper.as3.impl
 		public function set isRunning(value:Boolean):void
 		{
 			_isRunning = value;
+		}
+		//----------------------------------
+		//  isBlueSide
+		//----------------------------------
+		public function get isBlueSide():Boolean
+		{
+			return GameConfig.gameStateManager.getRolePlaying(GameStateManagerDefault.TURN_NOW_COMPUTER);
+		}
+		//----------------------------------
+		//  isRedSide
+		//----------------------------------
+		public function get isRedSide():Boolean
+		{
+			return GameConfig.gameStateManager.getRolePlaying(GameStateManagerDefault.TURN_NOW_HUMAN);
+		}
+		//----------------------------------
+		//  isGreenSide
+		//----------------------------------
+		public function get isGreenSide():Boolean
+		{
+			return GameConfig.gameStateManager.getRolePlaying(GameStateManagerDefault.TURN_NOW_ANOTHER_HUMAN);
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -230,12 +253,14 @@ package com.godpaper.as3.impl
 		}
 		
 		//----------------------------------
-		//  isAnotherHumanTurnNow
+		//  getRolePlaying
 		//----------------------------------
 		public function getRolePlaying(flagMask:uint):Boolean
 		{
 			return BitFlagUtil.isSet(_roles,flagMask);
 		}
+		
+		
 	}
 }
 
