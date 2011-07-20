@@ -38,6 +38,7 @@ package com.godpaper.as3.impl
 	 * Also a way for the originator to be responsible for saving and restoring its states.</br>
 	 * @author Knight.zhou
 	 * @history 2010-12-02 using memento design pattern to implment make/unmake functions.
+	 * @history 2011-07-20 add default the side handlers at make move function.
 	 */
 	public class ChessPieceManagerBase implements IChessPieceManager
 	{
@@ -113,8 +114,7 @@ package com.godpaper.as3.impl
 		//  eatOffs
 		//----------------------------------
 		/**
-		 *
-		 * @return the eaten chess pieces.
+		 * return the eaten chess pieces.
 		 */
 		public function get eatOffs():Vector.<ChessPiece>
 		{
@@ -122,8 +122,7 @@ package com.godpaper.as3.impl
 		}
 
 		/**
-		 *
-		 * @param value
+		 * @param value the eated off pieces.
 		 */
 		public function set eatOffs(value:Vector.<ChessPiece>):void
 		{
@@ -133,18 +132,14 @@ package com.godpaper.as3.impl
 		//----------------------------------
 		//  isChecking
 		//----------------------------------
-		/**
-		 *
-		 * @param value
-		 */
+		//
 		public function set isChecking(value:Boolean):void
 		{
 			_isChecking=value;
 		}
 
 		/**
-		 *
-		 * @return
+		 * return isChecking value.
 		 */
 		public function get isChecking():Boolean
 		{
@@ -212,6 +207,21 @@ package com.godpaper.as3.impl
 			GameConfig.chessPieceManager.memento=memento;
 			//
 			LOG.info("End makeMove:{0}", conductVO.brevity);
+			//clean up firstly.
+			currentRemovedPieces.length = 0;
+			//relatived side handlers.
+			if(GameConfig.gameStateManager.isBlueSide)
+			{
+				this.blueSideHandler();
+			}
+			if(GameConfig.gameStateManager.isRedSide)
+			{
+				this.redSideHandler();	
+			}
+			if(GameConfig.gameStateManager.isGreenSide)
+			{
+				this.greenSideHandler();	
+			}
 		}
 
 		/**
@@ -341,8 +351,8 @@ package com.godpaper.as3.impl
 
 		//pluge to death.	
 		/**
-		 *
-		 * @return
+		 * Plugin to death,results to human or computer win.</br>
+		 * return the game status code.
 		 */
 		public function noneMove():int
 		{
@@ -529,6 +539,22 @@ package com.godpaper.as3.impl
 			});
 			//
 			task.start();
+		}
+		
+		//
+		virtual protected function blueSideHandler():void
+		{
+			//TODO:implement functions.
+		}
+		//
+		virtual protected function redSideHandler():void
+		{
+			//TODO:implement functions.
+		}
+		//
+		virtual protected function greenSideHandler():void
+		{
+			//TODO:implement functions.
 		}
 	}
 

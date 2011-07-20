@@ -41,7 +41,7 @@ package com.godpaper.as3.utils
 		//----------------------------------
 		public static const CODE_NAME:String = "GODPAPER::TheRealKnight";
 		public static const BUILD_DATE: String = '20110720';
-		public static const BUILD_NUMBER: String = '119';
+		public static const BUILD_NUMBER: String = '121';
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

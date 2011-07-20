@@ -7,10 +7,11 @@ package com.lookbackon.AI.searching
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.LogUtil;
-
+	
 	import mx.logging.ILogger;
 
 	/**
@@ -242,7 +243,7 @@ package com.lookbackon.AI.searching
 				tempMove = orderingMoves[i];
 				//
 				makeMove(tempMove);
-				tempValue = miniMax(ChessPiecesModel.getInstance().gamePosition,depth-1);
+				tempValue = miniMax(ChessBoardModel.getInstance().status,depth-1);
 				unmakeMove(tempMove);
 				//
 				if(gamePosition.color==DefaultConstants.FLAG_RED)

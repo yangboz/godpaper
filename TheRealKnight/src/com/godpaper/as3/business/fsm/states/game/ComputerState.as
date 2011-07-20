@@ -8,6 +8,7 @@ package com.godpaper.as3.business.fsm.states.game
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.AI.FSM.IAgent;
@@ -17,14 +18,14 @@ package com.godpaper.as3.business.fsm.states.game
 	import com.lookbackon.AI.searching.MiniMax;
 	import com.lookbackon.AI.searching.RandomWalk;
 	import com.lookbackon.AI.searching.ShortSighted;
-
+	
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
-
+	
 	import mx.core.FlexGlobals;
 	import mx.logging.ILogger;
 	import mx.managers.CursorManager;
-
+	
 	import org.generalrelativity.thread.GreenThread;
 	import org.generalrelativity.thread.IRunnable;
 
@@ -116,7 +117,7 @@ package com.godpaper.as3.business.fsm.states.game
 			//
 			var className:String=getQualifiedClassName(GameConfig.tollgates[time]);
 			var implementation:Object=getDefinitionByName(className);
-			searching=new implementation(ChessPiecesModel.getInstance().gamePosition);
+			searching=new implementation(ChessBoardModel.getInstance().status);
 			//
 			LOG.info("current toll gate is:{0}", getQualifiedClassName(implementation));
 			//using this flash green thread algorithm to avoid script time limition only 15s.
