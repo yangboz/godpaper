@@ -6,6 +6,7 @@ package
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.contract.Contract;
+	import com.degrafa.geometry.Line;
 	import com.degrafa.geometry.RegularRectangle;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.model.ChessBoardModel;
@@ -48,6 +49,7 @@ package
 		NumberBoard;
 		//Degrafa
 		RegularRectangle;
+		Line;
 		//Implements
 		ApplicationDefault;
 		ApplicationDefaulter;

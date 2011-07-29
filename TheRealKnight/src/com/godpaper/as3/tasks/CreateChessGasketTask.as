@@ -6,8 +6,10 @@ package com.godpaper.as3.tasks
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.BoardConfig;
+	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.model.ChessGasketsModel;
+	import com.godpaper.as3.model.pools.ChessGasketsPool;
 	
 	import flash.geom.Point;
 	import flash.utils.getDefinitionByName;

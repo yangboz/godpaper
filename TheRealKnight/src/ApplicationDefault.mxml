@@ -15,7 +15,8 @@
 					 xmlns:plugin="com.godpaper.as3.views.plugin.*"
 					 xmlns:components="com.godpaper.as3.views.components.*"
 					 width="400"
-					 height="450">
+					 height="450"
+					 >
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.as3.business.factory.ChessFactoryBase;
@@ -82,6 +83,9 @@
 			}
 		]]>
 	</fx:Script>
+	
+	<!-- Style here -->
+	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 		<!---
@@ -157,6 +161,7 @@
 		</taskP:SequentialTaskGroup>
 
 		<!-- Services here -->
+		
 	</fx:Declarations>
 	<!---
 	Vistual elements at stage here.

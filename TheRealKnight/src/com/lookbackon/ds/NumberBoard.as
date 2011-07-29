@@ -1,6 +1,7 @@
 package com.lookbackon.ds
 {
 	import com.godpaper.as3.utils.ProxyArray;
+	
 	import de.polygonal.ds.Array2;
 
 	//--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ package com.lookbackon.ds
 	 * Subtracting one score from another determines how well a player is doing relative to the opposing player.  </br>
 	 * You throw these numbers into your general run-of-the-mill minimax algorithm, throw in some alpha-beta cutoff logic for efficiency,
 	 * and that, in a nutshell, is the secret to my algorithm.</br>
-	 * The original connect-4 algorithm created by Keith Pomakis(pomakis@pobox.com),aslo I get this right to translate to AS3 version.
+	 * The original connect-4 algorithm created by Keith Pomakis(pomakis@pobox.com),aslo I(youngwelle@gmail.com) get this right to translate to AS3 version.
 	 * 
 	 * @author yangboz
 	 * @langVersion 3.0
@@ -54,6 +55,13 @@ package com.lookbackon.ds
 		public static const VERTICAL:String = "V";//"vertical direction";
 		public static const FORWARD_DIAGONAL:String = "F"//"forward diagonal direction";
 		public static const BACKWARD_DIAGONAL:String = "B";//"backward diagonal direction";
+		//sample match patterns
+//		public static const PATTERNS_BBB:String = "BBB";//blue blue blue
+//		public static const PATTERNS_BBR:String = "BBR";//blue blue red
+//		public static const PATTERNS_BRB:String = "BRB";//blue red blue
+//		public static const PATTERNS_RRR:String = "RRR";//red red red
+//		public static const PATTERNS_RRB:String = "RRB";//red red blue
+//		public static const PATTERNS_RBR:String = "RBR";//red blue red
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -278,9 +286,10 @@ package com.lookbackon.ds
 		 * Return the connex results,such as z[0]-horizontally,z[1]-vertically,z[2]-forwardDiagonal,z[3]-backwardDiagonal
 		 * @param board the board resource;
 		 * @param len the length of connex;
+		 * @param pattern the connex's match pattern function with parameter such as('RRR','BBB','RBR','RRB'...);
 		 * @return the calculated connections categoried by array;
 		 */		
-		public function getConnex(board:Array2,len:int):Array
+		public function getConnex(board:Array2,len:int,pattern:Function):Array
 		{
 //			trace("connex board:",board.dump());
 			var z:Array = [];
@@ -374,7 +383,7 @@ package com.lookbackon.ds
 					}
 				}
 			}
-			//filter array elements
+			//filter array elements by unique.
 			if(z[0].length)
 			{
 				z[0] = getUniqueArrays(z[0]);
@@ -405,6 +414,26 @@ package com.lookbackon.ds
 				for(var z3:int=0;z3<z[3].length;z3++)
 				{
 //					trace("z3[",z3,"]:",z[3][z3]);
+				}
+			}
+			//filter array by custom match patterns functions.
+			if(pattern!=null && (pattern is Function) )
+			{
+				if(z[0].length)
+				{
+					z[0] = pattern.apply(this,[z[0]]);
+				}
+				if(z[1].length)
+				{
+					z[1] = pattern.apply(this,[z[1]]);
+				}
+				if(z[2].length)
+				{
+					z[2] = pattern.apply(this,[z[2]]);
+				}
+				if(z[3].length)
+				{
+					z[3] = pattern.apply(this,[z[3]]);
 				}
 			}
 			//
@@ -563,6 +592,22 @@ package com.lookbackon.ds
 		}
 		//At least the group's element shoule be successional align.
 		private function getSuccessionalGroup(source:Array,len:int):Array
+		{
+			var result:Array = [];
+			var groupProxy:ProxyArray = new ProxyArray(source);
+			var objectSum:int = groupProxy.objectSum();
+			//if the total number at least bigger than len?
+			if(objectSum==len)
+			{
+				return source;
+			}
+			return result;
+		}
+		//At least the group's element shoule be successional align.
+		/**
+		 * @param pattern the connex's match pattern('RRR','BBB','RBR','RRB'...);
+		 */		
+		private function getSuccessionalGroupWithPattern(source:Array,len:int,pattern:String):Array
 		{
 			var result:Array = [];
 			var groupProxy:ProxyArray = new ProxyArray(source);

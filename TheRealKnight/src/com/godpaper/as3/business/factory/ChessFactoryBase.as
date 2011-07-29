@@ -30,7 +30,7 @@ package com.godpaper.as3.business.factory
 	//--------------------------------------------------------------------------
 
 	/**
-	 * AbstractChessFactory.as class.Simply factory produce ChessPiece/ChessGasket/ChessVO/OmenVO.
+	 * Simply factory produce ChessPiece/ChessGasket/ChessVO/OmenVO and relatived properties.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -43,10 +43,10 @@ package com.godpaper.as3.business.factory
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		protected var chessPieceLabel:String="";
-		protected var chessPieceValue:int=0;
-		protected var chessPieceType:String="";
-		protected var chessPieceSource:Object;
+		protected var chessPieceLabel:String="";//The label of chess piece.
+		protected var chessPieceValue:int=0;//The value of chess piece(hex value prefered).
+		protected var chessPieceType:String="";//Blue/Red/Green...
+		protected var chessPieceSource:Object;//style source asset(@see assets/EmbededAssets.as).
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
