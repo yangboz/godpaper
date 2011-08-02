@@ -43,10 +43,11 @@ package com.godpaper.as3.business.factory
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		protected var chessPieceLabel:String="";//The label of chess piece.
+		protected var chessPieceLabel:String="";//The label of chess piece.@see DefaultPiecesConstants.as
 		protected var chessPieceValue:int=0;//The value of chess piece(hex value prefered).
 		protected var chessPieceType:String="";//Blue/Red/Green...
 		protected var chessPieceSource:Object;//style source asset(@see assets/EmbededAssets.as).
+		protected var chessPieceName:String="";//the unique chess piece name to identify the chess piece of typed group.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -108,7 +109,7 @@ package com.godpaper.as3.business.factory
 			}
 			//
 			simpleChessPiece.label=this.chessPieceLabel;
-			simpleChessPiece.name=this.chessPieceLabel;
+			simpleChessPiece.name=this.chessPieceName;
 			simpleChessPiece.type=chessPieceType;
 			//			simpleChessPiece.swfLoader.source = String("./assets/").concat(chessPieceType,".swf");
 			simpleChessPiece.swfLoader.source=this.chessPieceSource;

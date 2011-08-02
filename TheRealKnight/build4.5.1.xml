@@ -5,7 +5,7 @@
 <!-- Generated from project settings as of 6/10/11 11:29 AM -->
 <project name="TheRealKnight(4.5.1)"
 		 default="build"
-		 basedir="C:/Users/yangboz/godpaper/TheRealKnight">
+		 basedir="C:/Users/yangboz/git/godpaper/TheRealKnight">
 
 	<property name="FLEX_HOME"
 			  value="C:/Program Files/Adobe/Adobe Flash Builder 4.5/sdks/4.5.1"/>
@@ -26,7 +26,7 @@
 			 classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
 
 	<property name="PROJECT_DIR"
-			  value="C:/Users/yangboz/godpaper/TheRealKnight"/>
+			  value="C:/Users/yangboz/git/godpaper/TheRealKnight"/>
 	<property name="SOURCE_DIR"
 			  value="${PROJECT_DIR}/src"/>
 	<property name="OUTPUT_DIR"

@@ -10,21 +10,23 @@ package com.godpaper.as3.impl
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IXray;
 	import com.godpaper.as3.model.ChessGasketsModel;
+	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.views.components.ChessGasket;
 	import com.godpaper.as3.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
-
+	
+	import flash.events.MouseEvent;
 	import flash.geom.Point;
-
+	
 	import mx.core.IUIComponent;
 	import mx.events.DragEvent;
 	import mx.events.FlexEvent;
 	import mx.managers.DragManager;
-
+	
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.Logger;
-
+	
 	import spark.components.BorderContainer;
 	import spark.events.ElementExistenceEvent;
 
@@ -42,8 +44,8 @@ package com.godpaper.as3.impl
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		[Bindable]
 		private var chessGasketsModel:ChessGasketsModel = ChessGasketsModel.getInstance();
+		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -134,7 +136,6 @@ package com.godpaper.as3.impl
 		//--------------------------------------------------------------------------
 		public function AbstractChessGasket()
 		{
-			//TODO: implement function
 			super();
 			//
 			this.addEventListener(FlexEvent.CREATION_COMPLETE,creationCompleteHandler);
@@ -154,12 +155,14 @@ package com.godpaper.as3.impl
 		//creationCompleteHandler
 		protected function creationCompleteHandler(event:FlexEvent):void
 		{
-			// TODO Auto-generated method stub
+			// event listener method stub
 			this.addEventListener(DragEvent.DRAG_ENTER, dragEnterHandler);
 			this.addEventListener(DragEvent.DRAG_DROP, dragDropHandler);
 			//once piece add or remove,maybe check event triggled.
 			this.addEventListener(ElementExistenceEvent.ELEMENT_ADD, elementAddHandler);
 			this.addEventListener(ElementExistenceEvent.ELEMENT_REMOVE, elementRemoveHandler);
+			//
+			this.addEventListener(MouseEvent.CLICK, mouseClickHandler);
 		}
 
 		//dragEnterHandler
@@ -169,6 +172,7 @@ package com.godpaper.as3.impl
 			_conductVO.target=event.dragInitiator as IChessPiece;
 			_conductVO.previousPosition=(event.dragInitiator as ChessPiece).position;
 			_conductVO.nextPosition=this.position;
+			//do move validation
 			if (GameConfig.chessPieceManager.doMoveValidation(_conductVO))
 			{
 				DragManager.acceptDragDrop(event.currentTarget as IUIComponent);
@@ -208,6 +212,24 @@ package com.godpaper.as3.impl
 		protected function elementRemoveHandler(event:ElementExistenceEvent):void
 		{
 			//
+		}
+		
+		//mouseClickHandler
+		protected function mouseClickHandler(event:MouseEvent):void
+		{
+			if(chessPiecesModel.selectedPiece)
+			{
+				this._conductVO=new ConductVO();
+				_conductVO.target= chessPiecesModel.selectedPiece;
+				_conductVO.previousPosition= chessPiecesModel.selectedPiece.position;
+				_conductVO.nextPosition=this.position;
+				//do move validation
+				if (GameConfig.chessPieceManager.doMoveValidation(_conductVO))
+				{
+					//apply move.
+					GameConfig.chessPieceManager.applyMove(conductVO);
+				}
+			}
 		}
 		//--------------------------------------------------------------------------
 		//

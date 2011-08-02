@@ -2,21 +2,22 @@ package com.godpaper.as3.model
 {
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
-
+	
 	import de.polygonal.ds.Array2;
-
+	
 	import mx.logging.ILogger;
 
 	/**
-	 * A singleton model hold all Chess Pieces's information.
+	 * A singleton model hold all Chess Pieces's informations.
 	 *
 	 * @author Knight.zhou
-	 *
+	 * @history 08/02/2011 added the current selected chess piece property.
 	 */
 	public class ChessPiecesModel
 	{
@@ -27,10 +28,6 @@ package com.godpaper.as3.model
 		//--------------------------------------------------------------------------
 		//Singleton instance of ChessPiecesModel;
 		private static var instance:ChessPiecesModel;
-		//----------------------------------
-		//  CONSTANTS
-		//----------------------------------
-		private static const LOG:ILogger=LogUtil.getLogger(ChessPiecesModel);
 		//generation.
 		//obtain reds/blues chess pieces entity.
 		private var _reds:Vector.<ChessPiece>=new Vector.<ChessPiece>();
@@ -58,8 +55,12 @@ package com.godpaper.as3.model
 		private var _blueMarshal:BitBoard=new BitBoard(9, 10);
 		private var _blueCannon:BitBoard=new BitBoard(9, 10);
 		private var _bluePawn:BitBoard=new BitBoard(9, 10);
-
-		//TODO.other structs.
+		//the current selected chess piece
+		private var _selectedPiece:IChessPiece;
+		//----------------------------------
+		//  CONSTANTS
+		//----------------------------------
+		private static const LOG:ILogger=LogUtil.getLogger(ChessPiecesModel);
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -85,6 +86,18 @@ package com.godpaper.as3.model
 		//  Properties
 		//
 		//--------------------------------------------------------------------------
+		//----------------------------------
+		//  selectedPiece
+		//----------------------------------
+		public function get selectedPiece():IChessPiece
+		{
+			return _selectedPiece;
+		}
+		
+		public function set selectedPiece(value:IChessPiece):void
+		{
+			_selectedPiece = value;
+		}
 		//----------------------------------
 		//  blues
 		//----------------------------------

@@ -8,6 +8,7 @@ package com.godpaper.as3.business.fsm.states.game
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
 
@@ -26,7 +27,7 @@ package com.godpaper.as3.business.fsm.states.game
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-
+		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -65,6 +66,7 @@ package com.godpaper.as3.business.fsm.states.game
 			//
 			IndicatorConfig.readOut=false;
 			//about data
+			chessPiecesModel.selectedPiece = null;
 		}
 
 		override public function exit():void

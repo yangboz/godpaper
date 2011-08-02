@@ -69,6 +69,7 @@
 			//  Protected methods
 			//
 			//--------------------------------------------------------------------------
+			//
 			override protected function mouseDownHandler(event:MouseEvent):void
 			{
 				super.mouseDownHandler(event);
@@ -82,7 +83,14 @@
 					GameConfig.chessPieceManager.indicateGasketsCapture(this.chessVO.captures);
 				}
 			}
-
+			//
+			override protected function mouseClickHandler(event:MouseEvent):void
+			{
+				super.mouseClickHandler(event);
+				//additional functions.
+				
+			}
+			
 			//
 			protected function get iPlug():IPlug
 			{

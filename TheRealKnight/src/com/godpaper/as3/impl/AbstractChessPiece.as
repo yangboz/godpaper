@@ -12,6 +12,7 @@ package com.godpaper.as3.impl
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.OmenVO;
+	import com.godpaper.as3.views.components.ChessPiece;
 	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -28,13 +29,15 @@ package com.godpaper.as3.impl
 	import org.spicefactory.lib.logging.Logger;
 	
 	import spark.components.Group;
+	import spark.filters.BlurFilter;
 
 	/**
-	 * AbstractChessPiece.as class.
+	 * Abstract the basic logic and functions related on chess piece.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Jan 20, 2011 3:47:27 PM
+	 * @history 08/02/2011 added the button click event handler to toggle chess piece move functions.
 	 */   	 
 	public class AbstractChessPiece extends Group implements IChessPiece
 	{		
@@ -47,6 +50,8 @@ package com.godpaper.as3.impl
 		private var textColor:String=DefaultConstants.COLOR_BLUE; //default is blue.
 		//pre-define this swf loader for playing the drag proxy(image/movie) effect. 
 		public var swfLoader:SWFLoader;
+		//models
+		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -117,6 +122,8 @@ package com.godpaper.as3.impl
 			{
 				this.textColor=DefaultConstants.COLOR_RED;
 				this.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+				//
+				this.addEventListener(MouseEvent.CLICK,mouseClickHandler);
 			}
 		}
 		//----------------------------------
@@ -219,6 +226,16 @@ package com.godpaper.as3.impl
 			// remove event listener
 			//				this.removeEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
 			//				LOG.debug("occupies:{0}",this.chessVO.occupies.dump());
+			LOG.debug("captures:{0}", this.chessVO.captures.dump());
+			LOG.debug("moves:{0}", this.chessVO.moves.dump());
+			LOG.debug("current bitboard:{0}", ChessPiecesModel.getInstance().allPieces.dump());
+		}
+		
+		//mouseClickHandler
+		protected function mouseClickHandler(event:MouseEvent):void
+		{
+			chessPiecesModel.selectedPiece = this;
+			//dump info.
 			LOG.debug("captures:{0}", this.chessVO.captures.dump());
 			LOG.debug("moves:{0}", this.chessVO.moves.dump());
 			LOG.debug("current bitboard:{0}", ChessPiecesModel.getInstance().allPieces.dump());
