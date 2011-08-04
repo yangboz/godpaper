@@ -48,6 +48,7 @@ package com.godpaper.as3.business.factory
 		protected var chessPieceType:String="";//Blue/Red/Green...
 		protected var chessPieceSource:Object;//style source asset(@see assets/EmbededAssets.as).
 		protected var chessPieceName:String="";//the unique chess piece name to identify the chess piece of typed group.
+		protected var chessGasketTips:String="";//The tool tips of chess gasket.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -162,7 +163,11 @@ package com.godpaper.as3.business.factory
 			myChessGasket.position=position;
 			myChessGasket.x=position.x * BoardConfig.xOffset - myChessGasket.width / 2 + BoardConfig.xAdjust;
 			myChessGasket.y=position.y * BoardConfig.yOffset + BoardConfig.yAdjust;
-			myChessGasket.toolTip=position.toString();
+			if(GasketConfig.tipsVisible)
+			{
+				chessGasketTips = position.toString();
+				myChessGasket.toolTip=chessGasketTips;
+			}
 			return myChessGasket;
 		}
 

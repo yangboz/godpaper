@@ -23,12 +23,14 @@ package com.godpaper.as3.configs
 		//--------------------------------------------------------------------------
 		private static var _width:Number=50;
 		private static var _height:Number=50;
-		private static var _borderVisible:Boolean=false;//You'd beter set true for the purpose of debug view.
+		private static var _borderVisible:Boolean = false;//You'd beter set true for the purpose of debug view.
 		private static var _backgroundAlpha:Number=0.0;
 		private static var _contentBackgroundAlpha:Number=0.0;
 		private static var _borderAlpha:Number=1;
 		//ObjectPool
 		private static var _maxPoolSize:uint=100;
+		//toolTips
+		private static var _tipsVisible:Boolean = true;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -38,6 +40,16 @@ package com.godpaper.as3.configs
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		//
+		public static function get tipsVisible():Boolean
+		{
+			return _tipsVisible;
+		}
+		
+		public static function set tipsVisible(value:Boolean):void
+		{
+			_tipsVisible = value;
+		}
 		//
 		public static function get borderAlpha():Number
 		{

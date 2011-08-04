@@ -5,6 +5,7 @@ package com.godpaper.as3.impl
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.core.IChessGasket;
 	import com.godpaper.as3.core.IChessPiece;
@@ -202,7 +203,7 @@ package com.godpaper.as3.impl
 			//renew ChessPiece's position.
 			//				ChessPiece(event.element).position = this.position;
 			//clear gasket indicate effect.
-			var emptyLegalMoves:BitBoard=new BitBoard(9, 10);
+			var emptyLegalMoves:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 			emptyLegalMoves.clear();
 			//empty indicate effect.
 			GameConfig.chessPieceManager.indicateGasketsMove(emptyLegalMoves);
