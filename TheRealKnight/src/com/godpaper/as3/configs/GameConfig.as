@@ -33,6 +33,8 @@ package com.godpaper.as3.configs
 		private static var _gameStateManager:IGameStateManager = new GameStateManagerDefault();
 		//The game play mode(computer vs human,human vs human);
 		private static var _playMode:String = HUMAN_VS_COMPUTER;
+		//the interval score of each tollgate.
+		private static var _scoreInterval:Number = 10;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -43,6 +45,18 @@ package com.godpaper.as3.configs
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		//----------------------------------
+		//  scoreInterval(read-write)
+		//----------------------------------
+		public static function get scoreInterval():Number
+		{
+			return _scoreInterval;
+		}
+		
+		public static function set scoreInterval(value:Number):void
+		{
+			_scoreInterval = value;
+		}
 		//----------------------------------
 		//  tollgateTips(read-write)
 		//----------------------------------

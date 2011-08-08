@@ -29,8 +29,8 @@
 		</degrafa:strokes>
 		<!-- Horizontal lines and Vertical lines. -->
 		<degrafa:GeometryGroup id="geometryGroup">
-			<repeaters:HorizontalLineRepeater count="{BoardConfig.yLines}" stroke="{blackStroke}" x="0" x1="{BoardConfig.width}" y="0" moveOffsetY="{BoardConfig.yOffset}"/> 
-			<repeaters:VerticalLineRepeater count="{BoardConfig.xLines}" stroke="{blackStroke}" y="0" y1="{BoardConfig.height}" x="0" moveOffsetX="{BoardConfig.xOffset}"/>
+			<repeaters:HorizontalLineRepeater id="hLineRepeater" count="{BoardConfig.yLines}" stroke="{blackStroke}" x="0" x1="{BoardConfig.width}" y="0" moveOffsetY="{BoardConfig.yOffset}"/> 
+			<repeaters:VerticalLineRepeater id="vLineRepeater" count="{BoardConfig.xLines}" stroke="{blackStroke}" y="0" y1="{BoardConfig.height}" x="0" moveOffsetX="{BoardConfig.xOffset}"/>
 		</degrafa:GeometryGroup>
 		<!-- Intersect lines . -->
 		<!--<degrafa:GeometryGroup>

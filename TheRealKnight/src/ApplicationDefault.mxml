@@ -132,7 +132,8 @@
 		<parsley:PopUp center="true"
 					   modal="true"
 					   open="{IndicatorConfig.submitScore}">
-			<plugin:SubmitScoreAndNextRound id="submitScoreAndNamePopup"/>
+			<!--<popups:SubmitScoreAndNextRoundMC id="submitScoreAndNamePopup"/>-->
+			<popups:SubmitScoreAndNextRound id="submitScoreAndNamePopup"/>
 		</parsley:PopUp>
 
 		<!-- Controllers here -->
