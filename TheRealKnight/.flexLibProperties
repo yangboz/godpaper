@@ -257,6 +257,7 @@
     <classEntry path="com.godpaper.as3.views.components.PiecesBox"/>
     <classEntry path="com.godpaper.as3.views.popups.SubmitScoreAndNextRoundMC"/>
     <classEntry path="com.godpaper.as3.views.popups.SubmitScoreAndNextRound"/>
+    <classEntry path="com.godpaper.as3.consts.DefaultTollgatesConstant"/>
   </includeClasses>
   <includeResources>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.foo" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.foo"/>
