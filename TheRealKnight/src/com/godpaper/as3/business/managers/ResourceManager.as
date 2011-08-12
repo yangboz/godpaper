@@ -39,7 +39,7 @@ package com.godpaper.as3.business.managers
 		//  CONSTANTS
 		//----------------------------------
 		public static const LOAD_CUSTOM_RESOURCE_BUNDLE_COMPLETE:String 	= "LoadCustomResourceBundleComplete";
-		private static const LOG:ILogger = LogUtil.getLogger(ResourceManager);
+		private static const LOG:ILogger = LogUtil.getLogger(com.godpaper.as3.business.managers.ResourceManager);
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor

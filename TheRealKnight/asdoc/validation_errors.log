@@ -1,22 +1,37 @@
-Text for description in com.lookbackon.AI.fuzzyLogicSystem:FuzzyRule is not valid.
-org.xml.sax.SAXParseException: Attribute name "variable" associated with an element type "linguistic" must be followed by the ' = ' character.
-
 Text for description in com.lookbackon.AI.searching:SearchingBase is not valid.
 No matching start tag.
+
+Text for description in com.lookbackon.AI.fuzzyLogicSystem:FuzzyRule is not valid.
+org.xml.sax.SAXParseException: Attribute name "variable" associated with an element type "linguistic" must be followed by the ' = ' character.
 
 Text for example in org.generalrelativity.thread:GreenThread is not valid.
 org.xml.sax.SAXParseException: The element type "IRunnable" must be terminated by the matching end-tag "</IRunnable>".
 
+Text for description in com.godpaper.as3.consts:ZobristConstants is not valid.
+No matching start tag.
+
 Text for description in com.godpaper.as3.consts:DefaultPiecesConstants is not valid.
 No matching start tag.
 
-Text for description in com.lookbackon.ds:ZobristHashTable is not valid.
+Text for description in com.godpaper.as3.business.managers:EventManager is not valid.
+org.xml.sax.SAXParseException: The element type "p" must be terminated by the matching end-tag "</p>".
+
+Text for description in com.godpaper.as3.model:EndingGameModel is not valid.
+No matching start tag.
+
+Text for description in com.godpaper.as3.model:OpeningBookModel is not valid.
+No matching start tag.
+
+Text for description in com.godpaper.as3.model.vos:ConductVO is not valid.
 No matching start tag.
 
 Text for description in com.lookbackon.ds:BitBoard is not valid.
 No matching start tag.
 
-Text for description in com.godpaper.as3.model.vos:ConductVO is not valid.
+Text for description in com.lookbackon.ds:ZobristHashTable is not valid.
+No matching start tag.
+
+Text for description in com.godpaper.as3.impl:AbstractChessVO is not valid.
 No matching start tag.
 
 Text for description in com.godpaper.as3.tasks:CreateChessVoTask is not valid.
@@ -24,6 +39,12 @@ org.xml.sax.SAXParseException: Element type "conduct" must be followed by either
 
 Text for description in de.polygonal.math.null is not valid.
 org.xml.sax.SAXParseException: The entity name must immediately follow the '&' in the entity reference.
+
+Text for return in com.suckatmath.machinelearning.genetic.core:EvolvableComparator/com.suckatmath.machinelearning.genetic.core:EvolvableComparator:compareFitness is not valid.
+org.xml.sax.SAXParseException: The content of elements must consist of well-formed character data or markup.
+
+Text for description in com.suckatmath.machinelearning.genetic.core:GeneticEngine/setCrossoverNumParents is not valid.
+org.xml.sax.SAXParseException: The content of elements must consist of well-formed character data or markup.
 
 Text for description in com.lookbackon.AI.searching:SearchingBase/SearchingBase is not valid.
 No matching start tag.

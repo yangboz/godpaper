@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../override.css" type="text/css"><meta name="keywords" content="Graph,de.polygonal.ds.Graph,_size,_table,arcs,bitCount,cellCount,celled,data,data,data,height,marked,maxSize,maxSize,node,nodes,numArcs,size,size,size,size,size,size,weight,width,addArc,addArc,addNode,appendCol,appendRow,breadthFirst,clear,clear,clear,clear,clear,clear,clear,clearMarks,contains,contains,contains,contains,contains,contains,containsKey,depthFirst,dump,dump,dump,dump,fill,find,find,get,getArc,getArc,getArray,getBit,getCol,getIterator,getIterator,getIterator,getIterator,getIterator,getIterator,getKeySet,getRow,gett,hasNext,hasNext,hashInt,hashString,insert,insert,isEmpty,isEmpty,isEmpty,isEmpty,isEmpty,isEmpty,next,next,prependCol,prependRow,remove,remove,remove,removeArc,removeArc,removeNode,resize,resize,set,setAll,setBit,setCol,setRow,setXs,setYs,sett,shiftDown,shiftLeft,shiftRight,shiftUp,start,start,toArray,toArray,toArray,toArray,toArray,toArray,toString,toString,toString,toString,toString,transpose"><title>de.polygonal.ds.Graph</title></head><body><script language="javascript" type="text/javascript" src="../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'Graph - GODPAPER TheRealKnight Action Script API Document';
+				var baseRef = '../../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">GODPAPER::TheRealKnight</td><td class="titleTableTopNav" align="right"><a href="../../../package-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../class-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../all-index-A.html" onclick="loadClassListFrame('../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../index.html?de/polygonal/ds/Graph.html&amp;de/polygonal/ds/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">Graph</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Graph"); titleBar_setSubNav(false,true,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">de.polygonal.ds</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  Graph</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">Graph  <img src="../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr><tr><td class="classHeaderTableLabel">Implements</td><td> <a href="../../../de/polygonal/ds/Collection.html">Collection</a></td></tr></table><p></p><p></p><p></p>
+	 A linked uni-directional weighted graph structure.
+	 
+	 The Graph class manages all graph nodes. Each graph node has an array
+	 of arcs, pointing to different nodes.
+	 <p></p><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#maxSize" class="signatureLink">maxSize</a> : int<div class="summaryTableDescription">[read-only] 
+		 The number of nodes the graph can store.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#nodes" class="signatureLink">nodes</a> : Array<div class="summaryTableDescription">
+	 	 The graph's nodes.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#size" class="signatureLink">size</a> : int<div class="summaryTableDescription">[read-only] 
+		 
+		 The total number of items.</div></td><td class="summaryTableOwnerCol">Graph</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#Graph()" class="signatureLink">Graph</a>(size:int)</div><div class="summaryTableDescription">
+		 Creates an empty graph.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#addArc()" class="signatureLink">addArc</a>(from:int, to:int, weight:int = 1):Boolean</div><div class="summaryTableDescription">
+		 Adds an arc pointing to the node located at the 'from' index
+		 to the node at the 'to' index.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#addNode()" class="signatureLink">addNode</a>(obj:*, i:int):Boolean</div><div class="summaryTableDescription">
+		 Adds a node at a given index to the graph.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#breadthFirst()" class="signatureLink">breadthFirst</a>(node:<a href="../../../de/polygonal/ds/GraphNode.html">GraphNode</a>, visit:Function):void</div><div class="summaryTableDescription">
+		 Performs a breadth-first traversal starting at a given node.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#clear()" class="signatureLink">clear</a>():void</div><div class="summaryTableDescription">
+		 
+		 Clears all items.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#clearMarks()" class="signatureLink">clearMarks</a>():void</div><div class="summaryTableDescription">
+		 Marks are used to keep track of the nodes that have been visited
+		 during a depth-first or breadth-first traversal.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#contains()" class="signatureLink">contains</a>(obj:*):Boolean</div><div class="summaryTableDescription">
+		 
+		 Determines if the collection contains a given item.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#depthFirst()" class="signatureLink">depthFirst</a>(node:<a href="../../../de/polygonal/ds/GraphNode.html">GraphNode</a>, visit:Function):void</div><div class="summaryTableDescription">
+		 Performs an iterative depth-first traversal starting at a given node.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getArc()" class="signatureLink">getArc</a>(from:int, to:int):<a href="../../../de/polygonal/ds/GraphArc.html">GraphArc</a></div><div class="summaryTableDescription">
+		 Finds an arc pointing to the node at the 'from' index to the node
+		 at the 'to' index.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getIterator()" class="signatureLink">getIterator</a>():<a href="../../../de/polygonal/ds/Iterator.html">Iterator</a></div><div class="summaryTableDescription">
+		 
+		 Initializes an iterator object pointing to the first item in the
+		 collection.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isEmpty()" class="signatureLink">isEmpty</a>():Boolean</div><div class="summaryTableDescription">
+		 
+		 Checks if the collection is empty.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#removeArc()" class="signatureLink">removeArc</a>(from:int, to:int):Boolean</div><div class="summaryTableDescription">
+		 Removes an arc pointing to the node located at the
+		 'from' index to the node at the 'to' index.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#removeNode()" class="signatureLink">removeNode</a>(i:int):Boolean</div><div class="summaryTableDescription">
+		 Removes a node from the graph at a given index.</div></td><td class="summaryTableOwnerCol">Graph</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#toArray()" class="signatureLink">toArray</a>():Array</div><div class="summaryTableDescription">
+		 
+		 Converts the collection into an array.</div></td><td class="summaryTableOwnerCol">Graph</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="maxSize"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">maxSize</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>maxSize:int</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+		 The number of nodes the graph can store.
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get maxSize():int</code><br/></div><a name="propertyDetail"></a><a name="nodes"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">nodes</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>public var nodes:Array</code><p></p><p></p><p>
+	 	 The graph's nodes.
+	 	 </p></div><a name="propertyDetail"></a><a name="size"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">size</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>size:int</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+		 
+		 The total number of items.
+		 
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get size():int</code><br/></div><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="Graph()"></a><a name="Graph(int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">Graph</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function Graph(size:int)</code><p></p><p>
+		 Creates an empty graph.
+		 
+		 </p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">size</span>:int</code> &mdash; The total number of nodes the graph can hold.
+		 </td></tr></table></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="addArc()"></a><a name="addArc(int,int,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">addArc</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function addArc(from:int, to:int, weight:int = 1):Boolean</code><p></p><p></p><p>
+		 Adds an arc pointing to the node located at the 'from' index
+		 to the node at the 'to' index.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">from</span>:int</code> &mdash;   The originating graph node index.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">to</span>:int</code> &mdash;     The ending graph node index.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">weight</span>:int</code> (default = <code>1</code>)<code></code> &mdash; The arc's weight
+		 
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; True if the arc was added, otherwise false.
+		 </td></tr></table></div><a name="addNode()"></a><a name="addNode(any,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">addNode</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function addNode(obj:*, i:int):Boolean</code><p></p><p></p><p>
+		 Adds a node at a given index to the graph.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">obj</span>:*</code> &mdash; The data to store in the node.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">i</span>:int</code> &mdash;   The index the node is stored at.
+		 
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; True if a node was added, otherwise false.
+		 </td></tr></table></div><a name="breadthFirst()"></a><a name="breadthFirst(de.polygonal.ds.GraphNode,Function)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">breadthFirst</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function breadthFirst(node:<a href="../../../de/polygonal/ds/GraphNode.html">GraphNode</a>, visit:Function):void</code><p></p><p></p><p>
+		 Performs a breadth-first traversal starting at a given node.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">node</span>:<a href="../../../de/polygonal/ds/GraphNode.html">GraphNode</a></code> &mdash;  The graph node at which the traversal starts.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">visit</span>:Function</code> &mdash; A callback function which is invoked every time a node
+		              is visited. The visited node is accessible through
+		              the function's first argument. You can terminate the
+		              traversal by returning false in the callback function.
+		 </td></tr></table></p><br/><span class="label"> Example </span><br/><div class="detailBody">The following code shows an example callback function.
+		 The graph traversal runs until the value '5' is found in the data
+		 property of a node instance.
+		 <div class="listing" version="3.0"><pre>
+         var visitNode:Function = function(node:GraphNode):Boolean
+         {
+             if (node.data == 5)
+                 return false; //terminate traversal
+             return true;
+         }
+         myGraph.breadthFirst(graph.nodes[0], visitNode);
+         </pre></div>
+		 
+		 </div></div><a name="clear()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">clear</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function clear():void</code><p></p><p></p><p>
+		 
+		 Clears all items.
+		 </p></div><a name="clearMarks()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">clearMarks</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function clearMarks():void</code><p></p><p></p><p>
+		 Marks are used to keep track of the nodes that have been visited
+		 during a depth-first or breadth-first traversal. You must call this
+		 method to clear all markers before starting a new traversal.
+		 </p></div><a name="contains()"></a><a name="contains(any)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">contains</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function contains(obj:*):Boolean</code><p></p><p></p><p>
+		 
+		 Determines if the collection contains a given item.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">obj</span>:*</code> &mdash; The item to search for.
+		 
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; True if the item exists, otherwise false.
+		 </td></tr></table></div><a name="depthFirst()"></a><a name="depthFirst(de.polygonal.ds.GraphNode,Function)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">depthFirst</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function depthFirst(node:<a href="../../../de/polygonal/ds/GraphNode.html">GraphNode</a>, visit:Function):void</code><p></p><p></p><p>
+		 Performs an iterative depth-first traversal starting at a given node.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">node</span>:<a href="../../../de/polygonal/ds/GraphNode.html">GraphNode</a></code> &mdash;  The graph node at which the traversal starts.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">visit</span>:Function</code> &mdash; A callback function which is invoked every time a node
+		              is visited. The visited node is accessible through
+		              the function's first argument. You can terminate the
+		              traversal by returning false in the callback function.
+		 </td></tr></table></p><br/><span class="label"> Example </span><br/><div class="detailBody">The following code shows an example callback function.
+		 The graph traversal runs until the value '5' is found in the data
+		 property of a node instance.
+		 <div class="listing" version="3.0"><pre>
+         var visitNode:Function = function(node:GraphNode):Boolean
+         {
+             if (node.data == 5)
+                 return false; //terminate traversal
+             return true;
+         }
+         myGraph.depthFirst(graph.nodes[0], visitNode);
+         </pre></div>
+		 
+		 </div></div><a name="getArc()"></a><a name="getArc(int,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getArc</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getArc(from:int, to:int):<a href="../../../de/polygonal/ds/GraphArc.html">GraphArc</a></code><p></p><p></p><p>
+		 Finds an arc pointing to the node at the 'from' index to the node
+		 at the 'to' index.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">from</span>:int</code> &mdash; The originating graph node index.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">to</span>:int</code> &mdash;   The ending graph node index.
+		 
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../de/polygonal/ds/GraphArc.html">GraphArc</a></code> &mdash; A GraphArc object or null if it doesn't exist.
+		 </td></tr></table></div><a name="getIterator()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getIterator</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getIterator():<a href="../../../de/polygonal/ds/Iterator.html">Iterator</a></code><p></p><p></p><p>
+		 
+		 Initializes an iterator object pointing to the first item in the
+		 collection.
+		 
+		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../de/polygonal/ds/Iterator.html">Iterator</a></code> &mdash; An iterator object.
+		 </td></tr></table></div><a name="isEmpty()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isEmpty</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function isEmpty():Boolean</code><p></p><p></p><p>
+		 
+		 Checks if the collection is empty.
+		 
+		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; True if empty, otherwise false.
+		 </td></tr></table></div><a name="removeArc()"></a><a name="removeArc(int,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">removeArc</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function removeArc(from:int, to:int):Boolean</code><p></p><p></p><p>
+		 Removes an arc pointing to the node located at the
+		 'from' index to the node at the 'to' index.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">from</span>:int</code> &mdash; The originating graph node index.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">to</span>:int</code> &mdash;   The ending graph node index.
+		 
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; True if the arc was removed, otherwise false.
+		 </td></tr></table></div><a name="removeNode()"></a><a name="removeNode(int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">removeNode</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function removeNode(i:int):Boolean</code><p></p><p></p><p>
+		 Removes a node from the graph at a given index.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">i</span>:int</code> &mdash; The node's index.
+		 
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; True if removal was successful, otherwise false.
+		 </td></tr></table></div><a name="toArray()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function toArray():Array</code><p></p><p></p><p>
+		 
+		 Converts the collection into an array.
+		 
+		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; An array.
+		 </td></tr></table></div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.</footer><br/>Fri Aug 12 2011, 02:34 PM +08:00  </center></div></body></html><!--Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.<br/>Fri Aug 12 2011, 02:34 PM +08:00  -->

@@ -19,7 +19,7 @@ package com.godpaper.as3.plugins
 	 * Increasing the communication points between the host and the plug-in by adding more method, property, and event signatures to the IPlug interface. 
 	 * Additional interaction between the host and plug-ins will allow for plug-ins that can do more things.
 	 * Enabling users to explicitly select the plug-ins that are loaded.
-	 * @see:http://geekspeak.creatrixgames.com/free-managed-flash-multiplayer-apis.html
+	 * @see http://geekspeak.creatrixgames.com/free-managed-flash-multiplayer-apis.html
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0

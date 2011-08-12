@@ -21,7 +21,7 @@ package com.lookbackon.ds
 	 * Subtracting one score from another determines how well a player is doing relative to the opposing player.  </br>
 	 * You throw these numbers into your general run-of-the-mill minimax algorithm, throw in some alpha-beta cutoff logic for efficiency,
 	 * and that, in a nutshell, is the secret to my algorithm.</br>
-	 * The original connect-4 algorithm created by Keith Pomakis(pomakis@pobox.com),aslo I(youngwelle@gmail.com) get this right to translate to AS3 version.
+	 * The original connect-4 algorithm created by Keith Pomakis(pomakis.at.pobox.com),aslo I(youngwelle.at.gmail.com) get this right to translate to AS3 version.
 	 * 
 	 * @author yangboz
 	 * @langVersion 3.0
