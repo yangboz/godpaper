@@ -38,7 +38,7 @@
 			//
 			protected function get currentScore():int
 			{
-				return (GameConfig.gameStateManager.level) * GameConfig.scoreInterval;
+				return (GameConfig.tollgates[GameConfig.gameStateManager.level].score);
 			}
 			
 			//
@@ -97,7 +97,7 @@
 				//initialize the panel.
 				this.nextBtn.enabled = this.hasNextRound;
 				this.tollgateTxt.text = GameConfig.gameStateManager.level.toString();
-				this.scoreTextInput.text = GameConfig.scoreInterval.toString();
+				this.scoreTextInput.text = currentScore.toString();
 			}
 			//
 			protected function uicomponent_showHandler(event:FlexEvent):void

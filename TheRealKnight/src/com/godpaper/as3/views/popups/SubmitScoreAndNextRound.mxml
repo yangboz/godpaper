@@ -79,13 +79,13 @@
 			//
 			protected function get currentScore():int
 			{
-				return (GameConfig.gameStateManager.level) * 10;
+				return (GameConfig.tollgates[GameConfig.gameStateManager.level].score);
 			}
 			
 			//
 			protected function get hasNextRound():Boolean
 			{
-				return GameConfig.gameStateManager.level < GameConfig.tollgates.length;
+				return GameConfig.gameStateManager.level < GameConfig.tollgates.length-1;
 			}
 			
 			//

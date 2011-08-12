@@ -258,14 +258,15 @@
     <classEntry path="com.godpaper.as3.views.popups.SubmitScoreAndNextRoundMC"/>
     <classEntry path="com.godpaper.as3.views.popups.SubmitScoreAndNextRound"/>
     <classEntry path="com.godpaper.as3.consts.DefaultTollgatesConstant"/>
+    <classEntry path="assets.DefaultEmbededAssets"/>
   </includeClasses>
   <includeResources>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.foo" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.foo"/>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/A simplex approach for the tunning of a chess evaluation function.pdf" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/A simplex approach for the tunning of a chess evaluation function.pdf"/>
     <resourceEntry destPath="com/lookbackon/AI/learning/adaBoost/A Quick Introduction About AdaBoost.pdf" sourcePath="com/lookbackon/AI/learning/adaBoost/A Quick Introduction About AdaBoost.pdf"/>
     <resourceEntry destPath="org/generalrelativity/.DS_Store" sourcePath="org/generalrelativity/.DS_Store"/>
-    <resourceEntry destPath="com/lookbackon/AI/learning/tcs-learn.pdf" sourcePath="com/lookbackon/AI/learning/tcs-learn.pdf"/>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/NelderMeadSimplex.foo" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/NelderMeadSimplex.foo"/>
+    <resourceEntry destPath="com/lookbackon/AI/learning/tcs-learn.pdf" sourcePath="com/lookbackon/AI/learning/tcs-learn.pdf"/>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/fuzzy/Fuzzy Chess Tactics.pdf" sourcePath="com/lookbackon/AI/evaluation/fuzzy/Fuzzy Chess Tactics.pdf"/>
     <resourceEntry destPath="com/godpaper/as3/configs/logConfig.xml" sourcePath="com/godpaper/as3/configs/logConfig.xml"/>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/Adaptive Extensions of the Nelder and Mead Simplex Method.pdf" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/Adaptive Extensions of the Nelder and Mead Simplex Method.pdf"/>

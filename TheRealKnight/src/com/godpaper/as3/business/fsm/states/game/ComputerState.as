@@ -72,7 +72,6 @@ package com.godpaper.as3.business.fsm.states.game
 		//--------------------------------------------------------------------------
 		public function ComputerState(agent:IAgent, resource:Object, description:String=null)
 		{
-			//TODO: implement function
 			super(agent, resource, description);
 		}
 
@@ -83,7 +82,6 @@ package com.godpaper.as3.business.fsm.states.game
 		//--------------------------------------------------------------------------
 		override public function enter():void
 		{
-			//TODO: implement function
 			//hold turn flag
 			GameConfig.turnFlag=DefaultConstants.FLAG_BLUE;
 			//about view
@@ -91,7 +89,7 @@ package com.godpaper.as3.business.fsm.states.game
 			//
 			IndicatorConfig.readOut=true;
 			//default update current state.
-			update(GameConfig.gameStateManager.level - 1);
+			update(GameConfig.gameStateManager.level);
 		}
 
 		override public function exit():void
@@ -104,7 +102,8 @@ package com.godpaper.as3.business.fsm.states.game
 
 		override public function update(time:Number=0):void
 		{
-			//TODO:switch any searching class to test.
+			//switch any searching class to test.
+			//Example:
 			//			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
 			//			searching = new MinMax(ChessPiecesModel.getInstance().gamePosition);
 			//			searching = new MiniMax(ChessPiecesModel.getInstance().gamePosition,5);
@@ -114,8 +113,9 @@ package com.godpaper.as3.business.fsm.states.game
 			//			gameAI = new PVS(ChessPiecesModel.getInstance().gamePosition);
 			//			gameAI = new ShortSighted(ChessPiecesModel.getInstance().gamePosition);
 			//			searching = new AttackFalse(ChessPiecesModel.getInstance().gamePosition);
-			//
-			var className:String=getQualifiedClassName(GameConfig.tollgates[time]);
+			//Using the class reflection architure to dynamic instance the configed class,
+			//@see the DefaultTollgatesConstant.as
+			var className:String=getQualifiedClassName(GameConfig.tollgates[time].searching);
 			var implementation:Object=getDefinitionByName(className);
 			searching=new implementation(ChessBoardModel.getInstance().status);
 			//

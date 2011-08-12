@@ -44,7 +44,7 @@ package com.godpaper.as3.impl
 		//
 		private var _isRunning:Boolean;
 		//
-		private var _level:int=1;
+		private var _level:int=0;
 		//
 		public var agent:GameAgent;
 		//----------------------------------

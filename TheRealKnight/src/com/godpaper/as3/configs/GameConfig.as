@@ -1,5 +1,6 @@
 package com.godpaper.as3.configs
 {
+	import com.godpaper.as3.consts.DefaultTollgatesConstant;
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.core.IGameStateManager;
 	import com.godpaper.as3.impl.GameStateManagerDefault;
@@ -26,15 +27,12 @@ package com.godpaper.as3.configs
 		//--------------------------------------------------------------------------
 		//global game config.
 		private static var _turnFlag:int;
-		private static var _tollgates:Array;
-		private static var _tollgateTips:Array;
+		private static var _tollgates:Vector.<DefaultTollgatesConstant> = new Vector.<DefaultTollgatesConstant>();
 		//
 		private static var _chessPieceManager:IChessPieceManager;
 		private static var _gameStateManager:IGameStateManager = new GameStateManagerDefault();
 		//The game play mode(computer vs human,human vs human);
 		private static var _playMode:String = HUMAN_VS_COMPUTER;
-		//the interval score of each tollgate.
-		private static var _scoreInterval:Number = 10;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -46,43 +44,26 @@ package com.godpaper.as3.configs
 		//
 		//-------------------------------------------------------------------------- 
 		//----------------------------------
-		//  scoreInterval(read-write)
+		//  tollgates(read-only)
 		//----------------------------------
-		public static function get scoreInterval():Number
+		public static function get tollgates():Vector.<DefaultTollgatesConstant>
 		{
-			return _scoreInterval;
-		}
-		
-		public static function set scoreInterval(value:Number):void
-		{
-			_scoreInterval = value;
-		}
-		//----------------------------------
-		//  tollgateTips(read-write)
-		//----------------------------------
-		public static function get tollgateTips():Array
-		{
-			return _tollgateTips;
-		}
-
-		public static function set tollgateTips(value:Array):void
-		{
-			_tollgateTips=value;
-		}
-
-		//----------------------------------
-		//  tollgates(read-write)
-		//----------------------------------
-		public static function get tollgates():Array
-		{
+			//push the default tollgates.
+			_tollgates.push(
+				DefaultTollgatesConstant.SuicideDiscord,
+				DefaultTollgatesConstant.HorrorGib,
+				DefaultTollgatesConstant.UnnaturalBase,
+				DefaultTollgatesConstant.OctagonGibs,
+				DefaultTollgatesConstant.AbandonedDream
+			);
+			//
 			return _tollgates;
 		}
-
-		public static function set tollgates(value:Array):void
-		{
-			_tollgates=value;
-		}
-
+		
+//		public static function set tollgates(value:Vector.<DefaultTollgatesConstant>):void
+//		{
+//			_tollgates = value;
+//		}
 		//----------------------------------
 		//  turnFlag(read-write)
 		//----------------------------------
@@ -90,12 +71,13 @@ package com.godpaper.as3.configs
 		{
 			return _turnFlag;
 		}
-
+		/**
+		 * @param value of who is first turn-now.
+		 */		
 		public static function set turnFlag(value:int):void
 		{
 			_turnFlag=value;
 		}
-
 		//----------------------------------
 		//  gameStateManager(read-write)
 		//----------------------------------
@@ -122,16 +104,19 @@ package com.godpaper.as3.configs
 			_chessPieceManager=value;
 		}
 		//----------------------------------
-		//  playMode(read-write)
+		//  playMode(read-only)
 		//----------------------------------
+		/**
+		 * The human vs human feature under construction. 
+		 */		
 		public static function get playMode():String
 		{
 			return _playMode;
 		}
-		public static function set playMode(value:String):void
-		{
-			_playMode = value;
-		}
+//		public static function set playMode(value:String):void
+//		{
+//			_playMode = value;
+//		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

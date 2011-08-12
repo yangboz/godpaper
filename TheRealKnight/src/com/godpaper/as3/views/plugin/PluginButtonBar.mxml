@@ -11,25 +11,27 @@
 	<s:dataProvider>
 		<s:ArrayList>
 			<fx:Object label="baby"
-					   toolTip="baby intelligence"
+					   toolTip="{GameConfig.tollgates[0].tips}"
 					   enabled="true"
-					   icon="{icon_tollgate_01}"/>
+					   icon="{DefaultEmbededAssets.ICON_TOLLGATE_01}"/>
 			<fx:Object label="store"
 					   toolTip="store"
 					   enabled="true"
-					   icon="{icon_store}"/>
+					   icon="{DefaultEmbededAssets.ICON_STORE}"/>
 			<fx:Object label="leadboard"
 					   toolTip="leader board"
 					   enabled="true"
-					   icon="{icon_coin}"/>
+					   icon="{DefaultEmbededAssets.ICON_COIN}"/>
 			<fx:Object label="account"
 					   toolTip="account login"
 					   enabled="true"
-					   icon="{icon_account}"/>
+					   icon="{DefaultEmbededAssets.ICON_ACCOUNT}"/>
 		</s:ArrayList>
 	</s:dataProvider>
 	<fx:Script>
 		<![CDATA[
+			import assets.DefaultEmbededAssets;
+			
 			import com.godpaper.as3.configs.GameConfig;
 			import com.godpaper.as3.messages.LevelUpMessage;
 			import com.godpaper.as3.plugins.IPlug;
@@ -38,40 +40,14 @@
 			
 			import spark.components.ButtonBarButton;
 			import spark.events.IndexChangeEvent;
-			//tollgate icon class here
-			[Bindable]
-			[Embed(source="/com/godpaper/as3/views/plugin/icons/tollgate01_50x50.png")]
-			private var icon_tollgate_01:Class;
-			[Bindable]
-			[Embed(source="/com/godpaper/as3/views/plugin/icons/tollgate02_50x50.png")]
-			private var icon_tollgate_02:Class;
-			[Bindable]
-			[Embed(source="/com/godpaper/as3/views/plugin/icons/tollgate03_50x50.png")]
-			private var icon_tollgate_03:Class;
-			[Bindable]
-			[Embed(source="/com/godpaper/as3/views/plugin/icons/tollgate04_50x50.png")]
-			private var icon_tollgate_04:Class;
-			//
-			[Bindable]
-			[Embed(source="/com/godpaper/as3/views/plugin/icons/store_50x50.png")]
-			private var icon_store:Class;
-			[Bindable]
-			[Embed(source="/com/godpaper/as3/views/plugin/icons/coin_50x50.png")]
-			private var icon_coin:Class;
-			[Bindable]
-			[Embed(source="/com/godpaper/as3/views/plugin/icons/account_50x50.png")]
-			private var icon_account:Class;
-			//
-			private var icon_tollgates:Array=[icon_tollgate_01, icon_tollgate_02, icon_tollgate_03, icon_tollgate_04];
 
 			//parsley message handler
 			[MessageHandler]
 			public function levelUpHandler(message:LevelUpMessage):void
 			{
 				var btnBarBtn:ButtonBarButton=this.dataGroup.getElementAt(0) as ButtonBarButton;
-//				btnBarBtn.setStyle("icon", icon_tollgates[GameConfig.gameStateManager.level - 1]);
-				btnBarBtn.skin["iconImage"]["source"]=icon_tollgates[GameConfig.gameStateManager.level - 1];
-				btnBarBtn.toolTip=GameConfig.tollgateTips[GameConfig.gameStateManager.level - 1];
+				btnBarBtn.skin["iconImage"]["source"]=GameConfig.tollgates[GameConfig.gameStateManager.level].icon;
+				btnBarBtn.toolTip = GameConfig.tollgates[GameConfig.gameStateManager.level].tips;
 			}
 
 			protected function changeHandler(event:IndexChangeEvent):void
