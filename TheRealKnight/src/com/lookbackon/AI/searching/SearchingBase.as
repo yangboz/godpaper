@@ -238,7 +238,6 @@ package com.lookbackon.AI.searching
 		//----------------------------------
 		//  generateMoves(native)
 		//----------------------------------
-		//return all possbility movements;
 		/**
 		 * This function generates all possible moves and stores them in the vector.</br>
 		 * It returns the vector of the legal moves.</br>
@@ -265,7 +264,14 @@ package com.lookbackon.AI.searching
 							conductVO.target=cp;
 							conductVO.previousPosition=conductVO.target.position;
 							conductVO.nextPosition=new Point(c, r);
-							resultAC.push(conductVO);
+							//append the doMoveValidation filters.
+							//Why to do this functions?
+							//cuz many type of chess,after the pre-generated chess vo(moves)
+							//should be modified by some rule and limit.
+							if(GameConfig.chessPieceManager.doMoveValidation(conductVO))
+							{
+								resultAC.push(conductVO);
+							}
 //							trace("anew ",conductVO.dump());
 						}
 					}

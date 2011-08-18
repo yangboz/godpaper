@@ -4,13 +4,14 @@ package com.godpaper.as3.core
 	/**
 	 * The interface of chess pieces,about occupy,moves,captures.
 	 * @see http://chess.dubmun.com/bitboard.html
-	 * @author knight.zhou
+	 * @author Knight.zhou
 	 * @history 01/07/2011 ADDED:defends bitboard property.
+	 * @history 08/18/2011 ADDED:identifier property for ChessVO.
 	 */	
 	public interface IChessVO
 	{
 		//for initialization.
-		function initialization(rowIndex:int, colIndex:int,flag:int=0):void;
+		function initialization(rowIndex:int, colIndex:int,flag:int=0,identifier:String=""):void;
 		//spaces occupied by red/blue pieces:
 		function set occupies(value:BitBoard):void;
 		function get occupies():BitBoard;

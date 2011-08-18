@@ -1,12 +1,13 @@
 package com.godpaper.as3.impl
 {
+	import com.godpaper.as3.core.IChessPiece;
+	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
-
+	
 	import mx.logging.ILogger;
-	import com.godpaper.as3.core.IChessVO;
 
 	/**
 	 * This is our bitboard:</p>
@@ -58,6 +59,8 @@ package com.godpaper.as3.impl
 		protected var blocker:BitBoard;
 		//chess flag value(red or blue).
 		protected var flag:int;
+		//chess vo identifier.
+		protected var identifier:String;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -74,19 +77,21 @@ package com.godpaper.as3.impl
 		 * @param the rowIndex of destination point;
 		 * @param the colIndex of destination point;
 		 * @param the flag you wanna set(red is 0,blue is 1).
+		 * @param the identifier of ChessVO.
 		 */		
-		public function AbstractChessVO(width:int, height:int, rowIndex:int, colIndex:int,flag:int=0)
+		public function AbstractChessVO(width:int, height:int, rowIndex:int, colIndex:int,flag:int=0,identifier:String="")
 		{
-			//TODO: implement function
+			//call super.
 			super(width, height);
-			//
+			//store the proteced variables.
 			this.flag = flag;
+			this.identifier = identifier;
 			//init.
 			this._occupies = new BitBoard(width,height);
 			this._moves = new BitBoard(width,height);
 			this._captures = new BitBoard(width,height);
 			this._defends = new BitBoard(width,height);
-			this.initialization(rowIndex,colIndex,flag);
+			this.initialization(rowIndex,colIndex,flag,identifier);
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -173,9 +178,10 @@ package com.godpaper.as3.impl
 		 * @param the rowIndex you wanna set bit flag.
 		 * @param the colIndex you wanna set big flag.
 		 * @param the flag you wanna set(red is 0,blue is 1).
+		 * @param the identifier of ChessVO.
 		 * @see mx.utils.BitFlagUtil#update
 		 */
-		virtual public function initialization( rowIndex:int, colIndex:int,flag:int=0):void
+		virtual public function initialization( rowIndex:int, colIndex:int,flag:int=0,identifier:String=""):void
 		{
 			//TODO: override function.
 			throw new DefaultErrors(DefaultErrors.INITIALIZE_VIRTUAL_FUNCTION);

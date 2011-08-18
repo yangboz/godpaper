@@ -7,7 +7,9 @@
 			 requireSelection="true"
 			 skinClass="com.godpaper.as3.views.plugin.PluginButtonBarSkin"
 			 change="changeHandler(event)"
-			 xmlns:parsley="http://www.spicefactory.org/parsley">
+			 xmlns:parsley="http://www.spicefactory.org/parsley"
+			 creationComplete="creationCompleteHandler(event)"
+			 >
 	<s:dataProvider>
 		<s:ArrayList>
 			<fx:Object label="baby"
@@ -37,6 +39,7 @@
 			import com.godpaper.as3.plugins.IPlug;
 			
 			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
 			
 			import spark.components.ButtonBarButton;
 			import spark.events.IndexChangeEvent;
@@ -49,7 +52,13 @@
 				btnBarBtn.skin["iconImage"]["source"]=GameConfig.tollgates[GameConfig.gameStateManager.level].icon;
 				btnBarBtn.toolTip = GameConfig.tollgates[GameConfig.gameStateManager.level].tips;
 			}
-
+			//
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				
+				
+			}
+			//
 			protected function changeHandler(event:IndexChangeEvent):void
 			{
 				// TODO Auto-generated method stub
