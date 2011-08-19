@@ -10,9 +10,9 @@ package com.lookbackon.AI.searching
 	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.lookbackon.AI.evaluation.linear.LinearEvaluationProxy;
 	import com.lookbackon.ds.BitBoard;
-
+	
 	import flash.geom.Point;
-
+	
 	import org.generalrelativity.thread.process.AbstractProcess;
 
 	/**
@@ -59,7 +59,10 @@ package com.lookbackon.AI.searching
 		//flag wheater this process done.
 		private var _processDone:Boolean;
 		//
-		private var _moves:Vector.<ConductVO>
+		private var _moves:Vector.<ConductVO>;
+		//Add this variables for save loops and time cost at the green thread run.
+		private var _movesHasGenerated:Boolean = false;
+		protected var generatedMoves:Vector.<ConductVO> = new Vector.<ConductVO>();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -248,36 +251,42 @@ package com.lookbackon.AI.searching
 		 */
 		final public function generateMoves(pieces:Vector.<ChessPiece>):Vector.<ConductVO>
 		{
-			var resultAC:Vector.<ConductVO>=new Vector.<ConductVO>();
-			for (var i:int=0; i < pieces.length; i++)
+			if(!_movesHasGenerated)
 			{
-				var cp:ChessPiece=pieces[i];
-				var moves:BitBoard = cp.chessVO.moves;
-				//
-				for (var c:int=0; c < moves.column; c++)
+//				var resultAC:Vector.<ConductVO>=new Vector.<ConductVO>();
+				for (var i:int=0; i < pieces.length; i++)
 				{
-					for (var r:int=0; r < moves.row; r++)
+					var cp:ChessPiece=pieces[i];
+					var moves:BitBoard = cp.chessVO.moves;
+					//
+					for (var c:int=0; c < moves.column; c++)
 					{
-						if ( moves.getBitt(r, c) )
+						for (var r:int=0; r < moves.row; r++)
 						{
-							var conductVO:ConductVO=new ConductVO();
-							conductVO.target=cp;
-							conductVO.previousPosition=conductVO.target.position;
-							conductVO.nextPosition=new Point(c, r);
-							//append the doMoveValidation filters.
-							//Why to do this functions?
-							//cuz many type of chess,after the pre-generated chess vo(moves)
-							//should be modified by some rule and limit.
-							if(GameConfig.chessPieceManager.doMoveValidation(conductVO))
+							if ( moves.getBitt(r, c) )
 							{
-								resultAC.push(conductVO);
+								var conductVO:ConductVO=new ConductVO();
+								conductVO.target=cp;
+								conductVO.previousPosition=conductVO.target.position;
+								conductVO.nextPosition=new Point(c, r);
+								//append the doMoveValidation filters.
+								//Why to do this functions?
+								//cuz many type of chess,after the pre-generated chess vo(moves)
+								//should be modified by some rule and limit.
+								if(GameConfig.chessPieceManager.doMoveValidation(conductVO))
+								{
+									generatedMoves.push(conductVO);
+								}
+								//							trace("anew ",conductVO.dump());
 							}
-//							trace("anew ",conductVO.dump());
 						}
 					}
 				}
 			}
-			return resultAC;
+			//set this flag true.
+			_movesHasGenerated = true;
+			//
+			return generatedMoves;
 		}
 
 		//----------------------------------
