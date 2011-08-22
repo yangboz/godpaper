@@ -34,33 +34,36 @@ package com.godpaper.as3.model
 		private var _blues:Vector.<ChessPiece>=new Vector.<ChessPiece>();
 		private var _pieces:Vector.<ChessPiece>=new Vector.<ChessPiece>();
 		//
-		private var _bluePieces:BitBoard=new BitBoard(9, 10);
-		private var _redPieces:BitBoard=new BitBoard(9, 10);
+		private var _bluePieces:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _redPieces:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
 		//special.
 		//red
-		private var _red:BitBoard = new BitBoard(9,10);
-		private var _redRook:BitBoard=new BitBoard(9, 10);
-		private var _redKnight:BitBoard=new BitBoard(9, 10);
-		private var _redBishop:BitBoard=new BitBoard(9, 10);
-		private var _redOffical:BitBoard=new BitBoard(9, 10);
-		private var _redMarshal:BitBoard=new BitBoard(9, 10);
-		private var _redCannon:BitBoard=new BitBoard(9, 10);
-		private var _redPawn:BitBoard=new BitBoard(9, 10);
+		private var _red:BitBoard = new BitBoard(MAX_BB_W,MAX_BB_H);
+		private var _redRook:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _redKnight:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _redBishop:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _redOffical:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _redMarshal:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _redCannon:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _redPawn:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
 		//blue
-		private var _blue:BitBoard = new BitBoard(9,10);
-		private var _blueRook:BitBoard=new BitBoard(9, 10);
-		private var _blueKnight:BitBoard=new BitBoard(9, 10);
-		private var _blueBishop:BitBoard=new BitBoard(9, 10);
-		private var _blueOffical:BitBoard=new BitBoard(9, 10);
-		private var _blueMarshal:BitBoard=new BitBoard(9, 10);
-		private var _blueCannon:BitBoard=new BitBoard(9, 10);
-		private var _bluePawn:BitBoard=new BitBoard(9, 10);
+		private var _blue:BitBoard = new BitBoard(MAX_BB_W,MAX_BB_H);
+		private var _blueRook:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _blueKnight:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _blueBishop:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _blueOffical:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _blueMarshal:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _blueCannon:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _bluePawn:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
 		//the current selected chess piece
 		private var _selectedPiece:IChessPiece;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
 		private static const LOG:ILogger=LogUtil.getLogger(ChessPiecesModel);
+		//this bit board limit size const should be more flexibility for adapting variable bitboard size. 
+		private static const MAX_BB_W:int = 11;
+		private static const MAX_BB_H:int = 11;
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
