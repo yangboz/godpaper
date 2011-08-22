@@ -33,6 +33,8 @@ package com.godpaper.as3.model
 		//Singleton instance of ChessBoardModel;
 		private static var instance:ChessBoardModel;
 		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+		//The step number of game played displayed on chess board?.
+		private var _stepNumber:Number=0;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -42,6 +44,19 @@ package com.godpaper.as3.model
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		//----------------------------------
+		//  stepNumber
+		//----------------------------------
+		[Bindable]
+		public function get stepNumber():Number
+		{
+			return _stepNumber;
+		}
+
+		public function set stepNumber(value:Number):void
+		{
+			_stepNumber = value;
+		}
 		//----------------------------------
 		//  numercal
 		//----------------------------------

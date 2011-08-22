@@ -135,7 +135,12 @@
 			<!--<popups:SubmitScoreAndNextRoundMC id="submitScoreAndNamePopup"/>-->
 			<popups:SubmitScoreAndNextRound id="submitScoreAndNamePopup"/>
 		</parsley:PopUp>
-
+		
+		<parsley:PopUp center="true"
+					   modal="true"
+					   open="{IndicatorConfig.outcome}">
+			<popups:ComputerWinTitleWindow id="computerWinPopup"/>
+		</parsley:PopUp>
 		<!-- Controllers here -->
 
 		<!-- Tasks -->

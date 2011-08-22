@@ -172,6 +172,8 @@ package com.godpaper.as3.impl
 			//clean up indicators.
 			IndicatorConfig.check=false;
 			IndicatorConfig.submitScore=false;
+			//reset game step number.
+			chessBoardModel.stepNumber=0;
 			//clear board,chess pieces
 			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
 			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());

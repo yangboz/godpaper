@@ -34,13 +34,13 @@ package com.godpaper.as3.impl
 	import spark.filters.GlowFilter;
 
 	/**
-	 * The chess piece manager manage chess piece move's validation/makeMove/unMakeMove.</br>
+	 * The default chess piece manager, manage chess piece move's validation/makeMove/unMakeMove.</br>
 	 * Also a way for the originator to be responsible for saving and restoring its states.</br>
 	 * @author Knight.zhou
 	 * @history 2010-12-02 using memento design pattern to implment make/unmake functions.
 	 * @history 2011-07-20 add default the side handlers at make move function.
 	 */
-	public class ChessPieceManagerBase implements IChessPieceManager
+	public class ChessPieceManagerDefault implements IChessPieceManager
 	{
 		//--------------------------------------------------------------------------
 		//
@@ -69,7 +69,7 @@ package com.godpaper.as3.impl
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private const LOG:ILogger=LogUtil.getLogger(ChessPieceManagerBase);
+		private const LOG:ILogger=LogUtil.getLogger(ChessPieceManagerDefault);
 
 		//--------------------------------------------------------------------------
 		//

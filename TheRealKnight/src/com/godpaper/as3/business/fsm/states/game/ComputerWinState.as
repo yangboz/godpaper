@@ -6,10 +6,9 @@ package com.godpaper.as3.business.fsm.states.game
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
-
-	import mx.controls.Alert;
 
 
 	/**
@@ -50,7 +49,6 @@ package com.godpaper.as3.business.fsm.states.game
 		//--------------------------------------------------------------------------
 		public function ComputerWinState(agent:IAgent, resource:Object, description:String=null)
 		{
-			//TODO: implement function
 			super(agent, resource, description);
 		}     	
 		//--------------------------------------------------------------------------
@@ -61,8 +59,8 @@ package com.godpaper.as3.business.fsm.states.game
 		override public function enter():void
 		{
 			GameConfig.gameStateManager.isRunning = false;
-			//
-			Alert.show("You play like a monkey,@-@","Computer Win!");
+			//popup the out come UI inter face.
+			IndicatorConfig.outcome = true;
 		}
 
 		override public function update(time:Number=0):void
@@ -72,7 +70,8 @@ package com.godpaper.as3.business.fsm.states.game
 
 		override public function exit():void
 		{
-
+			//popup the out come UI inter face.
+			IndicatorConfig.outcome = false;
 		}
 		//--------------------------------------------------------------------------
 		//

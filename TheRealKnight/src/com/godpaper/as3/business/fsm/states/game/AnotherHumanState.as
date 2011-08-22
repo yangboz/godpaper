@@ -10,7 +10,7 @@ package com.godpaper.as3.business.fsm.states.game
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
-
+	
 	import mx.managers.CursorManager;
 
 
@@ -28,7 +28,6 @@ package com.godpaper.as3.business.fsm.states.game
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -52,7 +51,6 @@ package com.godpaper.as3.business.fsm.states.game
 		//--------------------------------------------------------------------------
 		public function AnotherHumanState(agent:IAgent, resource:Object, description:String=null)
 		{
-			//TODO: implement function
 			super(agent, resource, description);
 		}     	
 		//--------------------------------------------------------------------------
@@ -69,7 +67,6 @@ package com.godpaper.as3.business.fsm.states.game
 			//about view
 			CursorManager.setBusyCursor();
 			//about data
-
 		}
 
 		override public function exit():void

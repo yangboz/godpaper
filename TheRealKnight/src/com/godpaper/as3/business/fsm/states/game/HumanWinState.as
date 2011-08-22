@@ -47,7 +47,6 @@ package com.godpaper.as3.business.fsm.states.game
 		//--------------------------------------------------------------------------
 		public function HumanWinState(agent:IAgent, resource:Object, description:String=null)
 		{
-			//TODO: implement function
 			super(agent, resource, description);
 		}     	
 		//--------------------------------------------------------------------------

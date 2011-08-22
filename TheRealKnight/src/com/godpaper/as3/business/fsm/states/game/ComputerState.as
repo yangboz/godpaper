@@ -9,15 +9,10 @@ package com.godpaper.as3.business.fsm.states.game
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.ChessBoardModel;
-	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
-	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.ISearching;
-	import com.lookbackon.AI.searching.MiniMax;
-	import com.lookbackon.AI.searching.RandomWalk;
-	import com.lookbackon.AI.searching.ShortSighted;
 	
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
