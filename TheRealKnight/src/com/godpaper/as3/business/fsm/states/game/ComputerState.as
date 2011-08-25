@@ -12,6 +12,7 @@ package com.godpaper.as3.business.fsm.states.game
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
+	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.lookbackon.AI.searching.ISearching;
 	
 	import flash.utils.getDefinitionByName;
@@ -110,9 +111,14 @@ package com.godpaper.as3.business.fsm.states.game
 			//			searching = new AttackFalse(ChessPiecesModel.getInstance().gamePosition);
 			//Using the class reflection architure to dynamic instance the configed class,
 			//@see the DefaultTollgatesConstant.as
+			//process the searching class reflection.
 			var className:String=getQualifiedClassName(GameConfig.tollgates[time].searching);
 			var implementation:Object=getDefinitionByName(className);
 			searching=new implementation(ChessBoardModel.getInstance().status);
+			//process the evaluation class reflection.
+			var evaluationClassName:String = getQualifiedClassName(GameConfig.tollgates[time].evaluation);
+			var evaluationClass:Object = getDefinitionByName(evaluationClassName);
+			searching.evaluation = new evaluationClass();
 			//
 			LOG.info("current toll gate is:{0}", getQualifiedClassName(implementation));
 			//using this flash green thread algorithm to avoid script time limition only 15s.

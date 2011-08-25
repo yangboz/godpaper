@@ -1,13 +1,12 @@
 package com.lookbackon.AI.searching
 {
 	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.consts.DefaultPiecesConstants;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.FilterUtil;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.MathUtil;
-
+	
 	import mx.logging.ILogger;
 
 	/**
@@ -89,15 +88,7 @@ package com.lookbackon.AI.searching
 		//return random position value.
 		override public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{
-			//Todo:doEvaluation about assumpted conductVO;
-			var importantValue:int = DefaultPiecesConstants[conductVO.target.type].important.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
-			var fuzzyImportValue:int = DefaultPiecesConstants[conductVO.target.type].convertedImportant.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
-			//TODO:dynamic omenVO value to be calculated. 
-			//precies evaluation value.
-			return importantValue+fuzzyImportValue;
-			//			return _positionEvaluation;
-			//			return Math.random()*100;
-			//			return super.doEvaluation(conductVO);
+			return Math.random()*100;
 		};
 
 	}	

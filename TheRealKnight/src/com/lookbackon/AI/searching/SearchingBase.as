@@ -8,7 +8,7 @@ package com.lookbackon.AI.searching
 	import com.godpaper.as3.utils.SortUtil;
 	import com.godpaper.as3.views.components.ChessPiece;
 	import com.lookbackon.AI.evaluation.IEvaluation;
-	import com.lookbackon.AI.evaluation.linear.LinearEvaluationProxy;
+	import com.lookbackon.AI.evaluation.linear.LinearEvaluation;
 	import com.lookbackon.ds.BitBoard;
 	
 	import flash.geom.Point;
@@ -53,7 +53,7 @@ package com.lookbackon.AI.searching
 		//
 		protected var gamePosition:PositionVO;
 		//Default Evaluation functions.
-		private var _evaluation:IEvaluation=new LinearEvaluationProxy(); //Notice:this is all kinds of evaluation method entry,should be test.
+		private var _evaluation:IEvaluation=new LinearEvaluation(); //Notice:this is all kinds of evaluation method entry,should be test.
 		//
 		private var _orderingMoves:Vector.<ConductVO>;
 		//flag wheater this process done.

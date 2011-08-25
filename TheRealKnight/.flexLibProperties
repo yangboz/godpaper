@@ -77,7 +77,6 @@
     <classEntry path="com.godpaper.as3.utils.GeneralValidator"/>
     <classEntry path="com.godpaper.as3.utils.LogUtil"/>
     <classEntry path="com.godpaper.as3.utils.MathUtil"/>
-    <classEntry path="com.godpaper.as3.utils.P2PChat"/>
     <classEntry path="com.godpaper.as3.utils.SortUtil"/>
     <classEntry path="com.godpaper.as3.views.components.ChessBoard"/>
     <classEntry path="com.godpaper.as3.views.components.ChessGasket"/>
@@ -103,7 +102,6 @@
     <classEntry path="com.lookbackon.AI.HFSM.states.IHState"/>
     <classEntry path="com.lookbackon.AI.evaluation.IEvaluation"/>
     <classEntry path="com.lookbackon.AI.evaluation.factors.ContemptFactor"/>
-    <classEntry path="com.lookbackon.AI.evaluation.linear.LinearEvaluationProxy"/>
     <classEntry path="com.lookbackon.AI.evaluation.statical.exchange.StaticExchangeEvaluation"/>
     <classEntry path="com.lookbackon.AI.evaluation.statical.nelderMeadSimplex.NelderMeadSimplexTest"/>
     <classEntry path="com.lookbackon.AI.evaluation.statical.nelderMeadSimplex.SimplexConstants"/>
@@ -137,7 +135,6 @@
     <classEntry path="com.lookbackon.AI.searching.RandomWalk"/>
     <classEntry path="com.lookbackon.AI.searching.SE"/>
     <classEntry path="com.lookbackon.AI.searching.SearchingBase"/>
-    <classEntry path="com.lookbackon.AI.searching.SearchingWalk"/>
     <classEntry path="com.lookbackon.AI.searching.ShortSighted"/>
     <classEntry path="com.lookbackon.AI.searching.Windowing"/>
     <classEntry path="com.lookbackon.AI.steeringBehavior.Circle"/>
@@ -260,14 +257,16 @@
     <classEntry path="com.godpaper.as3.consts.DefaultTollgatesConstant"/>
     <classEntry path="assets.DefaultEmbededAssets"/>
     <classEntry path="com.godpaper.as3.views.popups.ComputerWinTitleWindow"/>
+    <classEntry path="com.lookbackon.AI.evaluation.linear.LinearEvaluation"/>
+    <classEntry path="com.lookbackon.AI.evaluation.fuzzy.FuzzyImportantEvaluation"/>
   </includeClasses>
   <includeResources>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.foo" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/RegressionResult.foo"/>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/A simplex approach for the tunning of a chess evaluation function.pdf" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/A simplex approach for the tunning of a chess evaluation function.pdf"/>
     <resourceEntry destPath="com/lookbackon/AI/learning/adaBoost/A Quick Introduction About AdaBoost.pdf" sourcePath="com/lookbackon/AI/learning/adaBoost/A Quick Introduction About AdaBoost.pdf"/>
     <resourceEntry destPath="org/generalrelativity/.DS_Store" sourcePath="org/generalrelativity/.DS_Store"/>
-    <resourceEntry destPath="com/lookbackon/AI/learning/tcs-learn.pdf" sourcePath="com/lookbackon/AI/learning/tcs-learn.pdf"/>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/NelderMeadSimplex.foo" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/NelderMeadSimplex.foo"/>
+    <resourceEntry destPath="com/lookbackon/AI/learning/tcs-learn.pdf" sourcePath="com/lookbackon/AI/learning/tcs-learn.pdf"/>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/fuzzy/Fuzzy Chess Tactics.pdf" sourcePath="com/lookbackon/AI/evaluation/fuzzy/Fuzzy Chess Tactics.pdf"/>
     <resourceEntry destPath="com/godpaper/as3/configs/logConfig.xml" sourcePath="com/godpaper/as3/configs/logConfig.xml"/>
     <resourceEntry destPath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/Adaptive Extensions of the Nelder and Mead Simplex Method.pdf" sourcePath="com/lookbackon/AI/evaluation/statical/nelderMeadSimplex/Adaptive Extensions of the Nelder and Mead Simplex Method.pdf"/>

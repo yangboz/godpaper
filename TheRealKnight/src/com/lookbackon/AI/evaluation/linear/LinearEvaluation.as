@@ -1,59 +1,56 @@
 package com.lookbackon.AI.evaluation.linear
 {
+	//--------------------------------------------------------------------------
+	//
+	//  Imports
+	//
+	//--------------------------------------------------------------------------
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.lookbackon.ds.BitBoard;
-
-	import flash.utils.Proxy;
-	import flash.utils.flash_proxy;
-
 	/**
-	 * LinearEvaluationProxy.as class.
-	 * Similar to Shannon’s 1949 paper, the evaluation for this type of evaluation is defined as:</br>
-	 * T = T(red) -T(blue)
-	 * Where_ _ * 266 _ _ * 300 _ _ * 66_ *133 _ _ *166 _ _ * 600number of Horses number of Cannon number of pawns
-	 * T number Guards number of Elephants number of Rooks black+ + += + +
-	 * _ _ * 266 _ _ *300 _ _ * 66_ *133 _ _ *166 _ _ * 600
-	 * @author Knight.zhou
+	 * LinearEvaluation.as class.
+	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jun 10, 2010 2:09:53 PM
+	 * Created Aug 24, 2011 6:32:15 PM
 	 */
-	public class LinearEvaluationProxy extends Proxy implements IEvaluation
+	public class LinearEvaluation implements IEvaluation
 	{
-		use namespace flash_proxy;
+		//--------------------------------------------------------------------------
+		//
+		//  Variables
+		//
+		//--------------------------------------------------------------------------
+
+		//----------------------------------
+		//  CONSTANTS
+		//----------------------------------
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
-		//--------------------------------------------------------------------------
+		//-------------------------------------------------------------------------- 
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
-		//--------------------------------------------------------------------------
+		//-------------------------------------------------------------------------- 
 
-		//--------------------------------------------------------------------------
-		//
-		//  Private properties
-		//
-		//--------------------------------------------------------------------------
-		private var _item:Array;
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		//sample:trace(arr.sum()); 6arr.clear();
-		public function LinearEvaluationProxy()
+		public function LinearEvaluation()
 		{
-			//TODO: implement function
-			super();
-			_item = new Array();
 		}
+
 		/**
 		 * KQRBNP = number of kings, queens, rooks, bishops, knights and pawns;</br>
 		 * D,S,I = doubled, blocked and isolated pawns;</br>
@@ -67,7 +64,6 @@ package com.lookbackon.AI.evaluation.linear
 		 */		
 		public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{
-			//TODO: implement function
 			//Material
 			var M:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_MARSHAL] as BitBoard;
 			var m:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_MARSHAL] as BitBoard;
@@ -83,7 +79,7 @@ package com.lookbackon.AI.evaluation.linear
 			var p:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_PAWN] as BitBoard;
 			var B:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_BISHOP] as BitBoard;
 			var b:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_BISHOP] as BitBoard;
-
+			
 			var T_red:int = M.celled*133
 				+B.celled*166
 				+R.celled*600
@@ -109,42 +105,7 @@ package com.lookbackon.AI.evaluation.linear
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override flash_proxy function callProperty(methodName:*, ... args):* 
-		{
-			var res:*;
-			switch (methodName.toString()) 
-			{
-				case "clear":
-					_item = new Array();
-					break;
-				case "sum":
-					var sum:Number = 0;
-					for each (var i:* in _item) 
-					{
-						// ignore non-numeric values
-						if (!isNaN(i)) 
-						{
-							sum += i;
-						}
-					}
-					res = sum;
-					break;
-				default:
-					res = _item[methodName].apply(_item, args);
-					break;
-			}
-			return res;
-		}
 
-		override flash_proxy function getProperty(name:*):* 
-		{
-			return _item[name];
-		}
-
-		override flash_proxy function setProperty(name:*, value:*):void 
-		{
-			_item[name] = value;
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -159,4 +120,3 @@ package com.lookbackon.AI.evaluation.linear
 	}
 
 }
-
