@@ -1,4 +1,4 @@
-package com.godpaper.as3.impl
+package com.godpaper.as3.business.managers
 {
 	import com.adobe.cairngorm.task.ParallelTask;
 	import com.adobe.cairngorm.task.TaskEvent;
@@ -420,12 +420,18 @@ package com.godpaper.as3.impl
 				{
 					if (legalMoves.getBitt(v, h))
 					{
-						(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).setStyle("backgroundColor", 0xff0000);
+						if(ChessGasketsModel.getInstance().gaskets.gett(h, v))
+						{
+							(ChessGasketsModel.getInstance().gaskets.gett(h, v)as ChessGasket).setStyle("backgroundColor", 0xff0000);
+						}
 					}
 					else
 					{
-						(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).clearStyle("backgroundColor");
-						(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[];
+						if(ChessGasketsModel.getInstance().gaskets.gett(h, v))
+						{
+							(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).clearStyle("backgroundColor");
+							(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[];
+						}
 					}
 				}
 			}
@@ -445,7 +451,10 @@ package com.godpaper.as3.impl
 				{
 					if (legalCaptures.getBitt(v, h))
 					{
-						(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[new GlowFilter()];
+						if(ChessGasketsModel.getInstance().gaskets.gett(h, v))
+						{
+							(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[new GlowFilter()];
+						}	
 					}
 				}
 			}

@@ -80,10 +80,14 @@ package com.godpaper.as3.tasks
 			{
 				for(var h:int=0;h<BoardConfig.xLines;h++)
 				{
-					var cGasket:IVisualElement = 
-						FlexGlobals.topLevelApplication.addElement( realFactoy.createChessGasket(new Point(h,v)) );
 					//
-					ChessGasketsModel.getInstance().gaskets.sett(h,v,cGasket);
+					var cGasket:IVisualElement = realFactoy.createChessGasket(new Point(h,v))
+					if(cGasket)
+					{
+						FlexGlobals.topLevelApplication.addElement( cGasket );
+						//keep this reference to model.
+						ChessGasketsModel.getInstance().gaskets.sett(h,v,cGasket);
+					}
 				}
 			}
 			//plugin uicomponent at the top of game ui.

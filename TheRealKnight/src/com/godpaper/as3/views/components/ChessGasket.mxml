@@ -28,7 +28,6 @@
 			//
 			//--------------------------------------------------------------------------
 			//
-			[Bindable]
 			private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 			//----------------------------------
 			//  CONSTANTS

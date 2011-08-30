@@ -3,7 +3,7 @@ package com.godpaper.as3.configs
 	import com.godpaper.as3.consts.DefaultTollgatesConstant;
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.core.IGameStateManager;
-	import com.godpaper.as3.impl.GameStateManagerDefault;
+	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 
 	//--------------------------------------------------------------------------
 	//

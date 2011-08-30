@@ -1,4 +1,4 @@
-package com.godpaper.as3.impl
+package com.godpaper.as3.business.managers
 {
 	import com.adobe.cairngorm.task.SequenceTask;
 	import com.godpaper.as3.business.fsm.GameAgent;

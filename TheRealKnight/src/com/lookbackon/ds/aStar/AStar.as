@@ -1,5 +1,6 @@
 package com.lookbackon.ds.aStar
 {
+	import com.lookbackon.ds.AStarNodeBoard;
 	import com.lookbackon.ds.BitBoard;
 	
 	import org.generalrelativity.thread.process.AbstractProcess;
@@ -11,7 +12,7 @@ package com.lookbackon.ds.aStar
 	//--------------------------------------------------------------------------
 
 	/**
-	 * In computer science, A* (pronounced "A star" ( listen)) is a computer algorithm that is widely used in pathfinding and graph traversal,
+	 * In computer science, A* (pronounced "A star") is a computer algorithm that is widely used in pathfinding and graph traversal,
 	 * the process of plotting an efficiently traversable path between points, called nodes.
 	 * Noted for its performance and accuracy, it enjoys widespread use.
 	 * Peter Hart, Nils Nilsson and Bertram Raphael first described the algorithm in 1968.[1]
@@ -32,7 +33,7 @@ package com.lookbackon.ds.aStar
 		//--------------------------------------------------------------------------
 		private var _open:Array;
 		private var _closed:Array;
-		private var _grid:BitBoard;
+		private var _grid:AStarNodeBoard;
 		private var _endNode:AStarNode;
 		private var _startNode:AStarNode;
 		private var _path:Array;
@@ -75,14 +76,14 @@ package com.lookbackon.ds.aStar
 		/**
 		 * @return AStarBitBoard data source.
 		 */		
-		public function get grid():BitBoard
+		public function get grid():AStarNodeBoard
 		{
 			return _grid;
 		}
 		/**
 		 * @param value AStarBitBoard data source.
 		 */		
-		public function set grid(value:BitBoard):void
+		public function set grid(value:AStarNodeBoard):void
 		{
 			_grid = value;
 			//preparde data

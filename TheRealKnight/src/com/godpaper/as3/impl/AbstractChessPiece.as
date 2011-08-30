@@ -213,6 +213,7 @@ package com.godpaper.as3.impl
 		//mouseDownHandler
 		protected function mouseDownHandler(event:MouseEvent):void
 		{
+			chessPiecesModel.selectedPiece = this;
 			//handle the drag image/movie effect.
 			if(PieceConfig.usingDragProxy)
 			{

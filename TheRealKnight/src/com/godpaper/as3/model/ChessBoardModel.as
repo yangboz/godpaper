@@ -5,6 +5,7 @@ package com.godpaper.as3.model
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.views.components.ChessPiece;
+	import com.lookbackon.ds.AStarNodeBoard;
 	import com.lookbackon.ds.GraphBoard;
 	import com.lookbackon.ds.NumberBoard;
 	
@@ -17,7 +18,7 @@ package com.godpaper.as3.model
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * This singlton class maintain the board status information and with manifestation(numercal,graphical...) mode.   	
+	 * This singlton class maintain the board status information and with manifestation(numercal,graphical,A*Node...) mode.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -80,6 +81,25 @@ package com.godpaper.as3.model
 //			graphical.addEdge(
 //			graphical.addNode(
 			return graphical;
+		}
+		//----------------------------------
+		//  aStarNodes
+		//----------------------------------
+		/**
+		 * @return the node type board struct.Integrated the A* algorithm and functions.
+		 */		
+		public function get aStarNodes():AStarNodeBoard
+		{
+			var aStarNodes:AStarNodeBoard = new AStarNodeBoard(BoardConfig.xLines,BoardConfig.yLines);
+			for (var i:int=0; i < chessPiecesModel.pieces.length; i++)
+			{
+				var cp:ChessPiece= chessPiecesModel.pieces[i];
+				if(null == cp)
+				{
+					aStarNodes.setWalkable(cp.position.x, cp.position.y,true);//only the blank cell is walkable.
+				}
+			}
+			return aStarNodes;
 		}
 		//----------------------------------
 		//  status

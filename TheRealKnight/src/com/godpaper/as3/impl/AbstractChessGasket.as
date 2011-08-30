@@ -38,7 +38,7 @@ package com.godpaper.as3.impl
 	 * @playerVersion 9.0
 	 * Created Jan 21, 2011 3:51:25 PM
 	 */
-	public class AbstractChessGasket extends BorderContainer implements IChessGasket,IXray
+	public class AbstractChessGasket extends BorderContainer implements IChessGasket
 	{
 		//--------------------------------------------------------------------------
 		//
@@ -105,25 +105,25 @@ package com.godpaper.as3.impl
 		//----------------------------------
 		//  X-Ray properties
 		//----------------------------------
-		public function get bottomNode():ChessGasket
-		{
-			return chessGasketsModel.gaskets.gett(this.position.x,this.position.y+1) as ChessGasket;
-		}
-
-		public function get rightNode():ChessGasket
-		{
-			return chessGasketsModel.gaskets.gett(this.position.x+1,this.position.y) as ChessGasket;
-		}
-
-		public function get upNode():ChessGasket
-		{
-			return chessGasketsModel.gaskets.gett(this.position.x,this.position.y-1) as ChessGasket;
-		}
-
-		public function get leftNode():ChessGasket
-		{
-			return chessGasketsModel.gaskets.gett(this.position.x-1,this.position.y) as ChessGasket;
-		}
+//		public function get bottomNode():ChessGasket
+//		{
+//			return chessGasketsModel.gaskets.gett(this.position.x,this.position.y+1) as ChessGasket;
+//		}
+//
+//		public function get rightNode():ChessGasket
+//		{
+//			return chessGasketsModel.gaskets.gett(this.position.x+1,this.position.y) as ChessGasket;
+//		}
+//
+//		public function get upNode():ChessGasket
+//		{
+//			return chessGasketsModel.gaskets.gett(this.position.x,this.position.y-1) as ChessGasket;
+//		}
+//
+//		public function get leftNode():ChessGasket
+//		{
+//			return chessGasketsModel.gaskets.gett(this.position.x-1,this.position.y) as ChessGasket;
+//		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
