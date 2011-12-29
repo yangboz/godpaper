@@ -2,15 +2,15 @@
 <!-- This build file provdes a close approximation of the build process
 	 and build settings inside Flash Builder, but it is not an exact copy.
 	 Please customize this file as necessary. -->
-<!-- Generated from project settings as of 6/10/11 11:29 AM -->
-<project name="TheRealKnight(4.5.1)"
+<!-- Generated from project settings as of 29/12/11 1:45 PM -->
+<project name="TheRealKnight(4.6.0)"
 		 default="build"
 		 basedir="C:/Users/yangboz/git/godpaper/TheRealKnight">
 
 	<property name="FLEX_HOME"
-			  value="C:/Program Files/Adobe/Adobe Flash Builder 4.5/sdks/4.5.1"/>
+			  value="C:/Program Files/Adobe/Adobe Flash Builder 4.6/sdks/4.6.0"/>
 	<property name="SDK_VERSION"
-			  value="4.5.1.21328"/>
+			  value="4.6.0"/>
 
 	<taskdef name="mxmlc"
 			 classname="flex.ant.MxmlcTask"

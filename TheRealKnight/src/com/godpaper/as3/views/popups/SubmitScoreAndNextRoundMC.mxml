@@ -15,7 +15,6 @@
 			import com.godpaper.as3.configs.GameConfig;
 			import com.godpaper.as3.messages.LevelUpMessage;
 			import com.godpaper.as3.plugins.IPlug;
-			import com.lookbackon.AI.searching.SearchingWalk;
 			
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
