@@ -3,12 +3,12 @@
 						  xmlns:s="library://ns.adobe.com/flex/spark"
 						  xmlns:mx="library://ns.adobe.com/flex/mx"
 						  xmlns:impl="com.godpaper.as3.impl.*"
-						  width="{GasketConfig.width}"
-						  height="{GasketConfig.height}"
-						  borderVisible="{GasketConfig.borderVisible}"
-						  backgroundAlpha="{GasketConfig.backgroundAlpha}"
-						  contentBackgroundAlpha="{GasketConfig.contentBackgroundAlpha}"
-						  borderAlpha="{GasketConfig.borderAlpha}" 
+						  width="{gcWidth}"
+						  height="{gcHeight}"
+						  borderVisible="{gcBorderVisible}"
+						  backgroundAlpha="{gcBackgroundAlpha}"
+						  contentBackgroundAlpha="{gcContentBackgroundAlpha}"
+						  borderAlpha="{gcBorderAlpha}" 
 						  xmlns:parsley="http://www.spicefactory.org/parsley"
 						  >
 	<fx:Script>
@@ -27,6 +27,13 @@
 			//  Variables
 			//
 			//--------------------------------------------------------------------------
+			//
+			[Bindable]private var gcWidth:Number = GasketConfig.width;
+			[Bindable]private var gcHeight:Number = GasketConfig.height;
+			[Bindable]private var gcBorderVisible:Boolean = GasketConfig.borderVisible;
+			[Bindable]private var gcBackgroundAlpha:Number = GasketConfig.backgroundAlpha;
+			[Bindable]private var gcContentBackgroundAlpha:Number = GasketConfig.contentBackgroundAlpha;
+			[Bindable]private var gcBorderAlpha:Number = GasketConfig.borderAlpha;
 			//
 			private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 			//----------------------------------

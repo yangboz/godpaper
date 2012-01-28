@@ -13,6 +13,7 @@ package
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.utils.VersionController;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
+	import com.godpaper.as3.configs.PieceConfig;
 	import com.lookbackon.ds.NumberBoard;
 	import com.lookbackon.ds.aStar.AStar;
 	
@@ -64,6 +65,8 @@ package
 		public var pluginStage:MovieClip;
 		//Default mochi dashboard hint.
 		public var _mochiads_game_id:String = "c7278f158e32f9a0";
+		//For children dynamic factory config.
+		[Bindable]protected var pcFactory:Class = PieceConfig.factory;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

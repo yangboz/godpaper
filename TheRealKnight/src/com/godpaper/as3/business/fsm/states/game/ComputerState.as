@@ -99,7 +99,7 @@ package com.godpaper.as3.business.fsm.states.game
 		override public function update(time:Number=0):void
 		{
 			//switch any searching class to test.
-			//Example:
+			//just like:
 			//			gameAI = new RandomWalk(ChessPiecesModel.getInstance().gamePosition);
 			//			searching = new MinMax(ChessPiecesModel.getInstance().gamePosition);
 			//			searching = new MiniMax(ChessPiecesModel.getInstance().gamePosition,5);

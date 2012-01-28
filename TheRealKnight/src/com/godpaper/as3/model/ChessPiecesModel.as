@@ -61,7 +61,7 @@ package com.godpaper.as3.model
 		//  CONSTANTS
 		//----------------------------------
 		private static const LOG:ILogger=LogUtil.getLogger(ChessPiecesModel);
-		//this bit board limit size const should be more flexibility for adapting variable bitboard size. 
+		//TODO:this bit board limit size const should be more flexibility for adapting variable bitboard size. 
 		private static const MAX_BB_W:int = 15;
 		private static const MAX_BB_H:int = 15;
 		//--------------------------------------------------------------------------

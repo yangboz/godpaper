@@ -5,8 +5,8 @@
 		 xmlns:parsley="http://www.spicefactory.org/parsley"
 		 show="uicomponent_showHandler(event)"
 		 creationComplete="uicomponent_creationCompleteHandler(event)"
-		 maxWidth="{BoardConfig.width}"
-		 maxHeight="{BoardConfig.height/2}"
+		 maxWidth="{bcWidth}"
+		 maxHeight="{bcHeight/2}"
 		 > 
 	
 	<fx:Script> 
@@ -18,6 +18,14 @@
 			
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
+			//--------------------------------------------------------------------------
+			//
+			//  Variables
+			//
+			//--------------------------------------------------------------------------
+			//Internal variables
+			[Bindable]private var bcWidth:Number = BoardConfig.width;
+			[Bindable]private var bcHeight:Number = BoardConfig.height;
 			//Access nested movieclips in Flex SWFLoader with embedded SWF
 			//@see http://www.codersbible.com/snippet/show/21
 			//We just using exported SWC library file.

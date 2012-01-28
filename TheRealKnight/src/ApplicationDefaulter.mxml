@@ -153,13 +153,13 @@
 							label="startUp">
 			<tasks:CreateChessGasketTask id="ccgTask"
 										 label="create chess gasket"
-										 factory="{PieceConfig.factory}"/>
+										 factory="{pcFactory}"/>
 			<tasks:FillInPiecesBoxTask id="fpbTask"
 									   label="fill in the chess pieces box"
-									   factory="{PieceConfig.factory}"/>
+									   factory="{pcFactory}"/>
 			<tasks:CreateChessVoTask id="ccvTask"
 									 label="create chess VO"
-									 factory="{PieceConfig.factory}"/>
+									 factory="{pcFactory}"/>
 		</taskC:SequenceTask>
 
 		<!--<task:SequenceTask id="cleanUp" label="cleanUp">

@@ -40,8 +40,8 @@ package com.godpaper.as3.utils
 		//  CONSTANTS
 		//----------------------------------
 		public static const CODE_NAME:String = "GODPAPER::TheRealKnight";
-		public static const BUILD_DATE: String = '20110830';
-		public static const BUILD_NUMBER: String = '219';
+		public static const BUILD_DATE: String = '20120128';
+		public static const BUILD_NUMBER: String = '231';
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

@@ -8,15 +8,24 @@
 				   xmlns:geometry="com.degrafa.geometry.*" 
 				   xmlns:transform="com.degrafa.transform.*"
 				   borderVisible="false"
-				   width="{BoardConfig.width}" 
-				   height="{BoardConfig.height}"
-				   scaleX="{BoardConfig.xScale}"
-				   scaleY="{BoardConfig.yScale}"
+				   width="{bcWidth}" 
+				   height="{bcHeight}"
+				   scaleX="{bcXScale}"
+				   scaleY="{bcYScale}"
 				   >
 	<fx:Script>
 		<![CDATA[
 			import com.godpaper.as3.configs.BoardConfig;
 			import mx.graphics.SolidColorStroke;
+			//
+			[Bindable]private var bcWidth:Number = BoardConfig.width;
+			[Bindable]private var bcHeight:Number = BoardConfig.height;
+			[Bindable]private var bcXScale:Number = BoardConfig.xScale;
+			[Bindable]private var bcYScale:Number = BoardConfig.yScale;
+			[Bindable]private var bcYLines:Number = BoardConfig.yLines;
+			[Bindable]private var bcXLines:Number = BoardConfig.xLines;
+			[Bindable]private var bcYOffset:Number = BoardConfig.yOffset;
+			[Bindable]private var bcXOffset:Number = BoardConfig.xOffset;
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -29,8 +38,8 @@
 		</degrafa:strokes>
 		<!-- Horizontal lines and Vertical lines. -->
 		<degrafa:GeometryGroup id="geometryGroup">
-			<repeaters:HorizontalLineRepeater id="hLineRepeater" count="{BoardConfig.yLines}" stroke="{blackStroke}" x="0" x1="{BoardConfig.width}" y="0" moveOffsetY="{BoardConfig.yOffset}"/> 
-			<repeaters:VerticalLineRepeater id="vLineRepeater" count="{BoardConfig.xLines}" stroke="{blackStroke}" y="0" y1="{BoardConfig.height}" x="0" moveOffsetX="{BoardConfig.xOffset}"/>
+			<repeaters:HorizontalLineRepeater id="hLineRepeater" count="{bcYLines}" stroke="{blackStroke}" x="0" x1="{bcWidth}" y="0" moveOffsetY="{bcYOffset}"/> 
+			<repeaters:VerticalLineRepeater id="vLineRepeater" count="{bcXLines}" stroke="{blackStroke}" y="0" y1="{bcHeight}" x="0" moveOffsetX="{bcXOffset}"/>
 		</degrafa:GeometryGroup>
 		<!-- Intersect lines . -->
 		<!--<degrafa:GeometryGroup>

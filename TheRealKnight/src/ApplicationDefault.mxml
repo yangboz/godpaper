@@ -24,7 +24,7 @@
 			import com.godpaper.as3.configs.IndicatorConfig;
 			import com.godpaper.as3.configs.PieceConfig;
 			import com.lookbackon.AI.searching.*;
-
+			
 			import mx.events.FlexEvent;
 			import mx.logging.LogEventLevel;
 
@@ -148,13 +148,13 @@
 							label="startUp">
 			<tasks:CreateChessGasketTask id="ccgTask"
 										 label="create chess gasket"
-										 factory="{PieceConfig.factory}"/>
+										 factory="{pcFactory}"/>
 			<tasks:CreateChessPieceTask id="ccpTask"
 										label="create chess piece"
-										factory="{PieceConfig.factory}"/>
+										factory="{pcFactory}"/>
 			<tasks:CreateChessVoTask id="ccvTask"
 									 label="create chess VO"
-									 factory="{PieceConfig.factory}"/>
+									 factory="{pcFactory}"/>
 		</taskC:SequenceTask>
 
 		<!--<task:SequenceTask id="cleanUp" label="cleanUp">
