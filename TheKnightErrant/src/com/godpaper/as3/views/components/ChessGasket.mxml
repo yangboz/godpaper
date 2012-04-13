@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<impl:AbstractChessGasket xmlns:fx="http://ns.adobe.com/mxml/2009"
+						  xmlns:s="library://ns.adobe.com/flex/spark"
+						  xmlns:mx="library://ns.adobe.com/flex/mx"
+						  xmlns:impl="com.godpaper.as3.impl.*"
+						  width="{gcWidth}"
+						  height="{gcHeight}"
+						  borderVisible="{gcBorderVisible}"
+						  backgroundAlpha="{gcBackgroundAlpha}"
+						  contentBackgroundAlpha="{gcContentBackgroundAlpha}"
+						  borderAlpha="{gcBorderAlpha}" 
+						  xmlns:parsley="http://www.spicefactory.org/parsley"
+						  >
+	<fx:Script>
+		<![CDATA[
+			import com.godpaper.as3.configs.GameConfig;
+			import com.godpaper.as3.configs.GasketConfig;
+			import com.godpaper.as3.consts.DefaultConstants;
+			import com.godpaper.as3.model.ChessPiecesModel;
+			import com.godpaper.as3.plugins.IPlug;
+			
+			import mx.core.FlexGlobals;
+			
+			import spark.events.ElementExistenceEvent;
+			//--------------------------------------------------------------------------
+			//
+			//  Variables
+			//
+			//--------------------------------------------------------------------------
+			//
+			[Bindable]private var gcWidth:Number = GasketConfig.width;
+			[Bindable]private var gcHeight:Number = GasketConfig.height;
+			[Bindable]private var gcBorderVisible:Boolean = GasketConfig.borderVisible;
+			[Bindable]private var gcBackgroundAlpha:Number = GasketConfig.backgroundAlpha;
+			[Bindable]private var gcContentBackgroundAlpha:Number = GasketConfig.contentBackgroundAlpha;
+			[Bindable]private var gcBorderAlpha:Number = GasketConfig.borderAlpha;
+			//
+			private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+			//----------------------------------
+			//  CONSTANTS
+			//----------------------------------
+
+			//--------------------------------------------------------------------------
+			//
+			//  Properties(implement)
+			//
+			//--------------------------------------------------------------------------
+
+			//--------------------------------------------------------------------------
+			//
+			//  Methods
+			//
+			//--------------------------------------------------------------------------
+			//elementAddHandler
+			override protected function elementAddHandler(event:ElementExistenceEvent):void
+			{
+				super.elementAddHandler(event);
+				//check indicate handler.
+				if (iPlug.data.hasCheckIndicator && GameConfig.gameStateManager.isRunning)
+				{
+					//Notice:after apply move ture flag changed immidiatly,but check indicator ongoing.
+					if (DefaultConstants.FLAG_BLUE == GameConfig.turnFlag)
+					{
+						GameConfig.chessPieceManager.indicateCheck(chessPiecesModel.pieces, chessPiecesModel.BLUE_MARSHAL);
+					}
+					else
+					{
+						GameConfig.chessPieceManager.indicateCheck(chessPiecesModel.pieces, chessPiecesModel.RED_MARSHAL);
+					}
+				}
+			}
+
+			//elementRemoveHandler
+			override protected function elementRemoveHandler(event:ElementExistenceEvent):void
+			{
+				//
+				if (iPlug.data.hasCheckIndicator && GameConfig.gameStateManager.isRunning)
+				{
+					//Notice:turn flag change after remove piece at apply move behavior.
+					if (DefaultConstants.FLAG_BLUE == GameConfig.turnFlag)
+					{
+						GameConfig.chessPieceManager.indicateCheck(chessPiecesModel.pieces, chessPiecesModel.RED_MARSHAL);
+					}
+					else
+					{
+						GameConfig.chessPieceManager.indicateCheck(chessPiecesModel.pieces, chessPiecesModel.BLUE_MARSHAL);
+					}
+				}
+			}
+			
+			//
+			protected function get iPlug():IPlug
+			{
+				return IPlug(FlexGlobals.topLevelApplication.pluginUIComponent.provider);
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<parsley:Configure/>
+	</fx:Declarations>
+	<!--<s:Rect width="100%" height="100%">
+	<s:stroke>
+	<s:SolidColorStroke color="white" alpha=".5"/>
+	</s:stroke>
+	<s:fill>
+	<s:SolidColor color="white" alpha=".5"/>
+	</s:fill>
+	</s:Rect>-->
+</impl:AbstractChessGasket>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:UIComponent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:parsley="http://www.spicefactory.org/parsley"
+		 show="uicomponent_showHandler(event)"
+		 creationComplete="uicomponent_creationCompleteHandler(event)"
+		 maxWidth="{bcWidth}"
+		 maxHeight="{bcHeight/2}"
+		 > 
+	
+	<fx:Script> 
+		<![CDATA[ 
+			import com.godpaper.as3.configs.BoardConfig;
+			import com.godpaper.as3.configs.GameConfig;
+			import com.godpaper.as3.messages.LevelUpMessage;
+			import com.godpaper.as3.plugins.IPlug;
+			
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			//--------------------------------------------------------------------------
+			//
+			//  Variables
+			//
+			//--------------------------------------------------------------------------
+			//Internal variables
+			[Bindable]private var bcWidth:Number = BoardConfig.width;
+			[Bindable]private var bcHeight:Number = BoardConfig.height;
+			//Access nested movieclips in Flex SWFLoader with embedded SWF
+			//@see http://www.codersbible.com/snippet/show/21
+			//We just using exported SWC library file.
+			private var _scorePanelMC:ScorePanelMC;
+			//parsley message dispatcher
+			/**
+			 * The [MessageDispatcher] metadata tells Parsley to configure the
+			 * function so it can be used to send (dispatch) messages.
+			 */
+			[MessageDispatcher]
+			public var dispatcher:Function;
+			//--------------------------------------------------------------------------
+			//
+			//  Protected properties
+			//
+			//-------------------------------------------------------------------------- 
+			//
+			protected function get currentScore():int
+			{
+				return (GameConfig.tollgates[GameConfig.gameStateManager.level].score);
+			}
+			
+			//
+			protected function get hasNextRound():Boolean
+			{
+				return GameConfig.gameStateManager.level < GameConfig.tollgates.length;
+			}
+			
+			//
+			protected function get iPlug():IPlug
+			{
+				return IPlug(FlexGlobals.topLevelApplication.pluginUIComponent.provider);
+			}
+			//--------------------------------------------------------------------------
+			//
+			//  Public properties
+			//
+			//-------------------------------------------------------------------------- 
+			public function get movieClip():MovieClip
+			{
+				return MovieClip(this._scorePanelMC);
+			}
+			public function get tollgateTxt():TextField
+			{
+				return movieClip["tollgateTxt"];
+			}
+			public function get nameTextInput():TextField
+			{
+				return movieClip["nameTxt"];
+			}
+			public function get scoreTextInput():TextField
+			{
+				return movieClip["scoreTxt"];
+			}
+			public function get nextBtn():SimpleButton
+			{
+				return movieClip["nextBtn"];
+			}
+			public function get submitBtn():SimpleButton
+			{
+				return movieClip["submitBtn"];
+			}
+			//--------------------------------------------------------------------------
+			//
+			//  Protected methods
+			//
+			//--------------------------------------------------------------------------
+			//
+			protected function uicomponent_creationCompleteHandler(event:FlexEvent):void
+			{
+				this._scorePanelMC = new ScorePanelMC();
+				this.addChild(_scorePanelMC);
+				//
+				this.nextBtn.addEventListener(MouseEvent.CLICK,nextRoundBtn_clickHandler);
+				this.submitBtn.addEventListener(MouseEvent.CLICK,submitBtnClickHandler);
+				//initialize the panel.
+				this.nextBtn.enabled = this.hasNextRound;
+				this.tollgateTxt.text = GameConfig.gameStateManager.level.toString();
+				this.scoreTextInput.text = currentScore.toString();
+			}
+			//
+			protected function uicomponent_showHandler(event:FlexEvent):void
+			{
+				//
+				iPlug.saveData({"boardID": null});
+				//				MochiScores.setBoardID(PluginConfig.mochiBoardID);
+			}
+			//
+			protected function submitBtnClickHandler(event:MouseEvent):void
+			{
+				//
+				iPlug.submitData(Number(scoreTextInput.text));
+				//				mochiModel.score.addValue(Number(scoreTextInput.text));
+				//
+				iPlug.showLeaderboard(
+					{
+						score: Number(scoreTextInput.text),
+						name: nameTextInput.text
+					}
+				);
+				//				MochiScores.showLeaderboard(
+				//					{   res: FlexGlobals.topLevelApplication.width.toString().concat(
+				//						"x",FlexGlobals.topLevelApplication.height), 
+				//						clip: FlexGlobals.topLevelApplication._mochiClip, 
+				//						score: mochiModel.score.value,
+				//						name: nameTextInput.text
+				//					}
+				//					);
+				//
+				GameConfig.gameStateManager.restart();
+			}
+			//
+			protected function nextRoundBtn_clickHandler(event:MouseEvent):void
+			{
+				//
+				GameConfig.gameStateManager.restart();
+				//increase intelligence level.
+				GameConfig.gameStateManager.level++;
+				//broad cast level up message.
+				dispatcher(new LevelUpMessage(GameConfig.gameStateManager.level));
+			}
+			//--------------------------------------------------------------------------
+			//
+			//  Private methods
+			//
+			//--------------------------------------------------------------------------
+			
+		]]> 
+	</fx:Script> 
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<parsley:Configure/>
+	</fx:Declarations>
+</mx:UIComponent>

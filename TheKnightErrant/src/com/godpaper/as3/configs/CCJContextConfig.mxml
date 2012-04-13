@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This is the file that declares which objects you wish to manage through Parsley.
+Any object declared within the Object Tag will be allowed to participate in any of Parsley's
+features.  This is a MXML implementation, but this can also be declared in and XML file.
+-->
+<fx:Object xmlns:fx="http://ns.adobe.com/mxml/2009"
+		   xmlns:s="library://ns.adobe.com/flex/spark"
+		   xmlns:mx="library://ns.adobe.com/flex/mx" 
+		   xmlns:spicefactory="http://www.spicefactory.org/parsley" 
+		   >
+	<fx:Script>
+		<![CDATA[
+			import com.godpaper.as3.commands.ConductCommand;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<!--<mochi:MochiModel/>-->
+		<!---
+		Here is the Service that we ask Parsley to use.  Since this service implements
+		IRssService, Parsley figures out that it should inject this service whenever
+		an Injection request for IRssService is made.
+		Notice that I've declared the Service as a DynamicObject.  This means that a new
+		instance will be created every time it is injected, and when the reference to this
+		instace is finished, the old instance is removed.  Type is the name of the class
+		you wish to have created.
+		Alternatively I could have declared it as a "Singleton" in the sense that once
+		created it remains during the life of this context.  When using Soap WebServices
+		I always use the singleton aproach so that the wsdl only downloads once.
+		Using the singleton aproach the declaration should be:
+		<services:ConductService />
+		-->    
+		<!--<spicefactory:DynamicObject type="{ConductService}"/>-->
+		<!---
+		This is the declaration for the Dynamic Command. DynamicCommands are created automatically
+		when a message of the type of the parameter received by the execute method is dispatched.
+		type is the name of the class that you wish to have invoked.  Selector is the specific
+		identifier so that you can have more than one message of the same message class dispatched
+		and the selector let's you select wich dynamic command is associated with it.  I use
+		public static const so that it is obvious wich message class is associated, although
+		it is obtained by Parsley from the parameter of the execute method.
+		You can also specify the name of the execute method, if it's not execute, but I would
+		discourage you to do so.  Execute standard across all MVC frameworks.
+		-->    
+		<spicefactory:DynamicCommand type="{ConductCommand}"/>
+	</fx:Declarations>
+</fx:Object>
