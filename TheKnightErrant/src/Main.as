@@ -27,16 +27,32 @@ package
 	//
 	//--------------------------------------------------------------------------
 	import flash.display.Sprite;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
 	import flash.events.Event;
+	import flash.geom.Rectangle;
+	import flash.utils.getTimer;
 	
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
+	import org.spicefactory.parsley.core.context.Context;
+	import org.spicefactory.parsley.core.events.ContextEvent;
+	import org.spicefactory.parsley.flash.logging.FlashLoggingXmlSupport;
+	import org.spicefactory.parsley.xml.XmlContextBuilder;
 	
+	import pl.mateuszmackowiak.visuals.CursorManager;
+	
+	import starling.core.Starling;
+
 	/**
 	 * Main.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
-	 * @playerVersion 11.0+
+	 * @playerVersion 11.2+
+	 * @airVersion 3.2+
 	 * Created Apr 12, 2012 9:38:56 AM
 	 */   	 
+	[SWF(frameRate="60", width="320", height="480", backgroundColor="0x666666")]//Default swf metadata.
 	public class Main extends Sprite
 	{		
 		//--------------------------------------------------------------------------
@@ -44,11 +60,11 @@ package
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		private var mStarling:Starling;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:Logger = LogContext.getLogger(Main);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -60,26 +76,96 @@ package
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		/**
+		 * This app's context for Parsley.
+		 */
+		protected var mainContext:Context;
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
+		/**
+		 * Application bootstrap class.
+		 * 
+		 */
 		public function Main()
 		{
 			super();
+			LOG.debug("preinitializeHandler@Constructor");
+			preinitializeHandler();
 			//
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.align = StageAlign.TOP_LEFT;
+			//
+			Starling.multitouchEnabled = true; // useful on mobile devices
+			Starling.handleLostContext = true; // deactivate on mobile devices (to save memory)
+			//
+			mStarling = new Starling(Game, stage,new Rectangle(0,0,320,480));
+			mStarling.simulateMultitouch = true;
+			mStarling.enableErrorChecking = false;
+			mStarling.start();
+			// loader info.
+			this.loaderInfo.addEventListener(Event.COMPLETE, loaderInfo_completeHandler);
+			// add to stage.
 			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
-		}     	
+			// this event is dispatched when stage3D is set up
+			stage.stage3Ds[0].addEventListener(Event.CONTEXT3D_CREATE, onContextCreated);
+			//
+			
+		} 
+		//
+		private function loaderInfo_completeHandler(event:Event):void
+		{
+			LOG.debug("creationCompleteHandler@loaderInfo_complete");
+			//
+			this.stage.addEventListener(Event.RESIZE, stage_resizeHandler, false, 0, true);
+			//
+			creationCompleteHandler();
+		}
+		//
+		private function stage_resizeHandler(event:Event):void
+		{
+			LOG.debug("stage_resizeHandler");
+			const viewPort:Rectangle = this.mStarling.viewPort;
+			viewPort.width = this.stage.stageWidth;
+			viewPort.height = this.stage.stageHeight;
+			this.mStarling.viewPort = viewPort;
+			this.mStarling.stage.stageWidth = this.stage.stageWidth;
+			this.mStarling.stage.stageHeight = this.stage.stageHeight;
+		}
 		private function addToStageHandler(event:Event):void
 		{
+			LOG.debug("initializeHandler@addToStage");
 			this.removeEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
+			// Parsley initialize
+			FlashLoggingXmlSupport.initialize();
+			// parsley context
+			mainContext = XmlContextBuilder.build("ParsleyConfiguration.xml");
+			mainContext.addEventListener(ContextEvent.INITIALIZED, contextEventInitializedHandler);
 			//
-			preinitializeHandler();
 			initializeHandler();
-			creationCompleteHandler();
+		}
+		/**
+		 * Handler for Parsley ContextEvent.INITIALIZED event.
+		 */
+		private function contextEventInitializedHandler(event:ContextEvent):void
+		{    
+			LOG.debug("contextEventInitializedHandler(...)");
+			mainContext.removeEventListener(ContextEvent.INITIALIZED, contextEventInitializedHandler);
+			// Add in the views.
+		}        
+		//
+		private function onContextCreated(event:Event):void
+		{
+			LOG.debug("applicationCompleteHandler@onContextCreated");
+			// set framerate to 30 in software mode
+			if (Starling.context.driverInfo.toLowerCase().indexOf("software") != -1)
+				Starling.current.nativeStage.frameRate = 30;
+			//
 			applicationCompleteHandler();
+			//
+			CursorManager.setBusyCursor();
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -105,7 +191,7 @@ package
 		 * @param event
 		 *
 		 */		
-		protected function preinitializeHandler(event:FlexEvent):void
+		protected function preinitializeHandler():void
 		{
 			//config initialization here.
 			//				BoardConfig.xLines = 9;
@@ -120,7 +206,7 @@ package
 		 * @param event
 		 *
 		 */		
-		protected function initializeHandler(event:FlexEvent):void
+		protected function initializeHandler():void
 		{
 			//number of tollgate tips would be matched with tollgates!
 			//				GameConfig.tollgates = [RandomWalk,ShortSighted,AttackFalse,AttackFalse,MiniMax];
@@ -134,7 +220,7 @@ package
 		 * @param event
 		 *
 		 */		
-		protected function creationCompleteHandler(event:FlexEvent):void
+		protected function creationCompleteHandler():void
 		{
 			//			//create chess gaskets.
 			//			//create chess piece
@@ -144,7 +230,7 @@ package
 			//			//init data struct.@see ChessPieceModel dump info.
 			//			this.dumpFootSprint();
 			//Add version control context menu.
-			VersionController.getInstance(this);
+//			VersionController.getInstance(this);
 		}
 		//  application1_applicationCompleteHandler
 		/**
@@ -153,18 +239,18 @@ package
 		 * @param event
 		 *
 		 */		
-		protected function applicationCompleteHandler(event:FlexEvent):void
+		protected function applicationCompleteHandler():void
 		{
 			//GameManager start.
-			GameConfig.gameStateManager.start();
-			//
-			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
-			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());
-			LOG.info("allPieces:{0}", ChessPiecesModel.getInstance().allPieces.dump());
-			//
-			LOG.info("allPieces rotate90:{0}", ChessPiecesModel.getInstance().allPieces.rotate90().dump());
-			LOG.info("allPieces rotate90.bitCount:{0}", ChessPiecesModel.getInstance().allPieces.bitCount);
-			LOG.info("allPieces rotate90.cellCount:{0}", ChessPiecesModel.getInstance().allPieces.cellCount);
+//			GameConfig.gameStateManager.start();
+//			//
+//			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
+//			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());
+//			LOG.info("allPieces:{0}", ChessPiecesModel.getInstance().allPieces.dump());
+//			//
+//			LOG.info("allPieces rotate90:{0}", ChessPiecesModel.getInstance().allPieces.rotate90().dump());
+//			LOG.info("allPieces rotate90.bitCount:{0}", ChessPiecesModel.getInstance().allPieces.bitCount);
+//			LOG.info("allPieces rotate90.cellCount:{0}", ChessPiecesModel.getInstance().allPieces.cellCount);
 		}
 		//--------------------------------------------------------------------------
 		//
