@@ -1,6 +1,6 @@
 package com.lookbackon.AI.steeringBehavior.behaviors
 {
-	import com.lookbackon.AI.steeringBehavior.VehicleSample;
+	import com.lookbackon.AI.steeringBehavior.Vehicle;
 
 	/**
 	 * 
@@ -9,6 +9,6 @@ package com.lookbackon.AI.steeringBehavior.behaviors
 	 */
 	public interface IEvade
 	{
-		function evade(target:VehicleSample):void;
+		function evade(target:Vehicle):void;
 	}
 }

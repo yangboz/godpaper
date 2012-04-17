@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="new_flexunit4_testcase_class" deleted="false" description="Newly created FlexUnit4 TestCase Class file" enabled="true" id="com.adobe.flexbuilder.flexunit.filetemplates.new_flexunit4_testcase_class" name="FlexUnit4 TestCase Class">/**
+ *  GODPAPER Confidential,Copyright ${year}. All rights reserved.
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining
+ *  a copy of this software and associated documentation files (the "Software"),
+ *  to deal in the Software without restriction, including without limitation
+ *  the rights to use, copy, modify, merge, publish, distribute, sub-license,
+ *  and/or sell copies of the Software, and to permit persons to whom the
+ *  Software is furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included
+ *  in all copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ *  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ *  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ *  IN THE SOFTWARE.
+ */
+${package_declaration}
+{
+	//--------------------------------------------------------------------------
+    //
+    //  Imports
+    //
+    //--------------------------------------------------------------------------
+    ${import_declaration}
+    /**
+   	* ${file_name} class.   	
+   	* @author ${user}
+   	* @langVersion 3.0
+   	* @playerVersion 11.2+
+   	* @airVersion 3.2+
+   	* Created ${date} ${time}
+   	*/
+    ${class_declaration}
+    {		
+        [Before]
+	    public function setUp():void
+        {
+	    }
+        
+        [After]
+        public function tearDown():void
+        {
+        }
+        
+        [BeforeClass]
+	    public static function setUpBeforeClass():void
+	    {
+        }
+        
+        [AfterClass]
+	    public static function tearDownAfterClass():void
+	    {
+        }
+        
+        ${test_method_stubs}
+     }
+}</template></templates>

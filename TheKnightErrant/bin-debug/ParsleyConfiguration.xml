@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects 
+    xmlns="http://www.spicefactory.org/parsley"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.spicefactory.org/parsley 
+        http://www.spicefactory.org/parsley/schema/2.3/parsley-core.xsd"
+    >
+     <!-- Objects managed by Parsley -->
+<!--  	<object type="models.ApplicationModel" /> -->
+<!--  	<object type="controllers.ApplicationController" /> -->
+     
+<!-- 	<object type="views.InputView" /> -->
+<!-- 	<object type="views.OutputView"  />  -->
+<!-- 	<log:factory id="logFactory"> -->
+<!--         <log:appender ref="appender" threshold="trace"/> -->
+<!--         <log:logger name="org.spicefactory" level="warn"/> -->
+<!--         <log:logger name="com.bookstore" level="debug"/> -->
+<!--     </log:factory> -->
+    
+<!--     <object id="appender" type="org.spicefactory.lib.flash.logging.impl.TraceAppender"/> -->
+</objects>
