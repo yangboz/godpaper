@@ -8,9 +8,9 @@ package com.lookbackon.AI.searching
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
-	import com.godpaper.as3.utils.LogUtil;
-
-	import mx.logging.ILogger;
+	
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 
 	/**
 	 * About ShortSightedAI(鼠目寸光)</br>
@@ -32,7 +32,7 @@ package com.lookbackon.AI.searching
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(ShortSighted);
+		private static const LOG:Logger = LogContext.getLogger(ShortSighted);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

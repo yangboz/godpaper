@@ -46,12 +46,10 @@ package
 	import org.spicefactory.parsley.flash.logging.FlashLoggingXmlSupport;
 	import org.spicefactory.parsley.xml.XmlContextBuilder;
 	
-	import pl.mateuszmackowiak.visuals.CursorManager;
-	
 	import starling.core.Starling;
 
 	/**
-	 * Main.as class.   	
+	 * ApplicationBase.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
@@ -71,7 +69,8 @@ package
 		//Default mochi dashboard hint.
 		public var _mochiads_game_id:String = "c7278f158e32f9a0";
 		//For children dynamic factory config.
-		[Bindable]protected var pcFactory:Class = PieceConfig.factory;
+//		[Bindable]protected var pcFactory:Class = PieceConfig.factory;
+		protected var pcFactory:Class = PieceConfig.factory;
 		//
 		public var pluginUIComponent:PluginUIComponent;
 		//
@@ -179,8 +178,6 @@ package
 				Starling.current.nativeStage.frameRate = 30;
 			//
 			applicationCompleteHandler();
-			//
-			CursorManager.setBusyCursor();
 		}
 		//--------------------------------------------------------------------------
 		//

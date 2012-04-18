@@ -1,6 +1,6 @@
 package com.lookbackon.ds.aStar
 {
-	import mx.utils.ObjectUtil;
+//	import mx.utils.ObjectUtil;
 
 	//--------------------------------------------------------------------------
 	//
@@ -63,7 +63,8 @@ package com.lookbackon.ds.aStar
 		//--------------------------------------------------------------------------
 		public function toString():String
 		{
-			return ObjectUtil.toString(this);
+//			return ObjectUtil.toString(this);
+			return "AStarNode->x:"+this.x+",y:"+this.y;
 		}
 		//--------------------------------------------------------------------------
 		//

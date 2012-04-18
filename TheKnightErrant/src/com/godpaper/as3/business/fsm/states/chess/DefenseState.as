@@ -2,7 +2,7 @@ package com.godpaper.as3.business.fsm.states.chess
 {
 	import com.lookbackon.AI.FSM.states.StateBase;
 	import com.godpaper.as3.business.fsm.ChessAgent;
-	import com.godpaper.as3.views.components.ChessPiece;
+	import com.godpaper.starling.views.components.ChessPiece;
 	
 	/**
 	 * Defense state try to keep "marshal" safty.</br>

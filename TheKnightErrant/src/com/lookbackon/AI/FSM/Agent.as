@@ -1,7 +1,7 @@
 package com.lookbackon.AI.FSM
 {
-	import mx.core.IUIComponent;
-	import mx.core.IVisualElement;
+//	import mx.core.IVisualElement;
+	import com.godpaper.as3.core.IVisualElement;
 
 	/**
 	 * The agent uses an instance of the FiniteStateMachine class the handle its AI.</br>

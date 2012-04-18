@@ -15,15 +15,13 @@ package com.godpaper.as3.business.managers
 	import com.godpaper.as3.tasks.CreateChessPieceTask;
 	import com.godpaper.as3.tasks.CreateChessVoTask;
 	import com.godpaper.as3.utils.BitFlagUtil;
-	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.MiniMax;
 	import com.lookbackon.AI.searching.RandomWalk;
 	import com.lookbackon.AI.searching.ShortSighted;
 	
-	import mx.core.FlexGlobals;
-	import mx.core.IVisualElement;
-	import mx.logging.ILogger;
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 
 	/**
 	 * A player manager class to maintain turn-based game.
@@ -50,7 +48,7 @@ package com.godpaper.as3.business.managers
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private const LOG:ILogger=LogUtil.getLogger(GameStateManagerDefault);
+		private const LOG:Logger=LogContext.getLogger(GameStateManagerDefault);
 		//game phase
 		//Masks for bits inside the 'flags' var
 		//which store the state of Boolean game phase properties.
@@ -144,7 +142,8 @@ package com.godpaper.as3.business.managers
 		{
 			//TODO:
 			//agent initialization.
-			agent=new GameAgent("CCJGameAgent", FlexGlobals.topLevelApplication as IVisualElement);
+//			agent=new GameAgent("CCJGameAgent", FlexGlobals.topLevelApplication as IVisualElement);
+			agent=new GameAgent("CCJGameAgent", null);
 			//logic condition who's turn now at first.
 			if (GameConfig.turnFlag == DefaultConstants.FLAG_BLUE)
 			{
@@ -175,11 +174,11 @@ package com.godpaper.as3.business.managers
 			//reset game step number.
 			chessBoardModel.stepNumber=0;
 			//clear board,chess pieces
-			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
-			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());
-			FlexGlobals.topLevelApplication.cleanUpSequenceTask.start();
+//			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
+//			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());
+//			FlexGlobals.topLevelApplication.cleanUpSequenceTask.start();
 			//dump the end of game messages.
-			FlexGlobals.topLevelApplication.dumpFootSprint();
+//			FlexGlobals.topLevelApplication.dumpFootSprint();
 			//
 			//put down chess pieces again
 			//no more create chess gasket again.
@@ -189,7 +188,7 @@ package com.godpaper.as3.business.managers
 			startUpTask.addChild(new CreateChessVoTask(PieceConfig.factory));
 			startUpTask.start();
 			//
-			FlexGlobals.topLevelApplication.dumpFootSprint();
+//			FlexGlobals.topLevelApplication.dumpFootSprint();
 			//
 			start();
 		}

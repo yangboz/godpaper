@@ -28,10 +28,17 @@ package
 	//--------------------------------------------------------------------------
 	import assets.DefaultEmbededAssets;
 	
+	import com.emibap.textureAtlas.DynamicAtlas;
+	import com.godpaper.as3.utils.MathUtil;
+	import com.godpaper.starling.views.components.ChessPiece;
+	
+	import pl.mateuszmackowiak.visuals.CursorManager;
+	
 	import starling.display.Image;
+	import starling.display.MovieClip;
 	import starling.display.Sprite;
-	
-	
+	import starling.textures.TextureAtlas;
+
 	/**
 	 * Game.as class.   	
 	 * @author yangboz
@@ -72,12 +79,27 @@ package
 		public function Game()
 		{
 			super();
+			//
+//			CursorManager.setBusyCursor();
 			// sound initialization takes a moment, so we prepare them here
 			DefaultEmbededAssets.prepareSounds();
 			DefaultEmbededAssets.loadBitmapFonts();
-			//
+			//VisualElement test.
 			var bg:Image = new Image(DefaultEmbededAssets.getTexture("Background"));
 			addChild(bg);
+			//
+			for(var i:int=0;i<100;i++)
+			{
+				var cp:ChessPiece = new ChessPiece(DefaultEmbededAssets.getTexture("RED_MARSHAL"));
+				addChild(cp);
+				cp.x = MathUtil.transactRandomNumberInRange(10,300);
+				cp.y = MathUtil.transactRandomNumberInRange(10,460);
+			}
+			//
+//			var redMarshallMC:Class = new DefaultEmbededAssets.RED_MARSHAL();
+//			var atlas:TextureAtlas = DynamicAtlas.fromMovieClipContainer(redMarshallMC, .5, 0, true, true);
+//			var redMarshall:MovieClip = new MovieClip(atlas.getTextures("boy"), 60);
+//			addChild(redMarshall);
 		}     	
 		//--------------------------------------------------------------------------
 		//

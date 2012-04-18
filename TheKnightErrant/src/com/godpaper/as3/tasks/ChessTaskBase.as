@@ -8,8 +8,6 @@ package com.godpaper.as3.tasks
 	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.as3.configs.PieceConfig;
 	
-	import mx.core.IUIComponent;
-
 
 	/**
 	 * Abstract the ChessTask struct including the assign/assignee and trackment.

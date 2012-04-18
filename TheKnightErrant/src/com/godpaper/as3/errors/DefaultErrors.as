@@ -1,7 +1,7 @@
 package com.godpaper.as3.errors
 {
-	import mx.utils.UIDUtil;
-
+//	import mx.utils.UIDUtil;
+	import com.godpaper.as3.utils.UIDUtil;
 	/**
 	 *
 	 * Customize errors occured at Default.

@@ -1,9 +1,9 @@
 package com.lookbackon.AI.FSM
 {
 	import com.lookbackon.AI.FSM.states.IState;
-	import com.godpaper.as3.utils.LogUtil;
 	
-	import mx.logging.ILogger;
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 	
 	/**
 	 * The FiniteStateMachine is responsible for
@@ -22,7 +22,8 @@ package com.lookbackon.AI.FSM
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(FiniteStateMachine);
+		private static const LOG:Logger = LogContext.getLogger(FiniteStateMachine);
+		//
 		private var _globalState:IState;//For globally track monster's state.
 		private var _currentState:IState;
 		private var _previousState:IState;

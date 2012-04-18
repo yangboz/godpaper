@@ -1,6 +1,6 @@
 package com.lookbackon.ds.graph
 {
-	import mx.utils.ObjectUtil;
+//	import mx.utils.ObjectUtil;
 
 	//--------------------------------------------------------------------------
 	//
@@ -69,7 +69,8 @@ package com.lookbackon.ds.graph
 		//
 		public function toString():String
 		{
-			return ObjectUtil.toString(this);
+//			return ObjectUtil.toString(this);
+			return "GraphEdge->src:"+this.src+",dst:"+this.dst;
 		}
 		//--------------------------------------------------------------------------
 		//

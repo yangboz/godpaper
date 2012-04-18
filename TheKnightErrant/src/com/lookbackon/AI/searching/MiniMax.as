@@ -10,9 +10,8 @@ package com.lookbackon.AI.searching
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.PositionVO;
-	import com.godpaper.as3.utils.LogUtil;
-	
-	import mx.logging.ILogger;
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 
 	/**
 	 * <b>MiniMax.as class.</b></br>
@@ -56,7 +55,7 @@ package com.lookbackon.AI.searching
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(MiniMax);
+		private static const LOG:Logger = LogContext.getLogger(MiniMax);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

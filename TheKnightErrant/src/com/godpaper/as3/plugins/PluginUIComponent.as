@@ -5,15 +5,11 @@ package com.godpaper.as3.plugins
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import flash.display.Sprite;
 	import flash.display.MovieClip;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
-	
-	import mx.events.FlexEvent;
-	
-	import starling.display.Sprite;
-	import starling.events.Event;
-
+	import flash.events.Event;	
 	/**
 	 * Commonly for custom define the plugin provider.
 	 * Increasing the communication points between the host and the plug-in by adding more method, property, and event signatures to the IPlug interface. 

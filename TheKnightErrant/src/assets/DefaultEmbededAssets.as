@@ -67,66 +67,69 @@ package assets
 		//
 		// Bitmaps
 
-		[Embed(source="/media/textures/background.png")]
+		[Embed(source="/assets/media/textures/background.png")]
 		private static const Background:Class;
 
-		[Embed(source="/media/textures/starling_sheet.png")]
+		[Embed(source="/assets/media/textures/starling_sheet.png")]
 		private static const StarlingSheet:Class;
 
-		[Embed(source="/media/textures/flash_egg.png")]
+		[Embed(source="/assets/media/textures/flash_egg.png")]
 		private static const FlashEgg:Class;
 
-		[Embed(source="/media/textures/starling_front.png")]
+		[Embed(source="/assets/media/textures/starling_front.png")]
 		private static const StarlingFront:Class;
 
-		[Embed(source="/media/textures/logo.png")]
+		[Embed(source="/assets/media/textures/logo.png")]
 		private static const Logo:Class;
 
-		[Embed(source="/media/textures/button_back.png")]
+		[Embed(source="/assets/media/textures/button_back.png")]
 		private static const ButtonBack:Class;
 
-		[Embed(source="/media/textures/button_big.png")]
+		[Embed(source="/assets/media/textures/button_big.png")]
 		private static const ButtonBig:Class;
 
-		[Embed(source="/media/textures/button_normal.png")]
+		[Embed(source="/assets/media/textures/button_normal.png")]
 		private static const ButtonNormal:Class;
 
-		[Embed(source="/media/textures/button_square.png")]
+		[Embed(source="/assets/media/textures/button_square.png")]
 		private static const ButtonSquare:Class;
 
-		[Embed(source="/media/textures/benchmark_object.png")]
+		[Embed(source="/assets/media/textures/benchmark_object.png")]
 		private static const BenchmarkObject:Class;
 
 		// Compressed textures
 
-		[Embed(source="/media/textures/compressed_texture.atf", mimeType="application/octet-stream")]
+		[Embed(source="/assets/media/textures/compressed_texture.atf", mimeType="application/octet-stream")]
 		private static const CompressedTexture:Class;
 
 		// Fonts
 
 		// The 'embedAsCFF'-part IS REQUIRED!!!!
-		[Embed(source="/media/fonts/Ubuntu-R.ttf", embedAsCFF="false", fontFamily="Ubuntu")]
+		[Embed(source="/assets/media/fonts/Ubuntu-R.ttf", embedAsCFF="false", fontFamily="Ubuntu")]
 		private static const UbuntuRegular:Class;
 
-		[Embed(source="/media/fonts/desyrel.fnt", mimeType="application/octet-stream")]
+		[Embed(source="/assets/media/fonts/desyrel.fnt", mimeType="application/octet-stream")]
 		private static const DesyrelXml:Class;
 
-		[Embed(source="/media/fonts/desyrel.png")]
+		[Embed(source="/assets/media/fonts/desyrel.png")]
 		private static const DesyrelTexture:Class;
 
 		// Texture Atlas
 
-		[Embed(source="/media/textures/atlas.xml", mimeType="application/octet-stream")]
+		[Embed(source="/assets/media/textures/atlas.xml", mimeType="application/octet-stream")]
 		private static const AtlasXml:Class;
 
-		[Embed(source="/media/textures/atlas.png")]
+		[Embed(source="/assets/media/textures/atlas.png")]
 		private static const AtlasTexture:Class;
 
 		// Sounds
 
-		[Embed(source="/media/audio/wing_flap.mp3")]
+		[Embed(source="/assets/media/audio/wing_flap.mp3")]
 		private static const StepSound:Class;
-
+		
+		//for testing
+		[Embed(source="/assets/swfs/RED_MARSHAL.png")]
+		public static const RED_MARSHAL:Class;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

@@ -5,11 +5,13 @@ package com.godpaper.as3.business.fsm
 	import com.godpaper.as3.business.fsm.states.chess.NascenceState;
 	import com.godpaper.as3.business.fsm.states.chess.RenascenceState;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.AI.FSM.Agent;
-
-	import mx.core.IVisualElement;
-	import mx.logging.ILogger;
+	
+//	import mx.core.IVisualElement;
+	import com.godpaper.as3.core.IVisualElement;
+	
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 
 	/**
 	 * ChessAgent to agently maintain all of chess state.
@@ -30,8 +32,8 @@ package com.godpaper.as3.business.fsm
 		public var renascenceState:RenascenceState;
 		//----------------------------------
 		//  CONSTANTS
-		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(ChessAgent);
+		//----------------------------------]
+		private static const LOG:Logger = LogContext.getLogger(ChessAgent);
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor

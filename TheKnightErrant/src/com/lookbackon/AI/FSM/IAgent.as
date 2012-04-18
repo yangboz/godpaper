@@ -1,6 +1,7 @@
 package com.lookbackon.AI.FSM
 {
-	import mx.core.IVisualElement;
+//	import mx.core.IVisualElement;
+	import com.godpaper.as3.core.IVisualElement;
 
 	//--------------------------------------------------------------------------
 	//

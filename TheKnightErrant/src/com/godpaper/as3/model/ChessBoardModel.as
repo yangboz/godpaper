@@ -4,7 +4,7 @@ package com.godpaper.as3.model
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.vos.PositionVO;
-	import com.godpaper.as3.views.components.ChessPiece;
+	import com.godpaper.starling.views.components.ChessPiece;
 	import com.lookbackon.ds.AStarNodeBoard;
 	import com.lookbackon.ds.GraphBoard;
 	import com.lookbackon.ds.NumberBoard;
@@ -48,7 +48,7 @@ package com.godpaper.as3.model
 		//----------------------------------
 		//  stepNumber
 		//----------------------------------
-		[Bindable]
+//		[Bindable]
 		public function get stepNumber():Number
 		{
 			return _stepNumber;

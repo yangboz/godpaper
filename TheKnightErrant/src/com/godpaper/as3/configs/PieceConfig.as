@@ -2,7 +2,7 @@ package com.godpaper.as3.configs
 {
 	import com.godpaper.as3.core.IPiecesBox;
 	import com.godpaper.as3.model.vos.ConductVO;
-	import com.godpaper.as3.views.components.PiecesBox;
+	import com.godpaper.starling.views.components.PiecesBox;
 
 	//--------------------------------------------------------------------------
 	//

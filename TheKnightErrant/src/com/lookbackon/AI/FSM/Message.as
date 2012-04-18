@@ -1,6 +1,7 @@
 package com.lookbackon.AI.FSM
 {
-	import mx.utils.UIDUtil;
+//	import mx.utils.UIDUtil;
+	import com.godpaper.as3.utils.UIDUtil;
 
 	//--------------------------------------------------------------------------
 	//

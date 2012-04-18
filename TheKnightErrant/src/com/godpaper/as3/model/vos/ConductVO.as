@@ -4,15 +4,15 @@ package com.godpaper.as3.model.vos
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.as3.views.components.ChessGasket;
-	import com.godpaper.as3.views.components.ChessPiece;
+	import com.godpaper.starling.views.components.ChessGasket;
+	import com.godpaper.starling.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
-
+	
 	import flash.events.EventDispatcher;
 	import flash.geom.Point;
-
-	import mx.logging.ILogger;
+	
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 
 	/**
 	 * This conduct entity model with basic information as follows:</p>
@@ -46,7 +46,7 @@ package com.godpaper.as3.model.vos
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(ConductVO);
+		private static const LOG:Logger = LogContext.getLogger(ConductVO);
 		//--------------------------------------------------------------------------
 		//
 		//  Properties
@@ -98,10 +98,10 @@ package com.godpaper.as3.model.vos
 			//
 			var cGasket:ChessGasket = 
 				ChessGasketsModel.getInstance().gaskets.gett(value.x,value.y) as ChessGasket;
-			if(cGasket.numElements>=1)
+			if(cGasket.numChildren>=1)
 			{
 				//TODO:chess piece eat off.
-				var removedPiece:ChessPiece = cGasket.getElementAt(0) as ChessPiece;
+				var removedPiece:ChessPiece = cGasket.getChildAt(0) as ChessPiece;
 				var removedIndex:int = GameConfig.chessPieceManager.calculatePieceIndex(removedPiece);
 				LOG.debug("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
 				//set eat off value.

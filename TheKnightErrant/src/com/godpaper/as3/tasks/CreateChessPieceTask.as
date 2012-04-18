@@ -11,13 +11,13 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
-	import com.godpaper.as3.views.components.ChessGasket;
-
+	import com.godpaper.starling.views.components.ChessGasket;
+	
 	import flash.geom.Point;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
-
-	import mx.core.FlexGlobals;
+	
+	import starling.display.DisplayObject;
 
 	/**
 	 * ChessTaskBase.as class.
@@ -91,8 +91,8 @@ package com.godpaper.as3.tasks
 						ecGasket.chessPiece = iChessPiece;
 //						ecGasket.addElement( iChessPiece );
 						//
-						iChessPiece.x = 0;
-						iChessPiece.y = 0;
+						(iChessPiece as DisplayObject).x = 0;
+						(iChessPiece as DisplayObject).y = 0;
 							//
 					}
 				}

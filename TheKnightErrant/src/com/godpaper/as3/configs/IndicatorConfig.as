@@ -20,15 +20,15 @@ package com.godpaper.as3.configs
 		//
 		//--------------------------------------------------------------------------
 		//default
-		[Bindable]public static var readOut:Boolean=false;
+		public static var readOut:Boolean=false;
 		//about chess check(chinese chess jam..)
-		[Bindable]public static var check:Boolean=false;
+		public static var check:Boolean=false;
 		//about plugins(mochi..)
-		[Bindable]public static var submitScore:Boolean=false;
+		public static var submitScore:Boolean=false;
 		//about airport(utility,extreme,etc..)
-		[Bindable]public static var airportUtility:Boolean=false;
+		public static var airportUtility:Boolean=false;
 		//about popup the computer win title window
-		[Bindable]public static var outcome:Boolean=false;
+		public static var outcome:Boolean=false;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
