@@ -2,7 +2,7 @@ package com.godpaper.as3.plugins
 {
 	import flash.display.Stage;
 	
-	import mx.core.UIComponent;
+//	import mx.core.UIComponent;
 
 	//--------------------------------------------------------------------------
 	//

@@ -6,13 +6,13 @@ package com.godpaper.as3.plugins
 	//
 	//--------------------------------------------------------------------------
 	import flash.display.MovieClip;
-	import flash.events.Event;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	
-	import mx.core.FlexGlobals;
-	import mx.core.UIComponent;
 	import mx.events.FlexEvent;
+	
+	import starling.display.Sprite;
+	import starling.events.Event;
 
 	/**
 	 * Commonly for custom define the plugin provider.
@@ -25,7 +25,7 @@ package com.godpaper.as3.plugins
 	 * @playerVersion 9.0
 	 * Created Apr 21, 2011 10:06:57 PM
 	 */   	 
-	public class PluginUIComponent extends UIComponent
+	public class PluginUIComponent extends Sprite
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -78,7 +78,7 @@ package com.godpaper.as3.plugins
 		{
 			super();
 			//
-			this.addEventListener(FlexEvent.CREATION_COMPLETE,creationCompleteHandler);
+			this.addEventListener(Event.COMPLETE,creationCompleteHandler);
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -97,14 +97,14 @@ package com.godpaper.as3.plugins
 		 * @param event
 		 *
 		 */		
-		protected function creationCompleteHandler(event:FlexEvent):void
+		protected function creationCompleteHandler(event:Event):void
 		{
 			//construct plugin movie played stage.
-			FlexGlobals.topLevelApplication.pluginStage = new MovieClip();
+			ApplicationBase(this.root).pluginStage = new MovieClip();
 			//
-			this.addChild(FlexGlobals.topLevelApplication.pluginStage);
+			this.addChild(ApplicationBase(this.root).pluginStage);
 			//
-			FlexGlobals.topLevelApplication.pluginStage.addEventListener(Event.ADDED_TO_STAGE,pluginStageClipOnStage);
+			ApplicationBase(this.root).pluginStage.addEventListener(Event.ADDED_TO_STAGE,pluginStageClipOnStage);
 		}
 		
 		//--------------------------------------------------------------------------

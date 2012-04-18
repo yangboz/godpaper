@@ -76,8 +76,6 @@ package com.godpaper.starling.views.components
 		public function RoundButton(upState:Texture, text:String="", downState:Texture=null)
 		{
 			super(upState, text, downState);
-			//
-			this.addEventListener(TouchEvent.TOUCH,touchHandler);
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -122,26 +120,6 @@ package com.godpaper.starling.views.components
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function touchHandler(event:TouchEvent):void
-		{
-			const touch:Touch = event.getTouch(this);
-			//
-			if(touch.phase == TouchPhase.BEGAN)
-			{
-				this.x = touch.globalX;
-				this.y = touch.globalY;
-			}
-			else if(touch.phase == TouchPhase.MOVED)
-			{
-				this.x = touch.globalX;
-				this.y = touch.globalY;
-			}
-			else if(touch.phase == TouchPhase.ENDED)
-			{
-				this.x = touch.globalX;
-				this.y = touch.globalY;
-			}
-		}
 	}
 	
 }

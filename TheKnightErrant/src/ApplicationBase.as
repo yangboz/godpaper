@@ -26,6 +26,12 @@ package
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.configs.PieceConfig;
+	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.plugins.PluginUIComponent;
+	
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
@@ -53,18 +59,27 @@ package
 	 * Created Apr 12, 2012 9:38:56 AM
 	 */   	 
 	[SWF(frameRate="60", width="320", height="480", backgroundColor="0x666666")]//Default swf metadata.
-	public class Main extends Sprite
+	public class ApplicationBase extends Sprite
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
+		//Plugin stage support.
+		public var pluginStage:MovieClip;
+		//Default mochi dashboard hint.
+		public var _mochiads_game_id:String = "c7278f158e32f9a0";
+		//For children dynamic factory config.
+		[Bindable]protected var pcFactory:Class = PieceConfig.factory;
+		//
+		public var pluginUIComponent:PluginUIComponent;
+		//
 		private var mStarling:Starling;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(Main);
+		private static const LOG:Logger = LogContext.getLogger(ApplicationBase);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -89,7 +104,7 @@ package
 		 * Application bootstrap class.
 		 * 
 		 */
-		public function Main()
+		public function ApplicationBase()
 		{
 			super();
 			LOG.debug("preinitializeHandler@Constructor");
@@ -242,13 +257,13 @@ package
 		protected function applicationCompleteHandler():void
 		{
 			//GameManager start.
-//			GameConfig.gameStateManager.start();
-//			//
-//			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
-//			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());
-//			LOG.info("allPieces:{0}", ChessPiecesModel.getInstance().allPieces.dump());
-//			//
-//			LOG.info("allPieces rotate90:{0}", ChessPiecesModel.getInstance().allPieces.rotate90().dump());
+			GameConfig.gameStateManager.start();
+			//
+			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
+			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());
+			LOG.info("allPieces:{0}", ChessPiecesModel.getInstance().allPieces.dump());
+			//
+			LOG.info("allPieces rotate90:{0}", ChessPiecesModel.getInstance().allPieces.rotate90().dump());
 //			LOG.info("allPieces rotate90.bitCount:{0}", ChessPiecesModel.getInstance().allPieces.bitCount);
 //			LOG.info("allPieces rotate90.cellCount:{0}", ChessPiecesModel.getInstance().allPieces.cellCount);
 		}

@@ -26,6 +26,9 @@ package
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import assets.DefaultEmbededAssets;
+	
+	import starling.display.Image;
 	import starling.display.Sprite;
 	
 	
@@ -68,8 +71,13 @@ package
 		//--------------------------------------------------------------------------
 		public function Game()
 		{
-			//TODO: implement function
 			super();
+			// sound initialization takes a moment, so we prepare them here
+			DefaultEmbededAssets.prepareSounds();
+			DefaultEmbededAssets.loadBitmapFonts();
+			//
+			var bg:Image = new Image(DefaultEmbededAssets.getTexture("Background"));
+			addChild(bg);
 		}     	
 		//--------------------------------------------------------------------------
 		//

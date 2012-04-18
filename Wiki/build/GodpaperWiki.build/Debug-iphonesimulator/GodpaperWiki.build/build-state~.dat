@@ -1,0 +1,262 @@
+TGodpaperWiki
+v7
+r0
+t339860975.409443
+cCheck dependencies
+cProcessInfoPlistFile /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/Info.plist GodpaperWiki-Info.plist
+cCompileXIB /Users/smartkit/Documents/GitHub/GodpaperWiki/MainWindow.xib
+cCompileXIB /Users/smartkit/Documents/GitHub/GodpaperWiki/RootViewController.xib
+cProcessPCH /var/folders/Tu/TuU8QfuYHKqVLZe66Sxk1U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GodpaperWiki_Prefix-gjrfqwccsnduikfnjlskdomoabhj/GodpaperWiki_Prefix.pch.gch GodpaperWiki_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/main.o /Users/smartkit/Documents/GitHub/GodpaperWiki/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/GodpaperWikiAppDelegate.o /Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/GodpaperWikiAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/RootViewController.o /Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/RootViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cLd /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/GodpaperWiki normal i386
+cGenerateDSYMFile /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app.dSYM /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/GodpaperWiki
+cTouch /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk
+c000000004D5C9B4E0000000000000110
+t1297914702
+s272
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004D54CFFA00000000002999B0
+t1297403898
+s2726320
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004D54CFE5000000000029DA70
+t1297403877
+s2742896
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004D54CFB80000000000001466
+t1297403832
+s5222
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004D5615B40000000000000AA1
+t1297487284
+s2721
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004D5616030000000000766870
+t1297487363
+s7759984
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/usr/include/Availability.h
+c000000004D4F7A2B0000000000001B19
+t1297054251
+s6937
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/GodpaperWikiAppDelegate.h
+c000000004E91A50F00000000000001E1
+t1318167823
+s481
+i<UIKit/UIKit.h>
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/GodpaperWikiAppDelegate.m
+c000000004E91A50F0000000000000AD2
+t1318167823
+s2770
+i"GodpaperWikiAppDelegate.h"
+i"RootViewController.h"
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/RootViewController.h
+c000000004E91A557000000000000010F
+t1318167895
+s271
+i<UIKit/UIKit.h>
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/RootViewController.m
+c000000004E91A66C00000000000012DC
+t1318168172
+s4828
+i"RootViewController.h"
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/GodpaperWiki_Prefix.pch
+c000000004E91A50F000000000000014A
+t1318167823
+s330
+i<Availability.h>
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/MainWindow.xib
+c000000004E91A50F0000000000006008
+t1318167823
+s24584
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/RootViewController.xib
+c000000004E91A50F0000000000004457
+t1318167823
+s17495
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app
+t1318168175
+s238
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app.dSYM
+t1318168175
+s102
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/GodpaperWiki
+t1318168175
+s18556
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/Info.plist
+t1318168173
+s611
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/MainWindow.nib
+t1318168174
+s2461
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/PkgInfo
+t1318168173
+s8
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/RootViewController.nib
+t1318168174
+s1518
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/GodpaperWiki.LinkFileList
+c000000004E91A66D00000000000001C2
+t1318168173
+s450
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/GodpaperWikiAppDelegate.o
+t1318168175
+s53304
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/RootViewController.o
+t1318168175
+s44756
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/main.o
+t1318168175
+s6324
+
+N/Users/smartkit/Documents/GitHub/GodpaperWiki/main.m
+c000000004E91A50F000000000000016D
+t1318167823
+s365
+i<UIKit/UIKit.h>
+
+N/var/folders/Tu/TuU8QfuYHKqVLZe66Sxk1U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GodpaperWiki_Prefix-gjrfqwccsnduikfnjlskdomoabhj/GodpaperWiki_Prefix.pch.gch
+t1318168174
+s15814064
+
+NGodpaperWiki-Info.plist
+c000000004E91A50F000000000000038D
+t1318167823
+s909
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies339860973#339860973#0(0"0(0#1#0"27866456492998768#0"0#
+
+CCompileC build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/GodpaperWikiAppDelegate.o /Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/GodpaperWikiAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s339860975.011641
+e339860975.133422
+r1
+xCompileC
+xbuild/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/GodpaperWikiAppDelegate.o
+x/Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/GodpaperWikiAppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@87"Compile /Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/GodpaperWikiAppDelegate.m339860975#339860975#0(0"0(0#0#79"/Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/GodpaperWikiAppDelegate.m8612126528#2137"    cd /Users/smartkit/Documents/GitHub/GodpaperWiki    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300 -iquote /Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-generated-files.hmap -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-own-target-headers.hmap -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-all-target-headers.hmap -iquote /Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-project-headers.hmap -F/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/include -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/DerivedSources/i386 -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/DerivedSources -include /var/folders/Tu/TuU8QfuYHKqVLZe66Sxk1U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GodpaperWiki_Prefix-gjrfqwccsnduikfnjlskdomoabhj/GodpaperWiki_Prefix.pch -c /Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/GodpaperWikiAppDelegate.m -o /Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/GodpaperWikiAppDelegate.o0#
+
+CCompileC build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/RootViewController.o /Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/RootViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s339860975.012336
+e339860975.130720
+r1
+xCompileC
+xbuild/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/RootViewController.o
+x/Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/RootViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@82"Compile /Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/RootViewController.m339860975#339860975#0(0"0(0#0#74"/Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/RootViewController.m8612931680#2127"    cd /Users/smartkit/Documents/GitHub/GodpaperWiki    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300 -iquote /Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-generated-files.hmap -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-own-target-headers.hmap -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-all-target-headers.hmap -iquote /Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-project-headers.hmap -F/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/include -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/DerivedSources/i386 -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/DerivedSources -include /var/folders/Tu/TuU8QfuYHKqVLZe66Sxk1U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GodpaperWiki_Prefix-gjrfqwccsnduikfnjlskdomoabhj/GodpaperWiki_Prefix.pch -c /Users/smartkit/Documents/GitHub/GodpaperWiki/Classes/RootViewController.m -o /Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/RootViewController.o0#
+
+CCompileC build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/main.o /Users/smartkit/Documents/GitHub/GodpaperWiki/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s339860975.010846
+e339860975.115102
+r1
+xCompileC
+xbuild/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/main.o
+x/Users/smartkit/Documents/GitHub/GodpaperWiki/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@60"Compile /Users/smartkit/Documents/GitHub/GodpaperWiki/main.m339860975#339860975#0(0"0(0#0#52"/Users/smartkit/Documents/GitHub/GodpaperWiki/main.m8611562016#2091"    cd /Users/smartkit/Documents/GitHub/GodpaperWiki    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300 -iquote /Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-generated-files.hmap -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-own-target-headers.hmap -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-all-target-headers.hmap -iquote /Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-project-headers.hmap -F/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/include -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/DerivedSources/i386 -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/DerivedSources -include /var/folders/Tu/TuU8QfuYHKqVLZe66Sxk1U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GodpaperWiki_Prefix-gjrfqwccsnduikfnjlskdomoabhj/GodpaperWiki_Prefix.pch -c /Users/smartkit/Documents/GitHub/GodpaperWiki/main.m -o /Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/main.o0#
+
+CCompileXIB /Users/smartkit/Documents/GitHub/GodpaperWiki/MainWindow.xib
+s339860973.814790
+e339860974.200607
+r1
+xCompileXIB
+x/Users/smartkit/Documents/GitHub/GodpaperWiki/MainWindow.xib
+lSLF07#2@25"CompileXIB MainWindow.xib339860973#339860974#0(0"0(0#0#60"/Users/smartkit/Documents/GitHub/GodpaperWiki/MainWindow.xib8611150784#596"    cd /Users/smartkit/Documents/GitHub/GodpaperWiki    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.3    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/MainWindow.nib /Users/smartkit/Documents/GitHub/GodpaperWiki/MainWindow.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk0#
+
+CCompileXIB /Users/smartkit/Documents/GitHub/GodpaperWiki/RootViewController.xib
+s339860973.816158
+e339860974.205387
+r1
+xCompileXIB
+x/Users/smartkit/Documents/GitHub/GodpaperWiki/RootViewController.xib
+lSLF07#2@33"CompileXIB RootViewController.xib339860973#339860974#0(0"0(0#0#68"/Users/smartkit/Documents/GitHub/GodpaperWiki/RootViewController.xib8610468288#612"    cd /Users/smartkit/Documents/GitHub/GodpaperWiki    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.3    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/RootViewController.nib /Users/smartkit/Documents/GitHub/GodpaperWiki/RootViewController.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk0#
+
+CGenerateDSYMFile /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app.dSYM /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/GodpaperWiki
+s339860975.369550
+e339860975.407010
+r1
+xGenerateDSYMFile
+x/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app.dSYM
+x/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/GodpaperWiki
+lSLF07#2@124"GenerateDSYMFile build/Debug-iphonesimulator/GodpaperWiki.app.dSYM build/Debug-iphonesimulator/GodpaperWiki.app/GodpaperWiki339860975#339860975#0(0"0(0#0#103"/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/GodpaperWiki8611520448#419"    cd /Users/smartkit/Documents/GitHub/GodpaperWiki    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/GodpaperWiki -o /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app.dSYM0#
+
+CLd /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/GodpaperWiki normal i386
+s339860975.133490
+e339860975.369371
+r1
+xLd
+x/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/GodpaperWiki
+xnormal
+xi386
+lSLF07#2@108"Link /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/GodpaperWiki339860975#339860975#0(0"0(0#0#0"8612497856#960"    cd /Users/smartkit/Documents/GitHub/GodpaperWiki    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -L/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator -F/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator -filelist /Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/Objects-normal/i386/GodpaperWiki.LinkFileList -mmacosx-version-min=10.6 -Xlinker -objc_abi_version -Xlinker 2 -framework Foundation -framework UIKit -framework CoreGraphics -o /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/GodpaperWiki0#
+
+CProcessInfoPlistFile /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/Info.plist GodpaperWiki-Info.plist
+s339860973.809221
+e339860973.814722
+r1
+xProcessInfoPlistFile
+x/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/Info.plist
+xGodpaperWiki-Info.plist
+lSLF07#2@31"Process GodpaperWiki-Info.plist339860973#339860973#0(0"0(0#0#69"/Users/smartkit/Documents/GitHub/GodpaperWiki/GodpaperWiki-Info.plist31244160508756040#515"    cd /Users/smartkit/Documents/GitHub/GodpaperWiki    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility GodpaperWiki-Info.plist -genpkginfo /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app/Info.plist0#
+
+CProcessPCH /var/folders/Tu/TuU8QfuYHKqVLZe66Sxk1U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GodpaperWiki_Prefix-gjrfqwccsnduikfnjlskdomoabhj/GodpaperWiki_Prefix.pch.gch GodpaperWiki_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s339860974.205603
+e339860975.010762
+r1
+xProcessPCH
+x/var/folders/Tu/TuU8QfuYHKqVLZe66Sxk1U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GodpaperWiki_Prefix-gjrfqwccsnduikfnjlskdomoabhj/GodpaperWiki_Prefix.pch.gch
+xGodpaperWiki_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@34"Precompile GodpaperWiki_Prefix.pch339860974#339860975#0(0"0(0#0#69"/Users/smartkit/Documents/GitHub/GodpaperWiki/GodpaperWiki_Prefix.pch8612222560#1971"    cd /Users/smartkit/Documents/GitHub/GodpaperWiki    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300 -iquote /Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-generated-files.hmap -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-own-target-headers.hmap -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-all-target-headers.hmap -iquote /Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/GodpaperWiki-project-headers.hmap -F/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/include -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/DerivedSources/i386 -I/Users/smartkit/Documents/GitHub/GodpaperWiki/build/GodpaperWiki.build/Debug-iphonesimulator/GodpaperWiki.build/DerivedSources -c /Users/smartkit/Documents/GitHub/GodpaperWiki/GodpaperWiki_Prefix.pch -o /var/folders/Tu/TuU8QfuYHKqVLZe66Sxk1U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/GodpaperWiki_Prefix-gjrfqwccsnduikfnjlskdomoabhj/GodpaperWiki_Prefix.pch.gch0#
+
+CTouch /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app
+s339860975.407113
+e339860975.409362
+r1
+xTouch
+x/Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app
+lSLF07#2@96"Touch /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app339860975#339860975#0(0"0(0#0#0"8604146560#297"    cd /Users/smartkit/Documents/GitHub/GodpaperWiki    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/smartkit/Documents/GitHub/GodpaperWiki/build/Debug-iphonesimulator/GodpaperWiki.app0#
+
