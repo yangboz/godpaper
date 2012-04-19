@@ -22,16 +22,16 @@ package com.godpaper.as3.business.managers
 	import com.godpaper.as3.tasks.UpdatePiecesOmenVoTask;
 	import com.godpaper.as3.tasks.UpdatePiecesPositionTask;
 	import com.godpaper.as3.tasks.UpdateZobristKeysTask;
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.as3.views.components.ChessGasket;
-	import com.godpaper.as3.views.components.ChessPiece;
+	import com.godpaper.starling.views.components.ChessGasket;
+	import com.godpaper.starling.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
-
+	
 	import de.polygonal.math.PM_PRNG;
+	
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 
-	import mx.logging.ILogger;
 
-	import spark.filters.GlowFilter;
 
 	/**
 	 * The default chess piece manager, manage chess piece move's validation/makeMove/unMakeMove.</br>
@@ -69,7 +69,7 @@ package com.godpaper.as3.business.managers
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private const LOG:ILogger=LogUtil.getLogger(ChessPieceManagerDefault);
+		private const LOG:Logger=LogContext.getLogger(ChessPieceManagerDefault);
 
 		//--------------------------------------------------------------------------
 		//

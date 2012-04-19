@@ -8,6 +8,7 @@ package com.godpaper.as3.business.fsm.states.game
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.consts.FlexGlobals;
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
@@ -123,7 +124,7 @@ package com.godpaper.as3.business.fsm.states.game
 			//using this flash green thread algorithm to avoid script time limition only 15s.
 			processes=new Vector.<IRunnable>();
 			processes.push(searching);
-//			greenThread=new GreenThread(processes, FlexGlobals.topLevelApplication.stage.frameRate);
+			greenThread=new GreenThread(processes, FlexGlobals.topLevelApplication.stage.frameRate);
 			greenThread=new GreenThread(processes, 60);
 			//
 			//			greenThread.addEventListener(GreenThreadEvent.PROCESS_TIMEOUT, function(event:GreenThreadEvent):void

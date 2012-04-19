@@ -11,16 +11,16 @@ package pl.mateuszmackowiak.visuals
 
 	public class CursorManager
 	{
-		[Embed(source="assets/aero_busy.png")]
+		[Embed(source="assets/images/cursors/aero_busy.png")]
 		private static var WindowsAreoBusyClass:Class;
 		
-		[Embed(source="assets/mac_busy.png")]
+		[Embed(source="assets/images/cursors/mac_busy.png")]
 		private static var MacBusyClass:Class;
 		
-		[Embed(source="assets/linux_busy.png")]
+		[Embed(source="assets/images/cursors/linux_busy.png")]
 		private static var LinuxBusyClass:Class;
 		
-		[Embed(source="assets/windows.png")]
+		[Embed(source="assets/images/cursors/windows.png")]
 		private static var WindowsBusyClass:Class;
 		
 		public static const BUSY_CURSOR_NAME:String = "busyCoursor";

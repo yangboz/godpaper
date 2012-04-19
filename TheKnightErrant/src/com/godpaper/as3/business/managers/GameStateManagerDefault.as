@@ -6,6 +6,7 @@ package com.godpaper.as3.business.managers
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.consts.FlexGlobals;
 	import com.godpaper.as3.core.IGameStateManager;
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
@@ -14,11 +15,12 @@ package com.godpaper.as3.business.managers
 	import com.godpaper.as3.tasks.CleanUpPiecesBitboardTask;
 	import com.godpaper.as3.tasks.CreateChessPieceTask;
 	import com.godpaper.as3.tasks.CreateChessVoTask;
-	import com.godpaper.as3.utils.BitFlagUtil;
 	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.MiniMax;
 	import com.lookbackon.AI.searching.RandomWalk;
 	import com.lookbackon.AI.searching.ShortSighted;
+	
+	import mx.utils.BitFlagUtil;
 	
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.Logger;
@@ -174,11 +176,11 @@ package com.godpaper.as3.business.managers
 			//reset game step number.
 			chessBoardModel.stepNumber=0;
 			//clear board,chess pieces
-//			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
-//			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());
-//			FlexGlobals.topLevelApplication.cleanUpSequenceTask.start();
+			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
+			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());
+			FlexGlobals.topLevelApplication.cleanUpSequenceTask.start();
 			//dump the end of game messages.
-//			FlexGlobals.topLevelApplication.dumpFootSprint();
+			FlexGlobals.topLevelApplication.dumpFootSprint();
 			//
 			//put down chess pieces again
 			//no more create chess gasket again.

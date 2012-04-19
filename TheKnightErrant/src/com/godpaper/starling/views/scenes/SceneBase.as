@@ -19,34 +19,44 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.as3.utils
+package com.godpaper.starling.views.scenes
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.consts.FlexGlobals;
+	
+	import org.osflash.signals.Signal;
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
+	
+	import starling.display.Sprite;
+	import starling.events.Event;
+	
 	
 	/**
-	 * UIDUtil.as class.   	
+	 * Abstract the pure AS3 scene logic and busniess as base class.	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 18, 2012 1:41:57 PM
+	 * Created Apr 19, 2012 2:56:21 PM
 	 */   	 
-	public class UIDUtil
+	public class SceneBase extends Sprite
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		public var enterSig:Signal;//exit scene signal
+		public var exitSig:Signal;//enter scene signal
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:Logger = LogContext.getLogger(SceneBase);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -64,78 +74,19 @@ package com.godpaper.as3.utils
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		/**
-		 *  @private
-		 *  Char codes for 0123456789ABCDEF
-		 */
-		private static const ALPHA_CHAR_CODES:Array = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70];
-		
-		
-		/**
-		 *  Generates a UID (unique identifier) based on ActionScript's
-		 *  pseudo-random number generator and the current time.
-		 *
-		 *  <p>The UID has the form
-		 *  <code>"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"</code>
-		 *  where X is a hexadecimal digit (0-9, A-F).</p>
-		 *
-		 *  <p>This UID will not be truly globally unique; but it is the best
-		 *  we can do without player support for UID generation.</p>
-		 *
-		 *  @return The newly-generated UID.
-		 *  
-		 *  @langversion 3.0
-		 *  @playerversion Flash 9
-		 *  @playerversion AIR 1.1
-		 *  @productversion Flex 3
-		 */
-		public static function createUID():String
+		public function SceneBase()
 		{
-			var uid:Array = new Array(36);
-			var index:int = 0;
-			
-			var i:int;
-			var j:int;
-			
-			for (i = 0; i < 8; i++)
-			{
-				uid[index++] = ALPHA_CHAR_CODES[Math.floor(Math.random() *  16)];
-			}
-			
-			for (i = 0; i < 3; i++)
-			{
-				uid[index++] = 45; // charCode for "-"
-				
-				for (j = 0; j < 4; j++)
-				{
-					uid[index++] = ALPHA_CHAR_CODES[Math.floor(Math.random() *  16)];
-				}
-			}
-			
-			uid[index++] = 45; // charCode for "-"
+			super();
 			//
-			var time:Number = new Date().time();
-			// Note: time is the number of milliseconds since 1970,
-			// which is currently more than one trillion.
-			// We use the low 8 hex digits of this number in the UID.
-			// Just in case the system clock has been reset to
-			// Jan 1-4, 1970 (in which case this number could have only
-			// 1-7 hex digits), we pad on the left with 7 zeros
-			// before taking the low digits.
-			var timeString:String = ("0000000" + time.toString(16).toUpperCase()).substr(-8);
-			
-			for (i = 0; i < 8; i++)
-			{
-				uid[index++] = timeString.charCodeAt(i);
-			}
-			
-			for (i = 0; i < 4; i++)
-			{
-				uid[index++] = ALPHA_CHAR_CODES[Math.floor(Math.random() *  16)];
-			}
-			
-			return String.fromCharCode.apply(null, uid);
-		}    	
+			this.enterSig = new Signal(Object);
+			this.exitSig = new Signal(Object);
+			//
+			this.enterSig.addOnce(onEnter);
+			this.exitSig.addOnce(onExit);
+			//
+			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
+			this.addEventListener(Event.REMOVED_FROM_STAGE,removeFromStageHandler);
+		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -147,12 +98,40 @@ package com.godpaper.as3.utils
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+		//
+		protected function onEnter(data:Array):void
+		{
+			LOG.debug("onEnter");
+		}
+		//
+		protected function onExit(data:Array):void
+		{
+			LOG.debug("onExit");
+		}
+		//
+		protected function onResize(data:Array):void
+		{
+			LOG.debug("onReize->stageWidth:"+data[0]+" stageHeight:"+data[1]);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		private function addToStageHandler(event:Event):void
+		{
+			this.enterSig.dispatch([]);
+			//
+			this.removeEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
+			//
+			FlexGlobals.topLevelApplication.resizeSig.add(onResize);
+		}
+		private function removeFromStageHandler(event:Event):void
+		{
+			this.exitSig.dispatch([]);
+			//
+			this.removeEventListener(Event.REMOVED_FROM_STAGE,removeFromStageHandler);
+		}
 	}
 	
 }

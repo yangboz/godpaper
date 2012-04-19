@@ -26,10 +26,13 @@ package
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.adobe.cairngorm.task.SequenceTask;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.PieceConfig;
+	import com.godpaper.as3.consts.FlexGlobals;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.plugins.PluginUIComponent;
+	import com.godpaper.starling.views.scenes.GameScene;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -39,8 +42,11 @@ package
 	import flash.geom.Rectangle;
 	import flash.utils.getTimer;
 	
+	import org.osflash.signals.Signal;
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.Logger;
+	import org.spicefactory.lib.task.SequentialTaskGroup;
+	import org.spicefactory.lib.task.Task;
 	import org.spicefactory.parsley.core.context.Context;
 	import org.spicefactory.parsley.core.events.ContextEvent;
 	import org.spicefactory.parsley.flash.logging.FlashLoggingXmlSupport;
@@ -75,6 +81,10 @@ package
 		public var pluginUIComponent:PluginUIComponent;
 		//
 		private var mStarling:Starling;
+		//Tasks
+		public var cleanUpSequenceTask:SequentialTaskGroup;
+		//Signasl
+		public var resizeSig:Signal;//stage resize signal.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -106,6 +116,7 @@ package
 		public function ApplicationBase()
 		{
 			super();
+			//
 			LOG.debug("preinitializeHandler@Constructor");
 			preinitializeHandler();
 			//
@@ -115,7 +126,7 @@ package
 			Starling.multitouchEnabled = true; // useful on mobile devices
 			Starling.handleLostContext = true; // deactivate on mobile devices (to save memory)
 			//
-			mStarling = new Starling(Game, stage,new Rectangle(0,0,320,480));
+			mStarling = new Starling(GameScene, stage,new Rectangle(0,0,320,480));
 			mStarling.simulateMultitouch = true;
 			mStarling.enableErrorChecking = false;
 			mStarling.start();
@@ -125,7 +136,8 @@ package
 			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
 			// this event is dispatched when stage3D is set up
 			stage.stage3Ds[0].addEventListener(Event.CONTEXT3D_CREATE, onContextCreated);
-			//
+			// signals initialization.
+			this.resizeSig = new Signal(Object);
 			
 		} 
 		//
@@ -147,6 +159,8 @@ package
 			this.mStarling.viewPort = viewPort;
 			this.mStarling.stage.stageWidth = this.stage.stageWidth;
 			this.mStarling.stage.stageHeight = this.stage.stageHeight;
+			//dispatch signal with size.
+			this.resizeSig.dispatch([stage.stageWidth,stage.stageHeight]);
 		}
 		private function addToStageHandler(event:Event):void
 		{
@@ -159,6 +173,8 @@ package
 			mainContext.addEventListener(ContextEvent.INITIALIZED, contextEventInitializedHandler);
 			//
 			initializeHandler();
+			//Store this reference to FlexGlobals.topLevelApplication
+			FlexGlobals.topLevelApplication = this;
 		}
 		/**
 		 * Handler for Parsley ContextEvent.INITIALIZED event.
@@ -256,11 +272,11 @@ package
 			//GameManager start.
 			GameConfig.gameStateManager.start();
 			//
-			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
-			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());
-			LOG.info("allPieces:{0}", ChessPiecesModel.getInstance().allPieces.dump());
-			//
-			LOG.info("allPieces rotate90:{0}", ChessPiecesModel.getInstance().allPieces.rotate90().dump());
+//			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
+//			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());
+//			LOG.info("allPieces:{0}", ChessPiecesModel.getInstance().allPieces.dump());
+//			//
+//			LOG.info("allPieces rotate90:{0}", ChessPiecesModel.getInstance().allPieces.rotate90().dump());
 //			LOG.info("allPieces rotate90.bitCount:{0}", ChessPiecesModel.getInstance().allPieces.bitCount);
 //			LOG.info("allPieces rotate90.cellCount:{0}", ChessPiecesModel.getInstance().allPieces.cellCount);
 		}

@@ -6,15 +6,14 @@ package com.godpaper.as3.services
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.BoardConfig;
-
+	import com.godpaper.as3.consts.FlexGlobals;
+	import com.godpaper.as3.plugins.IPlug;
+	
 	import flash.events.NetStatusEvent;
 	import flash.net.GroupSpecifier;
 	import flash.net.NetConnection;
 	import flash.net.NetGroup;
-	import com.godpaper.as3.plugins.IPlug;
 	
-	import mx.core.FlexGlobals;
-
 	/**
 	 * ConductService.as class.
 	 * @author yangboz

@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package
+package com.godpaper.starling.views.scenes
 {
 	//--------------------------------------------------------------------------
 	//
@@ -47,7 +47,7 @@ package
 	 * @airVersion 3.2+
 	 * Created Apr 16, 2012 11:01:37 AM
 	 */   	 
-	public class Game extends Sprite
+	public class GameScene extends SceneBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -76,11 +76,26 @@ package
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function Game()
+		public function GameScene()
 		{
 			super();
+		}     	
+		//--------------------------------------------------------------------------
+		//
+		//  Public methods
+		//
+		//--------------------------------------------------------------------------
+		
+		//--------------------------------------------------------------------------
+		//
+		//  Protected methods
+		//
+		//--------------------------------------------------------------------------
+		//
+		override protected function onEnter(data:Array):void
+		{
 			//
-//			CursorManager.setBusyCursor();
+			//			CursorManager.setBusyCursor();
 			// sound initialization takes a moment, so we prepare them here
 			DefaultEmbededAssets.prepareSounds();
 			DefaultEmbededAssets.loadBitmapFonts();
@@ -96,23 +111,21 @@ package
 				cp.y = MathUtil.transactRandomNumberInRange(10,460);
 			}
 			//
-//			var redMarshallMC:Class = new DefaultEmbededAssets.RED_MARSHAL();
-//			var atlas:TextureAtlas = DynamicAtlas.fromMovieClipContainer(redMarshallMC, .5, 0, true, true);
-//			var redMarshall:MovieClip = new MovieClip(atlas.getTextures("boy"), 60);
-//			addChild(redMarshall);
-		}     	
-		//--------------------------------------------------------------------------
+			//			var redMarshallMC:Class = new DefaultEmbededAssets.RED_MARSHAL();
+			//			var atlas:TextureAtlas = DynamicAtlas.fromMovieClipContainer(redMarshallMC, .5, 0, true, true);
+			//			var redMarshall:MovieClip = new MovieClip(atlas.getTextures("boy"), 60);
+			//			addChild(redMarshall);
+		}
 		//
-		//  Public methods
+		override protected function onExit(data:Array):void
+		{
+			//
+		}
 		//
-		//--------------------------------------------------------------------------
-		
-		//--------------------------------------------------------------------------
-		//
-		//  Protected methods
-		//
-		//--------------------------------------------------------------------------
-		
+		override protected function onResize(data:Array):void
+		{
+			//
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods

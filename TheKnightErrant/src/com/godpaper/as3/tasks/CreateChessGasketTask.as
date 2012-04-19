@@ -7,16 +7,16 @@ package com.godpaper.as3.tasks
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GasketConfig;
+	import com.godpaper.as3.consts.FlexGlobals;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.pools.ChessGasketsPool;
+	import com.godpaper.as3.core.IVisualElement;
 	
 	import flash.geom.Point;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	
-	import mx.core.FlexGlobals;
-	import mx.core.IVisualElement;
 
 	/**
 	 * CreateChessGasketTask.as class.
@@ -91,9 +91,9 @@ package com.godpaper.as3.tasks
 				}
 			}
 			//plugin uicomponent at the top of game ui.
-			FlexGlobals.topLevelApplication.setElementIndex(
+			FlexGlobals.topLevelApplication.setChildIndex(
 				FlexGlobals.topLevelApplication.pluginUIComponent,
-				FlexGlobals.topLevelApplication.numElements-1
+				FlexGlobals.topLevelApplication.numChildren-1
 				);
 			//
 			this.complete();
