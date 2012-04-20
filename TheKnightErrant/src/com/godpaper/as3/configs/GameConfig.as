@@ -1,9 +1,9 @@
 package com.godpaper.as3.configs
 {
+	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 	import com.godpaper.as3.consts.DefaultTollgatesConstant;
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.core.IGameStateManager;
-	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 
 	//--------------------------------------------------------------------------
 	//
@@ -38,6 +38,9 @@ package com.godpaper.as3.configs
 		//----------------------------------
 		public static const HUMAN_VS_COMPUTER:String = "human vs computer.";
 		public static const HUMAN_VS_HUMAN:String = "human vs human.";
+		//
+		public static const DEFAULT_WIDTH:Number = 320;
+		public static const DEFUALT_HEIGHT:Number = 480;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

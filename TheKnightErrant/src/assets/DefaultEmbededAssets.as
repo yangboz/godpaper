@@ -67,8 +67,8 @@ package assets
 		//
 		// Bitmaps
 
-		[Embed(source="/assets/media/textures/background.png")]
-		private static const Background:Class;
+		[Embed(source="/assets/images/background.png")]
+		private static const IMG_BACK_GROUND:Class;
 
 		[Embed(source="/assets/media/textures/starling_sheet.png")]
 		private static const StarlingSheet:Class;
@@ -115,11 +115,10 @@ package assets
 		private static const DesyrelTexture:Class;
 
 		// Texture Atlas
-
-		[Embed(source="/assets/media/textures/atlas.xml", mimeType="application/octet-stream")]
+		[Embed(source="/assets/media/textures/defaultAtlas.xml", mimeType="application/octet-stream")]
 		private static const AtlasXml:Class;
-
-		[Embed(source="/assets/media/textures/atlas.png")]
+		
+		[Embed(source="/assets/media/textures/defaultAtlasTexture.png")]
 		private static const AtlasTexture:Class;
 
 		// Sounds
@@ -184,11 +183,11 @@ package assets
 		{
 			if (sTextureAtlas == null)
 			{
-				var texture:Texture=getTexture("AtlasTexture");
-				var xml:XML=XML(new AtlasXml());
-				sTextureAtlas=new TextureAtlas(texture, xml);
+				var texture:Texture = getTexture("AtlasTexture");
+				var xml:XML = XML(new AtlasXml());
+				sTextureAtlas = new TextureAtlas(texture, xml);
 			}
-
+			
 			return sTextureAtlas;
 		}
 

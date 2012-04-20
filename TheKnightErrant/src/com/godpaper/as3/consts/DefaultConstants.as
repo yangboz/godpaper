@@ -31,6 +31,8 @@ package com.godpaper.as3.consts
 		//
 		public static const COLOR_RED:String="red"; //below;
 		public static const COLOR_BLUE:String="blue"; //above;
+		//chess board backgroud
+		public static const IMG_BACK_GROUND:String = "IMG_BACK_GROUND";
 		//chess pieces type consts
 		public static const BLUE:String="BLUE";
 		//chess pieces type consts

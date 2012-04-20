@@ -86,6 +86,7 @@ package com.godpaper.starling.views.scenes
 			//
 			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
 			this.addEventListener(Event.REMOVED_FROM_STAGE,removeFromStageHandler);
+			this.addEventListener(Event.ENTER_FRAME,onEnterFrame);
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -112,6 +113,11 @@ package com.godpaper.starling.views.scenes
 		protected function onResize(data:Array):void
 		{
 			LOG.debug("onReize->stageWidth:"+data[0]+" stageHeight:"+data[1]);
+		}
+		//
+		protected function onEnterFrame(event:Event):void
+		{
+			LOG.debug("onEnterFrame");
 		}
 		//--------------------------------------------------------------------------
 		//

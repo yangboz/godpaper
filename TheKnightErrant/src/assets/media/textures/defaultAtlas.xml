@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:5aa011132b1a87d1475a0068fb519824$ -->
+<TextureAtlas imagePath="ChineseChess.png">
+    <SubTexture name="BLUE_BISHOP" x="2" y="2" width="54" height="71"/>
+    <SubTexture name="BLUE_CANNON" x="58" y="2" width="54" height="71"/>
+    <SubTexture name="BLUE_KNIGHT" x="114" y="2" width="54" height="71"/>
+    <SubTexture name="BLUE_MARSHAL" x="170" y="2" width="54" height="71"/>
+    <SubTexture name="BLUE_OFFICAL" x="2" y="75" width="54" height="71"/>
+    <SubTexture name="BLUE_PAWN" x="58" y="75" width="54" height="71"/>
+    <SubTexture name="BLUE_ROOK" x="114" y="75" width="54" height="71"/>
+    <SubTexture name="RED_BISHOP" x="170" y="75" width="54" height="71"/>
+    <SubTexture name="RED_CANNON" x="2" y="148" width="54" height="71"/>
+    <SubTexture name="RED_KNIGHT" x="58" y="148" width="54" height="71"/>
+    <SubTexture name="RED_MARSHAL" x="114" y="148" width="54" height="71"/>
+    <SubTexture name="RED_OFFICAL" x="170" y="148" width="54" height="71"/>
+    <SubTexture name="RED_PAWN" x="2" y="221" width="54" height="71"/>
+    <SubTexture name="RED_ROOK" x="58" y="221" width="54" height="71"/>
+</TextureAtlas>

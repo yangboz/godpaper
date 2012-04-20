@@ -28,19 +28,13 @@ package com.godpaper.starling.views.scenes
 	//--------------------------------------------------------------------------
 	import assets.DefaultEmbededAssets;
 	
-	import com.emibap.textureAtlas.DynamicAtlas;
-	import com.godpaper.as3.utils.MathUtil;
-	import com.godpaper.starling.views.components.ChessPiece;
+	import com.godpaper.starling.views.components.ChessBoard;
+	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
 	
-	import pl.mateuszmackowiak.visuals.CursorManager;
-	
-	import starling.display.Image;
-	import starling.display.MovieClip;
-	import starling.display.Sprite;
-	import starling.textures.TextureAtlas;
+	import starling.events.Event;
 
 	/**
-	 * Game.as class.   	
+	 * GameScene accepts input from the user and instructs the model and a viewport to perform actions based on that input. 	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
@@ -54,7 +48,11 @@ package com.godpaper.starling.views.scenes
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		private var chessBoard:ChessBoard;
+		//
+		private var _vehicle:SteeredVehicle;
+		private var _circles:Array;
+		private var _numCircles:int = 10;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -99,22 +97,15 @@ package com.godpaper.starling.views.scenes
 			// sound initialization takes a moment, so we prepare them here
 			DefaultEmbededAssets.prepareSounds();
 			DefaultEmbededAssets.loadBitmapFonts();
-			//VisualElement test.
-			var bg:Image = new Image(DefaultEmbededAssets.getTexture("Background"));
-			addChild(bg);
-			//
-			for(var i:int=0;i<100;i++)
-			{
-				var cp:ChessPiece = new ChessPiece(DefaultEmbededAssets.getTexture("RED_MARSHAL"));
-				addChild(cp);
-				cp.x = MathUtil.transactRandomNumberInRange(10,300);
-				cp.y = MathUtil.transactRandomNumberInRange(10,460);
-			}
-			//
-			//			var redMarshallMC:Class = new DefaultEmbededAssets.RED_MARSHAL();
-			//			var atlas:TextureAtlas = DynamicAtlas.fromMovieClipContainer(redMarshallMC, .5, 0, true, true);
-			//			var redMarshall:MovieClip = new MovieClip(atlas.getTextures("boy"), 60);
-			//			addChild(redMarshall);
+			//Add visualElement to view.
+			//Chess board
+			this.chessBoard = new ChessBoard();
+			this.addChild(chessBoard);
+			//Pieces box
+			
+			//Plugin bar
+			
+			//Other views testing
 		}
 		//
 		override protected function onExit(data:Array):void
@@ -123,6 +114,11 @@ package com.godpaper.starling.views.scenes
 		}
 		//
 		override protected function onResize(data:Array):void
+		{
+			//
+		}
+		//
+		override protected function onEnterFrame(event:Event):void
 		{
 			//
 		}

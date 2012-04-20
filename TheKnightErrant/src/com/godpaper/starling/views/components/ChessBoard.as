@@ -26,8 +26,20 @@ package com.godpaper.starling.views.components
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import starling.display.Sprite;
+	import assets.DefaultEmbededAssets;
 	
+	import com.emibap.textureAtlas.DynamicAtlas;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.IChessBoard;
+	import com.godpaper.as3.utils.MathUtil;
+	import com.godpaper.starling.views.components.ChessPiece;
+	
+	import pl.mateuszmackowiak.visuals.CursorManager;
+	
+	import starling.display.Image;
+	import starling.display.MovieClip;
+	import starling.display.Sprite;
+	import starling.textures.TextureAtlas;
 	
 	/**
 	 * A chess board is defined by a number of rows and columns, which may vary for different application levels.   	
@@ -37,14 +49,15 @@ package com.godpaper.starling.views.components
 	 * @airVersion 3.2+
 	 * Created Apr 18, 2012 10:01:04 AM
 	 */   	 
-	public class ChessBoard extends Sprite
+	public class ChessBoard extends Sprite implements IChessBoard
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		private var _rows:Number;
+		private var _columns:Number;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -54,7 +67,40 @@ package com.godpaper.starling.views.components
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		//
+		public function get rows():Number
+		{
+			return _rows;
+		}
 		
+		public function set rows(value:Number):void
+		{
+			_rows = value;
+		}
+		//
+		public function get columns():Number
+		{
+			return _columns;
+		}
+		
+		public function set columns(value:Number):void
+		{
+			_columns = value;
+		}
+		//----------------------------------
+		//  type(BitBoard,NumberBoard,GraphBoard,ArrayBoard...)
+		//----------------------------------
+		private var _type:String;
+		
+		public function get type():String
+		{
+			return _type;
+		}
+		
+		public function set type(value:String):void
+		{
+			_type=value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -66,10 +112,35 @@ package com.godpaper.starling.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessBoard()
+		public function ChessBoard(width:Number=320,height:Number=480)
 		{
-			//TODO: implement function
 			super();
+			//VisualElement process.
+			//Puts on background image.
+			var bg:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
+			addChild(bg);
+			//Put on lines if neccessray.
+			
+			//Puts on chess gaskets
+			
+			//Puts on chess pieces
+			var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
+			for(var i:int=0;i<100;i++)
+			{
+				var cp:ChessPiece = new ChessPiece(atlas.getTexture(DefaultConstants.BLUE_KNIGHT));
+//				var cp:Image = new Image(atlas.getTexture(DefaultConstants.BLUE_BISHOP));
+				addChild(cp);
+				cp.x = MathUtil.transactRandomNumberInRange(0,width);
+				cp.y = MathUtil.transactRandomNumberInRange(0,height);
+			}
+			//
+			
+			//
+			//			var redMarshallMC:Class = new DefaultEmbededAssets.RED_MARSHAL();
+			//			var atlas:TextureAtlas = DynamicAtlas.fromMovieClipContainer(redMarshallMC, .5, 0, true, true);
+			//			var redMarshall:MovieClip = new MovieClip(atlas.getTextures("boy"), 60);
+			//			addChild(redMarshall);
+			
 		}     	
 		//--------------------------------------------------------------------------
 		//

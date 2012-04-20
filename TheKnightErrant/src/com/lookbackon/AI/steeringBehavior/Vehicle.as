@@ -1,7 +1,7 @@
 package com.lookbackon.AI.steeringBehavior
 {
 	import flash.display.Sprite;
-	
+//	import starling.display.Sprite;
 	/**
 	 * Base class for moving characters.
 	 */

@@ -62,7 +62,8 @@ package
 	 * @airVersion 3.2+
 	 * Created Apr 12, 2012 9:38:56 AM
 	 */   	 
-	[SWF(frameRate="60", width="320", height="480", backgroundColor="0x666666")]//Default swf metadata.
+	[SWF(frameRate="60", width="320", height="480", backgroundColor="0x666666")]
+//	[SWF(frameRate="60", width="768", height="1004", backgroundColor="0x666666")]//Default swf metadata.
 	public class ApplicationBase extends Sprite
 	{		
 		//--------------------------------------------------------------------------
@@ -126,12 +127,12 @@ package
 			Starling.multitouchEnabled = true; // useful on mobile devices
 			Starling.handleLostContext = true; // deactivate on mobile devices (to save memory)
 			//
-			mStarling = new Starling(GameScene, stage,new Rectangle(0,0,320,480));
+			mStarling = new Starling(GameScene, stage,new Rectangle(0,0,768,1004));
 			mStarling.simulateMultitouch = true;
 			mStarling.enableErrorChecking = false;
 			mStarling.start();
 			// loader info.
-			this.loaderInfo.addEventListener(Event.COMPLETE, loaderInfo_completeHandler);
+			this.loaderInfo.addEventListener(Event.COMPLETE, loaderInfoCompleteHandler);
 			// add to stage.
 			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
 			// this event is dispatched when stage3D is set up
@@ -141,16 +142,16 @@ package
 			
 		} 
 		//
-		private function loaderInfo_completeHandler(event:Event):void
+		private function loaderInfoCompleteHandler(event:Event):void
 		{
 			LOG.debug("creationCompleteHandler@loaderInfo_complete");
 			//
-			this.stage.addEventListener(Event.RESIZE, stage_resizeHandler, false, 0, true);
+			this.stage.addEventListener(Event.RESIZE, stageResizeHandler, false, 0, true);
 			//
 			creationCompleteHandler();
 		}
 		//
-		private function stage_resizeHandler(event:Event):void
+		private function stageResizeHandler(event:Event):void
 		{
 			LOG.debug("stage_resizeHandler");
 			const viewPort:Rectangle = this.mStarling.viewPort;

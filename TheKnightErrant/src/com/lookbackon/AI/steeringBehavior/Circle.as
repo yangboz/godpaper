@@ -1,8 +1,15 @@
 package com.lookbackon.AI.steeringBehavior
 {
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
+	
+	import starling.display.Image;
+//	import starling.display.Sprite;
+	import starling.textures.Texture;
+
 	/**
-	 * 
+	 * Starling graphic draw based on Image class. 
+	 * @see http://forum.starling-framework.org/topic/drawinggraphics-api-work-with-starling
 	 * @author Knight.zhou
 	 * 
 	 */	
@@ -15,8 +22,7 @@ package com.lookbackon.AI.steeringBehavior
 		{
 			_radius = radius;
 			_color = color;
-			graphics.lineStyle(0, _color);
-			graphics.drawCircle(0, 0, _radius);
+			
 		}
 		
 		public function get radius():Number

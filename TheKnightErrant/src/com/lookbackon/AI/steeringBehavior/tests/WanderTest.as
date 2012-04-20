@@ -5,7 +5,7 @@ package com.lookbackon.AI.steeringBehavior.tests
 	import com.lookbackon.AI.steeringBehavior.Vector2D;
 	import com.lookbackon.AI.steeringBehavior.Vehicle;
 	
-	import flash.display.Sprite;
+		import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
