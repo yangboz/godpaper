@@ -101,6 +101,26 @@ package com.godpaper.starling.views.components
 		{
 			_type=value;
 		}
+		//----------------------------------
+		//  background(BitBoard,NumberBoard,GraphBoard,ArrayBoard...)
+		//----------------------------------
+		private var _background:Image;
+		
+		public function get background():Image
+		{
+			return _background;
+		}
+		
+		public function set background(value:Image):void
+		{
+			_background=value;
+			//Remove the existed background at first.
+			if(_background!=null)
+			{
+				removeChild(_background);
+			}
+			addChild(_background);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -117,22 +137,22 @@ package com.godpaper.starling.views.components
 			super();
 			//VisualElement process.
 			//Puts on background image.
-			var bg:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
-			addChild(bg);
+//			var bg:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
+//			addChild(bg);
 			//Put on lines if neccessray.
 			
 			//Puts on chess gaskets
 			
-			//Puts on chess pieces
-			var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
-			for(var i:int=0;i<100;i++)
-			{
-				var cp:ChessPiece = new ChessPiece(atlas.getTexture(DefaultConstants.BLUE_KNIGHT));
-//				var cp:Image = new Image(atlas.getTexture(DefaultConstants.BLUE_BISHOP));
-				addChild(cp);
-				cp.x = MathUtil.transactRandomNumberInRange(0,width);
-				cp.y = MathUtil.transactRandomNumberInRange(0,height);
-			}
+//			Puts on chess pieces
+//			var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
+//			for(var i:int=0;i<100;i++)
+//			{
+//				var cp:ChessPiece = new ChessPiece(atlas.getTexture(DefaultConstants.BLUE_KNIGHT));
+////				var cp:Image = new Image(atlas.getTexture(DefaultConstants.BLUE_BISHOP));
+//				addChild(cp);
+//				cp.x = MathUtil.transactRandomNumberInRange(0,width);
+//				cp.y = MathUtil.transactRandomNumberInRange(0,height);
+//			}
 			//
 			
 			//

@@ -63,10 +63,10 @@ package com.godpaper.as3.configs
 			return _tollgates;
 		}
 		
-//		public static function set tollgates(value:Vector.<DefaultTollgatesConstant>):void
-//		{
-//			_tollgates = value;
-//		}
+		public static function set tollgates(value:Vector.<DefaultTollgatesConstant>):void
+		{
+			_tollgates = value;
+		}
 		//----------------------------------
 		//  turnFlag(read-write)
 		//----------------------------------

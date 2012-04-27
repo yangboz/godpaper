@@ -4,6 +4,7 @@ package com.godpaper.as3.business.factory
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IChessGasket;
 	import com.godpaper.as3.core.IChessPiece;
@@ -15,13 +16,15 @@ package com.godpaper.as3.business.factory
 	import com.godpaper.as3.model.pools.RedChessPiecesPool;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
-	import com.godpaper.as3.views.components.ChessGasket;
-	import com.godpaper.as3.views.components.ChessPiece;
+	import com.godpaper.starling.views.components.ChessGasket;
+	import com.godpaper.starling.views.components.ChessPiece;
 	
 	import flash.geom.Point;
 	
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.Logger;
+	
+	import starling.textures.Texture;
 
 	//--------------------------------------------------------------------------
 	//
@@ -113,7 +116,7 @@ package com.godpaper.as3.business.factory
 			simpleChessPiece.name=this.chessPieceName;
 			simpleChessPiece.type=chessPieceType;
 			//			simpleChessPiece.swfLoader.source = String("./assets/").concat(chessPieceType,".swf");
-			simpleChessPiece.swfLoader.source=this.chessPieceSource;
+			simpleChessPiece.swfLoader.texture=this.chessPieceSource as Texture;
 			simpleChessPiece.swfLoader.scaleX= PieceConfig.scaleX;
 			simpleChessPiece.swfLoader.scaleY= PieceConfig.scaleY;
 			//set flag to identify.
@@ -166,7 +169,7 @@ package com.godpaper.as3.business.factory
 			if(GasketConfig.tipsVisible)
 			{
 				chessGasketTips = position.toString();
-				myChessGasket.toolTip=chessGasketTips;
+//				myChessGasket.toolTip=chessGasketTips;
 			}
 			return myChessGasket;
 		}
@@ -192,6 +195,20 @@ package com.godpaper.as3.business.factory
 		public function generateOmenVO(conductVO:ConductVO):OmenVO
 		{
 			throw new Error(DefaultErrors.INITIALIZE_VIRTUAL_FUNCTION);
+			return null;
+		}
+		/**
+		 * Create the type specialed chess board
+		 * @param type the chess board type(bitBoard,graphBoard,arrayBoard...)
+		 * @return the IChessBoard.
+		 * 
+		 */		
+		public function createChessBoard(type:String):IChessBoard
+		{
+			switch(type)
+			{
+				//TODO:implment funcs.
+			}
 			return null;
 		}
 		//--------------------------------------------------------------------------

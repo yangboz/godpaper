@@ -27,6 +27,9 @@ package com.godpaper.as3.core
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.core.IVisualElement;
+	
+	import starling.display.Image;
+
 	/**
 	 * A chess board is defined by a number of rows and columns, which may vary for different application levels. 
 	 * Chess board types(Bitboard,NumberBoard,GraphBoard,ArrayBoard...) 	
@@ -48,6 +51,9 @@ package com.godpaper.as3.core
 		//	
 		function get rows():Number
 		function set rows(value:Number):void	
+		//
+		function set background(value:Image):void;
+		function get background():Image;
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

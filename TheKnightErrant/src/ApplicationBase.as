@@ -27,12 +27,24 @@ package
 	//
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.SequenceTask;
+	import com.godpaper.as3.business.factory.ChessFactoryBase;
+	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.PieceConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.consts.FlexGlobals;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.plugins.PluginUIComponent;
+	import com.godpaper.as3.tasks.CreateChessGasketTask;
+	import com.godpaper.as3.tasks.CreateChessPieceTask;
+	import com.godpaper.as3.tasks.CreateChessVoTask;
+	import com.godpaper.as3.utils.VersionController;
+	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.starling.views.scenes.GameScene;
+	import com.lookbackon.AI.searching.AttackFalse;
+	import com.lookbackon.AI.searching.MiniMax;
+	import com.lookbackon.AI.searching.RandomWalk;
+	import com.lookbackon.AI.searching.ShortSighted;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -105,6 +117,8 @@ package
 		 * This app's context for Parsley.
 		 */
 		protected var mainContext:Context;
+		//
+		protected var startUpSequenceTask:SequenceTask;
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -223,10 +237,19 @@ package
 		protected function preinitializeHandler():void
 		{
 			//config initialization here.
-			//				BoardConfig.xLines = 9;
-			//				BoardConfig.yLines = 10;
-			//				BoardConfig.xOffset = 50;
-			//				BoardConfig.yOffset = 50;
+			//config initialization here.
+			//about chess board:
+			BoardConfig.xLines=9;
+			BoardConfig.yLines=10;
+			BoardConfig.xOffset=50;
+			BoardConfig.yOffset=50;
+			BoardConfig.xAdjust=50;
+			BoardConfig.yAdjust=-1;
+			//about piece:
+			PieceConfig.factory = ChessFactoryBase;
+			//about plugin:
+			PluginConfig.mochiBoardID = "3a460211409897f4";
+			PluginConfig.mochiGameID = "47de4a85dd3e213a";
 		}
 		//application1_initializeHandler
 		/**
@@ -238,9 +261,9 @@ package
 		protected function initializeHandler():void
 		{
 			//number of tollgate tips would be matched with tollgates!
-			//				GameConfig.tollgates = [RandomWalk,ShortSighted,AttackFalse,AttackFalse,MiniMax];
-			//				GameConfig.tollgateTips = ["baby intelligence","fellow intelligence","man intelligence","guru intelligence"];
-			//				GameConfig.turnFlag = CcjConstants.FLAG_RED;
+//			GameConfig.tollgates = [RandomWalk,ShortSighted,AttackFalse,AttackFalse,MiniMax];
+//			GameConfig.tollgateTips = ["baby intelligence","fellow intelligence","man intelligence","guru intelligence"];
+			GameConfig.turnFlag = DefaultConstants.FLAG_RED;
 		}
 		//  application1_creationCompleteHandler
 		/**
@@ -255,11 +278,15 @@ package
 			//			//create chess piece
 			//			//create chess pieces' chessVO;
 			//			//create chess pieces' omenVO;
-			//			this.startUpSequenceTask.start();
+			this.startUpSequenceTask = new SequenceTask();
+			this.startUpSequenceTask.addChild(new CreateChessGasketTask());
+//			this.startUpSequenceTask.addChild(new CreateChessPieceTask());
+//			this.startUpSequenceTask.addChild(new CreateChessVoTask());
+			this.startUpSequenceTask.start();
 			//			//init data struct.@see ChessPieceModel dump info.
 			//			this.dumpFootSprint();
 			//Add version control context menu.
-//			VersionController.getInstance(this);
+			VersionController.getInstance(this);
 		}
 		//  application1_applicationCompleteHandler
 		/**

@@ -7,7 +7,7 @@ package com.godpaper.as3.core
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
-
+	
 	import flash.geom.Point;
 
 
@@ -17,6 +17,7 @@ package com.godpaper.as3.core
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Jan 27, 2011 4:34:33 PM
+	 * @history 04/27/2012 createChessBoard func added.
 	 */
 	public interface IChessFactory
 	{
@@ -44,6 +45,8 @@ package com.godpaper.as3.core
 		function generateChessVO(conductVO:ConductVO):IChessVO;
 
 		function generateOmenVO(conductVO:ConductVO):OmenVO;
+		
+		function createChessBoard(type:String):IChessBoard;
 	}
 }
 

@@ -1,114 +1,89 @@
-package com.godpaper.as3.model.pools
+package com.godpaper.as3.configs
 {
-	import com.godpaper.starling.views.components.ChessGasket;
-	import com.godpaper.starling.views.components.ChessPiece;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	
+
 	/**
-	 * Reusing objects reduces the need to instantiate objects, which can be expensive. 
-	 * It also reduces the chances of the garbage collector running, which can slow down your application. 
-	 * The following code illustrates the object pooling technique:  	
+	 * PluginConfig.as class.Global plugin(mochimedia,facebook,sns) configuration(gameID,boardID,etc..),(which one) set up at application's initialization stage.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jul 2, 2011 10:59:45 AM
-	 * @see http://help.adobe.com/en_US/as3/mobile/WS948100b6829bd5a6-19cd3c2412513c24bce-8000.html
+	 * Created Jan 30, 2011 3:38:44 PM
 	 */   	 
-	public class BlueChessPiecesPool
+	public class PluginConfig
 	{		
-		private static var MAX_VALUE:uint; 
-		private static var GROWTH_VALUE:uint; 
-		private static var counter:uint; 
-		private static var pool:Vector.<ChessPiece>; 
-		private static var currentSprite:ChessPiece; 
-		private static var _initialized:Boolean = false;
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		private static var _mochiGameID:String;
+		private static var _mochiBoardID:String;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
 		//
-		public static function get initialized():Boolean
+		public static function get mochiBoardID():String
 		{
-			return _initialized;
+			return _mochiBoardID;
+		}
+
+		public static function set mochiBoardID(value:String):void
+		{
+			_mochiBoardID = value;
+		}
+		//
+		public static function get mochiGameID():String
+		{
+			return _mochiGameID;
+		}
+
+		public static function set mochiGameID(value:String):void
+		{
+			_mochiGameID = value;
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		   	
+		public function PluginConfig()
+		{
+		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		//
-		public static function initialize( maxPoolSize:uint, growthValue:uint ):void 
-		{ 
-			MAX_VALUE = maxPoolSize; 
-			GROWTH_VALUE = growthValue; 
-			counter = maxPoolSize; 
-			
-			var i:uint = maxPoolSize; 
-			
-			pool = new Vector.<ChessPiece>(MAX_VALUE); 
-			while( --i > -1 ) 
-				pool[i] = new ChessPiece(); 
-			//
-			_initialized = true;
-		} 
-		//
-		public static function get():ChessPiece 
-		{ 
-			if ( counter > 0 ) 
-				return currentSprite = pool[--counter]; 
-			
-			var i:uint = GROWTH_VALUE; 
-			while( --i > -1 ) 
-				pool.unshift ( new ChessPiece() ); 
-			counter = GROWTH_VALUE; 
-			return get(); 
-			
-		} 
-		//
-		public static function dispose(disposed:ChessPiece):void 
-		{ 
-			pool[counter++] = disposed; 
-		} 
 
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+
 	}
-	
+
 }
+

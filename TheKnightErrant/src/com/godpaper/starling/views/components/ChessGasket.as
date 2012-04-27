@@ -26,8 +26,11 @@ package com.godpaper.starling.views.components
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import assets.DefaultEmbededAssets;
+	
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.IChessGasket;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
@@ -47,6 +50,7 @@ package com.godpaper.starling.views.components
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	
 	
 	/**
@@ -154,9 +158,15 @@ package com.godpaper.starling.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessGasket(upState:Texture, text:String="", downState:Texture=null)
+		public function ChessGasket(upState:Texture=null, text:String="", downState:Texture=null)
 		{
-			super(upState, text, downState);
+			if(upState==null)
+			{
+				var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
+				var defaultUpState:Texture = atlas.getTexture(DefaultConstants.BLUE_KNIGHT);
+			}
+			//
+			super(defaultUpState, text, downState);
 			//
 			this.addEventListener(Event.COMPLETE,creationCompleteHandler);
 		}

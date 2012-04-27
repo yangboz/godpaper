@@ -5,14 +5,13 @@ package com.godpaper.as3.utils
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import flash.display.Sprite;
 	import flash.events.ContextMenuEvent;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	import flash.ui.ContextMenu;
 	import flash.ui.ContextMenuItem;
 	
-	import mx.core.Application;
-	import mx.core.UIComponent;
 	import mx.core.mx_internal;
 
 	use namespace mx_internal;
@@ -24,7 +23,7 @@ package com.godpaper.as3.utils
 	 * Created Jun 2, 2011 10:42:22 AM
 	 * @see http://www.sephiroth.it/weblog/archives/2010/01/update_your_app_version_using_ant_bui.php
 	 */   	 
-	public class VersionController extends Application
+	public class VersionController extends Sprite
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -35,13 +34,13 @@ package com.godpaper.as3.utils
 		*Forces this class to use the singleton pattern;
 		*/
 		private static var _class:VersionController;
-		private static var _application:UIComponent;
+		private static var _application:Sprite;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		public static const CODE_NAME:String = "GODPAPER::TheRealKnight";
-		public static const BUILD_DATE: String = '20120128';
-		public static const BUILD_NUMBER: String = '231';
+		public static const CODE_NAME:String = "GODPAPER::TheKnightErrant";
+		public static const BUILD_DATE: String = '20120427';
+		public static const BUILD_NUMBER: String = '000';
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -68,7 +67,7 @@ package com.godpaper.as3.utils
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		public static function getInstance(item:UIComponent):VersionController
+		public static function getInstance(item:Sprite):VersionController
 		{
 			_application=item;
 			if (!_class)

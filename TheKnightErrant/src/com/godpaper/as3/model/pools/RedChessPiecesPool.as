@@ -1,7 +1,7 @@
 package com.godpaper.as3.model.pools
 {
-	import com.godpaper.as3.views.components.ChessGasket;
-	import com.godpaper.as3.views.components.ChessPiece;
+	import com.godpaper.starling.views.components.ChessGasket;
+	import com.godpaper.starling.views.components.ChessPiece;
 
 	//--------------------------------------------------------------------------
 	//

@@ -210,7 +210,7 @@ package com.godpaper.starling.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessPiece(upState:Texture, text:String="", downState:Texture=null)
+		public function ChessPiece(upState:Texture=null, text:String="", downState:Texture=null)
 		{
 			//TODO: implement function
 			super(upState, text, downState);
