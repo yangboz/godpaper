@@ -39,6 +39,7 @@ package com.godpaper.starling.views.components
 	import starling.display.Image;
 	import starling.display.MovieClip;
 	import starling.display.Sprite;
+	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 	
 	/**
@@ -143,16 +144,23 @@ package com.godpaper.starling.views.components
 			
 			//Puts on chess gaskets
 			
-//			Puts on chess pieces
-//			var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
-//			for(var i:int=0;i<100;i++)
-//			{
-//				var cp:ChessPiece = new ChessPiece(atlas.getTexture(DefaultConstants.BLUE_KNIGHT));
-////				var cp:Image = new Image(atlas.getTexture(DefaultConstants.BLUE_BISHOP));
+			//Puts on chess pieces
+			var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
+			for(var i:int=0;i<100;i++)
+			{
+				var texture:Texture = atlas.getTexture(DefaultConstants.BLUE_KNIGHT);
+//				var cp:ChessPiece = new ChessPiece(null);
+//				var cp:Image = new Image(atlas.getTexture(DefaultConstants.BLUE_BISHOP));
+//				var cp:ChessGasket = new ChessGasket(null);	
 //				addChild(cp);
 //				cp.x = MathUtil.transactRandomNumberInRange(0,width);
 //				cp.y = MathUtil.transactRandomNumberInRange(0,height);
-//			}
+				//Chess gasket testing..
+
+//				addChild(cg);
+//				cg.x = MathUtil.transactRandomNumberInRange(0,width);
+//				cg.y = MathUtil.transactRandomNumberInRange(0,height);
+			}
 			//
 			
 			//

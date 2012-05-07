@@ -160,10 +160,12 @@ package com.godpaper.starling.views.components
 		//--------------------------------------------------------------------------
 		public function ChessGasket(upState:Texture=null, text:String="", downState:Texture=null)
 		{
+			//Default texture setting here.
+			var defaultUpState:Texture;
 			if(upState==null)
 			{
 				var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
-				var defaultUpState:Texture = atlas.getTexture(DefaultConstants.BLUE_KNIGHT);
+				defaultUpState = atlas.getTexture(DefaultConstants.BLUE_BISHOP);
 			}
 			//
 			super(defaultUpState, text, downState);

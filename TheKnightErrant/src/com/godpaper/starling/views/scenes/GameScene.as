@@ -48,7 +48,7 @@ package com.godpaper.starling.views.scenes
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var chessBoard:ChessBoard;
+		public var chessBoard:ChessBoard;
 		//
 		private var _vehicle:SteeredVehicle;
 		private var _circles:Array;

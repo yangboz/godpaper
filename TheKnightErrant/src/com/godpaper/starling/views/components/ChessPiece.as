@@ -26,6 +26,8 @@ package com.godpaper.starling.views.components
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import assets.DefaultEmbededAssets;
+	
 	import com.godpaper.as3.business.fsm.ChessAgent;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
@@ -52,6 +54,7 @@ package com.godpaper.starling.views.components
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	
 	/**
 	 * Abstract the basic logic and functions related on chess piece.
@@ -212,8 +215,14 @@ package com.godpaper.starling.views.components
 		//--------------------------------------------------------------------------
 		public function ChessPiece(upState:Texture=null, text:String="", downState:Texture=null)
 		{
-			//TODO: implement function
-			super(upState, text, downState);
+			//Default texture setting here.
+			var defaultUpState:Texture;
+			if(upState==null)
+			{
+				var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
+				defaultUpState = atlas.getTexture(DefaultConstants.BLUE_KNIGHT);
+			}
+			super(defaultUpState, text, downState);
 			//
 			this.addEventListener(Event.COMPLETE,creationCompleteHandler);
 		}
