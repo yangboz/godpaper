@@ -13,10 +13,10 @@ package starling.text
     import flash.geom.Rectangle;
     import flash.utils.Dictionary;
     
-    import starling.display.DisplayObject;
     import starling.display.Image;
-    import starling.display.Sprite;
+    import starling.display.QuadBatch;
     import starling.textures.Texture;
+    import starling.textures.TextureSmoothing;
     import starling.utils.HAlign;
     import starling.utils.VAlign;
 
@@ -52,9 +52,19 @@ package starling.text
      */ 
     public class BitmapFont
     {
+        // embed minimal font
+        [Embed(source="../../assets/mini.fnt", mimeType="application/octet-stream")]
+        private static var MiniXml:Class;
+        
+        [Embed(source = "../../assets/mini.png")]
+        private static var MiniTexture:Class;
+        
         /** Use this constant for the <code>fontSize</code> property of the TextField class to 
          *  render the bitmap font in exactly the size it was created. */ 
         public static const NATIVE_SIZE:int = -1;
+        
+        /** The font name of the embedded minimal bitmap font. Use this e.g. for debug output. */
+        public static const MINI:String = "mini";
         
         private static const CHAR_SPACE:int   = 32;
         private static const CHAR_TAB:int     =  9;
@@ -65,17 +75,27 @@ package starling.text
         private var mName:String;
         private var mSize:Number;
         private var mLineHeight:Number;
+        private var mBaseline:Number;
+        private var mHelperImage:Image;
         
-        /** Creates a bitmap font by parsing an XML file and uses the specified texture. */
-        public function BitmapFont(texture:Texture, fontXml:XML=null)
+        /** Creates a bitmap font by parsing an XML file and uses the specified texture. 
+         *  If you don't pass any data, the "mini" font will be created. */
+        public function BitmapFont(texture:Texture=null, fontXml:XML=null)
         {
+            // if no texture is passed in, we create the minimal, embedded font
+            if (texture == null && fontXml == null)
+            {
+                texture = Texture.fromBitmap(new MiniTexture());
+                fontXml = XML(new MiniXml());
+            }
+            
             mName = "unknown";
-            mLineHeight = mSize = 14;
+            mLineHeight = mSize = mBaseline = 14;
             mTexture = texture;
             mChars = new Dictionary();
+            mHelperImage = new Image(texture);
             
-            if (fontXml)
-                parseFontXml(fontXml);
+            if (fontXml) parseFontXml(fontXml);
         }
         
         /** Disposes the texture of the bitmap font! */
@@ -87,9 +107,16 @@ package starling.text
         
         private function parseFontXml(fontXml:XML):void
         {
+            var scale:Number = mTexture.scale;
+            var frame:Rectangle = mTexture.frame;
+            
             mName = fontXml.info.attribute("face");
-            mSize = parseFloat(fontXml.info.attribute("size"));
-            mLineHeight = parseFloat(fontXml.common.attribute("lineHeight"));
+            mSize = parseFloat(fontXml.info.attribute("size")) / scale;
+            mLineHeight = parseFloat(fontXml.common.attribute("lineHeight")) / scale;
+            mBaseline = parseFloat(fontXml.common.attribute("base")) / scale;
+            
+            if (fontXml.info.attribute("smooth").toString() == "0")
+                smoothing = TextureSmoothing.NONE;
             
             if (mSize <= 0)
             {
@@ -100,15 +127,15 @@ package starling.text
             for each (var charElement:XML in fontXml.chars.char)
             {
                 var id:int = parseInt(charElement.attribute("id"));
-                var xOffset:Number = parseFloat(charElement.attribute("xoffset"));
-                var yOffset:Number = parseFloat(charElement.attribute("yoffset"));
-                var xAdvance:Number = parseFloat(charElement.attribute("xadvance"));
+                var xOffset:Number = parseFloat(charElement.attribute("xoffset")) / scale;
+                var yOffset:Number = parseFloat(charElement.attribute("yoffset")) / scale;
+                var xAdvance:Number = parseFloat(charElement.attribute("xadvance")) / scale;
                 
                 var region:Rectangle = new Rectangle();
-                region.x = parseFloat(charElement.attribute("x"));
-                region.y = parseFloat(charElement.attribute("y"));
-                region.width  = parseFloat(charElement.attribute("width"));
-                region.height = parseFloat(charElement.attribute("height"));
+                region.x = parseFloat(charElement.attribute("x")) / scale + frame.x;
+                region.y = parseFloat(charElement.attribute("y")) / scale + frame.y;
+                region.width  = parseFloat(charElement.attribute("width")) / scale;
+                region.height = parseFloat(charElement.attribute("height")) / scale;
                 
                 var texture:Texture = Texture.fromTexture(mTexture, region);
                 var bitmapChar:BitmapChar = new BitmapChar(id, texture, xOffset, yOffset, xAdvance); 
@@ -119,7 +146,7 @@ package starling.text
             {
                 var first:int = parseInt(kerningElement.attribute("first"));
                 var second:int = parseInt(kerningElement.attribute("second"));
-                var amount:Number = parseFloat(kerningElement.attribute("amount"));
+                var amount:Number = parseFloat(kerningElement.attribute("amount")) / scale;
                 if (second in mChars) getChar(second).addKerning(first, amount);
             }
         }
@@ -136,49 +163,83 @@ package starling.text
             mChars[charID] = bitmapChar;
         }
         
-        /** Creates a display object that contains the given text by arranging individual chars. */
-        public function createDisplayObject(width:Number, height:Number, text:String,
-                                            fontSize:Number=-1, color:uint=0xffffff, 
-                                            hAlign:String="center", vAlign:String="center",      
-                                            autoScale:Boolean=true, 
-                                            kerning:Boolean=true):DisplayObject
+        /** Draws text into a QuadBatch. */
+        public function fillQuadBatch(quadBatch:QuadBatch, width:Number, height:Number, text:String,
+                                      fontSize:Number=-1, color:uint=0xffffff, 
+                                      hAlign:String="center", vAlign:String="center",      
+                                      autoScale:Boolean=true, 
+                                      kerning:Boolean=true):void
         {
-            if (fontSize == NATIVE_SIZE) fontSize = mSize;
+            var charLocations:Vector.<CharLocation> = arrangeChars(width, height, text, fontSize, 
+                                                                   hAlign, vAlign, autoScale, kerning);
+            var numChars:int = charLocations.length;
             
-            var lineContainer:Sprite;
+            if (numChars > 8192)
+                throw new ArgumentError("Bitmap Font text is limited to 8192 characters.");
+            
+            for (var i:int=0; i<numChars; ++i)
+            {
+                var charLocation:CharLocation = charLocations[i];
+                var char:BitmapChar = charLocation.char;
+                mHelperImage.texture = char.texture;
+                mHelperImage.readjustSize();
+                mHelperImage.x = charLocation.x;
+                mHelperImage.y = charLocation.y;
+                mHelperImage.scaleX = mHelperImage.scaleY = charLocation.scale;
+                mHelperImage.color = color;
+                quadBatch.addImage(mHelperImage);
+            }
+        }
+        
+        /** Arranges the characters of a text inside a rectangle, adhering to the given settings. 
+         *  Returns a Vector of CharLocations. */
+        private function arrangeChars(width:Number, height:Number, text:String, fontSize:Number=-1,
+                                      hAlign:String="center", vAlign:String="center",
+                                      autoScale:Boolean=true, kerning:Boolean=true):Vector.<CharLocation>
+        {
+            if (text == null || text.length == 0) return new <CharLocation>[];
+            if (fontSize < 0) fontSize *= -mSize;
+            
+            var lines:Vector.<Vector.<CharLocation>>;
             var finished:Boolean = false;
+            var char:BitmapChar;
+            var charLocation:CharLocation;
+            var numChars:int;
+            var containerWidth:Number;
+            var containerHeight:Number;
+            var scale:Number;
             
             while (!finished)
             {
-                var scale:Number = fontSize / mSize;
-                lineContainer = new Sprite();
+                scale = fontSize / mSize;
+                containerWidth  = width / scale;
+                containerHeight = height / scale;
                 
-                if (mLineHeight * scale <= height)
+                lines = new Vector.<Vector.<CharLocation>>();
+                
+                if (mLineHeight <= containerHeight)
                 {
-                    var containerWidth:Number  = width / scale;
-                    var containerHeight:Number = height / scale;
-                    lineContainer.scaleX = lineContainer.scaleY = scale;
-                
                     var lastWhiteSpace:int = -1;
                     var lastCharID:int = -1;
                     var currentX:Number = 0;
-                    var currentLine:Sprite = new Sprite();
-                    var numChars:int = text.length;
-                
+                    var currentY:Number = 0;
+                    var currentLine:Vector.<CharLocation> = new <CharLocation>[];
+                    
+                    numChars = text.length;
                     for (var i:int=0; i<numChars; ++i)
                     {
                         var lineFull:Boolean = false;
-                        
                         var charID:int = text.charCodeAt(i);
+                        
                         if (charID == CHAR_NEWLINE)
                         {
                             lineFull = true;
                         }
                         else
                         {
-                            var bitmapChar:BitmapChar = getChar(charID);
+                            char = getChar(charID);
                             
-                            if (bitmapChar == null)
+                            if (char == null)
                             {
                                 trace("[Starling] Missing character: " + charID);
                                 continue;
@@ -187,33 +248,27 @@ package starling.text
                             if (charID == CHAR_SPACE || charID == CHAR_TAB)
                                 lastWhiteSpace = i;
                             
-                            var charImage:Image = bitmapChar.createImage();
-                            
                             if (kerning)
-                                currentX += bitmapChar.getKerning(lastCharID);
+                                currentX += char.getKerning(lastCharID);
                             
-                            charImage.x = currentX + bitmapChar.xOffset;
-                            charImage.y = bitmapChar.yOffset;
-                            charImage.color = color;
-                            currentLine.addChild(charImage);
+                            charLocation = new CharLocation(char);
+                            charLocation.x = currentX + char.xOffset;
+                            charLocation.y = currentY + char.yOffset;
+                            currentLine.push(charLocation);
                             
-                            currentX += bitmapChar.xAdvance;
+                            currentX += char.xAdvance;
                             lastCharID = charID;
                             
-                            if (currentX > containerWidth)
+                            if (charLocation.x + char.width > containerWidth)
                             {
                                 // remove characters and add them again to next line
                                 var numCharsToRemove:int = lastWhiteSpace == -1 ? 1 : i - lastWhiteSpace;
-                                var removeIndex:int = currentLine.numChildren - numCharsToRemove;
+                                var removeIndex:int = currentLine.length - numCharsToRemove;
                                 
-                                for (var r:int=0; r<numCharsToRemove; ++r)
-                                    currentLine.removeChildAt(removeIndex);
+                                currentLine.splice(removeIndex, numCharsToRemove);
                                 
-                                if (currentLine.numChildren == 0)
+                                if (currentLine.length == 0)
                                     break;
-                                
-                                var lastChar:DisplayObject = currentLine.getChildAt(currentLine.numChildren-1);
-                                currentX = lastChar.x + lastChar.width;
                                 
                                 i -= numCharsToRemove;
                                 lineFull = true;
@@ -222,18 +277,20 @@ package starling.text
                         
                         if (i == numChars - 1)
                         {
-                            lineContainer.addChild(currentLine);
+                            lines.push(currentLine);
                             finished = true;
                         }
                         else if (lineFull)
                         {
-                            lineContainer.addChild(currentLine);
-                            var nextLineY:Number = currentLine.y + mLineHeight;
+                            lines.push(currentLine);
+                            currentY += mLineHeight;
                             
-                            if (nextLineY + mLineHeight <= containerHeight)
+                            if (lastWhiteSpace == i)
+                                currentLine.pop();
+                            
+                            if (currentY + mLineHeight <= containerHeight)
                             {
-                                currentLine = new Sprite();
-                                currentLine.y = nextLineY;
+                                currentLine = new <CharLocation>[];
                                 currentX = 0;
                                 lastWhiteSpace = -1;
                                 lastCharID = -1;
@@ -244,45 +301,54 @@ package starling.text
                             }
                         }
                     } // for each char
-                } // if (mLineHeight * scale <= height)
+                } // if (mLineHeight <= containerHeight)
                 
                 if (autoScale && !finished)
                 {
                     fontSize -= 1;
-                    lineContainer.dispose();
+                    lines.length = 0;
                 }
                 else
                 {
                     finished = true; 
                 }
-                
             } // while (!finished)
             
-            if (hAlign != HAlign.LEFT)
+            var finalLocations:Vector.<CharLocation> = new <CharLocation>[];
+            var numLines:int = lines.length;
+            var bottom:Number = currentY + mLineHeight;
+            var yOffset:int = 0;
+            
+            if (vAlign == VAlign.BOTTOM)      yOffset =  containerHeight - bottom;
+            else if (vAlign == VAlign.CENTER) yOffset = (containerHeight - bottom) / 2;
+            
+            for (var lineID:int=0; lineID<numLines; ++lineID)
             {
-                var numLines:int = lineContainer.numChildren;
-                for (var l:int=0; l<numLines; ++l)
+                var line:Vector.<CharLocation> = lines[lineID];
+                numChars = line.length;
+                
+                if (numChars == 0) continue;
+                
+                var lastLocation:CharLocation = line[line.length-1];
+                var right:Number = lastLocation.x + lastLocation.char.width;
+                var xOffset:int = 0;
+                
+                if (hAlign == HAlign.RIGHT)       xOffset =  containerWidth - right;
+                else if (hAlign == HAlign.CENTER) xOffset = (containerWidth - right) / 2;
+                
+                for (var c:int=0; c<numChars; ++c)
                 {
-                    var line:Sprite = lineContainer.getChildAt(l) as Sprite;
-                    var finalChar:DisplayObject = line.getChildAt(line.numChildren-1);
-                    var lineWidth:Number = finalChar.x + finalChar.width;
-                    var widthDiff:Number = containerWidth - lineWidth;
-                    line.x = int(hAlign == HAlign.RIGHT ? widthDiff : widthDiff / 2);
+                    charLocation = line[c];
+                    charLocation.x = scale * (charLocation.x + xOffset);
+                    charLocation.y = scale * (charLocation.y + yOffset);
+                    charLocation.scale = scale;
+                    
+                    if (charLocation.char.width > 0 && charLocation.char.height > 0)
+                        finalLocations.push(charLocation);
                 }
             }
             
-            var outerContainer:Sprite = new Sprite();
-            outerContainer.addChild(lineContainer);
-            
-            if (vAlign != VAlign.TOP)
-            {
-                var contentHeight:Number = lineContainer.numChildren * mLineHeight * scale;
-                var heightDiff:Number = height - contentHeight;
-                lineContainer.y = int(vAlign == VAlign.BOTTOM ? heightDiff : heightDiff / 2);
-            }
-            
-            outerContainer.flatten();
-            return outerContainer;
+            return finalLocations;
         }
         
         /** The name of the font as it was parsed from the font file. */
@@ -294,5 +360,27 @@ package starling.text
         /** The height of one line in pixels. */
         public function get lineHeight():Number { return mLineHeight; }
         public function set lineHeight(value:Number):void { mLineHeight = value; }
+        
+        /** The smoothing filter that is used for the texture. */ 
+        public function get smoothing():String { return mHelperImage.smoothing; }
+        public function set smoothing(value:String):void { mHelperImage.smoothing = value; } 
+        
+        /** The baseline of the font. */
+        public function get baseline():Number { return mBaseline; }
+    }
+}
+
+import starling.text.BitmapChar;
+
+class CharLocation
+{
+    public var char:BitmapChar;
+    public var scale:Number;
+    public var x:Number;
+    public var y:Number;
+    
+    public function CharLocation(char:BitmapChar)
+    {
+        this.char = char;
     }
 }

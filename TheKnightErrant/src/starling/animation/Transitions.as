@@ -21,9 +21,9 @@ package starling.animation
     /** The Transitions class contains static methods that define easing functions. 
      *  Those functions will be used by the Tween class to execute animations.
      * 
-     *  Find a visual representation of the transitions at this 
-     *  <a href="http://www.sparrow-framework.org/wp-content/uploads/2010/06/transitions.png">link</a>.
-     * 
+     *  <p>Here is a visual representation of the available transitions:</p> 
+     *  <img src="http://gamua.com/img/blog/2010/sparrow-transitions.png"/>
+     *  
      *  <p>You can define your own transitions through the "registerTransition" function. A 
      *  transition function must have the following signature, where <code>ratio</code> is 
      *  in the range 0-1:</p>
@@ -58,38 +58,38 @@ package starling.animation
         /** Returns the transition function that was registered under a certain name. */ 
         public static function getTransition(name:String):Function
         {
-            if (sTransitions == null) registerDefaultTransitions();
+            if (sTransitions == null) registerDefaults();
             return sTransitions[name];
         }
         
         /** Registers a new transition function under a certain name. */
-        public static function registerTransition(name:String, func:Function):void
+        public static function register(name:String, func:Function):void
         {
-            if (sTransitions == null) registerDefaultTransitions();
+            if (sTransitions == null) registerDefaults();
             sTransitions[name] = func;
         }
         
-        private static function registerDefaultTransitions():void
+        private static function registerDefaults():void
         {
             sTransitions = new Dictionary();
             
-            registerTransition(LINEAR, linear);
-            registerTransition(EASE_IN, easeIn);
-            registerTransition(EASE_OUT, easeOut);
-            registerTransition(EASE_IN_OUT, easeInOut);
-            registerTransition(EASE_OUT_IN, easeOutIn);
-            registerTransition(EASE_IN_BACK, easeInBack);
-            registerTransition(EASE_OUT_BACK, easeOutBack);
-            registerTransition(EASE_IN_OUT_BACK, easeInOutBack);
-            registerTransition(EASE_OUT_IN_BACK, easeOutInBack);
-            registerTransition(EASE_IN_ELASTIC, easeInElastic);
-            registerTransition(EASE_OUT_ELASTIC, easeOutElastic);
-            registerTransition(EASE_IN_OUT_ELASTIC, easeInOutElastic);
-            registerTransition(EASE_OUT_IN_ELASTIC, easeOutInElastic);
-            registerTransition(EASE_IN_BOUNCE, easeInBounce);
-            registerTransition(EASE_OUT_BOUNCE, easeOutBounce);
-            registerTransition(EASE_IN_OUT_BOUNCE, easeInOutBounce);
-            registerTransition(EASE_OUT_IN_BOUNCE, easeOutInBounce);
+            register(LINEAR, linear);
+            register(EASE_IN, easeIn);
+            register(EASE_OUT, easeOut);
+            register(EASE_IN_OUT, easeInOut);
+            register(EASE_OUT_IN, easeOutIn);
+            register(EASE_IN_BACK, easeInBack);
+            register(EASE_OUT_BACK, easeOutBack);
+            register(EASE_IN_OUT_BACK, easeInOutBack);
+            register(EASE_OUT_IN_BACK, easeOutInBack);
+            register(EASE_IN_ELASTIC, easeInElastic);
+            register(EASE_OUT_ELASTIC, easeOutElastic);
+            register(EASE_IN_OUT_ELASTIC, easeInOutElastic);
+            register(EASE_OUT_IN_ELASTIC, easeOutInElastic);
+            register(EASE_IN_BOUNCE, easeInBounce);
+            register(EASE_OUT_BOUNCE, easeOutBounce);
+            register(EASE_IN_OUT_BOUNCE, easeInOutBounce);
+            register(EASE_OUT_IN_BOUNCE, easeOutInBounce);
         }         
         
         // transition functions

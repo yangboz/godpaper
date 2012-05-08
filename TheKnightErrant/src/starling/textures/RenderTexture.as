@@ -47,6 +47,9 @@ package starling.textures
      *  });
      *  </pre>
      *  
+     *  <p>To erase parts of a render texture, you can use any display object like a "rubber" by
+     *  setting its blending mode to "BlendMode.ERASE".</p>
+     * 
      *  <p>Beware that render textures can't be restored when the Starling's render context is lost.
      *  </p>
      *     
@@ -67,17 +70,20 @@ package starling.textures
          *  texture just like a canvas. If it is not, it will be cleared before each draw call.
          *  Persistancy doubles the required graphics memory! Thus, if you need the texture only 
          *  for one draw (or drawBundled) call, you should deactivate it. */
-        public function RenderTexture(width:int, height:int, persistent:Boolean=true)
+        public function RenderTexture(width:int, height:int, persistent:Boolean=true, scale:Number=-1)
         {
+            if (scale <= 0) scale = Starling.contentScaleFactor; 
+            
             mSupport = new RenderSupport();
-            mNativeWidth  = getNextPowerOfTwo(width);
-            mNativeHeight = getNextPowerOfTwo(height);
-            mActiveTexture = Texture.empty(width, height, 0x0, true);
+            mNativeWidth  = getNextPowerOfTwo(width  * scale);
+            mNativeHeight = getNextPowerOfTwo(height * scale);
+            mActiveTexture = Texture.empty(width, height, 0x0, true, scale);
             
             if (persistent)
             {
-                mBufferTexture = Texture.empty(width, height, 0x0, true);
+                mBufferTexture = Texture.empty(width, height, 0x0, true, scale);
                 mHelperImage = new Image(mBufferTexture);
+                mHelperImage.smoothing = TextureSmoothing.NONE; // solves some antialias-issues
             }
         }
         
@@ -109,9 +115,14 @@ package starling.textures
             function render():void
             {
                 mSupport.pushMatrix();
+                mSupport.pushBlendMode();
+                
+                mSupport.blendMode = object.blendMode;
                 mSupport.transformMatrix(object);            
                 object.render(mSupport, 1.0);
+                
                 mSupport.popMatrix();
+                mSupport.popBlendMode();
             }
         }
         
@@ -119,12 +130,13 @@ package starling.textures
          *  switches and allows you to draw multiple objects into a non-persistent texture. */
         public function drawBundled(drawingBlock:Function, antiAliasing:int=0):void
         {
+            var scale:Number = mActiveTexture.scale;
             var context:Context3D = Starling.context;
             if (context == null) throw new MissingContextError();
             
             // limit drawing to relevant area
             context.setScissorRectangle(
-                new Rectangle(0, 0, mActiveTexture.width, mActiveTexture.height));
+                new Rectangle(0, 0, mActiveTexture.width * scale, mActiveTexture.height * scale));
             
             // persistent drawing uses double buffering, as Molehill forces us to call 'clear'
             // on every render target once per update.
@@ -139,15 +151,15 @@ package starling.textures
             }
             
             context.setRenderToTexture(mActiveTexture.base, false, antiAliasing);
-            RenderSupport.setDefaultBlendFactors(true);
             RenderSupport.clear();
-
-            mSupport.setOrthographicProjection(mNativeWidth, mNativeHeight);
+            
+            mSupport.setOrthographicProjection(mNativeWidth/scale, mNativeHeight/scale);
+            mSupport.applyBlendMode(true);
             
             // draw buffer
             if (isPersistent)
                 mHelperImage.render(mSupport, 1.0);
-                        
+            
             try
             {
                 mDrawing = true;
@@ -198,6 +210,9 @@ package starling.textures
         
         /** @inheritDoc */
         public override function get height():Number { return mActiveTexture.height; }        
+        
+        /** @inheritDoc */
+        public override function get scale():Number { return mActiveTexture.scale; }
         
         /** @inheritDoc */
         public override function get premultipliedAlpha():Boolean 
