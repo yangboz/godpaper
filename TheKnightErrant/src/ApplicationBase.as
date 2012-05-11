@@ -26,6 +26,8 @@ package
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import assets.DefaultEmbededAssets;
+	
 	import com.adobe.cairngorm.task.SequenceTask;
 	import com.godpaper.as3.business.factory.ChessFactoryBase;
 	import com.godpaper.as3.configs.BoardConfig;
@@ -34,12 +36,14 @@ package
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.consts.FlexGlobals;
+	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.plugins.PluginUIComponent;
 	import com.godpaper.as3.tasks.CreateChessGasketTask;
 	import com.godpaper.as3.tasks.CreateChessPieceTask;
 	import com.godpaper.as3.tasks.CreateChessVoTask;
 	import com.godpaper.as3.utils.VersionController;
+	import com.godpaper.starling.views.components.ChessBoard;
 	import com.godpaper.starling.views.scenes.GameScene;
 	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.MiniMax;
@@ -65,6 +69,8 @@ package
 	import org.spicefactory.parsley.xml.XmlContextBuilder;
 	
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
+	import starling.display.Image;
 
 	/**
 	 * ApplicationBase.as class constructed with framework's workflow:
@@ -78,7 +84,7 @@ package
 	 * @airVersion 3.2+
 	 * Created Apr 12, 2012 9:38:56 AM
 	 */   	 
-	[SWF(frameRate="60", width="320", height="480", backgroundColor="0x666666")]
+	[SWF(frameRate="60", width="320", height="480", backgroundColor="0xffffff")]
 //	[SWF(frameRate="60", width="768", height="1004", backgroundColor="0x666666")]//Default swf metadata.
 	public class ApplicationBase extends Sprite
 	{		
@@ -94,8 +100,9 @@ package
 		//For children dynamic factory config.
 //		[Bindable]protected var pcFactory:Class = PieceConfig.factory;
 		protected var pcFactory:Class = PieceConfig.factory;
-		//
+		//Views
 		public var pluginUIComponent:PluginUIComponent;
+		public var chessBoard:IChessBoard;
 		//
 		private var mStarling:Starling;
 		//Tasks
@@ -149,6 +156,8 @@ package
 			mStarling.simulateMultitouch = true;
 			mStarling.enableErrorChecking = false;
 			mStarling.start();
+			//Display stats.
+			mStarling.showStats = true;
 			// loader info.
 			this.loaderInfo.addEventListener(Event.COMPLETE, loaderInfoCompleteHandler);
 			// add to stage.
@@ -157,8 +166,6 @@ package
 			stage.stage3Ds[0].addEventListener(Event.CONTEXT3D_CREATE, onContextCreated);
 			// signals initialization.
 			this.resizeSig = new Signal(Object);
-			// plugin view init
-			this.pluginUIComponent = new PluginUIComponent();
 		} 
 		//
 		private function loaderInfoCompleteHandler(event:Event):void
@@ -248,12 +255,12 @@ package
 			//config initialization here.
 			//config initialization here.
 			//about chess board:
-			BoardConfig.xLines=9;
-			BoardConfig.yLines=10;
+			BoardConfig.xLines=4;
+			BoardConfig.yLines=4;
 			BoardConfig.xOffset=50;
 			BoardConfig.yOffset=50;
 			BoardConfig.xAdjust=50;
-			BoardConfig.yAdjust=-1;
+			BoardConfig.yAdjust=50;
 			//about piece:
 			PieceConfig.factory = ChessFactoryBase;
 			//about plugin:
@@ -283,6 +290,14 @@ package
 		 */		
 		protected function creationCompleteHandler():void
 		{
+			//Display chess board at first.
+			var chessBoardBackground:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
+//			this.chessBoard = new ChessBoard(chessBoardBackground);
+			this.chessBoard = new ChessBoard(null);
+			FlexGlobals.gameStage.addChild(starling.display.DisplayObject(this.chessBoard));
+			// plugin view init
+//			this.pluginUIComponent = new PluginUIComponent();
+//			this.addChild(starling.display.DisplayObject(this.pluginUIComponent));
 			//			//create chess gaskets.
 			//			//create chess piece
 			//			//create chess pieces' chessVO;

@@ -30,6 +30,7 @@ package com.godpaper.starling.views.components
 	
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.IChessGasket;
 	import com.godpaper.as3.core.IChessPiece;
@@ -38,6 +39,8 @@ package com.godpaper.starling.views.components
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.lookbackon.ds.BitBoard;
 	
+	import flash.display.BitmapData;
+	import flash.display.Shape;
 	import flash.geom.Point;
 	
 	import org.spicefactory.lib.logging.LogContext;
@@ -45,12 +48,15 @@ package com.godpaper.starling.views.components
 	
 	import starling.display.Button;
 	import starling.display.DisplayObject;
+	import starling.display.Image;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
+	import starling.utils.Color;
+	import starling.utils.Polygon;
 	
 	
 	/**
@@ -70,6 +76,14 @@ package com.godpaper.starling.views.components
 		//--------------------------------------------------------------------------
 		private var chessGasketsModel:ChessGasketsModel = ChessGasketsModel.getInstance();
 		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+		//Global configures.
+		private var _width:Number;
+		private var _height:Number;
+		private var _borderVisible:Boolean;//You'd beter set true for the purpose of debug view.
+		private var _backgroundAlpha:Number;
+		private var _contentBackgroundAlpha:Number;
+		private var _borderAlpha:Number;
+		private var _tipsVisible:Boolean;//toolTips
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -147,6 +161,68 @@ package com.godpaper.starling.views.components
 		//		{
 		//			return chessGasketsModel.gaskets.gett(this.position.x-1,this.position.y) as ChessGasket;
 		//		}
+		//
+		//----------Global configures-----------
+		//----------------------------------
+		//  tipsVisible()
+		//----------------------------------
+		public function get tipsVisible():Boolean
+		{
+			return _tipsVisible;
+		}
+		
+		public function set tipsVisible(value:Boolean):void
+		{
+			_tipsVisible = value;
+		}
+		//----------------------------------
+		//  borderAlpha()
+		//----------------------------------
+		public function get borderAlpha():Number
+		{
+			return _borderAlpha;
+		}
+		
+		public function set borderAlpha(value:Number):void
+		{
+			_borderAlpha = value;
+		}
+		//----------------------------------
+		//  contentBackgroundAlpha()
+		//----------------------------------
+		public function get contentBackgroundAlpha():Number
+		{
+			return _contentBackgroundAlpha;
+		}
+		
+		public function set contentBackgroundAlpha(value:Number):void
+		{
+			_contentBackgroundAlpha = value;
+		}
+		//----------------------------------
+		//  backgroundAlpha()
+		//----------------------------------
+		public function get backgroundAlpha():Number
+		{
+			return _backgroundAlpha;
+		}
+		
+		public function set backgroundAlpha(value:Number):void
+		{
+			_backgroundAlpha = value;
+		}
+		//----------------------------------
+		//  borderVisible()
+		//----------------------------------
+		public function get borderVisible():Boolean
+		{
+			return _borderVisible;
+		}
+		
+		public function set borderVisible(value:Boolean):void
+		{
+			_borderVisible = value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -160,12 +236,18 @@ package com.godpaper.starling.views.components
 		//--------------------------------------------------------------------------
 		public function ChessGasket(upState:Texture=null, text:String="", downState:Texture=null)
 		{
+			//Binding the global configures.
+			this.backgroundAlpha = GasketConfig.backgroundAlpha;
+			this.borderAlpha = GasketConfig.borderAlpha;
+			this.borderVisible = GasketConfig.borderVisible;
+			this.contentBackgroundAlpha = GasketConfig.contentBackgroundAlpha;
 			//Default texture setting here.
 			var defaultUpState:Texture;
 			if(upState==null)
 			{
-				var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
-				defaultUpState = atlas.getTexture(DefaultConstants.BLUE_BISHOP);
+				defaultUpState = this.getUpStateTexture();
+//				var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
+//				defaultUpState = atlas.getTexture(DefaultConstants.BLUE_BISHOP);
 			}
 			//
 			super(defaultUpState, text, downState);
@@ -262,6 +344,38 @@ package com.godpaper.starling.views.components
 				}
 			}
 		}
+		//Custom render the texture with the global gasket configuration.
+		protected function getUpStateTexture():Texture
+		{
+			//Temp graphic objects tests.
+			//@see:http://wiki.starling-framework.org/manual/dynamic_textures
+//			Polygon
+//			var polygon:Polygon = new Polygon(50,4,Color.NAVY);
+//			polygon.x = 100;
+//			polygon.y = 100;
+//			polygon.pivotX = 0;
+//			polygon.pivotY = 0;
+//			polygon.rotation = 30;
+//			addChild(polygon);
+			//Draw a circle shape
+			var shape:Shape = new Shape();
+			shape.graphics.beginFill(Color.BLACK,this.backgroundAlpha);
+			shape.graphics.lineStyle(1,Color.FUCHSIA,this.borderAlpha);
+			var radius:Number = Math.min(GasketConfig.width,GasketConfig.height)/2;
+//			shape.graphics.drawCircle(GasketConfig.width/2,GasketConfig.height/2,radius);
+			shape.graphics.drawRect(0,0,GasketConfig.width,GasketConfig.height);
+			shape.graphics.endFill();
+			//But we can draw that shape into a bitmap and then create a texture from that bitmap! 
+			var bmpData:BitmapData = new BitmapData(GasketConfig.width, GasketConfig.height, true, 0x0);
+			bmpData.draw(shape);
+			//
+			var texture:Texture = Texture.fromBitmapData(bmpData);
+//			var image:Image = new Image(texture);
+//			addChild(image);
+			//
+			return texture;
+		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods

@@ -21,16 +21,16 @@ package com.godpaper.as3.configs
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private static var _width:Number=50;
-		private static var _height:Number=50;
-		private static var _borderVisible:Boolean = false;//You'd beter set true for the purpose of debug view.
-		private static var _backgroundAlpha:Number=0.0;
-		private static var _contentBackgroundAlpha:Number=0.0;
-		private static var _borderAlpha:Number=1;
+		public static var width:Number=48;
+		public static var height:Number=48;
+		public static var borderVisible:Boolean = false;//You'd beter set true for the purpose of debug view.
+		public static var backgroundAlpha:Number=0.2;
+		public static var contentBackgroundAlpha:Number=0.0;
+		public static var borderAlpha:Number=1;
 		//ObjectPool
 		private static var _maxPoolSize:uint=100;
 		//toolTips
-		private static var _tipsVisible:Boolean = true;
+		public static var tipsVisible:Boolean = true;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -40,76 +40,6 @@ package com.godpaper.as3.configs
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//
-		public static function get tipsVisible():Boolean
-		{
-			return _tipsVisible;
-		}
-		
-		public static function set tipsVisible(value:Boolean):void
-		{
-			_tipsVisible = value;
-		}
-		//
-		public static function get borderAlpha():Number
-		{
-			return _borderAlpha;
-		}
-
-		public static function set borderAlpha(value:Number):void
-		{
-			_borderAlpha = value;
-		}
-		//
-		public static function get contentBackgroundAlpha():Number
-		{
-			return _contentBackgroundAlpha;
-		}
-
-		public static function set contentBackgroundAlpha(value:Number):void
-		{
-			_contentBackgroundAlpha = value;
-		}
-		//
-		public static function get backgroundAlpha():Number
-		{
-			return _backgroundAlpha;
-		}
-
-		public static function set backgroundAlpha(value:Number):void
-		{
-			_backgroundAlpha = value;
-		}
-		//
-		public static function get borderVisible():Boolean
-		{
-			return _borderVisible;
-		}
-
-		public static function set borderVisible(value:Boolean):void
-		{
-			_borderVisible = value;
-		}
-		//	
-		public static function get height():Number
-		{
-			return _height;
-		}
-
-		public static function set height(value:Number):void
-		{
-			_height = value;
-		}
-		//
-		public static function get width():Number
-		{
-			return _width;
-		}
-
-		public static function set width(value:Number):void
-		{
-			_width = value;
-		}
 		//
 		public static function get growthValue():uint
 		{
