@@ -28,7 +28,6 @@ package com.godpaper.starling.views.scenes
 	//--------------------------------------------------------------------------
 	import assets.DefaultEmbededAssets;
 	
-	import com.godpaper.starling.views.components.ChessBoard;
 	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
 	
 	import starling.events.Event;
@@ -48,7 +47,6 @@ package com.godpaper.starling.views.scenes
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var chessBoard:ChessBoard;
 		//
 		private var _vehicle:SteeredVehicle;
 		private var _circles:Array;
@@ -98,9 +96,7 @@ package com.godpaper.starling.views.scenes
 			DefaultEmbededAssets.prepareSounds();
 			DefaultEmbededAssets.loadBitmapFonts();
 			//Add visualElement to view.
-			//Chess board
-			this.chessBoard = new ChessBoard();
-			this.addChild(chessBoard);
+			
 			//Pieces box
 			
 			//Plugin bar

@@ -21,6 +21,10 @@
  */
 package com.godpaper.as3.consts
 {
+	import com.godpaper.starling.views.scenes.GameScene;
+	
+	import starling.display.Stage;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -53,6 +57,8 @@ package com.godpaper.as3.consts
 		//
 		//-------------------------------------------------------------------------- 
 		public static var topLevelApplication:ApplicationBase;
+		public static var gameScene:GameScene;
+		public static var gameStage:Stage;
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

@@ -69,7 +69,7 @@ package com.godpaper.as3.model.pools
 			
 			pool = new Vector.<ChessGasket>(MAX_VALUE); 
 			while( --i > -1 ) 
-				pool[i] = new ChessGasket(); 
+				pool[i] = new ChessGasket(null); 
 		} 
 		//
 		public static function get():ChessGasket 
@@ -79,7 +79,7 @@ package com.godpaper.as3.model.pools
 			
 			var i:uint = GROWTH_VALUE; 
 			while( --i > -1 ) 
-				pool.unshift ( new ChessGasket() ); 
+				pool.unshift ( new ChessGasket(null) ); 
 			counter = GROWTH_VALUE; 
 			return get(); 
 			

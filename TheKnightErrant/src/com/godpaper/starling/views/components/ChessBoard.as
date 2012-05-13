@@ -29,18 +29,30 @@ package com.godpaper.starling.views.components
 	import assets.DefaultEmbededAssets;
 	
 	import com.emibap.textureAtlas.DynamicAtlas;
+	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.utils.MathUtil;
 	import com.godpaper.starling.views.components.ChessPiece;
+	
+	import flash.display.BitmapData;
+	import flash.display.Shape;
+	import flash.display.Sprite;
+	
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 	
 	import pl.mateuszmackowiak.visuals.CursorManager;
 	
 	import starling.display.Image;
 	import starling.display.MovieClip;
 	import starling.display.Sprite;
+	import starling.events.Event;
+	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
-	
+	import starling.utils.Color;
+	import starling.utils.Polygon;
+
 	/**
 	 * A chess board is defined by a number of rows and columns, which may vary for different application levels.   	
 	 * @author yangboz
@@ -48,6 +60,7 @@ package com.godpaper.starling.views.components
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Apr 18, 2012 10:01:04 AM
+	 * @see http://wiki.starling-framework.org/manual/dynamic_textures
 	 */   	 
 	public class ChessBoard extends Sprite implements IChessBoard
 	{		
@@ -56,36 +69,132 @@ package com.godpaper.starling.views.components
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _rows:Number;
-		private var _columns:Number;
+		//global board config.
+		private var _xLines:Number;
+		private var _yLines:Number;
+		//board scale
+		private var _xScale:Number;
+		private var _yScale:Number;
+		//board lattic
+		private var _xOffset:Number;
+		private var _yOffset:Number;
+		//board size
+//		private var _width:Number;//Native
+//		private var _height:Number;//Native
+		//board background
+		//		private static var _backGround:Class;
+		//board x,y position adjust
+		private var _xAdjust:Number;
+		private var _yAdjust:Number;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		//
+		private static const LOG:Logger = LogContext.getLogger(ChessBoard);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//
-		public function get rows():Number
+		//----------------------------------
+		//  yAdjust(for pixel adjustment at y axis)
+		//----------------------------------
+		public function get yAdjust():Number
 		{
-			return _rows;
+			return _yAdjust;
+		}
+		/**
+		 * @param value the user defined value(in pixel) for y-axis based position ajustment.
+		 */
+		public function set yAdjust(value:Number):void
+		{
+			_yAdjust = value;
+		}
+		//----------------------------------
+		//  xAdjust(for pixel adjustment at x axis)
+		//----------------------------------
+		public function get xAdjust():Number
+		{
+			return _xAdjust;
+		}
+		/**
+		 * @param value the user defined value(in pixel) for x-axis based position ajustment.
+		 */
+		public function set xAdjust(value:Number):void
+		{
+			_xAdjust = value;
+		}
+		//----------------------------------
+		//  yOffset(the lattice of ChessBoard at y axis)
+		//----------------------------------
+		public function get yOffset():Number
+		{
+			return _yOffset;
 		}
 		
-		public function set rows(value:Number):void
+		public function set yOffset(value:Number):void
 		{
-			_rows = value;
+			_yOffset = value;
 		}
-		//
-		public function get columns():Number
+		//----------------------------------
+		//  xOffset(the lattice of ChessBoard at x axis)
+		//----------------------------------
+		public function get xOffset():Number
 		{
-			return _columns;
+			return _xOffset;
 		}
 		
-		public function set columns(value:Number):void
+		public function set xOffset(value:Number):void
 		{
-			_columns = value;
+			_xOffset = value;
+		}
+		//----------------------------------
+		//  yScale(the scale rate of ChessBoard at y axis)
+		//----------------------------------
+		public function get yScale():Number
+		{
+			return _yScale;
+		}
+		
+		public function set yScale(value:Number):void
+		{
+			_yScale = value;
+		}
+		//----------------------------------
+		//  xScale(the scale rate of ChessBoard at x axis)
+		//----------------------------------
+		public function get xScale():Number
+		{
+			return _xScale;
+		}
+		
+		public function set xScale(value:Number):void
+		{
+			_xScale = value;
+		}
+		//----------------------------------
+		//  yLines(the number of lines displayed on ChessBoard at y axis)
+		//----------------------------------
+		public function get yLines():Number
+		{
+			return _yLines;
+		}
+		
+		public function set yLines(value:Number):void
+		{
+			_yLines = value;
+		}
+		//----------------------------------
+		//  xLines(the number of lines displayed on ChessBoard at x axis)
+		//----------------------------------
+		public function get xLines():Number
+		{
+			return _xLines;
+		}
+		
+		public function set xLines(value:Number):void
+		{
+			_xLines = value;
 		}
 		//----------------------------------
 		//  type(BitBoard,NumberBoard,GraphBoard,ArrayBoard...)
@@ -102,9 +211,9 @@ package com.godpaper.starling.views.components
 			_type=value;
 		}
 		//----------------------------------
-		//  background(BitBoard,NumberBoard,GraphBoard,ArrayBoard...)
+		//  background(CrossLines or Embbed image textures)
 		//----------------------------------
-		private var _background:Image;
+		private var _background:Image = null;
 		
 		public function get background():Image
 		{
@@ -113,13 +222,23 @@ package com.godpaper.starling.views.components
 		
 		public function set background(value:Image):void
 		{
-			_background=value;
-			//Remove the existed background at first.
-			if(_background!=null)
+			if(value!=null)
 			{
-				removeChild(_background);
+				if(this.contains(_background))
+				{
+					removeChild(_background);//Remove the existed background at first.
+				}
+				//set anew value
+				_background=value;
+				//Puts on background image.
+				//			var bg:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
+				//			addChild(bg);
+				//Display anew backgournd
+				addChild(_background);
+			}else//Draw to render the program background.
+			{
+				this.backgroundRender();
 			}
-			addChild(_background);
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -132,35 +251,22 @@ package com.godpaper.starling.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessBoard(width:Number=320,height:Number=480)
+		public function ChessBoard(background:Image)
 		{
 			super();
+			//Binding to the global configured variables
+			this.xLines = BoardConfig.xLines;
+			this.yLines = BoardConfig.yLines;
+			this.xScale = BoardConfig.xScale;
+			this.yScale = BoardConfig.yScale;
+			this.xOffset = BoardConfig.xOffset;
+			this.yOffset = BoardConfig.yOffset;
+			this.width = BoardConfig.width;
+			this.height = BoardConfig.height;
+			this.xAdjust = BoardConfig.xAdjust;
+			this.yAdjust = BoardConfig.yAdjust;
 			//VisualElement process.
-			//Puts on background image.
-//			var bg:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
-//			addChild(bg);
-			//Put on lines if neccessray.
-			
-			//Puts on chess gaskets
-			
-//			Puts on chess pieces
-//			var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
-//			for(var i:int=0;i<100;i++)
-//			{
-//				var cp:ChessPiece = new ChessPiece(atlas.getTexture(DefaultConstants.BLUE_KNIGHT));
-////				var cp:Image = new Image(atlas.getTexture(DefaultConstants.BLUE_BISHOP));
-//				addChild(cp);
-//				cp.x = MathUtil.transactRandomNumberInRange(0,width);
-//				cp.y = MathUtil.transactRandomNumberInRange(0,height);
-//			}
-			//
-			
-			//
-			//			var redMarshallMC:Class = new DefaultEmbededAssets.RED_MARSHAL();
-			//			var atlas:TextureAtlas = DynamicAtlas.fromMovieClipContainer(redMarshallMC, .5, 0, true, true);
-			//			var redMarshall:MovieClip = new MovieClip(atlas.getTextures("boy"), 60);
-			//			addChild(redMarshall);
-			
+			this.background = background;
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -173,7 +279,81 @@ package com.godpaper.starling.views.components
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+		protected function backgroundRender():void
+		{
+			//Temp graphic objects tests.
+			//@see:http://wiki.starling-framework.org/manual/dynamic_textures
+			//Polygon
+			//			var polygon:Polygon = new Polygon(50,4,Color.NAVY);
+			//			polygon.x = 100;
+			//			polygon.y = 100;
+			//			polygon.pivotX = 0;
+			//			polygon.pivotY = 0;
+			////			polygon.rotation = 30;
+			//			addChild(polygon);
+			//Put on lines if neccessray.
+			var shape:Shape = new Shape();
+			shape.graphics.beginFill(Color.BLACK);
+			//graphics.drawPath method takes two parameters: 
+			//a Vector of coordinates of consecutive points on the path and a Vector of commands. 
+			//(The last optional parameter 'winding' is not relevant to our experiment.) 
+			//We create the Vector variables.
+			//We will draw black lines of thickness 1 and alpha 1.
+			shape.graphics.lineStyle(1,Color.BLACK,1);
+			var drawCoords:Vector.<Number> = new Vector.<Number>();
+			var drawCommands:Vector.<int> = new Vector.<int>();
+			/*
+			We populate Vectors to be used with the drawPath method. In the Vector of commands, 1 correponds to moveTo, 2 corresponds to lineTo. Thus, the Vector of commands is: moveTo, lineTo, moveTo, and lineTo. Then, we call the drawPath method. The upper right cross is drawn. The intersection is not correct and it does not correspond to an overlap of two transparent objects.
+			*/
+			drawCoords.push(100,10);
+			drawCommands.push(1);
+			drawCoords.push(200,10);
+			drawCommands.push(2);
+			//
+			//			shape.graphics.drawCircle(50, 50, 30);
+			//			shape.graphics.drawPath(drawCommands,drawCoords);
+			//Just using the simply line drawing func.
+			shape.graphics.moveTo(this.xAdjust,this.yAdjust);
+			//
+//			shape.graphics.lineTo(10,150);
+//			shape.graphics.moveTo(60,10);
+//			shape.graphics.lineTo(60,150);
+//			shape.graphics.moveTo(110,10);
+			//Draw x lines
+			for(var j:int=0;j<this.yLines;j++)
+			{
+				var lX:Number = this.xAdjust+j*this.xOffset;
+				var lY:Number = this.yAdjust+(this.yLines-1)*this.yOffset;
+				var mX:Number = this.xAdjust+(j+1)*this.xOffset;
+				var mY:Number = this.yAdjust;
+				LOG.debug("xLines drawing:{0},{1},{2},{3}",lX,lY,mX,mY);
+				shape.graphics.lineTo(lX,lY);
+				shape.graphics.moveTo(mX,mY);
+			}
+			//Go back to the start point.
+			shape.graphics.moveTo(this.xAdjust,this.yAdjust);
+			//Draw y lines
+			for(var i:int=0;i<this.xLines;i++)
+			{
+				var lXx:Number = (this.xLines-1)*this.xOffset+this.xAdjust;
+				var lYy:Number = this.yAdjust+i*this.yOffset;
+				var mXx:Number = this.xAdjust;
+				var mYy:Number = this.yAdjust+(i+1)*this.yOffset;
+				LOG.debug("yLines drawing:{0},{1},{2},{3}",lXx,lYy,mXx,mYy);
+				shape.graphics.lineTo(lXx,lYy);
+				shape.graphics.moveTo(mXx,mYy);
+			}
+			shape.graphics.endFill();
+			//But we can draw that shape into a bitmap and then create a texture from that bitmap! 
+			var bmpData:BitmapData = new BitmapData(BoardConfig.width, BoardConfig.height, true, 0x0);
+			bmpData.draw(shape);
+			//
+			var texture:Texture = Texture.fromBitmapData(bmpData);
+			var image:Image = new Image(texture);
+			addChild(image);
+			//The we get the actual width/height properties.
+			LOG.debug("ChessBoard size:{0},{1}",this.width,this.height);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods

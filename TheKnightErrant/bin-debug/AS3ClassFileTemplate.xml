@@ -35,6 +35,7 @@ ${package_declaration}&#13;
    	* @playerVersion 11.2+&#13;
    	* @airVersion 3.2+&#13;
    	* Created ${date} ${time}&#13;
+   	* @history 05/00/12,&#13;
    	*/   	 &#13;
 	${class_declaration}&#13;
 	{		&#13;

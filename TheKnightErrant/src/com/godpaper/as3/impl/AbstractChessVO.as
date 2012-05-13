@@ -4,7 +4,8 @@ package com.godpaper.as3.impl
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.utils.LogUtil;
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 	import com.lookbackon.ds.BitBoard;
 	
 	import org.spicefactory.lib.logging.LogContext;
@@ -72,7 +73,7 @@ package com.godpaper.as3.impl
 		//
 		//--------------------------------------------------------------------------
 		/**
-		 *
+		 * Customize construct the abstracted chess vo with parameters.
 		 * @param the width value of bitboard;
 		 * @param the height value of bitboard;
 		 * @param the rowIndex of destination point;

@@ -190,8 +190,6 @@ package com.godpaper.as3.business.managers
 			startUpTask.addChild(new CreateChessVoTask(PieceConfig.factory));
 			startUpTask.start();
 			//
-//			FlexGlobals.topLevelApplication.dumpFootSprint();
-			//
 			start();
 		}
 

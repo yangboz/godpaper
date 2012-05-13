@@ -1,17 +1,16 @@
 package com.godpaper.as3.business.managers
 {
-	import com.godpaper.as3.utils.LogUtil;
-	
 	import flash.display.Loader;
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
 	
 	import mx.events.ResourceEvent;
-	import mx.logging.ILogger;
 	import mx.resources.IResourceBundle;
 	import mx.resources.ResourceBundle;
 	import mx.resources.ResourceManager;
 	
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 	/*[Event(name="LoadCustomResourceBundleComplete")]*/
 	/**
 	 * 
@@ -39,7 +38,7 @@ package com.godpaper.as3.business.managers
 		//  CONSTANTS
 		//----------------------------------
 		public static const LOAD_CUSTOM_RESOURCE_BUNDLE_COMPLETE:String 	= "LoadCustomResourceBundleComplete";
-		private static const LOG:ILogger = LogUtil.getLogger(com.godpaper.as3.business.managers.ResourceManager);
+		private static const LOG:Logger = LogContext.getLogger(com.godpaper.as3.business.managers.ResourceManager);
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor

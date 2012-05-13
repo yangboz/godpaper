@@ -26,20 +26,24 @@ package
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import assets.DefaultEmbededAssets;
+	
 	import com.adobe.cairngorm.task.SequenceTask;
 	import com.godpaper.as3.business.factory.ChessFactoryBase;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.PieceConfig;
+	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.consts.FlexGlobals;
+	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.plugins.PluginUIComponent;
 	import com.godpaper.as3.tasks.CreateChessGasketTask;
 	import com.godpaper.as3.tasks.CreateChessPieceTask;
 	import com.godpaper.as3.tasks.CreateChessVoTask;
 	import com.godpaper.as3.utils.VersionController;
-	import com.godpaper.as3.configs.PluginConfig;
+	import com.godpaper.starling.views.components.ChessBoard;
 	import com.godpaper.starling.views.scenes.GameScene;
 	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.MiniMax;
@@ -65,16 +69,22 @@ package
 	import org.spicefactory.parsley.xml.XmlContextBuilder;
 	
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
+	import starling.display.Image;
 
 	/**
-	 * ApplicationBase.as class.   	
+	 * ApplicationBase.as class constructed with framework's workflow:
+	 * 1.preinitializeHandler;
+	 * 2.initializeHandler;
+	 * 3.creationCompleteHandler;
+	 * 4.applicationCompleteHandler;
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Apr 12, 2012 9:38:56 AM
 	 */   	 
-	[SWF(frameRate="60", width="320", height="480", backgroundColor="0x666666")]
+	[SWF(frameRate="60", width="320", height="480", backgroundColor="0xffffff")]
 //	[SWF(frameRate="60", width="768", height="1004", backgroundColor="0x666666")]//Default swf metadata.
 	public class ApplicationBase extends Sprite
 	{		
@@ -90,12 +100,14 @@ package
 		//For children dynamic factory config.
 //		[Bindable]protected var pcFactory:Class = PieceConfig.factory;
 		protected var pcFactory:Class = PieceConfig.factory;
-		//
+		//Views
 		public var pluginUIComponent:PluginUIComponent;
+		public var chessBoard:IChessBoard;
 		//
 		private var mStarling:Starling;
 		//Tasks
 		public var cleanUpSequenceTask:SequentialTaskGroup;
+		protected var startUpSequenceTask:SequenceTask;
 		//Signasl
 		public var resizeSig:Signal;//stage resize signal.
 		//----------------------------------
@@ -117,8 +129,6 @@ package
 		 * This app's context for Parsley.
 		 */
 		protected var mainContext:Context;
-		//
-		protected var startUpSequenceTask:SequenceTask;
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -133,6 +143,7 @@ package
 			super();
 			//
 			LOG.debug("preinitializeHandler@Constructor");
+			// turn to framework's workflow
 			preinitializeHandler();
 			//
 			stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -145,6 +156,8 @@ package
 			mStarling.simulateMultitouch = true;
 			mStarling.enableErrorChecking = false;
 			mStarling.start();
+			//Display stats.
+			mStarling.showStats = true;
 			// loader info.
 			this.loaderInfo.addEventListener(Event.COMPLETE, loaderInfoCompleteHandler);
 			// add to stage.
@@ -153,7 +166,6 @@ package
 			stage.stage3Ds[0].addEventListener(Event.CONTEXT3D_CREATE, onContextCreated);
 			// signals initialization.
 			this.resizeSig = new Signal(Object);
-			
 		} 
 		//
 		private function loaderInfoCompleteHandler(event:Event):void
@@ -162,7 +174,6 @@ package
 			//
 			this.stage.addEventListener(Event.RESIZE, stageResizeHandler, false, 0, true);
 			//
-			creationCompleteHandler();
 		}
 		//
 		private function stageResizeHandler(event:Event):void
@@ -177,6 +188,7 @@ package
 			//dispatch signal with size.
 			this.resizeSig.dispatch([stage.stageWidth,stage.stageHeight]);
 		}
+		//
 		private function addToStageHandler(event:Event):void
 		{
 			LOG.debug("initializeHandler@addToStage");
@@ -186,10 +198,11 @@ package
 			// parsley context
 			mainContext = XmlContextBuilder.build("ParsleyConfiguration.xml");
 			mainContext.addEventListener(ContextEvent.INITIALIZED, contextEventInitializedHandler);
-			//
+			// turn to framework's workflow
 			initializeHandler();
 			//Store this reference to FlexGlobals.topLevelApplication
 			FlexGlobals.topLevelApplication = this;
+			FlexGlobals.gameStage = mStarling.stage;
 		}
 		/**
 		 * Handler for Parsley ContextEvent.INITIALIZED event.
@@ -203,12 +216,15 @@ package
 		//
 		private function onContextCreated(event:Event):void
 		{
-			LOG.debug("applicationCompleteHandler@onContextCreated");
+			var driverIsSoftware:Boolean = Starling.context.driverInfo.toLowerCase().indexOf("software") != -1;
+			LOG.debug("applicationCompleteHandler@onContextCreated,driverInfo(software) is:",driverIsSoftware);
 			// set framerate to 30 in software mode
-			if (Starling.context.driverInfo.toLowerCase().indexOf("software") != -1)
-				Starling.current.nativeStage.frameRate = 30;
-			//
-			applicationCompleteHandler();
+			if (driverIsSoftware)
+			{
+				Starling.current.nativeStage.frameRate = 30;			
+			}
+			// turn to framework's workflow
+			creationCompleteHandler();
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -227,7 +243,7 @@ package
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		//		application1_preinitializeHandler
+		//		applicationBase_preinitializeHandler
 		/**
 		 * All kinds of view components initialization here.
 		 *
@@ -239,19 +255,19 @@ package
 			//config initialization here.
 			//config initialization here.
 			//about chess board:
-			BoardConfig.xLines=9;
-			BoardConfig.yLines=10;
+			BoardConfig.xLines=4;
+			BoardConfig.yLines=4;
 			BoardConfig.xOffset=50;
 			BoardConfig.yOffset=50;
 			BoardConfig.xAdjust=50;
-			BoardConfig.yAdjust=-1;
+			BoardConfig.yAdjust=50;
 			//about piece:
 			PieceConfig.factory = ChessFactoryBase;
 			//about plugin:
 			PluginConfig.mochiBoardID = "3a460211409897f4";
 			PluginConfig.mochiGameID = "47de4a85dd3e213a";
 		}
-		//application1_initializeHandler
+		//applicationBase_initializeHandler
 		/**
 		 * Game initialization here.
 		 *
@@ -265,7 +281,7 @@ package
 //			GameConfig.tollgateTips = ["baby intelligence","fellow intelligence","man intelligence","guru intelligence"];
 			GameConfig.turnFlag = DefaultConstants.FLAG_RED;
 		}
-		//  application1_creationCompleteHandler
+		//  applicationBase_creationCompleteHandler
 		/**
 		 * View(chess pieces/gaskets) components initialization here.
 		 *
@@ -274,6 +290,14 @@ package
 		 */		
 		protected function creationCompleteHandler():void
 		{
+			//Display chess board at first.
+			var chessBoardBackground:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
+//			this.chessBoard = new ChessBoard(chessBoardBackground);
+			this.chessBoard = new ChessBoard(null);
+			FlexGlobals.gameStage.addChild(starling.display.DisplayObject(this.chessBoard));
+			// plugin view init
+//			this.pluginUIComponent = new PluginUIComponent();
+//			this.addChild(starling.display.DisplayObject(this.pluginUIComponent));
 			//			//create chess gaskets.
 			//			//create chess piece
 			//			//create chess pieces' chessVO;
@@ -287,8 +311,10 @@ package
 			//			this.dumpFootSprint();
 			//Add version control context menu.
 			VersionController.getInstance(this);
+			// turn to framework's workflow
+			applicationCompleteHandler();
 		}
-		//  application1_applicationCompleteHandler
+		//  applicationBase_applicationCompleteHandler
 		/**
 		 * Game application start up here.
 		 *

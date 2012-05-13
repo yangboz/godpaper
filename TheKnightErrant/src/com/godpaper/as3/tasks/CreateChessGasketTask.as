@@ -18,6 +18,8 @@ package com.godpaper.as3.tasks
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	
+	import starling.display.DisplayObject;
+	
 
 	/**
 	 * CreateChessGasketTask.as class.
@@ -82,20 +84,21 @@ package com.godpaper.as3.tasks
 				for(var h:int=0;h<BoardConfig.xLines;h++)
 				{
 					//
-					var cGasket:IVisualElement = realFactoy.createChessGasket(new Point(h,v))
+					var cGasket:starling.display.DisplayObject = starling.display.DisplayObject(realFactoy.createChessGasket(new Point(h,v)));
 					if(cGasket)
 					{
-						FlexGlobals.topLevelApplication.addChild( cGasket as DisplayObject );
+						FlexGlobals.gameStage.addChild( cGasket );
 						//keep this reference to model.
 						ChessGasketsModel.getInstance().gaskets.sett(h,v,cGasket);
 					}
 				}
 			}
-			//plugin uicomponent at the top of game ui.
-			FlexGlobals.topLevelApplication.setChildIndex(
-				FlexGlobals.topLevelApplication.pluginUIComponent,
-				FlexGlobals.topLevelApplication.numChildren-1
-				);
+//TODO:plugin uicomponent at the top of game ui.
+//			var numChildren:int = FlexGlobals.gameStage.numChildren;
+//			FlexGlobals.topLevelApplication.setChildIndex(
+//				FlexGlobals.topLevelApplication.pluginUIComponent,
+//				numChildren-1
+//				);
 			//
 			this.complete();
 		}
