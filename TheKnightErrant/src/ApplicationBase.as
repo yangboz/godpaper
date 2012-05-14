@@ -46,6 +46,8 @@ package
 	import com.godpaper.as3.utils.VersionController;
 	import com.godpaper.starling.views.components.ChessBoard;
 	import com.godpaper.starling.views.scenes.GameScene;
+	import com.godpaper.tho.buiness.factory.ThoChessFactory;
+	import com.godpaper.tho.buiness.managers.ThoChessPieceManager;
 	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.MiniMax;
 	import com.lookbackon.AI.searching.RandomWalk;
@@ -264,8 +266,13 @@ package
 			BoardConfig.yAdjust=50;
 			//gasket config:
 //			GasketConfig.maxPoolSize = 16;
+			GasketConfig.tipsVisible = true;
 			//about piece:
-			PieceConfig.factory = ChessFactoryBase;
+			PieceConfig.factory = ThoChessFactory;
+			PieceConfig.maxPoolSizeBlue = 4;
+			PieceConfig.maxPoolSizeRed = 4;
+			PieceConfig.scaleX = 0.5;
+			PieceConfig.scaleY = 0.5;
 			//about plugin:
 			PluginConfig.mochiBoardID = "3a460211409897f4";
 			PluginConfig.mochiGameID = "47de4a85dd3e213a";
@@ -283,6 +290,7 @@ package
 //			GameConfig.tollgates = [RandomWalk,ShortSighted,AttackFalse,AttackFalse,MiniMax];
 //			GameConfig.tollgateTips = ["baby intelligence","fellow intelligence","man intelligence","guru intelligence"];
 			GameConfig.turnFlag = DefaultConstants.FLAG_RED;
+			GameConfig.chessPieceManager = new ThoChessPieceManager();
 		}
 		//  applicationBase_creationCompleteHandler
 		/**
@@ -307,7 +315,7 @@ package
 			//			//create chess pieces' omenVO;
 			this.startUpSequenceTask = new SequenceTask();
 			this.startUpSequenceTask.addChild(new CreateChessGasketTask());
-//			this.startUpSequenceTask.addChild(new CreateChessPieceTask());
+			this.startUpSequenceTask.addChild(new CreateChessPieceTask());
 //			this.startUpSequenceTask.addChild(new CreateChessVoTask());
 			this.startUpSequenceTask.start();
 			//			//init data struct.@see ChessPieceModel dump info.

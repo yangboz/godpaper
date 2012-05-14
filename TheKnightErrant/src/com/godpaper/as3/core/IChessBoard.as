@@ -26,8 +26,6 @@ package com.godpaper.as3.core
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.core.IVisualElement;
-	
 	import starling.display.Image;
 
 	/**
@@ -39,7 +37,7 @@ package com.godpaper.as3.core
 	 * @airVersion 3.2+
 	 * Created Apr 19, 2012 5:46:39 PM
 	 */
-	public interface IChessBoard extends  IVisualElement,IType
+	public interface IChessBoard extends IType
 	{
 		//--------------------------------------------------------------------------
 		//

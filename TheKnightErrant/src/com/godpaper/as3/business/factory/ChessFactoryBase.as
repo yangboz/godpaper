@@ -116,9 +116,9 @@ package com.godpaper.as3.business.factory
 			simpleChessPiece.name=this.chessPieceName;
 			simpleChessPiece.type=chessPieceType;
 			//			simpleChessPiece.swfLoader.source = String("./assets/").concat(chessPieceType,".swf");
-			simpleChessPiece.swfLoader.texture=this.chessPieceSource as Texture;
-			simpleChessPiece.swfLoader.scaleX= PieceConfig.scaleX;
-			simpleChessPiece.swfLoader.scaleY= PieceConfig.scaleY;
+//			simpleChessPiece.swfLoader.texture=this.chessPieceSource as Texture;
+//			simpleChessPiece.swfLoader.scaleX= PieceConfig.scaleX;
+//			simpleChessPiece.swfLoader.scaleY= PieceConfig.scaleY;
 			//set flag to identify.
 			simpleChessPiece.flag=DefaultConstants.FLAG_BLUE;
 			//

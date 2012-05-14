@@ -26,18 +26,18 @@ package com.godpaper.as3.configs
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private static var _factory:Class;
-		private static var _usingDragProxy:Boolean;
-		private static var _scaleX:Number=1.0;
-		private static var _scaleY:Number=1.0;
+		public static var factory:Class;
+		public static var usingDragProxy:Boolean;
+		public static var scaleX:Number=1.0;
+		public static var scaleY:Number=1.0;
 		//ObjectPool
 		private static var _maxPoolSizeBlue:uint=16;
 		private static var _maxPoolSizeRed:uint=16;
 		//PiecesBox data
 		private static var _bluePieces:Vector.<ConductVO> = new Vector.<ConductVO>;
 		private static var _redPieces:Vector.<ConductVO> = new Vector.<ConductVO>;
-		private static var _bluePiecesBox:IPiecesBox;
-		private static var _redPiecesBox:IPiecesBox;
+		public static var bluePiecesBox:IPiecesBox;
+		public static var redPiecesBox:IPiecesBox;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -47,26 +47,6 @@ package com.godpaper.as3.configs
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//	
-		public static function get redPiecesBox():IPiecesBox
-		{
-			return _redPiecesBox;
-		}
-
-		public static function set redPiecesBox(value:IPiecesBox):void
-		{
-			_redPiecesBox = value;
-		}
-		//
-		public static function get bluePiecesBox():IPiecesBox
-		{
-			return _bluePiecesBox;
-		}
-
-		public static function set bluePiecesBox(value:IPiecesBox):void
-		{
-			_bluePiecesBox = value;
-		}
 		//
 		public static function get redPieces():Vector.<ConductVO>
 		{
@@ -76,49 +56,6 @@ package com.godpaper.as3.configs
 		public static function get bluePieces():Vector.<ConductVO>
 		{
 			return _bluePieces;
-		}
-		//
-		public static function get usingDragProxy():Boolean
-		{
-			return _usingDragProxy;
-		}
-
-		public static function set usingDragProxy(value:Boolean):void
-		{
-			_usingDragProxy=value;
-		}
-
-		//
-		public static function get factory():Class
-		{
-			return _factory;
-		}
-
-		public static function set factory(value:Class):void
-		{
-			_factory=value;
-		}
-
-		//
-		public static function get scaleY():Number
-		{
-			return _scaleY;
-		}
-
-		public static function set scaleY(value:Number):void
-		{
-			_scaleY=value;
-		}
-
-		//
-		public static function get scaleX():Number
-		{
-			return _scaleX;
-		}
-
-		public static function set scaleX(value:Number):void
-		{
-			_scaleX=value;
 		}
 		//
 		public static function get growthValue():uint
@@ -166,9 +103,7 @@ package com.godpaper.as3.configs
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PieceConfig()
-		{
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods

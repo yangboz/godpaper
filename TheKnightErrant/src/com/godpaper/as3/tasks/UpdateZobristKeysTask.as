@@ -9,9 +9,9 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.model.ZobristKeysModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.ZobristKeyVO;
-	import com.godpaper.as3.utils.LogUtil;
 	
-	import mx.logging.ILogger;
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 	
 	
 	/**
@@ -34,7 +34,7 @@ package com.godpaper.as3.tasks
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(UpdateZobristKeysTask);
+		private static const LOG:Logger = LogContext.getLogger(UpdateZobristKeysTask);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

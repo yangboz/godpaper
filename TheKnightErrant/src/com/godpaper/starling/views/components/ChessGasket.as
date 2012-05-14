@@ -68,7 +68,7 @@ package com.godpaper.starling.views.components
 	 * @airVersion 3.2+
 	 * Created Apr 18, 2012 9:47:38 AM
 	 */   	 
-	public class ChessGasket extends Button implements IChessGasket
+	public class ChessGasket extends RoundButton implements IChessGasket
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -246,8 +246,8 @@ package com.godpaper.starling.views.components
 			this.tipsVisible = GasketConfig.tipsVisible;
 			var tipText:String = this.tipsVisible?text:"";
 			//Default texture setting here.
-			var defaultUpState:Texture;
-			if(upState==null)
+			var defaultUpState:Texture = upState;
+			if(defaultUpState==null)
 			{
 				defaultUpState = this.getUpStateTexture();
 //				var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();

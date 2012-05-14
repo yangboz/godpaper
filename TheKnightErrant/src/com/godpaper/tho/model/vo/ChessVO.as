@@ -19,37 +19,29 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.components
+package com.godpaper.tho.model.vo
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.core.IVisualElement;
+	import com.godpaper.as3.impl.AbstractChessVO;
+	import com.godpaper.as3.model.ChessPiecesModel;
 	
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 	
-	import mx.utils.NameUtil;
-	import mx.utils.UIDUtil;
-	
-	import starling.display.Button;
-	import starling.display.DisplayObject;
-	import starling.events.Touch;
-	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
-	import starling.textures.Texture;
 	
 	/**
-	 * RoundButton.as class.   	
+	 * TwhVO.as class.The "two hit one" chess piece's value object.  	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 16, 2012 1:42:24 PM
+	 * Created May 14, 2012 2:10:57 PM
 	 */   	 
-	public class RoundButton extends Button implements IVisualElement
+	public class ChessVO extends AbstractChessVO
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -60,36 +52,13 @@ package com.godpaper.starling.views.components
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:Logger = LogContext.getLogger(ChessVO);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//----------------------------------
-		//  uid
-		//----------------------------------
-		private var _uid:String;
-		/**
-		 *  The unique identifier for this object.
-		 *  
-		 *  @langversion 3.0
-		 *  @playerversion Flash 9
-		 *  @playerversion AIR 1.1
-		 *  @productversion Flex 3
-		 */
-		public function get uid():String
-		{
-			return _uid;
-		}
 		
-		/**
-		 *  @private
-		 */
-		public function set uid(value:String):void
-		{
-			_uid = value;
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -101,51 +70,56 @@ package com.godpaper.starling.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function RoundButton(upState:Texture, text:String="", downState:Texture=null)
+		public function ChessVO(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0, identifier:String="")
 		{
-			//Initialize the uid
-			this.uid = UIDUtil.createUID();
-			//
-			super(upState, text, downState);
+			super(width, height, rowIndex, colIndex, flag, identifier);
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function hitTest(localPoint:Point, forTouch:Boolean=false):DisplayObject
+		//
+		override public function initialization(rowIndex:int, colIndex:int, flag:int=0,identifier:String=""):void
 		{
-			// When the user touches the screen, this method is used to find out if an object was 
-			// hit. By default, this method uses the bounding box, but by overriding it, 
-			// we can change the box (rectangle) to a circle (or whatever necessary).
-			
-			// when the hit test is done to check if a touch is hitting the object, invisible or
-			// untouchable objects must cause the hit test to fail.
-			if (forTouch && (!visible || !touchable)) 
-				return null; 
-			
-			// get center of button
-			var bounds:Rectangle = this.bounds;
-			var centerX:Number = bounds.width / 2;
-			var centerY:Number = bounds.height / 2;
-			
-			// calculate distance of localPoint to center. 
-			// we keep it squared, since we want to avoid the 'sqrt()'-call.
-			var sqDist:Number = Math.pow(localPoint.x - centerX, 2) + 
-				Math.pow(localPoint.y - centerY, 2);
-			
-			// when the squared distance is smaller than the squared radius, 
-			// the point is inside the circle
-			var radius:Number = bounds.width / 2;
-			if (sqDist < Math.pow(radius, 2)) return this;
-			else return null;
+			//@see http://www.godpaper.com/godpaper/index.php/%E5%85%AD%E5%AD%90%E6%A3%8B
+			// *
+			// *s*
+			// *
+			//Notice:Don't worry about bitboard over-fence issues,that it wouldbe be handle it as default.
+			//about occupies.
+			if(colIndex<3)
+			{
+				this.occupies.setBitt(rowIndex,colIndex+1,true);
+			}
+			if(colIndex>0)
+			{
+				this.occupies.setBitt(rowIndex,colIndex-1,true);
+			}
+			if(rowIndex<3)
+			{
+				this.occupies.setBitt(rowIndex+1,colIndex,true);
+			}
+			if(rowIndex>0)
+			{
+				this.occupies.setBitt(rowIndex-1,colIndex,true);
+			}
+			LOG.info("occupies:{0}",this.occupies.dump());
+			//about legal moves.
+			LOG.info(ChessPiecesModel.getInstance().allPieces.dump());
+			this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().allPieces));
+			//
+			LOG.info("moves:{0}",this.moves.dump());
+			//blocker
+			//about attacked captures.
+			//about defends.
 		}
-		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
