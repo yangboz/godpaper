@@ -24,13 +24,13 @@ package com.godpaper.as3.configs
 		public static var width:Number=48;
 		public static var height:Number=48;
 		public static var borderVisible:Boolean = false;//You'd beter set true for the purpose of debug view.
-		public static var backgroundAlpha:Number=0.2;
+		public static var backgroundAlpha:Number=0.1;
 		public static var contentBackgroundAlpha:Number=0.0;
 		public static var borderAlpha:Number=1;
 		//ObjectPool
-		private static var _maxPoolSize:uint=100;
+		public static var maxPoolSize:uint=100;
 		//toolTips
-		public static var tipsVisible:Boolean = true;
+		public static var tipsVisible:Boolean = false;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -44,16 +44,6 @@ package com.godpaper.as3.configs
 		public static function get growthValue():uint
 		{
 			return maxPoolSize>>1;
-		}
-		//
-		public static function get maxPoolSize():uint
-		{
-			return _maxPoolSize;
-		}
-		
-		public static function set maxPoolSize(value:uint):void
-		{
-			_maxPoolSize = value;
 		}
 		//--------------------------------------------------------------------------
 		//

@@ -41,6 +41,7 @@ package com.godpaper.starling.views.components
 	
 	import flash.display.BitmapData;
 	import flash.display.Shape;
+	import flash.display.Sprite;
 	import flash.geom.Point;
 	
 	import org.spicefactory.lib.logging.LogContext;
@@ -67,7 +68,7 @@ package com.godpaper.starling.views.components
 	 * @airVersion 3.2+
 	 * Created Apr 18, 2012 9:47:38 AM
 	 */   	 
-	public class ChessGasket extends Button implements IChessGasket
+	public class ChessGasket extends RoundButton implements IChessGasket
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -83,6 +84,7 @@ package com.godpaper.starling.views.components
 		private var _backgroundAlpha:Number;
 		private var _contentBackgroundAlpha:Number;
 		private var _borderAlpha:Number;
+		private var _toolTip:String;
 		private var _tipsVisible:Boolean;//toolTips
 		//----------------------------------
 		//  CONSTANTS
@@ -241,16 +243,18 @@ package com.godpaper.starling.views.components
 			this.borderAlpha = GasketConfig.borderAlpha;
 			this.borderVisible = GasketConfig.borderVisible;
 			this.contentBackgroundAlpha = GasketConfig.contentBackgroundAlpha;
+			this.tipsVisible = GasketConfig.tipsVisible;
+			var tipText:String = this.tipsVisible?text:"";
 			//Default texture setting here.
-			var defaultUpState:Texture;
-			if(upState==null)
+			var defaultUpState:Texture = upState;
+			if(defaultUpState==null)
 			{
 				defaultUpState = this.getUpStateTexture();
 //				var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
 //				defaultUpState = atlas.getTexture(DefaultConstants.BLUE_BISHOP);
 			}
 			//
-			super(defaultUpState, text, downState);
+			super(defaultUpState, tipText, downState);
 			//
 			this.addEventListener(Event.COMPLETE,creationCompleteHandler);
 		}
@@ -358,9 +362,10 @@ package com.godpaper.starling.views.components
 //			polygon.rotation = 30;
 //			addChild(polygon);
 			//Draw a circle shape
-			var shape:Shape = new Shape();
+			var shape:Sprite = new Sprite();
+//			var shape:Shape = new Shape();
 			shape.graphics.beginFill(Color.BLACK,this.backgroundAlpha);
-			shape.graphics.lineStyle(1,Color.FUCHSIA,this.borderAlpha);
+			shape.graphics.lineStyle(1,Color.FUCHSIA,this.borderVisible?this.borderAlpha:0);
 			var radius:Number = Math.min(GasketConfig.width,GasketConfig.height)/2;
 //			shape.graphics.drawCircle(GasketConfig.width/2,GasketConfig.height/2,radius);
 			shape.graphics.drawRect(0,0,GasketConfig.width,GasketConfig.height);

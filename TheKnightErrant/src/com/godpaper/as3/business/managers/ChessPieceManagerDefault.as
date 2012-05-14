@@ -64,7 +64,7 @@ package com.godpaper.as3.business.managers
 		private var _previousMementos:Array=[];
 		private var _nextMementos:Array=[];
 		//flag is checked.
-		[Bindable]
+//		[Bindable]
 		private var _isChecking:Boolean=false;
 		//----------------------------------
 		//  CONSTANTS
@@ -422,15 +422,15 @@ package com.godpaper.as3.business.managers
 					{
 						if(ChessGasketsModel.getInstance().gaskets.gett(h, v))
 						{
-							(ChessGasketsModel.getInstance().gaskets.gett(h, v)as ChessGasket).setStyle("backgroundColor", 0xff0000);
+//							(ChessGasketsModel.getInstance().gaskets.gett(h, v)as ChessGasket).setStyle("backgroundColor", 0xff0000);
 						}
 					}
 					else
 					{
 						if(ChessGasketsModel.getInstance().gaskets.gett(h, v))
 						{
-							(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).clearStyle("backgroundColor");
-							(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[];
+//							(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).clearStyle("backgroundColor");
+//							(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[];
 						}
 					}
 				}
@@ -453,7 +453,7 @@ package com.godpaper.as3.business.managers
 					{
 						if(ChessGasketsModel.getInstance().gaskets.gett(h, v))
 						{
-							(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[new GlowFilter()];
+//							(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[new GlowFilter()];
 						}	
 					}
 				}

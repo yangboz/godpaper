@@ -8,6 +8,7 @@ package com.godpaper.as3.tasks
 	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.as3.business.factory.ChessFactoryBase;
 	import com.godpaper.as3.configs.BoardConfig;
+	import com.godpaper.as3.consts.FlexGlobals;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
@@ -84,12 +85,15 @@ package com.godpaper.as3.tasks
 				for(var vv:int=0;vv<BoardConfig.yLines;vv++)
 				{
 					var iChessPiece:IChessPiece = realFactoy.createChessPiece(new Point(hh,vv));
+					var cpDisplayObject:DisplayObject = DisplayObject(realFactoy.createChessPiece(new Point(hh,vv)));
+					//
 					if(iChessPiece!=null)
 					{
 //						trace("index:",vv*CcjConstants.BOARD_V_LINES+hh);
 						var ecGasket:ChessGasket = ChessGasketsModel.getInstance().gaskets.gett(hh,vv) as ChessGasket;
 						ecGasket.chessPiece = iChessPiece;
 //						ecGasket.addElement( iChessPiece );
+						ecGasket.addChild(cpDisplayObject);
 						//
 						(iChessPiece as DisplayObject).x = 0;
 						(iChessPiece as DisplayObject).y = 0;

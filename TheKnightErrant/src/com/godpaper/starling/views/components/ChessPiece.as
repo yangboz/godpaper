@@ -84,7 +84,7 @@ package com.godpaper.starling.views.components
 		//
 		private var textColor:String=DefaultConstants.COLOR_BLUE; //default is blue.
 		//pre-define this swf loader for playing the drag proxy(image/movie) effect. 
-		public var swfLoader:Image;
+//		public var swfLoader:Image;
 		//models
 		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 		//----------------------------------
@@ -202,6 +202,7 @@ package com.godpaper.starling.views.components
 		{
 			_label=value;
 		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -215,12 +216,15 @@ package com.godpaper.starling.views.components
 		//--------------------------------------------------------------------------
 		public function ChessPiece(upState:Texture=null, text:String="", downState:Texture=null)
 		{
+			//Binding the global configurations.
+			this.scaleX = PieceConfig.scaleX;
+			this.scaleY = PieceConfig.scaleY;
 			//Default texture setting here.
-			var defaultUpState:Texture;
-			if(upState==null)
+			var defaultUpState:Texture = upState;
+			if(defaultUpState==null)
 			{
 				var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
-				defaultUpState = atlas.getTexture(DefaultConstants.BLUE_KNIGHT);
+				defaultUpState = atlas.getTexture(DefaultConstants.BLUE);
 			}
 			super(defaultUpState, text, downState);
 			//

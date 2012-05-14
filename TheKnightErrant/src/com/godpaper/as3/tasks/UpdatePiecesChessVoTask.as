@@ -9,14 +9,13 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.as3.views.components.ChessPiece;
+	import com.godpaper.starling.views.components.ChessPiece;
 
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 
-	import mx.logging.ILogger;
-
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 	/**
 	 * UpdatePiecesChessVoTask.as class.
 	 * @author yangboz
@@ -35,7 +34,7 @@ package com.godpaper.as3.tasks
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(UpdatePiecesChessVoTask);
+		private static const LOG:Logger = LogContext.getLogger(UpdatePiecesChessVoTask);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

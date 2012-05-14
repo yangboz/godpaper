@@ -13,13 +13,12 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.as3.views.components.ChessGasket;
-	import com.godpaper.as3.views.components.ChessPiece;
+	import com.godpaper.starling.views.components.ChessGasket;
+	import com.godpaper.starling.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
-
-	import mx.core.IVisualElement;
-	import mx.logging.ILogger;
+	
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 
 	/**
 	 * UpdateChessPiecesTask.as class.
@@ -39,7 +38,7 @@ package com.godpaper.as3.tasks
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(UpdateChessPiecesTask);
+		private static const LOG:Logger = LogContext.getLogger(UpdateChessPiecesTask);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -77,21 +76,24 @@ package com.godpaper.as3.tasks
 		//--------------------------------------------------------------------------
 		override protected function performTask():void
 		{
-			//TODO:
 			var cGasket:ChessGasket = 
 				ChessGasketsModel.getInstance().gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
 			//
-			if(cGasket.numElements>=1)
+//			if(cGasket.numElements>=1)
+			if(cGasket.numChildren>=1)	
 			{
 				//TODO:chess piece eat off.
-				var removedPiece:ChessPiece = cGasket.getElementAt(0) as ChessPiece;
+//				var removedPiece:ChessPiece = cGasket.getElementAt(0) as ChessPiece;
+				var removedPiece:ChessPiece = cGasket.getChildAt(0) as ChessPiece;
 				var removedIndex:int = GameConfig.chessPieceManager.calculatePieceIndex(removedPiece);
 				LOG.info("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
-				if(ChessPiece(cGasket.getElementAt(0)).label==DefaultPiecesConstants.BLUE_MARSHAL.label)
+//				if(ChessPiece(cGasket.getElementAt(0)).label==DefaultPiecesConstants.BLUE_MARSHAL.label)
+				if(ChessPiece(cGasket.getChildAt(0)).label==DefaultPiecesConstants.BLUE_MARSHAL.label)	
 				{
 					GameConfig.gameStateManager.humanWin();	
 				}
-				if(ChessPiece(cGasket.getElementAt(0)).label==DefaultPiecesConstants.RED_MARSHAL.label)
+//				if(ChessPiece(cGasket.getElementAt(0)).label==DefaultPiecesConstants.RED_MARSHAL.label)
+				if(ChessPiece(cGasket.getChildAt(0)).label==DefaultPiecesConstants.RED_MARSHAL.label)
 				{
 					GameConfig.gameStateManager.computerWin();
 				}

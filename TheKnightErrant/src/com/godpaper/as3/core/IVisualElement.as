@@ -21,6 +21,8 @@
  */
 package com.godpaper.as3.core
 {
+	import mx.core.IUID;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -35,7 +37,7 @@ package com.godpaper.as3.core
 	 * @airVersion 3.2+
 	 * Created Apr 18, 2012 1:53:12 PM
 	 */   	 
-	public interface IVisualElement
+	public interface IVisualElement extends IUID
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -52,7 +54,12 @@ package com.godpaper.as3.core
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		//
+		function set x(value:Number):void;
+		function get x():Number;
+		//
+		function set y(value:Number):void;
+		function get y():Number;
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
