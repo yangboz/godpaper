@@ -32,6 +32,7 @@ package
 	import com.godpaper.as3.business.factory.ChessFactoryBase;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
@@ -261,6 +262,8 @@ package
 			BoardConfig.yOffset=50;
 			BoardConfig.xAdjust=50;
 			BoardConfig.yAdjust=50;
+			//gasket config:
+//			GasketConfig.maxPoolSize = 16;
 			//about piece:
 			PieceConfig.factory = ChessFactoryBase;
 			//about plugin:

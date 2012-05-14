@@ -165,11 +165,13 @@ package com.godpaper.as3.business.factory
 			var myChessGasket:ChessGasket= ChessGasketsPool.get();
 			myChessGasket.position=position;
 			myChessGasket.x=position.x * BoardConfig.xOffset - myChessGasket.width / 2 + BoardConfig.xAdjust;
-			myChessGasket.y=position.y * BoardConfig.yOffset + BoardConfig.yAdjust;
+			myChessGasket.y=position.y * BoardConfig.yOffset - myChessGasket.height / 2+ BoardConfig.yAdjust;
 			if(GasketConfig.tipsVisible)
 			{
-				chessGasketTips = position.toString();
+//				chessGasketTips = position.toString();
 //				myChessGasket.toolTip=chessGasketTips;
+				chessGasketTips = "".concat(position.x,",",position.y);
+				myChessGasket.text = chessGasketTips;
 			}
 			return myChessGasket;
 		}

@@ -215,6 +215,9 @@ package com.godpaper.starling.views.components
 		//--------------------------------------------------------------------------
 		public function ChessPiece(upState:Texture=null, text:String="", downState:Texture=null)
 		{
+			//Binding the global configurations.
+			this.scaleX = PieceConfig.scaleX;
+			this.scaleY = PieceConfig.scaleY;
 			//Default texture setting here.
 			var defaultUpState:Texture;
 			if(upState==null)
