@@ -53,8 +53,9 @@ package com.godpaper.as3.tasks
 		//--------------------------------------------------------------------------
 		public function UpdatePiecesOmenVoTask()
 		{
-			//TODO: implement function
 			super();
+			//Set properties
+			this.label = "UpdatePiecesOmenVoTask";
 		}     	
 		//--------------------------------------------------------------------------
 		//

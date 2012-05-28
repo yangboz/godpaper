@@ -276,11 +276,11 @@ package com.godpaper.starling.views.components
 			// event listener method stub
 			//			this.addEventListener(TouchEvent.TOUCH, dragEnterHandler);
 			//			this.addEventListener(TouchEvent.TOUCH, dragDropHandler);
-			this.addEventListener(TouchEvent.TOUCH,touchHandler);
+//			this.addEventListener(TouchEvent.TOUCH,touchHandler);
 			//once piece add or remove,maybe check event triggled.
 			this.addEventListener(Event.ADDED_TO_STAGE, elementAddHandler);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, elementRemoveHandler);
-			this.addEventListener(Event.TRIGGERED,mouseClickHandler);
+//			this.addEventListener(Event.TRIGGERED,mouseClickHandler);
 		}
 		//dragEnterHandler
 		protected function dragEnterHandler(event:TouchEvent):void
@@ -401,7 +401,6 @@ package com.godpaper.starling.views.components
 				case TouchPhase.HOVER:
 					break;
 				case TouchPhase.MOVED:
-					
 					break;
 				case TouchPhase.ENDED:
 					//delegate to drag drop handler

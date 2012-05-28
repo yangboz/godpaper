@@ -1,5 +1,7 @@
 package com.godpaper.as3.business.factory
 {
+	import assets.DefaultEmbededAssets;
+	
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
@@ -25,6 +27,7 @@ package com.godpaper.as3.business.factory
 	import org.spicefactory.lib.logging.Logger;
 	
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 
 	//--------------------------------------------------------------------------
 	//
@@ -111,14 +114,14 @@ package com.godpaper.as3.business.factory
 			{
 				simpleChessPiece = BlueChessPiecesPool.get();
 			}
-			//
+			//Set properties
 			simpleChessPiece.label=this.chessPieceLabel;
 			simpleChessPiece.name=this.chessPieceName;
 			simpleChessPiece.type=chessPieceType;
-			//			simpleChessPiece.swfLoader.source = String("./assets/").concat(chessPieceType,".swf");
-//			simpleChessPiece.swfLoader.texture=this.chessPieceSource as Texture;
-//			simpleChessPiece.swfLoader.scaleX= PieceConfig.scaleX;
-//			simpleChessPiece.swfLoader.scaleY= PieceConfig.scaleY;
+			//Set texture atlas
+			var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
+			simpleChessPiece.upState = atlas.getTexture(chessPieceType);
+			simpleChessPiece.downState = atlas.getTexture(chessPieceType);
 			//set flag to identify.
 			simpleChessPiece.flag=DefaultConstants.FLAG_BLUE;
 			//
@@ -146,7 +149,7 @@ package com.godpaper.as3.business.factory
 			{
 				//data
 				simpleChessPiece.position=position;
-				LOG.debug("Anew chess piece has been created@{0}",position);
+				LOG.debug("Anew chess piece has been created@{0},type:{1},name:{2},value:{3},label:{4}",position,chessPieceType,chessPieceName,chessPieceValue,chessPieceLabel);
 				return simpleChessPiece as IChessPiece;
 			}
 			return null;
@@ -173,6 +176,7 @@ package com.godpaper.as3.business.factory
 				chessGasketTips = "".concat(position.x,",",position.y);
 				myChessGasket.text = chessGasketTips;
 			}
+			LOG.debug("Anew chess gasket has been created@{0},label:{1}",position,chessGasketTips);
 			return myChessGasket;
 		}
 

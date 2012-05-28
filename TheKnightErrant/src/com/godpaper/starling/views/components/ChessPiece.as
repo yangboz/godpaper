@@ -34,6 +34,7 @@ package com.godpaper.starling.views.components
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.consts.FlexGlobals;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.model.ChessPiecesModel;
@@ -43,7 +44,9 @@ package com.godpaper.starling.views.components
 	import com.lookbackon.AI.FSM.Message;
 	import com.lookbackon.ds.BitBoard;
 	
+	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import flash.media.Sound;
 	
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.Logger;
@@ -87,6 +90,8 @@ package com.godpaper.starling.views.components
 //		public var swfLoader:Image;
 		//models
 		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+		//sound effect
+		private var cpMoveSound:Sound;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -216,9 +221,6 @@ package com.godpaper.starling.views.components
 		//--------------------------------------------------------------------------
 		public function ChessPiece(upState:Texture=null, text:String="", downState:Texture=null)
 		{
-			//Binding the global configurations.
-			this.scaleX = PieceConfig.scaleX;
-			this.scaleY = PieceConfig.scaleY;
 			//Default texture setting here.
 			var defaultUpState:Texture = upState;
 			if(defaultUpState==null)
@@ -228,7 +230,19 @@ package com.godpaper.starling.views.components
 			}
 			super(defaultUpState, text, downState);
 			//
-			this.addEventListener(Event.COMPLETE,creationCompleteHandler);
+//			this.addEventListener(Event.COMPLETE,creationCompleteHandler);
+			this.addEventListener(Event.ROOT_CREATED,creationCompleteHandler);
+			//Binding the global configurations.
+			this.scaleX = PieceConfig.scaleX;
+			this.scaleY = PieceConfig.scaleY;
+			//Set properties
+			var MoveSound:Class = DefaultEmbededAssets.SOUND_CP_MOVE;
+			this.cpMoveSound = new MoveSound();
+			//once piece add or remove,maybe check event triggled.
+			this.addEventListener(Event.REMOVED_FROM_STAGE, elementRemoveHandler);
+			this.addEventListener(Event.TRIGGERED,mouseClickHandler);
+//			this.addEventListener(Event.ADDED_TO_STAGE, elementAddHandler);
+			this.addEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
 		}
 		
 		//--------------------------------------------------------------------------
@@ -256,6 +270,13 @@ package com.godpaper.starling.views.components
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
+		//addToStageHandler
+		protected function addToStageHandler(event:Event):void
+		{
+			//
+			this.addEventListener(TouchEvent.TOUCH,touchHandler);
+			LOG.debug("starling.events.Event,target:{0}", event.target);
+		}
 		//creationCompleteHandler
 		protected function creationCompleteHandler(event:Event):void
 		{
@@ -269,16 +290,14 @@ package com.godpaper.starling.views.components
 			// event listener method stub
 //			this.addEventListener(TouchEvent.TOUCH, dragEnterHandler);
 //			this.addEventListener(TouchEvent.TOUCH, dragDropHandler);
-			this.addEventListener(TouchEvent.TOUCH,touchHandler);
-			//once piece add or remove,maybe check event triggled.
-			this.addEventListener(Event.ADDED_TO_STAGE, elementAddHandler);
-			this.addEventListener(Event.REMOVED_FROM_STAGE, elementRemoveHandler);
-			this.addEventListener(Event.TRIGGERED,mouseClickHandler);
 		}
 		//
 		protected function elementAddHandler(event:Event):void
 		{
+			//
+			this.addEventListener(TouchEvent.TOUCH,touchHandler);
 			LOG.debug("starling.events.Event,target:{0}", event.target);
+			
 			//renew ChessPiece's position.
 			//				ChessPiece(event.element).position = this.position;
 			//clear gasket indicate effect.
@@ -368,27 +387,33 @@ package com.godpaper.starling.views.components
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function touchHandler(event:TouchEvent):void
+		public function touchHandler(event:TouchEvent):void
 		{
 			const touch:Touch = event.getTouch(this);
 			//
-			this.x = touch.globalX;
-			this.y = touch.globalY;
+			var position:Point = touch.getLocation(FlexGlobals.gameStage);
+			var target:ChessPiece = event.target as ChessPiece;
+			//
 			switch(touch.phase)
 			{
 				case TouchPhase.BEGAN:
+					//Play sound effect.
+					this.cpMoveSound.play();
 					break;
 				case TouchPhase.HOVER:
 					break;
 				case TouchPhase.MOVED:
 					//delegate to mouse down handler
-					mouseDownHandler(event);
+					target.x = position.x - target.width/2;
+					target.y = position.y - target.height/2;
 					break;
 				case TouchPhase.ENDED:
+					//End sound effect.
+					this.cpMoveSound.close();
 					break;
 				case TouchPhase.STATIONARY:
 					//delegate to mouse click handler
-					mouseClickHandler(event);
+//					mouseClickHandler(event);
 					break;
 				default:
 					break;

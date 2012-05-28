@@ -1,1 +1,1 @@
-*Upgrade the starling version from 1.0 to 1.1;
+[NEW]:Upgrade the starling version from 1.0 to 1.1;

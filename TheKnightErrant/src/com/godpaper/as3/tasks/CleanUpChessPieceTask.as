@@ -58,8 +58,8 @@ package com.godpaper.as3.tasks
 		//--------------------------------------------------------------------------
 		public function CleanUpChessPieceTask()
 		{
-			//TODO: implement function
 			super();
+			//Set properties
 		}     	
 		//--------------------------------------------------------------------------
 		//

@@ -169,6 +169,7 @@ package
 			stage.stage3Ds[0].addEventListener(Event.CONTEXT3D_CREATE, onContextCreated);
 			// signals initialization.
 			this.resizeSig = new Signal(Object);
+			//
 		} 
 		//
 		private function loaderInfoCompleteHandler(event:Event):void
@@ -267,12 +268,13 @@ package
 			//gasket config:
 //			GasketConfig.maxPoolSize = 16;
 			GasketConfig.tipsVisible = true;
+			GasketConfig.backgroundAlpha = 0.0;
 			//about piece:
 			PieceConfig.factory = ThoChessFactory;
-			PieceConfig.maxPoolSizeBlue = 4;
-			PieceConfig.maxPoolSizeRed = 4;
-			PieceConfig.scaleX = 0.5;
-			PieceConfig.scaleY = 0.5;
+			PieceConfig.maxPoolSizeBlue = 6;
+			PieceConfig.maxPoolSizeRed = 6;
+			PieceConfig.scaleX = .5;
+			PieceConfig.scaleY = .5;
 			//about plugin:
 			PluginConfig.mochiBoardID = "3a460211409897f4";
 			PluginConfig.mochiGameID = "47de4a85dd3e213a";
@@ -314,6 +316,7 @@ package
 			//			//create chess pieces' chessVO;
 			//			//create chess pieces' omenVO;
 			this.startUpSequenceTask = new SequenceTask();
+			this.startUpSequenceTask.label = "startUpSequenceTask";
 			this.startUpSequenceTask.addChild(new CreateChessGasketTask());
 			this.startUpSequenceTask.addChild(new CreateChessPieceTask());
 //			this.startUpSequenceTask.addChild(new CreateChessVoTask());

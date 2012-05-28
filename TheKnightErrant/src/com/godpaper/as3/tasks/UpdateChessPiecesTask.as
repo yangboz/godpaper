@@ -58,8 +58,9 @@ package com.godpaper.as3.tasks
 		//--------------------------------------------------------------------------
 		public function UpdateChessPiecesTask(conductVO:ConductVO)
 		{
-			//TODO: implement function
 			super();
+			//Set properties
+			this.label = "UpdateChessPiecesTask";
 			//
 			this.conductVO = conductVO;
 		}     	

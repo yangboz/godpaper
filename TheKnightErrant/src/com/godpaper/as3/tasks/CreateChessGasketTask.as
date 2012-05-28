@@ -59,8 +59,9 @@ package com.godpaper.as3.tasks
 		//--------------------------------------------------------------------------
 		public function CreateChessGasketTask()
 		{
-			//TODO: implement function
 			super();
+			//Set properties
+			this.label = "CreateChessGasketTask";
 		}     	
 		//--------------------------------------------------------------------------
 		//

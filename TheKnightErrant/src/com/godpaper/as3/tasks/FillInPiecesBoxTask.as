@@ -14,16 +14,13 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.utils.MathUtil;
-	import com.godpaper.as3.views.components.ChessGasket;
-	import com.godpaper.as3.views.components.PiecesBox;
+	import com.godpaper.starling.views.components.ChessGasket;
+	import com.godpaper.starling.views.components.PiecesBox;
 	
 	import flash.geom.Point;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	
-	import mx.core.FlexGlobals;
-	
-	import spark.components.Application;
 
 	/**
 	 * FillInPiecesBoxTask.as class.   	
@@ -64,6 +61,8 @@ package com.godpaper.as3.tasks
 		public function FillInPiecesBoxTask()
 		{
 			super();
+			//Set properties
+			this.label = "FillInPiecesBoxTask";
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -83,7 +82,8 @@ package com.godpaper.as3.tasks
 				var iChessPiece:IChessPiece = realFactoy.createChessPiece(defaultPoint,DefaultConstants.FLAG_BLUE);
 				if(iChessPiece!=null)
 				{
-					(PieceConfig.bluePiecesBox as PiecesBox).addElement( iChessPiece );
+//					(PieceConfig.bluePiecesBox as PiecesBox).addElement( iChessPiece );
+					(PieceConfig.bluePiecesBox as PiecesBox).addChild( iChessPiece );
 					//
 					iChessPiece.x = getRandomX((PieceConfig.bluePiecesBox as PiecesBox));
 					iChessPiece.y = getRandomY((PieceConfig.bluePiecesBox as PiecesBox));
@@ -96,7 +96,8 @@ package com.godpaper.as3.tasks
 				var jChessPiece:IChessPiece = realFactoy.createChessPiece(defaultPoint,DefaultConstants.FLAG_RED);
 				if(jChessPiece!=null)
 				{
-					(PieceConfig.redPiecesBox as PiecesBox).addElement( jChessPiece );
+//					(PieceConfig.redPiecesBox as PiecesBox).addElement( jChessPiece );
+					(PieceConfig.redPiecesBox as PiecesBox).addChild( jChessPiece );
 					//
 					jChessPiece.x = getRandomX((PieceConfig.redPiecesBox as PiecesBox));
 					jChessPiece.y = getRandomY((PieceConfig.redPiecesBox as PiecesBox));

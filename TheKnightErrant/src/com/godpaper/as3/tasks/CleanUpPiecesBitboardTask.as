@@ -55,8 +55,8 @@ package com.godpaper.as3.tasks
 		//--------------------------------------------------------------------------
 		public function CleanUpPiecesBitboardTask()
 		{
-			//TODO: implement function
 			super();
+			//Set properties
 		}
 
 		//--------------------------------------------------------------------------

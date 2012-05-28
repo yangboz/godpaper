@@ -51,8 +51,9 @@ package com.godpaper.as3.tasks
 		//--------------------------------------------------------------------------
 		public function UpdatePiecesPositionTask(conductVO:ConductVO)
 		{
-			//TODO: implement function
 			super();
+			//Set properties
+			this.label = "UpdatePiecesPositionTask";
 			//
 			this.conductVO = conductVO;
 		}     	

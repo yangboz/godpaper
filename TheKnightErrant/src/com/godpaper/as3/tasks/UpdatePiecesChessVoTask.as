@@ -54,8 +54,9 @@ package com.godpaper.as3.tasks
 		//--------------------------------------------------------------------------
 		public function UpdatePiecesChessVoTask(factory:Class)
 		{
-			//TODO: implement function
 			super();
+			//Set properties
+			this.label = "UpdatePiecesChessVoTask";
 			//
 			this.factory = factory;
 		}     	

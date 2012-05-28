@@ -93,7 +93,6 @@ package com.godpaper.starling.views.scenes
 			//
 			//			CursorManager.setBusyCursor();
 			// sound initialization takes a moment, so we prepare them here
-			DefaultEmbededAssets.prepareSounds();
 			DefaultEmbededAssets.loadBitmapFonts();
 			//Add visualElement to view.
 			

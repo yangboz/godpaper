@@ -4,7 +4,8 @@ package assets
 	import flash.media.Sound;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
-
+	import flash.utils.getDefinitionByName;
+	
 	import starling.text.BitmapFont;
 	import starling.text.TextField;
 	import starling.textures.Texture;
@@ -70,33 +71,6 @@ package assets
 		[Embed(source="/assets/images/background.png")]
 		private static const IMG_BACK_GROUND:Class;
 
-		[Embed(source="/assets/media/textures/starling_sheet.png")]
-		private static const StarlingSheet:Class;
-
-		[Embed(source="/assets/media/textures/flash_egg.png")]
-		private static const FlashEgg:Class;
-
-		[Embed(source="/assets/media/textures/starling_front.png")]
-		private static const StarlingFront:Class;
-
-		[Embed(source="/assets/media/textures/logo.png")]
-		private static const Logo:Class;
-
-		[Embed(source="/assets/media/textures/button_back.png")]
-		private static const ButtonBack:Class;
-
-		[Embed(source="/assets/media/textures/button_big.png")]
-		private static const ButtonBig:Class;
-
-		[Embed(source="/assets/media/textures/button_normal.png")]
-		private static const ButtonNormal:Class;
-
-		[Embed(source="/assets/media/textures/button_square.png")]
-		private static const ButtonSquare:Class;
-
-		[Embed(source="/assets/media/textures/benchmark_object.png")]
-		private static const BenchmarkObject:Class;
-
 		// Compressed textures
 
 		[Embed(source="/assets/media/textures/compressed_texture.atf", mimeType="application/octet-stream")]
@@ -122,9 +96,9 @@ package assets
 		private static const AtlasTexture:Class;
 
 		// Sounds
-
-		[Embed(source="/assets/media/audio/wing_flap.mp3")]
-		private static const StepSound:Class;
+		//Refs:http://soundrangers.com/index.cfm?currentpage=3&fuseaction=category.display&category_id=554
+		[Embed(source="/assets/media/audio/chess_piece_move.mp3")]
+		public static const SOUND_CP_MOVE:Class;
 		
 		//for testing
 		[Embed(source="/assets/swfs/RED_MARSHAL.png")]
@@ -169,16 +143,6 @@ package assets
 		}
 
 		//
-		public static function getSound(name:String):Sound
-		{
-			var sound:Sound=sSounds[name] as Sound;
-			if (sound)
-				return sound;
-			else
-				throw new ArgumentError("Sound not found: " + name);
-		}
-
-		//
 		public static function getTextureAtlas():TextureAtlas
 		{
 			if (sTextureAtlas == null)
@@ -203,11 +167,6 @@ package assets
 			}
 		}
 
-		//
-		public static function prepareSounds():void
-		{
-			sSounds["Step"]=new StepSound();
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

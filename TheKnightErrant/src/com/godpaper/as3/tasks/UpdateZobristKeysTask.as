@@ -54,8 +54,9 @@ package com.godpaper.as3.tasks
 		//--------------------------------------------------------------------------
 		public function UpdateZobristKeysTask(conductVO:ConductVO)
 		{
-			//TODO: implement function
 			super();
+			//Set properties
+			this.label = "UpdateZobristKeysTask";
 			//
 			this.conductVO = conductVO;
 		}     	
