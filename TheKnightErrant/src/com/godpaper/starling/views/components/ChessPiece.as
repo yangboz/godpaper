@@ -29,6 +29,7 @@ package com.godpaper.starling.views.components
 	import assets.DefaultEmbededAssets;
 	
 	import com.godpaper.as3.business.fsm.ChessAgent;
+	import com.godpaper.as3.business.managers.ChessPieceDragManager;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;
@@ -47,10 +48,12 @@ package com.godpaper.starling.views.components
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.media.Sound;
+	import flash.media.SoundChannel;
 	
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.Logger;
 	
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -92,6 +95,7 @@ package com.godpaper.starling.views.components
 		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 		//sound effect
 		private var cpMoveSound:Sound;
+		private var cpMoveSoundChannel:SoundChannel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -240,9 +244,10 @@ package com.godpaper.starling.views.components
 			this.cpMoveSound = new MoveSound();
 			//once piece add or remove,maybe check event triggled.
 			this.addEventListener(Event.REMOVED_FROM_STAGE, elementRemoveHandler);
-			this.addEventListener(Event.TRIGGERED,mouseClickHandler);
+//			this.addEventListener(Event.TRIGGERED,mouseClickHandler);
 //			this.addEventListener(Event.ADDED_TO_STAGE, elementAddHandler);
 			this.addEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
+			this.addEventListener(Event.REMOVED_FROM_STAGE, removeFromStageHandler);
 		}
 		
 		//--------------------------------------------------------------------------
@@ -265,6 +270,15 @@ package com.godpaper.starling.views.components
 		{
 			return this.label.concat(this.position.x,this.position.y);
 		}
+		//
+		override public function dispose():void
+		{
+			this.removeEventListener(Event.REMOVED_FROM_STAGE, elementRemoveHandler);
+			//			this.addEventListener(Event.TRIGGERED,mouseClickHandler);
+			this.removeEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
+			this.removeEventListener(TouchEvent.TOUCH,touchHandler);
+			super.dispose();
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -276,6 +290,11 @@ package com.godpaper.starling.views.components
 			//
 			this.addEventListener(TouchEvent.TOUCH,touchHandler);
 			LOG.debug("starling.events.Event,target:{0}", event.target);
+		}
+		//removeFromStageHandler
+		protected function removeFromStageHandler(event:Event):void
+		{
+			
 		}
 		//creationCompleteHandler
 		protected function creationCompleteHandler(event:Event):void
@@ -389,16 +408,19 @@ package com.godpaper.starling.views.components
 		//--------------------------------------------------------------------------
 		public function touchHandler(event:TouchEvent):void
 		{
-			const touch:Touch = event.getTouch(this);
-			//
-			var position:Point = touch.getLocation(FlexGlobals.gameStage);
 			var target:ChessPiece = event.target as ChessPiece;
+			const touch:Touch = event.getTouch(target);
+			if(null==touch) return;//FIXME:Null exception handler.
+			//
+			var space:DisplayObject = FlexGlobals.gameStage;
+			LOG.info("ChessPiece touch: {0}, space:{1}",touch,space);
+			var position:Point = touch.getLocation(space);
 			//
 			switch(touch.phase)
 			{
 				case TouchPhase.BEGAN:
 					//Play sound effect.
-					this.cpMoveSound.play();
+					this.cpMoveSoundChannel = this.cpMoveSound.play();
 					break;
 				case TouchPhase.HOVER:
 					break;
@@ -406,14 +428,16 @@ package com.godpaper.starling.views.components
 					//delegate to mouse down handler
 					target.x = position.x - target.width/2;
 					target.y = position.y - target.height/2;
+//					ChessPieceDragManager.getInstance().drag(target,FlexGlobals.gameStage);
+					//
 					break;
 				case TouchPhase.ENDED:
 					//End sound effect.
-					this.cpMoveSound.close();
+					this.cpMoveSoundChannel.stop();
 					break;
 				case TouchPhase.STATIONARY:
 					//delegate to mouse click handler
-//					mouseClickHandler(event);
+//					mouseDownHandler(event);
 					break;
 				default:
 					break;
