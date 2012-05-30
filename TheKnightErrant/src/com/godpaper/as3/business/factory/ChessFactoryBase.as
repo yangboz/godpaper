@@ -51,6 +51,7 @@ package com.godpaper.as3.business.factory
 		protected var chessPieceLabel:String="";//The label of chess piece.@see DefaultPiecesConstants.as
 		protected var chessPieceValue:int=0;//The value of chess piece(hex value prefered).
 		protected var chessPieceType:String="";//Blue/Red/Green...
+		protected var chessPieceSubType:String=null;//BLUE_ROCK/Red_STAR/Green_...
 		protected var chessPieceSource:Object;//style source asset(@see assets/EmbededAssets.as).
 		protected var chessPieceName:String="";//the unique chess piece name to identify the chess piece of typed group.
 		protected var chessGasketTips:String="";//The tool tips of chess gasket.
@@ -119,8 +120,8 @@ package com.godpaper.as3.business.factory
 			simpleChessPiece.type=chessPieceType;
 			//Set texture atlas
 			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
-			simpleChessPiece.upState = atlas.getTexture(chessPieceType);
-			simpleChessPiece.downState = atlas.getTexture(chessPieceType);
+			simpleChessPiece.upState = atlas.getTexture(chessPieceSubType?chessPieceSubType:chessPieceType);
+			simpleChessPiece.downState = atlas.getTexture(chessPieceSubType?chessPieceSubType:chessPieceType);
 			//set flag to identify.
 			simpleChessPiece.flag=DefaultConstants.FLAG_BLUE;
 			//

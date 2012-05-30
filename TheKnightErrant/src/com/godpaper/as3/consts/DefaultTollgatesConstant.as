@@ -50,11 +50,11 @@ package com.godpaper.as3.consts
 //		True Hive
 //		Lonely Grinder
 //		Horror Temple 
-		public static const SuicideDiscord:DefaultTollgatesConstant = new DefaultTollgatesConstant(RandomWalk,LinearEvaluation,null,null,"Suicide Discord",10,AssetEmbedsDefault.ICON_TOLLGATE_01);
-		public static const HorrorGib:DefaultTollgatesConstant = new DefaultTollgatesConstant(ShortSighted,LinearEvaluation,null,null,"Horror Gib",30,AssetEmbedsDefault.ICON_TOLLGATE_02);
-		public static const UnnaturalBase:DefaultTollgatesConstant = new DefaultTollgatesConstant(AttackFalse,LinearEvaluation,null,null,"Unnatural Base",55,AssetEmbedsDefault.ICON_TOLLGATE_03);
-		public static const OctagonGibs:DefaultTollgatesConstant = new DefaultTollgatesConstant(MiniMax,LinearEvaluation,null,null,"Octagon Gibs",85,AssetEmbedsDefault.ICON_TOLLGATE_04);
-		public static const AbandonedDream:DefaultTollgatesConstant = new DefaultTollgatesConstant(MiniMax,FuzzyImportantEvaluation,null,null,"Abandoned Dream",100,AssetEmbedsDefault.ICON_TOLLGATE_05);
+		public static const SuicideDiscord:DefaultTollgatesConstant = new DefaultTollgatesConstant(RandomWalk,LinearEvaluation,null,null,"Suicide Discord",10,AssetEmbedsDefault.getClass("ICON_TOLLGATE_01"));
+		public static const HorrorGib:DefaultTollgatesConstant = new DefaultTollgatesConstant(ShortSighted,LinearEvaluation,null,null,"Horror Gib",30,AssetEmbedsDefault.getClass("ICON_TOLLGATE_02"));
+		public static const UnnaturalBase:DefaultTollgatesConstant = new DefaultTollgatesConstant(AttackFalse,LinearEvaluation,null,null,"Unnatural Base",55,AssetEmbedsDefault.getClass("ICON_TOLLGATE_03"));
+		public static const OctagonGibs:DefaultTollgatesConstant = new DefaultTollgatesConstant(MiniMax,LinearEvaluation,null,null,"Octagon Gibs",85,AssetEmbedsDefault.getClass("ICON_TOLLGATE_04"));
+		public static const AbandonedDream:DefaultTollgatesConstant = new DefaultTollgatesConstant(MiniMax,FuzzyImportantEvaluation,null,null,"Abandoned Dream",100,AssetEmbedsDefault.getClass("ICON_TOLLGATE_05"));
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

@@ -41,31 +41,6 @@ package
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		//tollgate icon class here
-		[Embed(source="/assets/images/icons/tollgate01_50x50.png")]
-		public static const ICON_TOLLGATE_01:Class;
-
-		[Embed(source="/assets/images/icons/tollgate02_50x50.png")]
-		public static const ICON_TOLLGATE_02:Class;
-
-		[Embed(source="/assets/images/icons/tollgate03_50x50.png")]
-		public static const ICON_TOLLGATE_03:Class;
-
-		[Embed(source="/assets/images/icons/tollgate04_50x50.png")]
-		public static const ICON_TOLLGATE_04:Class;
-
-		[Embed(source="/assets/images/icons/tollgate04_50x50.png")]
-		public static const ICON_TOLLGATE_05:Class;
-
-		//plugin category icon class here.
-		[Embed(source="/assets/images/icons/store_50x50.png")]
-		public static const ICON_STORE:Class;
-
-		[Embed(source="/assets/images/icons/coin_50x50.png")]
-		public static const ICON_COIN:Class;
-
-		[Embed(source="/assets/images/icons/account_50x50.png")]
-		public static const ICON_ACCOUNT:Class;
 		//
 		// Bitmaps
 
@@ -100,6 +75,11 @@ package
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
+		//
+		public static function getClass(name:String):Class
+		{
+			return create(name) as Class;
+		}
 		//
 		public static function getTexture(name:String):Texture
 		{
