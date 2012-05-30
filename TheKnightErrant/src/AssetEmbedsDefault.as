@@ -1,4 +1,4 @@
-package assets
+package 
 {
 	import flash.display.Bitmap;
 	import flash.media.Sound;
@@ -18,14 +18,14 @@ package assets
 	//--------------------------------------------------------------------------
 
 	/**
-	 * DefaultEmbededAssets.as class.For obtainning static embeded resources.
+	 * A class for obtainning static embeded resources(images,fonts,sound,texture...).
 	 * @see http://livedocs.adobe.com/flex/3/html/help.html?content=embed_3.html
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Aug 12, 2011 10:32:59 AM
 	 */
-	public class DefaultEmbededAssets
+	public class AssetEmbedsDefault
 	{
 		//--------------------------------------------------------------------------
 		//
@@ -37,6 +37,7 @@ package assets
 		private static var sSounds:Dictionary=new Dictionary();
 		private static var sTextureAtlas:TextureAtlas;
 		private static var sBitmapFontsLoaded:Boolean;
+		private static var sContentScaleFactor:int = 1;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -71,38 +72,11 @@ package assets
 		[Embed(source="/assets/images/background.png")]
 		private static const IMG_BACK_GROUND:Class;
 
-		// Compressed textures
-
-		[Embed(source="/assets/media/textures/compressed_texture.atf", mimeType="application/octet-stream")]
-		private static const CompressedTexture:Class;
-
-		// Fonts
-
-		// The 'embedAsCFF'-part IS REQUIRED!!!!
-		[Embed(source="/assets/media/fonts/Ubuntu-R.ttf", embedAsCFF="false", fontFamily="Ubuntu")]
-		private static const UbuntuRegular:Class;
-
-		[Embed(source="/assets/media/fonts/desyrel.fnt", mimeType="application/octet-stream")]
-		private static const DesyrelXml:Class;
-
-		[Embed(source="/assets/media/fonts/desyrel.png")]
-		private static const DesyrelTexture:Class;
-
-		// Texture Atlas
-		[Embed(source="/assets/media/textures/defaultAtlas.xml", mimeType="application/octet-stream")]
-		private static const AtlasXml:Class;
-		
-		[Embed(source="/assets/media/textures/defaultAtlasTexture.png")]
-		private static const AtlasTexture:Class;
-
 		// Sounds
 		//Refs:http://soundrangers.com/index.cfm?currentpage=3&fuseaction=category.display&category_id=554
-		[Embed(source="/assets/media/audio/chess_piece_move.mp3")]
+		[Embed(source="/assets/audio/chess_piece_move.mp3")]
 		public static const SOUND_CP_MOVE:Class;
 		
-		//for testing
-		[Embed(source="/assets/swfs/RED_MARSHAL.png")]
-		public static const RED_MARSHAL:Class;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -131,7 +105,7 @@ package assets
 		{
 			if (sTextures[name] == undefined)
 			{
-				var data:Object=new DefaultEmbededAssets[name]();
+				var data:Object= create(name);
 				//
 				if (data is Bitmap)
 					sTextures[name]=Texture.fromBitmap(data as Bitmap);
@@ -148,7 +122,7 @@ package assets
 			if (sTextureAtlas == null)
 			{
 				var texture:Texture = getTexture("AtlasTexture");
-				var xml:XML = XML(new AtlasXml());
+				var xml:XML = XML(create("AtlasTextureXml"));
 				sTextureAtlas = new TextureAtlas(texture, xml);
 			}
 			
@@ -161,7 +135,7 @@ package assets
 			if (!sBitmapFontsLoaded)
 			{
 				var texture:Texture=getTexture("DesyrelTexture");
-				var xml:XML=XML(new DesyrelXml());
+				var xml:XML=XML(create("DesyrelXml"));
 				TextField.registerBitmapFont(new BitmapFont(texture, xml));
 				sBitmapFontsLoaded=true;
 			}
@@ -178,6 +152,21 @@ package assets
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		private static function create(name:String):Object
+		{
+			var textureClass:Class = sContentScaleFactor == 1 ? AssetEmbeds_1x : AssetEmbeds_2x;
+			return new textureClass[name];
+		}
+		
+		public static function get contentScaleFactor():Number { return sContentScaleFactor; }
+		public static function set contentScaleFactor(value:Number):void 
+		{
+			for each (var texture:Texture in sTextures)
+			texture.dispose();
+			
+			sTextures = new Dictionary();
+			sContentScaleFactor = value < 1.5 ? 1 : 2; // assets are available for factor 1 and 2 
+		}
 	}
 
 }

@@ -65,20 +65,35 @@ package com.lookbackon.AI.evaluation.linear
 		public function doEvaluation(conductVO:ConductVO,gamePosition:PositionVO):int
 		{
 			//Material
-			var M:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_MARSHAL] as BitBoard;
-			var m:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_MARSHAL] as BitBoard;
-			var R:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_ROOK] as BitBoard;
-			var r:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_ROOK] as BitBoard;
-			var K:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_KNIGHT] as BitBoard;
-			var k:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_KNIGHT] as BitBoard;
-			var O:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_OFFICAL] as BitBoard;
-			var o:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_OFFICAL] as BitBoard;
-			var C:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_CANNON] as BitBoard;
-			var c:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_CANNON] as BitBoard;
-			var P:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_PAWN] as BitBoard;
-			var p:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_PAWN] as BitBoard;
-			var B:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_BISHOP] as BitBoard;
-			var b:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_BISHOP] as BitBoard;
+//			var M:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_MARSHAL] as BitBoard;
+//			var m:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_MARSHAL] as BitBoard;
+//			var R:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_ROOK] as BitBoard;
+//			var r:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_ROOK] as BitBoard;
+//			var K:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_KNIGHT] as BitBoard;
+//			var k:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_KNIGHT] as BitBoard;
+//			var O:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_OFFICAL] as BitBoard;
+//			var o:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_OFFICAL] as BitBoard;
+//			var C:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_CANNON] as BitBoard;
+//			var c:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_CANNON] as BitBoard;
+//			var P:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_PAWN] as BitBoard;
+//			var p:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_PAWN] as BitBoard;
+//			var B:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_BISHOP] as BitBoard;
+//			var b:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_BISHOP] as BitBoard;
+//			
+			var M:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
+			var m:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
+			var R:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
+			var r:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
+			var K:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
+			var k:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
+			var O:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
+			var o:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
+			var C:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
+			var c:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
+			var P:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
+			var p:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
+			var B:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
+			var b:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
 			
 			var T_red:int = M.celled*133
 				+B.celled*166

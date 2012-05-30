@@ -26,7 +26,6 @@ package
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import assets.DefaultEmbededAssets;
 	
 	import com.adobe.cairngorm.task.SequenceTask;
 	import com.godpaper.as3.business.factory.ChessFactoryBase;
@@ -268,13 +267,14 @@ package
 			//gasket config:
 //			GasketConfig.maxPoolSize = 16;
 			GasketConfig.tipsVisible = true;
-			GasketConfig.backgroundAlpha = 0.0;
+			GasketConfig.backgroundAlpha = 0.5;
 			//about piece:
 			PieceConfig.factory = ThoChessFactory;
 			PieceConfig.maxPoolSizeBlue = 6;
 			PieceConfig.maxPoolSizeRed = 6;
-			PieceConfig.scaleX = .5;
-			PieceConfig.scaleY = .5;
+			//Notice:starling scaleX/Y seldom triggle touch event issues.
+			PieceConfig.scaleX = 1;
+			PieceConfig.scaleY = 1;
 			//about plugin:
 			PluginConfig.mochiBoardID = "3a460211409897f4";
 			PluginConfig.mochiGameID = "47de4a85dd3e213a";
@@ -304,7 +304,7 @@ package
 		protected function creationCompleteHandler():void
 		{
 			//Display chess board at first.
-			var chessBoardBackground:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
+			var chessBoardBackground:Image = new Image(AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND));
 //			this.chessBoard = new ChessBoard(chessBoardBackground);
 			this.chessBoard = new ChessBoard(null);
 			FlexGlobals.gameStage.addChild(starling.display.DisplayObject(this.chessBoard));

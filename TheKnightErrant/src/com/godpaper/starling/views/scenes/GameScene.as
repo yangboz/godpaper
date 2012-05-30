@@ -26,7 +26,6 @@ package com.godpaper.starling.views.scenes
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import assets.DefaultEmbededAssets;
 	
 	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
 	
@@ -93,7 +92,7 @@ package com.godpaper.starling.views.scenes
 			//
 			//			CursorManager.setBusyCursor();
 			// sound initialization takes a moment, so we prepare them here
-			DefaultEmbededAssets.loadBitmapFonts();
+			AssetEmbedsDefault.loadBitmapFonts();
 			//Add visualElement to view.
 			
 			//Pieces box

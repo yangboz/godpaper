@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:44506319e7742c78690dd58215024472$ -->
+<TextureAtlas imagePath="defaultAtlasTexture.png">
+    <SubTexture name="BLUE" x="2" y="2" width="35" height="30"/>
+    <SubTexture name="BLUE_ROCK" x="39" y="2" width="50" height="36"/>
+    <SubTexture name="BLUE_STAR" x="2" y="40" width="50" height="41"/>
+    <SubTexture name="RED" x="54" y="40" width="36" height="32"/>
+    <SubTexture name="RED_ROCK" x="2" y="83" width="50" height="36"/>
+    <SubTexture name="RED_STAR" x="54" y="83" width="50" height="41"/>
+</TextureAtlas>

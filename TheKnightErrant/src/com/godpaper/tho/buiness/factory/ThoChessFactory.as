@@ -26,7 +26,6 @@ package com.godpaper.tho.buiness.factory
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import assets.DefaultEmbededAssets;
 	
 	import com.godpaper.as3.business.factory.ChessFactoryBase;
 	import com.godpaper.as3.consts.DefaultConstants;
@@ -121,7 +120,7 @@ package com.godpaper.tho.buiness.factory
 					break;
 			}
 			//chess piece's swfloader source.
-			var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
+			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
 			this.chessPieceSource = atlas.getTexture(chessPieceType);
 			//call super functions.
 			return super.createChessPiece(position,flag);

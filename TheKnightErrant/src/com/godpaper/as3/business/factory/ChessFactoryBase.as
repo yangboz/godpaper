@@ -1,6 +1,5 @@
 package com.godpaper.as3.business.factory
 {
-	import assets.DefaultEmbededAssets;
 	
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GasketConfig;
@@ -119,7 +118,7 @@ package com.godpaper.as3.business.factory
 			simpleChessPiece.name=this.chessPieceName;
 			simpleChessPiece.type=chessPieceType;
 			//Set texture atlas
-			var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
+			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
 			simpleChessPiece.upState = atlas.getTexture(chessPieceType);
 			simpleChessPiece.downState = atlas.getTexture(chessPieceType);
 			//set flag to identify.

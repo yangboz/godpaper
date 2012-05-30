@@ -26,7 +26,6 @@ package com.godpaper.starling.views.components
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import assets.DefaultEmbededAssets;
 	
 	import com.emibap.textureAtlas.DynamicAtlas;
 	import com.godpaper.as3.configs.BoardConfig;

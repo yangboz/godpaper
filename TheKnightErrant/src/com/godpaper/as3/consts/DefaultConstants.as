@@ -33,25 +33,30 @@ package com.godpaper.as3.consts
 		public static const COLOR_BLUE:String="blue"; //above;
 		//chess board backgroud
 		public static const IMG_BACK_GROUND:String = "IMG_BACK_GROUND";
-		//chess pieces type consts
+		//chess pieces(blue) main type consts
 		public static const BLUE:String="BLUE";
-		//chess pieces type consts
-		public static const BLUE_ROOK:String="BLUE_ROOK";
-		public static const BLUE_KNIGHT:String="BLUE_KNIGHT";
-		public static const BLUE_BISHOP:String="BLUE_BISHOP";
-		public static const BLUE_OFFICAL:String="BLUE_OFFICAL";
-		public static const BLUE_MARSHAL:String="BLUE_MARSHAL";
-		public static const BLUE_CANNON:String="BLUE_CANNON";
-		public static const BLUE_PAWN:String="BLUE_PAWN";
-		//
+		public static const BLUE_ROCK:String="BLUE_ROCK";
+		public static const BLUE_STAR:String="BLUE_STAR";
+		//chess pieces(blue) sub type consts
+//		public static const BLUE_ROOK:String="BLUE_ROOK";
+//		public static const BLUE_KNIGHT:String="BLUE_KNIGHT";
+//		public static const BLUE_BISHOP:String="BLUE_BISHOP";
+//		public static const BLUE_OFFICAL:String="BLUE_OFFICAL";
+//		public static const BLUE_MARSHAL:String="BLUE_MARSHAL";
+//		public static const BLUE_CANNON:String="BLUE_CANNON";
+//		public static const BLUE_PAWN:String="BLUE_PAWN";
+		//chess pieces(red) main type consts
 		public static const RED:String="RED";
-		public static const RED_ROOK:String="RED_ROOK";
-		public static const RED_KNIGHT:String="RED_KNIGHT";
-		public static const RED_BISHOP:String="RED_BISHOP";
-		public static const RED_OFFICAL:String="RED_OFFICAL";
-		public static const RED_MARSHAL:String="RED_MARSHAL";
-		public static const RED_CANNON:String="RED_CANNON";
-		public static const RED_PAWN:String="RED_PAWN";
+		public static const RED_ROCK:String="RED_ROCK";
+		public static const RED_STAR:String="RED_STAR";
+		//chess pieces(red) sub type consts
+//		public static const RED_ROOK:String="RED_ROOK";
+//		public static const RED_KNIGHT:String="RED_KNIGHT";
+//		public static const RED_BISHOP:String="RED_BISHOP";
+//		public static const RED_OFFICAL:String="RED_OFFICAL";
+//		public static const RED_MARSHAL:String="RED_MARSHAL";
+//		public static const RED_CANNON:String="RED_CANNON";
+//		public static const RED_PAWN:String="RED_PAWN";
 		//chess pieces state label
 		public static const STATE_ATTACK:String="Attack";
 		public static const STATE_DEFENCE:String="Defence";

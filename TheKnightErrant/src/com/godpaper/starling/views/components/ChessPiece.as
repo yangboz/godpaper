@@ -26,7 +26,6 @@ package com.godpaper.starling.views.components
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import assets.DefaultEmbededAssets;
 	
 	import com.godpaper.as3.business.fsm.ChessAgent;
 	import com.godpaper.as3.business.managers.ChessPieceDragManager;
@@ -38,6 +37,7 @@ package com.godpaper.starling.views.components
 	import com.godpaper.as3.consts.FlexGlobals;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessVO;
+	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
@@ -229,7 +229,7 @@ package com.godpaper.starling.views.components
 			var defaultUpState:Texture = upState;
 			if(defaultUpState==null)
 			{
-				var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
+				var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
 				defaultUpState = atlas.getTexture(DefaultConstants.BLUE);
 			}
 			super(defaultUpState, text, downState);
@@ -240,7 +240,7 @@ package com.godpaper.starling.views.components
 			this.scaleX = PieceConfig.scaleX;
 			this.scaleY = PieceConfig.scaleY;
 			//Set properties
-			var MoveSound:Class = DefaultEmbededAssets.SOUND_CP_MOVE;
+			var MoveSound:Class = AssetEmbedsDefault.SOUND_CP_MOVE;
 			this.cpMoveSound = new MoveSound();
 			//once piece add or remove,maybe check event triggled.
 			this.addEventListener(Event.REMOVED_FROM_STAGE, elementRemoveHandler);
@@ -428,7 +428,11 @@ package com.godpaper.starling.views.components
 					//delegate to mouse down handler
 					target.x = position.x - target.width/2;
 					target.y = position.y - target.height/2;
+					var chessGasket:ChessGasket = ChessGasketsModel.getInstance().gaskets.gett(this.position.x,this.position.y) as ChessGasket;
+					
 //					ChessPieceDragManager.getInstance().drag(target,FlexGlobals.gameStage);
+					var colliding:Boolean = target.getBounds(target.parent).intersects(chessGasket.getBounds(chessGasket.parent));
+					LOG.info("ChessPiece colliding the chess gasket:{0} ? {1}",chessGasket,colliding);						
 					//
 					break;
 				case TouchPhase.ENDED:

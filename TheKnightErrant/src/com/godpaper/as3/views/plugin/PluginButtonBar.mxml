@@ -15,24 +15,23 @@
 			<fx:Object label="baby"
 					   toolTip="{gcTollgateTips}"
 					   enabled="true"
-					   icon="{DefaultEmbededAssets.ICON_TOLLGATE_01}"/>
+					   icon="{AssetEmbedsDefault.ICON_TOLLGATE_01}"/>
 			<fx:Object label="store"
 					   toolTip="store"
 					   enabled="true"
-					   icon="{DefaultEmbededAssets.ICON_STORE}"/>
+					   icon="{AssetEmbedsDefault.ICON_STORE}"/>
 			<fx:Object label="leadboard"
 					   toolTip="leader board"
 					   enabled="true"
-					   icon="{DefaultEmbededAssets.ICON_COIN}"/>
+					   icon="{AssetEmbedsDefault.ICON_COIN}"/>
 			<fx:Object label="account"
 					   toolTip="account login"
 					   enabled="true"
-					   icon="{DefaultEmbededAssets.ICON_ACCOUNT}"/>
+					   icon="{AssetEmbedsDefault.ICON_ACCOUNT}"/>
 		</s:ArrayList>
 	</s:dataProvider>
 	<fx:Script>
 		<![CDATA[
-			import assets.DefaultEmbededAssets;
 			
 			import com.godpaper.as3.configs.GameConfig;
 			import com.godpaper.as3.consts.DefaultTollgatesConstant;
