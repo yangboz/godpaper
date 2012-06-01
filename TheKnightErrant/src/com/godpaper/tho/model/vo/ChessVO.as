@@ -104,12 +104,12 @@ package com.godpaper.tho.model.vo
 			{
 				this.occupies.setBitt(rowIndex-1,colIndex,true);
 			}
-			LOG.info("occupies:{0}",this.occupies.dump());
+			LOG.info("({0},{1}),occupies:{2}",rowIndex,colIndex,this.occupies.dump());
 			//about legal moves.
-			LOG.info(ChessPiecesModel.getInstance().allPieces.dump());
+//			LOG.info("all pieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
 			this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().allPieces));
 			//
-			LOG.info("moves:{0}",this.moves.dump());
+			LOG.info("({0},{1}),moves:{0}",rowIndex,colIndex,this.moves.dump());
 			//blocker
 			//about attacked captures.
 			//about defends.

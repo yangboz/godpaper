@@ -298,7 +298,7 @@ package com.godpaper.starling.views.components
 			//(The last optional parameter 'winding' is not relevant to our experiment.) 
 			//We create the Vector variables.
 			//We will draw black lines of thickness 1 and alpha 1.
-			shape.graphics.lineStyle(1,Color.BLACK,1);
+			shape.graphics.lineStyle(1,Color.GRAY,1);
 			var drawCoords:Vector.<Number> = new Vector.<Number>();
 			var drawCommands:Vector.<int> = new Vector.<int>();
 			/*

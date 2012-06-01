@@ -34,13 +34,16 @@ package com.godpaper.starling.views.components
 	import mx.utils.NameUtil;
 	import mx.utils.UIDUtil;
 	
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
+	
 	import starling.display.Button;
 	import starling.display.DisplayObject;
+	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.textures.Texture;
-	
 	/**
 	 * RoundButton.as class.   	
 	 * @author yangboz
@@ -60,7 +63,7 @@ package com.godpaper.starling.views.components
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:Logger = LogContext.getLogger(RoundButton);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -107,6 +110,11 @@ package com.godpaper.starling.views.components
 			this.uid = UIDUtil.createUID();
 			//
 			super(upState, text, downState);
+			//Event handler
+			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
+			this.addEventListener(Event.REMOVED_FROM_STAGE,removeFromStageHandler);
+			this.addEventListener(Event.REMOVE_FROM_JUGGLER,removeFromJugglerHandler);
+			this.addEventListener(Event.CONTEXT3D_CREATE,context3dCreateHandler);
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -140,12 +148,50 @@ package com.godpaper.starling.views.components
 			if (sqDist < Math.pow(radius, 2)) return this;
 			else return null;
 		}
-		
+		//
+		override public function dispose():void
+		{
+			//Remove event listener
+			this.removeEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
+			this.removeEventListener(Event.REMOVED_FROM_STAGE,removeFromStageHandler);
+			this.removeEventListener(Event.REMOVE_FROM_JUGGLER,removeFromJugglerHandler);
+			this.removeEventListener(Event.CONTEXT3D_CREATE,context3dCreateHandler);
+			//
+			super.dispose();
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
+		protected function addToStageHandler(event:Event):void
+		{
+			this.addEventListener(TouchEvent.TOUCH,touchHandler);
+			LOG.debug("starling.events.TouchEvent,target:{0}", event.target);
+			//More to be  override	
+		}
+		protected function removeFromStageHandler(event:Event):void
+		{
+			this.removeEventListener(TouchEvent.TOUCH,touchHandler);
+			LOG.debug("starling.events.TouchEvent,target:{0}", event.target);
+			//More to be  override
+		}
+		protected function removeFromJugglerHandler(event:Event):void
+		{
+			LOG.debug("starling.events.Event,target:{0}", event.target);
+			//To be  override	
+			//Remove some inside animation.
+		}
+		protected function touchHandler(event:TouchEvent):void
+		{
+			LOG.debug("starling.events.TouchEvent,target:{0}", event.target);
+			//To be  override	
+		}
+		protected function context3dCreateHandler(event:Event):void
+		{
+			LOG.debug("starling.events.Event,target:{0}", event.target);
+			//To be  override	
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods

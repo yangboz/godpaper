@@ -50,6 +50,7 @@ package com.godpaper.starling.views.components
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	
+	import org.spicefactory.lib.flash.logging.impl.AbstractAppender;
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.Logger;
 	
@@ -93,6 +94,7 @@ package com.godpaper.starling.views.components
 //		public var swfLoader:Image;
 		//models
 		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+		private var chessGasketModel:ChessGasketsModel = ChessGasketsModel.getInstance();
 		//sound effect
 		private var cpMoveSound:Sound;
 		private var cpMoveSoundChannel:SoundChannel;
@@ -270,32 +272,11 @@ package com.godpaper.starling.views.components
 		{
 			return this.label.concat(this.position.x,this.position.y);
 		}
-		//
-		override public function dispose():void
-		{
-			this.removeEventListener(Event.REMOVED_FROM_STAGE, elementRemoveHandler);
-			//			this.addEventListener(Event.TRIGGERED,mouseClickHandler);
-			this.removeEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
-			this.removeEventListener(TouchEvent.TOUCH,touchHandler);
-			super.dispose();
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		//addToStageHandler
-		protected function addToStageHandler(event:Event):void
-		{
-			//
-			this.addEventListener(TouchEvent.TOUCH,touchHandler);
-			LOG.debug("starling.events.Event,target:{0}", event.target);
-		}
-		//removeFromStageHandler
-		protected function removeFromStageHandler(event:Event):void
-		{
-			
-		}
 		//creationCompleteHandler
 		protected function creationCompleteHandler(event:Event):void
 		{
@@ -314,7 +295,6 @@ package com.godpaper.starling.views.components
 		protected function elementAddHandler(event:Event):void
 		{
 			//
-			this.addEventListener(TouchEvent.TOUCH,touchHandler);
 			LOG.debug("starling.events.Event,target:{0}", event.target);
 			
 			//renew ChessPiece's position.
@@ -401,26 +381,24 @@ package com.godpaper.starling.views.components
 		{
 			return IPlug(ApplicationBase(this.root).pluginUIComponent.provider);
 		}
-		//--------------------------------------------------------------------------
 		//
-		//  Private methods
-		//
-		//--------------------------------------------------------------------------
-		public function touchHandler(event:TouchEvent):void
+		override protected function touchHandler(event:TouchEvent):void
 		{
 			var target:ChessPiece = event.target as ChessPiece;
 			const touch:Touch = event.getTouch(target);
 			if(null==touch) return;//FIXME:Null exception handler.
 			//
 			var space:DisplayObject = FlexGlobals.gameStage;
-			LOG.info("ChessPiece touch: {0}, space:{1}",touch,space);
+//			LOG.info("ChessPiece touch: {0}, space:{1}",touch,space);
 			var position:Point = touch.getLocation(space);
+			// 
+			var dropTargets:Vector.<ChessGasket>;
 			//
 			switch(touch.phase)
 			{
 				case TouchPhase.BEGAN:
 					//Play sound effect.
-					this.cpMoveSoundChannel = this.cpMoveSound.play();
+//					this.cpMoveSoundChannel = this.cpMoveSound.play();
 					break;
 				case TouchPhase.HOVER:
 					break;
@@ -428,24 +406,58 @@ package com.godpaper.starling.views.components
 					//delegate to mouse down handler
 					target.x = position.x - target.width/2;
 					target.y = position.y - target.height/2;
-					var chessGasket:ChessGasket = ChessGasketsModel.getInstance().gaskets.gett(this.position.x,this.position.y) as ChessGasket;
-					
-//					ChessPieceDragManager.getInstance().drag(target,FlexGlobals.gameStage);
-					var colliding:Boolean = target.getBounds(target.parent).intersects(chessGasket.getBounds(chessGasket.parent));
-					LOG.info("ChessPiece colliding the chess gasket:{0} ? {1}",chessGasket,colliding);						
+					//					ChessPieceDragManager.getInstance().drag(target,FlexGlobals.gameStage);
+					dropTargets = this.calculateDropTarget(target);
+					LOG.info("ChessPiece drop targets:{0} ",dropTargets);
 					//
+					chessPiecesModel.selectedPiece = this;
 					break;
 				case TouchPhase.ENDED:
 					//End sound effect.
-					this.cpMoveSoundChannel.stop();
+//					this.cpMoveSoundChannel.stop();
+					//
+					dropTargets = this.calculateDropTarget(target);
+					if(dropTargets[0])
+					{
+						var dropTarget:ChessGasket = dropTargets[0];
+						dropTarget.dragEnterHandler(event);
+					}
 					break;
 				case TouchPhase.STATIONARY:
 					//delegate to mouse click handler
-//					mouseDownHandler(event);
+					chessPiecesModel.selectedPiece = this;
 					break;
 				default:
 					break;
 			}
+		}
+		//--------------------------------------------------------------------------
+		//
+		//  Private methods
+		//
+		//--------------------------------------------------------------------------
+		//calculate the chess piece 's drop target
+		private function calculateDropTarget(dragInitor:ChessPiece):Vector.<ChessGasket>
+		{
+			var initPoint:Point = dragInitor.position;
+			var chessGasket:ChessGasket = chessGasketModel.gaskets.gett(initPoint.x,initPoint.y) as ChessGasket;
+			var dropTargets:Vector.<ChessGasket> = new  Vector.<ChessGasket>();
+			//
+			for(var i:int=0;i<BoardConfig.xLines;i++)
+			{
+				for(var j:int=0;j<BoardConfig.yLines;j++)
+				{
+					chessGasket =  chessGasketModel.gaskets.gett(i,j) as ChessGasket;
+					var colliding:Boolean = dragInitor.getBounds(dragInitor.parent).intersects(chessGasket.getBounds(chessGasket.parent));
+//					if(colliding && (chessGasket.position.x != dragInitor.position.x) && (chessGasket.position.y != dragInitor.position.y))
+					if(colliding)	
+					{
+						LOG.debug("ChessPiece colliding the chess gasket:{0}",chessGasket.position);		
+						dropTargets.push(chessGasket);
+					}
+				}
+			}
+			return dropTargets;
 		}
 	}
 	

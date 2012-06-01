@@ -174,7 +174,7 @@ package com.godpaper.as3.business.factory
 //				chessGasketTips = position.toString();
 //				myChessGasket.toolTip=chessGasketTips;
 				chessGasketTips = "".concat(position.x,",",position.y);
-				myChessGasket.text = chessGasketTips;
+//				myChessGasket.text = chessGasketTips;
 			}
 			LOG.debug("Anew chess gasket has been created@{0},label:{1}",position,chessGasketTips);
 			return myChessGasket;

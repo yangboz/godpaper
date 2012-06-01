@@ -31,6 +31,7 @@ package com.godpaper.starling.views.components
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.consts.FlexGlobals;
 	import com.godpaper.as3.core.IChessGasket;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
@@ -43,11 +44,14 @@ package com.godpaper.starling.views.components
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	
+	import mx.utils.UIDUtil;
+	
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.Logger;
 	
 	import starling.display.Button;
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	import starling.display.Image;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -122,14 +126,14 @@ package com.godpaper.starling.views.components
 		{
 			_chessPiece=value;
 			//
-			if (null != value)
-			{
-				this.addChild(value as DisplayObject);
-			}
-			else
-			{
-				this.removeChildAt(0);
-			}
+//			if (null != value)
+//			{
+//				this.addChild(value as DisplayObject);
+//			}
+//			else
+//			{
+//				this.removeChildAt(0);
+//			}
 		}
 		//----------------------------------
 		//  conductVO
@@ -248,7 +252,7 @@ package com.godpaper.starling.views.components
 			var defaultUpState:Texture = upState;
 			if(defaultUpState==null)
 			{
-				defaultUpState = this.getUpStateTexture();
+				defaultUpState = this.getUpStateTexture(Color.BLACK,this.backgroundAlpha,Color.BLACK,this.borderAlpha);
 //				var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
 //				defaultUpState = atlas.getTexture(DefaultConstants.BLUE_BISHOP);
 			}
@@ -256,6 +260,7 @@ package com.godpaper.starling.views.components
 			super(defaultUpState, tipText, downState);
 			//
 			this.addEventListener(Event.COMPLETE,creationCompleteHandler);
+			//
 		}
 		
 		//--------------------------------------------------------------------------
@@ -263,7 +268,29 @@ package com.godpaper.starling.views.components
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		//dragEnterHandler
+		public function dragEnterHandler(event:TouchEvent):void
+		{
+			this.upState = this.getUpStateTexture(Color.GREEN,this.backgroundAlpha,Color.GREEN,this.borderAlpha);
+			//
+			this._conductVO =new ConductVO();
+			_conductVO.target=event.target as IChessPiece;
+			_conductVO.previousPosition=(event.target as ChessPiece).position;
+			_conductVO.nextPosition=this.position;
+			//do move validation
+			if (GameConfig.chessPieceManager.doMoveValidation(_conductVO))
+			{
+				//				DragManager.acceptDragDrop(event.currentTarget as IUIComponent);
+				//				DragManager.showFeedback(DragManager.LINK);
+			}
+			// remove event listener
+			//				this.removeEventListener(DragEvent.DRAG_ENTER,dragEnterHandler);
+		}
+		//dragOutHandler
+		public function dragOutHandler(event:TouchEvent):void
+		{
+			this.upState = this.getUpStateTexture(Color.BLACK,this.backgroundAlpha,Color.BLACK,this.borderAlpha);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -273,31 +300,9 @@ package com.godpaper.starling.views.components
 		protected function creationCompleteHandler(event:Event):void
 		{
 			// event listener method stub
-			//			this.addEventListener(TouchEvent.TOUCH, dragEnterHandler);
-			//			this.addEventListener(TouchEvent.TOUCH, dragDropHandler);
-//			this.addEventListener(TouchEvent.TOUCH,touchHandler);
 			//once piece add or remove,maybe check event triggled.
-			this.addEventListener(Event.ADDED_TO_STAGE, elementAddHandler);
-			this.addEventListener(Event.REMOVED_FROM_STAGE, elementRemoveHandler);
 //			this.addEventListener(Event.TRIGGERED,mouseClickHandler);
 		}
-		//dragEnterHandler
-		protected function dragEnterHandler(event:TouchEvent):void
-		{
-			this._conductVO =new ConductVO();
-			_conductVO.target=event.target as IChessPiece;
-			_conductVO.previousPosition=(event.target as ChessPiece).position;
-			_conductVO.nextPosition=this.position;
-			//do move validation
-			if (GameConfig.chessPieceManager.doMoveValidation(_conductVO))
-			{
-//				DragManager.acceptDragDrop(event.currentTarget as IUIComponent);
-//				DragManager.showFeedback(DragManager.LINK);
-			}
-			// remove event listener
-			//				this.removeEventListener(DragEvent.DRAG_ENTER,dragEnterHandler);
-		}
-		
 		//dragDropHandler
 		protected function dragDropHandler(event:TouchEvent):void
 		{
@@ -348,7 +353,7 @@ package com.godpaper.starling.views.components
 			}
 		}
 		//Custom render the texture with the global gasket configuration.
-		protected function getUpStateTexture():Texture
+		protected function getUpStateTexture(bgColor:uint,bgAlpha:Number,borderColor:uint,borderAlpha:Number):Texture
 		{
 			//Temp graphic objects tests.
 			//@see:http://wiki.starling-framework.org/manual/dynamic_textures
@@ -363,8 +368,8 @@ package com.godpaper.starling.views.components
 			//Draw a circle shape
 			var shape:Sprite = new Sprite();
 //			var shape:Shape = new Shape();
-			shape.graphics.beginFill(Color.BLACK,this.backgroundAlpha);
-			shape.graphics.lineStyle(1,Color.FUCHSIA,this.borderVisible?this.borderAlpha:0);
+			shape.graphics.beginFill(bgColor,bgAlpha);
+			shape.graphics.lineStyle(1,borderColor,this.borderVisible?borderAlpha:0);
 			var radius:Number = Math.min(GasketConfig.width,GasketConfig.height)/2;
 //			shape.graphics.drawCircle(GasketConfig.width/2,GasketConfig.height/2,radius);
 			shape.graphics.drawRect(0,0,GasketConfig.width,GasketConfig.height);
@@ -379,40 +384,20 @@ package com.godpaper.starling.views.components
 			//
 			return texture;
 		}
-		
+//		override protected function addToStageHandler(event:Event):void
+//		{
+//			
+//		}
+		//
+//		override protected function touchHandler(event:TouchEvent):void
+//		{
+//			//Empty.
+//		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function touchHandler(event:TouchEvent):void
-		{
-			const touch:Touch = event.getTouch(this);
-			//
-			this.x = touch.globalX;
-			this.y = touch.globalY;
-			switch(touch.phase)
-			{
-				case TouchPhase.BEGAN:
-					//delegate to drag enter handler
-					dragEnterHandler(event);
-					break;
-				case TouchPhase.HOVER:
-					break;
-				case TouchPhase.MOVED:
-					break;
-				case TouchPhase.ENDED:
-					//delegate to drag drop handler
-					dragDropHandler(event);
-					break;
-				case TouchPhase.STATIONARY:
-					//delegate to mouse click handler
-					mouseClickHandler(event);
-					break;
-				default:
-					break;
-			}
-		}
 	}
 	
 }

@@ -267,7 +267,9 @@ package
 			//gasket config:
 //			GasketConfig.maxPoolSize = 16;
 			GasketConfig.tipsVisible = true;
-			GasketConfig.backgroundAlpha = 0.5;
+			GasketConfig.backgroundAlpha = 0.2;
+			GasketConfig.width = 30;
+			GasketConfig.height = 30;
 			//about piece:
 			PieceConfig.factory = ThoChessFactory;
 			PieceConfig.maxPoolSizeBlue = 6;
@@ -319,7 +321,7 @@ package
 			this.startUpSequenceTask.label = "startUpSequenceTask";
 			this.startUpSequenceTask.addChild(new CreateChessGasketTask());
 			this.startUpSequenceTask.addChild(new CreateChessPieceTask());
-//			this.startUpSequenceTask.addChild(new CreateChessVoTask());
+			this.startUpSequenceTask.addChild(new CreateChessVoTask());
 			this.startUpSequenceTask.start();
 			//			//init data struct.@see ChessPieceModel dump info.
 			//			this.dumpFootSprint();
@@ -340,9 +342,9 @@ package
 			//GameManager start.
 			GameConfig.gameStateManager.start();
 			//
-//			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
-//			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());
-//			LOG.info("allPieces:{0}", ChessPiecesModel.getInstance().allPieces.dump());
+			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
+			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());
+			LOG.info("allPieces:{0}", ChessPiecesModel.getInstance().allPieces.dump());
 //			//
 //			LOG.info("allPieces rotate90:{0}", ChessPiecesModel.getInstance().allPieces.rotate90().dump());
 //			LOG.info("allPieces rotate90.bitCount:{0}", ChessPiecesModel.getInstance().allPieces.bitCount);
