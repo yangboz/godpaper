@@ -98,15 +98,16 @@ package com.godpaper.as3.model.vos
 			//
 			var cGasket:ChessGasket = 
 				ChessGasketsModel.getInstance().gaskets.gett(value.x,value.y) as ChessGasket;
-			if(cGasket.numChildren>=1)
-			{
-				//TODO:chess piece eat off.
-				var removedPiece:ChessPiece = cGasket.getChildAt(0) as ChessPiece;
-				var removedIndex:int = GameConfig.chessPieceManager.calculatePieceIndex(removedPiece);
-				LOG.debug("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
-				//set eat off value.
-				eatOff = removedPiece;
-			}
+//			if(cGasket.numChildren>=1)
+//			if(cGasket.chessPiece)
+//			{
+//				//TODO:chess piece eat off with chess piece references.
+//				var removedPiece:ChessPiece = cGasket.getChildAt(0) as ChessPiece;
+//				var removedIndex:int = GameConfig.chessPieceManager.calculatePieceIndex(removedPiece);
+//				LOG.debug("Eat Off@{0} target:{1}",cGasket.position.toString(),removedPiece.toString());
+//				//set eat off value.
+//				eatOff = removedPiece;
+//			}
 		}
 		public function get nextPosition():Point
 		{

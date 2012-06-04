@@ -374,7 +374,7 @@ package com.godpaper.as3.business.managers
 		 */
 		public function willNoneMove(gamePosition:PositionVO):Boolean
 		{
-			//TODO:function implementation.
+			//TODO:check handler function implementation.
 			return false;
 		}
 

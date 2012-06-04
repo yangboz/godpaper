@@ -2,7 +2,7 @@
 		 basedir="."
 		 default="docs">
 	<property name="FLEX_HOME"
-			  value="C:\Flex\sdks\flex_sdk_4.1.0.16032"/>
+			  value="C:\Flex\sdks\flex_sdk_4.6.0.23201B"/>
 	<property name="OUTPUT_DIR" 
 			  value="${basedir}/asdoc"/>
 	<taskdef resource="flexTasks.tasks"
@@ -12,15 +12,15 @@
 	-->
 	<target name="docs" depends="clean">
 		<asdoc 
-			   window-title="GODPAPER TheRealKnight Action Script API Document"
-			   main-title="GODPAPER::TheRealKnight"
+			   window-title="GODPAPER TheKnightErrant Action Script API Document"
+			   main-title="GODPAPER::TheKnightErrant"
 			   footer="Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER."
 			   output="${OUTPUT_DIR}" 
 			   failonerror="true"
 			   lenient="true"
 			   strict="false"
 			   report-invalid-styles-as-warnings="true"
-			   templates-path="C:\Program Files\Adobe\Adobe Flash Builder 4.5\sdks\4.5.0\asdoc\templates_godpaper"
+			   templates-path="C:\Program Files\Adobe\Adobe Flash Builder 4.6\sdks\4.6.0\asdoc\templates_godpaper"
 			   >
 			<!--<exclude-classes class="ResourceManager"/>-->
 			<!-- generate asdoc for all as/mxml files in the doc-sources -->

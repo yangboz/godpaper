@@ -260,7 +260,8 @@ package com.godpaper.starling.views.components
 			super(defaultUpState, tipText, downState);
 			//
 			this.addEventListener(Event.COMPLETE,creationCompleteHandler);
-			//
+			//Can not touch.
+			this.touchable  = false;
 		}
 		
 		//--------------------------------------------------------------------------
@@ -271,8 +272,7 @@ package com.godpaper.starling.views.components
 		//dragEnterHandler
 		public function dragEnterHandler(event:TouchEvent):void
 		{
-			this.upState = this.getUpStateTexture(Color.GREEN,this.backgroundAlpha,Color.GREEN,this.borderAlpha);
-			//
+			//Update conduct value object.
 			this._conductVO =new ConductVO();
 			_conductVO.target=event.target as IChessPiece;
 			_conductVO.previousPosition=(event.target as ChessPiece).position;
@@ -282,14 +282,38 @@ package com.godpaper.starling.views.components
 			{
 				//				DragManager.acceptDragDrop(event.currentTarget as IUIComponent);
 				//				DragManager.showFeedback(DragManager.LINK);
+				//Update display effect.
+				this.upState = this.getUpStateTexture(Color.GREEN,this.backgroundAlpha,Color.GREEN,this.borderAlpha);
+				//Update chess piece reference.
+				this.chessPiece = event.target as IChessPiece;
+				//Align the chess piece's position.
+				this.chessPiece.x = this.x;
+				this.chessPiece.y = this.y;
+			}else
+			{
+				//Update display effect.
+				this.upState = this.getUpStateTexture(Color.RED,this.backgroundAlpha,Color.RED,this.borderAlpha);
 			}
-			// remove event listener
-			//				this.removeEventListener(DragEvent.DRAG_ENTER,dragEnterHandler);
 		}
 		//dragOutHandler
 		public function dragOutHandler(event:TouchEvent):void
 		{
+			//Update display effect.
 			this.upState = this.getUpStateTexture(Color.BLACK,this.backgroundAlpha,Color.BLACK,this.borderAlpha);
+			//Update chess piece reference by event.target.
+			this.chessPiece = null;
+		}
+		//dragDropHandler
+		public function dragDropHandler(event:TouchEvent):void
+		{
+			this._conductVO=new ConductVO();
+			_conductVO.target=event.target as IChessPiece;
+			_conductVO.previousPosition=(event.target as ChessPiece).position;
+			_conductVO.nextPosition=this.position;
+			//apply move.
+			GameConfig.chessPieceManager.applyMove(conductVO);
+			//
+			event.stopImmediatePropagation();
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -303,19 +327,6 @@ package com.godpaper.starling.views.components
 			//once piece add or remove,maybe check event triggled.
 //			this.addEventListener(Event.TRIGGERED,mouseClickHandler);
 		}
-		//dragDropHandler
-		protected function dragDropHandler(event:TouchEvent):void
-		{
-			this._conductVO=new ConductVO();
-			_conductVO.target=event.target as IChessPiece;
-			_conductVO.previousPosition=(event.target as ChessPiece).position;
-			_conductVO.nextPosition=this.position;
-			//apply move.
-			GameConfig.chessPieceManager.applyMove(conductVO);
-			//
-			event.stopImmediatePropagation();
-		}
-		
 		//
 		protected function elementAddHandler(event:Event):void
 		{

@@ -1,5 +1,6 @@
 package com.godpaper.as3.configs
 {
+	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
 	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 	import com.godpaper.as3.consts.DefaultTollgatesConstant;
 	import com.godpaper.as3.core.IChessPieceManager;
@@ -29,7 +30,7 @@ package com.godpaper.as3.configs
 		private static var _turnFlag:int;
 		private static var _tollgates:Vector.<DefaultTollgatesConstant> = new Vector.<DefaultTollgatesConstant>();
 		//
-		private static var _chessPieceManager:IChessPieceManager;
+		private static var _chessPieceManager:IChessPieceManager = new ChessPieceManagerDefault();
 		private static var _gameStateManager:IGameStateManager = new GameStateManagerDefault();
 		//The game play mode(computer vs human,human vs human);
 		private static var _playMode:String = HUMAN_VS_COMPUTER;

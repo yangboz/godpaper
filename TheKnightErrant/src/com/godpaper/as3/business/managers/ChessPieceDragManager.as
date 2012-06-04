@@ -27,16 +27,16 @@ package com.godpaper.as3.business.managers
 	//
 	//--------------------------------------------------------------------------
     import flash.display.Bitmap;
-import flash.display.BitmapData;
-import flash.events.Event;
-import flash.events.MouseEvent;
-import flash.geom.Point;
-
-import starling.display.DisplayObject;
-import starling.display.Image;
-import starling.display.Sprite;
-import starling.display.Stage;
-import starling.textures.Texture;
+	import flash.display.BitmapData;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
+	
+	import starling.display.DisplayObject;
+	import starling.display.Image;
+	import starling.display.Sprite;
+	import starling.display.Stage;
+	import starling.textures.Texture;
 
 	/**
 	 * Customize chess piece's Drag-and-Drop inside of AS3/starling system. 	

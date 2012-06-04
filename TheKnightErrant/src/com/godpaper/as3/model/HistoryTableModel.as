@@ -2,10 +2,10 @@ package com.godpaper.as3.model
 {
 	import com.godpaper.as3.consts.ZobristConstants;
 	import com.godpaper.as3.errors.DefaultErrors;
-	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.ZobristHashTable;
-
-	import mx.logging.ILogger;
+	
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 
 	/**
 	 * A singleton model hold chess board history table information.</br>
@@ -42,7 +42,7 @@ package com.godpaper.as3.model
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(HistoryTableModel);
+		private static const LOG:Logger = LogContext.getLogger(HistoryTableModel);
 		//generation.
 		//red
 		private var _redRook:ZobristHashTable		= new ZobristHashTable(MAX_SIZE,ZobristConstants.RED_ROOK.key);

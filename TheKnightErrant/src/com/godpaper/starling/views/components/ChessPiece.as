@@ -47,6 +47,7 @@ package com.godpaper.starling.views.components
 	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	
@@ -170,6 +171,7 @@ package com.godpaper.starling.views.components
 //				this.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 //				this.addEventListener(MouseEvent.CLICK,mouseClickHandler);
 			}
+			this.touchable = (value != DefaultConstants.FLAG_BLUE);
 		}
 		//----------------------------------
 		//  omenVO
@@ -384,6 +386,7 @@ package com.godpaper.starling.views.components
 		//
 		override protected function touchHandler(event:TouchEvent):void
 		{
+			//Drag phases:begin,out,enter,drop.
 			var target:ChessPiece = event.target as ChessPiece;
 			const touch:Touch = event.getTouch(target);
 			if(null==touch) return;//FIXME:Null exception handler.
@@ -392,7 +395,9 @@ package com.godpaper.starling.views.components
 //			LOG.info("ChessPiece touch: {0}, space:{1}",touch,space);
 			var position:Point = touch.getLocation(space);
 			// 
-			var dropTargets:Vector.<ChessGasket>;
+			var dragEnterTargets:Vector.<ChessGasket>;
+			var dragDropTarget:ChessGasket;
+			var dragOutTarget:ChessGasket;
 			//
 			switch(touch.phase)
 			{
@@ -407,21 +412,28 @@ package com.godpaper.starling.views.components
 					target.x = position.x - target.width/2;
 					target.y = position.y - target.height/2;
 					//					ChessPieceDragManager.getInstance().drag(target,FlexGlobals.gameStage);
-					dropTargets = this.calculateDropTarget(target);
-					LOG.info("ChessPiece drop targets:{0} ",dropTargets);
+//					//drag enter target(chess piece) refresh.
+//					dragEnterTargets = this.calculateDragEnterTargets(target);
+//					LOG.debug("drag enter ChessPieces @:{0}",dragEnterTargets);
 					//
 					chessPiecesModel.selectedPiece = this;
 					break;
 				case TouchPhase.ENDED:
 					//End sound effect.
 //					this.cpMoveSoundChannel.stop();
-					//
-					dropTargets = this.calculateDropTarget(target);
-					if(dropTargets[0])
-					{
-						var dropTarget:ChessGasket = dropTargets[0];
-						dropTarget.dragEnterHandler(event);
-					}
+					//drag enter target(chess piece) refresh.
+					dragEnterTargets = this.calculateDragEnterTargets(target);
+					LOG.debug("drag enter ChessPieces @:{0}",dragEnterTargets);
+					//drag drop target(chess piece) refresh.
+					dragDropTarget = this.calculateDragDropTarget(target,dragEnterTargets);
+					LOG.debug("drag drop ChessPiece @:{0}",dragDropTarget.position);
+					dragDropTarget.dragEnterHandler(event);
+					//drag out target(chess gasket) revert.
+					dragOutTarget = this.chessGasketModel.gaskets.gett(target.position.x,target.position.y) as ChessGasket;
+					LOG.debug("drag out ChessGaket @:{0}",dragOutTarget.position);
+					dragOutTarget.dragOutHandler(event);
+					//drag drop target(chess gasket) handler.
+//					dragDropTarget.dragDropHandler(event);
 					break;
 				case TouchPhase.STATIONARY:
 					//delegate to mouse click handler
@@ -436,8 +448,8 @@ package com.godpaper.starling.views.components
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		//calculate the chess piece 's drop target
-		private function calculateDropTarget(dragInitor:ChessPiece):Vector.<ChessGasket>
+		//calculate the chess piece 's drag enter targets
+		private function calculateDragEnterTargets(dragInitor:ChessPiece):Vector.<ChessGasket>
 		{
 			var initPoint:Point = dragInitor.position;
 			var chessGasket:ChessGasket = chessGasketModel.gaskets.gett(initPoint.x,initPoint.y) as ChessGasket;
@@ -458,6 +470,28 @@ package com.godpaper.starling.views.components
 				}
 			}
 			return dropTargets;
+		}
+		//calculate the final dropped target(chess gasket) from the detected drag entered chess gasket list.
+		private function calculateDragDropTarget(dragInitor:ChessPiece,dragEnterTargets:Vector.<ChessGasket>):ChessGasket
+		{
+			var final:ChessGasket;
+			var collidingAreaSize:Number = 0;
+			var indexFlag:int=0;
+			for(var i:int=0;i<dragEnterTargets.length;i++)
+			{
+				var chessGasket:ChessGasket = dragEnterTargets[i];
+				var collidingArea:Rectangle = dragInitor.getBounds(dragInitor.parent).intersection(chessGasket.getBounds(chessGasket.parent));
+				var areaSize:Number = collidingArea.width*collidingArea.height;
+				LOG.debug("drag drop each collidingArea({0}),area size:{1}",chessGasket.position,areaSize);
+				//Get the max area size index.
+				if(areaSize>=collidingAreaSize)
+				{
+					collidingAreaSize = areaSize;
+					indexFlag = i;
+				}
+			}
+			//
+			return dragEnterTargets[indexFlag];
 		}
 	}
 	

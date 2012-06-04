@@ -340,6 +340,7 @@ package
 		protected function applicationCompleteHandler():void
 		{
 			//GameManager start.
+			GameConfig.chessPieceManager = new ThoChessPieceManager();
 			GameConfig.gameStateManager.start();
 			//
 			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());

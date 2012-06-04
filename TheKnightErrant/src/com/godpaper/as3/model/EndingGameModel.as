@@ -1,9 +1,8 @@
 package com.godpaper.as3.model
 {
 	import com.godpaper.as3.errors.DefaultErrors;
-	import com.godpaper.as3.utils.LogUtil;
-
-	import mx.logging.ILogger;
+	import org.spicefactory.lib.logging.LogContext;
+	import org.spicefactory.lib.logging.Logger;
 
 	/**
 	 * A singleton model hold chess board opening book information.</p>
@@ -45,7 +44,7 @@ package com.godpaper.as3.model
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(EndingGameModel);
+		private static const LOG:Logger = LogContext.getLogger(EndingGameModel);
 		//generation.
 		//TODO.other structs.
 		//--------------------------------------------------------------------------
