@@ -60,6 +60,9 @@ package com.godpaper.as3.core
 		//
 		function set y(value:Number):void;
 		function get y():Number;
+		//
+		function set label(value:String):void;
+		function get label():String;
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

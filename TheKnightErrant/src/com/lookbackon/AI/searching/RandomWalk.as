@@ -4,10 +4,10 @@ package com.lookbackon.AI.searching
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.FilterUtil;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.MathUtil;
 	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import mx.logging.ILogger;
 
 	/**
 	 *
@@ -19,7 +19,8 @@ package com.lookbackon.AI.searching
 	 */	
 	public class RandomWalk extends SearchingBase
 	{
-		private static const LOG:Logger = LogContext.getLogger(RandomWalk);
+		//
+		private static const LOG:ILogger = LogUtil.getLogger(RandomWalk);
 		/**
 		 * About RandomWalkAI(瞎走)
 		 * if(game over in current board position) return winner,
@@ -46,7 +47,7 @@ package com.lookbackon.AI.searching
 			}else
 			{
 				//while checking,defends move first.
-				trace(GameConfig.chessPieceManager.isChecking);
+				LOG.debug(GameConfig.chessPieceManager.isChecking.toString());
 				if(GameConfig.chessPieceManager.isChecking)
 				{
 					randomMoves = moves.filter(FilterUtil.onDefends);

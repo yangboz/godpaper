@@ -8,10 +8,10 @@ package com.godpaper.as3.tasks
 	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.vos.ConductVO;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.components.ChessGasket;
-
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	
+	import mx.logging.ILogger;
 
 	/**
 	 * UpdatePiecesPostionTask.as class.
@@ -31,7 +31,7 @@ package com.godpaper.as3.tasks
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(UpdatePiecesPositionTask);
+		private static const LOG:ILogger = LogUtil.getLogger(UpdatePiecesPositionTask);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

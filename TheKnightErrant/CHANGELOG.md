@@ -16,3 +16,13 @@
 
 [CHANGE]:Using the as3 signal mechanic to replace of Parsley [MessageHandler] meta-data;
 
+[CHANGE]:While removing the eat-off chess piece,using its reference to replace of getChild/ElementAt function;
+
+[CHANGE]:Abstract the x,y and label properties to  IVisualElement.as;
+
+[DELETE]:FLEX3 UIComponent's CREATE_COMPLETE event;
+
+[CHANGE]:Using the TouceEvent.TRIGGLE to replace of the MouseEvent.MOUSE_DOWN/MOUSE_CLICK event listeners and handlers;
+
+[NEW]:Using the simplified FLEX logging package to replace of the Parsley/SpiceLib flash logging mechanics;
+ 

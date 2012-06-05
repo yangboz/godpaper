@@ -37,6 +37,7 @@ package com.godpaper.starling.views.components
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
 	
 	import flash.display.BitmapData;
@@ -44,10 +45,8 @@ package com.godpaper.starling.views.components
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	
+	import mx.logging.ILogger;
 	import mx.utils.UIDUtil;
-	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
 	
 	import starling.display.Button;
 	import starling.display.DisplayObject;
@@ -92,7 +91,7 @@ package com.godpaper.starling.views.components
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(ChessGasket);
+		private static const LOG:ILogger = LogUtil.getLogger(ChessGasket);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -258,8 +257,6 @@ package com.godpaper.starling.views.components
 			}
 			//
 			super(defaultUpState, tipText, downState);
-			//
-			this.addEventListener(Event.COMPLETE,creationCompleteHandler);
 			//Can not touch.
 			this.touchable  = false;
 		}
@@ -284,15 +281,13 @@ package com.godpaper.starling.views.components
 				//				DragManager.showFeedback(DragManager.LINK);
 				//Update display effect.
 				this.upState = this.getUpStateTexture(Color.GREEN,this.backgroundAlpha,Color.GREEN,this.borderAlpha);
-				//Update chess piece reference.
-				this.chessPiece = event.target as IChessPiece;
-				//Align the chess piece's position.
-				this.chessPiece.x = this.x;
-				this.chessPiece.y = this.y;
+				//Update chess piece reference by UpdateChessPiecesTask.
 			}else
 			{
 				//Update display effect.
 				this.upState = this.getUpStateTexture(Color.RED,this.backgroundAlpha,Color.RED,this.borderAlpha);
+				//
+				event.stopImmediatePropagation();
 			}
 		}
 		//dragOutHandler
@@ -314,55 +309,18 @@ package com.godpaper.starling.views.components
 			GameConfig.chessPieceManager.applyMove(conductVO);
 			//
 			event.stopImmediatePropagation();
-		}
-		//--------------------------------------------------------------------------
-		//
-		//  Protected methods
-		//
-		//--------------------------------------------------------------------------
-		//creationCompleteHandler
-		protected function creationCompleteHandler(event:Event):void
-		{
-			// event listener method stub
-			//once piece add or remove,maybe check event triggled.
-//			this.addEventListener(Event.TRIGGERED,mouseClickHandler);
-		}
-		//
-		protected function elementAddHandler(event:Event):void
-		{
-			LOG.debug("ElementExistenceEvent,element:{0}", event.target);
-			//renew ChessPiece's position.
-			//				ChessPiece(event.element).position = this.position;
+			//
 			//clear gasket indicate effect.
 			var emptyLegalMoves:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 			emptyLegalMoves.clear();
 			//empty indicate effect.
 			GameConfig.chessPieceManager.indicateGasketsMove(emptyLegalMoves);
 		}
-		
+		//--------------------------------------------------------------------------
 		//
-		protected function elementRemoveHandler(event:Event):void
-		{
-			//
-		}
-		
-		//mouseClickHandler
-		protected function mouseClickHandler(event:TouchEvent):void
-		{
-			if(chessPiecesModel.selectedPiece)
-			{
-				this._conductVO=new ConductVO();
-				_conductVO.target= chessPiecesModel.selectedPiece;
-				_conductVO.previousPosition= chessPiecesModel.selectedPiece.position;
-				_conductVO.nextPosition=this.position;
-				//do move validation
-				if (GameConfig.chessPieceManager.doMoveValidation(_conductVO))
-				{
-					//apply move.
-					GameConfig.chessPieceManager.applyMove(conductVO);
-				}
-			}
-		}
+		//  Protected methods
+		//
+		//--------------------------------------------------------------------------
 		//Custom render the texture with the global gasket configuration.
 		protected function getUpStateTexture(bgColor:uint,bgAlpha:Number,borderColor:uint,borderAlpha:Number):Texture
 		{

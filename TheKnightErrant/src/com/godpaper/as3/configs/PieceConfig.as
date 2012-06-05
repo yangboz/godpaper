@@ -18,6 +18,7 @@ package com.godpaper.as3.configs
 	 * Created Jan 30, 2011 2:18:35 PM
 	 * @history 06/17/2011 added scaleX/Y properties.
 	 * @history 07/02/2011 added maxPoolSize(BLUE/RED),growthValue properties;
+	 * @history 06/05/2012 deprecated the usingDragProxy,always using;
 	 */
 	public class PieceConfig
 	{
@@ -27,7 +28,7 @@ package com.godpaper.as3.configs
 		//
 		//--------------------------------------------------------------------------
 		public static var factory:Class;
-		public static var usingDragProxy:Boolean;
+//		public static var usingDragProxy:Boolean;
 		public static var scaleX:Number=1.0;
 		public static var scaleY:Number=1.0;
 		//ObjectPool

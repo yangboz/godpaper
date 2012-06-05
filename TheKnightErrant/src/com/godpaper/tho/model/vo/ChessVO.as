@@ -28,10 +28,9 @@ package com.godpaper.tho.model.vo
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.impl.AbstractChessVO;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.utils.LogUtil;
 	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
-	
+	import mx.logging.ILogger;
 	
 	/**
 	 * TwhVO.as class.The "two hit one" chess piece's value object.  	
@@ -52,7 +51,7 @@ package com.godpaper.tho.model.vo
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(ChessVO);
+		private static const LOG:ILogger = LogUtil.getLogger(ChessVO);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

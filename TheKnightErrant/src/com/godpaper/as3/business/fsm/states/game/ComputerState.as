@@ -10,6 +10,7 @@ package com.godpaper.as3.business.fsm.states.game
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.consts.FlexGlobals;
 	import com.godpaper.as3.model.ChessBoardModel;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
 	import com.lookbackon.AI.evaluation.IEvaluation;
@@ -18,10 +19,10 @@ package com.godpaper.as3.business.fsm.states.game
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	
+	import mx.logging.ILogger;
+	
 	import org.generalrelativity.thread.GreenThread;
 	import org.generalrelativity.thread.IRunnable;
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
 	
 	import pl.mateuszmackowiak.visuals.CursorManager;
 
@@ -47,8 +48,7 @@ package com.godpaper.as3.business.fsm.states.game
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger=LogContext.getLogger(ComputerState);
-
+		private static const LOG:ILogger=LogUtil.getLogger(ComputerState);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

@@ -31,6 +31,7 @@ package com.godpaper.starling.views.components
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.IChessBoard;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.MathUtil;
 	import com.godpaper.starling.views.components.ChessPiece;
 	
@@ -38,8 +39,7 @@ package com.godpaper.starling.views.components
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import mx.logging.ILogger;
 	
 	import pl.mateuszmackowiak.visuals.CursorManager;
 	
@@ -89,7 +89,7 @@ package com.godpaper.starling.views.components
 		//  CONSTANTS
 		//----------------------------------
 		//
-		private static const LOG:Logger = LogContext.getLogger(ChessBoard);
+		private static const LOG:ILogger = LogUtil.getLogger(ChessBoard);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

@@ -9,9 +9,10 @@ package com.lookbackon.AI.searching
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.FilterUtil;
+	import com.godpaper.as3.utils.LogUtil;
 	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import mx.logging.ILogger;
+
 	/**
 	 * AttackFalse.as class.(假进攻)
 	 * @author Knight.zhou
@@ -29,7 +30,7 @@ package com.lookbackon.AI.searching
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(AttackFalse);
+		private static const LOG:ILogger = LogUtil.getLogger(AttackFalse);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

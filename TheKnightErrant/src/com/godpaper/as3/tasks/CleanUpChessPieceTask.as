@@ -10,13 +10,15 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.components.ChessGasket;
 	import com.godpaper.starling.views.components.ChessPiece;
-
+	
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
-
-
+	
+	import mx.logging.ILogger;
+	
 	import org.spicefactory.lib.task.Task;
 
 	/**
@@ -33,12 +35,11 @@ package com.godpaper.as3.tasks
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-//		[Bindable]
 		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-
+		private static const LOG:ILogger = LogUtil.getLogger(CleanUpChessPieceTask);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -77,7 +78,7 @@ package com.godpaper.as3.tasks
 					var chessGasket:ChessGasket = (ChessGasketsModel.getInstance().gaskets.gett(h,v) as ChessGasket);
 					if( chessGasket.chessPiece )
 					{
-						trace("removed piece:",ChessPiece(chessGasket.chessPiece).label );
+						LOG.info("removed piece:{0}",ChessPiece(chessGasket.chessPiece).label );
 						try{
 							chessGasket.chessPiece.chessVO = null;
 							chessGasket.chessPiece.omenVO = null;
@@ -90,7 +91,7 @@ package com.godpaper.as3.tasks
 						}catch(error:Error)
 						{
 							//
-							trace(error);
+							LOG.error(error.toString());
 						}
 					}
 				}

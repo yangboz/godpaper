@@ -27,10 +27,11 @@ package com.godpaper.starling.views.scenes
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.consts.FlexGlobals;
+	import com.godpaper.as3.utils.LogUtil;
+	
+	import mx.logging.ILogger;
 	
 	import org.osflash.signals.Signal;
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
 	
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -56,7 +57,7 @@ package com.godpaper.starling.views.scenes
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(SceneBase);
+		private static const LOG:ILogger = LogUtil.getLogger(SceneBase);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

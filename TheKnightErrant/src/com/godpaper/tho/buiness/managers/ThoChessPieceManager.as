@@ -37,6 +37,7 @@ package com.godpaper.tho.buiness.managers
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.FilterUtil;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.components.ChessGasket;
 	import com.godpaper.starling.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
@@ -45,8 +46,7 @@ package com.godpaper.tho.buiness.managers
 	
 	import flash.geom.Point;
 	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import mx.logging.ILogger;
 	
 	/**
 	 * The chess piece manager(TwoHitOne) manage chess piece move's validation/makeMove/unMakeMove.</br>
@@ -69,7 +69,7 @@ package com.godpaper.tho.buiness.managers
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(ThoChessPieceManager);
+		private static const LOG:ILogger = LogUtil.getLogger(ThoChessPieceManager);
 		//--------------------------------------------------------------------------
 		//
 		// Public properties
@@ -167,11 +167,11 @@ package com.godpaper.tho.buiness.managers
 				}
 				if(sumOfFlags==1)
 				{
-					trace(data[i]);
+					LOG.debug(data[i]);
 					result.push(data[i]);
 				}
 			}
-			trace("blue sum of flags result:",result);
+			LOG.debug("blue sum of flags result:",result);
 			//
 			return result;
 		}
@@ -189,11 +189,11 @@ package com.godpaper.tho.buiness.managers
 				}
 				if(sumOfFlags==2)
 				{
-					trace(data[i]);
+					LOG.debug(data[i]);
 					result.push(data[i]);
 				}
 			}
-			trace("red sum of flags result:",result);
+			LOG.debug("red sum of flags result:",result);
 			//
 			return result;
 		}

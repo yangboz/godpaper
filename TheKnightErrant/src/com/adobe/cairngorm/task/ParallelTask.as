@@ -22,8 +22,9 @@
  */
 package com.adobe.cairngorm.task
 {
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import com.godpaper.as3.utils.LogUtil;
+	
+	import mx.logging.ILogger;
 
     /**
      * A task group that processes its children in pseudo-parallel. All the child
@@ -38,8 +39,7 @@ package com.adobe.cairngorm.task
         //  Constants
         //
         //------------------------------------------------------------------------
-
-        private static const LOG:Logger = LogContext.getLogger(ParallelTask);
+        private static const LOG:ILogger = LogUtil.getLogger(ParallelTask);
 
         //------------------------------------------------------------------------
         //
@@ -60,18 +60,21 @@ package com.adobe.cairngorm.task
 
         override protected function performTask():void
         {
-            if (LOG.isDebugEnabled())
-            {
-                LOG.debug("Starting parallel task group: label={0}, children={1}, size={2}",
-                          label, children.length, size);
-            }
+//            if (LOG.isDebugEnabled())
+//            {
+//                LOG.debug("Starting parallel task group: label={0}, children={1}, size={2}",
+//                          label, children.length, size);
+//            }
+			LOG.debug("Starting parallel task group: label={0}, children={1}, size={2}",
+				label, children.length, size);
 
             if (hasNoEnabledChildren)
             {
-                if (LOG.isDebugEnabled())
-                {
-                    LOG.debug("Completed parallel task group: label={0}", label);
-                }
+//                if (LOG.isDebugEnabled())
+//                {
+//                    LOG.debug("Completed parallel task group: label={0}", label);
+//                }
+				LOG.debug("Completed parallel task group: label={0}", label);
                 complete();
             }
             else
@@ -109,10 +112,11 @@ package com.adobe.cairngorm.task
 
             if (processed == size && currentState != TaskEvent.TASK_FAULT)
             {
-                if (LOG.isDebugEnabled())
-                {
-                    LOG.debug("Completed parallel task group: label={0}", label);
-                }
+//                if (LOG.isDebugEnabled())
+//                {
+//                    LOG.debug("Completed parallel task group: label={0}", label);
+//                }
+				LOG.debug("Completed parallel task group: label={0}", label);
 
                 complete();
             }
@@ -122,10 +126,11 @@ package com.adobe.cairngorm.task
         {
             super.onChildTaskFault(event);
 
-            if (LOG.isErrorEnabled())
-            {
-                LOG.error("Fault during parallel task group: label={0}", label);
-            }
+//            if (LOG.isErrorEnabled())
+//            {
+//                LOG.error("Fault during parallel task group: label={0}", label);
+//            }
+			LOG.error("Fault during parallel task group: label={0}", label);
             
             fault(event.message);
         }

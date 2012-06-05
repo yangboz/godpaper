@@ -3,17 +3,19 @@ package com.godpaper.as3.model
 	import com.godpaper.as3.consts.ZobristConstants;
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.vos.ZobristKeyVO;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.ZobristHashTable;
 	
 	import de.polygonal.ds.Array3;
 	import de.polygonal.ds.HashTable;
 	import de.polygonal.math.PM_PRNG;
 	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import mx.logging.ILogger;
 	
 	/**
 	 * A singleton model hold all Chess Board's tag info for Chess HistoryTable/OpeningBook.
+	 * 
+	 * @see http://chessprogramming.wikispaces.com/Zobrist+Hashing
 	 * 
 	 * @author Knight.zhou
 	 * 
@@ -49,7 +51,7 @@ package com.godpaper.as3.model
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(ZobristKeysModel);
+		private static const LOG:ILogger = LogUtil.getLogger(ZobristKeysModel);
 		//generation.
 		//TODO.other structs.
 		//--------------------------------------------------------------------------

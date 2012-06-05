@@ -22,8 +22,9 @@
  */
 package com.adobe.cairngorm.task
 {
-	import org.spicefactory.lib.logging.Logger;
-    import org.spicefactory.lib.logging.LogContext;
+	import com.godpaper.as3.utils.LogUtil;
+	
+	import mx.logging.ILogger;
 
     /**
      * A task group that processes its children in sequence. The next child is
@@ -36,7 +37,7 @@ package com.adobe.cairngorm.task
         //  Constants
         //
         //------------------------------------------------------------------------
-        private static const LOG:Logger = LogContext.getLogger(SequenceTask);
+        private static const LOG:ILogger = LogUtil.getLogger(SequenceTask);
 
         //------------------------------------------------------------------------
         //
@@ -66,11 +67,13 @@ package com.adobe.cairngorm.task
 
         override protected function performTask():void
         {
-            if (LOG.isDebugEnabled())
-            {
-                LOG.debug("Starting sequence task group: label={0}, children={1}, size={2}",
-                          label, children.length, size);
-            }
+//            if (LOG.isDebugEnabled())
+//            {
+//                LOG.debug("Starting sequence task group: label={0}, children={1}, size={2}",
+//                          label, children.length, size);
+//            }
+			LOG.debug("Starting sequence task group: label={0}, children={1}, size={2}",
+				label, children.length, size);
 
             startNextTask();
         }
@@ -92,10 +95,11 @@ package com.adobe.cairngorm.task
         {
             super.onChildTaskFault(event);
 
-            if (LOG.isErrorEnabled())
-            {
-                LOG.error("Fault during sequence task group: label={0}", label);
-            }
+//            if (LOG.isErrorEnabled())
+//            {
+//                LOG.error("Fault during sequence task group: label={0}", label);
+//            }
+			LOG.error("Fault during sequence task group: label={0}", label);
 
             fault(event.message);
         }
@@ -119,10 +123,11 @@ package com.adobe.cairngorm.task
             }
             else
             {
-                if (LOG.isDebugEnabled())
-                {
-                    LOG.debug("Completed sequence task group: label={0}", label);
-                }
+//                if (LOG.isDebugEnabled())
+//                {
+//                    LOG.debug("Completed sequence task group: label={0}", label);
+//                }
+				LOG.debug("Completed sequence task group: label={0}", label);
 
                 complete();
             }

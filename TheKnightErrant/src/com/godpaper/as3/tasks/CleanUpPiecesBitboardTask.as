@@ -8,11 +8,12 @@ package com.godpaper.as3.tasks
 //	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
 	
-	import org.spicefactory.lib.logging.LogContext;
+	import mx.logging.ILogger;
+	
 	import org.spicefactory.lib.task.Task;
-	import org.spicefactory.lib.logging.Logger;
 
 
 	/**
@@ -34,8 +35,7 @@ package com.godpaper.as3.tasks
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger=LogContext.getLogger(CleanUpPiecesBitboardTask);
-
+		private static const LOG:ILogger=LogUtil.getLogger(CleanUpPiecesBitboardTask);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

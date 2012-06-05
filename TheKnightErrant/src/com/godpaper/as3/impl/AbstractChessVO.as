@@ -4,12 +4,11 @@ package com.godpaper.as3.impl
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
 	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import mx.logging.ILogger;
+	
 	
 	/**
 	 * This is our bitboard:</p>
@@ -66,7 +65,7 @@ package com.godpaper.as3.impl
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(AbstractChessVO);
+		private static const LOG:ILogger = LogUtil.getLogger(AbstractChessVO);
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor

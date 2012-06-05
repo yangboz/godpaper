@@ -22,12 +22,15 @@
  */
 package com.adobe.cairngorm.task
 {
+	import com.godpaper.as3.utils.LogUtil;
+	
 	import flash.events.EventDispatcher;
 	
 	import mx.events.StateChangeEvent;
+	import mx.logging.ILogger;
+	import mx.logging.Log;
+	import mx.logging.LogEvent;
 	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
 	//---------------------------------------------------------------------------
 	//
 	//  Meta-data
@@ -59,7 +62,8 @@ package com.adobe.cairngorm.task
 	 */
 	public class Task extends EventDispatcher implements ITask
 	{
-		private static const LOG:Logger=LogContext.getLogger(Task);
+		//
+		private static const LOG:ILogger=LogUtil.getLogger(Task);
 
 		//------------------------------------------------------------------------
 		//
@@ -128,10 +132,11 @@ package com.adobe.cairngorm.task
 
 		public function start():void
 		{
-			if (LOG.isDebugEnabled())
-			{
-				LOG.debug("Starting task-item: label={0}", label);
-			}
+//			if (LOG.isDebugEnabled())
+//			{
+//				LOG.debug("Starting task-item: label={0}", label);
+//			}
+			LOG.debug("Starting task-item: label={0}", label);
 
 			dispatchEvent(TaskEvent.createStartEvent(this));
 			setCurrentState(TaskState.RUNNING);
@@ -173,10 +178,11 @@ package com.adobe.cairngorm.task
 			if (_currentState != TaskState.RUNNING)
 				return;
 
-			if (LOG.isDebugEnabled())
-			{
-				LOG.debug("Completed task-item: label={0}", label);
-			}
+//			if (LOG.isDebugEnabled())
+//			{
+//				LOG.debug("Completed task-item: label={0}", label);
+//			}
+			LOG.debug("Completed task-item: label={0}", label);
 
 			setCurrentState(TaskState.COMPLETED);
 
@@ -196,10 +202,11 @@ package com.adobe.cairngorm.task
 			if (_currentState != TaskState.RUNNING)
 				return;
 
-			if (LOG.isErrorEnabled())
-			{
-				LOG.error("Fault processing task-item: label={0}, message={1}", label, message);
-			}
+//			if (LOG.isErrorEnabled())
+//			{
+//				LOG.error("Fault processing task-item: label={0}, message={1}", label, message);
+//			}
+			LOG.error("Fault processing task-item: label={0}, message={1}", label, message);
 
 			setCurrentState(TaskState.FAULT);
 

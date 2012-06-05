@@ -10,8 +10,9 @@ package com.lookbackon.AI.searching
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.PositionVO;
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import com.godpaper.as3.utils.LogUtil;
+	
+	import mx.logging.ILogger;
 
 	/**
 	 * <b>MiniMax.as class.</b></br>
@@ -55,7 +56,7 @@ package com.lookbackon.AI.searching
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(MiniMax);
+		private static const LOG:ILogger = LogUtil.getLogger(MiniMax);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -105,7 +106,7 @@ package com.lookbackon.AI.searching
 			{
 				//
 				var result:int = doEvaluation(bestMove,gamePosition);
-				trace("maxi do evaluation result:",result);
+				LOG.debug("maxi do evaluation result:",result);
 				//
 				this.processDone = true;
 				//
@@ -135,7 +136,7 @@ package com.lookbackon.AI.searching
 				}
 			}
 			//
-			trace("maxi result:",result);
+			LOG.debug("maxi result:",result);
 			return max;
 		}
 
@@ -146,7 +147,7 @@ package com.lookbackon.AI.searching
 			if(depth==0)
 			{
 				var result:int = -doEvaluation(bestMove,gamePosition);
-				trace("mini do evaluation result:",result);
+				LOG.debug("mini do evaluation result:",result);
 				//
 				this.processDone = true;
 				//
@@ -175,7 +176,7 @@ package com.lookbackon.AI.searching
 				}
 			}
 			//
-			trace("mini result:",result);
+			LOG.debug("mini result:",result);
 			return min;
 		}
 		//--------------------------------------------------------------------------

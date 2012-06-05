@@ -5,15 +5,14 @@ package com.godpaper.as3.model
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.vos.PositionVO;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
 	
 	import de.polygonal.ds.Array2;
 	
+	import mx.logging.ILogger;
 	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
-
 	/**
 	 * A singleton model hold all Chess Pieces's informations.
 	 *
@@ -61,7 +60,7 @@ package com.godpaper.as3.model
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger=LogContext.getLogger(ChessPiecesModel);
+		private static const LOG:ILogger=LogUtil.getLogger(ChessPiecesModel);
 		//TODO:this bit board limit size const should be more flexibility for adapting variable bitboard size. 
 		private static const MAX_BB_W:int = 15;
 		private static const MAX_BB_H:int = 15;

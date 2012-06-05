@@ -17,13 +17,13 @@ package com.godpaper.as3.business.factory
 	import com.godpaper.as3.model.pools.RedChessPiecesPool;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.components.ChessGasket;
 	import com.godpaper.starling.views.components.ChessPiece;
 	
 	import flash.geom.Point;
 	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import mx.logging.ILogger;
 	
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
@@ -58,7 +58,7 @@ package com.godpaper.as3.business.factory
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger=LogContext.getLogger(ChessFactoryBase);
+		private static const LOG:ILogger=LogUtil.getLogger(ChessFactoryBase);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

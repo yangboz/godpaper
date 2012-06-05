@@ -27,15 +27,14 @@ package com.godpaper.starling.views.components
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.core.IVisualElement;
+	import com.godpaper.as3.utils.LogUtil;
 	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
+	import mx.logging.ILogger;
 	import mx.utils.NameUtil;
 	import mx.utils.UIDUtil;
-	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
 	
 	import starling.display.Button;
 	import starling.display.DisplayObject;
@@ -44,6 +43,7 @@ package com.godpaper.starling.views.components
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.textures.Texture;
+
 	/**
 	 * RoundButton.as class.   	
 	 * @author yangboz
@@ -63,7 +63,7 @@ package com.godpaper.starling.views.components
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(RoundButton);
+		private static const LOG:ILogger = LogUtil.getLogger(RoundButton);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -74,7 +74,7 @@ package com.godpaper.starling.views.components
 		//----------------------------------
 		private var _uid:String;
 		/**
-		 *  The unique identifier for this object.
+		 *  The unique identifier(uid) for this object.
 		 *  
 		 *  @langversion 3.0
 		 *  @playerversion Flash 9
@@ -93,6 +93,30 @@ package com.godpaper.starling.views.components
 		{
 			_uid = value;
 		}
+		//----------------------------------
+		//  label
+		//----------------------------------
+		private var _label:String;
+		/**
+		 *  The common identifier(label) for this object.
+		 *  
+		 *  @langversion 3.0
+		 *  @playerversion Flash 9
+		 *  @playerversion AIR 1.1
+		 *  @productversion Flex 3
+		 */
+		public function get label():String
+		{
+			return _label;
+		}
+		
+		/**
+		 *  @private
+		 */
+		public function set label(value:String):void
+		{
+			_label = value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -104,17 +128,19 @@ package com.godpaper.starling.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function RoundButton(upState:Texture, text:String="", downState:Texture=null)
+		public function RoundButton(upState:Texture, label:String="", downState:Texture=null)
 		{
 			//Initialize the uid
 			this.uid = UIDUtil.createUID();
+			this.label = label;
 			//
-			super(upState, text, downState);
+			super(upState, label, downState);
 			//Event handler
 			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
 			this.addEventListener(Event.REMOVED_FROM_STAGE,removeFromStageHandler);
 			this.addEventListener(Event.REMOVE_FROM_JUGGLER,removeFromJugglerHandler);
 			this.addEventListener(Event.CONTEXT3D_CREATE,context3dCreateHandler);
+			this.addEventListener(Event.TRIGGERED,triggeredHandler);
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -191,6 +217,11 @@ package com.godpaper.starling.views.components
 		{
 			LOG.debug("starling.events.Event,target:{0}", event.target);
 			//To be  override	
+		}
+		protected function triggeredHandler(event:Event):void
+		{
+			LOG.debug("starling.events.Event,target:{0}", event.target);
+			//To be  override
 		}
 		//--------------------------------------------------------------------------
 		//

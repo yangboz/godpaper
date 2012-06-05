@@ -24,8 +24,10 @@ package com.adobe.cairngorm.task
 {
 //    import mx.logging.ILogger;
 //    import mx.logging.Log;
-	import org.spicefactory.lib.logging.Logger;
-	import org.spicefactory.lib.logging.LogContext;
+	import com.godpaper.as3.utils.LogUtil;
+	
+	import mx.logging.ILogger;
+
     //---------------------------------------------------------------------------
     //
     //  Meta-data
@@ -61,8 +63,7 @@ package com.adobe.cairngorm.task
         //  Constants
         //
         //------------------------------------------------------------------------
-
-        private static const LOG:Logger = LogContext.getLogger(TaskGroup);
+        private static const LOG:ILogger =  LogUtil.getLogger(TaskGroup);
 
         //------------------------------------------------------------------------
         //
@@ -187,10 +188,11 @@ package com.adobe.cairngorm.task
 
             if (child.enabled)
             {
-                if (LOG.isDebugEnabled())
-                {
-                    LOG.debug("Starting task: label={0}", child.label);
-                }
+//                if (LOG.isDebugEnabled())
+//                {
+//                    LOG.debug("Starting task: label={0}", child.label);
+//                }
+				LOG.debug("Starting task: label={0}", child.label);
 
                 child.addEventListener(TaskEvent.TASK_START, onChildTaskStart);
                 child.addEventListener(TaskEvent.TASK_COMPLETE, onChildTaskComplete);
@@ -206,10 +208,11 @@ package com.adobe.cairngorm.task
             }
             else
             {
-                if (LOG.isDebugEnabled())
-                {
-                    LOG.debug("Skipping task-item: label={0}", child.label);
-                }
+//                if (LOG.isDebugEnabled())
+//                {
+//                    LOG.debug("Skipping task-item: label={0}", child.label);
+//                }
+				LOG.debug("Skipping task-item: label={0}", child.label);
 
                 dispatchNextProgressEvent();
 
@@ -230,10 +233,11 @@ package com.adobe.cairngorm.task
          */
         protected function onChildTaskStart(event:TaskEvent):void
         {
-            if (LOG.isDebugEnabled())
-            {
-                LOG.debug("Started child task-item: label={0}", event.task.label);
-            }
+//            if (LOG.isDebugEnabled())
+//            {
+//                LOG.debug("Started child task-item: label={0}", event.task.label);
+//            }
+			LOG.debug("Started child task-item: label={0}", event.task.label);
 
             dispatchEvent(TaskEvent.createChildStartEvent(event.task));
         }
@@ -245,10 +249,11 @@ package com.adobe.cairngorm.task
          */
         protected function onChildTaskComplete(event:TaskEvent):void
         {
-            if (LOG.isDebugEnabled())
-            {
-                LOG.debug("Completed child task-item: label={0}", event.task.label);
-            }
+//            if (LOG.isDebugEnabled())
+//            {
+//                LOG.debug("Completed child task-item: label={0}", event.task.label);
+//            }
+			LOG.debug("Completed child task-item: label={0}", event.task.label);
 
             cleanUpChild(event.task);
 
@@ -264,10 +269,11 @@ package com.adobe.cairngorm.task
          */
         protected function onChildTaskFault(event:TaskEvent):void
         {
-            if (LOG.isErrorEnabled())
-            {
-                LOG.error("Fault during child task-item: label={0}", event.task.label);
-            }
+//            if (LOG.isErrorEnabled())
+//            {
+//                LOG.error("Fault during child task-item: label={0}", event.task.label);
+//            }
+			LOG.error("Fault during child task-item: label={0}", event.task.label);
 
             cleanUpChild(event.task);
 

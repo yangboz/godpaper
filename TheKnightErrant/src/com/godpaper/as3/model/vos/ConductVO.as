@@ -4,6 +4,7 @@ package com.godpaper.as3.model.vos
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.components.ChessGasket;
 	import com.godpaper.starling.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
@@ -11,8 +12,7 @@ package com.godpaper.as3.model.vos
 	import flash.events.EventDispatcher;
 	import flash.geom.Point;
 	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import mx.logging.ILogger;
 
 	/**
 	 * This conduct entity model with basic information as follows:</p>
@@ -25,16 +25,18 @@ package com.godpaper.as3.model.vos
 	 * @history 2010-6-24,re-construct:newPositon to currentPosition,keep previousPosition.
 	 * @history 2010-7-12,add-construct:eatOff,crossValue.
 	 * @history 2010-12-02,reverse() added.
+	 * @history 2012-06-05,simplify the class and properties.
 	 */
-	public class ConductVO extends EventDispatcher
+//	public class ConductVO extends EventDispatcher
+    public class ConductVO
 	{
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _target:IChessPiece;  
-		private var _prviousPosition:Point	=	new Point(-1,-1);
+//		private var _target:IChessPiece;  
+//		private var _previousPosition:Point	=	new Point(-1,-1);
 		//private var _currentPosition:Point  =  	new Point(-1,-1);
 		private var _nextPosition:Point 	=	new Point(-1,-1);
 		//
@@ -42,11 +44,11 @@ package com.godpaper.as3.model.vos
 		//
 		private var _eatOff:ChessPiece;
 		//
-		private var _crossValue:int;
+//		private var _crossValue:int;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(ConductVO);
+		private static const LOG:ILogger = LogUtil.getLogger(ConductVO);
 		//--------------------------------------------------------------------------
 		//
 		//  Properties
@@ -55,25 +57,27 @@ package com.godpaper.as3.model.vos
 		//----------------------------------
 		//  target(read-write)
 		//----------------------------------
-		public function get target():IChessPiece
-		{
-			return _target;
-		}
-		public function set target(value:IChessPiece):void
-		{
-			_target = value;
-		}
+		public var target:IChessPiece;  
+//		public function get target():IChessPiece
+//		{
+//			return _target;
+//		}
+//		public function set target(value:IChessPiece):void
+//		{
+//			_target = value;
+//		}
 		//----------------------------------
 		//  previousPosition(read-write)
 		//----------------------------------
-		public function get previousPosition():Point
-		{
-			return _prviousPosition;
-		}
-		public function set previousPosition(value:Point):void
-		{
-			_prviousPosition = value;
-		}
+//		public function get previousPosition():Point
+//		{
+//			return _previousPosition;
+//		}
+//		public function set previousPosition(value:Point):void
+//		{
+//			_previousPosition = value;
+//		}
+		public var previousPosition:Point	=	new Point(-1,-1);
 		//----------------------------------
 		//  brevity(read-only)
 		//----------------------------------
@@ -87,7 +91,8 @@ package com.godpaper.as3.model.vos
 		//----------------------------------
 		public function get currentPosition():Point
 		{
-			return _target.position;
+//			return _target.position;
+			return target.position;
 		}
 		//----------------------------------
 		//  nextPosition(read-write)
@@ -129,14 +134,15 @@ package com.godpaper.as3.model.vos
 		//----------------------------------
 		//  crossValue(read-write)
 		//----------------------------------
-		public function get crossValue():int
-		{
-			return _crossValue;
-		}
-		public function set crossValue(value:int):void
-		{
-			_crossValue = value;
-		}
+//		public function get crossValue():int
+//		{
+//			return _crossValue;
+//		}
+//		public function set crossValue(value:int):void
+//		{
+//			_crossValue = value;
+//		}
+		public var crossValue:int;
 		//--------------------------------------------------------------------------
 		//
 		//  Methods

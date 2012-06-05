@@ -42,6 +42,7 @@ package
 	import com.godpaper.as3.tasks.CreateChessGasketTask;
 	import com.godpaper.as3.tasks.CreateChessPieceTask;
 	import com.godpaper.as3.tasks.CreateChessVoTask;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
 	import com.godpaper.starling.views.components.ChessBoard;
 	import com.godpaper.starling.views.scenes.GameScene;
@@ -60,15 +61,11 @@ package
 	import flash.geom.Rectangle;
 	import flash.utils.getTimer;
 	
+	import mx.logging.ILogger;
+	import mx.logging.LogEvent;
+	
 	import org.osflash.signals.Signal;
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
 	import org.spicefactory.lib.task.SequentialTaskGroup;
-	import org.spicefactory.lib.task.Task;
-	import org.spicefactory.parsley.core.context.Context;
-	import org.spicefactory.parsley.core.events.ContextEvent;
-	import org.spicefactory.parsley.flash.logging.FlashLoggingXmlSupport;
-	import org.spicefactory.parsley.xml.XmlContextBuilder;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
@@ -115,7 +112,7 @@ package
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(ApplicationBase);
+		private static const LOG:ILogger = LogUtil.getLogger(ApplicationBase);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -127,10 +124,7 @@ package
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		/**
-		 * This app's context for Parsley.
-		 */
-		protected var mainContext:Context;
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -144,6 +138,7 @@ package
 		{
 			super();
 			//
+//			LogUtil.traceTarget.filters = ["com.godpaper.*"];
 			LOG.debug("preinitializeHandler@Constructor");
 			// turn to framework's workflow
 			preinitializeHandler();
@@ -196,26 +191,12 @@ package
 		{
 			LOG.debug("initializeHandler@addToStage");
 			this.removeEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
-			// Parsley initialize
-			FlashLoggingXmlSupport.initialize();
-			// parsley context
-			mainContext = XmlContextBuilder.build("ParsleyConfiguration.xml");
-			mainContext.addEventListener(ContextEvent.INITIALIZED, contextEventInitializedHandler);
 			// turn to framework's workflow
 			initializeHandler();
 			//Store this reference to FlexGlobals.topLevelApplication
 			FlexGlobals.topLevelApplication = this;
 			FlexGlobals.gameStage = mStarling.stage;
 		}
-		/**
-		 * Handler for Parsley ContextEvent.INITIALIZED event.
-		 */
-		private function contextEventInitializedHandler(event:ContextEvent):void
-		{    
-			LOG.debug("contextEventInitializedHandler(...)");
-			mainContext.removeEventListener(ContextEvent.INITIALIZED, contextEventInitializedHandler);
-			// Add in the views.
-		}        
 		//
 		private function onContextCreated(event:Event):void
 		{
@@ -265,7 +246,7 @@ package
 			BoardConfig.xAdjust=50;
 			BoardConfig.yAdjust=50;
 			//gasket config:
-//			GasketConfig.maxPoolSize = 16;
+			GasketConfig.maxPoolSize = 16;
 			GasketConfig.tipsVisible = true;
 			GasketConfig.backgroundAlpha = 0.2;
 			GasketConfig.width = 30;

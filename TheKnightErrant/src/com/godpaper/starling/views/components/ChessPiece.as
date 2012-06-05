@@ -42,6 +42,7 @@ package com.godpaper.starling.views.components
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.plugins.IPlug;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.AI.FSM.Message;
 	import com.lookbackon.ds.BitBoard;
 	
@@ -51,9 +52,7 @@ package com.godpaper.starling.views.components
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	
-	import org.spicefactory.lib.flash.logging.impl.AbstractAppender;
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import mx.logging.ILogger;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Image;
@@ -102,7 +101,7 @@ package com.godpaper.starling.views.components
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(ChessPiece);
+		private static const LOG:ILogger = LogUtil.getLogger(ChessPiece);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -201,21 +200,6 @@ package com.godpaper.starling.views.components
 		{
 			_type=value;
 		}
-		//----------------------------------
-		//  label
-		//----------------------------------
-		private var _label:String;
-		
-		public function get label():String
-		{
-			return _label;
-		}
-		
-		public function set label(value:String):void
-		{
-			_label=value;
-		}
-		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -237,21 +221,23 @@ package com.godpaper.starling.views.components
 				defaultUpState = atlas.getTexture(DefaultConstants.BLUE);
 			}
 			super(defaultUpState, text, downState);
-			//
-//			this.addEventListener(Event.COMPLETE,creationCompleteHandler);
-			this.addEventListener(Event.ROOT_CREATED,creationCompleteHandler);
+			//Original create complete handler process.
 			//Binding the global configurations.
 			this.scaleX = PieceConfig.scaleX;
 			this.scaleY = PieceConfig.scaleY;
 			//Set properties
 			var MoveSound:Class = AssetEmbedsDefault.SOUND_CP_MOVE;
 			this.cpMoveSound = new MoveSound();
-			//once piece add or remove,maybe check event triggled.
-			this.addEventListener(Event.REMOVED_FROM_STAGE, elementRemoveHandler);
-//			this.addEventListener(Event.TRIGGERED,mouseClickHandler);
-//			this.addEventListener(Event.ADDED_TO_STAGE, elementAddHandler);
-			this.addEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
-			this.addEventListener(Event.REMOVED_FROM_STAGE, removeFromStageHandler);
+			// finite state machine initialization.
+			this.agent=new ChessAgent(this.name, this, null);
+			//fsm enter to default state.
+			this.agent.fsm.changeState(this.agent.nascenceState);
+			//set text style.
+			//			this.setStyle("color", textColor);
+			//			this.setStyle("fillColor", textColor);
+			// event listener method stub
+			//			this.addEventListener(TouchEvent.TOUCH, dragEnterHandler);
+			//			this.addEventListener(TouchEvent.TOUCH, dragDropHandler);
 		}
 		
 		//--------------------------------------------------------------------------
@@ -279,22 +265,10 @@ package com.godpaper.starling.views.components
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		//creationCompleteHandler
-		protected function creationCompleteHandler(event:Event):void
-		{
-			// finite state machine initialization.
-			this.agent=new ChessAgent(this.name, this, null);
-			//fsm enter to default state.
-			this.agent.fsm.changeState(this.agent.nascenceState);
-			//set text style.
-//			this.setStyle("color", textColor);
-//			this.setStyle("fillColor", textColor);
-			// event listener method stub
-//			this.addEventListener(TouchEvent.TOUCH, dragEnterHandler);
-//			this.addEventListener(TouchEvent.TOUCH, dragDropHandler);
-		}
-		//
+//		elementAddHandler
 		protected function elementAddHandler(event:Event):void
+		//addToStageHandler
+//		override protected function addToStageHandler(event:Event):void
 		{
 			//
 			LOG.debug("starling.events.Event,target:{0}", event.target);
@@ -321,8 +295,10 @@ package com.godpaper.starling.views.components
 			}
 		}
 		
-		//
+		//elementRemoveHandler
 		protected function elementRemoveHandler(event:Event):void
+		//removeFromStageHandler
+//		override protected function removeFromStageHandler(event:Event):void
 		{
 			//
 			if (iPlug.data.hasCheckIndicator && GameConfig.gameStateManager.isRunning)
@@ -340,43 +316,15 @@ package com.godpaper.starling.views.components
 		}
 		
 		//mouseClickHandler
-		protected function mouseClickHandler(event:Event):void
+//		protected function mouseClickHandler(event:Event):void
+		//triggeredHandler
+		override protected function triggeredHandler(event:Event):void
 		{
 			chessPiecesModel.selectedPiece = this;
 			//dump info.
 			LOG.debug("captures:{0}", this.chessVO.captures.dump());
 			LOG.debug("moves:{0}", this.chessVO.moves.dump());
 			LOG.debug("current bitboard:{0}", ChessPiecesModel.getInstance().allPieces.dump());
-		}
-		//mouseDownHandler
-		protected function mouseDownHandler(event:TouchEvent):void
-		{
-			chessPiecesModel.selectedPiece = this;
-			//handle the drag image/movie effect.
-			if(PieceConfig.usingDragProxy)
-			{
-//				var imageProxy:Image = new Image();
-//				imageProxy.texture = this.swfLoader.texture;
-//				imageProxy.scaleX = PieceConfig.scaleX;
-//				imageProxy.scaleY = PieceConfig.scaleY;
-			}
-			//
-//			DragManager.doDrag(event.currentTarget as IUIComponent, null, event,imageProxy);
-			// remove event listener
-			//				this.removeEventListener(MouseEvent.MOUSE_DOWN,mouseDownHandler);
-			//				LOG.debug("occupies:{0}",this.chessVO.occupies.dump());
-			LOG.debug("captures:{0}", this.chessVO.captures.dump());
-			LOG.debug("moves:{0}", this.chessVO.moves.dump());
-			LOG.debug("current bitboard:{0}", ChessPiecesModel.getInstance().allPieces.dump());
-			//indicate gasket can fill with chess piece.
-			if (iPlug.data.hasMoveIndicator)
-			{
-				GameConfig.chessPieceManager.indicateGasketsMove(this.chessVO.moves);
-			}
-			if (iPlug.data.hasCaptureIndicator)
-			{
-				GameConfig.chessPieceManager.indicateGasketsCapture(this.chessVO.captures);
-			}
 		}
 		//
 		protected function get iPlug():IPlug
@@ -433,11 +381,24 @@ package com.godpaper.starling.views.components
 					LOG.debug("drag out ChessGaket @:{0}",dragOutTarget.position);
 					dragOutTarget.dragOutHandler(event);
 					//drag drop target(chess gasket) handler.
-//					dragDropTarget.dragDropHandler(event);
+					dragDropTarget.dragDropHandler(event);
 					break;
 				case TouchPhase.STATIONARY:
 					//delegate to mouse click handler
 					chessPiecesModel.selectedPiece = this;
+					//				LOG.debug("occupies:{0}",this.chessVO.occupies.dump());
+					LOG.debug("captures:{0}", this.chessVO.captures.dump());
+					LOG.debug("moves:{0}", this.chessVO.moves.dump());
+					LOG.debug("current bitboard:{0}", ChessPiecesModel.getInstance().allPieces.dump());
+					//indicate gasket can fill with chess piece.
+					if (iPlug.data.hasMoveIndicator)
+					{
+						GameConfig.chessPieceManager.indicateGasketsMove(this.chessVO.moves);
+					}
+					if (iPlug.data.hasCaptureIndicator)
+					{
+						GameConfig.chessPieceManager.indicateGasketsCapture(this.chessVO.captures);
+					}
 					break;
 				default:
 					break;

@@ -15,15 +15,14 @@ package com.godpaper.as3.business.managers
 	import com.godpaper.as3.tasks.CleanUpPiecesBitboardTask;
 	import com.godpaper.as3.tasks.CreateChessPieceTask;
 	import com.godpaper.as3.tasks.CreateChessVoTask;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.AI.searching.AttackFalse;
 	import com.lookbackon.AI.searching.MiniMax;
 	import com.lookbackon.AI.searching.RandomWalk;
 	import com.lookbackon.AI.searching.ShortSighted;
 	
+	import mx.logging.ILogger;
 	import mx.utils.BitFlagUtil;
-	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
 
 	/**
 	 * A player manager class to maintain turn-based game.
@@ -50,7 +49,7 @@ package com.godpaper.as3.business.managers
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private const LOG:Logger=LogContext.getLogger(GameStateManagerDefault);
+		private const LOG:ILogger=LogUtil.getLogger(GameStateManagerDefault);
 		//game phase
 		//Masks for bits inside the 'flags' var
 		//which store the state of Boolean game phase properties.

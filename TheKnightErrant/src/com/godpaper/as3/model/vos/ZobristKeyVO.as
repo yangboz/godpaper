@@ -8,11 +8,19 @@ package com.godpaper.as3.model.vos
 	import flash.events.EventDispatcher;
 
 	/**
+	 * The zobrist key value object obtain the keys(color,type,position).
+	 * Zobrist hashing is a technique to transform a board position of arbitrary size 
+	 * into a number of a set length, with an equal distribution over all possible numbers, 
+	 * invented by Albert Zobrist. 
+	 * 
+	 * @see http://chessprogramming.wikispaces.com/Zobrist+Hashing
 	 * 
 	 * @author Knight.zhou
+	 * @history 2012-06-05,code comments added.
 	 * 
 	 */
-	public class ZobristKeyVO extends EventDispatcher
+//	public class ZobristKeyVO extends EventDispatcher
+	public class ZobristKeyVO
 	{
 		//chess colour bit board.
 		public var color:Array2;
