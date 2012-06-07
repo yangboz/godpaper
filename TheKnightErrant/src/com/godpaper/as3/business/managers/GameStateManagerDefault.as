@@ -175,9 +175,9 @@ package com.godpaper.as3.business.managers
 			//reset game step number.
 			chessBoardModel.stepNumber=0;
 			//clear board,chess pieces
-			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
-			FlexGlobals.topLevelApplication.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());
-			FlexGlobals.topLevelApplication.cleanUpSequenceTask.start();
+			FlexGlobals.gameScene.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
+			FlexGlobals.gameScene.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());
+			FlexGlobals.gameScene.cleanUpSequenceTask.start();
 			//dump the end of game messages.
 			FlexGlobals.topLevelApplication.dumpFootSprint();
 			//

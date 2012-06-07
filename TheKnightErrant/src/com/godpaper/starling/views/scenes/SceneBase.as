@@ -52,8 +52,7 @@ package com.godpaper.starling.views.scenes
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		public var enterSig:Signal;//exit scene signal
-		public var exitSig:Signal;//enter scene signal
+
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -79,66 +78,38 @@ package com.godpaper.starling.views.scenes
 		{
 			super();
 			//
-			this.enterSig = new Signal(Object);
-			this.exitSig = new Signal(Object);
-			//
-			this.enterSig.addOnce(onEnter);
-			this.exitSig.addOnce(onExit);
-			//
 			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
 			this.addEventListener(Event.REMOVED_FROM_STAGE,removeFromStageHandler);
-			this.addEventListener(Event.ENTER_FRAME,onEnterFrame);
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		//
+		override public function dispose():void
+		{
+			this.removeEventListener(Event.REMOVED_FROM_STAGE,removeFromStageHandler);
+			this.removeEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		//
-		protected function onEnter(data:Array):void
+		protected function addToStageHandler(event:Event):void
 		{
-			LOG.debug("onEnter");
 		}
 		//
-		protected function onExit(data:Array):void
+		protected function removeFromStageHandler(event:Event):void
 		{
-			LOG.debug("onExit");
-		}
-		//
-		protected function onResize(data:Array):void
-		{
-			LOG.debug("onReize->stageWidth:"+data[0]+" stageHeight:"+data[1]);
-		}
-		//
-		protected function onEnterFrame(event:Event):void
-		{
-			LOG.debug("onEnterFrame");
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function addToStageHandler(event:Event):void
-		{
-			this.enterSig.dispatch([]);
-			//
-			this.removeEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
-			//
-			FlexGlobals.topLevelApplication.resizeSig.add(onResize);
-		}
-		private function removeFromStageHandler(event:Event):void
-		{
-			this.exitSig.dispatch([]);
-			//
-			this.removeEventListener(Event.REMOVED_FROM_STAGE,removeFromStageHandler);
-		}
+		
 	}
 	
 }

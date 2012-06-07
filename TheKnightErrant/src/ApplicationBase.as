@@ -27,8 +27,6 @@ package
 	//
 	//--------------------------------------------------------------------------
 	
-	import com.adobe.cairngorm.task.SequenceTask;
-	import com.godpaper.as3.business.factory.ChessFactoryBase;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;
@@ -39,19 +37,11 @@ package
 	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.plugins.PluginUIComponent;
-	import com.godpaper.as3.tasks.CreateChessGasketTask;
-	import com.godpaper.as3.tasks.CreateChessPieceTask;
-	import com.godpaper.as3.tasks.CreateChessVoTask;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
-	import com.godpaper.starling.views.components.ChessBoard;
 	import com.godpaper.starling.views.scenes.GameScene;
 	import com.godpaper.tho.buiness.factory.ThoChessFactory;
 	import com.godpaper.tho.buiness.managers.ThoChessPieceManager;
-	import com.lookbackon.AI.searching.AttackFalse;
-	import com.lookbackon.AI.searching.MiniMax;
-	import com.lookbackon.AI.searching.RandomWalk;
-	import com.lookbackon.AI.searching.ShortSighted;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -59,24 +49,16 @@ package
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
-	import flash.utils.getTimer;
+	import flash.system.Capabilities;
 	
 	import mx.logging.ILogger;
-	import mx.logging.LogEvent;
-	
-	import org.osflash.signals.Signal;
-	import org.spicefactory.lib.task.SequentialTaskGroup;
 	
 	import starling.core.Starling;
-	import starling.display.DisplayObject;
-	import starling.display.Image;
 
 	/**
 	 * ApplicationBase.as class constructed with framework's workflow:
-	 * 1.preinitializeHandler;
-	 * 2.initializeHandler;
-	 * 3.creationCompleteHandler;
-	 * 4.applicationCompleteHandler;
+	 * 1.initializeHandler;
+	 * 2.applicationCompleteHandler;
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
@@ -104,11 +86,8 @@ package
 		public var chessBoard:IChessBoard;
 		//
 		private var mStarling:Starling;
-		//Tasks
-		public var cleanUpSequenceTask:SequentialTaskGroup;
-		protected var startUpSequenceTask:SequenceTask;
-		//Signasl
-		public var resizeSig:Signal;//stage resize signal.
+		//Signals
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -136,45 +115,46 @@ package
 		 */
 		public function ApplicationBase()
 		{
-			super();
+//			super();
 			//
-//			LogUtil.traceTarget.filters = ["com.godpaper.*"];
 			LOG.debug("preinitializeHandler@Constructor");
-			// turn to framework's workflow
-			preinitializeHandler();
 			//
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.align = StageAlign.TOP_LEFT;
+//			trace(stage.stage3Ds.length);
 			//
 			Starling.multitouchEnabled = true; // useful on mobile devices
 			Starling.handleLostContext = true; // deactivate on mobile devices (to save memory)
 			//
-			mStarling = new Starling(GameScene, stage,new Rectangle(0,0,768,1004));
+//			mStarling = new Starling(GameScene, stage,new Rectangle(0,0,768,1004));
+			mStarling = new Starling(GameScene, stage);
 			mStarling.simulateMultitouch = true;
-			mStarling.enableErrorChecking = false;
+			mStarling.enableErrorChecking = Capabilities.isDebugger;
 			mStarling.start();
 			//Display stats.
 			mStarling.showStats = true;
 			// loader info.
-			this.loaderInfo.addEventListener(Event.COMPLETE, loaderInfoCompleteHandler);
+			this.loaderInfo.addEventListener(flash.events.Event.COMPLETE, loaderInfoCompleteHandler);
 			// add to stage.
-			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
+			this.addEventListener(flash.events.Event.ADDED_TO_STAGE,addToStageHandler);
 			// this event is dispatched when stage3D is set up
-			stage.stage3Ds[0].addEventListener(Event.CONTEXT3D_CREATE, onContextCreated);
+			mStarling.stage3D.addEventListener(flash.events.Event.CONTEXT3D_CREATE, context3DCreatedHandler);
+//			mStarling.stage3D.addEventListener(starling.events.Event.ROOT_CREATED, rootCreatedHandler);
 			// signals initialization.
-			this.resizeSig = new Signal(Object);
-			//
+			
+			// turn to framework's workflow
+			initializeHandler();
 		} 
 		//
-		private function loaderInfoCompleteHandler(event:Event):void
+		private function loaderInfoCompleteHandler(event:flash.events.Event):void
 		{
 			LOG.debug("creationCompleteHandler@loaderInfo_complete");
 			//
-			this.stage.addEventListener(Event.RESIZE, stageResizeHandler, false, 0, true);
+			this.stage.addEventListener(flash.events.Event.RESIZE, stageResizeHandler, false, 0, true);
 			//
 		}
 		//
-		private function stageResizeHandler(event:Event):void
+		private function stageResizeHandler(event:flash.events.Event):void
 		{
 			LOG.debug("stage_resizeHandler");
 			const viewPort:Rectangle = this.mStarling.viewPort;
@@ -183,33 +163,40 @@ package
 			this.mStarling.viewPort = viewPort;
 			this.mStarling.stage.stageWidth = this.stage.stageWidth;
 			this.mStarling.stage.stageHeight = this.stage.stageHeight;
-			//dispatch signal with size.
-			this.resizeSig.dispatch([stage.stageWidth,stage.stageHeight]);
 		}
 		//
-		private function addToStageHandler(event:Event):void
+		private function addToStageHandler(event:flash.events.Event):void
 		{
 			LOG.debug("initializeHandler@addToStage");
-			this.removeEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
+			this.removeEventListener(flash.events.Event.ADDED_TO_STAGE,addToStageHandler);
 			// turn to framework's workflow
-			initializeHandler();
+//			applicationCompleteHandler();
 			//Store this reference to FlexGlobals.topLevelApplication
 			FlexGlobals.topLevelApplication = this;
 			FlexGlobals.gameStage = mStarling.stage;
 		}
 		//
-		private function onContextCreated(event:Event):void
+		private function context3DCreatedHandler(event:flash.events.Event):void
 		{
+//			LOG.debug("Starling is start:{0}",mStarling.isStarted);
 			var driverIsSoftware:Boolean = Starling.context.driverInfo.toLowerCase().indexOf("software") != -1;
-			LOG.debug("applicationCompleteHandler@onContextCreated,driverInfo(software) is:",driverIsSoftware);
+			LOG.debug("applicationCompleteHandler@onContextCreated,driverInfo(software) is:{0}",driverIsSoftware);
 			// set framerate to 30 in software mode
 			if (driverIsSoftware)
 			{
 				Starling.current.nativeStage.frameRate = 30;			
 			}
+			//
+			this.removeEventListener(flash.events.Event.CONTEXT3D_CREATE,context3DCreatedHandler);
 			// turn to framework's workflow
-			creationCompleteHandler();
+			applicationCompleteHandler();
 		}
+//		private function rootCreatedHandler(event:starling.events.Event):void
+//		{
+//			LOG.debug("Starling root created");
+//			//
+//			this.removeEventListener(starling.events.Event.ROOT_CREATED,rootCreatedHandler);
+//		}
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -220,21 +207,25 @@ package
 		 */		
 		public function dumpFootSprint():void
 		{
-			
+			//
+			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
+			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());
+			LOG.info("allPieces:{0}", ChessPiecesModel.getInstance().allPieces.dump());
+			//			//
+			//			LOG.info("allPieces rotate90:{0}", ChessPiecesModel.getInstance().allPieces.rotate90().dump());
+			//			LOG.info("allPieces rotate90.bitCount:{0}", ChessPiecesModel.getInstance().allPieces.bitCount);
+			//			LOG.info("allPieces rotate90.cellCount:{0}", ChessPiecesModel.getInstance().allPieces.cellCount);
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		//		applicationBase_preinitializeHandler
+		//applicationBase_initializeHandler
 		/**
 		 * All kinds of view components initialization here.
-		 *
-		 * @param event
-		 *
 		 */		
-		protected function preinitializeHandler():void
+		protected function initializeHandler():void
 		{
 			//config initialization here.
 			//config initialization here.
@@ -262,75 +253,23 @@ package
 			PluginConfig.mochiBoardID = "3a460211409897f4";
 			PluginConfig.mochiGameID = "47de4a85dd3e213a";
 		}
-		//applicationBase_initializeHandler
+		//  applicationBase_applicationCompleteHandler
 		/**
-		 * Game initialization here.
-		 *
-		 * @param event
-		 *
+		 * Game application start up here.
 		 */		
-		protected function initializeHandler():void
+		protected function applicationCompleteHandler():void
 		{
-			//number of tollgate tips would be matched with tollgates!
-//			GameConfig.tollgates = [RandomWalk,ShortSighted,AttackFalse,AttackFalse,MiniMax];
-//			GameConfig.tollgateTips = ["baby intelligence","fellow intelligence","man intelligence","guru intelligence"];
-			GameConfig.turnFlag = DefaultConstants.FLAG_RED;
-			GameConfig.chessPieceManager = new ThoChessPieceManager();
-		}
-		//  applicationBase_creationCompleteHandler
-		/**
-		 * View(chess pieces/gaskets) components initialization here.
-		 *
-		 * @param event
-		 *
-		 */		
-		protected function creationCompleteHandler():void
-		{
-			//Display chess board at first.
-			var chessBoardBackground:Image = new Image(AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND));
-//			this.chessBoard = new ChessBoard(chessBoardBackground);
-			this.chessBoard = new ChessBoard(null);
-			FlexGlobals.gameStage.addChild(starling.display.DisplayObject(this.chessBoard));
-			// plugin view init
-//			this.pluginUIComponent = new PluginUIComponent();
-//			this.addChild(starling.display.DisplayObject(this.pluginUIComponent));
-			//			//create chess gaskets.
-			//			//create chess piece
-			//			//create chess pieces' chessVO;
-			//			//create chess pieces' omenVO;
-			this.startUpSequenceTask = new SequenceTask();
-			this.startUpSequenceTask.label = "startUpSequenceTask";
-			this.startUpSequenceTask.addChild(new CreateChessGasketTask());
-			this.startUpSequenceTask.addChild(new CreateChessPieceTask());
-			this.startUpSequenceTask.addChild(new CreateChessVoTask());
-			this.startUpSequenceTask.start();
 			//			//init data struct.@see ChessPieceModel dump info.
 			//			this.dumpFootSprint();
 			//Add version control context menu.
 			VersionController.getInstance(this);
-			// turn to framework's workflow
-			applicationCompleteHandler();
-		}
-		//  applicationBase_applicationCompleteHandler
-		/**
-		 * Game application start up here.
-		 *
-		 * @param event
-		 *
-		 */		
-		protected function applicationCompleteHandler():void
-		{
 			//GameManager start.
+			//number of tollgate tips would be matched with tollgates!
+			//			GameConfig.tollgates = [RandomWalk,ShortSighted,AttackFalse,AttackFalse,MiniMax];
+			//			GameConfig.tollgateTips = ["baby intelligence","fellow intelligence","man intelligence","guru intelligence"];
+			GameConfig.turnFlag = DefaultConstants.FLAG_RED;
 			GameConfig.chessPieceManager = new ThoChessPieceManager();
 			GameConfig.gameStateManager.start();
-			//
-			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
-			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());
-			LOG.info("allPieces:{0}", ChessPiecesModel.getInstance().allPieces.dump());
-//			//
-//			LOG.info("allPieces rotate90:{0}", ChessPiecesModel.getInstance().allPieces.rotate90().dump());
-//			LOG.info("allPieces rotate90.bitCount:{0}", ChessPiecesModel.getInstance().allPieces.bitCount);
-//			LOG.info("allPieces rotate90.cellCount:{0}", ChessPiecesModel.getInstance().allPieces.cellCount);
 		}
 		//--------------------------------------------------------------------------
 		//

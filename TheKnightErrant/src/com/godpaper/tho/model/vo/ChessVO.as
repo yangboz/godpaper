@@ -108,7 +108,7 @@ package com.godpaper.tho.model.vo
 //			LOG.info("all pieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
 			this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().allPieces));
 			//
-			LOG.info("({0},{1}),moves:{0}",rowIndex,colIndex,this.moves.dump());
+			LOG.info("({0},{1}),moves:{2}",rowIndex,colIndex,this.moves.dump());
 			//blocker
 			//about attacked captures.
 			//about defends.

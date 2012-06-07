@@ -25,4 +25,8 @@
 [CHANGE]:Using the TouceEvent.TRIGGLE to replace of the MouseEvent.MOUSE_DOWN/MOUSE_CLICK event listeners and handlers;
 
 [NEW]:Using the simplified FLEX logging package to replace of the Parsley/SpiceLib flash logging mechanics;
+
+[CHANGE]:Simplify the ApplicationBase startup process,left the initializeHandler and applicationComplateHandler to override;
+
+[CHANGE]:Remove the view components(ChessGasket,ChessBoard,ChessPieces) related initial and tasks to GameScene addToStageHandler;
  

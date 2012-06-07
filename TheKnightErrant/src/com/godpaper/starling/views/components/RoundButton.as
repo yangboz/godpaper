@@ -139,7 +139,6 @@ package com.godpaper.starling.views.components
 			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
 			this.addEventListener(Event.REMOVED_FROM_STAGE,removeFromStageHandler);
 			this.addEventListener(Event.REMOVE_FROM_JUGGLER,removeFromJugglerHandler);
-			this.addEventListener(Event.CONTEXT3D_CREATE,context3dCreateHandler);
 			this.addEventListener(Event.TRIGGERED,triggeredHandler);
 		}     	
 		//--------------------------------------------------------------------------
@@ -181,7 +180,6 @@ package com.godpaper.starling.views.components
 			this.removeEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
 			this.removeEventListener(Event.REMOVED_FROM_STAGE,removeFromStageHandler);
 			this.removeEventListener(Event.REMOVE_FROM_JUGGLER,removeFromJugglerHandler);
-			this.removeEventListener(Event.CONTEXT3D_CREATE,context3dCreateHandler);
 			//
 			super.dispose();
 		}
@@ -210,12 +208,7 @@ package com.godpaper.starling.views.components
 		}
 		protected function touchHandler(event:TouchEvent):void
 		{
-			LOG.debug("starling.events.TouchEvent,target:{0}", event.target);
-			//To be  override	
-		}
-		protected function context3dCreateHandler(event:Event):void
-		{
-			LOG.debug("starling.events.Event,target:{0}", event.target);
+//			LOG.debug("starling.events.TouchEvent,target:{0}", event.target);
 			//To be  override	
 		}
 		protected function triggeredHandler(event:Event):void

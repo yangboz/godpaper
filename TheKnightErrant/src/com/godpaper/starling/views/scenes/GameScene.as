@@ -27,8 +27,21 @@ package com.godpaper.starling.views.scenes
 	//
 	//--------------------------------------------------------------------------
 	
+	import com.adobe.cairngorm.task.SequenceTask;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.consts.FlexGlobals;
+	import com.godpaper.as3.tasks.CreateChessGasketTask;
+	import com.godpaper.as3.tasks.CreateChessPieceTask;
+	import com.godpaper.as3.tasks.CreateChessVoTask;
+	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.starling.views.components.ChessBoard;
 	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
 	
+	import mx.logging.ILogger;
+	
+	import org.spicefactory.lib.task.SequentialTaskGroup;
+	
+	import starling.display.Image;
 	import starling.events.Event;
 
 	/**
@@ -46,6 +59,9 @@ package com.godpaper.starling.views.scenes
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
+		//Tasks
+		public var cleanUpSequenceTask:SequentialTaskGroup;
+		public var startUpSequenceTask:SequenceTask;
 		//
 		private var _vehicle:SteeredVehicle;
 		private var _circles:Array;
@@ -53,7 +69,7 @@ package com.godpaper.starling.views.scenes
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:ILogger = LogUtil.getLogger(GameScene);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -87,7 +103,8 @@ package com.godpaper.starling.views.scenes
 		//
 		//--------------------------------------------------------------------------
 		//
-		override protected function onEnter(data:Array):void
+		override protected function addToStageHandler(event:Event):void
+//		override protected function onEnter(data:Array):void
 		{
 			//
 			//			CursorManager.setBusyCursor();
@@ -100,21 +117,25 @@ package com.godpaper.starling.views.scenes
 			//Plugin bar
 			
 			//Other views testing
-		}
-		//
-		override protected function onExit(data:Array):void
-		{
-			//
-		}
-		//
-		override protected function onResize(data:Array):void
-		{
-			//
-		}
-		//
-		override protected function onEnterFrame(event:Event):void
-		{
-			//
+			
+			//Display chess board at first.
+			var chessBoardBackground:Image = new Image(AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND));
+			//			this.chessBoard = new ChessBoard(chessBoardBackground);
+			var chessBoard:ChessBoard = new ChessBoard(null);
+			FlexGlobals.gameStage.addChild(starling.display.DisplayObject(chessBoard));
+			// plugin view init
+			//			this.pluginUIComponent = new PluginUIComponent();
+			//			this.addChild(starling.display.DisplayObject(this.pluginUIComponent));
+			//			//create chess gaskets.
+			//			//create chess piece
+			//			//create chess pieces' chessVO;
+			//			//create chess pieces' omenVO;
+			this.startUpSequenceTask = new SequenceTask();
+			this.startUpSequenceTask.label = "startUpSequenceTask";
+			this.startUpSequenceTask.addChild(new CreateChessGasketTask());
+			this.startUpSequenceTask.addChild(new CreateChessPieceTask());
+			this.startUpSequenceTask.addChild(new CreateChessVoTask());
+			this.startUpSequenceTask.start();
 		}
 		//--------------------------------------------------------------------------
 		//

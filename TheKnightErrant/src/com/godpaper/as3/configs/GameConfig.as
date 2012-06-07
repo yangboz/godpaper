@@ -27,11 +27,11 @@ package com.godpaper.as3.configs
 		//
 		//--------------------------------------------------------------------------
 		//global game config.
-		private static var _turnFlag:int;
+//		private static var _turnFlag:int;
 		private static var _tollgates:Vector.<DefaultTollgatesConstant> = new Vector.<DefaultTollgatesConstant>();
 		//
-		private static var _chessPieceManager:IChessPieceManager = new ChessPieceManagerDefault();
-		private static var _gameStateManager:IGameStateManager = new GameStateManagerDefault();
+//		private static var _chessPieceManager:IChessPieceManager = new ChessPieceManagerDefault();
+//		private static var _gameStateManager:IGameStateManager = new GameStateManagerDefault();
 		//The game play mode(computer vs human,human vs human);
 		private static var _playMode:String = HUMAN_VS_COMPUTER;
 		//----------------------------------
@@ -71,42 +71,45 @@ package com.godpaper.as3.configs
 		//----------------------------------
 		//  turnFlag(read-write)
 		//----------------------------------
-		public static function get turnFlag():int
-		{
-			return _turnFlag;
-		}
-		/**
-		 * @param value of who is first turn-now.
-		 */		
-		public static function set turnFlag(value:int):void
-		{
-			_turnFlag=value;
-		}
+		public static var turnFlag:int;
+//		public static function get turnFlag():int
+//		{
+//			return _turnFlag;
+//		}
+//		/**
+//		 * @param value of who is first turn-now.
+//		 */		
+//		public static function set turnFlag(value:int):void
+//		{
+//			_turnFlag=value;
+//		}
 		//----------------------------------
 		//  gameStateManager(read-write)
 		//----------------------------------
-		public static function get gameStateManager():IGameStateManager
-		{
-			return _gameStateManager;
-		}
-
-		public static function set gameStateManager(value:IGameStateManager):void
-		{
-			_gameStateManager=value;
-		}
+		public static var gameStateManager:IGameStateManager = new GameStateManagerDefault();
+//		public static function get gameStateManager():IGameStateManager
+//		{
+//			return _gameStateManager;
+//		}
+//
+//		public static function set gameStateManager(value:IGameStateManager):void
+//		{
+//			_gameStateManager=value;
+//		}
 
 		//----------------------------------
 		//  chessPieceManager(read-write)
 		//----------------------------------
-		public static function get chessPieceManager():IChessPieceManager
-		{
-			return _chessPieceManager;
-		}
-
-		public static function set chessPieceManager(value:IChessPieceManager):void
-		{
-			_chessPieceManager=value;
-		}
+		public static var chessPieceManager:IChessPieceManager = new ChessPieceManagerDefault();
+//		public static function get chessPieceManager():IChessPieceManager
+//		{
+//			return _chessPieceManager;
+//		}
+//
+//		public static function set chessPieceManager(value:IChessPieceManager):void
+//		{
+//			_chessPieceManager=value;
+//		}
 		//----------------------------------
 		//  playMode(read-only)
 		//----------------------------------

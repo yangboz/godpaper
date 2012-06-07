@@ -10,7 +10,7 @@
 
 package starling.display
 {
-    import flash.geom.Matrix3D;
+    import flash.geom.Matrix;
     import flash.ui.Mouse;
     import flash.ui.MouseCursor;
     
@@ -82,7 +82,7 @@ package starling.display
          *  either call <code>flatten</code> again, or <code>unflatten</code> the sprite. */
         public function flatten():void
         {
-            dispatchEventOnChildren(new Event(Event.FLATTEN));
+            broadcastEventWith(Event.FLATTEN);
             
             if (mFlattenedContents == null)
             {
@@ -130,13 +130,13 @@ package starling.display
                 
                 var alpha:Number = parentAlpha * this.alpha;
                 var numBatches:int = mFlattenedContents.length;
-                var mvpMatrix:Matrix3D = support.mvpMatrix;
+                var mvpMatrix:Matrix = support.mvpMatrix;
                 
                 for (var i:int=0; i<numBatches; ++i)
                 {
                     var quadBatch:QuadBatch = mFlattenedContents[i];
                     var blendMode:String = quadBatch.blendMode == BlendMode.AUTO ?
-                                           support.blendMode : quadBatch.blendMode;
+                        support.blendMode : quadBatch.blendMode;
                     quadBatch.renderCustom(mvpMatrix, alpha, blendMode);
                 }
             }

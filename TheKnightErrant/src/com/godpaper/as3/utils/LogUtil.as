@@ -37,8 +37,8 @@ package com.godpaper.as3.utils
 	 */
 	public class LogUtil {
 		
-		//Variables
-		private static var _traceTarget:TraceTarget;
+		//Variables(should be only one instance!)
+		private static var _traceTarget:TraceTarget = new TraceTarget();
 		/**
 		 * With the utility method approach,
 		 * the class name can be refactored
@@ -52,20 +52,15 @@ package com.godpaper.as3.utils
 		public static function getLogger(c:Class):ILogger {
 			var className:String =getQualifiedClassName(c).replace("::", ".");
 			//Customize the Log
-			_traceTarget = new TraceTarget();
 			_traceTarget.includeLevel = true;
 //			_traceTarget.includeDate = true;
 			_traceTarget.includeCategory = true;
 			_traceTarget.includeTime = true;
 			_traceTarget.fieldSeparator = "->";
+//			_traceTarget.filters = ["com.godpaper.starling.views.scenes.GameScene"];
 			Log.addTarget(_traceTarget);
 			//
 			return Log.getLogger(className);
-		}
-		//
-		public static function get traceTarget():TraceTarget
-		{
-			return _traceTarget;
 		}
 	}
 }
