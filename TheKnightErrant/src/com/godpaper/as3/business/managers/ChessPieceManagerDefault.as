@@ -382,7 +382,7 @@ package com.godpaper.as3.business.managers
 		 *
 		 * @param chessPiece
 		 * @return
-		 * @throws CcjErrors
+		 * @throws DefaultErrors
 		 */
 		public function calculatePieceIndex(chessPiece:ChessPiece):int
 		{

@@ -131,10 +131,10 @@ package com.godpaper.starling.views.scenes
 			//			//create chess pieces' chessVO;
 			//			//create chess pieces' omenVO;
 			this.startUpSequenceTask = new SequenceTask();
-			this.startUpSequenceTask.label = "startUpSequenceTask";
-			this.startUpSequenceTask.addChild(new CreateChessGasketTask());
-			this.startUpSequenceTask.addChild(new CreateChessPieceTask());
-			this.startUpSequenceTask.addChild(new CreateChessVoTask());
+			this.startUpSequenceTask.label = "startUpSequenceTask";//33.6M(debug)
+			this.startUpSequenceTask.addChild(new CreateChessGasketTask());//34.1M
+			this.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.8M
+			this.startUpSequenceTask.addChild(new CreateChessVoTask());//35.5M
 			this.startUpSequenceTask.start();
 		}
 		//--------------------------------------------------------------------------

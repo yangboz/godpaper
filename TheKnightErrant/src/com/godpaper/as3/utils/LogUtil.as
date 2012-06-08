@@ -56,6 +56,7 @@ package com.godpaper.as3.utils
 //			_traceTarget.includeDate = true;
 			_traceTarget.includeCategory = true;
 			_traceTarget.includeTime = true;
+			_traceTarget.includeMemory = true;
 			_traceTarget.fieldSeparator = "->";
 //			_traceTarget.filters = ["com.godpaper.starling.views.scenes.GameScene"];
 			Log.addTarget(_traceTarget);

@@ -267,7 +267,7 @@ package com.godpaper.starling.views.components
 		//
 		//--------------------------------------------------------------------------
 		//dragEnterHandler
-		public function dragEnterHandler(event:TouchEvent):void
+		public function dragEnterHandler(event:TouchEvent):Boolean
 		{
 			//Update conduct value object.
 			this._conductVO =new ConductVO();
@@ -275,28 +275,35 @@ package com.godpaper.starling.views.components
 			_conductVO.previousPosition=(event.target as ChessPiece).position;
 			_conductVO.nextPosition=this.position;
 			//do move validation
-			if (GameConfig.chessPieceManager.doMoveValidation(_conductVO))
+			var validateResult:Boolean = GameConfig.chessPieceManager.doMoveValidation(_conductVO);
+			if (validateResult)
 			{
 				//				DragManager.acceptDragDrop(event.currentTarget as IUIComponent);
 				//				DragManager.showFeedback(DragManager.LINK);
 				//Update display effect.
-				this.upState = this.getUpStateTexture(Color.GREEN,this.backgroundAlpha,Color.GREEN,this.borderAlpha);
+//				this.upState.dispose();
+//				this.upState = this.getUpStateTexture(Color.GREEN,this.backgroundAlpha,Color.GREEN,this.borderAlpha);
 				//Update chess piece reference by UpdateChessPiecesTask.
 			}else
 			{
 				//Update display effect.
-				this.upState = this.getUpStateTexture(Color.RED,this.backgroundAlpha,Color.RED,this.borderAlpha);
-				//
-				event.stopImmediatePropagation();
+//				this.upState.dispose();
+//				this.upState = this.getUpStateTexture(Color.RED,this.backgroundAlpha,Color.RED,this.borderAlpha);
 			}
+			//
+			event.stopImmediatePropagation();
+			return validateResult;
 		}
 		//dragOutHandler
 		public function dragOutHandler(event:TouchEvent):void
 		{
 			//Update display effect.
-			this.upState = this.getUpStateTexture(Color.BLACK,this.backgroundAlpha,Color.BLACK,this.borderAlpha);
+//			this.upState.dispose();
+//			this.upState = this.getUpStateTexture(Color.BLACK,this.backgroundAlpha,Color.BLACK,this.borderAlpha);
 			//Update chess piece reference by event.target.
 			this.chessPiece = null;
+			//
+			event.stopImmediatePropagation();
 		}
 		//dragDropHandler
 		public function dragDropHandler(event:TouchEvent):void

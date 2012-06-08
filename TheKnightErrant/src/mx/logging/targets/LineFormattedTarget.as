@@ -12,6 +12,8 @@
 package mx.logging.targets
 {
 
+import flash.system.System;
+
 import mx.core.mx_internal;
 import mx.logging.AbstractTarget;
 import mx.logging.ILogger;
@@ -147,6 +149,22 @@ public class LineFormattedTarget extends AbstractTarget
      *  @productversion Flex 3
      */
     public var includeTime:Boolean;
+	
+	//----------------------------------
+	//  includeMemory
+	//----------------------------------
+	
+	[Inspectable(category="General", defaultValue="false")]
+	
+	/**
+	 *  Indicates if the memory value should be added to the trace.
+	 *  
+	 *  @langversion 3.0
+	 *  @playerversion Flash 9
+	 *  @playerversion AIR 1.1
+	 *  @productversion Flex 3
+	 */
+	public var includeMemory:Boolean;
 
     //--------------------------------------------------------------------------
     //
@@ -195,12 +213,19 @@ public class LineFormattedTarget extends AbstractTarget
             level = "[" + LogEvent.getLevelString(event.level) +
                     "]" + fieldSeparator;
         }
+		
+		var memory:String = "";
+		if (includeMemory)
+		{
+			memory = "[" + getMemory() +
+				"]" + fieldSeparator;
+		}
 
         var category:String = includeCategory ?
                               ILogger(event.target).category + fieldSeparator :
                               "";
 
-        internalLog(date + level + category + event.message);
+        internalLog(date + level + memory + category + event.message);
     }
     
     //--------------------------------------------------------------------------
@@ -247,6 +272,12 @@ public class LineFormattedTarget extends AbstractTarget
     {
         // override this method to perform the redirection to the desired output
     }
+	
+	//
+	private function getMemory():String
+	{
+		return (System.totalMemory * 0.000000954).toFixed(3).concat("M"); // 1 / (1024*1024) to convert to MB" +
+	}
 }
 
 }

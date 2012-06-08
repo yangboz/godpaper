@@ -371,17 +371,27 @@ package com.godpaper.starling.views.components
 //					this.cpMoveSoundChannel.stop();
 					//drag enter target(chess piece) refresh.
 					dragEnterTargets = this.calculateDragEnterTargets(target);
-					LOG.debug("drag enter ChessPieces @:{0}",dragEnterTargets);
+					LOG.debug("drag enter ChessGakets @:{0}",dragEnterTargets);
 					//drag drop target(chess piece) refresh.
 					dragDropTarget = this.calculateDragDropTarget(target,dragEnterTargets);
-					LOG.debug("drag drop ChessPiece @:{0}",dragDropTarget.position);
-					dragDropTarget.dragEnterHandler(event);
+					LOG.debug("drag drop ChessGaket @:{0}",dragDropTarget.position);
 					//drag out target(chess gasket) revert.
 					dragOutTarget = this.chessGasketModel.gaskets.gett(target.position.x,target.position.y) as ChessGasket;
 					LOG.debug("drag out ChessGaket @:{0}",dragOutTarget.position);
 					dragOutTarget.dragOutHandler(event);
 					//drag drop target(chess gasket) handler.
-					dragDropTarget.dragDropHandler(event);
+					//Sort of drag opereation validation here
+					if( isDragAndDropPositionValid(dragDropTarget,dragOutTarget) )
+					{
+						if( isDragAndDropPositionIllegal(dragDropTarget,event))
+						{
+							dragDropTarget.dragDropHandler(event);
+							break;
+						}
+					}
+					//Revert the previous drag and drop operation.
+					this.x = dragOutTarget.x;
+					this.y = dragOutTarget.y;
 					break;
 				case TouchPhase.STATIONARY:
 					//delegate to mouse click handler
@@ -453,6 +463,20 @@ package com.godpaper.starling.views.components
 			}
 			//
 			return dragEnterTargets[indexFlag];
+		}
+		//Drag and drop operation validators here.
+		//First-off,avoid the same position drag and drop.
+		private function isDragAndDropPositionValid(dragInitior:ChessGasket,dropTarget:ChessGasket):Boolean
+		{
+			var sameX:Boolean = (dragInitior.position.x==dropTarget.position.x);
+			var sameY:Boolean = (dragInitior.position.y==dropTarget.position.y);
+			return (  !sameX || !sameY  );
+		}
+		//Second,the illegal result based on the chess game's rule.
+		private function isDragAndDropPositionIllegal(dropTarget:ChessGasket,event:TouchEvent):Boolean
+		{
+			var moveValid:Boolean = dropTarget.dragEnterHandler(event);
+			return moveValid;
 		}
 	}
 	

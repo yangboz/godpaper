@@ -34,7 +34,6 @@ package
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.consts.FlexGlobals;
-	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.plugins.PluginUIComponent;
 	import com.godpaper.as3.utils.LogUtil;
@@ -52,6 +51,8 @@ package
 	import flash.system.Capabilities;
 	
 	import mx.logging.ILogger;
+	
+	import net.hires.debug.Stats;
 	
 	import starling.core.Starling;
 
@@ -83,7 +84,6 @@ package
 		protected var pcFactory:Class = PieceConfig.factory;
 		//Views
 		public var pluginUIComponent:PluginUIComponent;
-		public var chessBoard:IChessBoard;
 		//
 		private var mStarling:Starling;
 		//Signals
@@ -144,6 +144,9 @@ package
 			
 			// turn to framework's workflow
 			initializeHandler();
+			// Stats display
+//			var stats:Stats = new Stats();
+//			this.addChild(stats);
 		} 
 		//
 		private function loaderInfoCompleteHandler(event:flash.events.Event):void

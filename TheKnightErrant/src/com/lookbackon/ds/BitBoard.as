@@ -1,6 +1,7 @@
 package com.lookbackon.ds
 {
 	import com.godpaper.as3.errors.DefaultErrors;
+	
 	import de.polygonal.ds.BitVector;
 
 	/**
@@ -337,7 +338,7 @@ package com.lookbackon.ds
 		 */	
 		public function dump():String
 		{
-			var result:String = "[BitBoard, size=";
+			var result:String = "[BitBoard, size=";//34.090M
 			result = result.concat((_column*_row).toString(),"\n","{");
 			//
 			for(var h:int=0;h<_row;h++)
@@ -350,6 +351,18 @@ package com.lookbackon.ds
 			}
 			result = result.concat("\n","}","]");
 			return result;
+//			var results:Vector.<String> = new Vector.<String>();//31.999M
+//			results.push("[BitBoard, size=".concat(_column*_row,"\n","{"));
+//			for(var h:int=0;h<_row;h++)
+//			{
+//				results.push("\n".concat("\t"));
+//				for(var w:int=0;w<_column;w++)
+//				{
+//					results.push("[".concat(this.getBit(this._column*h+w).toString(),"]"));
+//				}
+//			}
+//			results.push("\n".concat("}","]"));
+//			return results.toString();
 		}
 	}
 }

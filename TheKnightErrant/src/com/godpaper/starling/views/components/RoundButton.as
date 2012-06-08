@@ -191,7 +191,7 @@ package com.godpaper.starling.views.components
 		protected function addToStageHandler(event:Event):void
 		{
 			this.addEventListener(TouchEvent.TOUCH,touchHandler);
-			LOG.debug("starling.events.TouchEvent,target:{0}", event.target);
+//			LOG.debug("starling.events.TouchEvent,target:{0}", event.target);
 			//More to be  override	
 		}
 		protected function removeFromStageHandler(event:Event):void
