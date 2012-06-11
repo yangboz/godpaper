@@ -369,15 +369,23 @@ package com.godpaper.starling.views.components
 				case TouchPhase.ENDED:
 					//End sound effect.
 //					this.cpMoveSoundChannel.stop();
+					//drag out target(chess gasket) init.
+					dragOutTarget = this.chessGasketModel.gaskets.gett(target.position.x,target.position.y) as ChessGasket;
+					LOG.debug("drag out ChessGaket @:{0}",dragOutTarget.position);
 					//drag enter target(chess piece) refresh.
 					dragEnterTargets = this.calculateDragEnterTargets(target);
+					if(!dragEnterTargets.length)
+					{
+						//Revert to the previous drag and drop operation.
+						this.x = dragOutTarget.x;
+						this.y = dragOutTarget.y;
+						break;
+					}
 					LOG.debug("drag enter ChessGakets @:{0}",dragEnterTargets);
 					//drag drop target(chess piece) refresh.
 					dragDropTarget = this.calculateDragDropTarget(target,dragEnterTargets);
 					LOG.debug("drag drop ChessGaket @:{0}",dragDropTarget.position);
-					//drag out target(chess gasket) revert.
-					dragOutTarget = this.chessGasketModel.gaskets.gett(target.position.x,target.position.y) as ChessGasket;
-					LOG.debug("drag out ChessGaket @:{0}",dragOutTarget.position);
+					//drag out target(chess gasket) process.
 					dragOutTarget.dragOutHandler(event);
 					//drag drop target(chess gasket) handler.
 					//Sort of drag opereation validation here
@@ -389,7 +397,7 @@ package com.godpaper.starling.views.components
 							break;
 						}
 					}
-					//Revert the previous drag and drop operation.
+					//Default revert to the previous drag and drop operation.
 					this.x = dragOutTarget.x;
 					this.y = dragOutTarget.y;
 					break;
