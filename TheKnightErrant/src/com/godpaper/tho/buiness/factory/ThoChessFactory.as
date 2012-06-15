@@ -103,7 +103,7 @@ package com.godpaper.tho.buiness.factory
 					chessPieceLabel=DefaultPiecesConstants.BLUE.label;
 					chessPieceValue=16+int(position.x);
 					chessPieceType=DefaultConstants.BLUE;
-					chessPieceSubType = DefaultConstants.BLUE;//BLUE_ROCK,BLUE_STAR
+					chessPieceSubType = DefaultConstants.BLUE_ROCK;//BLUE_ROCK,BLUE_STAR
 					break;
 				//about red
 				case "(x=0, y=2)":
@@ -115,7 +115,7 @@ package com.godpaper.tho.buiness.factory
 					chessPieceLabel=DefaultPiecesConstants.RED.label;
 					chessPieceValue=8+int(position.x);
 					chessPieceType=DefaultConstants.RED;
-					chessPieceSubType = DefaultConstants.RED;//RED_ROCK,RED_STAR
+					chessPieceSubType = DefaultConstants.RED_ROCK;//RED_ROCK,RED_STAR
 					break;
 				default:
 					return null;

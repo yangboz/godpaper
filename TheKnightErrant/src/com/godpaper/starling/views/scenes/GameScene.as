@@ -29,7 +29,7 @@ package com.godpaper.starling.views.scenes
 	
 	import com.adobe.cairngorm.task.SequenceTask;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.consts.FlexGlobals;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.tasks.CreateChessGasketTask;
 	import com.godpaper.as3.tasks.CreateChessPieceTask;
 	import com.godpaper.as3.tasks.CreateChessVoTask;

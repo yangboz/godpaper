@@ -26,7 +26,7 @@ package com.godpaper.starling.views.scenes
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.consts.FlexGlobals;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	
 	import mx.logging.ILogger;

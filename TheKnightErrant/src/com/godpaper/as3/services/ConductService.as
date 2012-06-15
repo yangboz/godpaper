@@ -6,7 +6,7 @@ package com.godpaper.as3.services
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.consts.FlexGlobals;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	
 	import flash.events.NetStatusEvent;
@@ -32,7 +32,7 @@ package com.godpaper.as3.services
 		private var netGroup:NetGroup;
 		private var ncHistory:String;
 
-		[Bindable]
+//		[Bindable]
 		private var user:String;
 
 		private var _connected:Boolean=false;

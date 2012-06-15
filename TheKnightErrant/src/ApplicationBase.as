@@ -33,8 +33,8 @@ package
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.consts.FlexGlobals;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.plugins.PluginUIComponent;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
@@ -66,8 +66,8 @@ package
 	 * @airVersion 3.2+
 	 * Created Apr 12, 2012 9:38:56 AM
 	 */   	 
-	[SWF(frameRate="60", width="320", height="480", backgroundColor="0xffffff")]
-//	[SWF(frameRate="60", width="768", height="1004", backgroundColor="0x666666")]//Default swf metadata.
+	[SWF(frameRate="60", width="320", height="480", backgroundColor="0xffffff")]//320×480 for iPhone devices
+//	[SWF(frameRate="60", width="384", height="512", backgroundColor="0xffffff")]//384×512 for iPad devices
 	public class ApplicationBase extends Sprite
 	{		
 		//--------------------------------------------------------------------------
@@ -116,6 +116,7 @@ package
 		public function ApplicationBase()
 		{
 //			super();
+			LOG.debug("SigletonFactory test:{0}",FlexGlobals.chessPieceModel.BLUE_BISHOP.dump());
 			//
 			LOG.debug("preinitializeHandler@Constructor");
 			//
@@ -127,12 +128,24 @@ package
 			Starling.handleLostContext = true; // deactivate on mobile devices (to save memory)
 			//
 //			mStarling = new Starling(GameScene, stage,new Rectangle(0,0,768,1004));
-			mStarling = new Starling(GameScene, stage);
+//			var screenWidth:int  = 320;//384
+//			var screenHeight:int = 480;//512
+			var screenWidth:int  = stage.fullScreenWidth;
+			var screenHeight:int = stage.fullScreenHeight;
+			var viewPort:Rectangle = new Rectangle(0, 0, screenWidth, screenHeight);
+			mStarling = new Starling(GameScene, stage,viewPort);
 			mStarling.simulateMultitouch = true;
 			mStarling.enableErrorChecking = Capabilities.isDebugger;
 			mStarling.start();
 			//Display stats.
 			mStarling.showStats = true;
+			//Multi-Resolution Development
+			//@see: http://wiki.starling-framework.org/manual/multi-resolution_development
+			LOG.debug("Starling contentScaleFactor:{0}",mStarling.contentScaleFactor);
+			var isPad:Boolean = (screenWidth >= 768 || screenWidth >= 1536);
+			mStarling.stage.stageWidth  = isPad ? 384 : 320;
+			mStarling.stage.stageHeight = isPad ? 512 : 480;
+			LOG.debug("Starling contentScaleFactor:{0}",mStarling.contentScaleFactor);
 			// loader info.
 			this.loaderInfo.addEventListener(flash.events.Event.COMPLETE, loaderInfoCompleteHandler);
 			// add to stage.
@@ -160,12 +173,12 @@ package
 		private function stageResizeHandler(event:flash.events.Event):void
 		{
 			LOG.debug("stage_resizeHandler");
-			const viewPort:Rectangle = this.mStarling.viewPort;
-			viewPort.width = this.stage.stageWidth;
-			viewPort.height = this.stage.stageHeight;
-			this.mStarling.viewPort = viewPort;
-			this.mStarling.stage.stageWidth = this.stage.stageWidth;
-			this.mStarling.stage.stageHeight = this.stage.stageHeight;
+//			const viewPort:Rectangle = this.mStarling.viewPort;
+//			viewPort.width = this.stage.stageWidth;
+//			viewPort.height = this.stage.stageHeight;
+//			this.mStarling.viewPort = viewPort;
+//			this.mStarling.stage.stageWidth = this.stage.stageWidth;
+//			this.mStarling.stage.stageHeight = this.stage.stageHeight;
 		}
 		//
 		private function addToStageHandler(event:flash.events.Event):void

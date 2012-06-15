@@ -6,7 +6,7 @@ package com.godpaper.as3.business.managers
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.consts.FlexGlobals;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.core.IGameStateManager;
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;

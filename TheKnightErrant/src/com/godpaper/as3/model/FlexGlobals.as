@@ -19,8 +19,9 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.as3.consts
+package com.godpaper.as3.model
 {
+	import com.godpaper.as3.utils.SingletonFactory;
 	import com.godpaper.starling.views.scenes.GameScene;
 	
 	import starling.display.Stage;
@@ -59,6 +60,8 @@ package com.godpaper.as3.consts
 		public static var topLevelApplication:ApplicationBase;
 		public static var gameScene:GameScene;
 		public static var gameStage:Stage;
+		//Models
+		public static var chessPieceModel:AnotherChessPiecesModel = SingletonFactory.produce(AnotherChessPiecesModel);
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
