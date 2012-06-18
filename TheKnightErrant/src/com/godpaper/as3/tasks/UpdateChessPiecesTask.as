@@ -12,6 +12,7 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.components.ChessGasket;
@@ -78,7 +79,8 @@ package com.godpaper.as3.tasks
 		override protected function performTask():void
 		{
 			var cGasket:ChessGasket = 
-				ChessGasketsModel.getInstance().gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
+//				ChessGasketsModel.getInstance().gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
+				FlexGlobals.chessGasketsModel.gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
 			//
 //			if(cGasket.numElements>=1)
 			if(cGasket.chessPiece)	
@@ -102,18 +104,18 @@ package com.godpaper.as3.tasks
 					GameConfig.gameStateManager.computerWin();
 				}
 				//clean this bit at pieces.
-				BitBoard(ChessPiecesModel.getInstance()[removedPiece.type]).setBitt(removedPiece.position.y,removedPiece.position.x,false);
+				BitBoard(FlexGlobals.chessPiecesModel[removedPiece.type]).setBitt(removedPiece.position.y,removedPiece.position.x,false);
 				//set eat off value.
 				GameConfig.chessPieceManager.eatOffs.push(removedPiece);
 				//remove pieces data.
 				if(GameConfig.turnFlag==DefaultConstants.FLAG_RED)
 				{
 					//clean this bit at bluePieces.
-					ChessPiecesModel.getInstance().blues.splice(removedIndex,1);
+					FlexGlobals.chessPiecesModel.blues.splice(removedIndex,1);
 				}else
 				{
 					//clean this bit at redPieces.
-					ChessPiecesModel.getInstance().reds.splice(removedIndex,1);
+					FlexGlobals.chessPiecesModel.reds.splice(removedIndex,1);
 				}
 				//remove element from gasket.
 //				cGasket.removeElementAt(0);

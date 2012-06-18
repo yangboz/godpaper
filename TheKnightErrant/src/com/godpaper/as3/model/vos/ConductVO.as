@@ -4,6 +4,7 @@ package com.godpaper.as3.model.vos
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.components.ChessGasket;
 	import com.godpaper.starling.views.components.ChessPiece;
@@ -102,7 +103,8 @@ package com.godpaper.as3.model.vos
 			_nextPosition = value;
 			//
 			var cGasket:ChessGasket = 
-				ChessGasketsModel.getInstance().gaskets.gett(value.x,value.y) as ChessGasket;
+//				ChessGasketsModel.getInstance().gaskets.gett(value.x,value.y) as ChessGasket;
+				FlexGlobals.chessGasketsModel.gaskets.gett(value.x,value.y) as ChessGasket;
 //			if(cGasket.numChildren>=1)
 //			if(cGasket.chessPiece)
 //			{

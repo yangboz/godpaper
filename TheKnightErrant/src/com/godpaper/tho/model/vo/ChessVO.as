@@ -28,6 +28,7 @@ package com.godpaper.tho.model.vo
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.impl.AbstractChessVO;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	
 	import mx.logging.ILogger;
@@ -105,8 +106,8 @@ package com.godpaper.tho.model.vo
 			}
 			LOG.info("({0},{1}),occupies:{2}",rowIndex,colIndex,this.occupies.dump());
 			//about legal moves.
-//			LOG.info("all pieces:{0}",ChessPiecesModel.getInstance().allPieces.dump());
-			this.moves = this.occupies.xor(this.occupies.and(ChessPiecesModel.getInstance().allPieces));
+//			LOG.info("all pieces:{0}",FlexGlobals.chessPiecesModel.allPieces.dump());
+			this.moves = this.occupies.xor(this.occupies.and(FlexGlobals.chessPiecesModel.allPieces));
 			//
 			LOG.info("({0},{1}),moves:{2}",rowIndex,colIndex,this.moves.dump());
 			//blocker

@@ -8,8 +8,8 @@ package com.godpaper.as3.business.fsm.states.game
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.ChessBoardModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
@@ -114,7 +114,7 @@ package com.godpaper.as3.business.fsm.states.game
 			//process the searching class reflection.
 			var className:String=getQualifiedClassName(GameConfig.tollgates[time].searching);
 			var implementation:Object=getDefinitionByName(className);
-			searching=new implementation(ChessBoardModel.getInstance().status);
+			searching=new implementation(FlexGlobals.chessBoardModel.status);
 			//process the evaluation class reflection.
 			var evaluationClassName:String = getQualifiedClassName(GameConfig.tollgates[time].evaluation);
 			var evaluationClass:Object = getDefinitionByName(evaluationClassName);

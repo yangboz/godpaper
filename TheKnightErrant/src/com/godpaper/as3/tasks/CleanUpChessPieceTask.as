@@ -10,6 +10,7 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.components.ChessGasket;
 	import com.godpaper.starling.views.components.ChessPiece;
@@ -35,7 +36,7 @@ package com.godpaper.as3.tasks
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+		private var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -75,7 +76,8 @@ package com.godpaper.as3.tasks
 			{
 				for(var h:int=0;h<BoardConfig.xLines;h++)
 				{
-					var chessGasket:ChessGasket = (ChessGasketsModel.getInstance().gaskets.gett(h,v) as ChessGasket);
+//					var chessGasket:ChessGasket = (ChessGasketsModel.getInstance().gaskets.gett(h,v) as ChessGasket);
+					var chessGasket:ChessGasket = (FlexGlobals.chessGasketsModel.gaskets.gett(h,v) as ChessGasket);
 					if( chessGasket.chessPiece )
 					{
 						LOG.info("removed piece:{0}",ChessPiece(chessGasket.chessPiece).label );

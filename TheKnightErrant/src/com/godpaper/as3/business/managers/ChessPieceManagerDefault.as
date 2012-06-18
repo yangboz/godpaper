@@ -13,6 +13,7 @@ package com.godpaper.as3.business.managers
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesMemento;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.model.vos.ZobristKeyVO;
@@ -52,7 +53,7 @@ package com.godpaper.as3.business.managers
 //		private  var _crossOverValue:int;//and we using _crossOverValue for store the value "b";
 		private var _zKey:ZobristKeyVO; //current chess piece's zobrist key value object.
 		//
-		private var chessPiecesModel:ChessPiecesModel=ChessPiecesModel.getInstance();
+		private var chessPiecesModel:ChessPiecesModel=FlexGlobals.chessPiecesModel;
 		//
 		private var _eatOffs:Vector.<ChessPiece>=new Vector.<ChessPiece>();
 		//
@@ -64,6 +65,8 @@ package com.godpaper.as3.business.managers
 		//flag is checked.
 //		[Bindable]
 		private var _isChecking:Boolean=false;
+		//
+		private var chessGaketsModel:ChessGasketsModel = FlexGlobals.chessGasketsModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -251,7 +254,8 @@ package com.godpaper.as3.business.managers
 				//thrown out the eatten piece;
 				eattenPiece=eatOffs.pop() as IChessPiece;
 				//roll back the eatting piece;
-				var cGasket:ChessGasket=ChessGasketsModel.getInstance().gaskets.gett(eattenPiece.position.x, eattenPiece.position.y);
+//				var cGasket:ChessGasket=ChessGasketsModel.getInstance().gaskets.gett(eattenPiece.position.x, eattenPiece.position.y);
+				var cGasket:ChessGasket= FlexGlobals.chessGasketsModel.gaskets.gett(eattenPiece.position.x, eattenPiece.position.y);
 //				cGasket.addElement(eattenPiece);
 				cGasket.chessPiece=eattenPiece;
 			}
@@ -315,7 +319,7 @@ package com.godpaper.as3.business.managers
 			//clean bits at current removed pieces.
 			for each( var piece:ChessPiece in currentRemovedPieces)
 			{
-				BitBoard(ChessPiecesModel.getInstance()[piece.type]).setBitt(piece.position.y, piece.position.x, false);
+				BitBoard(chessPiecesModel[piece.type]).setBitt(piece.position.y, piece.position.x, false);
 			}	
 			//clean this bit at pieces.
 			for each( var index:int in currentRemovedPieceIndexs)
@@ -339,7 +343,8 @@ package com.godpaper.as3.business.managers
 			//remove element from gasket.
 			for each( var piecee:ChessPiece in currentRemovedPieces)
 			{
-				var cGasket:ChessGasket=ChessGasketsModel.getInstance().gaskets.gett(piecee.position.x,piecee.position.y) as ChessGasket;
+//				var cGasket:ChessGasket=ChessGasketsModel.getInstance().gaskets.gett(piecee.position.x,piecee.position.y) as ChessGasket;
+				var cGasket:ChessGasket= chessGaketsModel.gaskets.gett(piecee.position.x,piecee.position.y) as ChessGasket;
 				//cGasket.removeElementAt(0);
 				cGasket.chessPiece=null;
 			}
@@ -418,14 +423,14 @@ package com.godpaper.as3.business.managers
 				{
 					if (legalMoves.getBitt(v, h))
 					{
-						if(ChessGasketsModel.getInstance().gaskets.gett(h, v))
+						if(chessGaketsModel.gaskets.gett(h, v))
 						{
 //							(ChessGasketsModel.getInstance().gaskets.gett(h, v)as ChessGasket).setStyle("backgroundColor", 0xff0000);
 						}
 					}
 					else
 					{
-						if(ChessGasketsModel.getInstance().gaskets.gett(h, v))
+						if(chessGaketsModel.gaskets.gett(h, v))
 						{
 //							(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).clearStyle("backgroundColor");
 //							(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[];
@@ -449,7 +454,7 @@ package com.godpaper.as3.business.managers
 				{
 					if (legalCaptures.getBitt(v, h))
 					{
-						if(ChessGasketsModel.getInstance().gaskets.gett(h, v))
+						if(chessGaketsModel.gaskets.gett(h, v))
 						{
 //							(ChessGasketsModel.getInstance().gaskets.gett(h, v) as ChessGasket).filters=[new GlowFilter()];
 						}	
@@ -498,11 +503,11 @@ package com.godpaper.as3.business.managers
 			var checkmated:Boolean;
 			if (gamePosition.color == DefaultConstants.FLAG_BLUE)
 			{
-				checkmated=ChessPiecesModel.getInstance().BLUE_MARSHAL.isEmpty;
+				checkmated=chessPiecesModel.BLUE_MARSHAL.isEmpty;
 			}
 			else
 			{
-				checkmated=ChessPiecesModel.getInstance().RED_MARSHAL.isEmpty;
+				checkmated=chessPiecesModel.RED_MARSHAL.isEmpty;
 			}
 			return checkmated;
 		}

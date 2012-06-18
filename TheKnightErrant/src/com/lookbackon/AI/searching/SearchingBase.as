@@ -2,6 +2,7 @@ package com.lookbackon.AI.searching
 {
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.FilterUtil;
@@ -128,7 +129,7 @@ package com.lookbackon.AI.searching
 //		[Deprecated(replacement="com.lookbackon.AI.searching.SearchingBase.orderingMoves")]
 		public function get moves():Vector.<ConductVO>
 		{
-			var _moves:Vector.<ConductVO> = generateMoves(ChessPiecesModel.getInstance().blues);
+			var _moves:Vector.<ConductVO> = generateMoves(FlexGlobals.chessPiecesModel.blues);
 			//filter suicide moves.
 			_moves = _moves.filter(FilterUtil.onSuicide);
 			//TBC

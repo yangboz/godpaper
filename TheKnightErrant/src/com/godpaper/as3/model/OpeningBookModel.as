@@ -1,12 +1,13 @@
 package com.godpaper.as3.model
 {
 	import com.godpaper.as3.errors.DefaultErrors;
-
+	import com.godpaper.as3.utils.LogUtil;
+	
 	import de.polygonal.ds.Graph;
 	import de.polygonal.ds.GraphNode;
 	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import mx.logging.ILogger;
+
 	/**
 	 * <b>A singleton model hold chess board opening book information.</b></p>
 	 * Whether you like it or not,opening book are very important in many games.</br>
@@ -53,7 +54,7 @@ package com.godpaper.as3.model
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(OpeningBookModel);
+		private static const LOG:ILogger = LogUtil.getLogger(OpeningBookModel);
 		//generation.
 		//TODO.other structs.
 		//--------------------------------------------------------------------------

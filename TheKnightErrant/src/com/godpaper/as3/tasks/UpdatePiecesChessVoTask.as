@@ -8,6 +8,7 @@ package com.godpaper.as3.tasks
 	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.components.ChessPiece;
@@ -31,7 +32,7 @@ package com.godpaper.as3.tasks
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+		private var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

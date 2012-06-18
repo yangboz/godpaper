@@ -57,11 +57,14 @@ package com.godpaper.as3.model
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		//Views.
 		public static var topLevelApplication:ApplicationBase;
 		public static var gameScene:GameScene;
 		public static var gameStage:Stage;
-		//Models
-		public static var chessPieceModel:AnotherChessPiecesModel = SingletonFactory.produce(AnotherChessPiecesModel);
+		//Models.
+		public static var chessPiecesModel:ChessPiecesModel = SingletonFactory.produce(ChessPiecesModel);
+		public static var chessGasketsModel:ChessGasketsModel = SingletonFactory.produce(ChessGasketsModel);
+		public static var chessBoardModel:ChessBoardModel = SingletonFactory.produce(ChessBoardModel);
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

@@ -90,7 +90,8 @@ package com.godpaper.as3.tasks
 					{
 						FlexGlobals.gameStage.addChild( cGasket );
 						//keep this reference to model.
-						ChessGasketsModel.getInstance().gaskets.sett(h,v,cGasket);
+//						ChessGasketsModel.getInstance().gaskets.sett(h,v,cGasket);
+						FlexGlobals.chessGasketsModel.gaskets.sett(h,v,cGasket);
 					}
 				}
 			}

@@ -6,10 +6,10 @@ package com.godpaper.as3.tasks
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.starling.views.components.ChessGasket;
 	
 	import flash.geom.Point;
@@ -90,7 +90,8 @@ package com.godpaper.as3.tasks
 					{
 						FlexGlobals.gameStage.addChild(cpDisplayObject);
 //						trace("index:",vv*CcjConstants.BOARD_V_LINES+hh);
-						var ecGasket:ChessGasket = ChessGasketsModel.getInstance().gaskets.gett(hh,vv) as ChessGasket;
+//						var ecGasket:ChessGasket = ChessGasketsModel.getInstance().gaskets.gett(hh,vv) as ChessGasket;
+						var ecGasket:ChessGasket = FlexGlobals.chessGasketsModel.gaskets.gett(hh,vv) as ChessGasket;
 						ecGasket.chessPiece = iChessPiece;
 						//
 						(iChessPiece as DisplayObject).x = ecGasket.x;

@@ -9,8 +9,8 @@ package com.godpaper.as3.model
 	import com.godpaper.as3.errors.DefaultErrors;
 
 	import de.polygonal.ds.Array2;
-
-
+	//Framework internal usage only.
+	[ExcludeClass]
 	/**
 	 * ChessGasketsModel.as class. A singleton model hold all Chess gaskets' information.
 	 * @author yangboz
@@ -26,7 +26,7 @@ package com.godpaper.as3.model
 		//
 		//--------------------------------------------------------------------------
 		//Singleton instance of ChessGasketsModel;
-		private static var instance:ChessGasketsModel;
+//		private static var instance:ChessGasketsModel;
 		//
 		private var _gaskets:Array2=new Array2(BoardConfig.xLines, BoardConfig.yLines);
 		//----------------------------------
@@ -60,19 +60,23 @@ package com.godpaper.as3.model
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessGasketsModel(access:Private)
+//		public function ChessGasketsModel(access:Private)
+//		{
+//			if (access != null)
+//			{
+//				if (instance == null)
+//				{
+//					instance=this;
+//				}
+//			}
+//			else
+//			{
+//				throw new DefaultErrors(DefaultErrors.INITIALIZE_SINGLETON_CLASS);
+//			}
+//		}
+		public function ChessGasketModel():void
 		{
-			if (access != null)
-			{
-				if (instance == null)
-				{
-					instance=this;
-				}
-			}
-			else
-			{
-				throw new DefaultErrors(DefaultErrors.INITIALIZE_SINGLETON_CLASS);
-			}
+			_gaskets = new Array2(BoardConfig.xLines, BoardConfig.yLines);
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -84,14 +88,14 @@ package com.godpaper.as3.model
 		 * @return the singleton instance of ChessGasketsModel
 		 *
 		 */
-		public static function getInstance():ChessGasketsModel
-		{
-			if (instance == null)
-			{
-				instance=new ChessGasketsModel(new Private());
-			}
-			return instance;
-		}
+//		public static function getInstance():ChessGasketsModel
+//		{
+//			if (instance == null)
+//			{
+//				instance=new ChessGasketsModel(new Private());
+//			}
+//			return instance;
+//		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -109,8 +113,8 @@ package com.godpaper.as3.model
 /**
  *Inner class which restricts construtor access to Private
  */
-internal class Private
-{
-}
+//internal class Private
+//{
+//}
 
 

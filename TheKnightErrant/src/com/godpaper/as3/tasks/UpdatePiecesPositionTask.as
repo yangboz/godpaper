@@ -7,6 +7,7 @@ package com.godpaper.as3.tasks
 	//--------------------------------------------------------------------------
 	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.as3.model.ChessGasketsModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.components.ChessGasket;
@@ -72,7 +73,8 @@ package com.godpaper.as3.tasks
 		{
 			//TODO:
 			var cGasket:ChessGasket = 
-				ChessGasketsModel.getInstance().gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
+//				ChessGasketsModel.getInstance().gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
+				FlexGlobals.chessGasketsModel.gaskets.gett(conductVO.nextPosition.x,conductVO.nextPosition.y) as ChessGasket;
 			this.conductVO.target.position = cGasket.position;
 			//
 			this.complete();

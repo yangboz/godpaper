@@ -7,10 +7,12 @@ package com.lookbackon.AI.evaluation.linear
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.lookbackon.ds.BitBoard;
+
 	/**
 	 * LinearEvaluation.as class.
 	 * @author yangboz
@@ -25,7 +27,7 @@ package com.lookbackon.AI.evaluation.linear
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-
+		private var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -80,20 +82,20 @@ package com.lookbackon.AI.evaluation.linear
 //			var B:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED_BISHOP] as BitBoard;
 //			var b:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE_BISHOP] as BitBoard;
 //			
-			var M:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
-			var m:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
-			var R:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
-			var r:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
-			var K:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
-			var k:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
-			var O:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
-			var o:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
-			var C:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
-			var c:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
-			var P:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
-			var p:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
-			var B:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.RED] as BitBoard;
-			var b:BitBoard = ChessPiecesModel.getInstance()[DefaultConstants.BLUE] as BitBoard;
+			var M:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.RED] as BitBoard;
+			var m:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.BLUE] as BitBoard;
+			var R:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.RED] as BitBoard;
+			var r:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.BLUE] as BitBoard;
+			var K:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.RED] as BitBoard;
+			var k:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.BLUE] as BitBoard;
+			var O:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.RED] as BitBoard;
+			var o:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.BLUE] as BitBoard;
+			var C:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.RED] as BitBoard;
+			var c:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.BLUE] as BitBoard;
+			var P:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.RED] as BitBoard;
+			var p:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.BLUE] as BitBoard;
+			var B:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.RED] as BitBoard;
+			var b:BitBoard = FlexGlobals.chessPiecesModel[DefaultConstants.BLUE] as BitBoard;
 			
 			var T_red:int = M.celled*133
 				+B.celled*166

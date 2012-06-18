@@ -9,6 +9,7 @@ package com.lookbackon.AI.searching
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.LogUtil;
 	
@@ -53,6 +54,8 @@ package com.lookbackon.AI.searching
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
+		private var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
+		private var chessBoardModel:ChessBoardModel = FlexGlobals.chessBoardModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -114,7 +117,7 @@ package com.lookbackon.AI.searching
 			}
 			var max:int = int.MIN_VALUE;
 			//
-			orderingMoves = generateMoves(ChessPiecesModel.getInstance().blues);
+			orderingMoves = generateMoves(FlexGlobals.chessPiecesModel.blues);
 			var len:int = orderingMoves.length;
 			//
 			if(orderingMoves.length<=0)
@@ -155,7 +158,7 @@ package com.lookbackon.AI.searching
 			}
 			var min:int = int.MAX_VALUE;
 			//
-			orderingMoves = generateMoves(ChessPiecesModel.getInstance().blues);
+			orderingMoves = generateMoves(chessPiecesModel.blues);
 			var len:int = orderingMoves.length;
 			//
 			if(orderingMoves.length<=0)
@@ -219,7 +222,7 @@ package com.lookbackon.AI.searching
 			}
 			if(gamePosition.color==DefaultConstants.FLAG_RED)
 			{
-				orderingMoves = generateMoves(ChessPiecesModel.getInstance().reds);
+				orderingMoves = generateMoves(chessPiecesModel.reds);
 				//pluge to death.
 				if(0==orderingMoves.length)
 				{
@@ -227,7 +230,7 @@ package com.lookbackon.AI.searching
 				}
 			}else
 			{
-				orderingMoves = generateMoves(ChessPiecesModel.getInstance().blues);
+				orderingMoves = generateMoves(chessPiecesModel.blues);
 				//pluge to death.
 				if(0==orderingMoves.length)
 				{
@@ -243,7 +246,7 @@ package com.lookbackon.AI.searching
 				tempMove = orderingMoves[i];
 				//
 				makeMove(tempMove);
-				tempValue = miniMax(ChessBoardModel.getInstance().status,depth-1);
+				tempValue = miniMax(chessBoardModel.status,depth-1);
 				unmakeMove(tempMove);
 				//
 				if(gamePosition.color==DefaultConstants.FLAG_RED)

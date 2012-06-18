@@ -34,3 +34,16 @@ Artificial Intelligence:
 
 Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 
+TODO List:
+
+#1.ZobristKey Model for game status process;
+
+#2.OpeningBook Model for game open book construction;
+
+#3.HistoryTable Model for game historic process;
+
+#4.Searching Tree sort of class implementation;
+
+#5.Machine Learning implementation;
+
+#6.More...

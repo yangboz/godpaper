@@ -12,6 +12,7 @@ package com.godpaper.as3.business.factory
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.pools.BlueChessPiecesPool;
 	import com.godpaper.as3.model.pools.ChessGasketsPool;
 	import com.godpaper.as3.model.pools.RedChessPiecesPool;
@@ -131,17 +132,17 @@ package com.godpaper.as3.business.factory
 				{
 					simpleChessPiece.flag=DefaultConstants.FLAG_RED; 
 					//					ChessPiecesModel.getInstance().redPieces.setBitt(position.y,position.x,true);
-					ChessPiecesModel.getInstance()[simpleChessPiece.type].setBitt(position.y, position.x, true);
+					FlexGlobals.chessPiecesModel[simpleChessPiece.type].setBitt(position.y, position.x, true);
 					//push to reds collection.
-					ChessPiecesModel.getInstance().reds.push(simpleChessPiece);
+					FlexGlobals.chessPiecesModel.reds.push(simpleChessPiece);
 				}
 				else //blue
 				{
 					//simpleChessPiece.enabled = false;
 					//					ChessPiecesModel.getInstance().bluePieces.setBitt(position.y,position.x,true);
-					ChessPiecesModel.getInstance()[simpleChessPiece.type].setBitt(position.y, position.x, true);
+					FlexGlobals.chessPiecesModel[simpleChessPiece.type].setBitt(position.y, position.x, true);
 					//push to blues collection.
-					ChessPiecesModel.getInstance().blues.push(simpleChessPiece);
+					FlexGlobals.chessPiecesModel.blues.push(simpleChessPiece);
 				}
 			}
 			//avoid duplicate usless components.

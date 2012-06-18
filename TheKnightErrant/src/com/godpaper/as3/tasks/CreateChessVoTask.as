@@ -8,10 +8,11 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.business.factory.ChessFactoryBase;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.starling.views.components.ChessPiece;
-
+	
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 
@@ -29,7 +30,7 @@ package com.godpaper.as3.tasks
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+		private var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

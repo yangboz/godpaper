@@ -34,6 +34,7 @@ package com.godpaper.tho.buiness.managers
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.FilterUtil;
@@ -64,8 +65,8 @@ package com.godpaper.tho.buiness.managers
 		// Variables
 		//
 		//--------------------------------------------------------------------------
-		private var chessPieceModel:ChessPiecesModel = ChessPiecesModel.getInstance();
-		private var chessBoardModel:ChessBoardModel = ChessBoardModel.getInstance();
+		private var chessPieceModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
+		private var chessBoardModel:ChessBoardModel = FlexGlobals.chessBoardModel;
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------

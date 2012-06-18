@@ -12,7 +12,8 @@ package com.godpaper.as3.model
 	import de.polygonal.ds.Array2;
 	
 	import mx.logging.ILogger;
-	
+	//Framework internal usage only.
+	[ExcludeClass]
 	/**
 	 * A singleton model hold all Chess Pieces's informations.
 	 *
@@ -34,27 +35,27 @@ package com.godpaper.as3.model
 		private var _blues:Vector.<ChessPiece>=new Vector.<ChessPiece>();
 		private var _pieces:Vector.<ChessPiece>=new Vector.<ChessPiece>();
 		//
-		private var _bluePieces:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
-		private var _redPieces:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _bluePieces:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _redPieces:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 		//special.
 		//red
-		private var _red:BitBoard = new BitBoard(MAX_BB_W,MAX_BB_H);
-		private var _redRook:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
-		private var _redKnight:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
-		private var _redBishop:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
-		private var _redOffical:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
-		private var _redMarshal:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
-		private var _redCannon:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
-		private var _redPawn:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _red:BitBoard = new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _redRook:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _redKnight:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _redBishop:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _redOffical:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _redMarshal:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _redCannon:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _redPawn:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 		//blue
-		private var _blue:BitBoard = new BitBoard(MAX_BB_W,MAX_BB_H);
-		private var _blueRook:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
-		private var _blueKnight:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
-		private var _blueBishop:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
-		private var _blueOffical:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
-		private var _blueMarshal:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
-		private var _blueCannon:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
-		private var _bluePawn:BitBoard=new BitBoard(MAX_BB_W, MAX_BB_H);
+		private var _blue:BitBoard = new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _blueRook:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _blueKnight:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _blueBishop:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _blueOffical:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _blueMarshal:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _blueCannon:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _bluePawn:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 		//the current selected chess piece
 		private var _selectedPiece:IChessPiece;
 		//----------------------------------
@@ -62,28 +63,31 @@ package com.godpaper.as3.model
 		//----------------------------------
 		private static const LOG:ILogger=LogUtil.getLogger(ChessPiecesModel);
 		//TODO:this bit board limit size const should be more flexibility for adapting variable bitboard size. 
-		private static const MAX_BB_W:int = 15;
-		private static const MAX_BB_H:int = 15;
+//		private static const MAX_BB_W:int = 15;
+//		private static const MAX_BB_H:int = 15;
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessPiecesModel(access:Private)
+//		public function ChessPiecesModel(access:Private)
+//		{
+//			if (access != null)
+//			{
+//				if (instance == null)
+//				{
+//					instance=this;
+//				}
+//			}
+//			else
+//			{
+//				throw new DefaultErrors(DefaultErrors.INITIALIZE_SINGLETON_CLASS);
+//			}
+//		}
+		public function ChessPiecesModel()
 		{
-			if (access != null)
-			{
-				if (instance == null)
-				{
-					instance=this;
-				}
-			}
-			else
-			{
-				throw new DefaultErrors(DefaultErrors.INITIALIZE_SINGLETON_CLASS);
-			}
+			//
 		}
-
 		//--------------------------------------------------------------------------
 		//
 		//  Properties
@@ -108,12 +112,12 @@ package com.godpaper.as3.model
 		{
 			return _blues;
 		}
-
+		
 		public function set blues(value:Vector.<ChessPiece>):void
 		{
 			_blues=value;
 		}
-
+		
 		//----------------------------------
 		//  reds
 		//----------------------------------
@@ -121,12 +125,12 @@ package com.godpaper.as3.model
 		{
 			return _reds;
 		}
-
+		
 		public function set reds(value:Vector.<ChessPiece>):void
 		{
 			_reds=value;
 		}
-
+		
 		//----------------------------------
 		//  pieces
 		//----------------------------------
@@ -134,27 +138,27 @@ package com.godpaper.as3.model
 		{
 			return reds.concat(blues);
 		}
-
+		
 		//----------------------------------
 		//  gamePosition
 		//----------------------------------
 		/**
 		 * return the current game positon information.
 		 */	
-		[Deprecated(replacement="BoardModel.status", since="TheRealKnight_4.1.0.16076_20110718_100")]
-		public function get gamePosition():PositionVO
-		{
-			var _gamePosition:PositionVO=new PositionVO();
-			var board:Array2=new Array2(BoardConfig.xLines,BoardConfig.yLines);
-			for (var i:int=0; i < pieces.length; i++)
-			{
-				var cp:ChessPiece=pieces[i];
-				board.sett(cp.position.x, cp.position.y, cp);
-			}
-			_gamePosition.board=board;
-			_gamePosition.color=DefaultConstants.FLAG_BLUE;
-			return _gamePosition;
-		}
+//		[Deprecated(replacement="BoardModel.status", since="TheRealKnight_4.1.0.16076_20110718_100")]
+//		public function get gamePosition():PositionVO
+//		{
+//			var _gamePosition:PositionVO=new PositionVO();
+//			var board:Array2=new Array2(BoardConfig.xLines,BoardConfig.yLines);
+//			for (var i:int=0; i < pieces.length; i++)
+//			{
+//				var cp:ChessPiece=pieces[i];
+//				board.sett(cp.position.x, cp.position.y, cp);
+//			}
+//			_gamePosition.board=board;
+//			_gamePosition.color=DefaultConstants.FLAG_BLUE;
+//			return _gamePosition;
+//		}
 		//----------------------------------
 		//  allPieces
 		//----------------------------------
@@ -179,7 +183,7 @@ package com.godpaper.as3.model
 		{
 			return redPieces.or(bluePieces);
 		}
-
+		
 		//----------------------------------
 		//  bluePieces
 		//----------------------------------
@@ -200,10 +204,10 @@ package com.godpaper.as3.model
 		 */
 		public function get bluePieces():BitBoard
 		{
-//			return _bluePieces;
+			//			return _bluePieces;
 			return BLUE.or(BLUE_ROOK).or(BLUE_KNIGHT).or(BLUE_BISHOP).or(BLUE_OFFICAL).or(BLUE_MARSHAL).or(BLUE_CANNON).or(BLUE_PAWN);
 		}
-
+		
 		/**
 		 * Notice:set only for unit-test.
 		 * @param value a BitBoard representation of bluePieces.
@@ -214,7 +218,7 @@ package com.godpaper.as3.model
 			_bluePieces=value;
 			LOG.info("bluePieces:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  redPieces
 		//----------------------------------
@@ -236,10 +240,10 @@ package com.godpaper.as3.model
 		 */
 		public function get redPieces():BitBoard
 		{
-//			return 	_redPieces;
+			//			return 	_redPieces;
 			return RED.or(RED_ROOK).or(RED_KNIGHT).or(RED_BISHOP).or(RED_OFFICAL).or(RED_MARSHAL).or(RED_CANNON).or(RED_PAWN);
 		}
-
+		
 		/**
 		 * Notice:set only for unit-test.
 		 * @param value a BitBoard representation of redPieces.
@@ -257,7 +261,7 @@ package com.godpaper.as3.model
 		{
 			return _red;
 		}
-
+		
 		public function set RED(value:BitBoard):void
 		{
 			_red=value;
@@ -270,13 +274,13 @@ package com.godpaper.as3.model
 		{
 			return _redRook;
 		}
-
+		
 		public function set RED_ROOK(value:BitBoard):void
 		{
 			_redRook=value;
 			LOG.info("RED_ROOK:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  redKnight
 		//----------------------------------
@@ -284,13 +288,13 @@ package com.godpaper.as3.model
 		{
 			return _redKnight;
 		}
-
+		
 		public function set RED_KNIGHT(value:BitBoard):void
 		{
 			_redKnight=value;
 			LOG.info("RED_KNIGHT:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  redBishop
 		//----------------------------------
@@ -298,13 +302,13 @@ package com.godpaper.as3.model
 		{
 			return _redBishop;
 		}
-
+		
 		public function set RED_BISHOP(value:BitBoard):void
 		{
 			_redBishop=value;
 			LOG.info("RED_BISHOP:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  redOffical
 		//----------------------------------
@@ -312,13 +316,13 @@ package com.godpaper.as3.model
 		{
 			return _redOffical;
 		}
-
+		
 		public function set RED_OFFICAL(value:BitBoard):void
 		{
 			_redOffical=value;
 			LOG.info("RED_OFFICAL:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  redMarshal
 		//----------------------------------
@@ -326,13 +330,13 @@ package com.godpaper.as3.model
 		{
 			return _redMarshal;
 		}
-
+		
 		public function set RED_MARSHAL(value:BitBoard):void
 		{
 			_redMarshal=value;
 			LOG.info("RED_MARSHAL:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  redCannon
 		//----------------------------------
@@ -340,13 +344,13 @@ package com.godpaper.as3.model
 		{
 			return _redCannon;
 		}
-
+		
 		public function set RED_CANNON(value:BitBoard):void
 		{
 			_redCannon=value;
 			LOG.info("RED_CANNON:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  redPawn
 		//----------------------------------
@@ -354,13 +358,13 @@ package com.godpaper.as3.model
 		{
 			return _redPawn;
 		}
-
+		
 		public function set RED_PAWN(value:BitBoard):void
 		{
 			_redPawn=value;
 			LOG.info("RED_PAWN:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  blue
 		//----------------------------------
@@ -368,13 +372,13 @@ package com.godpaper.as3.model
 		{
 			return _blue;
 		}
-
+		
 		public function set BLUE(value:BitBoard):void
 		{
 			_blue=value;
 			LOG.info("BLUE:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  blueRook
 		//----------------------------------
@@ -382,13 +386,13 @@ package com.godpaper.as3.model
 		{
 			return _blueRook;
 		}
-
+		
 		public function set BLUE_ROOK(value:BitBoard):void
 		{
 			_blueRook=value;
 			LOG.info("BLUE_ROOK:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  blueKnight
 		//----------------------------------
@@ -396,13 +400,13 @@ package com.godpaper.as3.model
 		{
 			return _blueKnight;
 		}
-
+		
 		public function set BLUE_KNIGHT(value:BitBoard):void
 		{
 			_blueKnight=value;
 			LOG.info("BLUE_KNIGHT:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  blueBishop
 		//----------------------------------
@@ -410,13 +414,13 @@ package com.godpaper.as3.model
 		{
 			return _blueBishop;
 		}
-
+		
 		public function set BLUE_BISHOP(value:BitBoard):void
 		{
 			_blueBishop=value;
 			LOG.info("BLUE_BISHOP:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  blueOffical
 		//----------------------------------
@@ -424,13 +428,13 @@ package com.godpaper.as3.model
 		{
 			return _blueOffical;
 		}
-
+		
 		public function set BLUE_OFFICAL(value:BitBoard):void
 		{
 			_blueOffical=value;
 			LOG.info("BLUE_OFFICAL:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  blueMarshal
 		//----------------------------------
@@ -438,13 +442,13 @@ package com.godpaper.as3.model
 		{
 			return _blueMarshal;
 		}
-
+		
 		public function set BLUE_MARSHAL(value:BitBoard):void
 		{
 			_blueMarshal=value;
 			LOG.info("BLUE_MARSHAL:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  blueCannon
 		//----------------------------------
@@ -452,13 +456,13 @@ package com.godpaper.as3.model
 		{
 			return _blueCannon;
 		}
-
+		
 		public function set BLUE_CANNON(value:BitBoard):void
 		{
 			_blueCannon=value;
 			LOG.info("BLUE_CANNON:{0}", value.dump());
 		}
-
+		
 		//----------------------------------
 		//  bluePawn
 		//----------------------------------
@@ -466,13 +470,13 @@ package com.godpaper.as3.model
 		{
 			return _bluePawn;
 		}
-
+		
 		public function set BLUE_PAWN(value:BitBoard):void
 		{
 			_bluePawn=value;
 			LOG.info("BLUE_PAWN:{0}", value.dump());
 		}
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Methods
@@ -483,21 +487,20 @@ package com.godpaper.as3.model
 		 * @return the singleton instance of ChessPositionModel
 		 *
 		 */
-		public static function getInstance():ChessPiecesModel
-		{
-			if (instance == null)
-			{
-				instance=new ChessPiecesModel(new Private());
-			}
-			return instance;
-		}
+//		public static function getInstance():ChessPiecesModel
+//		{
+//			if (instance == null)
+//			{
+//				instance=new ChessPiecesModel(new Private());
+//			}
+//			return instance;
+//		}
 	}
 }
 
 /**
  *Inner class which restricts construtor access to Private
  */
-internal class Private
-{
-}
-
+//internal class Private
+//{
+//}

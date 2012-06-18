@@ -116,7 +116,6 @@ package
 		public function ApplicationBase()
 		{
 //			super();
-			LOG.debug("SigletonFactory test:{0}",FlexGlobals.chessPieceModel.BLUE_BISHOP.dump());
 			//
 			LOG.debug("preinitializeHandler@Constructor");
 			//
@@ -128,10 +127,10 @@ package
 			Starling.handleLostContext = true; // deactivate on mobile devices (to save memory)
 			//
 //			mStarling = new Starling(GameScene, stage,new Rectangle(0,0,768,1004));
-//			var screenWidth:int  = 320;//384
-//			var screenHeight:int = 480;//512
-			var screenWidth:int  = stage.fullScreenWidth;
-			var screenHeight:int = stage.fullScreenHeight;
+			var screenWidth:int  = 320;//384
+			var screenHeight:int = 480;//512
+//			var screenWidth:int  = stage.fullScreenWidth;
+//			var screenHeight:int = stage.fullScreenHeight;
 			var viewPort:Rectangle = new Rectangle(0, 0, screenWidth, screenHeight);
 			mStarling = new Starling(GameScene, stage,viewPort);
 			mStarling.simulateMultitouch = true;
@@ -224,13 +223,13 @@ package
 		public function dumpFootSprint():void
 		{
 			//
-			LOG.info("redPieces:{0}", ChessPiecesModel.getInstance().redPieces.dump());
-			LOG.info("bluePieces:{0}", ChessPiecesModel.getInstance().bluePieces.dump());
-			LOG.info("allPieces:{0}", ChessPiecesModel.getInstance().allPieces.dump());
+			LOG.info("redPieces:{0}", FlexGlobals.chessPiecesModel.redPieces.dump());
+			LOG.info("bluePieces:{0}", FlexGlobals.chessPiecesModel.bluePieces.dump());
+			LOG.info("allPieces:{0}", FlexGlobals.chessPiecesModel.allPieces.dump());
 			//			//
-			//			LOG.info("allPieces rotate90:{0}", ChessPiecesModel.getInstance().allPieces.rotate90().dump());
-			//			LOG.info("allPieces rotate90.bitCount:{0}", ChessPiecesModel.getInstance().allPieces.bitCount);
-			//			LOG.info("allPieces rotate90.cellCount:{0}", ChessPiecesModel.getInstance().allPieces.cellCount);
+			//			LOG.info("allPieces rotate90:{0}", FlexGlobals.chessPiecesModel.allPieces.rotate90().dump());
+			//			LOG.info("allPieces rotate90.bitCount:{0}", FlexGlobals.chessPiecesModel.allPieces.bitCount);
+			//			LOG.info("allPieces rotate90.cellCount:{0}", FlexGlobals.chessPiecesModel.allPieces.cellCount);
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -268,6 +267,10 @@ package
 			//about plugin:
 			PluginConfig.mochiBoardID = "3a460211409897f4";
 			PluginConfig.mochiGameID = "47de4a85dd3e213a";
+			//
+			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
+			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);
+			LOG.debug("SigletonFactory(cb) test:{0}",FlexGlobals.chessBoardModel.status.dump());
 		}
 		//  applicationBase_applicationCompleteHandler
 		/**

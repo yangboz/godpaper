@@ -31,11 +31,11 @@ package com.godpaper.starling.views.components
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.core.IChessGasket;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
@@ -77,8 +77,8 @@ package com.godpaper.starling.views.components
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var chessGasketsModel:ChessGasketsModel = ChessGasketsModel.getInstance();
-		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+		private var chessGasketsModel:ChessGasketsModel = FlexGlobals.chessGasketsModel;
+		private var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
 		//Global configures.
 		private var _width:Number;
 		private var _height:Number;

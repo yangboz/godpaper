@@ -34,11 +34,11 @@ package com.godpaper.starling.views.components
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.plugins.IPlug;
@@ -93,8 +93,9 @@ package com.godpaper.starling.views.components
 		//pre-define this swf loader for playing the drag proxy(image/movie) effect. 
 //		public var swfLoader:Image;
 		//models
-		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
-		private var chessGasketModel:ChessGasketsModel = ChessGasketsModel.getInstance();
+		private var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
+//		private var chessGasketModel:ChessGasketsModel = ChessGasketsModel.getInstance();
+		private var chessGasketModel:ChessGasketsModel = FlexGlobals.chessGasketsModel;
 		//sound effect
 		private var cpMoveSound:Sound;
 		private var cpMoveSoundChannel:SoundChannel;
@@ -324,7 +325,7 @@ package com.godpaper.starling.views.components
 			//dump info.
 			LOG.debug("captures:{0}", this.chessVO.captures.dump());
 			LOG.debug("moves:{0}", this.chessVO.moves.dump());
-			LOG.debug("current bitboard:{0}", ChessPiecesModel.getInstance().allPieces.dump());
+			LOG.debug("current bitboard:{0}", FlexGlobals.chessPiecesModel.allPieces.dump());
 		}
 		//
 		protected function get iPlug():IPlug
@@ -407,7 +408,7 @@ package com.godpaper.starling.views.components
 					//				LOG.debug("occupies:{0}",this.chessVO.occupies.dump());
 					LOG.debug("captures:{0}", this.chessVO.captures.dump());
 					LOG.debug("moves:{0}", this.chessVO.moves.dump());
-					LOG.debug("current bitboard:{0}", ChessPiecesModel.getInstance().allPieces.dump());
+					LOG.debug("current bitboard:{0}", FlexGlobals.chessPiecesModel.allPieces.dump());
 					//indicate gasket can fill with chess piece.
 					if (iPlug.data.hasMoveIndicator)
 					{

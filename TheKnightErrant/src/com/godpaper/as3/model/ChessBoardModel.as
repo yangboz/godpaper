@@ -16,7 +16,8 @@ package com.godpaper.as3.model
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	
+	//Framework internal usage only.
+	[ExcludeClass]
 	/**
 	 * This singlton class maintain the board status information and with manifestation(numercal,graphical,A*Node...) mode.   	
 	 * @author yangboz
@@ -32,8 +33,8 @@ package com.godpaper.as3.model
 		//
 		//--------------------------------------------------------------------------
 		//Singleton instance of ChessBoardModel;
-		private static var instance:ChessBoardModel;
-		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
+//		private static var instance:ChessBoardModel;
+//		private var chessPiecesModel:ChessPiecesModel = ChessPiecesModel.getInstance();
 		//The step number of game played displayed on chess board?.
 		private var _stepNumber:Number=0;
 		//----------------------------------
@@ -90,6 +91,7 @@ package com.godpaper.as3.model
 		 */		
 		public function get aStarNodes():AStarNodeBoard
 		{
+			var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
 			var aStarNodes:AStarNodeBoard = new AStarNodeBoard(BoardConfig.xLines,BoardConfig.yLines);
 			for (var i:int=0; i < chessPiecesModel.pieces.length; i++)
 			{
@@ -109,6 +111,7 @@ package com.godpaper.as3.model
 		 */		
 		public function get status():PositionVO
 		{
+			var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
 			var _gamePosition:PositionVO=new PositionVO();
 			var board:Array2=new Array2(BoardConfig.xLines,BoardConfig.yLines);
 			for (var i:int=0; i < chessPiecesModel.pieces.length; i++)
@@ -131,9 +134,24 @@ package com.godpaper.as3.model
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessBoardModel(access:Private)
+//		public function ChessBoardModel(access:Private)
+//		{
+//			if (access != null)
+//			{
+//				if (instance == null)
+//				{
+//					instance=this;
+//				}
+//			}
+//			else
+//			{
+//				throw new DefaultErrors(DefaultErrors.INITIALIZE_SINGLETON_CLASS);
+//			}
+//		}   
+		public function ChessBoardModel()
 		{
-		}     	
+			//
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -144,14 +162,14 @@ package com.godpaper.as3.model
 		 * @return the singleton instance of ChessBoardModel
 		 *
 		 */
-		public static function getInstance():ChessBoardModel 
-		{
-			if (instance == null) 
-			{
-				instance=new ChessBoardModel(new Private());
-			}
-			return instance;
-		}
+//		public static function getInstance():ChessBoardModel 
+//		{
+//			if (instance == null) 
+//			{
+//				instance=new ChessBoardModel(new Private());
+//			}
+//			return instance;
+//		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -169,6 +187,6 @@ package com.godpaper.as3.model
 /**
  *Inner class which restricts construtor access to Private
  */
-internal class Private 
-{
-}
+//internal class Private 
+//{
+//}

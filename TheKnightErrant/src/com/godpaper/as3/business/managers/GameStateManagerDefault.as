@@ -38,8 +38,8 @@ package com.godpaper.as3.business.managers
 		//
 		//--------------------------------------------------------------------------
 		//Model refs
-		private var chessPieceModel:ChessPiecesModel=ChessPiecesModel.getInstance();
-		private var chessBoardModel:ChessBoardModel=ChessBoardModel.getInstance();
+		private var chessPieceModel:ChessPiecesModel=FlexGlobals.chessPiecesModel;
+		private var chessBoardModel:ChessBoardModel=FlexGlobals.chessBoardModel;
 		//
 		private var _isRunning:Boolean;
 		//
