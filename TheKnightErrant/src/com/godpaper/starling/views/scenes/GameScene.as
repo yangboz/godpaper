@@ -35,10 +35,13 @@ package com.godpaper.starling.views.scenes
 	import com.godpaper.as3.tasks.CreateChessVoTask;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.components.ChessBoard;
+	import com.godpaper.starling.views.plugin.PluginButtonBar;
 	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
 	
 	import mx.logging.ILogger;
 	
+	import org.josht.starling.foxhole.controls.TabBar;
+	import org.josht.starling.foxhole.themes.IFoxholeTheme;
 	import org.spicefactory.lib.task.SequentialTaskGroup;
 	
 	import starling.display.Image;
@@ -66,6 +69,9 @@ package com.godpaper.starling.views.scenes
 		private var _vehicle:SteeredVehicle;
 		private var _circles:Array;
 		private var _numCircles:int = 10;
+		//
+		private var _tabBar:TabBar;
+		private var _theme:IFoxholeTheme;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -126,6 +132,10 @@ package com.godpaper.starling.views.scenes
 			// plugin view init
 			//			this.pluginUIComponent = new PluginUIComponent();
 			//			this.addChild(starling.display.DisplayObject(this.pluginUIComponent));
+			//Plugin button bar
+			var pluginButtonBar:PluginButtonBar = new PluginButtonBar();
+			pluginButtonBar.height = 50;
+			FlexGlobals.gameStage.addChild(pluginButtonBar);
 			//			//create chess gaskets.
 			//			//create chess piece
 			//			//create chess pieces' chessVO;
@@ -142,6 +152,12 @@ package com.godpaper.starling.views.scenes
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		private function layout(w:Number, h:Number):void
+		{
+			this._tabBar.width = w;
+			this._tabBar.x = (w - this._tabBar.width) / 2;
+			this._tabBar.y = h - this._tabBar.height;
+		}
 	}
 	
 }

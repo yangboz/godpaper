@@ -124,8 +124,9 @@ package com.godpaper.as3.business.fsm.states.game
 			//using this flash green thread algorithm to avoid script time limition only 15s.
 			processes=new Vector.<IRunnable>();
 			processes.push(searching);
+//			greenThread=new GreenThread(processes, 60);
+			LOG.debug("GreenThread hertz:{0}",FlexGlobals.topLevelApplication.stage.frameRate);
 			greenThread=new GreenThread(processes, FlexGlobals.topLevelApplication.stage.frameRate);
-			greenThread=new GreenThread(processes, 60);
 			//
 			//			greenThread.addEventListener(GreenThreadEvent.PROCESS_TIMEOUT, function(event:GreenThreadEvent):void
 			//			{

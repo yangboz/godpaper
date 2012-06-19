@@ -91,6 +91,7 @@ package com.godpaper.starling.views.scenes
 		{
 			this.removeEventListener(Event.REMOVED_FROM_STAGE,removeFromStageHandler);
 			this.removeEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
+			super.dispose();
 		}
 		//--------------------------------------------------------------------------
 		//

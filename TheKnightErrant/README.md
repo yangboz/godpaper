@@ -20,11 +20,19 @@ Michael Baczynski, http://www.polygonal.de
 
 Bit board, http://chess.dubmun.com/bitboard.html
 
-Chess Programming:
+AS3 Chess Programming Theory:
 
 Chess Programming Wiki, http://chessprogramming.wikispaces.com/
 
 Mediocre Chess, http://mediocrechess.varten.org/
+
+AS3 Chess Programming Source Code:
+
+AS3 Game data structure, http://www.polygonal.de
+
+AS3 Stage3d(Starling), http://www.sparrow-framework.org
+
+AS3 Stage3d(Starling) Mobile UI components(foxhole), https://github.com/joshtynjala/foxhole-starling
 
 Chess Documents:
 
@@ -36,14 +44,16 @@ Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 
 TODO List:
 
-#1.ZobristKey Model for game status process;
+1.ZobristKey Model for game status process;(plan)
 
-#2.OpeningBook Model for game open book construction;
+2.OpeningBook Model for game open book construction;(plan)
 
-#3.HistoryTable Model for game historic process;
+3.HistoryTable Model for game historic process;(plan)
 
-#4.Searching Tree sort of class implementation;
+4.Searching Tree sort of class implementation;(plan)
 
-#5.Machine Learning implementation;
+5.Machine Learning implementation;(plan)
 
-#6.More...
+6.ButtonBar with Starling UI implementation;(start)
+
+7.Pop up window with Starling UI implementation;(start)

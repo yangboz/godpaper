@@ -166,18 +166,24 @@ package
 			LOG.debug("creationCompleteHandler@loaderInfo_complete");
 			//
 			this.stage.addEventListener(flash.events.Event.RESIZE, stageResizeHandler, false, 0, true);
-			//
+			//Deative,active event listeners.
+			this.stage.addEventListener(Event.DEACTIVATE, stageDeactivateHandler, false, 0, true);
 		}
 		//
 		private function stageResizeHandler(event:flash.events.Event):void
 		{
 			LOG.debug("stage_resizeHandler");
-//			const viewPort:Rectangle = this.mStarling.viewPort;
-//			viewPort.width = this.stage.stageWidth;
-//			viewPort.height = this.stage.stageHeight;
-//			this.mStarling.viewPort = viewPort;
-//			this.mStarling.stage.stageWidth = this.stage.stageWidth;
-//			this.mStarling.stage.stageHeight = this.stage.stageHeight;
+			this.mStarling.stage.stageWidth = this.stage.stageWidth;
+			this.mStarling.stage.stageHeight = this.stage.stageHeight;
+			
+			const viewPort:Rectangle = this.mStarling.viewPort;
+			viewPort.width = this.stage.stageWidth;
+			viewPort.height = this.stage.stageHeight;
+			try
+			{
+				this.mStarling.viewPort = viewPort;
+			}
+			catch(error:Error) {}
 		}
 		//
 		private function addToStageHandler(event:flash.events.Event):void
@@ -212,6 +218,17 @@ package
 //			//
 //			this.removeEventListener(starling.events.Event.ROOT_CREATED,rootCreatedHandler);
 //		}
+		private function stageDeactivateHandler(event:Event):void
+		{
+			this.mStarling.stop();
+			this.stage.addEventListener(Event.ACTIVATE, stageDeactivateHandler, false, 0, true);
+		}
+		//
+		private function stageActivateHandler(event:Event):void
+		{
+			this.stage.removeEventListener(Event.ACTIVATE, stageActivateHandler);
+			this.mStarling.start();
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
