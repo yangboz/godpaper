@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 =====================================================================*/
 
 # About
-A flash board game framework named GODPAPER(code name:"the real knight") by as3 language.
+A flash & ios board game framework named GODPAPER(code name:"the real knight"&"the real bishop") by as3 & objective-c language.
 This wiki is dedicated to all the unsung heroes of the world, those who the absence of which
 would degrade all our lives to the point where the sweet release of death would seem
 preferable to continuing this mortal existence. Ironically, the absence of those I refer to
