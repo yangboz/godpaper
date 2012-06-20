@@ -46,37 +46,6 @@ package
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		//tollgate icon class here
-		[Embed(source="/assets/images/1x/icon_tollgate00.png")]
-		public static const ICON_TOLLGATE_01:Class;
-		
-		[Embed(source="/assets/images/1x/icon_tollgate01.png")]
-		public static const ICON_TOLLGATE_02:Class;
-		
-		[Embed(source="/assets/images/1x/icon_tollgate02.png")]
-		public static const ICON_TOLLGATE_03:Class;
-		
-		[Embed(source="/assets/images/1x/icon_tollgate03.png")]
-		public static const ICON_TOLLGATE_04:Class;
-		
-		[Embed(source="/assets/images/1x/icon_tollgate04.png")]
-		public static const ICON_TOLLGATE_05:Class;
-		
-		//plugin category icon class here.
-		[Embed(source="/assets/images/1x/icon_store.png")]
-		public static const ICON_STORE:Class;
-		
-		[Embed(source="/assets/images/1x/icon_coin.png")]
-		public static const ICON_COIN:Class;
-		
-		[Embed(source="/assets/images/1x/icon_account.png")]
-		public static const ICON_ACCOUNT:Class;
-		//
-		// Bitmaps
-		
-		[Embed(source="/assets/images/1x/background.png")]
-		public static const IMG_BACK_GROUND:Class;
-		
 		// Compressed textures
 		
 //		[Embed(source="/assets/textures/1x/compressed_texture.atf", mimeType="application/octet-stream")]

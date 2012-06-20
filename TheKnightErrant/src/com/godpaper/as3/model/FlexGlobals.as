@@ -23,6 +23,9 @@ package com.godpaper.as3.model
 {
 	import com.godpaper.as3.utils.SingletonFactory;
 	import com.godpaper.starling.views.scenes.GameScene;
+	import com.lookbackon.AI.FSM.Message;
+	
+	import org.osflash.signals.Signal;
 	
 	import starling.display.Stage;
 
@@ -33,7 +36,8 @@ package com.godpaper.as3.model
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * FlashGlobal.as class.   	
+	 * A marshalling class which list the global variables and referecnes without access limitation.
+	 * Just like the "FlexGloabls.as" which located at FLEX4 framework.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
@@ -65,6 +69,9 @@ package com.godpaper.as3.model
 		public static var chessPiecesModel:ChessPiecesModel = SingletonFactory.produce(ChessPiecesModel);
 		public static var chessGasketsModel:ChessGasketsModel = SingletonFactory.produce(ChessGasketsModel);
 		public static var chessBoardModel:ChessBoardModel = SingletonFactory.produce(ChessBoardModel);
+		//Signals.
+		public static var levelUpSignal:Signal = new Signal(int);//user level up signal.
+		public static var checkSignal:Signal = new Signal(Message);//chess check signal.
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

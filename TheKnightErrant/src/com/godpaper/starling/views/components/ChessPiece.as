@@ -54,6 +54,9 @@ package com.godpaper.starling.views.components
 	
 	import mx.logging.ILogger;
 	
+	import org.josht.starling.foxhole.controls.Callout;
+	import org.josht.starling.foxhole.controls.Label;
+	
 	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.events.Event;
@@ -326,6 +329,10 @@ package com.godpaper.starling.views.components
 			LOG.debug("captures:{0}", this.chessVO.captures.dump());
 			LOG.debug("moves:{0}", this.chessVO.moves.dump());
 			LOG.debug("current bitboard:{0}", FlexGlobals.chessPiecesModel.allPieces.dump());
+			//Call out for display positon,for debugging.
+//			const content:Label = new Label();
+//			content.text = this.position.toString();
+//			Callout.show(content, this, Callout.DIRECTION_UP);
 		}
 		//
 		protected function get iPlug():IPlug

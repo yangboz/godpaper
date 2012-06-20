@@ -26,16 +26,20 @@ package com.godpaper.starling.views.plugin
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.starling.views.popups.ThinkIndicatory;
 	
 	import flash.ui.Mouse;
 	
 	import mx.logging.ILogger;
 	
 	import org.josht.starling.foxhole.controls.Button;
+	import org.josht.starling.foxhole.controls.Callout;
+	import org.josht.starling.foxhole.controls.Label;
 	import org.josht.starling.foxhole.controls.TabBar;
 	import org.josht.starling.foxhole.data.ListCollection;
 	import org.josht.starling.foxhole.themes.IFoxholeTheme;
@@ -46,11 +50,12 @@ package com.godpaper.starling.views.plugin
 	import starling.events.Event;
 	import starling.events.ResizeEvent;
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	import starling.textures.TextureSmoothing;
 	
 	
 	/**
-	 * PluginButtonBar.as class.   	
+	 * Extending the foxhole UI component(TabBar) with customzie data provider,make it configurable and plugin-able.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
@@ -65,6 +70,7 @@ package com.godpaper.starling.views.plugin
 		//
 		//--------------------------------------------------------------------------
 		private var theme:IFoxholeTheme;
+		//
 		private var _icon_avatar:Image;
 		private var _icon_store:Image;
 		private var _icon_coin:Image;
@@ -74,6 +80,11 @@ package com.godpaper.starling.views.plugin
 		//  CONSTANTS
 		//----------------------------------
 		private static const LOG:ILogger = LogUtil.getLogger(PluginButtonBar);
+		//Buttonbar action identifer;
+		private static const ICON_TOLLGATE:String = "ICON_TOLLGATE_";
+		private static const ICON_STORE:String = "ICON_STORE";
+		private static const ICON_COIN:String = "ICON_COIN";
+		private static const ICON_ACCOUNT:String = "ICON_ACCOUNT";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -109,6 +120,13 @@ package com.godpaper.starling.views.plugin
 			this.stage.removeEventListener(ResizeEvent.RESIZE, stageResizeHandler);
 			super.dispose();
 		}
+		//Signal message handler
+		public function levelUpHandler(level:int):void
+		{
+//			var btnBarBtn:ButtonBarButton=this.dataGroup.getElementAt(0) as ButtonBarButton;
+//			btnBarBtn.skin["iconImage"]["source"]=GameConfig.tollgates[GameConfig.gameStateManager.level].icon;
+//			btnBarBtn.toolTip = GameConfig.tollgates[GameConfig.gameStateManager.level].tips;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -126,29 +144,35 @@ package com.godpaper.starling.views.plugin
 		//--------------------------------------------------------------------------
 		private function addToStageHandler(event:Event):void
 		{
+			//Signal listener
+			FlexGlobals.levelUpSignal.add(levelUpHandler);
+			//Tab bar view initialize
 			const isDesktop:Boolean = Mouse.supportsCursor;
 			//			this._theme = new AzureTheme(this.stage, !isDesktop);
 			this.theme = new MinimalTheme(this.stage, !isDesktop);
 			//Custom tab bar data provider
-			this._icon_avatar = new Image(AssetEmbedsDefault.getTexture("ICON_TOLLGATE_01"));
+			var gameLevel:int = 0;//Should dynnamic and configurable.
+			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
+			this._icon_avatar = new Image(atlas.getTexture(ICON_TOLLGATE.concat(gameLevel)));
 			this._icon_avatar.smoothing = TextureSmoothing.NONE;
 //			this._icon.scaleX = this._icon.scaleY = this.dpiScale;
-			this._icon_store = new Image(AssetEmbedsDefault.getTexture("ICON_STORE"));
+//			this._icon_avatar.scaleX = this._icon_avatar.scaleY = .5;
+			this._icon_store = new Image(atlas.getTexture(ICON_STORE));
 			this._icon_store.smoothing = TextureSmoothing.NONE;
-			this._icon_coin = new Image(AssetEmbedsDefault.getTexture("ICON_COIN"));
+			this._icon_coin = new Image(atlas.getTexture(ICON_COIN));
 			this._icon_coin.smoothing = TextureSmoothing.NONE;
-			this._icon_account = new Image(AssetEmbedsDefault.getTexture("ICON_ACCOUNT"));
+			this._icon_account = new Image(atlas.getTexture(ICON_ACCOUNT));
 			this._icon_account.smoothing = TextureSmoothing.NONE;
 			
-			this._selectedIcon = new Image(AssetEmbedsDefault.getTextureAtlas().getTexture(DefaultConstants.RED));
+			this._selectedIcon = new Image(atlas.getTexture(DefaultConstants.RED));
 			this._selectedIcon.smoothing = TextureSmoothing.NONE;
 //			this._selectedIcon.scaleX = this._selectedIcon.scaleY = this.dpiScale;
 			this.dataProvider = new ListCollection(
 				[
-					{ label: "", action: "avatar",defaultIcon:_icon_avatar,isToggle:true},
-					{ label: "", action: "store",defaultIcon:_icon_store,isToggle:true},
-					{ label: "", action: "coin",defaultIcon:_icon_coin,isToggle:true},
-					{ label: "", action: "account",defaultIcon:_icon_account,isToggle:true}
+					{ label: "", action: ICON_TOLLGATE,defaultIcon:_icon_avatar,isToggle:true},
+					{ label: "", action: ICON_STORE,defaultIcon:_icon_store,isToggle:true},
+					{ label: "", action: ICON_COIN,defaultIcon:_icon_coin,isToggle:true},
+					{ label: "", action: ICON_ACCOUNT,defaultIcon:_icon_account,isToggle:true}
 				]
 			);
 			this.validate();
@@ -173,7 +197,29 @@ package com.godpaper.starling.views.plugin
 		//
 		private function tabBarChangeHandler(tabBar:TabBar):void
 		{
-			LOG.debug("change action:{0}",tabBar.selectedItem.action);
+//			LOG.debug("change action:{0}",tabBar.selectedItem.action);
+			switch (tabBar.selectedItem.action)
+			{
+				case ICON_TOLLGATE: //tollgate
+//					const content:ThinkIndicatory = new ThinkIndicatory();
+//					Callout.show(content, this, Callout.DIRECTION_UP);
+//					IndicatorConfig.readOut = true;
+//					IndicatorConfig.outcome = true;
+//					iPlug.showData();
+					break;
+				case ICON_STORE: //store
+//					iPlug.showStore();
+					break;
+				case ICON_COIN: //coin,leadboard
+//					iPlug.showLeaderboard({boardID: iPlug.data.boardID});
+					break;
+				case ICON_ACCOUNT: //account
+					//
+//					iPlug.showLoginWidget();
+					break;
+				default:
+					break;
+			}
 		}
 	}
 	

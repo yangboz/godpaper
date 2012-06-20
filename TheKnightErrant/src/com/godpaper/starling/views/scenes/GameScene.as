@@ -28,7 +28,6 @@ package com.godpaper.starling.views.scenes
 	//--------------------------------------------------------------------------
 	
 	import com.adobe.cairngorm.task.SequenceTask;
-	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.tasks.CreateChessGasketTask;
 	import com.godpaper.as3.tasks.CreateChessPieceTask;
@@ -40,13 +39,10 @@ package com.godpaper.starling.views.scenes
 	
 	import mx.logging.ILogger;
 	
-	import org.josht.starling.foxhole.controls.TabBar;
-	import org.josht.starling.foxhole.themes.IFoxholeTheme;
 	import org.spicefactory.lib.task.SequentialTaskGroup;
 	
-	import starling.display.Image;
 	import starling.events.Event;
-
+	import starling.display.DisplayObject;
 	/**
 	 * GameScene accepts input from the user and instructs the model and a viewport to perform actions based on that input. 	
 	 * @author yangboz
@@ -70,8 +66,7 @@ package com.godpaper.starling.views.scenes
 		private var _circles:Array;
 		private var _numCircles:int = 10;
 		//
-		private var _tabBar:TabBar;
-		private var _theme:IFoxholeTheme;
+		public var chessBoard:ChessBoard;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -112,7 +107,8 @@ package com.godpaper.starling.views.scenes
 		override protected function addToStageHandler(event:Event):void
 //		override protected function onEnter(data:Array):void
 		{
-			//
+			//Store reference to FlexGlobal.
+			FlexGlobals.gameScene = this;
 			//			CursorManager.setBusyCursor();
 			// sound initialization takes a moment, so we prepare them here
 			AssetEmbedsDefault.loadBitmapFonts();
@@ -125,9 +121,9 @@ package com.godpaper.starling.views.scenes
 			//Other views testing
 			
 			//Display chess board at first.
-			var chessBoardBackground:Image = new Image(AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND));
+//			var chessBoardBackground:Image = new Image(AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND));
 			//			this.chessBoard = new ChessBoard(chessBoardBackground);
-			var chessBoard:ChessBoard = new ChessBoard(null);
+			chessBoard = new ChessBoard(null);
 			FlexGlobals.gameStage.addChild(starling.display.DisplayObject(chessBoard));
 			// plugin view init
 			//			this.pluginUIComponent = new PluginUIComponent();
@@ -152,12 +148,6 @@ package com.godpaper.starling.views.scenes
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function layout(w:Number, h:Number):void
-		{
-			this._tabBar.width = w;
-			this._tabBar.x = (w - this._tabBar.width) / 2;
-			this._tabBar.y = h - this._tabBar.height;
-		}
 	}
 	
 }

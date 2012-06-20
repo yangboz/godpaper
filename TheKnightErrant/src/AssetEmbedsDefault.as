@@ -44,8 +44,8 @@ package
 		//
 		// Bitmaps
 
-		[Embed(source="/assets/images/background.png")]
-		private static const IMG_BACK_GROUND:Class;
+//		[Embed(source="/assets/images/background.png")]
+//		private static const IMG_BACK_GROUND:Class;
 
 		// Sounds
 		//Refs:http://soundrangers.com/index.cfm?currentpage=3&fuseaction=category.display&category_id=554

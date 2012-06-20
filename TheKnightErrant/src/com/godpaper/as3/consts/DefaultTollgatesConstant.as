@@ -13,6 +13,9 @@ package com.godpaper.as3.consts
 	import com.lookbackon.AI.searching.MiniMax;
 	import com.lookbackon.AI.searching.RandomWalk;
 	import com.lookbackon.AI.searching.ShortSighted;
+	
+	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 
 	/**
 	 * DefaultTollgatesConstant.as class which providing easy tollgate configuration.	
@@ -50,11 +53,12 @@ package com.godpaper.as3.consts
 //		True Hive
 //		Lonely Grinder
 //		Horror Temple 
-		public static const SuicideDiscord:DefaultTollgatesConstant = new DefaultTollgatesConstant(RandomWalk,LinearEvaluation,null,null,"Suicide Discord",10,AssetEmbedsDefault.getClass("ICON_TOLLGATE_01"));
-		public static const HorrorGib:DefaultTollgatesConstant = new DefaultTollgatesConstant(ShortSighted,LinearEvaluation,null,null,"Horror Gib",30,AssetEmbedsDefault.getClass("ICON_TOLLGATE_02"));
-		public static const UnnaturalBase:DefaultTollgatesConstant = new DefaultTollgatesConstant(AttackFalse,LinearEvaluation,null,null,"Unnatural Base",55,AssetEmbedsDefault.getClass("ICON_TOLLGATE_03"));
-		public static const OctagonGibs:DefaultTollgatesConstant = new DefaultTollgatesConstant(MiniMax,LinearEvaluation,null,null,"Octagon Gibs",85,AssetEmbedsDefault.getClass("ICON_TOLLGATE_04"));
-		public static const AbandonedDream:DefaultTollgatesConstant = new DefaultTollgatesConstant(MiniMax,FuzzyImportantEvaluation,null,null,"Abandoned Dream",100,AssetEmbedsDefault.getClass("ICON_TOLLGATE_05"));
+		private static var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
+		public static const SuicideDiscord:DefaultTollgatesConstant = new DefaultTollgatesConstant(RandomWalk,LinearEvaluation,null,null,"Suicide Discord",10,atlas.getTexture("ICON_TOLLGATE_0"));
+		public static const HorrorGib:DefaultTollgatesConstant = new DefaultTollgatesConstant(ShortSighted,LinearEvaluation,null,null,"Horror Gib",30,atlas.getTexture("ICON_TOLLGATE_1"));
+		public static const UnnaturalBase:DefaultTollgatesConstant = new DefaultTollgatesConstant(AttackFalse,LinearEvaluation,null,null,"Unnatural Base",55,atlas.getTexture("ICON_TOLLGATE_2"));
+		public static const OctagonGibs:DefaultTollgatesConstant = new DefaultTollgatesConstant(MiniMax,LinearEvaluation,null,null,"Octagon Gibs",85,atlas.getTexture("ICON_TOLLGATE_3"));
+		public static const AbandonedDream:DefaultTollgatesConstant = new DefaultTollgatesConstant(MiniMax,FuzzyImportantEvaluation,null,null,"Abandoned Dream",100,atlas.getTexture("ICON_TOLLGATE_4"));
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -79,9 +83,9 @@ package com.godpaper.as3.consts
 		public var fuzzyLogic:Class;
 		public var tips:String;
 		public var score:Number;
-		public var icon:Class;
+		public var icon:Texture;
 		//
-		final public function DefaultTollgatesConstant(searching:Class,evaluation:Class,learning:Class,fuzzyLogic:Class,tips:String,score:Number,icon:Class)
+		final public function DefaultTollgatesConstant(searching:Class,evaluation:Class,learning:Class,fuzzyLogic:Class,tips:String,score:Number,icon:Texture)
 		{
 			this.searching = searching;
 			this.evaluation = evaluation;

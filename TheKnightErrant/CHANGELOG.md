@@ -29,4 +29,6 @@
 [CHANGE]:Simplify the ApplicationBase startup process,left the initializeHandler and applicationComplateHandler to override;
 
 [CHANGE]:Remove the view components(ChessGasket,ChessBoard,ChessPieces) related initial and tasks to GameScene addToStageHandler;
+
+[NEW]:Foxhole Starling UI implementation;
  
