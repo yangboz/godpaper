@@ -36,6 +36,7 @@ package
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.plugins.PluginUIComponent;
+	import com.godpaper.as3.plugins.mochi.MochiPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
 	import com.godpaper.starling.views.scenes.GameScene;
@@ -82,7 +83,7 @@ package
 		//For children dynamic factory config.
 //		[Bindable]protected var pcFactory:Class = PieceConfig.factory;
 		protected var pcFactory:Class = PieceConfig.factory;
-		//Views
+		//Views(esp for plugin display)
 		public var pluginUIComponent:PluginUIComponent;
 		//
 		private var mStarling:Starling;
@@ -167,7 +168,7 @@ package
 			//
 			this.stage.addEventListener(flash.events.Event.RESIZE, stageResizeHandler, false, 0, true);
 			//Deative,active event listeners.
-			this.stage.addEventListener(Event.DEACTIVATE, stageDeactivateHandler, false, 0, true);
+//			this.stage.addEventListener(Event.DEACTIVATE, stageDeactivateHandler, false, 0, true);
 		}
 		//
 		private function stageResizeHandler(event:flash.events.Event):void
@@ -195,6 +196,10 @@ package
 			//Store this reference to FlexGlobals.topLevelApplication
 			FlexGlobals.topLevelApplication = this;
 			FlexGlobals.gameStage = mStarling.stage;
+			// Plugin display
+			this.pluginUIComponent = new PluginUIComponent();
+			this.pluginUIComponent.provider = new MochiPlugin("34331f335e39fb05","26a614a9bfc8ec3e");
+			this.addChild(this.pluginUIComponent);
 		}
 		//
 		private function context3DCreatedHandler(event:flash.events.Event):void

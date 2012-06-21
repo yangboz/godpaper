@@ -19,58 +19,49 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.scenes
+package com.godpaper.starling.views.popups
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.configs.IndicatorConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
 	
-	import com.adobe.cairngorm.task.SequenceTask;
-	import com.godpaper.as3.model.FlexGlobals;
-	import com.godpaper.as3.tasks.CreateChessGasketTask;
-	import com.godpaper.as3.tasks.CreateChessPieceTask;
-	import com.godpaper.as3.tasks.CreateChessVoTask;
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.starling.views.components.ChessBoard;
-	import com.godpaper.starling.views.plugin.PluginButtonBar;
-	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
+	import org.josht.starling.foxhole.controls.Button;
+	import org.josht.starling.foxhole.controls.Label;
+	import org.josht.starling.foxhole.controls.Screen;
+	import org.josht.starling.foxhole.controls.ScreenHeader;
+	import org.josht.starling.foxhole.controls.ScrollContainer;
+	import org.josht.starling.foxhole.layout.HorizontalLayout;
 	
-	import mx.logging.ILogger;
-	
-	import org.spicefactory.lib.task.SequentialTaskGroup;
-	
-	import starling.events.Event;
 	import starling.display.DisplayObject;
 	/**
-	 * GameScene accepts input from the user and instructs the model and a viewport to perform actions based on that input. 	
+	 * Callout/popup view component that indicated the computer win status. 	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 16, 2012 11:01:37 AM
+	 * Created Jun 20, 2012 2:56:34 PM
 	 */   	 
-	public class GameScene extends SceneBase
+	public class ComputerWinIndicatory extends Screen
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//Tasks
-		public var cleanUpSequenceTask:SequentialTaskGroup;
-		public var startUpSequenceTask:SequenceTask;
+		private var _yesBtn:Button;
+		private var _noBtn:Button;
 		//
-		private var _vehicle:SteeredVehicle;
-		private var _circles:Array;
-		private var _numCircles:int = 10;
-		//
-		public var chessBoard:ChessBoard;
+		private var _container:ScrollContainer;
+		private var _header:ScreenHeader;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(GameScene);
+		private var layout:HorizontalLayout;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -88,9 +79,8 @@ package com.godpaper.starling.views.scenes
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function GameScene()
+		public function ComputerWinIndicatory()
 		{
-			super();
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -103,48 +93,76 @@ package com.godpaper.starling.views.scenes
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		//
-		override protected function addToStageHandler(event:Event):void
-//		override protected function onEnter(data:Array):void
+		override protected function initialize():void
 		{
-			//Store reference to FlexGlobal.
-			FlexGlobals.gameScene = this;
-			//			CursorManager.setBusyCursor();
-			// sound initialization takes a moment, so we prepare them here
-			AssetEmbedsDefault.loadBitmapFonts();
-			//Add visualElement to view.
-			
-			//Pieces box
-			
-			//Plugin bar
-			
-			//Other views testing
-			
-			//Display chess board at first.
-//			var chessBoardBackground:Image = new Image(AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND));
-			//			this.chessBoard = new ChessBoard(chessBoardBackground);
-			chessBoard = new ChessBoard(null);
-			FlexGlobals.gameStage.addChild(starling.display.DisplayObject(chessBoard));
-			//Plugin button bar view init
-			var pluginButtonBar:PluginButtonBar = new PluginButtonBar();
-			pluginButtonBar.height = 50;
-			FlexGlobals.gameStage.addChild(pluginButtonBar);
-			//			//create chess gaskets.
-			//			//create chess piece
-			//			//create chess pieces' chessVO;
-			//			//create chess pieces' omenVO;
-			this.startUpSequenceTask = new SequenceTask();
-			this.startUpSequenceTask.label = "startUpSequenceTask";//33.6M(debug)
-			this.startUpSequenceTask.addChild(new CreateChessGasketTask());//34.1M
-			this.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.8M
-			this.startUpSequenceTask.addChild(new CreateChessVoTask());//35.5M
-			this.startUpSequenceTask.start();
+			//header title
+			this._header = new ScreenHeader();
+			this._header.title = DefaultConstants.INDICATION_COMPUTER_WIN;
+			this.addChild(this._header);
+			//layout 
+			const layout:HorizontalLayout = new HorizontalLayout();
+			layout.gap = 0;
+			layout.paddingTop = 0;
+			layout.paddingRight = 0;
+			layout.paddingBottom = 0;
+			layout.paddingLeft = 0;
+			layout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_LEFT;
+			layout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_TOP;
+			//container
+			this._container = new ScrollContainer();
+			this._container.layout = layout;
+//			this.addChild(this._container);
+			//buttons 
+			this._yesBtn = new Button();
+			this._yesBtn.label = "YES";
+			this._yesBtn.width = this._yesBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
+//			this._container.addChild(this._yesBtn);
+			this._noBtn = new Button();
+			this._noBtn.label = "NO";
+			this._noBtn.width = this._noBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
+//			this._container.addChild(this._noBtn);
+			//header items
+			this._header.leftItems = new <DisplayObject>
+				[
+					this._yesBtn
+				];
+			this._header.rightItems = new <DisplayObject>
+				[
+					this._noBtn
+				];
+			//event listener
+			this._yesBtn.onRelease.add(yesButtonOnRelease);
+			this._noBtn.onRelease.add(noButtonOnRelease);
+		}
+		//
+		override protected function draw():void
+		{
+			//
+			this._header.width = this.actualWidth;
+			this._header.validate();
+			//			
+			this._container.y = this._header.height;
+//			this._container.width = this.actualWidth;
+			this._container.width = 100;
+			this._container.height = this.actualHeight - this._container.y;
+			this._container.validate();
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		private function yesButtonOnRelease(button:Button):void
+		{
+			//restart game.
+			GameConfig.gameStateManager.restart();
+			//
+			IndicatorConfig.outcome = false;
+		}
+		private function noButtonOnRelease(button:Button):void
+		{
+			IndicatorConfig.outcome = false;
+		}
 	}
 	
 }

@@ -74,7 +74,8 @@ package com.godpaper.as3.plugins
 		{
 			super();
 			//
-			this.addEventListener(Event.COMPLETE,creationCompleteHandler);
+//			this.addEventListener(Event.COMPLETE,creationCompleteHandler);
+			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -93,7 +94,8 @@ package com.godpaper.as3.plugins
 		 * @param event
 		 *
 		 */		
-		protected function creationCompleteHandler(event:Event):void
+//		protected function creationCompleteHandler(event:Event):void
+		protected function addToStageHandler(event:Event):void
 		{
 			//construct plugin movie played stage.
 			ApplicationBase(this.root).pluginStage = new MovieClip();
@@ -101,6 +103,8 @@ package com.godpaper.as3.plugins
 			this.addChild(ApplicationBase(this.root).pluginStage);
 			//
 			ApplicationBase(this.root).pluginStage.addEventListener(Event.ADDED_TO_STAGE,pluginStageClipOnStage);
+			//
+			this.removeEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
 		}
 		
 		//--------------------------------------------------------------------------

@@ -19,58 +19,41 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.scenes
+package com.godpaper.starling.views.popups
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	
-	import com.adobe.cairngorm.task.SequenceTask;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.consts.DefaultPiecesConstants;
 	import com.godpaper.as3.model.FlexGlobals;
-	import com.godpaper.as3.tasks.CreateChessGasketTask;
-	import com.godpaper.as3.tasks.CreateChessPieceTask;
-	import com.godpaper.as3.tasks.CreateChessVoTask;
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.starling.views.components.ChessBoard;
-	import com.godpaper.starling.views.plugin.PluginButtonBar;
-	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
+	import com.lookbackon.AI.FSM.Message;
 	
-	import mx.logging.ILogger;
-	
-	import org.spicefactory.lib.task.SequentialTaskGroup;
-	
-	import starling.events.Event;
-	import starling.display.DisplayObject;
+	import org.josht.starling.foxhole.controls.Label;
+	import org.josht.starling.foxhole.controls.Screen;
+
 	/**
-	 * GameScene accepts input from the user and instructs the model and a viewport to perform actions based on that input. 	
+	 * Callout/popup view component that indicated the computer/human be chencked status.  	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 16, 2012 11:01:37 AM
+	 * Created Jun 20, 2012 2:48:49 PM
 	 */   	 
-	public class GameScene extends SceneBase
+	public class CheckIndicatory extends Screen
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//Tasks
-		public var cleanUpSequenceTask:SequentialTaskGroup;
-		public var startUpSequenceTask:SequenceTask;
-		//
-		private var _vehicle:SteeredVehicle;
-		private var _circles:Array;
-		private var _numCircles:int = 10;
-		//
-		public var chessBoard:ChessBoard;
+		private var _label:Label;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(GameScene);
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -88,9 +71,8 @@ package com.godpaper.starling.views.scenes
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function GameScene()
+		public function CheckIndicatory()
 		{
-			super();
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -103,42 +85,25 @@ package com.godpaper.starling.views.scenes
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		//
-		override protected function addToStageHandler(event:Event):void
-//		override protected function onEnter(data:Array):void
+		override protected function initialize():void
 		{
-			//Store reference to FlexGlobal.
-			FlexGlobals.gameScene = this;
-			//			CursorManager.setBusyCursor();
-			// sound initialization takes a moment, so we prepare them here
-			AssetEmbedsDefault.loadBitmapFonts();
-			//Add visualElement to view.
-			
-			//Pieces box
-			
-			//Plugin bar
-			
-			//Other views testing
-			
-			//Display chess board at first.
-//			var chessBoardBackground:Image = new Image(AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND));
-			//			this.chessBoard = new ChessBoard(chessBoardBackground);
-			chessBoard = new ChessBoard(null);
-			FlexGlobals.gameStage.addChild(starling.display.DisplayObject(chessBoard));
-			//Plugin button bar view init
-			var pluginButtonBar:PluginButtonBar = new PluginButtonBar();
-			pluginButtonBar.height = 50;
-			FlexGlobals.gameStage.addChild(pluginButtonBar);
-			//			//create chess gaskets.
-			//			//create chess piece
-			//			//create chess pieces' chessVO;
-			//			//create chess pieces' omenVO;
-			this.startUpSequenceTask = new SequenceTask();
-			this.startUpSequenceTask.label = "startUpSequenceTask";//33.6M(debug)
-			this.startUpSequenceTask.addChild(new CreateChessGasketTask());//34.1M
-			this.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.8M
-			this.startUpSequenceTask.addChild(new CreateChessVoTask());//35.5M
-			this.startUpSequenceTask.start();
+			//
+			this._label = new Label();
+			this._label.text = DefaultConstants.INDICATION_CHECK;
+			this.addChild(this._label);
+			//AS3 signal to broad cast the chess check message.
+			var message:Message=new Message();
+			message.priority=DefaultPiecesConstants.BLUE_MARSHAL.strength;
+			//				message.data = chessPieceModel.BLUE_MARSHAL
+			FlexGlobals.checkSignal.dispatch(message);
+		}
+		
+		override protected function draw():void
+		{
+			//
+			this._label.validate();
+			this._label.x = (this.actualWidth - this._label.width) / 2;
+			this._label.y = (this.actualHeight - this._label.height) / 2;
 		}
 		//--------------------------------------------------------------------------
 		//

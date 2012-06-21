@@ -95,12 +95,12 @@ package com.godpaper.as3.tasks
 					}
 				}
 			}
-//TODO:plugin uicomponent at the top of game ui.
-//			var numChildren:int = FlexGlobals.gameStage.numChildren;
-//			FlexGlobals.topLevelApplication.setChildIndex(
-//				FlexGlobals.topLevelApplication.pluginUIComponent,
-//				numChildren-1
-//				);
+//Notice:make sure the plugin uicomponent at the top of game ui.
+			var numChildren:int = FlexGlobals.topLevelApplication.numChildren;
+			FlexGlobals.topLevelApplication.setChildIndex(
+				FlexGlobals.topLevelApplication.pluginUIComponent,
+				numChildren-1
+				);
 			//
 			this.complete();
 		}

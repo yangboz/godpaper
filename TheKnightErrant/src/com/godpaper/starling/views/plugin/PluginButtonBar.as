@@ -201,11 +201,7 @@ package com.godpaper.starling.views.plugin
 			switch (tabBar.selectedItem.action)
 			{
 				case ICON_TOLLGATE: //tollgate
-//					const content:ThinkIndicatory = new ThinkIndicatory();
-//					Callout.show(content, this, Callout.DIRECTION_UP);
-//					IndicatorConfig.readOut = true;
-//					IndicatorConfig.outcome = true;
-//					iPlug.showData();
+					iPlug.showData();
 					break;
 				case ICON_STORE: //store
 //					iPlug.showStore();
