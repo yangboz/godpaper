@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.as3.plugins.nonoba
+package com.godpaper.as3.plugins.kongregate
 {
 	//--------------------------------------------------------------------------
 	//
@@ -29,14 +29,16 @@ package com.godpaper.as3.plugins.nonoba
 	import com.godpaper.as3.plugins.IPlugData;
 	
 	import mx.utils.ObjectUtil;
+	
+	
 	/**
-	 * NonobaModel.as class.   	
+	 * KongregateModel.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Apr 25, 2011 3:32:30 PM
+	 * Created Apr 25, 2011 3:33:22 PM
 	 */   	 
-	public class NonobaModel implements IPlugData
+	public class KongregateModel implements IPlugData
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -65,7 +67,7 @@ package com.godpaper.as3.plugins.nonoba
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function NonobaModel()
+		public function KongregateModel()
 		{
 			//TODO: implement function
 		}
@@ -95,19 +97,19 @@ package com.godpaper.as3.plugins.nonoba
 		public function get hasCaptureIndicator():Boolean
 		{
 			//TODO: implement function
-			return false;
+			return true;
 		}
 		
 		public function get hasCheckIndicator():Boolean
 		{
 			//TODO: implement function
-			return false;
+			return true;
 		}
 		
 		public function get hasMoveIndicator():Boolean
 		{
 			//TODO: implement function
-			return false;
+			return true;
 		}
 		
 		public function toString():String

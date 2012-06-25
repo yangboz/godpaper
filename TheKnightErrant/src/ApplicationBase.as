@@ -37,6 +37,7 @@ package
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.PluginUIComponent;
+	import com.godpaper.as3.plugins.kongregate.KongregatePlugin;
 	import com.godpaper.as3.plugins.mochi.MochiPlugin;
 	import com.godpaper.as3.plugins.nonoba.NonobaPlugin;
 	import com.godpaper.as3.utils.LogUtil;
@@ -106,7 +107,8 @@ package
 		public function get pluginProvider():IPlug
 		{
 //			return new MochiPlugin(PluginConfig.gameID,PluginConfig.boardID);
-			return new NonobaPlugin();
+//			return new NonobaPlugin();
+			return new KongregatePlugin();
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -207,7 +209,7 @@ package
 			FlexGlobals.gameStage = mStarling.stage;
 			// Plugin display
 			this.pluginUIComponent = new PluginUIComponent();
-			this.pluginUIComponent.provider = this.pluginProvider;
+//			this.pluginUIComponent.provider = this.pluginProvider;With default plugin provider
 			this.addChild(this.pluginUIComponent);
 		}
 		//
