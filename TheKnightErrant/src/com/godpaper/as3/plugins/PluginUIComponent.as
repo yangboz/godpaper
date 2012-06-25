@@ -5,11 +5,14 @@ package com.godpaper.as3.plugins
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import flash.display.Sprite;
+	import com.godpaper.as3.model.FlexGlobals;
+	
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
-	import flash.events.Event;	
+
 	/**
 	 * Commonly for custom define the plugin provider.
 	 * Increasing the communication points between the host and the plug-in by adding more method, property, and event signatures to the IPlug interface. 
@@ -101,8 +104,10 @@ package com.godpaper.as3.plugins
 			ApplicationBase(this.root).pluginStage = new MovieClip();
 			//
 			this.addChild(ApplicationBase(this.root).pluginStage);
+			//Default plugin provider setting
+			this.provider = FlexGlobals.topLevelApplication.pluginProvider;
 			//
-			ApplicationBase(this.root).pluginStage.addEventListener(Event.ADDED_TO_STAGE,pluginStageClipOnStage);
+			FlexGlobals.topLevelApplication.pluginStage.addEventListener(Event.ADDED_TO_STAGE,pluginStageClipOnStage);
 			//
 			this.removeEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
 		}
@@ -128,6 +133,8 @@ package com.godpaper.as3.plugins
 //			var _curentPlugin:* = new implementation();
 			//plugin template functions defined here.
 			provider.initialization();
+			//
+			FlexGlobals.topLevelApplication.pluginStage.removeEventListener(Event.ADDED_TO_STAGE,pluginStageClipOnStage);
 		}
 	}
 	

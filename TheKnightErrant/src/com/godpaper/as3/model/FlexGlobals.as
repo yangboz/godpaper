@@ -63,8 +63,8 @@ package com.godpaper.as3.model
 		//-------------------------------------------------------------------------- 
 		//Views.
 		public static var topLevelApplication:ApplicationBase;
-		public static var gameScene:GameScene;
-		public static var gameStage:Stage;
+		public static var gameScene:GameScene;//The scene of game.
+		public static var gameStage:Stage;//The stage of game.
 		//Models.
 		public static var chessPiecesModel:ChessPiecesModel = SingletonFactory.produce(ChessPiecesModel);
 		public static var chessGasketsModel:ChessGasketsModel = SingletonFactory.produce(ChessGasketsModel);

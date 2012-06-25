@@ -7,7 +7,7 @@ package com.godpaper.as3.configs
 	//--------------------------------------------------------------------------
 
 	/**
-	 * PluginConfig.as class.Global plugin(mochimedia,facebook,sns) configuration(gameID,boardID,etc..),(which one) set up at application's initialization stage.
+	 * PluginConfig.as class.Global plugin(mochimedia,facebook,sort of other sns) configuration(gameID,boardID,appID,etc..),(which one) set up at application's initialization stage.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -20,8 +20,8 @@ package com.godpaper.as3.configs
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private static var _mochiGameID:String;
-		private static var _mochiBoardID:String;
+		public static var gameID:String;
+		public static var boardID:String;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -32,25 +32,6 @@ package com.godpaper.as3.configs
 		//
 		//-------------------------------------------------------------------------- 
 		//
-		public static function get mochiBoardID():String
-		{
-			return _mochiBoardID;
-		}
-
-		public static function set mochiBoardID(value:String):void
-		{
-			_mochiBoardID = value;
-		}
-		//
-		public static function get mochiGameID():String
-		{
-			return _mochiGameID;
-		}
-
-		public static function set mochiGameID(value:String):void
-		{
-			_mochiGameID = value;
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -62,9 +43,7 @@ package com.godpaper.as3.configs
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PluginConfig()
-		{
-		}     	
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods

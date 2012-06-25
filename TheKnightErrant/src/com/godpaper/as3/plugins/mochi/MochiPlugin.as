@@ -46,7 +46,10 @@ package com.godpaper.as3.plugins.mochi
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		public function get data():IPlugData
+		{
+			return _mochiModel;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -70,10 +73,11 @@ package com.godpaper.as3.plugins.mochi
 			_mochiModel.boardID = boardID;//3a460211409897f4
 		}
 		
-		public function get data():IPlugData
-		{
-			return _mochiModel;
-		}
+		//--------------------------------------------------------------------------
+		//
+		//  Public methods
+		//
+		//--------------------------------------------------------------------------
 		//
 		public function initialization():void
 		{
@@ -118,12 +122,14 @@ package com.godpaper.as3.plugins.mochi
 			//leader board with score and player name;
 			if(value.hasOwnProperty("score")&&value.hasOwnProperty("name"))
 			{
+				var widgetWidth:Number = FlexGlobals.gameStage.width;
+				var widgetHeight:Number = FlexGlobals.gameStage.height;
 				MochiScores.showLeaderboard(
-					{   res: FlexGlobals.topLevelApplication.width.toString().concat(
-						"x",FlexGlobals.topLevelApplication.height), 
+					{   res: widgetWidth.toString().concat(
+						"x",widgetHeight), 
 						clip: FlexGlobals.topLevelApplication.pluginStage, 
 						score: _mochiModel.score.value,
-//						name: nameTextInput.text
+						//						name: nameTextInput.text
 						name: value.name
 					}
 				);
@@ -135,7 +141,10 @@ package com.godpaper.as3.plugins.mochi
 		{
 			if (!loginWidgetShowed)
 			{
-				MochiSocial.showLoginWidget({x: FlexGlobals.topLevelApplication.width / 2 - 100, y: FlexGlobals.topLevelApplication.height / 2});
+				var loginWidgetX:Number = FlexGlobals.gameStage.width/ 2 - 100;//fixed widget's width;
+				var loginWidgetY:Number = FlexGlobals.gameStage.height / 2 - 50;//fixed widget's height;
+				//				LOG.debug("Mochi login widget position: ({0},{1})",loginWidgetX,loginWidgetY);
+				MochiSocial.showLoginWidget({x: loginWidgetX, y: loginWidgetY});
 				//
 				loginWidgetShowed=true;
 			}
@@ -161,12 +170,6 @@ package com.godpaper.as3.plugins.mochi
 			}
 			return true;
 		}     	
-		//--------------------------------------------------------------------------
-		//
-		//  Public methods
-		//
-		//--------------------------------------------------------------------------
-		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

@@ -35,6 +35,7 @@ package
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.PluginUIComponent;
 	import com.godpaper.as3.plugins.mochi.MochiPlugin;
 	import com.godpaper.as3.utils.LogUtil;
@@ -98,7 +99,13 @@ package
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		/**
+		 * Override this for customize plugin provider.
+		 */ 
+		public function get pluginProvider():IPlug
+		{
+			return new MochiPlugin(PluginConfig.gameID,PluginConfig.boardID);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -198,7 +205,7 @@ package
 			FlexGlobals.gameStage = mStarling.stage;
 			// Plugin display
 			this.pluginUIComponent = new PluginUIComponent();
-			this.pluginUIComponent.provider = new MochiPlugin("34331f335e39fb05","26a614a9bfc8ec3e");
+			this.pluginUIComponent.provider = this.pluginProvider;
 			this.addChild(this.pluginUIComponent);
 		}
 		//
@@ -265,7 +272,6 @@ package
 		protected function initializeHandler():void
 		{
 			//config initialization here.
-			//config initialization here.
 			//about chess board:
 			BoardConfig.xLines=4;
 			BoardConfig.yLines=4;
@@ -287,8 +293,8 @@ package
 			PieceConfig.scaleX = 1;
 			PieceConfig.scaleY = 1;
 			//about plugin:
-			PluginConfig.mochiBoardID = "3a460211409897f4";
-			PluginConfig.mochiGameID = "47de4a85dd3e213a";
+			PluginConfig.gameID = "cc2fd3b3196f4281";//your custom game related id.
+			PluginConfig.boardID = "51c558cd0315f8e7";//your custom game related board id.
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);

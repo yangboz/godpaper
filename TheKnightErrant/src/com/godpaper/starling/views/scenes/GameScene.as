@@ -113,10 +113,7 @@ package com.godpaper.starling.views.scenes
 			// sound initialization takes a moment, so we prepare them here
 			AssetEmbedsDefault.loadBitmapFonts();
 			//Add visualElement to view.
-			
 			//Pieces box
-			
-			//Plugin bar
 			
 			//Other views testing
 			
@@ -129,10 +126,10 @@ package com.godpaper.starling.views.scenes
 			var pluginButtonBar:PluginButtonBar = new PluginButtonBar();
 			pluginButtonBar.height = 50;
 			FlexGlobals.gameStage.addChild(pluginButtonBar);
-			//			//create chess gaskets.
-			//			//create chess piece
-			//			//create chess pieces' chessVO;
-			//			//create chess pieces' omenVO;
+			//create chess gaskets.
+			//create chess piece
+			//create chess pieces' chessVO;
+			//create chess pieces' omenVO;
 			this.startUpSequenceTask = new SequenceTask();
 			this.startUpSequenceTask.label = "startUpSequenceTask";//33.6M(debug)
 			this.startUpSequenceTask.addChild(new CreateChessGasketTask());//34.1M

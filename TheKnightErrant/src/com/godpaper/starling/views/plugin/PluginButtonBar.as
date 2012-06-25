@@ -169,7 +169,7 @@ package com.godpaper.starling.views.plugin
 //			this._selectedIcon.scaleX = this._selectedIcon.scaleY = this.dpiScale;
 			this.dataProvider = new ListCollection(
 				[
-					{ label: "", action: ICON_TOLLGATE,defaultIcon:_icon_avatar,isToggle:true},
+					{ label: "", action: ICON_TOLLGATE,defaultIcon:_icon_avatar,isToggle:true,useHandCursor:true},
 					{ label: "", action: ICON_STORE,defaultIcon:_icon_store,isToggle:true},
 					{ label: "", action: ICON_COIN,defaultIcon:_icon_coin,isToggle:true},
 					{ label: "", action: ICON_ACCOUNT,defaultIcon:_icon_account,isToggle:true}
@@ -204,14 +204,14 @@ package com.godpaper.starling.views.plugin
 					iPlug.showData();
 					break;
 				case ICON_STORE: //store
-//					iPlug.showStore();
+					iPlug.showStore();
 					break;
 				case ICON_COIN: //coin,leadboard
-//					iPlug.showLeaderboard({boardID: iPlug.data.boardID});
+					iPlug.showLeaderboard({boardID: iPlug.data.boardID});
 					break;
 				case ICON_ACCOUNT: //account
 					//
-//					iPlug.showLoginWidget();
+					iPlug.showLoginWidget();
 					break;
 				default:
 					break;
