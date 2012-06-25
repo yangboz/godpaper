@@ -38,6 +38,7 @@ package
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.PluginUIComponent;
 	import com.godpaper.as3.plugins.mochi.MochiPlugin;
+	import com.godpaper.as3.plugins.nonoba.NonobaPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
 	import com.godpaper.starling.views.scenes.GameScene;
@@ -104,7 +105,8 @@ package
 		 */ 
 		public function get pluginProvider():IPlug
 		{
-			return new MochiPlugin(PluginConfig.gameID,PluginConfig.boardID);
+//			return new MochiPlugin(PluginConfig.gameID,PluginConfig.boardID);
+			return new NonobaPlugin();
 		}
 		//--------------------------------------------------------------------------
 		//
