@@ -35,6 +35,7 @@ package com.godpaper.as3.plugins
 		function showStore():Boolean;
 		function showLeaderboard(value:Object):Boolean;
 		function showLoginWidget():Boolean;
+//		function showAchivements():Boolean;
 		//about data operation
 		function saveData(value:Object):Boolean;
 		function submitData(value:Object):Boolean;
