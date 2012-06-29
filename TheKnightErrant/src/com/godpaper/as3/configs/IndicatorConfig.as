@@ -59,7 +59,7 @@ package com.godpaper.as3.configs
 			if(value)
 			{
 				computerWinIndicatory = new ComputerWinIndicatory();
-				Callout.show(computerWinIndicatory, FlexGlobals.gameScene.chessBoard, Callout.DIRECTION_ANY);
+				Callout.show(computerWinIndicatory, getChessBoard(), Callout.DIRECTION_ANY);
 			}else
 			{
 				//				if(thinkIndicatoryPopup)
@@ -68,7 +68,7 @@ package com.godpaper.as3.configs
 				//				}
 			}
 		}
-		//
+
 		public static function get readOut():Boolean
 		{
 			return _readOut;
@@ -82,7 +82,7 @@ package com.godpaper.as3.configs
 			if(value)
 			{
 				thinkIndicatory = new ThinkIndicatory();
-				Callout.show(thinkIndicatory, FlexGlobals.gameScene.chessBoard, Callout.DIRECTION_DOWN);
+				Callout.show(thinkIndicatory, getChessBoard(), Callout.DIRECTION_DOWN);
 			}else
 			{
 				//				if(thinkIndicatoryPopup)
@@ -114,13 +114,16 @@ package com.godpaper.as3.configs
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-
+		private static function getChessBoard():DisplayObject
+		{
+			return DisplayObject(FlexGlobals.gameScene.chessBoard);
+		}
 
 	}
 

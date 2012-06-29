@@ -31,4 +31,10 @@
 [CHANGE]:Remove the view components(ChessGasket,ChessBoard,ChessPieces) related initial and tasks to GameScene addToStageHandler;
 
 [NEW]:Foxhole Starling UI implementation;
+
+[CHANGE]:Abstract the chess board creation to CreateChessBoardTask;
+
+[CHANGE]:Abstract the plugin button bar creation to CreatePluginButtonBarTask;
+
+[NEW]:Added the pieces-box required trigger for the "Partial information" typed chess board game;
  

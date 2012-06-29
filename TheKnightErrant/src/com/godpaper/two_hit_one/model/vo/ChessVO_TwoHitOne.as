@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.tho.model.vo
+package com.godpaper.two_hit_one.model.vo
 {
 	//--------------------------------------------------------------------------
 	//
@@ -41,7 +41,7 @@ package com.godpaper.tho.model.vo
 	 * @airVersion 3.2+
 	 * Created May 14, 2012 2:10:57 PM
 	 */   	 
-	public class ChessVO extends AbstractChessVO
+	public class ChessVO_TwoHitOne extends AbstractChessVO
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -52,7 +52,7 @@ package com.godpaper.tho.model.vo
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(ChessVO);
+		private static const LOG:ILogger = LogUtil.getLogger(ChessVO_TwoHitOne);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -70,7 +70,7 @@ package com.godpaper.tho.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessVO(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0, identifier:String="")
+		public function ChessVO_TwoHitOne(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0, identifier:String="")
 		{
 			super(width, height, rowIndex, colIndex, flag, identifier);
 		}     	

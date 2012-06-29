@@ -31,6 +31,7 @@ package com.adobe.cairngorm.task
 	import mx.logging.Log;
 	import mx.logging.LogEvent;
 	
+	import flash.utils.getQualifiedClassName;
 	//---------------------------------------------------------------------------
 	//
 	//  Meta-data
@@ -94,6 +95,10 @@ package com.adobe.cairngorm.task
 
 		public function get label():String
 		{
+			if(_label=="")
+			{
+				return getQualifiedClassName(this);
+			}
 			return _label;
 		}
 

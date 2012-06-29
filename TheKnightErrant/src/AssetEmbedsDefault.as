@@ -43,7 +43,7 @@ package
 		//----------------------------------
 		//
 		// Bitmaps
-
+		// Comment out for your custom chess background image texture.
 //		[Embed(source="/assets/images/background.png")]
 //		private static const IMG_BACK_GROUND:Class;
 

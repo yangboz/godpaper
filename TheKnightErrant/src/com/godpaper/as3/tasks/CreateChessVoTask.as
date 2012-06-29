@@ -58,7 +58,10 @@ package com.godpaper.as3.tasks
 			//Set properties
 			this.label = "CreateChessVoTask";
 			//
-			this.factory = factory;
+			if(factory)
+			{
+				this.factory = factory;
+			}
 		}     	
 		//--------------------------------------------------------------------------
 		//

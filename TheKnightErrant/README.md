@@ -54,6 +54,10 @@ TODO List:
 
 5.Machine Learning implementation;(plan)
 
-6.ButtonBar with Starling UI implementation;(start)
+6.ButtonBar with Starling UI implementation;(Done)
 
 7.Pop up window with Starling UI implementation;(start)
+
+8.PiecesBox with Starling UI implementation;(start)
+
+9.Merge the stand-alone chess board game to this main project;(Start)

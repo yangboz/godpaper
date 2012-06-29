@@ -27,12 +27,16 @@ package
 	//
 	//--------------------------------------------------------------------------
 	
+	import com.godpaper.as3.business.factory.ChessFactoryBase;
+	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.IChessFactory;
+	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
@@ -44,8 +48,10 @@ package
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
 	import com.godpaper.starling.views.scenes.GameScene;
-	import com.godpaper.tho.buiness.factory.ThoChessFactory;
-	import com.godpaper.tho.buiness.managers.ThoChessPieceManager;
+	import com.godpaper.tic_tac_toe.busniess.factory.ChessFactory_TicTacToe;
+	import com.godpaper.tic_tac_toe.busniess.managers.ChessPiecesManager_TicTacToe;
+	import com.godpaper.two_hit_one.buiness.factory.ChessFactory_TwoHitOne;
+	import com.godpaper.two_hit_one.buiness.managers.ChessPieceManager_TwoHitOne;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -60,11 +66,14 @@ package
 	import net.hires.debug.Stats;
 	
 	import starling.core.Starling;
+	import starling.display.Image;
+	import starling.textures.Texture;
 
 	/**
-	 * ApplicationBase.as class constructed with framework's workflow:
-	 * 1.initializeHandler;
-	 * 2.applicationCompleteHandler;
+	 * ApplicationBase.as class constructed with framework's workflow:(this base application actually is a classic "TicTacToc" chess game example);</br>
+	 * 1.initializeHandler;(protected for override)</br>
+	 * 2.applicationCompleteHandler;(private)</br>
+	 * 3.override-able properties(chessPieceManager,pluginProvider)</br>
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
@@ -107,10 +116,25 @@ package
 		 */ 
 		public function get pluginProvider():IPlug
 		{
-//			return new MochiPlugin(PluginConfig.gameID,PluginConfig.boardID);
+			return new MochiPlugin(PluginConfig.gameID,PluginConfig.boardID);
 //			return new NonobaPlugin();
 //			return new KongregatePlugin();
-			return new PlatogoPlugin("1146511093");
+//			return new PlatogoPlugin("1146511093");
+		}
+		/**
+		 * Override this for customize chess pieces manager.
+		 */ 
+		public function get chessPiecesManager():IChessPieceManager
+		{
+//			return new ChessPieceManagerDefault();
+			return new ChessPiecesManager_TicTacToe();
+		}
+		/**
+		 * Override this for none-pieces-box required chess board game.
+		 */
+		public function get piecesBoxRequired():Boolean
+		{
+			return true;
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -141,8 +165,10 @@ package
 			Starling.handleLostContext = true; // deactivate on mobile devices (to save memory)
 			//
 //			mStarling = new Starling(GameScene, stage,new Rectangle(0,0,768,1004));
-			var screenWidth:int  = 320;//384
-			var screenHeight:int = 480;//512
+			LOG.debug("stage size:{0},{1}",stage.stageWidth,stage.stageHeight);
+			//With user customized stage's size.
+			var screenWidth:int  = stage.stageWidth;//384
+			var screenHeight:int = stage.stageHeight;//512
 //			var screenWidth:int  = stage.fullScreenWidth;
 //			var screenHeight:int = stage.fullScreenHeight;
 			var viewPort:Rectangle = new Rectangle(0, 0, screenWidth, screenHeight);
@@ -156,8 +182,12 @@ package
 			//@see: http://wiki.starling-framework.org/manual/multi-resolution_development
 			LOG.debug("Starling contentScaleFactor:{0}",mStarling.contentScaleFactor);
 			var isPad:Boolean = (screenWidth >= 768 || screenWidth >= 1536);
-			mStarling.stage.stageWidth  = isPad ? 384 : 320;
-			mStarling.stage.stageHeight = isPad ? 512 : 480;
+//			mStarling.stage.stageWidth  = isPad ? 384 : 320;
+//			mStarling.stage.stageHeight = isPad ? 512 : 480;
+			var scaleWidthRate:Number = isPad ? 384/320 :1;
+			var scaleHeightRate:Number = isPad ? 512/480 :1;
+			mStarling.stage.stageWidth  = stage.stageWidth*scaleWidthRate;
+			mStarling.stage.stageHeight = stage.stageHeight*scaleHeightRate;
 			LOG.debug("Starling contentScaleFactor:{0}",mStarling.contentScaleFactor);
 			// loader info.
 			this.loaderInfo.addEventListener(flash.events.Event.COMPLETE, loaderInfoCompleteHandler);
@@ -279,20 +309,33 @@ package
 		{
 			//config initialization here.
 			//about chess board:
-			BoardConfig.xLines=4;
-			BoardConfig.yLines=4;
-			BoardConfig.xOffset=50;
-			BoardConfig.yOffset=50;
+			BoardConfig.xLines=3;
+			BoardConfig.yLines=3;
+			BoardConfig.xOffset=100;
+			BoardConfig.yOffset=100;	
+			BoardConfig.width=200;
+			BoardConfig.height=200;
+			BoardConfig.xScale=1;
+			BoardConfig.yScale=1;
 			BoardConfig.xAdjust=50;
-			BoardConfig.yAdjust=50;
+			BoardConfig.yAdjust=0;
+			//for connex
+			BoardConfig.hConnex = true;//enable the horizontal connection.
+			BoardConfig.vConnex = true;//enable the vertical connection.
+			BoardConfig.fdConnex = true;//enable the forward connection.
+			BoardConfig.bdConnex = true;//enable the backward connection.
+			BoardConfig.numConnex = 3;//the number of connection.
+			//Customize starling texture sample:
+//			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
+//			BoardConfig.backgroundImage = new Image(texture);
 			//gasket config:
-			GasketConfig.maxPoolSize = 16;
+			GasketConfig.maxPoolSize = 25;
 			GasketConfig.tipsVisible = true;
 			GasketConfig.backgroundAlpha = 0.2;
 			GasketConfig.width = 30;
 			GasketConfig.height = 30;
 			//about piece:
-			PieceConfig.factory = ThoChessFactory;
+			PieceConfig.factory = ChessFactory_TicTacToe;
 			PieceConfig.maxPoolSizeBlue = 6;
 			PieceConfig.maxPoolSizeRed = 6;
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
@@ -301,16 +344,22 @@ package
 			//about plugin:
 			PluginConfig.gameID = "cc2fd3b3196f4281";//your custom game related id.
 			PluginConfig.boardID = "51c558cd0315f8e7";//your custom game related board id.
+			this._mochiads_game_id = "dadc1bb72ac7ed7f";//espical for mochi game platform.
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);
 			LOG.debug("SigletonFactory(cb) test:{0}",FlexGlobals.chessBoardModel.status.dump());
 		}
+		//--------------------------------------------------------------------------
+		//
+		//  Private methods
+		//
+		//--------------------------------------------------------------------------
 		//  applicationBase_applicationCompleteHandler
 		/**
 		 * Game application start up here.
 		 */		
-		protected function applicationCompleteHandler():void
+		private function applicationCompleteHandler():void
 		{
 			//			//init data struct.@see ChessPieceModel dump info.
 			//			this.dumpFootSprint();
@@ -321,14 +370,9 @@ package
 			//			GameConfig.tollgates = [RandomWalk,ShortSighted,AttackFalse,AttackFalse,MiniMax];
 			//			GameConfig.tollgateTips = ["baby intelligence","fellow intelligence","man intelligence","guru intelligence"];
 			GameConfig.turnFlag = DefaultConstants.FLAG_RED;
-			GameConfig.chessPieceManager = new ThoChessPieceManager();
+			GameConfig.chessPieceManager = this.chessPiecesManager;
 			GameConfig.gameStateManager.start();
 		}
-		//--------------------------------------------------------------------------
-		//
-		//  Private methods
-		//
-		//--------------------------------------------------------------------------
 	}
 	
 }

@@ -1,5 +1,9 @@
 package com.godpaper.as3.configs
 {
+	import com.godpaper.as3.core.IChessBoard;
+	import com.godpaper.starling.views.components.ChessBoard;
+	
+	import starling.display.Image;
 
 	//--------------------------------------------------------------------------
 	//
@@ -45,6 +49,9 @@ package com.godpaper.as3.configs
 		public static var fdConnex:Boolean=false; //forward diagonally connection flag.
 		public static var bdConnex:Boolean=false; //backward diagonally connection flag.
 		public static var numConnex:Number;//the number of connex in each direction.
+		//background image texture.
+//		var chessBoardBackground:Image = new Image(AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND));
+		public static var backgroundImage:Image=null;//The chess board's backgroud texture;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

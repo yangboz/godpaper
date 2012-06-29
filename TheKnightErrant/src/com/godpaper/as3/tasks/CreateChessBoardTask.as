@@ -19,63 +19,49 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.scenes
+package com.godpaper.as3.tasks
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	
-	import com.adobe.cairngorm.task.SequenceTask;
 	import com.godpaper.as3.configs.BoardConfig;
+	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.core.IChessBoard;
+	import com.godpaper.as3.core.IChessFactory;
+	import com.godpaper.as3.core.IVisualElement;
+	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.FlexGlobals;
-	import com.godpaper.as3.tasks.CreateChessBoardTask;
-	import com.godpaper.as3.tasks.CreateChessGasketTask;
-	import com.godpaper.as3.tasks.CreateChessPieceTask;
-	import com.godpaper.as3.tasks.CreateChessVoTask;
-	import com.godpaper.as3.tasks.CreatePluginButtonBarTask;
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.starling.views.components.ChessBoard;
-	import com.godpaper.starling.views.plugin.PluginButtonBar;
-	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
+	import com.godpaper.as3.model.pools.ChessGasketsPool;
 	
-	import mx.logging.ILogger;
-	
-	import org.spicefactory.lib.task.SequentialTaskGroup;
+	import flash.display.DisplayObject;
+	import flash.geom.Point;
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 
 	/**
-	 * GameScene accepts input from the user and instructs the model and a viewport to perform actions based on that input. 	
+	 * CreateChessBoardTask.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 16, 2012 11:01:37 AM
+	 * Created Jun 29, 2012 1:24:26 PM
 	 */   	 
-	public class GameScene extends SceneBase
+	public class CreateChessBoardTask extends ChessTaskBase
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//Tasks
-		public var cleanUpSequenceTask:SequentialTaskGroup;
-		public var startUpSequenceTask:SequenceTask;
-		//
-		private var _vehicle:SteeredVehicle;
-		private var _circles:Array;
-		private var _numCircles:int = 10;
-		//
-		public var chessBoard:ChessBoard;
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(GameScene);
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -93,9 +79,12 @@ package com.godpaper.starling.views.scenes
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function GameScene()
+		public function CreateChessBoardTask(factory:Class=null)
 		{
 			super();
+			//Set properties
+			this.label = "CreateChessBoardTask";
+			this.factory = factory;
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -108,34 +97,17 @@ package com.godpaper.starling.views.scenes
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		//
-		override protected function addToStageHandler(event:Event):void
+		override protected function performTask():void
 		{
-			//Store reference to FlexGlobal.
-			FlexGlobals.gameScene = this;
-			//			CursorManager.setBusyCursor();
-			// sound initialization takes a moment, so we prepare them here
-			AssetEmbedsDefault.loadBitmapFonts();
-			//Add visualElement to view.
-			//create chess board.
-			//create chess gaskets.
-			//create chess piece
-			//create chess pieces' chessVO;
-			//create chess pieces' omenVO;
-			//create plugin button bar.
-			this.startUpSequenceTask = new SequenceTask();
-			this.startUpSequenceTask.label = "startUpSequenceTask";//29.748M(debug)
-			//Display chess board at first.
-			this.startUpSequenceTask.addChild(new CreateChessBoardTask());//33.332M
-			this.startUpSequenceTask.addChild(new CreateChessGasketTask());//33.316M
-			this.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.090M
-			this.startUpSequenceTask.addChild(new CreateChessVoTask());//34.922M
-			//create pices box
-			//Plugin button bar view init
-			this.startUpSequenceTask.addChild(new CreatePluginButtonBarTask());
-			this.startUpSequenceTask.start();
-			//TODO:top gap setting.
-//			this.y = 50;
+			var className:String = getQualifiedClassName(factory);
+			var implementation:Object = getDefinitionByName(className);
+			var realFactoy:IChessFactory  = new implementation();
+			//render the chess board background(default type:grid).
+			var chessBoard:IChessBoard = realFactoy.createChessBoard("grid");
+			//Add to starling stage(GameScene)
+			FlexGlobals.gameStage.addChild(starling.display.DisplayObject(chessBoard));
+			//
+			this.complete();
 		}
 		//--------------------------------------------------------------------------
 		//

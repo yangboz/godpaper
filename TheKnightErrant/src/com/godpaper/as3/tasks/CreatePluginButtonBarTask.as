@@ -19,8 +19,15 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.scenes
+package com.godpaper.as3.tasks
 {
+	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.starling.views.plugin.PluginButtonBar;
+	
+	import mx.logging.ILogger;
+	import mx.logging.Log;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -28,14 +35,14 @@ package com.godpaper.starling.views.scenes
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * PluginScene.as class.   	
+	 * CreatePluginButtonBar.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 19, 2012 4:47:58 PM
+	 * Created Jun 29, 2012 1:49:59 PM
 	 */   	 
-	public class PluginScene extends SceneBase
+	public class CreatePluginButtonBarTask extends ChessTaskBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -46,7 +53,7 @@ package com.godpaper.starling.views.scenes
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:ILogger = LogUtil.getLogger(CreatePluginButtonBarTask);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -64,9 +71,8 @@ package com.godpaper.starling.views.scenes
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PluginScene()
+		public function CreatePluginButtonBarTask()
 		{
-			//TODO: implement function
 			super();
 		}     	
 		//--------------------------------------------------------------------------
@@ -80,7 +86,15 @@ package com.godpaper.starling.views.scenes
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+		override protected function performTask():void
+		{
+			//Plugin button bar view init
+			var pluginButtonBar:PluginButtonBar = new PluginButtonBar();
+			pluginButtonBar.height = 50;
+			FlexGlobals.gameStage.addChild(pluginButtonBar);
+			//
+			this.complete();
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods

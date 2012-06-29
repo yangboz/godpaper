@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.tho.buiness.managers
+package com.godpaper.two_hit_one.buiness.managers
 {
 	//--------------------------------------------------------------------------
 	//
@@ -58,7 +58,7 @@ package com.godpaper.tho.buiness.managers
 	 * @airVersion 3.2+
 	 * Created May 14, 2012 2:06:30 PM
 	 */   	 
-	public class ThoChessPieceManager extends ChessPieceManagerDefault
+	public class ChessPieceManager_TwoHitOne extends ChessPieceManagerDefault
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -70,7 +70,7 @@ package com.godpaper.tho.buiness.managers
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(ThoChessPieceManager);
+		private static const LOG:ILogger = LogUtil.getLogger(ChessPieceManager_TwoHitOne);
 		//--------------------------------------------------------------------------
 		//
 		// Public properties
@@ -88,7 +88,7 @@ package com.godpaper.tho.buiness.managers
 		// Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ThoChessPieceManager()
+		public function ChessPieceManager_TwoHitOne()
 		{
 			super();
 		}

@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.tho.buiness.factory
+package com.godpaper.two_hit_one.buiness.factory
 {
 	//--------------------------------------------------------------------------
 	//
@@ -36,7 +36,7 @@ package com.godpaper.tho.buiness.factory
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.starling.views.components.ChessPiece;
-	import com.godpaper.tho.model.vo.ChessVO;
+	import com.godpaper.two_hit_one.model.vo.ChessVO_TwoHitOne;
 	
 	import flash.geom.Point;
 	
@@ -50,7 +50,7 @@ package com.godpaper.tho.buiness.factory
 	 * @airVersion 3.2+
 	 * Created May 14, 2012 1:59:30 PM
 	 */   	 
-	public class ThoChessFactory extends ChessFactoryBase
+	public class ChessFactory_TwoHitOne extends ChessFactoryBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -79,7 +79,7 @@ package com.godpaper.tho.buiness.factory
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ThoChessFactory()
+		public function ChessFactory_TwoHitOne()
 		{
 			super();
 		}     	
@@ -138,10 +138,10 @@ package com.godpaper.tho.buiness.factory
 			switch ((conductVO.target as ChessPiece).label)
 			{
 				case DefaultPiecesConstants.BLUE.label:
-					chessVO=new ChessVO(4,4,oRowIndex, oColIndex,DefaultConstants.FLAG_BLUE);
+					chessVO=new ChessVO_TwoHitOne(4,4,oRowIndex, oColIndex,DefaultConstants.FLAG_BLUE);
 					break;
 				case DefaultPiecesConstants.RED.label:
-					chessVO=new ChessVO(4, 4, oRowIndex, oColIndex,DefaultConstants.FLAG_RED);
+					chessVO=new ChessVO_TwoHitOne(4, 4, oRowIndex, oColIndex,DefaultConstants.FLAG_RED);
 					break;
 				default:
 					break;

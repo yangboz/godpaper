@@ -37,23 +37,25 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/SeekFleeTest1.as"/>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/Steering.as"/>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/VehicleTest.as"/>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/FleeTest.as"/>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/Steering2.as"/>
+    <application path="ApplicationBase.as"/>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/SeekFleeTest2.as"/>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/SeekTest.as"/>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/ArriveTest.as"/>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/PursueEvadeTest.as"/>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/PathTest.as"/>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/FlockTest.as"/>
     <application path="FlexUnitApplication.as"/>
     <application path="FlexUnitCompilerApplication.as"/>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/SeekFleeTest2.as"/>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/ArriveTest.as"/>
     <application path="com/lookbackon/AI/steeringBehavior/tests/WanderTest.as"/>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/SeekFleeTest1.as"/>
-    <application path="ApplicationBase.as"/>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/PursueEvadeTest.as"/>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/FlockTest.as"/>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/PathTest.as"/>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/VehicleTest.as"/>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/Steering.as"/>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/SeekTest.as"/>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/FleeTest.as"/>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/PursueTest.as"/>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/Steering2.as"/>
+    <application path="CatAndMouse.as"/>
+    <application path="TwoHitOne.as"/>
     <application path="com/lookbackon/AI/steeringBehavior/tests/AvoidTest.as"/>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/PursueTest.as"/>
   </applications>
   <modules/>
   <buildCSSFiles/>

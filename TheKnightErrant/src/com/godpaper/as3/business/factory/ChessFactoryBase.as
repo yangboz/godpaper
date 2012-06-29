@@ -5,6 +5,7 @@ package com.godpaper.as3.business.factory
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.consts.DefaultPiecesConstants;
 	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IChessGasket;
@@ -19,6 +20,7 @@ package com.godpaper.as3.business.factory
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.starling.views.components.ChessBoard;
 	import com.godpaper.starling.views.components.ChessGasket;
 	import com.godpaper.starling.views.components.ChessPiece;
 	
@@ -53,7 +55,7 @@ package com.godpaper.as3.business.factory
 		protected var chessPieceValue:int=0;//The value of chess piece(hex value prefered).
 		protected var chessPieceType:String="";//Blue/Red/Green...
 		protected var chessPieceSubType:String=null;//BLUE_ROCK/Red_STAR/Green_...
-		protected var chessPieceSource:Object;//style source asset(@see assets/EmbededAssets.as).
+		protected var chessPieceSource:Object;//style source(texture...) asset(@see assets/EmbededAssets.as).
 		protected var chessPieceName:String="";//the unique chess piece name to identify the chess piece of typed group.
 		protected var chessGasketTips:String="";//The tool tips of chess gasket.
 		//----------------------------------
@@ -98,15 +100,20 @@ package com.godpaper.as3.business.factory
 		//
 		//--------------------------------------------------------------------------
 		/**
-		 * Chess piece manipulate.
+		 * Chess piece manipulate procedure.
 		 * @param position chessPiece's position type is Point(x, y).
 		 * @param flag chessPices's side flag.(red/blue).
-		 * @return ChessPiece component with implement IChessPiece
+		 * @return ChessPiece component with implement IChessPiece or NULL.
 		 *
 		 */
 		public function createChessPiece(position:Point, flag:int=0):IChessPiece
 		{
-			//view
+			//avoid duplicate usless components.
+			if (this.chessPieceLabel=="")
+			{
+				return null;
+			}
+			//view related pool alloc and init.
 			var simpleChessPiece:ChessPiece;
 			if (this.chessPieceType.indexOf(DefaultConstants.RED)!=-1)//red
 			{
@@ -125,35 +132,27 @@ package com.godpaper.as3.business.factory
 			simpleChessPiece.downState = atlas.getTexture(chessPieceSubType?chessPieceSubType:chessPieceType);
 			//set flag to identify.
 			simpleChessPiece.flag=DefaultConstants.FLAG_BLUE;
-			//
-			if (this.chessPieceLabel!="")
+			//set model value with flag identifier.
+			if (this.chessPieceType.indexOf(DefaultConstants.RED)!=-1)//red
 			{
-				if (this.chessPieceType.indexOf(DefaultConstants.RED)!=-1)//red
-				{
-					simpleChessPiece.flag=DefaultConstants.FLAG_RED; 
-					//					ChessPiecesModel.getInstance().redPieces.setBitt(position.y,position.x,true);
-					FlexGlobals.chessPiecesModel[simpleChessPiece.type].setBitt(position.y, position.x, true);
-					//push to reds collection.
-					FlexGlobals.chessPiecesModel.reds.push(simpleChessPiece);
-				}
-				else //blue
-				{
-					//simpleChessPiece.enabled = false;
-					//					ChessPiecesModel.getInstance().bluePieces.setBitt(position.y,position.x,true);
-					FlexGlobals.chessPiecesModel[simpleChessPiece.type].setBitt(position.y, position.x, true);
-					//push to blues collection.
-					FlexGlobals.chessPiecesModel.blues.push(simpleChessPiece);
-				}
+				simpleChessPiece.flag=DefaultConstants.FLAG_RED; 
+				//					ChessPiecesModel.getInstance().redPieces.setBitt(position.y,position.x,true);
+				FlexGlobals.chessPiecesModel[simpleChessPiece.type].setBitt(position.y, position.x, true);
+				//push to reds collection.
+				FlexGlobals.chessPiecesModel.reds.push(simpleChessPiece);
 			}
-			//avoid duplicate usless components.
-			if (this.chessPieceLabel!="")
+			else //blue
 			{
-				//data
-				simpleChessPiece.position=position;
-				LOG.debug("Anew chess piece has been created@{0},type:{1},name:{2},value:{3},label:{4}",position,chessPieceType,chessPieceName,chessPieceValue,chessPieceLabel);
-				return simpleChessPiece as IChessPiece;
+				//simpleChessPiece.enabled = false;
+				//					ChessPiecesModel.getInstance().bluePieces.setBitt(position.y,position.x,true);
+				FlexGlobals.chessPiecesModel[simpleChessPiece.type].setBitt(position.y, position.x, true);
+				//push to blues collection.
+				FlexGlobals.chessPiecesModel.blues.push(simpleChessPiece);
 			}
-			return null;
+			//set position data
+			simpleChessPiece.position=position;
+			LOG.debug("Anew chess piece has been created@{0},type:{1},name:{2},value:{3},label:{4}",position,chessPieceType,chessPieceName,chessPieceValue,chessPieceLabel);
+			return simpleChessPiece as IChessPiece;
 		}
 
 		/**
@@ -201,8 +200,22 @@ package com.godpaper.as3.business.factory
 		 */
 		public function generateOmenVO(conductVO:ConductVO):OmenVO
 		{
-			throw new Error(DefaultErrors.INITIALIZE_VIRTUAL_FUNCTION);
-			return null;
+			//Default omenVO under construction.
+			var omenVO:OmenVO;
+			//TODO:importance initialization.
+			// LOG.info(omenVO.dump());
+			switch ((conductVO.target as ChessPiece).label)
+			{
+				case DefaultPiecesConstants.BLUE.label:
+					omenVO=new OmenVO(DefaultPiecesConstants.BLUE_BISHOP.strength, DefaultPiecesConstants.BLUE.important, conductVO.target.chessVO.moves.celled, conductVO.target.chessVO.captures.celled, -1);
+					break;
+				case DefaultPiecesConstants.RED.label:
+					omenVO=new OmenVO(DefaultPiecesConstants.RED_BISHOP.strength, DefaultPiecesConstants.RED.important, conductVO.target.chessVO.moves.celled, conductVO.target.chessVO.captures.celled, -1);
+					break;
+				default:
+					break;
+			}
+			return omenVO;
 		}
 		/**
 		 * Create the type specialed chess board
@@ -212,11 +225,18 @@ package com.godpaper.as3.business.factory
 		 */		
 		public function createChessBoard(type:String):IChessBoard
 		{
+			//TODO:customzie grid type implementation.
+			var chessBoard:IChessBoard;
 			switch(type)
 			{
-				//TODO:implment funcs.
+				case "grid":
+					//render the chess board background(default type:grid).
+					chessBoard = new ChessBoard(BoardConfig.backgroundImage);
+					break;
+				default:
+					break;
 			}
-			return null;
+			return chessBoard;
 		}
 		//--------------------------------------------------------------------------
 		//
