@@ -21,6 +21,8 @@ package com.godpaper.as3.tasks
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 	
+	import starling.display.DisplayObject;
+	
 
 	/**
 	 * FillInPiecesBoxTask.as class.   	
@@ -83,7 +85,7 @@ package com.godpaper.as3.tasks
 				if(iChessPiece!=null)
 				{
 //					(PieceConfig.bluePiecesBox as PiecesBox).addElement( iChessPiece );
-					(PieceConfig.bluePiecesBox as PiecesBox).addChild( iChessPiece );
+					(PieceConfig.bluePiecesBox as PiecesBox).addChild( DisplayObject(iChessPiece) );
 					//
 					iChessPiece.x = getRandomX((PieceConfig.bluePiecesBox as PiecesBox));
 					iChessPiece.y = getRandomY((PieceConfig.bluePiecesBox as PiecesBox));
@@ -97,7 +99,7 @@ package com.godpaper.as3.tasks
 				if(jChessPiece!=null)
 				{
 //					(PieceConfig.redPiecesBox as PiecesBox).addElement( jChessPiece );
-					(PieceConfig.redPiecesBox as PiecesBox).addChild( jChessPiece );
+					(PieceConfig.redPiecesBox as PiecesBox).addChild( DisplayObject(jChessPiece) );
 					//
 					jChessPiece.x = getRandomX((PieceConfig.redPiecesBox as PiecesBox));
 					jChessPiece.y = getRandomY((PieceConfig.redPiecesBox as PiecesBox));

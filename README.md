@@ -24,7 +24,7 @@ preferable to continuing this mortal existence. Ironically, the absence of those
 would all but guarantee this outcome!
 I of course refer here to the constants of the physical world:
 
-*G, the gravitational constant, whose vigilance secures us to this very world;
+**G**, the gravitational constant, whose vigilance secures us to this very world;
 
 **O**, oops;
 

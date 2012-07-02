@@ -61,7 +61,7 @@ package com.godpaper.starling.views.components
 	 * Created Apr 18, 2012 10:01:04 AM
 	 * @see http://wiki.starling-framework.org/manual/dynamic_textures
 	 */   	 
-	public class ChessBoard extends Sprite implements IChessBoard
+	public class ChessBoard extends UIComponent implements IChessBoard
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -212,33 +212,33 @@ package com.godpaper.starling.views.components
 		//----------------------------------
 		//  background(CrossLines or Embbed image textures)
 		//----------------------------------
-		private var _background:Image = null;
-		
-		public function get background():Image
-		{
-			return _background;
-		}
-		
-		public function set background(value:Image):void
-		{
-			if(value!=null)
-			{
-				if(this.contains(_background))
-				{
-					removeChild(_background);//Remove the existed background at first.
-				}
-				//set anew value
-				_background=value;
-				//Puts on background image.
-				//			var bg:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
-				//			addChild(bg);
-				//Display anew backgournd
-				addChild(_background);
-			}else//Draw to render the program background.
-			{
-				this.backgroundRender();
-			}
-		}
+//		private var _background:Image = null;
+//		
+//		public function get background():Image
+//		{
+//			return _background;
+//		}
+//		
+//		public function set background(value:Image):void
+//		{
+//			if(value!=null)
+//			{
+//				if(this.contains(_background))
+//				{
+//					removeChild(_background);//Remove the existed background at first.
+//				}
+//				//set anew value
+//				_background=value;
+//				//Puts on background image.
+//				//			var bg:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
+//				//			addChild(bg);
+//				//Display anew backgournd
+//				addChild(_background);
+//			}else//Draw to render the program background.
+//			{
+//				this.backgroundRender();
+//			}
+//		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -279,7 +279,7 @@ package com.godpaper.starling.views.components
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		protected function backgroundRender():void
+		override protected function backgroundRender():void
 		{
 			//Temp graphic objects tests.
 			//@see:http://wiki.starling-framework.org/manual/dynamic_textures

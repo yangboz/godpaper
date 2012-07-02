@@ -129,13 +129,6 @@ package
 //			return new ChessPieceManagerDefault();
 			return new ChessPiecesManager_TicTacToe();
 		}
-		/**
-		 * Override this for none-pieces-box required chess board game.
-		 */
-		public function get piecesBoxRequired():Boolean
-		{
-			return true;
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -313,12 +306,12 @@ package
 			BoardConfig.yLines=3;
 			BoardConfig.xOffset=100;
 			BoardConfig.yOffset=100;	
-			BoardConfig.width=200;
-			BoardConfig.height=200;
+//			BoardConfig.width=300;
+//			BoardConfig.height=300;
 			BoardConfig.xScale=1;
 			BoardConfig.yScale=1;
 			BoardConfig.xAdjust=50;
-			BoardConfig.yAdjust=0;
+			BoardConfig.yAdjust=50;
 			//for connex
 			BoardConfig.hConnex = true;//enable the horizontal connection.
 			BoardConfig.vConnex = true;//enable the vertical connection.
@@ -328,21 +321,24 @@ package
 			//Customize starling texture sample:
 //			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 //			BoardConfig.backgroundImage = new Image(texture);
+			//Pieces box config:
+			BoardConfig.piecesBoxRequired = true;
+//			BoardConfig.piecesBoxBgImage = null;
 			//gasket config:
-			GasketConfig.maxPoolSize = 25;
+			GasketConfig.maxPoolSize = 9;
 			GasketConfig.tipsVisible = true;
 			GasketConfig.backgroundAlpha = 0.2;
 			GasketConfig.width = 30;
 			GasketConfig.height = 30;
 			//about piece:
 			PieceConfig.factory = ChessFactory_TicTacToe;
-			PieceConfig.maxPoolSizeBlue = 6;
-			PieceConfig.maxPoolSizeRed = 6;
+			PieceConfig.maxPoolSizeBlue = 3;
+			PieceConfig.maxPoolSizeRed = 3;
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
 			PieceConfig.scaleX = 1;
 			PieceConfig.scaleY = 1;
 			//about plugin:
-			PluginConfig.gameID = "cc2fd3b3196f4281";//your custom game related id.
+			PluginConfig.gameID = "dadc1bb72ac7ed7f";//your custom game related id.
 			PluginConfig.boardID = "51c558cd0315f8e7";//your custom game related board id.
 			this._mochiads_game_id = "dadc1bb72ac7ed7f";//espical for mochi game platform.
 			//

@@ -36,8 +36,15 @@ package com.godpaper.as3.configs
 		public static var xOffset:Number=50;
 		public static var yOffset:Number=50;
 		//board size
-		public static var width:Number=300;
-		public static var height:Number=400;
+		public static function get height():Number
+		{
+			return (BoardConfig.yLines-1)*BoardConfig.yOffset+BoardConfig.yAdjust*2;
+		}
+		//
+		public static function get width():Number
+		{
+			return (BoardConfig.xLines-1)*BoardConfig.xOffset+BoardConfig.xAdjust*2;
+		}
 		//board background
 //		private static var _backGround:Class;
 		//board x,y position adjust
@@ -52,6 +59,9 @@ package com.godpaper.as3.configs
 		//background image texture.
 //		var chessBoardBackground:Image = new Image(AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND));
 		public static var backgroundImage:Image=null;//The chess board's backgroud texture;
+		//Pieces box relevant variables.
+		public static var piecesBoxRequired:Boolean = false;//For partical chess board game with pieces box component view;
+		public static var piecesBoxBgImage:Image=null;//The chess pieces box 's backgroud texture;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -61,7 +71,6 @@ package com.godpaper.as3.configs
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

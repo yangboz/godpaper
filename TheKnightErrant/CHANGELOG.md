@@ -34,7 +34,8 @@
 
 [CHANGE]:Abstract the chess board creation to CreateChessBoardTask;
 
-[CHANGE]:Abstract the plugin button bar creation to CreatePluginButtonBarTask;
+[CHANGE]:Abstract the plug-in button bar creation to CreatePluginButtonBarTask;
 
 [NEW]:Added the pieces-box required trigger for the "Partial information" typed chess board game;
  
+[CHANGE]:Changed the BoardConfig.width/height to read-only properties; 

@@ -35,7 +35,9 @@ package com.godpaper.starling.views.scenes
 	import com.godpaper.as3.tasks.CreateChessGasketTask;
 	import com.godpaper.as3.tasks.CreateChessPieceTask;
 	import com.godpaper.as3.tasks.CreateChessVoTask;
+	import com.godpaper.as3.tasks.CreatePiecesBoxTask;
 	import com.godpaper.as3.tasks.CreatePluginButtonBarTask;
+	import com.godpaper.as3.tasks.FillInPiecesBoxTask;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.components.ChessBoard;
 	import com.godpaper.starling.views.plugin.PluginButtonBar;
@@ -127,8 +129,17 @@ package com.godpaper.starling.views.scenes
 			this.startUpSequenceTask.label = "startUpSequenceTask";//29.748M(debug)
 			//Display chess board at first.
 			this.startUpSequenceTask.addChild(new CreateChessBoardTask());//33.332M
+			//Display the pieces box if neccessary
+			if(BoardConfig.piecesBoxRequired)
+			{
+				this.startUpSequenceTask.addChild(new CreatePiecesBoxTask());
+				this.startUpSequenceTask.addChild(new FillInPiecesBoxTask());
+			}
 			this.startUpSequenceTask.addChild(new CreateChessGasketTask());//33.316M
-			this.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.090M
+			if(!BoardConfig.piecesBoxRequired)
+			{
+				this.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.090M
+			}
 			this.startUpSequenceTask.addChild(new CreateChessVoTask());//34.922M
 			//create pices box
 			//Plugin button bar view init

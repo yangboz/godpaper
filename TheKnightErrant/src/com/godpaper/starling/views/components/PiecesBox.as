@@ -31,14 +31,17 @@ package com.godpaper.starling.views.components
 	import com.godpaper.as3.core.IPiecesBox;
 	import com.godpaper.as3.model.pools.BlueChessPiecesPool;
 	import com.godpaper.as3.model.pools.RedChessPiecesPool;
+	import com.godpaper.as3.utils.LogUtil;
 	
+	import flash.display.Shape;
 	import flash.geom.Rectangle;
 	
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	import mx.logging.ILogger;
 	
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.utils.Color;
+	import starling.utils.Polygon;
 	
 	
 	/**
@@ -48,8 +51,9 @@ package com.godpaper.starling.views.components
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Apr 18, 2012 9:54:47 AM
+	 * @history,using the starling(stage3d) version.
 	 */   	 
-	public class PiecesBox extends Sprite implements IPiecesBox
+	public class PiecesBox extends UIComponent implements IPiecesBox
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -61,7 +65,7 @@ package com.godpaper.starling.views.components
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:Logger = LogContext.getLogger(PiecesBox);
+		private static const LOG:ILogger = LogUtil.getLogger(PiecesBox);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -106,7 +110,8 @@ package com.godpaper.starling.views.components
 		{
 			super();
 			//
-			this.addEventListener(Event.COMPLETE, creationCompleteHandler);
+//			this.addEventListener(Event.COMPLETE, creationCompleteHandler);
+			this.addEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
 			//
 			_childrenArea = new Rectangle(0,0,this.width,this.height);
 		}
@@ -115,13 +120,18 @@ package com.godpaper.starling.views.components
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		override public function dispose():void
+		{
+			this.removeEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
+			super.dispose();
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		protected function creationCompleteHandler(event:Event):void
+//		protected function creationCompleteHandler(event:Event):void
+		protected function addToStageHandler(event:Event):void
 		{
 			if (PieceConfig.bluePieces.length)
 			{
@@ -141,6 +151,20 @@ package com.godpaper.starling.views.components
 					PieceConfig.redPiecesBox = this;
 				}
 			}
+		}
+		//
+		override protected function backgroundRender():void
+		{
+			//Temp graphic objects tests.
+			//@see:http://wiki.starling-framework.org/manual/dynamic_textures
+			//Polygon
+			var polygon:Polygon = new Polygon(50,4,Color.NAVY);
+			polygon.x = 100;
+			polygon.y = 100;
+			polygon.pivotX = 0;
+			polygon.pivotY = 0;
+//			polygon.rotation = 30;
+			addChild(polygon);
 		}
 		//--------------------------------------------------------------------------
 		//

@@ -126,12 +126,12 @@ package
 			BoardConfig.yLines=5;
 			BoardConfig.xOffset=100;
 			BoardConfig.yOffset=100;	
-			BoardConfig.width=400;
-			BoardConfig.height=400;
+//			BoardConfig.width=400;
+//			BoardConfig.height=400;
 			BoardConfig.xScale=1;
 			BoardConfig.yScale=1;
 			BoardConfig.xAdjust=50;
-			BoardConfig.yAdjust=0;
+			BoardConfig.yAdjust=50;
 			//Customize starling texture sample:
 			//			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 			//			BoardConfig.backgroundImage = new Image(texture);

@@ -124,16 +124,16 @@ package
 		{
 			//config initialization here.
 			//about chess board:
-			BoardConfig.xLines=5;
-			BoardConfig.yLines=5;
+			BoardConfig.xLines=4;
+			BoardConfig.yLines=4;
 			BoardConfig.xOffset=100;
 			BoardConfig.yOffset=100;	
-			BoardConfig.width=400;
-			BoardConfig.height=400;
+//			BoardConfig.width=300;
+//			BoardConfig.height=300;
 			BoardConfig.xScale=1;
 			BoardConfig.yScale=1;
 			BoardConfig.xAdjust=50;
-			BoardConfig.yAdjust=0;
+			BoardConfig.yAdjust=50;
 			//Customize starling texture sample:
 			//			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 			//			BoardConfig.backgroundImage = new Image(texture);

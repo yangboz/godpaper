@@ -19,30 +19,32 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.components
+package com.godpaper.as3.tasks
 {
+	import com.godpaper.as3.configs.BoardConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.starling.views.components.PiecesBox;
+	
+	import flash.geom.Rectangle;
+	
+	import starling.display.Image;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.core.IVisualElement;
-	
-	import mx.utils.UIDUtil;
-	
-	import starling.display.Image;
-	import starling.display.Sprite;
-	
 	
 	/**
-	 * UIComponent.as class.   	
+	 * CreatePiecesBoxTask.as class for the boxes(which filled with chess pieces) creation process.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 18, 2012 1:57:14 PM
+	 * Created Jun 29, 2012 4:03:28 PM
 	 */   	 
-	public class UIComponent extends Sprite implements IVisualElement
+	public class CreatePiecesBoxTask extends ChessTaskBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -59,58 +61,7 @@ package com.godpaper.starling.views.components
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//----------------------------------
-		//  background(CrossLines or Embbed image textures)
-		//----------------------------------
-		private var _background:Image = null;
-		public function get background():Image
-		{
-			return _background;
-		}
-		public function set background(value:Image):void
-		{
-			if(value!=null)
-			{
-				if(this.contains(_background))
-				{
-					removeChild(_background);//Remove the existed background at first.
-				}
-				//set anew value
-				_background=value;
-				//Puts on background image.
-				//			var bg:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
-				//			addChild(bg);
-				//Display anew backgournd
-				addChild(_background);
-			}else//Draw to render the program background.
-			{
-				this.backgroundRender();
-			}
-		}
-		//----------------------------------
-		//  label
-		//----------------------------------
-		private var _label:String;
-		public function set label(value:String):void
-		{
-			_label = value;
-		}
-		public function get label():String
-		{
-			return _label;
-		}
-		//----------------------------------
-		//  uid
-		//----------------------------------
-		private var _uid:String;
-		public function get uid():String
-		{
-			return _uid;
-		}
-		public function set uid(value:String):void
-		{
-			_uid = value;
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -122,11 +73,11 @@ package com.godpaper.starling.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function UIComponent()
+		public function CreatePiecesBoxTask()
 		{
 			super();
-			//uid creation.
-			this.uid = UIDUtil.createUID();
+			//Set properties.
+			this.label = "CreatePiecesBoxTask";
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -139,9 +90,43 @@ package com.godpaper.starling.views.components
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		protected function backgroundRender():void
+		override protected function performTask():void
 		{
-			//TODO:with customize override.
+			//TODO:<!-- PiecesBox View -->
+//				<components1:PiecesBox id="bluePiecesBox" visible="true" left="20" bottom="50" width="100"
+//				height="100"
+//				
+//				backgroundImageFillMode="scale" borderVisible="false"
+//				childrenArea="{new Rectangle(20,0,25,25)}"
+//				type="{DefaultConstants.BLUE}"/>
+//				<components1:PiecesBox id="redPiecesBox" visible="true" right="20" bottom="50" width="100"
+//				height="100"
+//				
+//				backgroundImageFillMode="scale" borderVisible="false"
+//				childrenArea="{new Rectangle(20,0,25,25)}" type="{DefaultConstants.RED}"/>
+			var bluePiecesBox:PiecesBox = new PiecesBox();
+			bluePiecesBox.x = 20;
+			bluePiecesBox.y = 380;
+			bluePiecesBox.width = 100;
+			bluePiecesBox.height = 100;
+			bluePiecesBox.background = BoardConfig.piecesBoxBgImage;
+			bluePiecesBox.childrenArea = new Rectangle(20,0,25,25);
+			bluePiecesBox.type = DefaultConstants.BLUE;
+			bluePiecesBox.useHandCursor = true;
+			//
+			var redPiecesBox:PiecesBox = new PiecesBox();
+			redPiecesBox.x = 220;
+			redPiecesBox.y = 380;
+			redPiecesBox.width = 100;
+			redPiecesBox.height = 100;
+			redPiecesBox.background = BoardConfig.piecesBoxBgImage;
+			redPiecesBox.childrenArea = new Rectangle(20,0,25,25);
+			redPiecesBox.type = DefaultConstants.RED;
+			//
+			FlexGlobals.gameStage.addChild(bluePiecesBox);
+			FlexGlobals.gameStage.addChild(redPiecesBox);
+			//
+			this.complete();
 		}
 		//--------------------------------------------------------------------------
 		//
