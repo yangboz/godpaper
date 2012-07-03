@@ -39,3 +39,5 @@
 [NEW]:Added the pieces-box required trigger for the "Partial information" typed chess board game;
  
 [CHANGE]:Changed the BoardConfig.width/height to read-only properties; 
+
+[NEW]:Implement the splash screen with customize subroutines;

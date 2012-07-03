@@ -27,31 +27,22 @@ package
 	//
 	//--------------------------------------------------------------------------
 	
-	import com.godpaper.as3.business.factory.ChessFactoryBase;
-	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IChessPieceManager;
-	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.PluginUIComponent;
-	import com.godpaper.as3.plugins.kongregate.KongregatePlugin;
 	import com.godpaper.as3.plugins.mochi.MochiPlugin;
-	import com.godpaper.as3.plugins.nonoba.NonobaPlugin;
-	import com.godpaper.as3.plugins.platogo.PlatogoPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
-	import com.godpaper.starling.views.scenes.GameScene;
+	import com.godpaper.starling.views.scenes.MainScene;
 	import com.godpaper.tic_tac_toe.busniess.factory.ChessFactory_TicTacToe;
 	import com.godpaper.tic_tac_toe.busniess.managers.ChessPiecesManager_TicTacToe;
-	import com.godpaper.two_hit_one.buiness.factory.ChessFactory_TwoHitOne;
-	import com.godpaper.two_hit_one.buiness.managers.ChessPieceManager_TwoHitOne;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -63,11 +54,7 @@ package
 	
 	import mx.logging.ILogger;
 	
-	import net.hires.debug.Stats;
-	
 	import starling.core.Starling;
-	import starling.display.Image;
-	import starling.textures.Texture;
 
 	/**
 	 * ApplicationBase.as class constructed with framework's workflow:(this base application actually is a classic "TicTacToc" chess game example);</br>
@@ -165,7 +152,8 @@ package
 //			var screenWidth:int  = stage.fullScreenWidth;
 //			var screenHeight:int = stage.fullScreenHeight;
 			var viewPort:Rectangle = new Rectangle(0, 0, screenWidth, screenHeight);
-			mStarling = new Starling(GameScene, stage,viewPort);
+//			mStarling = new Starling(GameScene, stage,viewPort);
+			mStarling = new Starling(MainScene, stage,viewPort);
 			mStarling.simulateMultitouch = true;
 			mStarling.enableErrorChecking = Capabilities.isDebugger;
 			mStarling.start();

@@ -21,63 +21,54 @@
  */
 package com.godpaper.starling.views.scenes
 {
+	import com.godpaper.starling.views.screens.GameScreen;
+	import com.godpaper.starling.views.screens.SplashScreen;
+	import com.gskinner.motion.easing.Cubic;
+	
+	import flash.ui.Mouse;
+	
+	import org.josht.starling.foxhole.controls.FPSDisplay;
+	import org.josht.starling.foxhole.controls.ScreenNavigator;
+	import org.josht.starling.foxhole.controls.ScreenNavigatorItem;
+	import org.josht.starling.foxhole.themes.IFoxholeTheme;
+	import org.josht.starling.foxhole.themes.MinimalTheme;
+	import org.josht.starling.foxhole.transitions.ScreenSlidingStackTransitionManager;
+	
+	import starling.display.Sprite;
+	import starling.events.Event;
+	import starling.events.ResizeEvent;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
 	
-	import com.adobe.cairngorm.task.SequenceTask;
-	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.core.IChessBoard;
-	import com.godpaper.as3.model.FlexGlobals;
-	import com.godpaper.as3.tasks.CreateChessBoardTask;
-	import com.godpaper.as3.tasks.CreateChessGasketTask;
-	import com.godpaper.as3.tasks.CreateChessPieceTask;
-	import com.godpaper.as3.tasks.CreateChessVoTask;
-	import com.godpaper.as3.tasks.CreatePiecesBoxTask;
-	import com.godpaper.as3.tasks.CreatePluginButtonBarTask;
-	import com.godpaper.as3.tasks.FillInPiecesBoxTask;
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.starling.views.components.ChessBoard;
-	import com.godpaper.starling.views.plugin.PluginButtonBar;
-	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
-	
-	import mx.logging.ILogger;
-	
-	import org.spicefactory.lib.task.SequentialTaskGroup;
-	
-	import starling.display.DisplayObject;
-	import starling.events.Event;
-
 	/**
-	 * GameScene accepts input from the user and instructs the model and a viewport to perform actions based on that input. 	
+	 * MainScene.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 16, 2012 11:01:37 AM
+	 * Created Jul 3, 2012 5:20:17 PM
 	 */   	 
-	public class GameScene extends SceneBase
+	public class MainScene extends SceneBase
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//Tasks
-		public var cleanUpSequenceTask:SequentialTaskGroup;
-		public var startUpSequenceTask:SequenceTask;
-		//
-		private var _vehicle:SteeredVehicle;
-		private var _circles:Array;
-		private var _numCircles:int = 10;
-		//
-		public var chessBoard:ChessBoard;
+		private var _theme:IFoxholeTheme;
+		private var _navigator:ScreenNavigator;
+		private var _transitionManager:ScreenSlidingStackTransitionManager;
+//		private var _fps:FPSDisplay;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(GameScene);
+		private static const SPLASH:String = "splashScreen";
+		private static const MAIN_MENU:String = "mainMenuScreen";
+		private static const GAME:String = "gameScreen";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -95,7 +86,7 @@ package com.godpaper.starling.views.scenes
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function GameScene()
+		public function MainScene()
 		{
 			super();
 		}     	
@@ -110,48 +101,45 @@ package com.godpaper.starling.views.scenes
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		//
 		override protected function addToStageHandler(event:Event):void
 		{
-			//Store reference to FlexGlobal.
-			FlexGlobals.gameScene = this;
-			//			CursorManager.setBusyCursor();
-			// sound initialization takes a moment, so we prepare them here
-			AssetEmbedsDefault.loadBitmapFonts();
-			//Add visualElement to view.
-			//create chess board.
-			//create chess gaskets.
-			//create chess piece
-			//create chess pieces' chessVO;
-			//create chess pieces' omenVO;
-			//create plugin button bar.
-			this.startUpSequenceTask = new SequenceTask();
-			this.startUpSequenceTask.label = "startUpSequenceTask";//29.748M(debug)
-			//Display chess board at first.
-			this.startUpSequenceTask.addChild(new CreateChessBoardTask());//33.332M
-			//Display the pieces box if neccessary
-			if(BoardConfig.piecesBoxRequired)
-			{
-				this.startUpSequenceTask.addChild(new CreatePiecesBoxTask());
-				this.startUpSequenceTask.addChild(new FillInPiecesBoxTask());
-			}
-			this.startUpSequenceTask.addChild(new CreateChessGasketTask());//33.316M
-			//create pices box
-			if(!BoardConfig.piecesBoxRequired)
-			{
-				this.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.090M
-			}
-			this.startUpSequenceTask.addChild(new CreateChessVoTask());//34.922M
-			//Plugin button bar view init
-			this.startUpSequenceTask.addChild(new CreatePluginButtonBarTask());
-			//task start
-			this.startUpSequenceTask.start();
+			//this is supposed to be an example mobile app, but it is also shown
+			//as a preview in Flash Player on the web. we're making a special
+			//case to pretend that the web SWF is running in the theme's "ideal"
+			//DPI. official themes usually target an iPhone Retina display.
+			const isDesktop:Boolean = Mouse.supportsCursor;
+			this._theme = new MinimalTheme(this.stage, !isDesktop);
+			const originalThemeDPI:int = this._theme.originalDPI;
+			
+			this._navigator = new ScreenNavigator();
+			this.addChild(this._navigator);
+			
+			this._navigator.addScreen(SPLASH, new ScreenNavigatorItem(SplashScreen));
+			
+			this._navigator.addScreen(GAME, new ScreenNavigatorItem(GameScreen));
+			
+			this._navigator.showScreen(GAME);//Screen swither here.
+			
+			this._transitionManager = new ScreenSlidingStackTransitionManager(this._navigator);
+			this._transitionManager.duration = 0.4;
+			this._transitionManager.ease = Cubic.easeOut;
+			
+//			this._fps = new FPSDisplay();
+//			this.stage.addChild(this._fps);
+//			this._fps.validate();
+//			this._fps.y = this.stage.stageHeight - this._fps.height;
+//			this.stage.addEventListener(ResizeEvent.RESIZE, stage_resizeHandler);
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+//		private function stage_resizeHandler(event:ResizeEvent):void
+//		{
+//			this._fps.validate();
+//			this._fps.y = this.stage.stageHeight - this._fps.height;
+//		}
 	}
 	
 }

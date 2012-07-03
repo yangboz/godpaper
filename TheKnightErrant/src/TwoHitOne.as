@@ -46,7 +46,6 @@ package
 	import com.godpaper.as3.plugins.platogo.PlatogoPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
-	import com.godpaper.starling.views.scenes.GameScene;
 	import com.godpaper.two_hit_one.buiness.factory.ChessFactory_TwoHitOne;
 	import com.godpaper.two_hit_one.buiness.managers.ChessPieceManager_TwoHitOne;
 	

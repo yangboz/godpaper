@@ -19,16 +19,12 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.as3.model
+package com.godpaper.starling.views.screens
 {
-	import com.godpaper.as3.utils.SingletonFactory;
-	import com.godpaper.starling.views.plugin.PluginButtonBar;
-	import com.godpaper.starling.views.screens.GameScreen;
-	import com.lookbackon.AI.FSM.Message;
-	
-	import org.osflash.signals.Signal;
-	
-	import starling.display.Stage;
+	import starling.events.Event;
+	import mx.logging.ILogger;
+	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.starling.views.scenes.SceneBase;
 
 	//--------------------------------------------------------------------------
 	//
@@ -37,15 +33,14 @@ package com.godpaper.as3.model
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * A marshalling class which list the global variables and referecnes without access limitation.
-	 * Just like the "FlexGloabls.as" which located at FLEX4 framework.
+	 * SplashScene.as class with customzie subroutines.	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 19, 2012 10:41:05 AM
+	 * Created Jul 3, 2012 5:11:09 PM
 	 */   	 
-	public class FlexGlobals
+	public class SplashScreen extends SceneBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -56,24 +51,13 @@ package com.godpaper.as3.model
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:ILogger = LogUtil.getLogger(SplashScreen);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//Views.
-		public static var topLevelApplication:ApplicationBase;
-//		public static var gameScene:GameScene;//The scene of game.
-		public static var gameScene:GameScreen;//The screen of game.
-		public static var gameStage:Stage;//The stage of game.
-		//Models.
-		public static var chessPiecesModel:ChessPiecesModel = SingletonFactory.produce(ChessPiecesModel);
-		public static var chessGasketsModel:ChessGasketsModel = SingletonFactory.produce(ChessGasketsModel);
-		public static var chessBoardModel:ChessBoardModel = SingletonFactory.produce(ChessBoardModel);
-		//Signals.
-		public static var levelUpSignal:Signal = new Signal(int);//user level up signal.
-		public static var checkSignal:Signal = new Signal(Message);//chess check signal.
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -85,7 +69,11 @@ package com.godpaper.as3.model
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		   	
+		public function SplashScreen()
+		{
+			//TODO: implement function
+			super();
+		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -97,7 +85,12 @@ package com.godpaper.as3.model
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+		override protected function addToStageHandler(event:Event):void
+		{
+			//			CursorManager.setBusyCursor();
+			// sound initialization takes a moment, so we prepare them here
+			AssetEmbedsDefault.loadBitmapFonts();
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
