@@ -21,6 +21,7 @@
  */
 package com.godpaper.as3.tasks
 {
+	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.starling.views.plugin.PluginButtonBar;
@@ -90,7 +91,7 @@ package com.godpaper.as3.tasks
 		{
 			//Plugin button bar view init
 			var pluginButtonBar:PluginButtonBar = new PluginButtonBar();
-			pluginButtonBar.height = 50;
+			pluginButtonBar.height = PluginConfig.buttonBarHeight;
 			FlexGlobals.gameStage.addChild(pluginButtonBar);
 			//
 			this.complete();

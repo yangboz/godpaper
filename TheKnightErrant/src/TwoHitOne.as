@@ -75,6 +75,8 @@ package
 	 * @airVersion 3.2+
 	 * Created Jun 26, 2012 4:13:21 PM
 	 */   	 
+	[SWF(frameRate="60", width="400", height="480", backgroundColor="0xffffff")]//320×480 for iPhone devices
+	//	[SWF(frameRate="60", width="384", height="512", backgroundColor="0xffffff")]//384×512 for iPad devices
 	public class TwoHitOne extends ApplicationBase
 	{		
 		//--------------------------------------------------------------------------

@@ -48,8 +48,8 @@ package com.godpaper.as3.configs
 		//board background
 //		private static var _backGround:Class;
 		//board x,y position adjust
-		public static var xAdjust:Number=10;
-		public static var yAdjust:Number=10;
+		public static var xAdjust:Number=50;
+		public static var yAdjust:Number=50;
 		//connex directions
 		public static var hConnex:Boolean=false; //horizontally connection flag.
 		public static var vConnex:Boolean=false; //vertically connection flag.

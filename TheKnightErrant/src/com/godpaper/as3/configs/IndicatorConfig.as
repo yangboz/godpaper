@@ -1,10 +1,12 @@
 package com.godpaper.as3.configs
 {
+	import com.godpaper.as3.impl.AbstractChessVO;
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.starling.views.popups.ComputerWinIndicatory;
 	import com.godpaper.starling.views.popups.ThinkIndicatory;
 	
 	import org.josht.starling.foxhole.controls.Callout;
+	import org.josht.starling.foxhole.controls.popups.CalloutPopUpContentManager;
 	import org.josht.starling.foxhole.core.PopUpManager;
 	
 	import starling.display.DisplayObject;
@@ -38,6 +40,8 @@ package com.godpaper.as3.configs
 		public static var airportUtility:Boolean=false;
 		//about popup the computer win title window
 		private static var _outcome:Boolean=false;
+		//call out(popup manager).
+		private static var _callout:CalloutPopUpContentManager = new CalloutPopUpContentManager();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -59,13 +63,16 @@ package com.godpaper.as3.configs
 			if(value)
 			{
 				computerWinIndicatory = new ComputerWinIndicatory();
-				Callout.show(computerWinIndicatory, getChessBoard(), Callout.DIRECTION_ANY);
+//				Callout.show(computerWinIndicatory, getChessBoard(), Callout.DIRECTION_ANY);
+//				_callout.open(computerWinIndicatory,FlexGlobals.gameScene);
+				PopUpManager.addPopUp(computerWinIndicatory);
 			}else
 			{
-				//				if(thinkIndicatoryPopup)
-				//				{
-				//					PopUpManager.removePopUp(computerWinIndicatory);	
-				//				}
+//				_callout.close();
+				if(computerWinIndicatory)
+				{
+					PopUpManager.removePopUp(computerWinIndicatory);
+				}
 			}
 		}
 
@@ -82,13 +89,16 @@ package com.godpaper.as3.configs
 			if(value)
 			{
 				thinkIndicatory = new ThinkIndicatory();
-				Callout.show(thinkIndicatory, getChessBoard(), Callout.DIRECTION_DOWN);
+//				Callout.show(thinkIndicatory, getChessBoard(), Callout.DIRECTION_DOWN);
+//				_callout.open(thinkIndicatory,FlexGlobals.gameScene);
+				PopUpManager.addPopUp(thinkIndicatory);
 			}else
 			{
-				//				if(thinkIndicatoryPopup)
-				//				{
-				//					PopUpManager.removePopUp(thinkIndicatoryPopup);	
-				//				}
+//				_callout.close();
+				if(thinkIndicatory)
+				{
+					PopUpManager.removePopUp(thinkIndicatory);
+				}
 			}
 		}
 		//--------------------------------------------------------------------------
@@ -120,10 +130,10 @@ package com.godpaper.as3.configs
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private static function getChessBoard():DisplayObject
-		{
-			return DisplayObject(FlexGlobals.gameScene.chessBoard);
-		}
+//		private static function getChessBoard():DisplayObject
+//		{
+//			return DisplayObject(FlexGlobals.gameScene.chessBoard);
+//		}
 
 	}
 

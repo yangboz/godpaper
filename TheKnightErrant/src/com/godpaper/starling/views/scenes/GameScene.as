@@ -136,17 +136,16 @@ package com.godpaper.starling.views.scenes
 				this.startUpSequenceTask.addChild(new FillInPiecesBoxTask());
 			}
 			this.startUpSequenceTask.addChild(new CreateChessGasketTask());//33.316M
+			//create pices box
 			if(!BoardConfig.piecesBoxRequired)
 			{
 				this.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.090M
 			}
 			this.startUpSequenceTask.addChild(new CreateChessVoTask());//34.922M
-			//create pices box
 			//Plugin button bar view init
 			this.startUpSequenceTask.addChild(new CreatePluginButtonBarTask());
+			//task start
 			this.startUpSequenceTask.start();
-			//TODO:top gap setting.
-//			this.y = 50;
 		}
 		//--------------------------------------------------------------------------
 		//

@@ -158,13 +158,13 @@ package com.godpaper.starling.views.components
 			//Temp graphic objects tests.
 			//@see:http://wiki.starling-framework.org/manual/dynamic_textures
 			//Polygon
-			var polygon:Polygon = new Polygon(50,4,Color.NAVY);
-			polygon.x = 100;
-			polygon.y = 100;
-			polygon.pivotX = 0;
-			polygon.pivotY = 0;
-//			polygon.rotation = 30;
-			addChild(polygon);
+//			var polygon:Polygon = new Polygon(50,4,Color.NAVY);
+//			polygon.x = 100;
+//			polygon.y = 100;
+//			polygon.pivotX = 0;
+//			polygon.pivotY = 0;
+////			polygon.rotation = 30;
+//			addChild(polygon);
 		}
 		//--------------------------------------------------------------------------
 		//

@@ -22,11 +22,15 @@
 package com.godpaper.as3.tasks
 {
 	import com.godpaper.as3.configs.BoardConfig;
+	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.starling.views.components.PiecesBox;
+	import com.godpaper.starling.views.plugin.PluginButtonBar;
 	
 	import flash.geom.Rectangle;
+	
+	import org.hamcrest.mxml.object.Null;
 	
 	import starling.display.Image;
 
@@ -104,23 +108,28 @@ package com.godpaper.as3.tasks
 //				
 //				backgroundImageFillMode="scale" borderVisible="false"
 //				childrenArea="{new Rectangle(20,0,25,25)}" type="{DefaultConstants.RED}"/>
+			var xGap:Number = 20;
+			var yGap:Number = 50;
+			var childAreaXOffset:Number = 20;
+			var childAreaYOffset:Number = 0;
+			var childAreaWidth:Number = 25;
+			var childAreaHeight:Number = 25;
 			var bluePiecesBox:PiecesBox = new PiecesBox();
-			bluePiecesBox.x = 20;
-			bluePiecesBox.y = 380;
 			bluePiecesBox.width = 100;
 			bluePiecesBox.height = 100;
+			bluePiecesBox.x = xGap;
+			bluePiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-PluginConfig.buttonBarHeight - childAreaHeight - yGap;
 			bluePiecesBox.background = BoardConfig.piecesBoxBgImage;
-			bluePiecesBox.childrenArea = new Rectangle(20,0,25,25);
+			bluePiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);
 			bluePiecesBox.type = DefaultConstants.BLUE;
-			bluePiecesBox.useHandCursor = true;
 			//
 			var redPiecesBox:PiecesBox = new PiecesBox();
-			redPiecesBox.x = 220;
-			redPiecesBox.y = 380;
 			redPiecesBox.width = 100;
 			redPiecesBox.height = 100;
+			redPiecesBox.x = FlexGlobals.topLevelApplication.stage.stageWidth-childAreaWidth -childAreaXOffset - xGap;
+			redPiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-PluginConfig.buttonBarHeight - childAreaHeight - yGap;
 			redPiecesBox.background = BoardConfig.piecesBoxBgImage;
-			redPiecesBox.childrenArea = new Rectangle(20,0,25,25);
+			redPiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);
 			redPiecesBox.type = DefaultConstants.RED;
 			//
 			FlexGlobals.gameStage.addChild(bluePiecesBox);

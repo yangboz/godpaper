@@ -1,5 +1,7 @@
 package com.godpaper.as3.configs
 {
+	import com.godpaper.starling.views.plugin.PluginButtonBar;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -22,6 +24,8 @@ package com.godpaper.as3.configs
 		//--------------------------------------------------------------------------
 		public static var gameID:String;
 		public static var boardID:String;
+		//Plugin button bar relevant properties.
+		public static var buttonBarHeight:Number=50;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

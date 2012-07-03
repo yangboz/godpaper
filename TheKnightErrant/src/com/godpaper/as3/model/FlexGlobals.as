@@ -22,6 +22,7 @@
 package com.godpaper.as3.model
 {
 	import com.godpaper.as3.utils.SingletonFactory;
+	import com.godpaper.starling.views.plugin.PluginButtonBar;
 	import com.godpaper.starling.views.scenes.GameScene;
 	import com.lookbackon.AI.FSM.Message;
 	
