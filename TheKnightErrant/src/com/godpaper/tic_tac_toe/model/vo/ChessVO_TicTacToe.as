@@ -6,8 +6,6 @@ package com.godpaper.tic_tac_toe.model.vo
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.impl.AbstractChessVO;
-	import com.godpaper.as3.model.ChessGasketsModel;
-	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	
@@ -28,8 +26,6 @@ package com.godpaper.tic_tac_toe.model.vo
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var chessGasketModel:ChessGasketsModel = FlexGlobals.chessGasketsModel;
-		private var chessPieceModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -83,8 +79,8 @@ package com.godpaper.tic_tac_toe.model.vo
 			}
 			LOG.info("occupies:{0}",this.occupies.dump());
 			//about legal moves.
-			LOG.info(chessPieceModel.allPieces.dump());
-			this.moves = this.occupies.xor(this.occupies.and(chessPieceModel.allPieces));
+			LOG.info(chessPiecesModel.allPieces.dump());
+			this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.allPieces));
 			//
 			LOG.info("moves:{0}",this.moves.dump());
 			//blocker

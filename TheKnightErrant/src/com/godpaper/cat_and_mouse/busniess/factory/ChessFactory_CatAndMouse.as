@@ -24,7 +24,7 @@ package com.godpaper.cat_and_mouse.busniess.factory
 
 
 	/**
-	 * YourChessFacory.as class.
+	 * ChessFactory_CatAndMouse.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0

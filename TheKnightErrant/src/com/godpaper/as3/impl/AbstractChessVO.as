@@ -3,8 +3,11 @@ package com.godpaper.as3.impl
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.errors.DefaultErrors;
+	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.starling.views.components.ChessGasket;
 	import com.lookbackon.ds.BitBoard;
 	
 	import mx.logging.ILogger;
@@ -62,6 +65,9 @@ package com.godpaper.as3.impl
 		protected var flag:int;
 		//chess vo identifier.
 		protected var identifier:String;
+		//model variables
+		protected var chessGasketModel:ChessGasketsModel = FlexGlobals.chessGasketsModel;
+		protected var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

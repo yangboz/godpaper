@@ -29,7 +29,7 @@ package com.godpaper.cat_and_mouse.model.vo
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var chessPieceModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -165,14 +165,14 @@ package com.godpaper.cat_and_mouse.model.vo
 			//
 			LOG.info("occupies:{0}",this.occupies.dump());
 			//about legal moves.
-			LOG.info(chessPieceModel.allPieces.dump());
+			LOG.info(chessPiecesModel.allPieces.dump());
 			if(flag==DefaultConstants.FLAG_RED)
 			{
-				this.moves = this.occupies.xor(this.occupies.and(chessPieceModel.redPieces));
+				this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.redPieces));
 			}
 			if(flag==DefaultConstants.FLAG_BLUE)
 			{
-				this.moves = this.occupies.xor(this.occupies.and(chessPieceModel.bluePieces));
+				this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.bluePieces));
 			}
 			//
 			LOG.info("moves:{0}",this.moves.dump());
@@ -180,7 +180,7 @@ package com.godpaper.cat_and_mouse.model.vo
 			//about attacked captures.
 			if(flag==DefaultConstants.FLAG_RED)
 			{
-				this.captures = this.moves.and(chessPieceModel.bluePieces);
+				this.captures = this.moves.and(chessPiecesModel.bluePieces);
 			}
 			//Mouse can not capture Cat.
 //			if(flag==DefaultConstants.FLAG_BLUE)

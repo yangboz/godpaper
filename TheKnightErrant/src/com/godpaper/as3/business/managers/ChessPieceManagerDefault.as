@@ -53,7 +53,7 @@ package com.godpaper.as3.business.managers
 //		private  var _crossOverValue:int;//and we using _crossOverValue for store the value "b";
 		private var _zKey:ZobristKeyVO; //current chess piece's zobrist key value object.
 		//
-		private var chessPiecesModel:ChessPiecesModel=FlexGlobals.chessPiecesModel;
+		protected var chessPiecesModel:ChessPiecesModel=FlexGlobals.chessPiecesModel;
 		//
 		private var _eatOffs:Vector.<ChessPiece>=new Vector.<ChessPiece>();
 		//
@@ -66,7 +66,7 @@ package com.godpaper.as3.business.managers
 //		[Bindable]
 		private var _isChecking:Boolean=false;
 		//
-		private var chessGaketsModel:ChessGasketsModel = FlexGlobals.chessGasketsModel;
+		protected var chessGaketsModel:ChessGasketsModel = FlexGlobals.chessGasketsModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
