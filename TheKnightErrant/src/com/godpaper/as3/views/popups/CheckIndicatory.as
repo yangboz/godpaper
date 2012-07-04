@@ -19,49 +19,41 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.popups
+package com.godpaper.as3.views.popups
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.consts.DefaultPiecesConstants;
+	import com.godpaper.as3.model.FlexGlobals;
+	import com.lookbackon.AI.FSM.Message;
 	
-	import org.josht.starling.foxhole.controls.Button;
 	import org.josht.starling.foxhole.controls.Label;
 	import org.josht.starling.foxhole.controls.Screen;
-	import org.josht.starling.foxhole.controls.ScreenHeader;
-	import org.josht.starling.foxhole.controls.ScrollContainer;
-	import org.josht.starling.foxhole.layout.HorizontalLayout;
-	
-	import starling.display.DisplayObject;
+
 	/**
-	 * Callout/popup view component that indicated the computer win status. 	
+	 * Callout/popup view component that indicated the computer/human be chencked status.  	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Jun 20, 2012 2:56:34 PM
+	 * Created Jun 20, 2012 2:48:49 PM
 	 */   	 
-	public class ComputerWinIndicatory extends Screen
+	public class CheckIndicatory extends Screen
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _yesBtn:Button;
-		private var _noBtn:Button;
-		//
-		private var _container:ScrollContainer;
-		private var _header:ScreenHeader;
+		private var _label:Label;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private var layout:HorizontalLayout;
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -79,7 +71,7 @@ package com.godpaper.starling.views.popups
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ComputerWinIndicatory()
+		public function CheckIndicatory()
 		{
 		}     	
 		//--------------------------------------------------------------------------
@@ -95,74 +87,29 @@ package com.godpaper.starling.views.popups
 		//--------------------------------------------------------------------------
 		override protected function initialize():void
 		{
-			//header title
-			this._header = new ScreenHeader();
-			this._header.title = DefaultConstants.INDICATION_COMPUTER_WIN;
-			this.addChild(this._header);
-			//layout 
-			const layout:HorizontalLayout = new HorizontalLayout();
-			layout.gap = 0;
-			layout.paddingTop = 0;
-			layout.paddingRight = 0;
-			layout.paddingBottom = 0;
-			layout.paddingLeft = 0;
-			layout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_LEFT;
-			layout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_TOP;
-			//container
-			this._container = new ScrollContainer();
-			this._container.layout = layout;
-//			this.addChild(this._container);
-			//buttons 
-			this._yesBtn = new Button();
-			this._yesBtn.label = "YES";
-			this._yesBtn.width = this._yesBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
-//			this._container.addChild(this._yesBtn);
-			this._noBtn = new Button();
-			this._noBtn.label = "NO";
-			this._noBtn.width = this._noBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
-//			this._container.addChild(this._noBtn);
-			//header items
-			this._header.leftItems = new <DisplayObject>
-				[
-					this._yesBtn
-				];
-			this._header.rightItems = new <DisplayObject>
-				[
-					this._noBtn
-				];
-			//event listener
-			this._yesBtn.onRelease.add(yesButtonOnRelease);
-			this._noBtn.onRelease.add(noButtonOnRelease);
+			//
+			this._label = new Label();
+			this._label.text = DefaultConstants.INDICATION_CHECK;
+			this.addChild(this._label);
+			//AS3 signal to broad cast the chess check message.
+			var message:Message=new Message();
+			message.priority=DefaultPiecesConstants.BLUE_MARSHAL.strength;
+			//				message.data = chessPieceModel.BLUE_MARSHAL
+			FlexGlobals.checkSignal.dispatch(message);
 		}
-		//
+		
 		override protected function draw():void
 		{
 			//
-			this._header.width = this.actualWidth;
-			this._header.validate();
-			//			
-			this._container.y = this._header.height;
-//			this._container.width = this.actualWidth;
-			this._container.width = 100;
-			this._container.height = this.actualHeight - this._container.y;
-			this._container.validate();
+			this._label.validate();
+			this._label.x = (this.actualWidth - this._label.width) / 2;
+			this._label.y = (this.actualHeight - this._label.height) / 2;
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function yesButtonOnRelease(button:Button):void
-		{
-			//restart game.
-			GameConfig.gameStateManager.restart();
-			//
-			IndicatorConfig.outcome = false;
-		}
-		private function noButtonOnRelease(button:Button):void
-		{
-			IndicatorConfig.outcome = false;
-		}
 	}
 	
 }

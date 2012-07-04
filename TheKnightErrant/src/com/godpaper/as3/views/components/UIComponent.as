@@ -19,28 +19,30 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.screens
+package com.godpaper.as3.views.components
 {
-	import starling.events.Event;
-	import mx.logging.ILogger;
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.starling.views.scenes.SceneBase;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.core.IVisualElement;
+	
+	import mx.utils.UIDUtil;
+	
+	import starling.display.Image;
+	import starling.display.Sprite;
+	
 	
 	/**
-	 * SplashScene.as class with customzie subroutines.	
+	 * UIComponent.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Jul 3, 2012 5:11:09 PM
+	 * Created Apr 18, 2012 1:57:14 PM
 	 */   	 
-	public class SplashScreen extends SceneBase
+	public class UIComponent extends Sprite implements IVisualElement
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -51,13 +53,64 @@ package com.godpaper.starling.views.screens
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(SplashScreen);
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		//----------------------------------
+		//  background(CrossLines or Embbed image textures)
+		//----------------------------------
+		private var _background:Image = null;
+		public function get background():Image
+		{
+			return _background;
+		}
+		public function set background(value:Image):void
+		{
+			if(value!=null)
+			{
+				if(this.contains(_background))
+				{
+					removeChild(_background);//Remove the existed background at first.
+				}
+				//set anew value
+				_background=value;
+				//Puts on background image.
+				//			var bg:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
+				//			addChild(bg);
+				//Display anew backgournd
+				addChild(_background);
+			}else//Draw to render the program background.
+			{
+				this.backgroundRender();
+			}
+		}
+		//----------------------------------
+		//  label
+		//----------------------------------
+		private var _label:String;
+		public function set label(value:String):void
+		{
+			_label = value;
+		}
+		public function get label():String
+		{
+			return _label;
+		}
+		//----------------------------------
+		//  uid
+		//----------------------------------
+		private var _uid:String;
+		public function get uid():String
+		{
+			return _uid;
+		}
+		public function set uid(value:String):void
+		{
+			_uid = value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -69,10 +122,11 @@ package com.godpaper.starling.views.screens
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function SplashScreen()
+		public function UIComponent()
 		{
-			//TODO: implement function
 			super();
+			//uid creation.
+			this.uid = UIDUtil.createUID();
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -85,11 +139,9 @@ package com.godpaper.starling.views.screens
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function addToStageHandler(event:Event):void
+		protected function backgroundRender():void
 		{
-			//			CursorManager.setBusyCursor();
-			// sound initialization takes a moment, so we prepare them here
-			AssetEmbedsDefault.loadBitmapFonts();
+			//TODO:with customize override.
 		}
 		//--------------------------------------------------------------------------
 		//

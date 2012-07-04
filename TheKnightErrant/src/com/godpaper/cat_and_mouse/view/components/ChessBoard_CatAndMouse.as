@@ -32,8 +32,8 @@ package com.godpaper.cat_and_mouse.view.components
 	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.MathUtil;
-	import com.godpaper.starling.views.components.ChessBoard;
-	import com.godpaper.starling.views.components.ChessPiece;
+	import com.godpaper.as3.views.components.ChessBoard;
+	import com.godpaper.as3.views.components.ChessPiece;
 	
 	import flash.display.BitmapData;
 	import flash.display.Shape;

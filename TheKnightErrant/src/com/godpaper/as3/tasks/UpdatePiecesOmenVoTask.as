@@ -9,7 +9,7 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.starling.views.components.ChessPiece;
+	import com.godpaper.as3.views.components.ChessPiece;
 	
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;

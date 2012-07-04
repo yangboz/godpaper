@@ -79,6 +79,10 @@ package com.godpaper.as3.consts
 		//Cirrus:rtmfp://p2p.rtmfp.net/40a1c5b634bc4f531ad7757f-2e3cf422214e/
 		public static const CIRRUS_SERVER:String = "rtmfp://stratus.adobe.com/";//"rtmfp://p2p.rtmfp.net/";
 		public static const CIRRUS_DEV_KEY:String = "99ead580edaf280c060675f9-f614dd07a932";//"40a1c5b634bc4f531ad7757f-2e3cf422214e";
+		//Screen ids
+		public static const SCREEN_SPLASH:String = "screen_splash";
+		public static const SCREEN_MAIN_MENU:String = "screen_main_menu";
+		public static const SCREEN_GAME:String = "screen_game";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

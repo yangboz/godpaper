@@ -22,10 +22,11 @@
 package com.godpaper.as3.model
 {
 	import com.godpaper.as3.utils.SingletonFactory;
-	import com.godpaper.starling.views.plugin.PluginButtonBar;
-	import com.godpaper.starling.views.screens.GameScreen;
+	import com.godpaper.as3.views.plugin.PluginButtonBar;
+	import com.godpaper.as3.views.screens.GameScreen;
 	import com.lookbackon.AI.FSM.Message;
 	
+	import org.josht.starling.foxhole.controls.ScreenNavigator;
 	import org.osflash.signals.Signal;
 	
 	import starling.display.Stage;
@@ -74,6 +75,8 @@ package com.godpaper.as3.model
 		//Signals.
 		public static var levelUpSignal:Signal = new Signal(int);//user level up signal.
 		public static var checkSignal:Signal = new Signal(Message);//chess check signal.
+		//Screen navigator
+		public static var screenNavigator:ScreenNavigator;
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

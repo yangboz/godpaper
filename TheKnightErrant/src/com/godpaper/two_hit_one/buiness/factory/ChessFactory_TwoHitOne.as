@@ -35,7 +35,7 @@ package com.godpaper.two_hit_one.buiness.factory
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
-	import com.godpaper.starling.views.components.ChessPiece;
+	import com.godpaper.as3.views.components.ChessPiece;
 	import com.godpaper.two_hit_one.model.vo.ChessVO_TwoHitOne;
 	
 	import flash.geom.Point;

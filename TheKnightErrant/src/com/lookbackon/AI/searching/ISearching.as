@@ -3,7 +3,7 @@ package com.lookbackon.AI.searching
 	import com.lookbackon.AI.evaluation.IEvaluation;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
-	import com.godpaper.starling.views.components.ChessPiece;
+	import com.godpaper.as3.views.components.ChessPiece;
 	
 	/**
 	 * The basic chess game AI behaviors to be implemented.

@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.plugin
+package com.godpaper.as3.views.plugin
 {
 	//--------------------------------------------------------------------------
 	//
@@ -31,7 +31,7 @@ package com.godpaper.starling.views.plugin
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.starling.views.popups.ThinkIndicatory;
+	import com.godpaper.as3.views.popups.ThinkIndicatory;
 	
 	import flash.ui.Mouse;
 	

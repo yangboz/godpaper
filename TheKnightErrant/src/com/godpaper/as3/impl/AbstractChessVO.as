@@ -7,7 +7,7 @@ package com.godpaper.as3.impl
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.starling.views.components.ChessGasket;
+	import com.godpaper.as3.views.components.ChessGasket;
 	import com.lookbackon.ds.BitBoard;
 	
 	import mx.logging.ILogger;

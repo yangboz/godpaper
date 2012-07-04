@@ -15,7 +15,7 @@ package com.godpaper.cat_and_mouse.busniess.factory
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
-	import com.godpaper.starling.views.components.ChessPiece;
+	import com.godpaper.as3.views.components.ChessPiece;
 	import com.godpaper.cat_and_mouse.model.vo.ChessVO_CatAndMouse;
 	
 	import flash.geom.Point;

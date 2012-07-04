@@ -19,20 +19,30 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.as3.tasks
+package com.godpaper.as3.views.scenes
 {
-	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.FlexGlobals;
-	import com.godpaper.as3.views.components.PiecesBox;
-	import com.godpaper.as3.views.plugin.PluginButtonBar;
+	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.as3.views.screens.GameScreen;
+	import com.godpaper.as3.views.screens.MainMenuScreen;
+	import com.godpaper.as3.views.screens.SplashScreen;
+	import com.gskinner.motion.easing.Cubic;
 	
-	import flash.geom.Rectangle;
+	import flash.ui.Mouse;
 	
-	import org.hamcrest.mxml.object.Null;
+	import mx.logging.ILogger;
 	
-	import starling.display.Image;
+	import org.josht.starling.foxhole.controls.FPSDisplay;
+	import org.josht.starling.foxhole.controls.ScreenNavigator;
+	import org.josht.starling.foxhole.controls.ScreenNavigatorItem;
+	import org.josht.starling.foxhole.themes.IFoxholeTheme;
+	import org.josht.starling.foxhole.themes.MinimalTheme;
+	import org.josht.starling.foxhole.transitions.ScreenSlidingStackTransitionManager;
+	
+	import starling.display.Sprite;
+	import starling.events.Event;
+	import starling.events.ResizeEvent;
 
 	//--------------------------------------------------------------------------
 	//
@@ -41,25 +51,28 @@ package com.godpaper.as3.tasks
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * CreatePiecesBoxTask.as class for the boxes(which filled with chess pieces) creation process.   	
+	 * MainScene.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Jun 29, 2012 4:03:28 PM
+	 * Created Jul 3, 2012 5:20:17 PM
 	 */   	 
-	public class CreatePiecesBoxTask extends ChessTaskBase
+	public class MainScene extends SceneBase
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		private var _theme:IFoxholeTheme;
+		private var _navigator:ScreenNavigator;
+		private var _transitionManager:ScreenSlidingStackTransitionManager;
+//		private var _fps:FPSDisplay;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:ILogger = LogUtil.getLogger(MainScene);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -77,11 +90,9 @@ package com.godpaper.as3.tasks
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CreatePiecesBoxTask()
+		public function MainScene()
 		{
 			super();
-			//Set properties.
-			this.label = "CreatePiecesBoxTask";
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -94,54 +105,47 @@ package com.godpaper.as3.tasks
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function performTask():void
+		override protected function addToStageHandler(event:Event):void
 		{
-			//TODO:<!-- PiecesBox View -->
-//				<components1:PiecesBox id="bluePiecesBox" visible="true" left="20" bottom="50" width="100"
-//				height="100"
-//				
-//				backgroundImageFillMode="scale" borderVisible="false"
-//				childrenArea="{new Rectangle(20,0,25,25)}"
-//				type="{DefaultConstants.BLUE}"/>
-//				<components1:PiecesBox id="redPiecesBox" visible="true" right="20" bottom="50" width="100"
-//				height="100"
-//				
-//				backgroundImageFillMode="scale" borderVisible="false"
-//				childrenArea="{new Rectangle(20,0,25,25)}" type="{DefaultConstants.RED}"/>
-			var xGap:Number = 20;
-			var yGap:Number = 50;
-			var childAreaXOffset:Number = 20;
-			var childAreaYOffset:Number = 0;
-			var childAreaWidth:Number = 25;
-			var childAreaHeight:Number = 25;
-			var bluePiecesBox:PiecesBox = new PiecesBox();
-			bluePiecesBox.width = 100;
-			bluePiecesBox.height = 100;
-			bluePiecesBox.x = xGap;
-			bluePiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-PluginConfig.buttonBarHeight - childAreaHeight - yGap;
-			bluePiecesBox.background = BoardConfig.piecesBoxBgImage;
-			bluePiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);
-			bluePiecesBox.type = DefaultConstants.BLUE;
+			//this is supposed to be an example mobile app, but it is also shown
+			//as a preview in Flash Player on the web. we're making a special
+			//case to pretend that the web SWF is running in the theme's "ideal"
+			//DPI. official themes usually target an iPhone Retina display.
+			const isDesktop:Boolean = Mouse.supportsCursor;
+			this._theme = new MinimalTheme(this.stage, !isDesktop);
+			const originalThemeDPI:int = this._theme.originalDPI;
+			
+			this._navigator = new ScreenNavigator();
+			this.addChild(this._navigator);
 			//
-			var redPiecesBox:PiecesBox = new PiecesBox();
-			redPiecesBox.width = 100;
-			redPiecesBox.height = 100;
-			redPiecesBox.x = FlexGlobals.topLevelApplication.stage.stageWidth-childAreaWidth -childAreaXOffset - xGap;
-			redPiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-PluginConfig.buttonBarHeight - childAreaHeight - yGap;
-			redPiecesBox.background = BoardConfig.piecesBoxBgImage;
-			redPiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);
-			redPiecesBox.type = DefaultConstants.RED;
-			//
-			FlexGlobals.gameStage.addChild(bluePiecesBox);
-			FlexGlobals.gameStage.addChild(redPiecesBox);
-			//
-			this.complete();
+			this._navigator.addScreen(DefaultConstants.SCREEN_SPLASH, new ScreenNavigatorItem(SplashScreen));
+			this._navigator.addScreen(DefaultConstants.SCREEN_MAIN_MENU, new ScreenNavigatorItem(MainMenuScreen));
+			this._navigator.addScreen(DefaultConstants.SCREEN_GAME, new ScreenNavigatorItem(GameScreen));
+			
+			//Store the navigator ref to FlexGlobals.
+			FlexGlobals.screenNavigator = this._navigator;
+			FlexGlobals.screenNavigator.showScreen((DefaultConstants.SCREEN_SPLASH));//Screen swither here.
+			
+			this._transitionManager = new ScreenSlidingStackTransitionManager(this._navigator);
+			this._transitionManager.duration = 0.4;
+			this._transitionManager.ease = Cubic.easeOut;
+			
+//			this._fps = new FPSDisplay();
+//			this.stage.addChild(this._fps);
+//			this._fps.validate();
+//			this._fps.y = this.stage.stageHeight - this._fps.height;
+//			this.stage.addEventListener(ResizeEvent.RESIZE, stage_resizeHandler);
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+//		private function stage_resizeHandler(event:ResizeEvent):void
+//		{
+//			this._fps.validate();
+//			this._fps.y = this.stage.stageHeight - this._fps.height;
+//		}
 	}
 	
 }

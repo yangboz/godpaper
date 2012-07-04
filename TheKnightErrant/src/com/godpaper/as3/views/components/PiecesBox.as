@@ -19,97 +19,81 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.components
+package com.godpaper.as3.views.components
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.core.IVisualElement;
+	import com.godpaper.as3.configs.PieceConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.IPiecesBox;
+	import com.godpaper.as3.model.pools.BlueChessPiecesPool;
+	import com.godpaper.as3.model.pools.RedChessPiecesPool;
+	import com.godpaper.as3.utils.LogUtil;
 	
-	import mx.utils.UIDUtil;
+	import flash.display.Shape;
+	import flash.geom.Rectangle;
 	
-	import starling.display.Image;
+	import mx.logging.ILogger;
+	
 	import starling.display.Sprite;
+	import starling.events.Event;
+	import starling.utils.Color;
+	import starling.utils.Polygon;
 	
 	
 	/**
-	 * UIComponent.as class.   	
+	 * A pieces box is defined by a number of piece items that represents slots for movable chess pieces.  	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 18, 2012 1:57:14 PM
+	 * Created Apr 18, 2012 9:54:47 AM
+	 * @history,using the starling(stage3d) version.
 	 */   	 
-	public class UIComponent extends Sprite implements IVisualElement
+	public class PiecesBox extends UIComponent implements IPiecesBox
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		private var _type:String;
+		private var _childrenArea:Rectangle;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:ILogger = LogUtil.getLogger(PiecesBox);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
 		//----------------------------------
-		//  background(CrossLines or Embbed image textures)
+		//  type(RED/BLUE...)
 		//----------------------------------
-		private var _background:Image = null;
-		public function get background():Image
+		public function get type():String
 		{
-			return _background;
+			return _type;
 		}
-		public function set background(value:Image):void
+		
+		public function set type(value:String):void
 		{
-			if(value!=null)
-			{
-				if(this.contains(_background))
-				{
-					removeChild(_background);//Remove the existed background at first.
-				}
-				//set anew value
-				_background=value;
-				//Puts on background image.
-				//			var bg:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
-				//			addChild(bg);
-				//Display anew backgournd
-				addChild(_background);
-			}else//Draw to render the program background.
-			{
-				this.backgroundRender();
-			}
+			_type=value;
 		}
 		//----------------------------------
-		//  label
+		//  childrenArea
 		//----------------------------------
-		private var _label:String;
-		public function set label(value:String):void
+		public function get childrenArea():Rectangle
 		{
-			_label = value;
+			return _childrenArea;
 		}
-		public function get label():String
+		
+		public function set childrenArea(value:Rectangle):void
 		{
-			return _label;
-		}
-		//----------------------------------
-		//  uid
-		//----------------------------------
-		private var _uid:String;
-		public function get uid():String
-		{
-			return _uid;
-		}
-		public function set uid(value:String):void
-		{
-			_uid = value;
+			_childrenArea = value;
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -122,26 +106,65 @@ package com.godpaper.starling.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function UIComponent()
+		public function PiecesBox()
 		{
 			super();
-			//uid creation.
-			this.uid = UIDUtil.createUID();
-		}     	
+			//
+//			this.addEventListener(Event.COMPLETE, creationCompleteHandler);
+			this.addEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
+			//
+			_childrenArea = new Rectangle(0,0,this.width,this.height);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		override public function dispose():void
+		{
+			this.removeEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
+			super.dispose();
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		protected function backgroundRender():void
+//		protected function creationCompleteHandler(event:Event):void
+		protected function addToStageHandler(event:Event):void
 		{
-			//TODO:with customize override.
+			if (PieceConfig.bluePieces.length)
+			{
+				if (type == DefaultConstants.BLUE)
+				{
+					BlueChessPiecesPool.initialize(PieceConfig.maxPoolSizeBlue, PieceConfig.growthValue);
+					//store this reference
+					PieceConfig.bluePiecesBox = this;
+				}
+			}
+			if (PieceConfig.redPieces.length)
+			{
+				if (type == DefaultConstants.RED)
+				{
+					RedChessPiecesPool.initialize(PieceConfig.maxPoolSizeRed, PieceConfig.growthValue);
+					//store this reference
+					PieceConfig.redPiecesBox = this;
+				}
+			}
+		}
+		//
+		override protected function backgroundRender():void
+		{
+			//Temp graphic objects tests.
+			//@see:http://wiki.starling-framework.org/manual/dynamic_textures
+			//Polygon
+//			var polygon:Polygon = new Polygon(50,4,Color.NAVY);
+//			polygon.x = 100;
+//			polygon.y = 100;
+//			polygon.pivotX = 0;
+//			polygon.pivotY = 0;
+////			polygon.rotation = 30;
+//			addChild(polygon);
 		}
 		//--------------------------------------------------------------------------
 		//

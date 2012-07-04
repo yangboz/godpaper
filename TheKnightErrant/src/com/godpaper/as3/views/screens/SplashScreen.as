@@ -19,66 +19,49 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.screens
+package com.godpaper.as3.views.screens
 {
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.utils.LogUtil;
+	
+	import mx.logging.ILogger;
+	
+	import org.josht.starling.foxhole.controls.Label;
+	import org.josht.starling.foxhole.controls.ProgressBar;
+	import org.josht.starling.foxhole.controls.Screen;
+	import org.josht.starling.motion.GTween;
+	
+	import starling.events.Event;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
 	
-	import com.adobe.cairngorm.task.SequenceTask;
-	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.core.IChessBoard;
-	import com.godpaper.as3.model.FlexGlobals;
-	import com.godpaper.as3.tasks.CreateChessBoardTask;
-	import com.godpaper.as3.tasks.CreateChessGasketTask;
-	import com.godpaper.as3.tasks.CreateChessPieceTask;
-	import com.godpaper.as3.tasks.CreateChessVoTask;
-	import com.godpaper.as3.tasks.CreatePiecesBoxTask;
-	import com.godpaper.as3.tasks.CreatePluginButtonBarTask;
-	import com.godpaper.as3.tasks.FillInPiecesBoxTask;
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.starling.views.components.ChessBoard;
-	import com.godpaper.starling.views.plugin.PluginButtonBar;
-	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
-	
-	import mx.logging.ILogger;
-	
-	import org.josht.starling.foxhole.controls.Screen;
-	import org.spicefactory.lib.task.SequentialTaskGroup;
-	
-	import starling.display.DisplayObject;
-	import starling.events.Event;
-
 	/**
-	 * GameScreen accepts input from the user and instructs the model and a viewport to perform actions based on that input. 	
+	 * SplashScene.as class with customzie subroutines.	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 16, 2012 11:01:37 AM
+	 * Created Jul 3, 2012 5:11:09 PM
 	 */   	 
-	public class GameScreen extends Screen
+	public class SplashScreen extends Screen
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//Tasks
-		public var cleanUpSequenceTask:SequentialTaskGroup;
-		public var startUpSequenceTask:SequenceTask;
-		//
-		private var _vehicle:SteeredVehicle;
-		private var _circles:Array;
-		private var _numCircles:int = 10;
-		//
-		public var chessBoard:ChessBoard;
+		private var _progressTween:GTween;//Foxhole extended GTween.
+		private var _progress:ProgressBar;
+		private var _label:Label;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(GameScreen);
+		private static const LOG:ILogger = LogUtil.getLogger(SplashScreen);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -96,8 +79,9 @@ package com.godpaper.starling.views.screens
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function GameScreen()
+		public function SplashScreen()
 		{
+			//TODO: implement function
 			super();
 		}     	
 		//--------------------------------------------------------------------------
@@ -105,50 +89,50 @@ package com.godpaper.starling.views.screens
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		//
 		override protected function initialize():void
 		{
-			//Store reference to FlexGlobal.
-			FlexGlobals.gameScene = this;
-			//Add visualElement to view.
-			//create chess board.
-			//create chess gaskets.
-			//create chess piece
-			//create chess pieces' chessVO;
-			//create chess pieces' omenVO;
-			//create plugin button bar.
-			this.startUpSequenceTask = new SequenceTask();
-			this.startUpSequenceTask.label = "startUpSequenceTask";//29.748M(debug)
-			//Display chess board at first.
-			this.startUpSequenceTask.addChild(new CreateChessBoardTask());//33.332M
-			//Display the pieces box if neccessary
-			if(BoardConfig.piecesBoxRequired)
+			this._progress = new ProgressBar();
+			this._progress.minimum = 0;
+			this._progress.maximum = 1;
+			this._progress.value = 0;
+			this.addChild(this._progress);
+			//
+			this._progressTween = new GTween(this._progress, 5,
+				{
+					value: 1
+				},
+				{
+					repeatCount: 1
+				});
+			//
+			this._label = new Label();
+			this._label.text = "LOADING...";
+			this.addChild(this._label);
+			//
+			//			CursorManager.setBusyCursor();
+			// sound initialization takes a moment, so we prepare them here
+			AssetEmbedsDefault.loadBitmapFonts();
+			//
+			this._progressTween.onComplete =  function():void
 			{
-				this.startUpSequenceTask.addChild(new CreatePiecesBoxTask());
-				this.startUpSequenceTask.addChild(new FillInPiecesBoxTask());
+				FlexGlobals.screenNavigator.showScreen((DefaultConstants.SCREEN_GAME));//Screen swither here.
 			}
-			this.startUpSequenceTask.addChild(new CreateChessGasketTask());//33.316M
-			//create pices box
-			if(!BoardConfig.piecesBoxRequired)
-			{
-				this.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.090M
-			}
-			this.startUpSequenceTask.addChild(new CreateChessVoTask());//34.922M
-			//Plugin button bar view init
-			this.startUpSequenceTask.addChild(new CreatePluginButtonBarTask());
-			//task start
-			this.startUpSequenceTask.start();
 		}
-		//
+		
 		override protected function draw():void
 		{
-			
+			this._progress.validate();
+			this._progress.x = (this.actualWidth - this._progress.width) / 2;
+			this._progress.y = (this.actualHeight - this._progress.height) / 2;
+			//
+			this._label.validate();
+			this._label.x = (this.actualWidth - this._label.width) / 2;
+			this._label.y = (this.actualHeight - this._label.height) / 2;
 		}
 		//--------------------------------------------------------------------------
 		//

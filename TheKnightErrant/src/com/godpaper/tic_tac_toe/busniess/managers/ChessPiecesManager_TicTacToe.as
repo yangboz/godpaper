@@ -14,7 +14,7 @@ package com.godpaper.tic_tac_toe.busniess.managers
 	import com.godpaper.as3.model.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.starling.views.components.ChessPiece;
+	import com.godpaper.as3.views.components.ChessPiece;
 	import com.lookbackon.ds.NumberBoard;
 	
 	import de.polygonal.ds.Array2;

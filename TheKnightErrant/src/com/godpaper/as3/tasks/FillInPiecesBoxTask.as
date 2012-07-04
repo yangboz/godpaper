@@ -14,8 +14,8 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.utils.MathUtil;
-	import com.godpaper.starling.views.components.ChessGasket;
-	import com.godpaper.starling.views.components.PiecesBox;
+	import com.godpaper.as3.views.components.ChessGasket;
+	import com.godpaper.as3.views.components.PiecesBox;
 	
 	import flash.geom.Point;
 	import flash.utils.getDefinitionByName;

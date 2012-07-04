@@ -40,7 +40,7 @@ package
 	import com.godpaper.as3.plugins.mochi.MochiPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
-	import com.godpaper.starling.views.scenes.MainScene;
+	import com.godpaper.as3.views.scenes.MainScene;
 	import com.godpaper.tic_tac_toe.busniess.factory.ChessFactory_TicTacToe;
 	import com.godpaper.tic_tac_toe.busniess.managers.ChessPiecesManager_TicTacToe;
 	

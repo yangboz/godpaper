@@ -20,9 +20,9 @@ package com.godpaper.as3.business.factory
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.starling.views.components.ChessBoard;
-	import com.godpaper.starling.views.components.ChessGasket;
-	import com.godpaper.starling.views.components.ChessPiece;
+	import com.godpaper.as3.views.components.ChessBoard;
+	import com.godpaper.as3.views.components.ChessGasket;
+	import com.godpaper.as3.views.components.ChessPiece;
 	
 	import flash.geom.Point;
 	

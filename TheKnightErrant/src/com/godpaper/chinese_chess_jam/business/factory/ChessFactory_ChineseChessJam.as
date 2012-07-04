@@ -16,7 +16,7 @@ package com.godpaper.chinese_chess_jam.business.factory
 	import com.godpaper.chinese_chess_jam.vo.OfficalVO;
 	import com.godpaper.chinese_chess_jam.vo.PawnVO;
 	import com.godpaper.chinese_chess_jam.vo.RookVO;
-	import com.godpaper.starling.views.components.ChessPiece;
+	import com.godpaper.as3.views.components.ChessPiece;
 	
 	import flash.geom.Point;
 	

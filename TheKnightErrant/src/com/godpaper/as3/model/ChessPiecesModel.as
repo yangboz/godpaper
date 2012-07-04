@@ -6,7 +6,7 @@ package com.godpaper.as3.model
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.starling.views.components.ChessPiece;
+	import com.godpaper.as3.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
 	
 	import de.polygonal.ds.Array2;

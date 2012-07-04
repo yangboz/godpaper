@@ -7,8 +7,8 @@ package com.godpaper.chinese_chess_jam.business.managers
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.chinese_chess_jam.consts.PiecesConstants_ChineseChessJam;
-	import com.godpaper.starling.views.components.ChessGasket;
-	import com.godpaper.starling.views.components.ChessPiece;
+	import com.godpaper.as3.views.components.ChessGasket;
+	import com.godpaper.as3.views.components.ChessPiece;
 	
 	import mx.logging.ILogger;
 

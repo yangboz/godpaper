@@ -1,6 +1,6 @@
 package com.godpaper.as3.configs
 {
-	import com.godpaper.starling.views.plugin.PluginButtonBar;
+	import com.godpaper.as3.views.plugin.PluginButtonBar;
 
 	//--------------------------------------------------------------------------
 	//

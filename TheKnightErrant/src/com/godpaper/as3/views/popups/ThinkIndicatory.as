@@ -19,56 +19,45 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.scenes
+package com.godpaper.as3.views.popups
 {
-	import com.godpaper.starling.views.screens.GameScreen;
-	import com.godpaper.starling.views.screens.SplashScreen;
-	import com.gskinner.motion.easing.Cubic;
-	
-	import flash.ui.Mouse;
-	
-	import org.josht.starling.foxhole.controls.FPSDisplay;
-	import org.josht.starling.foxhole.controls.ScreenNavigator;
-	import org.josht.starling.foxhole.controls.ScreenNavigatorItem;
-	import org.josht.starling.foxhole.themes.IFoxholeTheme;
-	import org.josht.starling.foxhole.themes.MinimalTheme;
-	import org.josht.starling.foxhole.transitions.ScreenSlidingStackTransitionManager;
-	
-	import starling.display.Sprite;
-	import starling.events.Event;
-	import starling.events.ResizeEvent;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.consts.DefaultConstants;
+	
+	import org.josht.starling.foxhole.controls.Label;
+	import org.josht.starling.foxhole.controls.ProgressBar;
+	import org.josht.starling.foxhole.controls.Screen;
+	import org.josht.starling.motion.GTween;
+	
+	import starling.events.Event;
+	
 	
 	/**
-	 * MainScene.as class.   	
+	 * Callout/popup view component that indicated the computer thinking status.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Jul 3, 2012 5:20:17 PM
+	 * Created Jun 20, 2012 1:41:57 PM
 	 */   	 
-	public class MainScene extends SceneBase
+	public class ThinkIndicatory extends Screen
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _theme:IFoxholeTheme;
-		private var _navigator:ScreenNavigator;
-		private var _transitionManager:ScreenSlidingStackTransitionManager;
-//		private var _fps:FPSDisplay;
+		private var _progressTween:GTween;//Foxhole extended GTween.
+		private var _progress:ProgressBar;
+		private var _label:Label;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const SPLASH:String = "splashScreen";
-		private static const MAIN_MENU:String = "mainMenuScreen";
-		private static const GAME:String = "gameScreen";
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -86,60 +75,55 @@ package com.godpaper.starling.views.scenes
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function MainScene()
+		public function ThinkIndicatory()
 		{
-			super();
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function addToStageHandler(event:Event):void
+		override protected function initialize():void
 		{
-			//this is supposed to be an example mobile app, but it is also shown
-			//as a preview in Flash Player on the web. we're making a special
-			//case to pretend that the web SWF is running in the theme's "ideal"
-			//DPI. official themes usually target an iPhone Retina display.
-			const isDesktop:Boolean = Mouse.supportsCursor;
-			this._theme = new MinimalTheme(this.stage, !isDesktop);
-			const originalThemeDPI:int = this._theme.originalDPI;
-			
-			this._navigator = new ScreenNavigator();
-			this.addChild(this._navigator);
-			
-			this._navigator.addScreen(SPLASH, new ScreenNavigatorItem(SplashScreen));
-			
-			this._navigator.addScreen(GAME, new ScreenNavigatorItem(GameScreen));
-			
-			this._navigator.showScreen(GAME);//Screen swither here.
-			
-			this._transitionManager = new ScreenSlidingStackTransitionManager(this._navigator);
-			this._transitionManager.duration = 0.4;
-			this._transitionManager.ease = Cubic.easeOut;
-			
-//			this._fps = new FPSDisplay();
-//			this.stage.addChild(this._fps);
-//			this._fps.validate();
-//			this._fps.y = this.stage.stageHeight - this._fps.height;
-//			this.stage.addEventListener(ResizeEvent.RESIZE, stage_resizeHandler);
+			this._progress = new ProgressBar();
+			this._progress.minimum = 0;
+			this._progress.maximum = 1;
+			this._progress.value = 0;
+			this.addChild(this._progress);
+			//
+			this._progressTween = new GTween(this._progress, 5,
+				{
+					value: 1
+				},
+				{
+					repeatCount: int.MAX_VALUE
+				});
+			//
+			this._label = new Label();
+			this._label.text = DefaultConstants.INDICATION_THINK;
+			this.addChild(this._label);
+		}
+		
+		override protected function draw():void
+		{
+			this._progress.validate();
+			this._progress.x = (this.actualWidth - this._progress.width) / 2;
+			this._progress.y = (this.actualHeight - this._progress.height) / 2;
+			//
+			this._label.validate();
+			this._label.x = (this.actualWidth - this._label.width) / 2;
+			this._label.y = (this.actualHeight - this._label.height) / 2;
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-//		private function stage_resizeHandler(event:ResizeEvent):void
-//		{
-//			this._fps.validate();
-//			this._fps.y = this.stage.stageHeight - this._fps.height;
-//		}
 	}
 	
 }

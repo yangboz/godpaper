@@ -2,8 +2,8 @@ package com.godpaper.as3.configs
 {
 	import com.godpaper.as3.impl.AbstractChessVO;
 	import com.godpaper.as3.model.FlexGlobals;
-	import com.godpaper.starling.views.popups.ComputerWinIndicatory;
-	import com.godpaper.starling.views.popups.ThinkIndicatory;
+	import com.godpaper.as3.views.popups.ComputerWinIndicatory;
+	import com.godpaper.as3.views.popups.ThinkIndicatory;
 	
 	import org.josht.starling.foxhole.controls.Callout;
 	import org.josht.starling.foxhole.controls.popups.CalloutPopUpContentManager;

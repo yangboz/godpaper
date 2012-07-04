@@ -16,7 +16,7 @@ package com.godpaper.tic_tac_toe.busniess.factory
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
-	import com.godpaper.starling.views.components.ChessPiece;
+	import com.godpaper.as3.views.components.ChessPiece;
 	import com.godpaper.tic_tac_toe.model.vo.ChessVO_TicTacToe;
 	
 	import flash.geom.Point;

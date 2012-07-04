@@ -19,82 +19,55 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.components
+package com.godpaper.as3.views.popups
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.configs.PieceConfig;
+	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.core.IPiecesBox;
-	import com.godpaper.as3.model.pools.BlueChessPiecesPool;
-	import com.godpaper.as3.model.pools.RedChessPiecesPool;
-	import com.godpaper.as3.utils.LogUtil;
 	
-	import flash.display.Shape;
-	import flash.geom.Rectangle;
+	import org.josht.starling.foxhole.controls.Button;
+	import org.josht.starling.foxhole.controls.Label;
+	import org.josht.starling.foxhole.controls.Screen;
+	import org.josht.starling.foxhole.controls.ScreenHeader;
+	import org.josht.starling.foxhole.controls.ScrollContainer;
+	import org.josht.starling.foxhole.layout.HorizontalLayout;
 	
-	import mx.logging.ILogger;
-	
-	import starling.display.Sprite;
-	import starling.events.Event;
-	import starling.utils.Color;
-	import starling.utils.Polygon;
-	
-	
+	import starling.display.DisplayObject;
 	/**
-	 * A pieces box is defined by a number of piece items that represents slots for movable chess pieces.  	
+	 * Callout/popup view component that indicated the computer win status. 	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 18, 2012 9:54:47 AM
-	 * @history,using the starling(stage3d) version.
+	 * Created Jun 20, 2012 2:56:34 PM
 	 */   	 
-	public class PiecesBox extends UIComponent implements IPiecesBox
+	public class ComputerWinIndicatory extends Screen
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _type:String;
-		private var _childrenArea:Rectangle;
+		private var _yesBtn:Button;
+		private var _noBtn:Button;
+		//
+		private var _container:ScrollContainer;
+		private var _header:ScreenHeader;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(PiecesBox);
+		private var layout:HorizontalLayout;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//----------------------------------
-		//  type(RED/BLUE...)
-		//----------------------------------
-		public function get type():String
-		{
-			return _type;
-		}
 		
-		public function set type(value:String):void
-		{
-			_type=value;
-		}
-		//----------------------------------
-		//  childrenArea
-		//----------------------------------
-		public function get childrenArea():Rectangle
-		{
-			return _childrenArea;
-		}
-		
-		public function set childrenArea(value:Rectangle):void
-		{
-			_childrenArea = value;
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -106,71 +79,90 @@ package com.godpaper.starling.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PiecesBox()
+		public function ComputerWinIndicatory()
 		{
-			super();
-			//
-//			this.addEventListener(Event.COMPLETE, creationCompleteHandler);
-			this.addEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
-			//
-			_childrenArea = new Rectangle(0,0,this.width,this.height);
-		}
+		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function dispose():void
-		{
-			this.removeEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
-			super.dispose();
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-//		protected function creationCompleteHandler(event:Event):void
-		protected function addToStageHandler(event:Event):void
+		override protected function initialize():void
 		{
-			if (PieceConfig.bluePieces.length)
-			{
-				if (type == DefaultConstants.BLUE)
-				{
-					BlueChessPiecesPool.initialize(PieceConfig.maxPoolSizeBlue, PieceConfig.growthValue);
-					//store this reference
-					PieceConfig.bluePiecesBox = this;
-				}
-			}
-			if (PieceConfig.redPieces.length)
-			{
-				if (type == DefaultConstants.RED)
-				{
-					RedChessPiecesPool.initialize(PieceConfig.maxPoolSizeRed, PieceConfig.growthValue);
-					//store this reference
-					PieceConfig.redPiecesBox = this;
-				}
-			}
+			//header title
+			this._header = new ScreenHeader();
+			this._header.title = DefaultConstants.INDICATION_COMPUTER_WIN;
+			this.addChild(this._header);
+			//layout 
+			const layout:HorizontalLayout = new HorizontalLayout();
+			layout.gap = 0;
+			layout.paddingTop = 0;
+			layout.paddingRight = 0;
+			layout.paddingBottom = 0;
+			layout.paddingLeft = 0;
+			layout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_LEFT;
+			layout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_TOP;
+			//container
+			this._container = new ScrollContainer();
+			this._container.layout = layout;
+//			this.addChild(this._container);
+			//buttons 
+			this._yesBtn = new Button();
+			this._yesBtn.label = "YES";
+			this._yesBtn.width = this._yesBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
+//			this._container.addChild(this._yesBtn);
+			this._noBtn = new Button();
+			this._noBtn.label = "NO";
+			this._noBtn.width = this._noBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
+//			this._container.addChild(this._noBtn);
+			//header items
+			this._header.leftItems = new <DisplayObject>
+				[
+					this._yesBtn
+				];
+			this._header.rightItems = new <DisplayObject>
+				[
+					this._noBtn
+				];
+			//event listener
+			this._yesBtn.onRelease.add(yesButtonOnRelease);
+			this._noBtn.onRelease.add(noButtonOnRelease);
 		}
 		//
-		override protected function backgroundRender():void
+		override protected function draw():void
 		{
-			//Temp graphic objects tests.
-			//@see:http://wiki.starling-framework.org/manual/dynamic_textures
-			//Polygon
-//			var polygon:Polygon = new Polygon(50,4,Color.NAVY);
-//			polygon.x = 100;
-//			polygon.y = 100;
-//			polygon.pivotX = 0;
-//			polygon.pivotY = 0;
-////			polygon.rotation = 30;
-//			addChild(polygon);
+			//
+			this._header.width = this.actualWidth;
+			this._header.validate();
+			//			
+			this._container.y = this._header.height;
+//			this._container.width = this.actualWidth;
+			this._container.width = 100;
+			this._container.height = this.actualHeight - this._container.y;
+			this._container.validate();
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		private function yesButtonOnRelease(button:Button):void
+		{
+			//restart game.
+			GameConfig.gameStateManager.restart();
+			//
+			IndicatorConfig.outcome = false;
+		}
+		private function noButtonOnRelease(button:Button):void
+		{
+			IndicatorConfig.outcome = false;
+		}
 	}
 	
 }

@@ -5,7 +5,7 @@ package com.godpaper.as3.core
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.starling.views.components.ChessGasket;
+	import com.godpaper.as3.views.components.ChessGasket;
 	/**
 	 * The term X-ray attack was apparently originated by Kenneth Harkness. </br>
 	 * On page 25 of the April 1947 Chess Review, in his series Picture Guide to Chess, </br>

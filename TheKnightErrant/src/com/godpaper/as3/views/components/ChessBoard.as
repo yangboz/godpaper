@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.starling.views.components
+package com.godpaper.as3.views.components
 {
 	//--------------------------------------------------------------------------
 	//
@@ -33,7 +33,7 @@ package com.godpaper.starling.views.components
 	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.MathUtil;
-	import com.godpaper.starling.views.components.ChessPiece;
+	import com.godpaper.as3.views.components.ChessPiece;
 	
 	import flash.display.BitmapData;
 	import flash.display.Shape;

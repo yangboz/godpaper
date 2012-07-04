@@ -1,7 +1,7 @@
 package com.godpaper.as3.configs
 {
 	import com.godpaper.as3.core.IChessBoard;
-	import com.godpaper.starling.views.components.ChessBoard;
+	import com.godpaper.as3.views.components.ChessBoard;
 	
 	import starling.display.Image;
 
