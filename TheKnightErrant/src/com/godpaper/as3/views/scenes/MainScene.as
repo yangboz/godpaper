@@ -22,7 +22,7 @@
 package com.godpaper.as3.views.scenes
 {
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.screens.GameScreen;
 	import com.godpaper.as3.views.screens.MainMenuScreen;

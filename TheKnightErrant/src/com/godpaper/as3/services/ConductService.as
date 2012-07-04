@@ -6,7 +6,7 @@ package com.godpaper.as3.services
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	
 	import flash.events.NetStatusEvent;

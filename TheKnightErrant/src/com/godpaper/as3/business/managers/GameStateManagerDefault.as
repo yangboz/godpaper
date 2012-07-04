@@ -6,7 +6,7 @@ package com.godpaper.as3.business.managers
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IGameStateManager;
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
@@ -175,9 +175,9 @@ package com.godpaper.as3.business.managers
 			//reset game step number.
 			chessBoardModel.stepNumber=0;
 			//clear board,chess pieces
-			FlexGlobals.gameScene.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
-			FlexGlobals.gameScene.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());
-			FlexGlobals.gameScene.cleanUpSequenceTask.start();
+			FlexGlobals.gameScreen.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
+			FlexGlobals.gameScreen.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());
+			FlexGlobals.gameScreen.cleanUpSequenceTask.start();
 			//dump the end of game messages.
 			FlexGlobals.topLevelApplication.dumpFootSprint();
 			//

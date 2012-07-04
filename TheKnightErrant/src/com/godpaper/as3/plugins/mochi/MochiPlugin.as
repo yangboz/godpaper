@@ -5,7 +5,7 @@ package com.godpaper.as3.plugins.mochi
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.IPlugData;
 	import com.godpaper.as3.utils.LogUtil;

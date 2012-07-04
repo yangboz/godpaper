@@ -9,7 +9,7 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.views.components.ChessGasket;
 	
 	import flash.geom.Point;

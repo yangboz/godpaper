@@ -3,7 +3,7 @@ package com.godpaper.chinese_chess_jam.business.managers
 	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.model.ChessGasketsModel;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.chinese_chess_jam.consts.PiecesConstants_ChineseChessJam;

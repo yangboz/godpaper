@@ -32,7 +32,7 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IVisualElement;
 	import com.godpaper.as3.model.ChessGasketsModel;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.pools.ChessGasketsPool;
 	
 	import flash.display.DisplayObject;

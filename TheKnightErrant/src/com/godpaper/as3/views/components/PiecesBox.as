@@ -53,7 +53,7 @@ package com.godpaper.as3.views.components
 	 * Created Apr 18, 2012 9:54:47 AM
 	 * @history,using the starling(stage3d) version.
 	 */   	 
-	public class PiecesBox extends UIComponent implements IPiecesBox
+	public class PiecesBox extends VisualElement implements IPiecesBox
 	{		
 		//--------------------------------------------------------------------------
 		//

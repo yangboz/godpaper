@@ -28,7 +28,7 @@ package com.godpaper.as3.views.plugin
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.popups.ThinkIndicatory;

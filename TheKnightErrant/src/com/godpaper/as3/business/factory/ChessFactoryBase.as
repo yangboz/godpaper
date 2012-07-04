@@ -13,7 +13,7 @@ package com.godpaper.as3.business.factory
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.pools.BlueChessPiecesPool;
 	import com.godpaper.as3.model.pools.ChessGasketsPool;
 	import com.godpaper.as3.model.pools.RedChessPiecesPool;

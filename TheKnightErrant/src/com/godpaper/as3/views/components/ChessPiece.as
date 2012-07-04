@@ -38,7 +38,7 @@ package com.godpaper.as3.views.components
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.plugins.IPlug;

@@ -2,7 +2,7 @@ package com.lookbackon.AI.searching
 {
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.FilterUtil;

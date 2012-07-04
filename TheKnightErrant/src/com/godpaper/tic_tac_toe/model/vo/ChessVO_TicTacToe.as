@@ -6,7 +6,7 @@ package com.godpaper.tic_tac_toe.model.vo
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.impl.AbstractChessVO;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	
 	import mx.logging.ILogger;

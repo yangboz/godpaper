@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.as3.model
+package com.godpaper.as3.core
 {
 	import com.godpaper.as3.utils.SingletonFactory;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
@@ -30,6 +30,9 @@ package com.godpaper.as3.model
 	import org.osflash.signals.Signal;
 	
 	import starling.display.Stage;
+	import com.godpaper.as3.model.ChessBoardModel;
+	import com.godpaper.as3.model.ChessGasketsModel;
+	import com.godpaper.as3.model.ChessPiecesModel;
 
 	//--------------------------------------------------------------------------
 	//
@@ -66,7 +69,7 @@ package com.godpaper.as3.model
 		//Views.
 		public static var topLevelApplication:ApplicationBase;
 //		public static var gameScene:GameScene;//The scene of game.
-		public static var gameScene:GameScreen;//The screen of game.
+		public static var gameScreen:GameScreen;//The screen of game.
 		public static var gameStage:Stage;//The stage of game.
 		//Models.
 		public static var chessPiecesModel:ChessPiecesModel = SingletonFactory.produce(ChessPiecesModel);

@@ -7,7 +7,7 @@ package com.lookbackon.AI.evaluation.linear
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.lookbackon.AI.evaluation.IEvaluation;

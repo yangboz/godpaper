@@ -61,7 +61,7 @@ package com.godpaper.as3.views.components
 	 * Created Apr 18, 2012 10:01:04 AM
 	 * @see http://wiki.starling-framework.org/manual/dynamic_textures
 	 */   	 
-	public class ChessBoard extends UIComponent implements IChessBoard
+	public class ChessBoard extends VisualElement implements IChessBoard
 	{		
 		//--------------------------------------------------------------------------
 		//

@@ -24,7 +24,7 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.views.components.PiecesBox;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
 	

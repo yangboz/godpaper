@@ -7,7 +7,7 @@ package com.godpaper.as3.tasks
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GasketConfig;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IVisualElement;
 	import com.godpaper.as3.model.ChessGasketsModel;

@@ -22,7 +22,7 @@
 package com.godpaper.as3.views.screens
 {
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	
 	import mx.logging.ILogger;
@@ -113,11 +113,12 @@ package com.godpaper.as3.views.screens
 			this._label = new Label();
 			this._label.text = "LOADING...";
 			this.addChild(this._label);
-			//
+			//Loading subroutines here.
+			
 			//			CursorManager.setBusyCursor();
 			// sound initialization takes a moment, so we prepare them here
 			AssetEmbedsDefault.loadBitmapFonts();
-			//
+			//Loading complete handler.
 			this._progressTween.onComplete =  function():void
 			{
 				FlexGlobals.screenNavigator.showScreen((DefaultConstants.SCREEN_GAME));//Screen swither here.

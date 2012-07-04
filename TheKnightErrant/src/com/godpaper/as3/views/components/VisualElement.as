@@ -35,14 +35,15 @@ package com.godpaper.as3.views.components
 	
 	
 	/**
-	 * UIComponent.as class.   	
+	 * UIComponent.as class.(FLEX3)
+	 * VisualElement.as class.(FLEX4)   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Apr 18, 2012 1:57:14 PM
 	 */   	 
-	public class UIComponent extends Sprite implements IVisualElement
+	public class VisualElement extends Sprite implements IVisualElement
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -122,7 +123,7 @@ package com.godpaper.as3.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function UIComponent()
+		public function VisualElement()
 		{
 			super();
 			//uid creation.

@@ -29,7 +29,7 @@ package com.godpaper.as3.views.popups
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	
 	import org.josht.starling.foxhole.controls.Button;

@@ -9,7 +9,7 @@ package com.godpaper.as3.business.fsm.states.game
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.model.ChessBoardModel;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;

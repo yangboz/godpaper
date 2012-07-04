@@ -10,6 +10,7 @@ package com.godpaper.as3.model
 	import com.lookbackon.ds.NumberBoard;
 	
 	import de.polygonal.ds.Array2;
+	import com.godpaper.as3.core.FlexGlobals;
 
 	//--------------------------------------------------------------------------
 	//

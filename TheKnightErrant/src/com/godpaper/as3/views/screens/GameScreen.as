@@ -30,7 +30,7 @@ package com.godpaper.as3.views.screens
 	import com.adobe.cairngorm.task.SequenceTask;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.core.IChessBoard;
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.tasks.CreateChessBoardTask;
 	import com.godpaper.as3.tasks.CreateChessGasketTask;
 	import com.godpaper.as3.tasks.CreateChessPieceTask;
@@ -115,7 +115,7 @@ package com.godpaper.as3.views.screens
 		override protected function initialize():void
 		{
 			//Store reference to FlexGlobal.
-			FlexGlobals.gameScene = this;
+			FlexGlobals.gameScreen = this;
 			//Add visualElement to view.
 			//create chess board.
 			//create chess gaskets.

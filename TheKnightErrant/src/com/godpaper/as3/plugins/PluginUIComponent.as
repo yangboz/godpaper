@@ -5,7 +5,7 @@ package com.godpaper.as3.plugins
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.model.FlexGlobals;
+	import com.godpaper.as3.core.FlexGlobals;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;

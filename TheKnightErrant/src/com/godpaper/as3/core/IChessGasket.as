@@ -1,8 +1,7 @@
 package com.godpaper.as3.core
 {
-	import com.godpaper.as3.core.IVisualElement;
 	import com.godpaper.as3.model.vos.ConductVO;
-
+	import com.godpaper.as3.core.IVisualElement;
 	/**
 	 * The interface of ChessGasket.Abstarct the chess gasket foundation and properties.
 	 *
