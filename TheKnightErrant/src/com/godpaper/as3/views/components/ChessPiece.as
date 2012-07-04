@@ -28,17 +28,17 @@ package com.godpaper.as3.views.components
 	//--------------------------------------------------------------------------
 	
 	import com.godpaper.as3.business.fsm.ChessAgent;
-	import com.godpaper.as3.business.managers.ChessPieceDragManager;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessVO;
+	import com.godpaper.as3.core.IPosition;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.plugins.IPlug;
@@ -378,8 +378,14 @@ package com.godpaper.as3.views.components
 					//End sound effect.
 //					this.cpMoveSoundChannel.stop();
 					//drag out target(chess gasket) init.
-					dragOutTarget = this.chessGasketModel.gaskets.gett(target.position.x,target.position.y) as ChessGasket;
-					LOG.debug("drag out ChessGaket @:{0}",dragOutTarget.position);
+					if(BoardConfig.piecesBoxRequired)
+					{
+						LOG.debug("drag out ChessGaket @:{0}",target.position);
+					}else
+					{
+						dragOutTarget = this.chessGasketModel.gaskets.gett(target.position.x,target.position.y) as ChessGasket;
+						LOG.debug("drag out ChessGaket @:{0}",dragOutTarget.position);
+					}
 					//drag enter target(chess piece) refresh.
 					dragEnterTargets = this.calculateDragEnterTargets(target);
 					if(!dragEnterTargets.length)

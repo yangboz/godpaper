@@ -2,6 +2,7 @@ package com.godpaper.as3.core
 {
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.core.IVisualElement;
+	import com.godpaper.as3.core.IDragdropable;
 	/**
 	 * The interface of ChessGasket.Abstarct the chess gasket foundation and properties.
 	 *
@@ -9,7 +10,7 @@ package com.godpaper.as3.core
 	 * @history 2011-2-18 current conductVO property added.
 	 * @history 2012-5-11 added the global configure variables.
 	 */	
-	public interface IChessGasket extends IVisualElement,IPosition
+	public interface IChessGasket extends IVisualElement,IPosition,IDragdropable
 	{
 		//TODO:Each chess gasket contains more than one chess pieces.
 		function get chessPiece():IChessPiece;

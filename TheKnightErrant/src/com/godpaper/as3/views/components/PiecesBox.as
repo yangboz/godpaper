@@ -40,6 +40,7 @@ package com.godpaper.as3.views.components
 	
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.events.TouchEvent;
 	import starling.utils.Color;
 	import starling.utils.Polygon;
 	
@@ -124,6 +125,24 @@ package com.godpaper.as3.views.components
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
 			super.dispose();
+		}//
+		//dragEnterHandler
+		public function dragEnterHandler(event:TouchEvent):Boolean
+		{
+			//Empty handler.
+			return false;
+		}
+		//dragOutHandler
+		public function dragOutHandler(event:TouchEvent):void
+		{
+			//TODO:Update display effect.
+			//
+			event.stopImmediatePropagation();
+		}
+		//dragDropHandler
+		public function dragDropHandler(event:TouchEvent):void
+		{
+			//Empty handler.
 		}
 		//--------------------------------------------------------------------------
 		//
