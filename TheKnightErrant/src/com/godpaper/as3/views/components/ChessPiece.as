@@ -37,6 +37,7 @@ package com.godpaper.as3.views.components
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.core.IDragdropable;
+	import com.godpaper.as3.core.IPiecesBox;
 	import com.godpaper.as3.core.IPosition;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
@@ -79,7 +80,7 @@ package com.godpaper.as3.views.components
 	 * @history 08/02/2011 added the button click event handler to toggle chess piece move functions.
 	 * @history 18/04/2012 extend the starling button for high performance solution.
 	 */   	 
-	public class ChessPiece extends RoundButton implements IChessPiece
+	public class ChessPiece extends VisualElement implements IChessPiece
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -104,6 +105,10 @@ package com.godpaper.as3.views.components
 		//sound effect
 		private var cpMoveSound:Sound;
 		private var cpMoveSoundChannel:SoundChannel;
+		//Original point record.
+		public var originalX:Number;
+		public var originalY:Number;
+		public var piecesBox:PiecesBox;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -262,7 +267,7 @@ package com.godpaper.as3.views.components
 			}
 		}
 		//
-		public function toString():String
+		override public function toString():String
 		{
 			return this.label.concat(this.position.x,this.position.y);
 		}
@@ -356,10 +361,7 @@ package com.godpaper.as3.views.components
 			// 
 			var dragEnterTargets:Vector.<ChessGasket>;
 			var dragDropTarget:ChessGasket;
-//			var dragDropTarget:IDragdropable;//ChessGasket
-//			var dragOutTarget:ChessGasket;
-			var dragOutTarget:IDragdropable;//ChessGasket/PiecesBox
-			var dragOutStage:Stage;
+			var dragOutTarget:ChessGasket;//ChessGasket/PiecesBox
 			//
 			switch(touch.phase)
 			{
@@ -386,9 +388,8 @@ package com.godpaper.as3.views.components
 					//drag out target(chess gasket) init.
 					if(BoardConfig.piecesBoxRequired)
 					{
-						dragOutStage = FlexGlobals.gameStage;
-//						LOG.debug("dragOutStage is:{0}",dragOutStage);
-						LOG.debug("drag out target @:{0}",dragOutStage);
+						dragOutTarget = this.piecesBox;
+						LOG.debug("drag out target @:{0}",dragOutTarget);
 					}else
 					{
 						dragOutTarget = this.chessGasketModel.gaskets.gett(target.position.x,target.position.y) as ChessGasket;
@@ -402,7 +403,9 @@ package com.godpaper.as3.views.components
 						//Revert to the previous drag and drop operation.
 						if(BoardConfig.piecesBoxRequired)
 						{
-							
+							//Original point record at FillInPiecesBox task.
+							this.x = originalX;
+							this.y = originalY;
 						}else
 						{
 							this.x = dragOutTarget.x;
@@ -415,33 +418,23 @@ package com.godpaper.as3.views.components
 					dragDropTarget = this.calculateDragDropTarget(target,dragEnterTargets);
 					LOG.debug("drag drop ChessGaket @:{0}",dragDropTarget.position);
 					//drag out target(chess gasket) process.
-					if(BoardConfig.piecesBoxRequired)
-					{
-						
-					}else
-					{
-						dragOutTarget.dragOutHandler(event);
-					}
+					dragOutTarget.dragOutHandler(event);
 					//drag drop target(chess gasket) handler.
 					//Sort of drag opereation validation here
-					if(BoardConfig.piecesBoxRequired)
+					if( isDragAndDropPositionValid((dragOutTarget as ChessGasket),dragDropTarget) )
 					{
-						
-					}else
-					{
-						if( isDragAndDropPositionValid(dragDropTarget,(dragOutTarget as ChessGasket)) )
+						if( isDragAndDropPositionIllegal(dragDropTarget,event))
 						{
-							if( isDragAndDropPositionIllegal(dragDropTarget,event))
-							{
-								dragDropTarget.dragDropHandler(event);
-								break;
-							}
+							dragDropTarget.dragDropHandler(event);
+							break;
 						}
 					}
 					//Default revert to the previous drag and drop operation.
 					if(BoardConfig.piecesBoxRequired)
 					{
-						
+						//Original point record at FillInPiecesBox task.
+						this.x = originalX;
+						this.y = originalY;
 					}else
 					{
 						this.x = (dragOutTarget as DisplayObject).x;

@@ -26,6 +26,7 @@ package com.godpaper.as3.core
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		//Each pieces box contains(receline) more than one chess pieces.
 		function set childrenArea(value:Rectangle):void;
 		function get childrenArea():Rectangle;
 		//

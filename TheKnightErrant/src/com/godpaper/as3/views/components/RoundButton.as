@@ -52,7 +52,7 @@ package com.godpaper.as3.views.components
 	 * @airVersion 3.2+
 	 * Created Apr 16, 2012 1:42:24 PM
 	 */   	 
-	public class RoundButton extends Button implements IVisualElement
+	public class RoundButton extends Button
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -69,54 +69,6 @@ package com.godpaper.as3.views.components
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//----------------------------------
-		//  uid
-		//----------------------------------
-		private var _uid:String;
-		/**
-		 *  The unique identifier(uid) for this object.
-		 *  
-		 *  @langversion 3.0
-		 *  @playerversion Flash 9
-		 *  @playerversion AIR 1.1
-		 *  @productversion Flex 3
-		 */
-		public function get uid():String
-		{
-			return _uid;
-		}
-		
-		/**
-		 *  @private
-		 */
-		public function set uid(value:String):void
-		{
-			_uid = value;
-		}
-		//----------------------------------
-		//  label
-		//----------------------------------
-		private var _label:String;
-		/**
-		 *  The common identifier(label) for this object.
-		 *  
-		 *  @langversion 3.0
-		 *  @playerversion Flash 9
-		 *  @playerversion AIR 1.1
-		 *  @productversion Flex 3
-		 */
-		public function get label():String
-		{
-			return _label;
-		}
-		
-		/**
-		 *  @private
-		 */
-		public function set label(value:String):void
-		{
-			_label = value;
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -130,9 +82,6 @@ package com.godpaper.as3.views.components
 		//--------------------------------------------------------------------------
 		public function RoundButton(upState:Texture, label:String="", downState:Texture=null)
 		{
-			//Initialize the uid
-			this.uid = UIDUtil.createUID();
-			this.label = label;
 			//
 			super(upState, label, downState);
 			//Event handler

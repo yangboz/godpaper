@@ -117,23 +117,24 @@ package com.godpaper.as3.tasks
 			var bluePiecesBox:PiecesBox = new PiecesBox();
 			bluePiecesBox.width = 100;
 			bluePiecesBox.height = 100;
-			bluePiecesBox.x = xGap;
-			bluePiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-PluginConfig.buttonBarHeight - childAreaHeight - yGap;
 			bluePiecesBox.background = BoardConfig.piecesBoxBgImage;
 			bluePiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);//Default setting.
 			bluePiecesBox.type = DefaultConstants.BLUE;
 			//
+			FlexGlobals.gameStage.addChild(bluePiecesBox);
+			bluePiecesBox.x = xGap;
+			bluePiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-PluginConfig.buttonBarHeight - childAreaHeight - yGap;
+			//
 			var redPiecesBox:PiecesBox = new PiecesBox();
 			redPiecesBox.width = 100;
 			redPiecesBox.height = 100;
-			redPiecesBox.x = FlexGlobals.topLevelApplication.stage.stageWidth-childAreaWidth -childAreaXOffset - xGap;
-			redPiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-PluginConfig.buttonBarHeight - childAreaHeight - yGap;
 			redPiecesBox.background = BoardConfig.piecesBoxBgImage;
 			redPiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);//Default setting.
 			redPiecesBox.type = DefaultConstants.RED;
 			//
-			FlexGlobals.gameStage.addChild(bluePiecesBox);
 			FlexGlobals.gameStage.addChild(redPiecesBox);
+			redPiecesBox.x = FlexGlobals.topLevelApplication.stage.stageWidth-redPiecesBox.width - xGap;
+			redPiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-PluginConfig.buttonBarHeight - childAreaHeight - yGap;
 			//
 			this.complete();
 		}

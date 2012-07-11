@@ -212,33 +212,30 @@ package com.godpaper.as3.views.components
 		//----------------------------------
 		//  background(CrossLines or Embbed image textures)
 		//----------------------------------
-//		private var _background:Image = null;
-//		
-//		public function get background():Image
-//		{
-//			return _background;
-//		}
-//		
-//		public function set background(value:Image):void
-//		{
-//			if(value!=null)
-//			{
-//				if(this.contains(_background))
-//				{
-//					removeChild(_background);//Remove the existed background at first.
-//				}
-//				//set anew value
-//				_background=value;
-//				//Puts on background image.
-//				//			var bg:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
-//				//			addChild(bg);
-//				//Display anew backgournd
-//				addChild(_background);
-//			}else//Draw to render the program background.
-//			{
-//				this.backgroundRender();
-//			}
-//		}
+		private var _background:Image = null;
+		
+		public function get background():Image
+		{
+			return _background;
+		}
+		
+		public function set background(value:Image):void
+		{
+			if(value!=null)
+			{
+				if(this.contains(_background))
+				{
+					removeChild(_background);//Remove the existed background at first.
+				}
+				//set anew value
+				_background=value;
+				//Puts on background image.
+				//			var bg:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
+				//			addChild(bg);
+				//Display anew backgournd
+				addChild(_background);
+			}
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

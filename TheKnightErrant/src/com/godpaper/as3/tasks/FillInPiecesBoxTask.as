@@ -94,6 +94,9 @@ package com.godpaper.as3.tasks
 					iChessPiece.x = getRandomX((PieceConfig.bluePiecesBox as PiecesBox));
 					iChessPiece.y = getRandomY((PieceConfig.bluePiecesBox as PiecesBox));
 					//
+					(iChessPiece as ChessPiece).originalX = iChessPiece.x;
+					(iChessPiece as ChessPiece).originalY = iChessPiece.y;
+					(iChessPiece as ChessPiece).piecesBox = PieceConfig.bluePiecesBox as PiecesBox;
 				}
 			}
 			//red
@@ -105,11 +108,14 @@ package com.godpaper.as3.tasks
 //					(PieceConfig.redPiecesBox as PiecesBox).addElement( jChessPiece );
 //					(PieceConfig.redPiecesBox as PiecesBox).addChild( DisplayObject(jChessPiece) );//view ref
 					FlexGlobals.gameStage.addChild(DisplayObject(jChessPiece));//view ref
-					PieceConfig.redPiecesBox.chessPieces.push(iChessPiece as ChessPiece);//model ref
+					PieceConfig.redPiecesBox.chessPieces.push(jChessPiece as ChessPiece);//model ref
 					//
 					jChessPiece.x = getRandomX((PieceConfig.redPiecesBox as PiecesBox));
 					jChessPiece.y = getRandomY((PieceConfig.redPiecesBox as PiecesBox));
 					//
+					(jChessPiece as ChessPiece).originalX = jChessPiece.x;
+					(jChessPiece as ChessPiece).originalY = jChessPiece.y;
+					(jChessPiece as ChessPiece).piecesBox = PieceConfig.redPiecesBox as PiecesBox;
 				}
 			}
 			//

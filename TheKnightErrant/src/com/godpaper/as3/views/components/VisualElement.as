@@ -32,6 +32,7 @@ package com.godpaper.as3.views.components
 	import flash.display.Sprite;
 	
 	import mx.utils.ObjectUtil;
+	import mx.utils.UIDUtil;
 	
 	import starling.display.Image;
 	import starling.textures.Texture;
@@ -65,57 +66,53 @@ package com.godpaper.as3.views.components
 		//
 		//-------------------------------------------------------------------------- 
 		//----------------------------------
-		//  background(CrossLines or Embbed image textures)
+		//  uid
 		//----------------------------------
-		private var _background:Image = null;
-		public function get background():Image
+		private var _uid:String;
+		/**
+		 *  The unique identifier(uid) for this object.
+		 *  
+		 *  @langversion 3.0
+		 *  @playerversion Flash 9
+		 *  @playerversion AIR 1.1
+		 *  @productversion Flex 3
+		 */
+		public function get uid():String
 		{
-			return _background;
+			return _uid;
 		}
-		public function set background(value:Image):void
+		
+		/**
+		 *  @private
+		 */
+		public function set uid(value:String):void
 		{
-			if(value!=null)
-			{
-				if(this.contains(_background))
-				{
-					removeChild(_background);//Remove the existed background at first.
-				}
-				//set anew value
-				_background=value;
-				//Puts on background image.
-				//			var bg:Image = new Image(DefaultEmbededAssets.getTexture(DefaultConstants.IMG_BACK_GROUND));
-				//			addChild(bg);
-				//Display anew backgournd
-				addChild(_background);
-			}else//Draw to render the program background.
-			{
-//				this.backgroundRender();
-			}
+			_uid = value;
 		}
-//		//----------------------------------
-//		//  label
-//		//----------------------------------
-//		private var _label:String;
-//		public function set label(value:String):void
-//		{
-//			_label = value;
-//		}
-//		public function get label():String
-//		{
-//			return _label;
-//		}
-//		//----------------------------------
-//		//  uid
-//		//----------------------------------
-//		private var _uid:String;
-//		public function get uid():String
-//		{
-//			return _uid;
-//		}
-//		public function set uid(value:String):void
-//		{
-//			_uid = value;
-//		}
+		//----------------------------------
+		//  label
+		//----------------------------------
+		private var _label:String;
+		/**
+		 *  The common identifier(label) for this object.
+		 *  
+		 *  @langversion 3.0
+		 *  @playerversion Flash 9
+		 *  @playerversion AIR 1.1
+		 *  @productversion Flex 3
+		 */
+		public function get label():String
+		{
+			return _label;
+		}
+		
+		/**
+		 *  @private
+		 */
+		public function set label(value:String):void
+		{
+			_label = value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -127,10 +124,13 @@ package com.godpaper.as3.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function VisualElement(upState:Texture=null, text:String="", downState:Texture=null)
+		public function VisualElement(upState:Texture=null, label:String="", downState:Texture=null)
 		{
 			//uid creation.
-//			this.uid = UIDUtil.createUID();
+			this.uid = UIDUtil.createUID();
+			//Initialize the uid
+			this.uid = UIDUtil.createUID();
+			this.label = label;
 			//Default texture setting here.
 			var defaultUpState:Texture = upState;
 			if(defaultUpState==null)

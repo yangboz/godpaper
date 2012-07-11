@@ -1,8 +1,9 @@
 package com.godpaper.as3.core
 {
 	import com.godpaper.as3.business.fsm.ChessAgent;
-	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.core.IVisualElement;
+	import com.godpaper.as3.model.vos.OmenVO;
+	
 	/**
 	 * The interface of ChessPiece include all of interface relatived to it.
 	 * @author Knight.zhou
@@ -19,8 +20,5 @@ package com.godpaper.as3.core
 		
 		function set omenVO(value:OmenVO):void;
 		function get omenVO():OmenVO;
-		
-//		function set type(value:String):void;
-//		function get type():String;
 	}
 }

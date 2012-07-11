@@ -1,8 +1,11 @@
 package com.godpaper.as3.core
 {
-	import com.godpaper.as3.model.vos.ConductVO;
-	import com.godpaper.as3.core.IVisualElement;
 	import com.godpaper.as3.core.IDragdropable;
+	import com.godpaper.as3.core.IVisualElement;
+	import com.godpaper.as3.model.vos.ConductVO;
+	
+	import starling.display.Image;
+
 	/**
 	 * The interface of ChessGasket.Abstarct the chess gasket foundation and properties.
 	 *
@@ -10,9 +13,13 @@ package com.godpaper.as3.core
 	 * @history 2011-2-18 current conductVO property added.
 	 * @history 2012-5-11 added the global configure variables.
 	 */	
-	public interface IChessGasket extends IDragdropable
+	public interface IChessGasket extends IVisualElement,IPosition,IDragdropable
 	{
-		//TODO:Each chess gasket contains more than one chess pieces.
+		//--------------------------------------------------------------------------
+		//
+		//  Public properties
+		//--------------------------------------------------------------------------
+		//Each chess gasket contains only one chess piece.
 		function get chessPiece():IChessPiece;
 		function set chessPiece(value:IChessPiece):void;
 		//
@@ -32,6 +39,14 @@ package com.godpaper.as3.core
 		//
 		function get borderVisible():Boolean;
 		function set borderVisible(value:Boolean):void;
+		//
+		function set background(value:Image):void;
+		function get background():Image;
+		//--------------------------------------------------------------------------
+		//
+		//  Public methods
+		//
+		//--------------------------------------------------------------------------
 	}
 }
 

@@ -62,6 +62,7 @@ package
 	 * 1.initializeHandler;(protected for override)</br>
 	 * 2.applicationCompleteHandler;(private)</br>
 	 * 3.override-able properties(chessPieceManager,pluginProvider)</br>
+	 * Notice:this ApplicationBase class actually is TicTacToe board game.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+

@@ -182,6 +182,11 @@ package com.godpaper.as3.views.components
 				}
 			}
 		}
+		//
+		override public function dragOutHandler(event:TouchEvent):void
+		{
+			//Empty.
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
