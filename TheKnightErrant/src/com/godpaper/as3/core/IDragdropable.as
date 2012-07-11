@@ -37,7 +37,7 @@ package com.godpaper.as3.core
 	 * @airVersion 3.2+
 	 * Created Jul 4, 2012 5:53:05 PM
 	 */   	 
-	public interface IDragdropable
+	public interface IDragdropable extends IVisualElement,IPosition
 	{		
 		//--------------------------------------------------------------------------
 		//

@@ -10,7 +10,7 @@ package com.godpaper.as3.core
 	 * @history 2011-2-18 current conductVO property added.
 	 * @history 2012-5-11 added the global configure variables.
 	 */	
-	public interface IChessGasket extends IVisualElement,IPosition,IDragdropable
+	public interface IChessGasket extends IDragdropable
 	{
 		//TODO:Each chess gasket contains more than one chess pieces.
 		function get chessPiece():IChessPiece;

@@ -31,11 +31,11 @@ package com.godpaper.as3.views.components
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessGasket;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
@@ -70,7 +70,7 @@ package com.godpaper.as3.views.components
 	 * @airVersion 3.2+
 	 * Created Apr 18, 2012 9:47:38 AM
 	 */   	 
-	public class ChessGasket extends RoundButton implements IChessGasket
+	public class ChessGasket extends VisualElement implements IChessGasket
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -255,8 +255,9 @@ package com.godpaper.as3.views.components
 //				var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
 //				defaultUpState = atlas.getTexture(DefaultConstants.BLUE_BISHOP);
 			}
+//			this.background = new Image(defaultUpState);
 			//
-			super(defaultUpState, tipText, downState);
+			super(defaultUpState, text, downState);
 			//Can not touch.
 			this.touchable  = false;
 		}
@@ -323,13 +324,18 @@ package com.godpaper.as3.views.components
 			//empty indicate effect.
 			GameConfig.chessPieceManager.indicateGasketsMove(emptyLegalMoves);
 		}
+		//
+		override public function toString():String
+		{
+			return "ChessGasket#".concat("position:",position.toString());
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
 		//Custom render the texture with the global gasket configuration.
-		protected function getUpStateTexture(bgColor:uint,bgAlpha:Number,borderColor:uint,borderAlpha:Number):Texture
+		override protected function getUpStateTexture(bgColor:uint,bgAlpha:Number,borderColor:uint,borderAlpha:Number):Texture
 		{
 			//Temp graphic objects tests.
 			//@see:http://wiki.starling-framework.org/manual/dynamic_textures

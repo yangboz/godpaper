@@ -41,3 +41,7 @@
 [CHANGE]:Changed the BoardConfig.width/height to read-only properties; 
 
 [NEW]:Implement the splash screen with customize subroutines;
+
+[CHANGE]:Display list inheritance:Button(Starling)->RoundButton->VistualElement;
+
+[CHANGE]:FillIn ChessPiecesBox business to PutOn;

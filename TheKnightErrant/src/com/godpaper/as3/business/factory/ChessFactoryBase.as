@@ -231,7 +231,13 @@ package com.godpaper.as3.business.factory
 			{
 				case "grid":
 					//render the chess board background(default type:grid).
-					chessBoard = new ChessBoard(BoardConfig.backgroundImage);
+					if(BoardConfig.backgroundImage)
+					{
+						chessBoard = new ChessBoard(BoardConfig.backgroundImage.texture);
+					}else
+					{
+						chessBoard = new ChessBoard( null );
+					}
 					break;
 				default:
 					break;

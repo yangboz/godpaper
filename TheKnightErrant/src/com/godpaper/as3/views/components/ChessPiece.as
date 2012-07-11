@@ -36,6 +36,7 @@ package com.godpaper.as3.views.components
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessVO;
+	import com.godpaper.as3.core.IDragdropable;
 	import com.godpaper.as3.core.IPosition;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
@@ -59,6 +60,7 @@ package com.godpaper.as3.views.components
 	
 	import starling.display.DisplayObject;
 	import starling.display.Image;
+	import starling.display.Stage;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -84,7 +86,7 @@ package com.godpaper.as3.views.components
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//
+		//Legacy MXML variables.
 //		[Bindable]private var gcWidth:Number = GasketConfig.width;
 //		[Bindable]private var gcHeight:Number = GasketConfig.height;
 //		[Bindable]private var gcBorderVisible:Boolean = GasketConfig.borderVisible;
@@ -250,7 +252,7 @@ package com.godpaper.as3.views.components
 		//
 		//--------------------------------------------------------------------------
 		//parsley message handler
-		[MessageHandler]
+//		[MessageHandler]
 		public function checkHandler(message:Message):void
 		{
 			if (DefaultConstants.FLAG_BLUE == flag)
@@ -350,10 +352,14 @@ package com.godpaper.as3.views.components
 			var space:DisplayObject = FlexGlobals.gameStage;
 //			LOG.info("ChessPiece touch: {0}, space:{1}",touch,space);
 			var position:Point = touch.getLocation(space);
+			LOG.debug("touch position:{0}",position.toString());
 			// 
 			var dragEnterTargets:Vector.<ChessGasket>;
 			var dragDropTarget:ChessGasket;
-			var dragOutTarget:ChessGasket;
+//			var dragDropTarget:IDragdropable;//ChessGasket
+//			var dragOutTarget:ChessGasket;
+			var dragOutTarget:IDragdropable;//ChessGasket/PiecesBox
+			var dragOutStage:Stage;
 			//
 			switch(touch.phase)
 			{
@@ -380,19 +386,28 @@ package com.godpaper.as3.views.components
 					//drag out target(chess gasket) init.
 					if(BoardConfig.piecesBoxRequired)
 					{
-						LOG.debug("drag out ChessGaket @:{0}",target.position);
+						dragOutStage = FlexGlobals.gameStage;
+//						LOG.debug("dragOutStage is:{0}",dragOutStage);
+						LOG.debug("drag out target @:{0}",dragOutStage);
 					}else
 					{
 						dragOutTarget = this.chessGasketModel.gaskets.gett(target.position.x,target.position.y) as ChessGasket;
-						LOG.debug("drag out ChessGaket @:{0}",dragOutTarget.position);
+						LOG.debug("drag out ChessGaket @:{0}",(dragOutTarget as ChessGasket).position);
 					}
 					//drag enter target(chess piece) refresh.
 					dragEnterTargets = this.calculateDragEnterTargets(target);
+					LOG.debug("dragEnterTargets:{0}",dragEnterTargets.toString());
 					if(!dragEnterTargets.length)
 					{
 						//Revert to the previous drag and drop operation.
-						this.x = dragOutTarget.x;
-						this.y = dragOutTarget.y;
+						if(BoardConfig.piecesBoxRequired)
+						{
+							
+						}else
+						{
+							this.x = dragOutTarget.x;
+							this.y = dragOutTarget.y;
+						}
 						break;
 					}
 					LOG.debug("drag enter ChessGakets @:{0}",dragEnterTargets);
@@ -400,20 +415,38 @@ package com.godpaper.as3.views.components
 					dragDropTarget = this.calculateDragDropTarget(target,dragEnterTargets);
 					LOG.debug("drag drop ChessGaket @:{0}",dragDropTarget.position);
 					//drag out target(chess gasket) process.
-					dragOutTarget.dragOutHandler(event);
+					if(BoardConfig.piecesBoxRequired)
+					{
+						
+					}else
+					{
+						dragOutTarget.dragOutHandler(event);
+					}
 					//drag drop target(chess gasket) handler.
 					//Sort of drag opereation validation here
-					if( isDragAndDropPositionValid(dragDropTarget,dragOutTarget) )
+					if(BoardConfig.piecesBoxRequired)
 					{
-						if( isDragAndDropPositionIllegal(dragDropTarget,event))
+						
+					}else
+					{
+						if( isDragAndDropPositionValid(dragDropTarget,(dragOutTarget as ChessGasket)) )
 						{
-							dragDropTarget.dragDropHandler(event);
-							break;
+							if( isDragAndDropPositionIllegal(dragDropTarget,event))
+							{
+								dragDropTarget.dragDropHandler(event);
+								break;
+							}
 						}
 					}
 					//Default revert to the previous drag and drop operation.
-					this.x = dragOutTarget.x;
-					this.y = dragOutTarget.y;
+					if(BoardConfig.piecesBoxRequired)
+					{
+						
+					}else
+					{
+						this.x = (dragOutTarget as DisplayObject).x;
+						this.y = (dragOutTarget as DisplayObject).y;
+					}
 					break;
 				case TouchPhase.STATIONARY:
 					//delegate to mouse click handler

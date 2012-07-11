@@ -28,10 +28,14 @@ package com.godpaper.as3.views.components
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.core.IVisualElement;
 	
-	import mx.utils.UIDUtil;
+	import flash.display.BitmapData;
+	import flash.display.Sprite;
+	
+	import mx.utils.ObjectUtil;
 	
 	import starling.display.Image;
-	import starling.display.Sprite;
+	import starling.textures.Texture;
+	import starling.utils.Color;
 	
 	
 	/**
@@ -43,7 +47,7 @@ package com.godpaper.as3.views.components
 	 * @airVersion 3.2+
 	 * Created Apr 18, 2012 1:57:14 PM
 	 */   	 
-	public class VisualElement extends Sprite implements IVisualElement
+	public class VisualElement extends RoundButton implements IVisualElement
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -85,33 +89,33 @@ package com.godpaper.as3.views.components
 				addChild(_background);
 			}else//Draw to render the program background.
 			{
-				this.backgroundRender();
+//				this.backgroundRender();
 			}
 		}
-		//----------------------------------
-		//  label
-		//----------------------------------
-		private var _label:String;
-		public function set label(value:String):void
-		{
-			_label = value;
-		}
-		public function get label():String
-		{
-			return _label;
-		}
-		//----------------------------------
-		//  uid
-		//----------------------------------
-		private var _uid:String;
-		public function get uid():String
-		{
-			return _uid;
-		}
-		public function set uid(value:String):void
-		{
-			_uid = value;
-		}
+//		//----------------------------------
+//		//  label
+//		//----------------------------------
+//		private var _label:String;
+//		public function set label(value:String):void
+//		{
+//			_label = value;
+//		}
+//		public function get label():String
+//		{
+//			return _label;
+//		}
+//		//----------------------------------
+//		//  uid
+//		//----------------------------------
+//		private var _uid:String;
+//		public function get uid():String
+//		{
+//			return _uid;
+//		}
+//		public function set uid(value:String):void
+//		{
+//			_uid = value;
+//		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -123,26 +127,67 @@ package com.godpaper.as3.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function VisualElement()
+		public function VisualElement(upState:Texture=null, text:String="", downState:Texture=null)
 		{
-			super();
 			//uid creation.
-			this.uid = UIDUtil.createUID();
+//			this.uid = UIDUtil.createUID();
+			//Default texture setting here.
+			var defaultUpState:Texture = upState;
+			if(defaultUpState==null)
+			{
+				defaultUpState = this.getUpStateTexture(Color.BLACK,1,Color.BLACK,1);
+				//				var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
+				//				defaultUpState = atlas.getTexture(DefaultConstants.BLUE_BISHOP);
+			}
+			//			this.background = new Image(defaultUpState);
+			//
+			super(defaultUpState, text, downState);
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		public function toString():String
+		{
+			return ObjectUtil.toString(this);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		protected function backgroundRender():void
+		//Custom render the texture with the global gasket configuration.
+		protected function getUpStateTexture(bgColor:uint,bgAlpha:Number,borderColor:uint,borderAlpha:Number):Texture
 		{
-			//TODO:with customize override.
+			//Temp graphic objects tests.
+			//@see:http://wiki.starling-framework.org/manual/dynamic_textures
+			//			Polygon
+			//			var polygon:Polygon = new Polygon(50,4,Color.NAVY);
+			//			polygon.x = 100;
+			//			polygon.y = 100;
+			//			polygon.pivotX = 0;
+			//			polygon.pivotY = 0;
+			//			polygon.rotation = 30;
+			//			addChild(polygon);
+			//Draw a circle shape
+			var shape:Sprite = new Sprite();
+			//			var shape:Shape = new Shape();
+			shape.graphics.beginFill(bgColor,bgAlpha);
+			shape.graphics.lineStyle(1,borderColor,1);
+//			var radius:Number = Math.min(GasketConfig.width,GasketConfig.height)/2;
+			//			shape.graphics.drawCircle(GasketConfig.width/2,GasketConfig.height/2,radius);
+			shape.graphics.drawRect(0,0,this.width,this.height);
+			shape.graphics.endFill();
+			//But we can draw that shape into a bitmap and then create a texture from that bitmap! 
+			var bmpData:BitmapData = new BitmapData(this.width, this.height, true, 0x0);
+			bmpData.draw(shape);
+			//
+			var texture:Texture = Texture.fromBitmapData(bmpData);
+			//			var image:Image = new Image(texture);
+			//			addChild(image);
+			//
+			return texture;
 		}
 		//--------------------------------------------------------------------------
 		//

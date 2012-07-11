@@ -33,10 +33,11 @@ package
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.PluginUIComponent;
+	import com.godpaper.as3.plugins.kongregate.KongregatePlugin;
 	import com.godpaper.as3.plugins.mochi.MochiPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
@@ -103,9 +104,9 @@ package
 		 */ 
 		public function get pluginProvider():IPlug
 		{
-			return new MochiPlugin(PluginConfig.gameID,PluginConfig.boardID);
+//			return new MochiPlugin(PluginConfig.gameID,PluginConfig.boardID);
 //			return new NonobaPlugin();
-//			return new KongregatePlugin();
+			return new KongregatePlugin();
 //			return new PlatogoPlugin("1146511093");
 		}
 		/**

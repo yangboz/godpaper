@@ -26,6 +26,7 @@ package com.godpaper.as3.views.components
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.business.fsm.ChessAgent;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.IPiecesBox;
@@ -34,13 +35,16 @@ package com.godpaper.as3.views.components
 	import com.godpaper.as3.utils.LogUtil;
 	
 	import flash.display.Shape;
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
 	import mx.logging.ILogger;
 	
+	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.TouchEvent;
+	import starling.textures.Texture;
 	import starling.utils.Color;
 	import starling.utils.Polygon;
 	
@@ -54,7 +58,7 @@ package com.godpaper.as3.views.components
 	 * Created Apr 18, 2012 9:54:47 AM
 	 * @history,using the starling(stage3d) version.
 	 */   	 
-	public class PiecesBox extends VisualElement implements IPiecesBox
+	public class PiecesBox extends ChessGasket implements IPiecesBox
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -63,6 +67,7 @@ package com.godpaper.as3.views.components
 		//--------------------------------------------------------------------------
 		private var _type:String;
 		private var _childrenArea:Rectangle;
+		private var _chessPieces:Vector.<ChessPiece> = new Vector.<ChessPiece>();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -72,6 +77,13 @@ package com.godpaper.as3.views.components
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		//----------------------------------
+		//  position
+		//----------------------------------
+		override public function get position():Point
+		{
+			return new Point(-1,-1);;
+		}
 		//----------------------------------
 		//  type(RED/BLUE...)
 		//----------------------------------
@@ -96,6 +108,18 @@ package com.godpaper.as3.views.components
 		{
 			_childrenArea = value;
 		}
+		//----------------------------------
+		//  chessPieces
+		//----------------------------------
+		public function get chessPieces():Vector.<ChessPiece>
+		{
+			return _chessPieces;
+		}
+		
+		public function set chessPieces(value:Vector.<ChessPiece>):void
+		{
+			_chessPieces = value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -107,9 +131,9 @@ package com.godpaper.as3.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PiecesBox()
+		public function PiecesBox(upState:Texture=null)
 		{
-			super();
+			super(upState);
 			//
 //			this.addEventListener(Event.COMPLETE, creationCompleteHandler);
 			this.addEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
@@ -126,23 +150,10 @@ package com.godpaper.as3.views.components
 			this.removeEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
 			super.dispose();
 		}//
-		//dragEnterHandler
-		public function dragEnterHandler(event:TouchEvent):Boolean
+		//
+		override public function toString():String
 		{
-			//Empty handler.
-			return false;
-		}
-		//dragOutHandler
-		public function dragOutHandler(event:TouchEvent):void
-		{
-			//TODO:Update display effect.
-			//
-			event.stopImmediatePropagation();
-		}
-		//dragDropHandler
-		public function dragDropHandler(event:TouchEvent):void
-		{
-			//Empty handler.
+			return "PiecesBox:#".concat(this.type,",pieces:",this.chessPieces.length);
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -150,7 +161,7 @@ package com.godpaper.as3.views.components
 		//
 		//--------------------------------------------------------------------------
 //		protected function creationCompleteHandler(event:Event):void
-		protected function addToStageHandler(event:Event):void
+		override protected function addToStageHandler(event:Event):void
 		{
 			if (PieceConfig.bluePieces.length)
 			{
@@ -170,20 +181,6 @@ package com.godpaper.as3.views.components
 					PieceConfig.redPiecesBox = this;
 				}
 			}
-		}
-		//
-		override protected function backgroundRender():void
-		{
-			//Temp graphic objects tests.
-			//@see:http://wiki.starling-framework.org/manual/dynamic_textures
-			//Polygon
-//			var polygon:Polygon = new Polygon(50,4,Color.NAVY);
-//			polygon.x = 100;
-//			polygon.y = 100;
-//			polygon.pivotX = 0;
-//			polygon.pivotY = 0;
-////			polygon.rotation = 30;
-//			addChild(polygon);
 		}
 		//--------------------------------------------------------------------------
 		//

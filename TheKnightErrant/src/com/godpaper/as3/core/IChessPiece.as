@@ -9,7 +9,7 @@ package com.godpaper.as3.core
 	 * @history 2010-06-25 add type property for category chess piece class type.
 	 * @history 2010-07-08 split the type property to a single file.
 	 */	
-	public interface IChessPiece extends  IVisualElement,IPosition,IType
+	public interface IChessPiece extends  IVisualElement,IType,IPosition
 	{
 		function set agent(value:ChessAgent):void;
 		function get agent():ChessAgent;

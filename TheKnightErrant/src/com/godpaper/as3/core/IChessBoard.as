@@ -47,8 +47,8 @@ package com.godpaper.as3.core
 		//----------------------------------
 		//  background(CrossLines or Embbed image textures)
 		//----------------------------------
-		function set background(value:Image):void;
-		function get background():Image;
+//		function set background(value:Image):void;
+//		function get background():Image;
 		//----------------------------------
 		//  yAdjust(for pixel adjustment at y axis)
 		//----------------------------------

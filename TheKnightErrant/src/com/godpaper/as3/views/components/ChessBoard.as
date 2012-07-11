@@ -250,9 +250,8 @@ package com.godpaper.as3.views.components
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessBoard(background:Image)
+		public function ChessBoard(background:Texture=null)
 		{
-			super();
 			//Binding to the global configured variables
 			this.xLines = BoardConfig.xLines;
 			this.yLines = BoardConfig.yLines;
@@ -265,22 +264,29 @@ package com.godpaper.as3.views.components
 //			this.height = BoardConfig.height;
 			this.xAdjust = BoardConfig.xAdjust;
 			this.yAdjust = BoardConfig.yAdjust;
-			//VisualElement process.
-			this.background = background;
+			//
+			super(background);
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		override public function toString():String
+		{
+			return "ChessBoard".concat(",lines(",this.xLines,",",this.yLines,")");
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function backgroundRender():void
+		override protected function getUpStateTexture(bgColor:uint,bgAlpha:Number,borderColor:uint,borderAlpha:Number):Texture
 		{
+			if(BoardConfig.backgroundImage)
+			{
+				return BoardConfig.backgroundImage.texture;
+			}
 			//Temp graphic objects tests.
 			//@see:http://wiki.starling-framework.org/manual/dynamic_textures
 			//Polygon
@@ -345,14 +351,16 @@ package com.godpaper.as3.views.components
 			}
 			shape.graphics.endFill();
 			//But we can draw that shape into a bitmap and then create a texture from that bitmap! 
+
 			var bmpData:BitmapData = new BitmapData(BoardConfig.width, BoardConfig.height, true, 0x0);
 			bmpData.draw(shape);
 			//
 			var texture:Texture = Texture.fromBitmapData(bmpData);
-			var image:Image = new Image(texture);
-			addChild(image);
+//			var image:Image = new Image(texture);
+//			addChild(image);
 			//The we get the actual width/height properties.
-			LOG.debug("ChessBoard size:{0},{1}",this.width,this.height);
+			LOG.debug("ChessBoard size:{0},{1}",BoardConfig.width,BoardConfig.height);
+			return texture;
 		}
 		//--------------------------------------------------------------------------
 		//

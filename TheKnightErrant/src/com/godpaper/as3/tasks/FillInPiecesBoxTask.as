@@ -10,11 +10,13 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.utils.MathUtil;
 	import com.godpaper.as3.views.components.ChessGasket;
+	import com.godpaper.as3.views.components.ChessPiece;
 	import com.godpaper.as3.views.components.PiecesBox;
 	
 	import flash.geom.Point;
@@ -85,7 +87,9 @@ package com.godpaper.as3.tasks
 				if(iChessPiece!=null)
 				{
 //					(PieceConfig.bluePiecesBox as PiecesBox).addElement( iChessPiece );
-					(PieceConfig.bluePiecesBox as PiecesBox).addChild( DisplayObject(iChessPiece) );
+//					(PieceConfig.bluePiecesBox as PiecesBox).addChild( DisplayObject(iChessPiece) );//view ref
+					FlexGlobals.gameStage.addChild(DisplayObject(iChessPiece));//view ref
+					PieceConfig.bluePiecesBox.chessPieces.push(iChessPiece as ChessPiece);//model ref
 					//
 					iChessPiece.x = getRandomX((PieceConfig.bluePiecesBox as PiecesBox));
 					iChessPiece.y = getRandomY((PieceConfig.bluePiecesBox as PiecesBox));
@@ -99,7 +103,9 @@ package com.godpaper.as3.tasks
 				if(jChessPiece!=null)
 				{
 //					(PieceConfig.redPiecesBox as PiecesBox).addElement( jChessPiece );
-					(PieceConfig.redPiecesBox as PiecesBox).addChild( DisplayObject(jChessPiece) );
+//					(PieceConfig.redPiecesBox as PiecesBox).addChild( DisplayObject(jChessPiece) );//view ref
+					FlexGlobals.gameStage.addChild(DisplayObject(jChessPiece));//view ref
+					PieceConfig.redPiecesBox.chessPieces.push(iChessPiece as ChessPiece);//model ref
 					//
 					jChessPiece.x = getRandomX((PieceConfig.redPiecesBox as PiecesBox));
 					jChessPiece.y = getRandomY((PieceConfig.redPiecesBox as PiecesBox));
@@ -117,12 +123,14 @@ package com.godpaper.as3.tasks
 		protected function getRandomX(sponsor:PiecesBox):Number
 		{
 //			return MathUtil.transactRandomNumberInRange(0,sponsor.width);
-			return MathUtil.transactRandomNumberInRange(sponsor.childrenArea.x,(sponsor.childrenArea.x+sponsor.childrenArea.width));
+			var gPoint:Point = sponsor.localToGlobal(new Point(sponsor.childrenArea.x,sponsor.childrenArea.y));
+			return MathUtil.transactRandomNumberInRange(sponsor.x,(sponsor.x+sponsor.childrenArea.width));
 		}
 		protected function getRandomY(sponsor:PiecesBox):Number
 		{
 //			return MathUtil.transactRandomNumberInRange(0,sponsor.height);
-			return MathUtil.transactRandomNumberInRange(sponsor.childrenArea.x,(sponsor.childrenArea.y+sponsor.childrenArea.height));
+			var gPoint:Point = sponsor.localToGlobal(new Point(sponsor.childrenArea.x,sponsor.childrenArea.y));
+			return MathUtil.transactRandomNumberInRange(sponsor.y,(sponsor.y+sponsor.childrenArea.height));
 		}
 		//--------------------------------------------------------------------------
 		//
