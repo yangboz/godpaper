@@ -1,16 +1,16 @@
-package com.godpaper.cat_and_mouse.busniess.managers
+package com.godpaper.tiger_in_beijing.busniess.managers
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
+	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.components.ChessPiece;
@@ -28,7 +28,7 @@ package com.godpaper.cat_and_mouse.busniess.managers
 	 * @playerVersion 9.0
 	 * Created Feb 25, 2011 12:38:06 PM
 	 */   	 
-	public class ChessPiecesManager_CatAndMouse extends ChessPieceManagerDefault
+	public class ChessPiecesManager_TigerInBeijing extends ChessPieceManagerDefault
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -38,7 +38,7 @@ package com.godpaper.cat_and_mouse.busniess.managers
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(ChessPiecesManager_CatAndMouse);
+		private static const LOG:ILogger = LogUtil.getLogger(ChessPiecesManager_TigerInBeijing);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -56,8 +56,9 @@ package com.godpaper.cat_and_mouse.busniess.managers
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessPiecesManager_CatAndMouse()
+		public function ChessPiecesManager_TigerInBeijing()
 		{
+			//TODO: implement function
 			super();
 		}     	
 
@@ -79,10 +80,50 @@ package com.godpaper.cat_and_mouse.busniess.managers
 		//--------------------------------------------------------------------------
 		override protected function blueSideHandler():void
 		{
-			//@see the game rule of "Cat And Mouse",over step number of 10,the mouse win.
-			if(chessBoardModel.stepNumber>=10)
+//			var cBoard:Array2=chessBoardModel.status.board;
+//			//				var connex:Array=mnm.getConnex(cBoard, NUM_CONNECTION);
+//			var connex:Array=chessBoardModel.numercal.getConnex(cBoard,BoardConfig.numConnex);
+//			LOG.debug("current board connex:{0}", connex);
+//			//horizontally.
+//			if(connex[0].length)
+//			{
+//				LOG.debug("Computer connex[0]:", connex[0]);
+//				//					trace(connex[0][0].length,(cBoard.getRow(BoardConfig.yLines).length-1),BoardConfig.numConnex);
+//				if ( (connex[0][0].length == BoardConfig.numConnex) &&  ((cBoard.getRow(BoardConfig.yLines).length-1) == BoardConfig.numConnex) )
+//				{
+//					//Computer Win
+//					GameConfig.gameStateManager.computerWin();
+//				}
+//			}
+			//another simple rule functions here.
+			if(chessPiecesModel.blues.every(onTheBottom))
 			{
+				//Computer Win
 				GameConfig.gameStateManager.computerWin();
+			}
+		}
+		override protected function redSideHandler():void
+		{
+//			var cBoard:Array2=chessBoardModel.status.board;
+//			//				var connex:Array=mnm.getConnex(cBoard, NUM_CONNECTION);
+//			var connex:Array=chessBoardModel.numercal.getConnex(cBoard,BoardConfig.numConnex);
+//			LOG.debug("current board connex:{0}", connex);
+//			//horizontally.
+//			if(connex[0].length)
+//			{
+//				LOG.debug("Huamn connex[0]:", connex[0]);
+//				//					trace(connex[0][0].length,(cBoard.getRow(0).length-1),BoardConfig.numConnex);
+//				if ( (connex[0][0].length == BoardConfig.numConnex) && ((cBoard.getRow(6).length-1) == BoardConfig.numConnex))
+//				{
+//					//Human Win
+//					GameConfig.gameStateManager.humanWin();
+//				}
+//			}
+			//another simple rule functions here.
+			if(chessPiecesModel.reds.every(onTheTop))
+			{
+				//Human Win
+				GameConfig.gameStateManager.humanWin();
 			}
 		}
 		//--------------------------------------------------------------------------
@@ -90,6 +131,14 @@ package com.godpaper.cat_and_mouse.busniess.managers
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		private function onTheTop(element:*, index:int, vector:Vector.<ChessPiece>):Boolean 
+		{
+			return 0== (element as ChessPiece).position.y;
+		}
+		private function onTheBottom(element:*, index:int, vector:Vector.<ChessPiece>):Boolean 
+		{
+			return (BoardConfig.yLines-1)==(element as ChessPiece).position.y;
+		}
 
 	}
 

@@ -23,7 +23,7 @@ package com.godpaper.tic_tac_toe.busniess.managers
 
 
 	/**
-	 * YourChessPiecesManager.as class.
+	 * ChessPiecesManager_TicTacToe.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -36,8 +36,6 @@ package com.godpaper.tic_tac_toe.busniess.managers
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var chessPieceModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
-		private var chessBoardModel:ChessBoardModel = FlexGlobals.chessBoardModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -99,7 +97,7 @@ package com.godpaper.tic_tac_toe.busniess.managers
 //				}
 //			}
 			//another simple rule functions here.
-			if(chessPieceModel.blues.every(onTheBottom))
+			if(chessPiecesModel.blues.every(onTheBottom))
 			{
 				//Computer Win
 				GameConfig.gameStateManager.computerWin();
@@ -123,7 +121,7 @@ package com.godpaper.tic_tac_toe.busniess.managers
 //				}
 //			}
 			//another simple rule functions here.
-			if(chessPieceModel.reds.every(onTheTop))
+			if(chessPiecesModel.reds.every(onTheTop))
 			{
 				//Human Win
 				GameConfig.gameStateManager.humanWin();

@@ -7,13 +7,14 @@ package com.godpaper.as3.business.managers
 	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesMemento;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.model.vos.ZobristKeyVO;
@@ -24,6 +25,7 @@ package com.godpaper.as3.business.managers
 	import com.godpaper.as3.tasks.UpdatePiecesPositionTask;
 	import com.godpaper.as3.tasks.UpdateZobristKeysTask;
 	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.as3.views.components.ChessBoard;
 	import com.godpaper.as3.views.components.ChessGasket;
 	import com.godpaper.as3.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
@@ -53,8 +55,6 @@ package com.godpaper.as3.business.managers
 //		private  var _crossOverValue:int;//and we using _crossOverValue for store the value "b";
 		private var _zKey:ZobristKeyVO; //current chess piece's zobrist key value object.
 		//
-		protected var chessPiecesModel:ChessPiecesModel=FlexGlobals.chessPiecesModel;
-		//
 		private var _eatOffs:Vector.<ChessPiece>=new Vector.<ChessPiece>();
 		//
 //		private  var _memento:ChessPiecesMemento;
@@ -65,8 +65,10 @@ package com.godpaper.as3.business.managers
 		//flag is checked.
 //		[Bindable]
 		private var _isChecking:Boolean=false;
-		//
+		//Models
 		protected var chessGaketsModel:ChessGasketsModel = FlexGlobals.chessGasketsModel;
+		protected var chessBoardModel:ChessBoardModel = FlexGlobals.chessBoardModel;
+		protected var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
