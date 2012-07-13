@@ -44,7 +44,7 @@ package
 	
 	/**
 	 * TigerInBeijing.as class. 
-	 * @see http://www.godpaper.com/godpaper/index.php/%E5%8C%97%E4%BA%AC%E8%80%81%E8%99%8E%E6%A3%8B  	
+	 * @see http://www.godpaper.com/godpaper/index.php/北京老虎棋  	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+

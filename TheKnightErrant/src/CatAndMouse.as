@@ -44,7 +44,7 @@ package
 	
 	/**
 	 * CatAndMouse.as class.   	
-	 * @see http://www.godpaper.com/godpaper/index.php/%E7%8C%AB%E6%8D%89%E9%BC%A0%E6%A3%8B
+	 * @see http://www.godpaper.com/godpaper/index.php/猫捉鼠棋
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+

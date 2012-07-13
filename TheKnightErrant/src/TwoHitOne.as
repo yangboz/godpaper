@@ -67,7 +67,7 @@ package
 	
 	/**
 	 * TwoHitOne.as class.   
-	 * @see http://www.godpaper.com/godpaper/index.php/%E5%85%AD%E5%AD%90%E6%A3%8B	
+	 * @see http://www.godpaper.com/godpaper/index.php/六子棋	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
