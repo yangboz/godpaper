@@ -18,6 +18,7 @@ package com.godpaper.as3.model.pools
 	 * @playerVersion 9.0
 	 * Created Jul 2, 2011 10:59:45 AM
 	 * @see http://help.adobe.com/en_US/as3/mobile/WS948100b6829bd5a6-19cd3c2412513c24bce-8000.html
+	 * @see http://en.wikipedia.org/wiki/Object_pool_pattern
 	 */   	 
 	public class BlueChessPiecesPool
 	{		

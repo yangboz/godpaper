@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/halo" 
+				   xmlns:degrafa="com.degrafa.*" 
+				   xmlns:repeaters="com.degrafa.geometry.repeaters.*" 
+				   xmlns:paint="com.degrafa.paint.*" 
+				   xmlns:geometry="com.degrafa.geometry.*" 
+				   xmlns:transform="com.degrafa.transform.*"
+				   borderVisible="false"
+				   width="{BoardConfig.width}" 
+				   height="{BoardConfig.height}"
+				   scaleX="{BoardConfig.xScale}"
+				   scaleY="{BoardConfig.yScale}"
+				   backgroundColor="black"
+				   >
+	<fx:Script>
+		<![CDATA[
+			import com.godpaper.as3.configs.BoardConfig;
+			import mx.graphics.SolidColorStroke;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<!-- Notice that the Repeater is inside a Halo container. -->
+	<degrafa:Surface>
+		
+		<degrafa:strokes>
+			<paint:SolidStroke    id="whiteStroke"
+									color="#FFF"
+									weight="1"
+									alpha=".5"/>
+		</degrafa:strokes>
+		
+		<degrafa:GeometryGroup>
+			
+			<repeaters:VerticalLineRepeater   id="vlRepeater"    
+											count="5"
+											stroke="{whiteStroke}"
+											x="0"
+											y="0"
+											y1="{BoardConfig.yOffset*4}"
+											offsetX="0"
+											offsetY="0"
+											moveOffsetX="{BoardConfig.xOffset}"
+											moveOffsetY="0"/>
+			
+			<repeaters:HorizontalLineRepeater id="hlRepeater"    
+											count="5"
+											stroke="{whiteStroke}"
+											x="0"
+											y="0"
+											x1="{BoardConfig.xOffset*4}"
+											offsetX="0"
+											offsetY="0"
+											moveOffsetX="0"
+											moveOffsetY="{BoardConfig.yOffset}"/>
+			
+			<!--diagnoal lines(from northWest to southEast)-->     
+			<geometry:Line 
+				stroke="{whiteStroke}"
+				x="{BoardConfig.xOffset*2}"
+				y="0"
+				x1="{BoardConfig.xOffset*4}"
+				y1="{BoardConfig.yOffset*2}"
+				/>
+			<geometry:Line 
+				stroke="{whiteStroke}"
+				x="0"
+				y="0"
+				x1="{BoardConfig.xOffset*4}"
+				y1="{BoardConfig.yOffset*4}"
+				/>                      
+			<geometry:Line 
+				stroke="{whiteStroke}"
+				x="0"
+				y="{BoardConfig.yOffset*2}"
+				x1="{BoardConfig.xOffset*2}"
+				y1="{BoardConfig.yOffset*4}"
+				/>
+			<!--diagnoal lines(from southWest to northEast)-->                      
+			<geometry:Line 
+				stroke="{whiteStroke}"
+				x="0"
+				y="{BoardConfig.yOffset*2}"
+				x1="{BoardConfig.xOffset*2}"
+				y1="0"
+				/>      
+			<geometry:Line 
+				stroke="{whiteStroke}"
+				x="0"
+				y="{BoardConfig.yOffset*4}"
+				x1="{BoardConfig.xOffset*4}"
+				y1="0"
+				/>      
+			
+			<geometry:Line 
+				stroke="{whiteStroke}"
+				x="{BoardConfig.xOffset*2}"
+				y="{BoardConfig.yOffset*4}"
+				x1="{BoardConfig.xOffset*4}"
+				y1="{BoardConfig.yOffset*2}"
+				/>      
+		</degrafa:GeometryGroup>
+		
+	</degrafa:Surface>
+
+</s:BorderContainer>

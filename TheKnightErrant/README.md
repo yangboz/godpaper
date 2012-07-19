@@ -30,9 +30,9 @@ AS3 Chess Programming Source Code:
 
 AS3 Game data structure, http://www.polygonal.de
 
-AS3 Stage3d(Starling), http://www.sparrow-framework.org
+AS3 Stage3d("Starling"), http://www.sparrow-framework.org
 
-AS3 Stage3d(Starling) Mobile UI components(foxhole), https://github.com/joshtynjala/foxhole-starling
+AS3 Stage3d("Starling") Mobile UI components("Foxhole"), https://github.com/joshtynjala/foxhole-starling
 
 Chess Documents:
 
@@ -42,7 +42,7 @@ Artificial Intelligence:
 
 Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 
-TODO List:
+TODO/Wish List:
 
 1.ZobristKey Model for game status process;(plan)
 
@@ -54,10 +54,18 @@ TODO List:
 
 5.Machine Learning implementation;(plan)
 
-6.ButtonBar with Starling UI implementation;(Done)
+6.ButtonBar with "Starling" UI implementation;(Done)
 
-7.Pop up window with Starling UI implementation;(start)
+7.Pop up window with "Starling" UI implementation;(Done.using the "Foxhole" Pop-up mechanic)
 
-8.PiecesBox with Starling UI implementation;(start)
+8.PiecesBox with "Starling" UI implementation;(Done.Extend from ChessGasket component)
 
-9.Merge the stand-alone chess board game to this main project;(Start)
+9.Merge the stand-alone chess board game to this main project,also with separated texture package;(Start)
+
+10.PvP mode implementation;(Plan)
+
+11."Facebook" plug-in implementation;(Plan)
+
+12.Numberic board algorithm implementation;(Plan)
+
+13.Flash player 11.4,concurrency(worker) implementation;(Plan)

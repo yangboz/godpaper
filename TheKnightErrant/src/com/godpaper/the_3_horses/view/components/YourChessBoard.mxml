@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/halo" 
+				   xmlns:degrafa="com.degrafa.*" 
+				   xmlns:repeaters="com.degrafa.geometry.repeaters.*" 
+				   xmlns:paint="com.degrafa.paint.*" 
+				   xmlns:geometry="com.degrafa.geometry.*" 
+				   xmlns:transform="com.degrafa.transform.*"
+				   borderVisible="false"
+				   width="{BoardConfig.width}" 
+				   height="{BoardConfig.height}"
+				   scaleX="{BoardConfig.xScale}"
+				   scaleY="{BoardConfig.yScale}"
+				   >
+	<fx:Script>
+		<![CDATA[
+			import com.godpaper.as3.configs.BoardConfig;
+			import mx.graphics.SolidColorStroke;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<!-- Notice that the Repeater is inside a Halo container. -->
+	<degrafa:Surface id="surface">
+		<degrafa:strokes>
+			<paint:SolidStroke id="blackStroke" color="#000" weight="2" alpha="1"/>
+		</degrafa:strokes>
+		<!-- Horizontal lines and Vertical lines. -->
+		<!--<degrafa:GeometryGroup id="geometryGroup">
+			<repeaters:HorizontalLineRepeater count="{BoardConfig.yLines}" stroke="{blackStroke}" x="{BoardConfig.yOffset}" x1="{BoardConfig.width}" y="0" moveOffsetY="{BoardConfig.yOffset}"/> 
+			<repeaters:VerticalLineRepeater count="{BoardConfig.xLines}" stroke="{blackStroke}" y="0" y1="{BoardConfig.height}" x="0" moveOffsetX="{BoardConfig.xOffset}"/>
+		</degrafa:GeometryGroup>-->
+		<degrafa:GeometryGroup>
+			<!-- Horizontal lines. from left to right-->
+			<geometry:Line x="{BoardConfig.xOffset*0}" y="{BoardConfig.yOffset*5}" x1="{BoardConfig.xOffset*1}" y1="{BoardConfig.yOffset*6}" stroke="{blackStroke}">
+			</geometry:Line>
+			<geometry:Line x="{BoardConfig.xOffset*0}" y="{BoardConfig.yOffset*3}" x1="{BoardConfig.xOffset*3}" y1="{BoardConfig.yOffset*6}" stroke="{blackStroke}">
+			</geometry:Line>
+			<geometry:Line x="{BoardConfig.xOffset*0}" y="{BoardConfig.yOffset*1}" x1="{BoardConfig.xOffset*5}" y1="{BoardConfig.yOffset*6}" stroke="{blackStroke}">
+			</geometry:Line>
+			<geometry:Line x="{BoardConfig.xOffset*1}" y="0" x1="{BoardConfig.xOffset*7}" y1="{BoardConfig.yOffset*6}" stroke="{blackStroke}">
+			</geometry:Line>
+			<geometry:Line x="{BoardConfig.xOffset*3}" y="0" x1="{BoardConfig.xOffset*9}" y1="{BoardConfig.yOffset*6}" stroke="{blackStroke}">
+			</geometry:Line>
+			
+			<geometry:Line x="{BoardConfig.xOffset*5}" y="0" x1="{BoardConfig.xOffset*10}" y1="{BoardConfig.yOffset*5}" stroke="{blackStroke}">
+			</geometry:Line>
+			<geometry:Line x="{BoardConfig.xOffset*7}" y="0" x1="{BoardConfig.xOffset*10}" y1="{BoardConfig.yOffset*3}" stroke="{blackStroke}">
+			</geometry:Line>
+			<geometry:Line x="{BoardConfig.xOffset*9}" y="0" x1="{BoardConfig.xOffset*10}" y1="{BoardConfig.yOffset*1}" stroke="{blackStroke}">
+			</geometry:Line>
+			<!-- Vertical lines. from top to bottom-->
+			<geometry:Line x="{BoardConfig.xOffset*1}" y="{BoardConfig.yOffset*0}" x1="{BoardConfig.xOffset*0}" y1="{BoardConfig.yOffset*1}" stroke="{blackStroke}">
+			</geometry:Line>
+			<geometry:Line x="{BoardConfig.xOffset*3}" y="{BoardConfig.yOffset*0}" x1="{BoardConfig.xOffset*0}" y1="{BoardConfig.yOffset*3}" stroke="{blackStroke}">
+			</geometry:Line>
+			<geometry:Line x="{BoardConfig.xOffset*5}" y="{BoardConfig.yOffset*0}" x1="{BoardConfig.xOffset*0}" y1="{BoardConfig.yOffset*5}" stroke="{blackStroke}">
+			</geometry:Line>
+			
+			<geometry:Line x="{BoardConfig.xOffset*7}" y="{BoardConfig.yOffset*0}" x1="{BoardConfig.xOffset*1}" y1="{BoardConfig.yOffset*6}" stroke="{blackStroke}">
+			</geometry:Line>
+			<geometry:Line x="{BoardConfig.xOffset*9}" y="{BoardConfig.yOffset*0}" x1="{BoardConfig.xOffset*3}" y1="{BoardConfig.yOffset*6}" stroke="{blackStroke}">
+			</geometry:Line>
+			
+			<geometry:Line x="{BoardConfig.xOffset*10}" y="{BoardConfig.yOffset*1}" x1="{BoardConfig.xOffset*5}" y1="{BoardConfig.yOffset*6}" stroke="{blackStroke}">
+			</geometry:Line>
+			<geometry:Line x="{BoardConfig.xOffset*10}" y="{BoardConfig.yOffset*3}" x1="{BoardConfig.xOffset*7}" y1="{BoardConfig.yOffset*6}" stroke="{blackStroke}">
+			</geometry:Line>
+			<geometry:Line x="{BoardConfig.xOffset*10}" y="{BoardConfig.yOffset*5}" x1="{BoardConfig.xOffset*9}" y1="{BoardConfig.yOffset*6}" stroke="{blackStroke}">
+			</geometry:Line>
+			<!-- Intersect lines . -->
+			
+		</degrafa:GeometryGroup>
+	</degrafa:Surface>
+</s:BorderContainer>

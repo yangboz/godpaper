@@ -315,15 +315,15 @@ package
 			BoardConfig.piecesBoxRequired = true;
 //			BoardConfig.piecesBoxBgImage = null;
 			//gasket config:
-			GasketConfig.maxPoolSize = 9;
+			GasketConfig.maxPoolSize = 9;//Notices:Object pools full of objects with dangerously stale state are sometimes called object cesspools and regarded as an anti-pattern.
 			GasketConfig.tipsVisible = true;
 			GasketConfig.backgroundAlpha = 0.2;
 			GasketConfig.width = 30;
 			GasketConfig.height = 30;
 			//about piece:
-			PieceConfig.factory = ChessFactory_TicTacToe;
-			PieceConfig.maxPoolSizeBlue = 5;
-			PieceConfig.maxPoolSizeRed = 5;
+			PieceConfig.factory = ChessFactory_TicTacToe;//your custom chess factory.
+			PieceConfig.maxPoolSizeBlue = 5;//What's the number of blue(computer) chess pieces?
+			PieceConfig.maxPoolSizeRed = 5;//What's the number of red(human) chess pieces?
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
 			PieceConfig.scaleX = 1;
 			PieceConfig.scaleY = 1;
