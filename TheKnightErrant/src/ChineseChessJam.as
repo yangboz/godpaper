@@ -25,8 +25,9 @@ package
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
-	import com.godpaper.as3.core.IChessPieceManager;
+	import com.godpaper.as3.configs.TextureConfig;
 	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.chinese_chess_jam.business.factory.ChessFactory_ChineseChessJam;
 	import com.godpaper.chinese_chess_jam.business.managers.ChessPieceManager_ChineseChessJam;
@@ -138,10 +139,14 @@ package
 			PluginConfig.gameID = "47de4a85dd3e213a";//your custom game related id.
 			PluginConfig.boardID = "3a460211409897f4";//your custom game related board id.
 			this._mochiads_game_id = "47de4a85dd3e213a";//espical for mochi game platform.
+			//TextureConfig
+			TextureConfig.AssetEmbeds_1x_class = AssetEmbeds_1x_chinese_chess_jam;
+			TextureConfig.AssetEmbeds_2x_class = AssetEmbeds_1x_chinese_chess_jam;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);
 			LOG.debug("SigletonFactory(cb) test:{0}",FlexGlobals.chessBoardModel.status.dump());
+			//
 		}
 		//--------------------------------------------------------------------------
 		//

@@ -19,22 +19,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.as3.views.screens
+package
 {
-	import com.godpaper.as3.configs.TextureConfig;
-	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.core.FlexGlobals;
-	import com.godpaper.as3.utils.LogUtil;
-	
-	import mx.logging.ILogger;
-	
-	import org.josht.starling.foxhole.controls.Label;
-	import org.josht.starling.foxhole.controls.ProgressBar;
-	import org.josht.starling.foxhole.controls.Screen;
-	import org.josht.starling.motion.GTween;
-	
-	import starling.events.Event;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -42,27 +28,31 @@ package com.godpaper.as3.views.screens
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * SplashScene.as class with customzie subroutines.	
+	 * AssetEmbeds_1x_chinese_chess_jam.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Jul 3, 2012 5:11:09 PM
+	 * Created May 30, 2012 2:43:50 PM
 	 */   	 
-	public class SplashScreen extends Screen
+	public class AssetEmbeds_1x_chinese_chess_jam
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _progressTween:GTween;//Foxhole extended GTween.
-		private var _progress:ProgressBar;
-		private var _label:Label;
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(SplashScreen);
+		// Texture Atlas
+		[Embed(source="/assets/textures/1x/chinese_chess_jam/AtlasTexture_chinese_chess_jam.xml", mimeType="application/octet-stream")]
+		public static const AtlasTextureXml:Class;
+		
+		[Embed(source="/assets/textures/1x/chinese_chess_jam/AtlasTexture_chinese_chess_jam.png")]
+		public static const AtlasTexture:Class;
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -80,65 +70,19 @@ package com.godpaper.as3.views.screens
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function SplashScreen()
-		{
-			//TODO: implement function
-			super();
-		}     	
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function initialize():void
-		{
-			this._progress = new ProgressBar();
-			this._progress.minimum = 0;
-			this._progress.maximum = 1;
-			this._progress.value = 0;
-			this.addChild(this._progress);
-			//
-			this._progressTween = new GTween(this._progress, 5,
-				{
-					value: 1
-				},
-				{
-					repeatCount: 1
-				});
-			//
-			this._label = new Label();
-			this._label.text = "LOADING...";
-			this.addChild(this._label);
-			//Loading subroutines here.
-			
-			//			CursorManager.setBusyCursor();
-			// sound initialization takes a moment, so we prepare them here
-			if(TextureConfig.fontTextureRequired)
-			{
-				AssetEmbedsDefault.loadBitmapFonts();
-			}
-			//Loading complete handler.
-			this._progressTween.onComplete =  function():void
-			{
-				FlexGlobals.screenNavigator.showScreen((DefaultConstants.SCREEN_GAME));//Screen swither here.
-			}
-		}
 		
-		override protected function draw():void
-		{
-			this._progress.validate();
-			this._progress.x = (this.actualWidth - this._progress.width) / 2;
-			this._progress.y = (this.actualHeight - this._progress.height) / 2;
-			//
-			this._label.validate();
-			this._label.x = (this.actualWidth - this._label.width) / 2;
-			this._label.y = (this.actualHeight - this._label.height) / 2;
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods

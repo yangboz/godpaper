@@ -51,7 +51,7 @@ package
 	 * @airVersion 3.2+
 	 * Created Jun 28, 2012 3:48:47 PM
 	 */   	 
-	[SWF(frameRate="60", width="500", height="500", backgroundColor="0xffffff")]//320×480 for iPhone devices
+	[SWF(frameRate="60", width="500", height="550", backgroundColor="0xffffff")]//320×480 for iPhone devices
 	//	[SWF(frameRate="60", width="384", height="512", backgroundColor="0xffffff")]//384×512 for iPad devices
 	public class CatAndMouse extends ApplicationBase
 	{		

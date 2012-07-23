@@ -173,10 +173,6 @@ package com.godpaper.chinese_chess_jam.business.factory
 					return null;
 					break;
 			}
-			//chess piece's swfloader source.
-//			this.chessPieceSource = EmbededAssets[chessPieceType];
-			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
-			this.chessPieceSource = atlas.getTexture(chessPieceType);
 			//call super functions.
 			return super.createChessPiece(position,flag);
 		}

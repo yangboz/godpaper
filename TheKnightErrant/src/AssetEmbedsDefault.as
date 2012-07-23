@@ -1,5 +1,7 @@
 package 
 {
+	import com.godpaper.as3.configs.TextureConfig;
+	
 	import flash.display.Bitmap;
 	import flash.media.Sound;
 	import flash.utils.ByteArray;
@@ -38,6 +40,8 @@ package
 		private static var sTextureAtlas:TextureAtlas;
 		private static var sBitmapFontsLoaded:Boolean;
 		private static var sContentScaleFactor:int = 1;
+		//About chess pieces
+		private static var cpTextureAtlas:TextureAtlas;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -114,11 +118,23 @@ package
 		{
 			if (!sBitmapFontsLoaded)
 			{
-				var texture:Texture=getTexture("DesyrelTexture");
-				var xml:XML=XML(create("DesyrelXml"));
+				var texture:Texture=getTexture(TextureConfig.altalsTexture_font_name);
+				var xml:XML=XML(create(TextureConfig.altalsTexture_font_xml_name));
 				TextField.registerBitmapFont(new BitmapFont(texture, xml));
 				sBitmapFontsLoaded=true;
 			}
+		}
+		//About chess pieces
+		public static function getChessPiecesTextureAtlas():TextureAtlas
+		{
+			if (cpTextureAtlas == null)
+			{
+				var texture:Texture = getTexture(TextureConfig.altalsTexture_img_name);
+				var xml:XML = XML(createChessPieces(TextureConfig.altalsTexture_xml_name));
+				cpTextureAtlas = new TextureAtlas(texture, xml);
+			}
+			
+			return cpTextureAtlas;
 		}
 
 		//--------------------------------------------------------------------------
@@ -132,9 +148,16 @@ package
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		//Default create
 		private static function create(name:String):Object
 		{
 			var textureClass:Class = sContentScaleFactor == 1 ? AssetEmbeds_1x : AssetEmbeds_2x;
+			return new textureClass[name];
+		}
+		//Chess pieces' create
+		private static function createChessPieces(name:String):Object
+		{
+			var textureClass:Class = (sContentScaleFactor == 1)?TextureConfig.AssetEmbeds_1x_class:TextureConfig.AssetEmbeds_2x_class;
 			return new textureClass[name];
 		}
 		
