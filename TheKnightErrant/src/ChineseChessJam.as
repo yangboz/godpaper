@@ -26,6 +26,7 @@ package
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.configs.TextureConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.utils.LogUtil;
@@ -33,6 +34,8 @@ package
 	import com.godpaper.chinese_chess_jam.business.managers.ChessPieceManager_ChineseChessJam;
 	
 	import mx.logging.ILogger;
+	
+	import starling.display.Image;
 
 	//--------------------------------------------------------------------------
 	//
@@ -142,10 +145,11 @@ package
 			//TextureConfig
 			TextureConfig.AssetEmbeds_1x_class = AssetEmbeds_1x_chinese_chess_jam;
 			TextureConfig.AssetEmbeds_2x_class = AssetEmbeds_1x_chinese_chess_jam;
+//			BoardConfig.backgroundImage = new Image(AssetEmbedsDefault.getTexture_cp_bg(DefaultConstants.IMG_BACK_GROUND));
 			//
-			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
-			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);
-			LOG.debug("SigletonFactory(cb) test:{0}",FlexGlobals.chessBoardModel.status.dump());
+//			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
+//			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);
+//			LOG.debug("SigletonFactory(cb) test:{0}",FlexGlobals.chessBoardModel.status.dump());
 			//
 		}
 		//--------------------------------------------------------------------------

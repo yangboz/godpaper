@@ -128,7 +128,7 @@ package com.godpaper.as3.business.factory
 			simpleChessPiece.type=chessPieceType;
 			//Set texture atlas
 //			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
-			var atlas:TextureAtlas = AssetEmbedsDefault.getChessPiecesTextureAtlas();
+			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas_cp();
 			simpleChessPiece.upState = atlas.getTexture(chessPieceSubType?chessPieceSubType:chessPieceType);
 			simpleChessPiece.downState = atlas.getTexture(chessPieceSubType?chessPieceSubType:chessPieceType);
 			//set flag to identify.

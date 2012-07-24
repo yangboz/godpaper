@@ -36,10 +36,12 @@ package
 		//--------------------------------------------------------------------------
 		// Texture cache
 		private static var sTextures:Dictionary=new Dictionary();
+		private static var sTextures_cp:Dictionary=new Dictionary();
 		private static var sSounds:Dictionary=new Dictionary();
 		private static var sTextureAtlas:TextureAtlas;
 		private static var sBitmapFontsLoaded:Boolean;
 		private static var sContentScaleFactor:int = 1;
+		private static var sContentScaleFactor_cp:int = 1;
 		//About chess pieces
 		private static var cpTextureAtlas:TextureAtlas;
 		//----------------------------------
@@ -99,7 +101,28 @@ package
 
 			return sTextures[name];
 		}
-
+		//esp for chess pieces
+		public static function getTexture_cp(name:String):Texture
+		{
+			if (sTextures_cp[name] == undefined)
+			{
+				var data:Object= create_cp(name);
+				//
+				if (data is Bitmap)
+					sTextures_cp[name]=Texture.fromBitmap(data as Bitmap);
+				else if (data is ByteArray)
+					sTextures_cp[name]=Texture.fromAtfData(data as ByteArray);
+			}
+			
+			return sTextures_cp[name];
+		}
+		//esp for chess pieces' background
+		public static function getTexture_cp_bg(name:String):Texture
+		{
+			var data:Object= create_cp(name);
+			sTextures_cp[name]=Texture.fromBitmap(data as Bitmap);
+			return sTextures_cp[name];
+		}
 		//
 		public static function getTextureAtlas():TextureAtlas
 		{
@@ -124,13 +147,13 @@ package
 				sBitmapFontsLoaded=true;
 			}
 		}
-		//About chess pieces
-		public static function getChessPiecesTextureAtlas():TextureAtlas
+		//esp for chess pieces
+		public static function getTextureAtlas_cp():TextureAtlas
 		{
 			if (cpTextureAtlas == null)
 			{
-				var texture:Texture = getTexture(TextureConfig.altalsTexture_img_name);
-				var xml:XML = XML(createChessPieces(TextureConfig.altalsTexture_xml_name));
+				var texture:Texture = getTexture_cp(TextureConfig.altalsTexture_img_name);
+				var xml:XML = XML(create_cp(TextureConfig.altalsTexture_xml_name));
 				cpTextureAtlas = new TextureAtlas(texture, xml);
 			}
 			
@@ -154,10 +177,10 @@ package
 			var textureClass:Class = sContentScaleFactor == 1 ? AssetEmbeds_1x : AssetEmbeds_2x;
 			return new textureClass[name];
 		}
-		//Chess pieces' create
-		private static function createChessPieces(name:String):Object
+		//esp for chess pieces
+		private static function create_cp(name:String):Object
 		{
-			var textureClass:Class = (sContentScaleFactor == 1)?TextureConfig.AssetEmbeds_1x_class:TextureConfig.AssetEmbeds_2x_class;
+			var textureClass:Class = (sContentScaleFactor_cp == 1)?TextureConfig.AssetEmbeds_1x_class:TextureConfig.AssetEmbeds_2x_class;
 			return new textureClass[name];
 		}
 		
@@ -169,6 +192,16 @@ package
 			
 			sTextures = new Dictionary();
 			sContentScaleFactor = value < 1.5 ? 1 : 2; // assets are available for factor 1 and 2 
+		}
+		//esp for chess pieces
+		public static function get contentScaleFactor_cp():Number { return sContentScaleFactor_cp; }
+		public static function set contentScaleFactor_cp(value:Number):void 
+		{
+			for each (var texture:Texture in sTextures)
+			texture.dispose();
+			
+			sTextures_cp = new Dictionary();
+			sContentScaleFactor_cp = value < 1.5 ? 1 : 2; // assets are available for factor 1 and 2 
 		}
 	}
 

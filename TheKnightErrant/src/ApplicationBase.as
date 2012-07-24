@@ -163,7 +163,7 @@ package
 			mStarling.showStats = true;
 			//Multi-Resolution Development
 			//@see: http://wiki.starling-framework.org/manual/multi-resolution_development
-			LOG.debug("Starling contentScaleFactor:{0}",mStarling.contentScaleFactor);
+//			LOG.debug("Starling contentScaleFactor:{0}",mStarling.contentScaleFactor);
 			var isPad:Boolean = (screenWidth >= 768 || screenWidth >= 1536);
 //			mStarling.stage.stageWidth  = isPad ? 384 : 320;
 //			mStarling.stage.stageHeight = isPad ? 512 : 480;

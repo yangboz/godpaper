@@ -1,5 +1,6 @@
 package com.godpaper.as3.configs
 {
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.views.components.ChessBoard;
 	
@@ -58,7 +59,7 @@ package com.godpaper.as3.configs
 		public static var numConnex:Number;//the number of connex in each direction.
 		//background image texture.
 //		var chessBoardBackground:Image = new Image(AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND));
-		public static var backgroundImage:Image=null;//The chess board's backgroud texture;
+		public static var backgroundImage:Image= null;//The chess board's backgroud texture;
 		//Pieces box relevant variables.
 		public static var piecesBoxRequired:Boolean = false;//For partical chess board game with pieces box component view;
 		public static var piecesBoxBgImage:Image=null;//The chess pieces box 's backgroud texture;

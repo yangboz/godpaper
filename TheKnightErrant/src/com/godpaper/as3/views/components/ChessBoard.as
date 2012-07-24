@@ -263,6 +263,8 @@ package com.godpaper.as3.views.components
 			this.yAdjust = BoardConfig.yAdjust;
 			//
 			super(background);
+			//
+			this.touchable = false;
 		}     	
 		//--------------------------------------------------------------------------
 		//

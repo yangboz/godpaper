@@ -52,7 +52,9 @@ package
 		
 		[Embed(source="/assets/textures/1x/chinese_chess_jam/AtlasTexture_chinese_chess_jam.png")]
 		public static const AtlasTexture:Class;
-
+		
+		[Embed(source="/assets/textures/1x/chinese_chess_jam/background_chinese_chess_jam.png")]
+		public static const IMG_BACK_GROUND:Class;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

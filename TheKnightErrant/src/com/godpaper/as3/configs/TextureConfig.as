@@ -46,13 +46,33 @@ package com.godpaper.as3.configs
 		public static var AssetEmbeds_2x_class:Class = AssetEmbeds_2x;
 		//
 //		public static var bitmapTextureRequired:Boolean = true;
-		public static var altalsTexture_img_name:String = "AtlasTexture";
-		public static var altalsTexture_xml_name:String = "AtlasTextureXml";
+		private static var _altalsTexture_img_name:String = "AtlasTexture";
+		private static var _altalsTexture_xml_name:String = "AtlasTextureXml";
 		//
 		public static var fontTextureRequired:Boolean = false;
-		public static var altalsTexture_font_name:String = "DesyrelTexture";
-		public static var altalsTexture_font_xml_name:String = "DesyrelXml";
+		private static var _altalsTexture_font_name:String = "DesyrelTexture";
+		private static var _altalsTexture_font_xml_name:String = "DesyrelXml";
 		
+		public static function get altalsTexture_font_xml_name():String
+		{
+			return _altalsTexture_font_xml_name;
+		}
+
+		public static function get altalsTexture_font_name():String
+		{
+			return _altalsTexture_font_name;
+		}
+
+		public static function get altalsTexture_xml_name():String
+		{
+			return _altalsTexture_xml_name;
+		}
+
+		public static function get altalsTexture_img_name():String
+		{
+			return _altalsTexture_img_name;
+		}
+
 	}
 	
 }
