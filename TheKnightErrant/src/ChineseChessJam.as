@@ -52,8 +52,8 @@ package
 	 * @airVersion 3.2+
 	 * Created Jul 3, 2012 4:16:34 PM
 	 */   
-	[SWF(frameRate="60", width="500", height="575", backgroundColor="0xffffff")]//320×480 for iPhone devices
-	//	[SWF(frameRate="60", width="384", height="512", backgroundColor="0xffffff")]//384×512 for iPad devices
+	[SWF(frameRate="60", width="500", height="600", backgroundColor="0xffffff")]//320×480 for iPhone devices
+//		[SWF(frameRate="60", width="600", height="636", backgroundColor="0xffffff")]//384×512 for iPad devices
 	public class ChineseChessJam extends ApplicationBase
 	{		
 		//--------------------------------------------------------------------------
@@ -144,8 +144,7 @@ package
 			this._mochiads_game_id = "47de4a85dd3e213a";//espical for mochi game platform.
 			//TextureConfig
 			TextureConfig.AssetEmbeds_1x_class = AssetEmbeds_1x_chinese_chess_jam;
-			TextureConfig.AssetEmbeds_2x_class = AssetEmbeds_1x_chinese_chess_jam;
-//			BoardConfig.backgroundImage = new Image(AssetEmbedsDefault.getTexture_cp_bg(DefaultConstants.IMG_BACK_GROUND));
+			TextureConfig.AssetEmbeds_2x_class = AssetEmbeds_2x_chinese_chess_jam;
 			//
 //			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 //			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);

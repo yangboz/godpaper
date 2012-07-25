@@ -28,7 +28,7 @@ package
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * AssetEmbeds_1x_chinese_chess_jam.as class.   	
+	 * AssetEmbeds_2x_chinese_chess_jam.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
@@ -52,7 +52,9 @@ package
 		
 		[Embed(source="/assets/textures/2x/chinese_chess_jam/AtlasTexture_chinese_chess_jam.png")]
 		public static const AtlasTexture:Class;
-
+		
+		[Embed(source="/assets/textures/2x/chinese_chess_jam/background_chinese_chess_jam.png")]
+		public static const IMG_BACK_GROUND:Class;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
