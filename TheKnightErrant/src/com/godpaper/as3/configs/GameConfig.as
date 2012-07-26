@@ -1,6 +1,6 @@
 package com.godpaper.as3.configs
 {
-	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
+	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
 	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 	import com.godpaper.as3.consts.DefaultTollgatesConstant;
 	import com.godpaper.as3.core.IChessPieceManager;
@@ -100,7 +100,7 @@ package com.godpaper.as3.configs
 		//----------------------------------
 		//  chessPieceManager(read-write)
 		//----------------------------------
-		public static var chessPieceManager:IChessPieceManager = new ChessPieceManagerDefault();
+		public static var chessPieceManager:IChessPieceManager = new ChessPiecesManagerDefault();
 //		public static function get chessPieceManager():IChessPieceManager
 //		{
 //			return _chessPieceManager;

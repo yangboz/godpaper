@@ -1,33 +1,28 @@
-package com.godpaper.the_3_horses.busniess.managers
+package com.godpaper.color_lines.model.vo
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
-	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.model.ChessBoardModel;
+	import com.godpaper.as3.impl.AbstractChessVO;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.as3.views.components.ChessPiece;
-	import com.lookbackon.ds.NumberBoard;
+	import com.lookbackon.ds.BitBoard;
+	import com.lookbackon.ds.aStar.AStar;
 	
-	import de.polygonal.ds.Array2;
+	import flash.events.Event;
 	
 	import mx.logging.ILogger;
 
-
 	/**
-	 * ChessPiecesManager_The3Horses.as class.
+	 * ColorLinesChessVO.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Feb 25, 2011 12:38:06 PM
+	 * Created Feb 25, 2011 12:38:37 PM
 	 */   	 
-	public class ChessPiecesManager_The3Horses extends ChessPiecesManagerDefault
+	public class ChessVO_ColorLines extends AbstractChessVO
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -37,7 +32,7 @@ package com.godpaper.the_3_horses.busniess.managers
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(ChessPiecesManager_The3Horses);
+		private static const LOG:ILogger = LogUtil.getLogger(ChessVO_ColorLines);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -55,9 +50,9 @@ package com.godpaper.the_3_horses.busniess.managers
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessPiecesManager_The3Horses()
+		public function ChessVO_ColorLines(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0)
 		{
-			super();
+			super(width, height, rowIndex, colIndex, flag);
 		}     	
 
 		//--------------------------------------------------------------------------
@@ -65,46 +60,39 @@ package com.godpaper.the_3_horses.busniess.managers
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function applyMove(conductVO:ConductVO):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:int=0,identifier:String=""):void
 		{
-			//super call here.
-			super.applyMove(conductVO);
-			//Apply your chess game rule here.
+			//TODO: implement function
+			//Define chess occupy/move/capture even defend bitboard here.
+			//@see http://www.godpaper.com/godpaper/index.php/%E5%B0%8F%E7%A0%96%E6%A0%BC%E6%A3%8B
+			// *
+			// *s*
+			// *
+			//Notice:Don't worry about bitboard over-fence issues,that it wouble be handle it as default.
+			//about occupies.
+			this.occupies.setAll();
+			this.occupies.setBitt(rowIndex,colIndex,false);
+			LOG.debug("occupies:{0}",this.occupies.dump());
+			//about legal moves.
+			this.moves.clear();
+//			LOG.debug("allPieces:{0}",chessPieceModel.allPieces.dump());
+			//
+			LOG.info("moves:{0}",this.moves.dump());
+			//blocker
+			//about attacked captures.
+			//about defends.
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function blueSideHandler():void
-		{
-			if(chessPiecesModel.blues.every(onTheRight))
-			{
-				//Computer Win
-				GameConfig.gameStateManager.computerWin();
-			}
-		}
-		override protected function redSideHandler():void
-		{
-			if(chessPiecesModel.reds.every(onTheLeft))
-			{
-				//Human Win
-				GameConfig.gameStateManager.humanWin();
-			}
-		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function onTheLeft(element:*, index:int, vector:Vector.<ChessPiece>):Boolean 
-		{
-			return 0== (element as ChessPiece).position.x;
-		}
-		private function onTheRight(element:*, index:int, vector:Vector.<ChessPiece>):Boolean 
-		{
-			return (BoardConfig.xLines-1)==(element as ChessPiece).position.x;
-		}
 	}
 
 }

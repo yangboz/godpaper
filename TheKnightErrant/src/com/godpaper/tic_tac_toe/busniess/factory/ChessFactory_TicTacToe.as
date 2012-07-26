@@ -23,7 +23,7 @@ package com.godpaper.tic_tac_toe.busniess.factory
 
 
 	/**
-	 * YourChessFacory.as class.
+	 * ChessFactory_TicTacToe.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0

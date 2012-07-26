@@ -41,7 +41,7 @@ package com.godpaper.as3.business.managers
 	 * @history 2010-12-02 using memento design pattern to implment make/unmake functions.
 	 * @history 2011-07-20 add default the side handlers at make move function.
 	 */
-	public class ChessPieceManagerDefault implements IChessPieceManager
+	public class ChessPiecesManagerDefault implements IChessPieceManager
 	{
 		//--------------------------------------------------------------------------
 		//
@@ -72,7 +72,7 @@ package com.godpaper.as3.business.managers
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private const LOG:ILogger=LogUtil.getLogger(ChessPieceManagerDefault);
+		private const LOG:ILogger=LogUtil.getLogger(ChessPiecesManagerDefault);
 
 		//--------------------------------------------------------------------------
 		//

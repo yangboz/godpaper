@@ -26,7 +26,7 @@ package com.godpaper.two_hit_one.buiness.managers
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
+	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
 	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
@@ -58,7 +58,7 @@ package com.godpaper.two_hit_one.buiness.managers
 	 * @airVersion 3.2+
 	 * Created May 14, 2012 2:06:30 PM
 	 */   	 
-	public class ChessPieceManager_TwoHitOne extends ChessPieceManagerDefault
+	public class ChessPieceManager_TwoHitOne extends ChessPiecesManagerDefault
 	{		
 		//--------------------------------------------------------------------------
 		//

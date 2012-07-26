@@ -5,7 +5,7 @@ package com.godpaper.tic_tac_toe.busniess.managers
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
+	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
 	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
@@ -29,7 +29,7 @@ package com.godpaper.tic_tac_toe.busniess.managers
 	 * @playerVersion 9.0
 	 * Created Feb 25, 2011 12:38:06 PM
 	 */   	 
-	public class ChessPiecesManager_TicTacToe extends ChessPieceManagerDefault
+	public class ChessPiecesManager_TicTacToe extends ChessPiecesManagerDefault
 	{		
 		//--------------------------------------------------------------------------
 		//

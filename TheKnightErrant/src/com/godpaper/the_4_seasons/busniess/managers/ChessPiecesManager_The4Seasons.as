@@ -5,7 +5,7 @@ package com.godpaper.the_4_seasons.busniess.managers
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
+	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.core.IChessGasket;
@@ -31,7 +31,7 @@ package com.godpaper.the_4_seasons.busniess.managers
 	 * @playerVersion 9.0
 	 * Created Feb 25, 2011 12:38:06 PM
 	 */   	 
-	public class ChessPiecesManager_The4Seasons extends com.godpaper.as3.business.managers.ChessPieceManagerDefault
+	public class ChessPiecesManager_The4Seasons extends com.godpaper.as3.business.managers.ChessPiecesManagerDefault
 	{		
 		//--------------------------------------------------------------------------
 		//

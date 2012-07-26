@@ -69,7 +69,9 @@ package
 		
 		[Embed(source="/assets/textures/1x/defaultAtlasTexture.png")]
 		public static const AtlasTexture:Class;
-
+		
+		//
+//		public static const IMG_BACK_GROUND:Class;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

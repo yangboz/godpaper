@@ -60,8 +60,11 @@ package com.godpaper.as3.configs
 		//background image texture.
 //		var chessBoardBackground:Image = new Image(AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND));
 //		public static var backgroundImage:Image= null;//The chess board's backgroud texture;
+		//
+		public static var backgroundImageRequired:Boolean = false;
 		public static function get backgroundImage():Image
 		{
+			if(!backgroundImageRequired) return null;
 			return new Image(AssetEmbedsDefault.getTexture_cp_bg(DefaultConstants.IMG_BACK_GROUND));
 		}
 		//Pieces box relevant variables.

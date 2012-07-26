@@ -1,6 +1,6 @@
 package com.godpaper.chinese_chess_jam.business.managers
 {
-	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
+	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.core.FlexGlobals;
@@ -18,7 +18,7 @@ package com.godpaper.chinese_chess_jam.business.managers
 	 * @author Knight.zhou
 	 * @history 2010-12-02 using memento design pattern to implment make/unmake functions.
 	 */
-	public class ChessPieceManager_ChineseChessJam extends ChessPieceManagerDefault
+	public class ChessPieceManager_ChineseChessJam extends ChessPiecesManagerDefault
 	{
 		//--------------------------------------------------------------------------
 		//

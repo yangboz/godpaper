@@ -69,3 +69,5 @@ TODO/Wish List:
 12.Numberic board algorithm implementation;(Plan)
 
 13.Flash player 11.4,concurrency(worker) implementation;(Plan)
+
+14.UCI protocol implementation with FEN string.

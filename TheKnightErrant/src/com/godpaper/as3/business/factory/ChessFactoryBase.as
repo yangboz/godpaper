@@ -6,14 +6,16 @@ package com.godpaper.as3.business.factory
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.consts.DefaultPiecesConstants;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IChessGasket;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.errors.DefaultErrors;
+	import com.godpaper.as3.model.ChessBoardModel;
+	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.pools.BlueChessPiecesPool;
 	import com.godpaper.as3.model.pools.ChessGasketsPool;
 	import com.godpaper.as3.model.pools.RedChessPiecesPool;
@@ -58,6 +60,10 @@ package com.godpaper.as3.business.factory
 		protected var chessPieceSource:Object;//style source(texture...) asset(@see assets/EmbededAssets.as).
 		protected var chessPieceName:String="";//the unique chess piece name to identify the chess piece of typed group.
 		protected var chessGasketTips:String="";//The tool tips of chess gasket.
+		//Models
+		protected var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
+		protected var chessGasketsModel:ChessGasketsModel = FlexGlobals.chessGasketsModel;
+		protected var chessBoardModel:ChessBoardModel = FlexGlobals.chessBoardModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

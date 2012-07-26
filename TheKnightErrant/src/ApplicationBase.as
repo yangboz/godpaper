@@ -27,6 +27,7 @@ package
 	//
 	//--------------------------------------------------------------------------
 	
+	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;
@@ -36,6 +37,7 @@ package
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessPieceManager;
+	import com.godpaper.as3.core.IGameStateManager;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.PluginUIComponent;
 	import com.godpaper.as3.plugins.kongregate.KongregatePlugin;
@@ -118,6 +120,13 @@ package
 		{
 //			return new ChessPieceManagerDefault();
 			return new ChessPiecesManager_TicTacToe();
+		}
+		/**
+		 * Override this for customize game state manager.
+		 */ 
+		public function get gameStateManager():IGameStateManager
+		{
+			return new GameStateManagerDefault();
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -361,6 +370,7 @@ package
 			//			GameConfig.tollgateTips = ["baby intelligence","fellow intelligence","man intelligence","guru intelligence"];
 			GameConfig.turnFlag = DefaultConstants.FLAG_RED;
 			GameConfig.chessPieceManager = this.chessPiecesManager;
+			GameConfig.gameStateManager = this.gameStateManager;
 			GameConfig.gameStateManager.start();
 		}
 	}

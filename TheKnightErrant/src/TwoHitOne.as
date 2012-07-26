@@ -27,7 +27,7 @@ package
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.business.factory.ChessFactoryBase;
-	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
+	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;

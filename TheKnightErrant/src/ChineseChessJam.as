@@ -118,6 +118,7 @@ package
 			BoardConfig.yScale=1;
 			BoardConfig.xAdjust=50;
 			BoardConfig.yAdjust=50;
+			BoardConfig.backgroundImageRequired = true;
 //			BoardConfig.xOffset=this.width/10;
 //			BoardConfig.yOffset=this.height/11;
 //			BoardConfig.xAdjust=this.width/10;

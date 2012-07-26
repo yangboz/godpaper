@@ -21,39 +21,35 @@
  */
 package
 {
-	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
-	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.configs.GasketConfig;
-	import com.godpaper.as3.configs.PieceConfig;
-	import com.godpaper.as3.configs.PluginConfig;
-	import com.godpaper.as3.core.IChessPieceManager;
-	import com.godpaper.as3.core.FlexGlobals;
-	import com.godpaper.as3.plugins.IPlug;
-	import com.godpaper.as3.plugins.mochi.MochiPlugin;
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.cat_and_mouse.busniess.factory.ChessFactory_CatAndMouse;
-	import com.godpaper.cat_and_mouse.busniess.managers.ChessPiecesManager_CatAndMouse;
-	
-	import mx.logging.ILogger;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	
+	import com.godpaper.as3.configs.BoardConfig;
+	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.configs.GasketConfig;
+	import com.godpaper.as3.configs.PieceConfig;
+	import com.godpaper.as3.configs.PluginConfig;
+	import com.godpaper.as3.configs.TextureConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.IChessPieceManager;
+	import com.godpaper.as3.core.IGameStateManager;
+	import com.godpaper.color_lines.busniess.factory.ChessFactory_ColorLines;
+	import com.godpaper.color_lines.busniess.managers.ChessPiecesManager_ColorLines;
+	import com.godpaper.color_lines.busniess.managers.GameStateManager_ColorLines;
+
 	/**
-	 * CatAndMouse.as class.   	
-	 * @see http://www.godpaper.com/godpaper/index.php/猫捉鼠棋
+	 * Color Lines (aka Lines) is a computer puzzle game, invented by Oleg Demin and first introduced as a video game by the Russian company Gamos (Russian: Геймос) in 1992. 
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Jun 28, 2012 3:48:47 PM
-	 */   	 
-	[SWF(frameRate="60", width="500", height="550", backgroundColor="0xffffff")]//320×480 for iPhone devices
+	 * Created Jul 26, 2012 3:20:05 PM
+	 */  
+	[SWF(frameRate="60", width="550", height="550", backgroundColor="0xffffff")]//320×480 for iPhone devices
 	//	[SWF(frameRate="60", width="384", height="512", backgroundColor="0xffffff")]//384×512 for iPad devices
-	public class CatAndMouse extends ApplicationBase
+	public class ColorLines extends ApplicationBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -64,28 +60,21 @@ package
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(CatAndMouse);
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		/**
-		 * Override this for customize plugin provider.
-		 */ 
-		override public function get pluginProvider():IPlug
-		{
-			return new MochiPlugin(PluginConfig.gameID,PluginConfig.boardID);
-			//			return new NonobaPlugin();
-			//			return new KongregatePlugin();
-			//			return new PlatogoPlugin("1146511093");
-		}
-		/**
-		 * Override this for customize chess pieces manager.
-		 */ 
+		//
 		override public function get chessPiecesManager():IChessPieceManager
 		{
-			return new ChessPiecesManager_CatAndMouse();
+			return new ChessPiecesManager_ColorLines();
+		}
+		//
+		override public function get gameStateManager():IGameStateManager
+		{
+			return new GameStateManager_ColorLines();
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -98,7 +87,7 @@ package
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CatAndMouse()
+		public function ColorLines()
 		{
 			//TODO: implement function
 			super();
@@ -114,48 +103,56 @@ package
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		//applicationBase_initializeHandler
-		/**
-		 * All kinds of view components initialization here.
-		 */		
 		override protected function initializeHandler():void
 		{
 			//config initialization here.
 			//about chess board:
-			BoardConfig.xLines=5;
-			BoardConfig.yLines=5;
-			BoardConfig.xOffset=100;
-			BoardConfig.yOffset=100;	
-//			BoardConfig.width=400;
-//			BoardConfig.height=400;
+			BoardConfig.xLines=9;
+			BoardConfig.yLines=9;
+			BoardConfig.xOffset=50;
+			BoardConfig.yOffset=50;	
+			//			BoardConfig.width=300;
+			//			BoardConfig.height=300;
 			BoardConfig.xScale=1;
 			BoardConfig.yScale=1;
 			BoardConfig.xAdjust=50;
 			BoardConfig.yAdjust=50;
+			//for connex
+			BoardConfig.hConnex = true;//enable the horizontal connection.
+			BoardConfig.vConnex = true;//enable the vertical connection.
+			BoardConfig.fdConnex = true;//enable the forward connection.
+			BoardConfig.bdConnex = true;//enable the backward connection.
+			BoardConfig.numConnex = 5;//the number of connection.
 			//Customize starling texture sample:
 			//			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 			//			BoardConfig.backgroundImage = new Image(texture);
+			//Pieces box config:
+			BoardConfig.piecesBoxRequired = true;
+			//			BoardConfig.piecesBoxBgImage = null;
 			//gasket config:
-			GasketConfig.maxPoolSize = 25;
+			GasketConfig.maxPoolSize = 9;//Notices:Object pools full of objects with dangerously stale state are sometimes called object cesspools and regarded as an anti-pattern.
 			GasketConfig.tipsVisible = true;
 			GasketConfig.backgroundAlpha = 0.2;
 			GasketConfig.width = 30;
 			GasketConfig.height = 30;
 			//about piece:
-			PieceConfig.factory = ChessFactory_CatAndMouse;
-			PieceConfig.maxPoolSizeBlue = 6;
-			PieceConfig.maxPoolSizeRed = 6;
+			PieceConfig.factory = ChessFactory_ColorLines;//your custom chess factory.
+			PieceConfig.maxPoolSizeBlue = 5;//What's the number of blue(computer) chess pieces?
+			PieceConfig.maxPoolSizeRed = 5;//What's the number of red(human) chess pieces?
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
 			PieceConfig.scaleX = 1;
 			PieceConfig.scaleY = 1;
 			//about plugin:
-			PluginConfig.gameID = "679698cc5a813f98";//your custom game related id.
-			PluginConfig.boardID = "23c42b7d6ae6e2aa";//your custom game related board id.
-			this._mochiads_game_id = "679698cc5a813f98";//espical for mochi game platform.
+			PluginConfig.gameID = "c7278f158e32f9a0";//your custom game related id.
+//			PluginConfig.boardID = "51c558cd0315f8e7";//your custom game related board id.
+			this._mochiads_game_id = "c7278f158e32f9a0";//espical for mochi game platform.
+			//TextureConfig
+			TextureConfig.AssetEmbeds_1x_class = AssetEmbeds_1x;
+			TextureConfig.AssetEmbeds_2x_class = AssetEmbeds_2x;
 			//
-			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
-			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);
-			LOG.debug("SigletonFactory(cb) test:{0}",FlexGlobals.chessBoardModel.status.dump());
+//			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
+//			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);
+//			LOG.debug("SigletonFactory(cb) test:{0}",FlexGlobals.chessBoardModel.status.dump());
 		}
 		//--------------------------------------------------------------------------
 		//

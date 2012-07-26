@@ -138,6 +138,11 @@ package com.lookbackon.ds
 		{
 			_nodes[x][y].walkable = value;
 		}
+		//
+		public function toString():String
+		{
+			return "AStarNodeBoard->col:"+this.column+",row:"+this.row;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

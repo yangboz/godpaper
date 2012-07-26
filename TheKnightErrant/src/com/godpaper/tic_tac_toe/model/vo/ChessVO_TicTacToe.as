@@ -13,7 +13,7 @@ package com.godpaper.tic_tac_toe.model.vo
 
 
 	/**
-	 * YourChessVO.as class.
+	 * ChessVO_TicTacToe.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0

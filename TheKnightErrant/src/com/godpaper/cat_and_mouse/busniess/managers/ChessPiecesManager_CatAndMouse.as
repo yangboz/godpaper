@@ -5,7 +5,7 @@ package com.godpaper.cat_and_mouse.busniess.managers
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
+	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.model.ChessBoardModel;
@@ -28,7 +28,7 @@ package com.godpaper.cat_and_mouse.busniess.managers
 	 * @playerVersion 9.0
 	 * Created Feb 25, 2011 12:38:06 PM
 	 */   	 
-	public class ChessPiecesManager_CatAndMouse extends ChessPieceManagerDefault
+	public class ChessPiecesManager_CatAndMouse extends ChessPiecesManagerDefault
 	{		
 		//--------------------------------------------------------------------------
 		//

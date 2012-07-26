@@ -7,7 +7,7 @@ package com.godpaper.tiger_in_beijing.busniess.managers
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.business.managers.ChessPieceManagerDefault;
+	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
 	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
@@ -28,7 +28,7 @@ package com.godpaper.tiger_in_beijing.busniess.managers
 	 * @playerVersion 9.0
 	 * Created Feb 25, 2011 12:38:06 PM
 	 */   	 
-	public class ChessPiecesManager_TigerInBeijing extends ChessPieceManagerDefault
+	public class ChessPiecesManager_TigerInBeijing extends ChessPiecesManagerDefault
 	{		
 		//--------------------------------------------------------------------------
 		//

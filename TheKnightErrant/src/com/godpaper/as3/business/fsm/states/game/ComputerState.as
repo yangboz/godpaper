@@ -25,7 +25,10 @@ package com.godpaper.as3.business.fsm.states.game
 	import org.generalrelativity.thread.IRunnable;
 	
 	import pl.mateuszmackowiak.visuals.CursorManager;
-
+	
+	import com.godpaper.as3.model.ChessBoardModel;
+	import com.godpaper.as3.model.ChessGasketsModel;
+	import com.godpaper.as3.model.ChessPiecesModel;
 	/**
 	 * ComputerState.as class.
 	 * @author yangboz
@@ -45,6 +48,10 @@ package com.godpaper.as3.business.fsm.states.game
 		//
 		private var processes:Vector.<IRunnable>;
 		private var greenThread:GreenThread;
+		//Models
+		protected var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
+		protected var chessGasketsModel:ChessGasketsModel = FlexGlobals.chessGasketsModel;
+		protected var chessBoardModel:ChessBoardModel = FlexGlobals.chessBoardModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
