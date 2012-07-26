@@ -323,7 +323,7 @@ package
 //			BoardConfig.backgroundImage = new Image(texture);
 			//Pieces box config:
 			BoardConfig.piecesBoxRequired = true;
-//			BoardConfig.piecesBoxBgImage = null;
+			BoardConfig.backgroundImageRequired = false;
 			//gasket config:
 			GasketConfig.maxPoolSize = 9;//Notices:Object pools full of objects with dangerously stale state are sometimes called object cesspools and regarded as an anti-pattern.
 			GasketConfig.tipsVisible = true;
