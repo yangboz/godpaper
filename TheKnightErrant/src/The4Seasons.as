@@ -25,6 +25,7 @@ package
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
+	import com.godpaper.as3.configs.TextureConfig;
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.the_4_seasons.busniess.factory.ChessFactory_The4Seasons;
@@ -120,7 +121,7 @@ package
 			//			BoardConfig.backgroundImage = new Image(texture);
 			//Pieces box config:
 			BoardConfig.piecesBoxRequired = false;
-			//			BoardConfig.piecesBoxBgImage = null;
+			BoardConfig.backgroundImageRequired = true;
 			//gasket config:
 			GasketConfig.maxPoolSize = 10;
 			GasketConfig.tipsVisible = true;
@@ -138,6 +139,9 @@ package
 			PluginConfig.gameID = "7e286778f1d7be15";//your custom game related id.
 //			PluginConfig.boardID = "51c558cd0315f8e7";//your custom game related board id.
 			this._mochiads_game_id = "7e286778f1d7be15";//espical for mochi game platform.
+			//TextureConfig
+			TextureConfig.AssetEmbeds_1x_class = AssetEmbeds_1x_the_4_seasons;
+//			TextureConfig.AssetEmbeds_2x_class = AssetEmbeds_2x_chinese_chess_jam;
 			//
 //			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 //			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);

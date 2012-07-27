@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:743eadd40c4d24ea4b43d2e91e9351e5$ -->
+<TextureAtlas imagePath="AtlasTexture_the_4_seasons.png">
+    <SubTexture name="Autumn" x="2" y="2" width="38" height="38"/>
+    <SubTexture name="Spring" x="42" y="2" width="38" height="38"/>
+    <SubTexture name="Summer" x="82" y="2" width="38" height="38"/>
+    <SubTexture name="Winter" x="2" y="42" width="38" height="38"/>
+</TextureAtlas>

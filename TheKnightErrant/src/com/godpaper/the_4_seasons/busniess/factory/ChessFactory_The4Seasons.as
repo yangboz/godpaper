@@ -90,14 +90,14 @@ package com.godpaper.the_4_seasons.busniess.factory
 					chessPieceValue=16+int(position.x);
 					chessPieceType=DefaultConstants.BLUE;
 //					this.chessPieceSource = EmbededAssets.SPRING;
-					this.chessPieceName = ChessPiecesConsts_The4Seasons.NAME_SPRING;
+					chessPieceSubType = this.chessPieceName = ChessPiecesConsts_The4Seasons.NAME_SPRING;
 					break;
 				case "(x=8, y=0)":
 					chessPieceLabel=DefaultPiecesConstants.BLUE.label;
 					chessPieceValue=16+int(position.x);
 					chessPieceType=DefaultConstants.BLUE;
 //					this.chessPieceSource = EmbededAssets.SUMMER;
-					this.chessPieceName = ChessPiecesConsts_The4Seasons.NAME_SUMMER;
+					chessPieceSubType = this.chessPieceName = ChessPiecesConsts_The4Seasons.NAME_SUMMER;
 					break;
 				//about red
 				case "(x=0, y=8)":
@@ -105,14 +105,14 @@ package com.godpaper.the_4_seasons.busniess.factory
 					chessPieceValue=8+int(position.x);
 					chessPieceType=DefaultConstants.RED;
 //					this.chessPieceSource = EmbededAssets.WINTER;
-					this.chessPieceName = ChessPiecesConsts_The4Seasons.NAME_WINTER;
+					chessPieceSubType = this.chessPieceName = ChessPiecesConsts_The4Seasons.NAME_WINTER;
 					break;
 				case "(x=8, y=8)":
 					chessPieceLabel=DefaultPiecesConstants.RED.label;
 					chessPieceValue=8+int(position.x);
 					chessPieceType=DefaultConstants.RED;
 //					this.chessPieceSource = EmbededAssets.AUTUMN;
-					this.chessPieceName = ChessPiecesConsts_The4Seasons.NAME_AUTUMN;
+					chessPieceSubType = this.chessPieceName = ChessPiecesConsts_The4Seasons.NAME_AUTUMN;
 					break;
 				default:
 					return null;

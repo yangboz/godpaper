@@ -24,10 +24,10 @@ package com.godpaper.the_4_seasons.consts
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		public static const NAME_SPRING:String = "name::Spring";
-		public static const NAME_SUMMER:String = "name::Summer";
-		public static const NAME_AUTUMN:String = "name::Autumn";
-		public static const NAME_WINTER:String = "name::Winter";
+		public static const NAME_SPRING:String = "Spring";
+		public static const NAME_SUMMER:String = "Summer";
+		public static const NAME_AUTUMN:String = "Autumn";
+		public static const NAME_WINTER:String = "Winter";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
