@@ -1,5 +1,7 @@
-package com.godpaper.the_4_seasons.consts
+package com.godpaper.the_5_elements.business.managers
 {
+	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -7,13 +9,13 @@ package com.godpaper.the_4_seasons.consts
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * ChessPiecesConsts_The4Seasons.as class.   	
+	 * T5eChessPiecesManager.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Aug 2, 2011 12:50:13 PM
+	 * Created Jul 1, 2011 2:53:12 PM
 	 */   	 
-	public class ChessPiecesConsts_The4Seasons
+	public class ChessPiecesManager_The5Elements extends ChessPiecesManagerDefault
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -24,10 +26,7 @@ package com.godpaper.the_4_seasons.consts
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		public static const NAME_SPRING:String = "Spring";
-		public static const NAME_SUMMER:String = "Summer";
-		public static const NAME_AUTUMN:String = "Autumn";
-		public static const NAME_WINTER:String = "Winter";
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -45,8 +44,10 @@ package com.godpaper.the_4_seasons.consts
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessPiecesConsts_The4Seasons()
+		public function ChessPiecesManager_The5Elements()
 		{
+			//TODO: implement function
+			super();
 		}     	
 		//--------------------------------------------------------------------------
 		//
