@@ -372,6 +372,8 @@ package
 			GameConfig.chessPieceManager = this.chessPiecesManager;
 			GameConfig.gameStateManager = this.gameStateManager;
 			GameConfig.gameStateManager.start();
+			//P2pService testing.
+//			FlexGlobals.conductService.initialization(null,null);
 		}
 	}
 	

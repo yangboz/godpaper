@@ -21,6 +21,11 @@
  */
 package com.godpaper.as3.core
 {
+	import com.godpaper.as3.model.ChessBoardModel;
+	import com.godpaper.as3.model.ChessGasketsModel;
+	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.UserModel;
+	import com.godpaper.as3.services.ConductService;
 	import com.godpaper.as3.utils.SingletonFactory;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
 	import com.godpaper.as3.views.screens.GameScreen;
@@ -30,9 +35,6 @@ package com.godpaper.as3.core
 	import org.osflash.signals.Signal;
 	
 	import starling.display.Stage;
-	import com.godpaper.as3.model.ChessBoardModel;
-	import com.godpaper.as3.model.ChessGasketsModel;
-	import com.godpaper.as3.model.ChessPiecesModel;
 
 	//--------------------------------------------------------------------------
 	//
@@ -75,11 +77,14 @@ package com.godpaper.as3.core
 		public static var chessPiecesModel:ChessPiecesModel = SingletonFactory.produce(ChessPiecesModel);
 		public static var chessGasketsModel:ChessGasketsModel = SingletonFactory.produce(ChessGasketsModel);
 		public static var chessBoardModel:ChessBoardModel = SingletonFactory.produce(ChessBoardModel);
+		public static var userModel:UserModel = SingletonFactory.produce(UserModel);
 		//Signals.
 		public static var levelUpSignal:Signal = new Signal(int);//user level up signal.
 		public static var checkSignal:Signal = new Signal(Message);//chess check signal.
 		//Screen navigator
 		public static var screenNavigator:ScreenNavigator;
+		//Services
+		public static var conductService:ConductService = SingletonFactory.produce(ConductService);
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

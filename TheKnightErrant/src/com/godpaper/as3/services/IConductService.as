@@ -5,7 +5,6 @@ package com.godpaper.as3.services
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import mx.rpc.AsyncToken;
 	/**
 	 * IConductService.as class.This interface is used to transform conduct information,</br>
 	 * Using interfaces makes it easy to switch the actual service classes.
@@ -40,7 +39,7 @@ package com.godpaper.as3.services
 		 * and notify the result in the chess piece manager.
 		 * @param value the value of conduct's brevity.
 		 */
-		function transforBrevity(value:String):void;
+		function transforBrevity(value:String):String;
 	}
 }
 
