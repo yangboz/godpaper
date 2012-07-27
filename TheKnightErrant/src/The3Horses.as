@@ -25,6 +25,7 @@ package
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
+	import com.godpaper.as3.configs.TextureConfig;
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.the_3_horses.busniess.factory.ChessFactory_The3Horses;
@@ -39,7 +40,7 @@ package
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	[SWF(frameRate="60", width="600", height="400", backgroundColor="0xffffff")]//320×480 for iPhone devices
+	[SWF(frameRate="60", width="600", height="450", backgroundColor="0xffffff")]//320×480 for iPhone devices
 	//	[SWF(frameRate="60", width="384", height="512", backgroundColor="0xffffff")]//384×512 for iPad devices
 	/**
 	 * The3Horses.as class.   
@@ -123,7 +124,7 @@ package
 			//			BoardConfig.backgroundImage = new Image(texture);
 			//Pieces box config:
 			BoardConfig.piecesBoxRequired = false;
-			//			BoardConfig.piecesBoxBgImage = null;
+//			BoardConfig.backgroundImageRequired = true;
 			//gasket config:
 			GasketConfig.maxPoolSize = 10;
 			GasketConfig.tipsVisible = true;
@@ -141,6 +142,9 @@ package
 			PluginConfig.gameID = "34331f335e39fb05";//your custom game related id.
 //			PluginConfig.boardID = "51c558cd0315f8e7";//your custom game related board id.
 			this._mochiads_game_id = "34331f335e39fb05";//espical for mochi game platform.
+			//TextureConfig
+			TextureConfig.AssetEmbeds_1x_class = AssetEmbeds_1x_the_3_horses;
+//			TextureConfig.AssetEmbeds_2x_class = AssetEmbeds_2x;
 			//
 //			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 //			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);
