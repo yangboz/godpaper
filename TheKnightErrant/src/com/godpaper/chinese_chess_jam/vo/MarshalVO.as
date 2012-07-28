@@ -30,7 +30,7 @@ package com.godpaper.chinese_chess_jam.vo
 		/**
 		 * @inheritDoc
 		 */
-		override public function initialization( rowIndex:int, colIndex:int,flag:int=0,identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
 		{
 			//TODO: implement function
 			//serveral admental(将对面问题)

@@ -5,8 +5,9 @@ package com.godpaper.tic_tac_toe.model.vo
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.impl.AbstractChessVO;
+	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.impl.AbstractChessVO;
 	import com.godpaper.as3.utils.LogUtil;
 	
 	import mx.logging.ILogger;
@@ -47,10 +48,10 @@ package com.godpaper.tic_tac_toe.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessVO_TicTacToe(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0)
+		public function ChessVO_TicTacToe(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0,identifier:String="")
 		{
 			//TODO: implement function
-			super(width, height, rowIndex, colIndex, flag);
+			super(width, height, rowIndex, colIndex, flag,identifier);
 		}     	
 
 		//--------------------------------------------------------------------------
@@ -58,7 +59,7 @@ package com.godpaper.tic_tac_toe.model.vo
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0,identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
 		{
 			//Define chess occupy/move/capture even defend bitboard here.
 			//@see http://www.godpaper.com/godpaper/index.php/%E5%B0%8F%E7%A0%96%E6%A0%BC%E6%A3%8B
@@ -73,13 +74,16 @@ package com.godpaper.tic_tac_toe.model.vo
 				{
 					if(chessGasketModel.gaskets.gett(col,row))
 					{
-						this.occupies.setBitt(row,col,true);
+						if(rowIndex==-1 && colIndex==-1)
+						{
+							this.occupies.setBitt(row,col,true);
+						}
 					}
 				}
 			}
 			LOG.info("occupies:{0}",this.occupies.dump());
 			//about legal moves.
-			LOG.info(chessPiecesModel.allPieces.dump());
+			LOG.info("allPieces:{0}",chessPiecesModel.allPieces.dump());
 			this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.allPieces));
 			//
 			LOG.info("moves:{0}",this.moves.dump());

@@ -39,10 +39,14 @@ package com.godpaper.as3.configs
 		private static var _redPieces:Vector.<ConductVO> = new Vector.<ConductVO>;
 		public static var bluePiecesBox:IPiecesBox;
 		public static var redPiecesBox:IPiecesBox;
+		//Display pieces
+//		public static var displayRule:uint=DISPLAY_RULE_AT_ONCE;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-
+//		public static const DISPLAY_RULE_AT_ONCE:uint = 1<<0;// "display_all_once";//一次性布子
+//		public static const DISPLAY_RULE_BY_TURN:uint = 1<<1;//"display_by_turn";//轮流布子
+//		public static const DISPLAY_RULE_SUB_SECTION:uint = 1<<2;//"display_sub_section";//分段布子
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

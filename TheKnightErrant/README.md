@@ -60,14 +60,16 @@ TODO/Wish List:
 
 8.PiecesBox with "Starling" UI implementation;(Done.Extend from ChessGasket component)
 
-9.Merge the stand-alone chess board game to this main project,also with separated texture package;(Start)
+9.Merge the stand-alone chess board game to this main project,also with separated texture package;(Done)
 
-10.PvP mode implementation;(Plan)
+10.PvP mode implementation;(Start)
 
 11."Facebook" plug-in implementation;(Plan)
 
-12.Numberic board algorithm implementation;(Plan)
+12.numerical board algorithm implementation;(Plan)
 
 13.Flash player 11.4,concurrency(worker) implementation;(Plan)
 
-14.UCI protocol implementation with FEN string.
+14.UCI protocol implementation with FEN string.(Plan)
+
+15.

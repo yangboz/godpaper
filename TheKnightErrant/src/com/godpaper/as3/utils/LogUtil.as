@@ -1,5 +1,7 @@
 package com.godpaper.as3.utils
 {
+	import com.godpaper.as3.configs.LogConfig;
+	
 	import flash.utils.getQualifiedClassName;
 	
 	import mx.logging.ILogger;
@@ -52,13 +54,14 @@ package com.godpaper.as3.utils
 		public static function getLogger(c:Class):ILogger {
 			var className:String =getQualifiedClassName(c).replace("::", ".");
 			//Customize the Log
-			_traceTarget.includeLevel = true;
-//			_traceTarget.includeDate = true;
-			_traceTarget.includeCategory = true;
-			_traceTarget.includeTime = true;
-			_traceTarget.includeMemory = true;
-			_traceTarget.fieldSeparator = "->";
-//			_traceTarget.filters = ["com.godpaper.starling.views.scenes.GameScene"];
+			_traceTarget.includeLevel = LogConfig.includeLevel;
+			_traceTarget.includeDate = LogConfig.includeDate;
+			_traceTarget.includeCategory = LogConfig.includeCategory;
+			_traceTarget.includeTime = LogConfig.includeTime;
+			_traceTarget.includeMemory = LogConfig.includeMemory;
+			_traceTarget.fieldSeparator = LogConfig.fieldSeparator;
+			_traceTarget.filters = LogConfig.filters;
+			_traceTarget.level = LogConfig.levle;
 			Log.addTarget(_traceTarget);
 			//
 			return Log.getLogger(className);

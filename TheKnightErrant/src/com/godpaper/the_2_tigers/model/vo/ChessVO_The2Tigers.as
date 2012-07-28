@@ -49,10 +49,10 @@ package com.godpaper.the_2_tigers.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessVO_The2Tigers(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0)
+		public function ChessVO_The2Tigers(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0, identifier:String="")
 		{
 			//TODO: implement function
-			super(width, height, rowIndex, colIndex, flag);
+			super(width, height, rowIndex, colIndex, flag,identifier);
 		}     	
 
 		//--------------------------------------------------------------------------

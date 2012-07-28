@@ -66,7 +66,7 @@ package com.godpaper.as3.model
 		/**
 		 * return the magic number board struct.
 		 */		
-		public function get numercal():NumberBoard
+		public function get numerical():NumberBoard
 		{
 			return new NumberBoard(BoardConfig.xLines, BoardConfig.yLines,BoardConfig.numConnex, BoardConfig.hConnex, BoardConfig.vConnex, BoardConfig.fdConnex, BoardConfig.bdConnex);
 		}
@@ -135,20 +135,6 @@ package com.godpaper.as3.model
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-//		public function ChessBoardModel(access:Private)
-//		{
-//			if (access != null)
-//			{
-//				if (instance == null)
-//				{
-//					instance=this;
-//				}
-//			}
-//			else
-//			{
-//				throw new DefaultErrors(DefaultErrors.INITIALIZE_SINGLETON_CLASS);
-//			}
-//		}   
 		public function ChessBoardModel()
 		{
 			//
@@ -158,19 +144,7 @@ package com.godpaper.as3.model
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		/**
-		 *
-		 * @return the singleton instance of ChessBoardModel
-		 *
-		 */
-//		public static function getInstance():ChessBoardModel 
-//		{
-//			if (instance == null) 
-//			{
-//				instance=new ChessBoardModel(new Private());
-//			}
-//			return instance;
-//		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -185,9 +159,3 @@ package com.godpaper.as3.model
 	}
 	
 }
-/**
- *Inner class which restricts construtor access to Private
- */
-//internal class Private 
-//{
-//}

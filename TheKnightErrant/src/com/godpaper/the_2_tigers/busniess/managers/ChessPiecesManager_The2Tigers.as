@@ -80,7 +80,7 @@ package com.godpaper.the_2_tigers.busniess.managers
 		{
 			var cBoard:Array2=chessBoardModel.status.board;
 			//				var connex:Array=mnm.getConnex(cBoard, NUM_CONNECTION);
-			var connex:Array=chessBoardModel.numercal.getConnex(cBoard,BoardConfig.numConnex,null);
+			var connex:Array=chessBoardModel.numerical.getConnex(cBoard,BoardConfig.numConnex,null);
 			LOG.debug("current board connex:{0}", connex);
 			//horizontally.
 			if(connex[0].length)
@@ -98,7 +98,7 @@ package com.godpaper.the_2_tigers.busniess.managers
 		{
 			var cBoard:Array2=chessBoardModel.status.board;
 			//				var connex:Array=mnm.getConnex(cBoard, NUM_CONNECTION);
-			var connex:Array=chessBoardModel.numercal.getConnex(cBoard,BoardConfig.numConnex,null);
+			var connex:Array=chessBoardModel.numerical.getConnex(cBoard,BoardConfig.numConnex,null);
 			LOG.debug("current board connex:{0}", connex);
 			//horizontally.
 			if(connex[0].length)

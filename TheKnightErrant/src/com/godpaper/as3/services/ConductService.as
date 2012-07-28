@@ -189,21 +189,6 @@ package com.godpaper.as3.services
 							if(PostVO.STATE_UPDATE == event.info.message.state)//updateRole
 							{
 							}
-							if(PostVO.STATE_CHAT == event.info.message.state)//updateRole
-							{
-								//dispatch external events.
-							}
-							if(PostVO.STATE_DOOR == event.info.message.state)//updateRole
-							{
-								//dispatch external events.
-							}
-							if(PostVO.STATE_VIDEO == event.info.message.state)//updateRole
-							{
-							}
-							if(PostVO.STATE_NOTIFY == event.info.message.state)//text notification
-							{
-								//dispatch external events.
-							}
 						}
 					}
 					break;

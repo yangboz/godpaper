@@ -19,40 +19,44 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.two_hit_one.model.vo
+package com.godpaper.as3.configs
 {
+	import mx.logging.LogEventLevel;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.impl.AbstractChessVO;
-	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.core.FlexGlobals;
-	import com.godpaper.as3.utils.LogUtil;
-	
-	import mx.logging.ILogger;
 	
 	/**
-	 * TwhVO.as class.The "two hit one" chess piece's value object.  	
+	 * LogConfig.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created May 14, 2012 2:10:57 PM
+	 * Created Jul 28, 2012 11:07:00 AM
 	 */   	 
-	public class ChessVO_TwoHitOne extends AbstractChessVO
+	public class LogConfig
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		public static var includeLevel:Boolean = true;
+		public static var includeDate:Boolean = false;
+		public static var includeCategory:Boolean = true;
+		public static var includeTime:Boolean = true;
+		public static var includeMemory:Boolean = true;
+		public static var fieldSeparator:String = "->";
+		public static var filters:Array = ["com.lookbackon.AI.searching.RandomWalk"];
+//		public static var filters:Array = [];
+		public static var levle:int = LogEventLevel.INFO;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(ChessVO_TwoHitOne);
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -70,50 +74,13 @@ package com.godpaper.two_hit_one.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessVO_TwoHitOne(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0, identifier:String="")
-		{
-			super(width, height, rowIndex, colIndex, flag, identifier);
-		}     	
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		//
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
-		{
-			//@see http://www.godpaper.com/godpaper/index.php/%E5%85%AD%E5%AD%90%E6%A3%8B
-			// *
-			// *s*
-			// *
-			//Notice:Don't worry about bitboard over-fence issues,that it wouldbe be handle it as default.
-			//about occupies.
-			if(colIndex<3)
-			{
-				this.occupies.setBitt(rowIndex,colIndex+1,true);
-			}
-			if(colIndex>0)
-			{
-				this.occupies.setBitt(rowIndex,colIndex-1,true);
-			}
-			if(rowIndex<3)
-			{
-				this.occupies.setBitt(rowIndex+1,colIndex,true);
-			}
-			if(rowIndex>0)
-			{
-				this.occupies.setBitt(rowIndex-1,colIndex,true);
-			}
-			LOG.info("({0},{1}),occupies:{2}",rowIndex,colIndex,this.occupies.dump());
-			//about legal moves.
-//			LOG.info("all pieces:{0}",FlexGlobals.chessPiecesModel.allPieces.dump());
-			this.moves = this.occupies.xor(this.occupies.and(FlexGlobals.chessPiecesModel.allPieces));
-			//
-			LOG.info("({0},{1}),moves:{2}",rowIndex,colIndex,this.moves.dump());
-			//blocker
-			//about attacked captures.
-			//about defends.
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

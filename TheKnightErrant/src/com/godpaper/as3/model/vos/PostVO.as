@@ -31,10 +31,6 @@ package com.godpaper.as3.model.vos
 		//----------------------------------
 		public static const STATE_REG:String = "registry";
 		public static const STATE_UPDATE:String = "update";
-		public static const STATE_CHAT:String = "chat";
-		public static const STATE_DOOR:String = "door";
-		public static const STATE_VIDEO:String = "video";
-		public static const STATE_NOTIFY:String = "notify";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

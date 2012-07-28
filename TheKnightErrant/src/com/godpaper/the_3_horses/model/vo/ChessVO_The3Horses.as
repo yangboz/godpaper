@@ -61,7 +61,7 @@ package com.godpaper.the_3_horses.model.vo
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0,identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
 		{
 			// - - * - * - -
 			// - - - - - - -

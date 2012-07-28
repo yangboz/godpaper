@@ -189,7 +189,7 @@ package com.godpaper.color_lines.busniess.managers
 		override protected function redSideHandler():void
 		{
 			var cBoard:Array2=chessBoardModel.status.board;
-			var connex:Array=chessBoardModel.numercal.getConnex(cBoard, BoardConfig.numConnex,null);
+			var connex:Array=chessBoardModel.numerical.getConnex(cBoard, BoardConfig.numConnex,null);
 			LOG.debug("current board connex:{0}@blueSideHandler", connex);
 			//horizontally.
 			if (connex[0].length)

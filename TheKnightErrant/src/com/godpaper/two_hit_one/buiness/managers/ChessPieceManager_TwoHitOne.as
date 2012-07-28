@@ -118,7 +118,7 @@ package com.godpaper.two_hit_one.buiness.managers
 		override protected function blueSideHandler():void
 		{
 			var cBoard:Array2=chessBoardModel.status.board;
-			var connex:Array=chessBoardModel.numercal.getConnex(cBoard,BoardConfig.numConnex,blueMatchPattern);
+			var connex:Array=chessBoardModel.numerical.getConnex(cBoard,BoardConfig.numConnex,blueMatchPattern);
 			LOG.debug("current board connex:{0}@blueSideHandler", connex);
 			//horizontally.
 			if(connex[0].length)
@@ -135,7 +135,7 @@ package com.godpaper.two_hit_one.buiness.managers
 		override protected function redSideHandler():void
 		{
 			var cBoard:Array2=chessBoardModel.status.board;
-			var connex:Array=chessBoardModel.numercal.getConnex(cBoard,BoardConfig.numConnex,redMatchPattern);
+			var connex:Array=chessBoardModel.numerical.getConnex(cBoard,BoardConfig.numConnex,redMatchPattern);
 			LOG.debug("current board connex:{0}@redSideHandler", connex);
 			//horizontally.
 			if(connex[0].length)

@@ -60,7 +60,7 @@ package com.godpaper.color_lines.model.vo
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0,identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
 		{
 			//TODO: implement function
 			//Define chess occupy/move/capture even defend bitboard here.

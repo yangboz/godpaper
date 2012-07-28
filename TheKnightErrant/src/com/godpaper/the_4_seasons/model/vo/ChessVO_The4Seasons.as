@@ -63,7 +63,7 @@ package com.godpaper.the_4_seasons.model.vo
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0,identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
 		{
 			//Define chess occupy/move/capture even defend bitboard here.
 			//@see http://www.godpaper.com/godpaper/index.php/四季棋

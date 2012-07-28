@@ -1,8 +1,8 @@
 package com.lookbackon.AI.searching
 {
 	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.utils.FilterUtil;
@@ -13,6 +13,7 @@ package com.lookbackon.AI.searching
 	import com.lookbackon.ds.BitBoard;
 	
 	import flash.geom.Point;
+	import flash.utils.Dictionary;
 	
 	import org.generalrelativity.thread.process.AbstractProcess;
 
