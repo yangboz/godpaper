@@ -1,6 +1,6 @@
 package com.godpaper.as3.utils
 {
-	import com.godpaper.as3.configs.LogConfig;
+	import com.godpaper.as3.configs.LoggerConfig;
 	
 	import flash.utils.getQualifiedClassName;
 	
@@ -54,14 +54,14 @@ package com.godpaper.as3.utils
 		public static function getLogger(c:Class):ILogger {
 			var className:String =getQualifiedClassName(c).replace("::", ".");
 			//Customize the Log
-			_traceTarget.includeLevel = LogConfig.includeLevel;
-			_traceTarget.includeDate = LogConfig.includeDate;
-			_traceTarget.includeCategory = LogConfig.includeCategory;
-			_traceTarget.includeTime = LogConfig.includeTime;
-			_traceTarget.includeMemory = LogConfig.includeMemory;
-			_traceTarget.fieldSeparator = LogConfig.fieldSeparator;
-			_traceTarget.filters = LogConfig.filters;
-			_traceTarget.level = LogConfig.levle;
+			_traceTarget.includeLevel = LoggerConfig.includeLevel;
+			_traceTarget.includeDate = LoggerConfig.includeDate;
+			_traceTarget.includeCategory = LoggerConfig.includeCategory;
+			_traceTarget.includeTime = LoggerConfig.includeTime;
+			_traceTarget.includeMemory = LoggerConfig.includeMemory;
+			_traceTarget.fieldSeparator = LoggerConfig.fieldSeparator;
+			_traceTarget.filters = LoggerConfig.filters;
+			_traceTarget.level = LoggerConfig.levle;
 			Log.addTarget(_traceTarget);
 			//
 			return Log.getLogger(className);

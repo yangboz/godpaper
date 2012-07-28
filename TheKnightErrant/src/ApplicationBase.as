@@ -31,6 +31,7 @@ package
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;
+	import com.godpaper.as3.configs.LoggerConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.configs.TextureConfig;
@@ -57,6 +58,7 @@ package
 	import flash.system.Capabilities;
 	
 	import mx.logging.ILogger;
+	import mx.logging.LogEventLevel;
 	
 	import starling.core.Starling;
 
@@ -344,6 +346,9 @@ package
 			//TextureConfig
 			TextureConfig.AssetEmbeds_1x_class = AssetEmbeds_1x;
 			TextureConfig.AssetEmbeds_2x_class = AssetEmbeds_2x;
+			//LogConfig
+			LoggerConfig.filters = ["com.godpaper.tic_tac_toe.busniess.managers.*"];
+			LoggerConfig.levle = LogEventLevel.DEBUG;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);

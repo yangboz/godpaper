@@ -30,14 +30,14 @@ package com.godpaper.as3.configs
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * LogConfig.as class.   	
+	 * LoggerConfig.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Jul 28, 2012 11:07:00 AM
 	 */   	 
-	public class LogConfig
+	public class LoggerConfig
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -50,8 +50,8 @@ package com.godpaper.as3.configs
 		public static var includeTime:Boolean = true;
 		public static var includeMemory:Boolean = true;
 		public static var fieldSeparator:String = "->";
-		public static var filters:Array = ["com.lookbackon.AI.searching.RandomWalk"];
-//		public static var filters:Array = [];
+//		public static var filters:Array = ["com.lookbackon.AI.searching.RandomWalk"];
+		public static var filters:Array = [];
 		public static var levle:int = LogEventLevel.INFO;
 		//----------------------------------
 		//  CONSTANTS

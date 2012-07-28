@@ -9,9 +9,9 @@ package com.godpaper.tic_tac_toe.busniess.managers
 	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.components.ChessPiece;
@@ -81,51 +81,53 @@ package com.godpaper.tic_tac_toe.busniess.managers
 		//--------------------------------------------------------------------------
 		override protected function blueSideHandler():void
 		{
-//			var cBoard:Array2=chessBoardModel.status.board;
-//			//				var connex:Array=mnm.getConnex(cBoard, NUM_CONNECTION);
-//			var connex:Array=chessBoardModel.numercal.getConnex(cBoard,BoardConfig.numConnex);
-//			LOG.debug("current board connex:{0}", connex);
-//			//horizontally.
-//			if(connex[0].length)
-//			{
-//				LOG.debug("Computer connex[0]:", connex[0]);
-//				//					trace(connex[0][0].length,(cBoard.getRow(BoardConfig.yLines).length-1),BoardConfig.numConnex);
-//				if ( (connex[0][0].length == BoardConfig.numConnex) &&  ((cBoard.getRow(BoardConfig.yLines).length-1) == BoardConfig.numConnex) )
-//				{
-//					//Computer Win
-//					GameConfig.gameStateManager.computerWin();
-//				}
-//			}
-			//another simple rule functions here.
-			if(chessPiecesModel.blues.every(onTheBottom))
+			var cBoard:Array2=chessBoardModel.status.board;
+			//				var connex:Array=mnm.getConnex(cBoard, NUM_CONNECTION);
+			var connex:Array=chessBoardModel.numerical.getConnex(cBoard,BoardConfig.numConnex,patternFunc_BBB);
+			LOG.debug("blueSideHandler,current board connex:{0}", connex);
+			//horizontally.
+			if(connex[0].length)
 			{
-				//Computer Win
-				GameConfig.gameStateManager.computerWin();
+				LOG.debug("Computer connex[0]:{0}", connex[0]);
+				//					trace(connex[0][0].length,(cBoard.getRow(BoardConfig.yLines).length-1),BoardConfig.numConnex);
+//				if ( (connex[0][0].length == BoardConfig.numConnex) &&  ((cBoard.getRow(BoardConfig.yLines).length-1) == BoardConfig.numConnex) )
+				if ( (connex[0][0].length == BoardConfig.numConnex) )	
+				{
+					//Computer Win
+					GameConfig.gameStateManager.computerWin();
+				}
 			}
+//			//another simple rule functions here.
+//			if(chessPiecesModel.blues.every(onTheBottom))
+//			{
+//				//Computer Win
+//				GameConfig.gameStateManager.computerWin();
+//			}
 		}
 		override protected function redSideHandler():void
 		{
-//			var cBoard:Array2=chessBoardModel.status.board;
-//			//				var connex:Array=mnm.getConnex(cBoard, NUM_CONNECTION);
-//			var connex:Array=chessBoardModel.numercal.getConnex(cBoard,BoardConfig.numConnex);
-//			LOG.debug("current board connex:{0}", connex);
-//			//horizontally.
-//			if(connex[0].length)
-//			{
-//				LOG.debug("Huamn connex[0]:", connex[0]);
-//				//					trace(connex[0][0].length,(cBoard.getRow(0).length-1),BoardConfig.numConnex);
-//				if ( (connex[0][0].length == BoardConfig.numConnex) && ((cBoard.getRow(6).length-1) == BoardConfig.numConnex))
-//				{
-//					//Human Win
-//					GameConfig.gameStateManager.humanWin();
-//				}
-//			}
-			//another simple rule functions here.
-			if(chessPiecesModel.reds.every(onTheTop))
+			var cBoard:Array2=chessBoardModel.status.board;
+			//				var connex:Array=mnm.getConnex(cBoard, NUM_CONNECTION);
+			var connex:Array=chessBoardModel.numerical.getConnex(cBoard,BoardConfig.numConnex,patternFunc_RRR);
+			LOG.debug("redSideHandler,current board connex:{0}", connex);
+			//horizontally.
+			if(connex[0].length)
 			{
-				//Human Win
-				GameConfig.gameStateManager.humanWin();
+				LOG.debug("Huamn connex[0]:{0}", connex[0]);
+				//					trace(connex[0][0].length,(cBoard.getRow(0).length-1),BoardConfig.numConnex);
+//				if ( (connex[0][0].length == BoardConfig.numConnex) && ((cBoard.getRow(BoardConfig.yLines).length-1) == BoardConfig.numConnex))
+				if ( (connex[0][0].length == BoardConfig.numConnex) )
+				{
+					//Human Win
+					GameConfig.gameStateManager.humanWin();
+				}
 			}
+//			//another simple rule functions here.
+//			if(chessPiecesModel.reds.every(onTheTop))
+//			{
+//				//Human Win
+//				GameConfig.gameStateManager.humanWin();
+//			}
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -140,7 +142,40 @@ package com.godpaper.tic_tac_toe.busniess.managers
 		{
 			return (BoardConfig.yLines-1)==(element as ChessPiece).position.y;
 		}
-
+		//
+		private function sameRedFlag(element:*, index:int, arr:Array):Boolean
+		{
+			return (ChessPiece(element).label.indexOf("+")!=-1);
+		}
+		//
+		private function sameBlueFlag(element:*, index:int, arr:Array):Boolean
+		{
+			return (ChessPiece(element).label.indexOf("-")!=-1);
+		}
+		//
+		private function patternFunc_RRR(values:Array):Array
+		{
+			var result:Array = [];
+			//
+			if(values[0].every(sameRedFlag))
+			{
+				trace("patternFunc_RRR:",values);
+				result = values;
+			}
+			return result;
+		}
+		//
+		private function patternFunc_BBB(values:Array):Array
+		{
+			var result:Array = [];
+			//
+			if(values[0].every(sameBlueFlag))
+			{
+				trace("patternFunc_BBB:",values);
+				result = values;
+			}
+			return result;
+		}
 	}
 
 }

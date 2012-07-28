@@ -1,8 +1,9 @@
 package com.godpaper.as3.configs
 {
-	import com.godpaper.as3.impl.AbstractChessVO;
 	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.impl.AbstractChessVO;
 	import com.godpaper.as3.views.popups.ComputerWinIndicatory;
+	import com.godpaper.as3.views.popups.HumanWinIndicatory;
 	import com.godpaper.as3.views.popups.ThinkIndicatory;
 	
 	import org.josht.starling.foxhole.controls.Callout;
@@ -35,7 +36,7 @@ package com.godpaper.as3.configs
 		//about chess check(chinese chess jam..)
 		public static var check:Boolean=false;
 		//about plugins(mochi..)
-		public static var submitScore:Boolean=false;
+		private static var _submitScore:Boolean=false;
 		//about airport(utility,extreme,etc..)
 		public static var airportUtility:Boolean=false;
 		//about popup the computer win title window
@@ -51,6 +52,7 @@ package com.godpaper.as3.configs
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+
 		public static function get outcome():Boolean
 		{
 			return _outcome;
@@ -98,6 +100,32 @@ package com.godpaper.as3.configs
 				if(thinkIndicatory)
 				{
 					PopUpManager.removePopUp(thinkIndicatory);
+				}
+			}
+		}
+		//
+		private static var humanWinIndicatory:HumanWinIndicatory;
+		public static function get submitScore():Boolean
+		{
+			return _submitScore;
+		}
+		
+		public static function set submitScore(value:Boolean):void
+		{
+			_submitScore = value;
+			//Call out view(progress bar).
+			if(value)
+			{
+				humanWinIndicatory = new HumanWinIndicatory();
+				//				Callout.show(computerWinIndicatory, getChessBoard(), Callout.DIRECTION_ANY);
+				//				_callout.open(computerWinIndicatory,FlexGlobals.gameScene);
+				PopUpManager.addPopUp(humanWinIndicatory);
+			}else
+			{
+				//				_callout.close();
+				if(humanWinIndicatory)
+				{
+					PopUpManager.removePopUp(humanWinIndicatory);
 				}
 			}
 		}
