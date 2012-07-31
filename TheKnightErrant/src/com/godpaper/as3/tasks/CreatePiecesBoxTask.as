@@ -30,8 +30,6 @@ package com.godpaper.as3.tasks
 	
 	import flash.geom.Rectangle;
 	
-	import org.hamcrest.mxml.object.Null;
-	
 	import starling.display.Image;
 
 	//--------------------------------------------------------------------------

@@ -5,13 +5,13 @@ package com.lookbackon.AI.searching
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.MathUtil;
 	import com.lookbackon.ds.BitBoard;
-
+	
 	import de.polygonal.ds.Array2;
-
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
+	
+	import mx.logging.ILogger;
 
 	/**
 	 *
@@ -22,7 +22,7 @@ package com.lookbackon.AI.searching
 	public class MinMax extends SearchingBase
 	{
 		//
-		private static const LOG:Logger = LogContext.getLogger(MinMax);
+		private static const LOG:ILogger = LogUtil.getLogger(MinMax);
 		//
 		private static const MAX_DEPTH:int = 5;
 		//	
@@ -76,10 +76,10 @@ package com.lookbackon.AI.searching
 				return best_move;
 			}*/
 			//init ordering moves.
-			orderingMoves = generateMoves(ChessPiecesModel.getInstance().blues);
+			orderingMoves = generateMoves(chessPiecesModel.blues);
 			//depth auto increasement.
 			depth++;
-			LOG.trace("Max depth:",depth);
+			LOG.debug("Max depth:",depth);
 			//
 			if( orderingMoves.length<=0 )
 			{
@@ -94,7 +94,7 @@ package com.lookbackon.AI.searching
 				return bestMove;			
 			}
 			//			
-			LOG.trace("Max orderingMoves.len:{0}",orderingMoves.length);
+			LOG.debug("Max orderingMoves.len:{0}",orderingMoves.length);
 			var len:int = orderingMoves.length;
 			var tempMoveValue:int;
 			var bestMoveValue:int;
@@ -109,7 +109,7 @@ package com.lookbackon.AI.searching
 				if(tempMoveValue>bestMoveValue)
 				{
 					bestMove = tempMove;
-					LOG.trace("Max bestMove:{0}",bestMove.dump());
+					LOG.debug("Max bestMove:{0}",bestMove.dump());
 					//
 					this.alpha = tempMoveValue;
 				}
@@ -145,7 +145,7 @@ package com.lookbackon.AI.searching
 			}
 			return best_move;*/
 			//init ordering moves.
-			orderingMoves = generateMoves(ChessPiecesModel.getInstance().reds);
+			orderingMoves = generateMoves(chessPiecesModel.reds);
 			//
 			if(orderingMoves.length<=0)
 			{
@@ -159,7 +159,7 @@ package com.lookbackon.AI.searching
 				//
 				return bestMove;			
 			}
-			LOG.trace("Min orderingMoves.len:{0}",orderingMoves.length);
+			LOG.debug("Min orderingMoves.len:{0}",orderingMoves.length);
 			var len:int = orderingMoves.length;
 			var tempMoveValue:int;
 			var bestMoveValue:int;
@@ -174,7 +174,7 @@ package com.lookbackon.AI.searching
 				if(tempMoveValue>bestMoveValue)
 				{
 					bestMove = tempMove;
-					LOG.trace("Min bestMove:{0}",bestMove.dump());
+					LOG.debug("Min bestMove:{0}",bestMove.dump());
 					//
 					this.beta = tempMoveValue;
 				}
@@ -213,7 +213,7 @@ package com.lookbackon.AI.searching
 			var fuzzyImportValue:int = DefaultPiecesConstants[conductVO.target.type].convertedImportant.gett(conductVO.nextPosition.x,conductVO.nextPosition.y);
 			//TODO:dynamic omenVO value to be calculated. 
 			//precies evaluation value.
-			LOG.trace("evaluation value: ",importantValue+fuzzyImportValue);
+			LOG.debug("evaluation value: ",importantValue+fuzzyImportValue);
 			return importantValue+fuzzyImportValue;
 		};
 		//

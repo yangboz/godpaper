@@ -54,8 +54,7 @@ package com.lookbackon.AI.searching
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
-		private var chessBoardModel:ChessBoardModel = FlexGlobals.chessBoardModel;
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

@@ -35,10 +35,10 @@ package org.josht.starling.foxhole.themes
 
 	public class MinimalTheme extends AddedWatcher implements IFoxholeTheme
 	{
-		[Embed(source="/../assets/images/minimal.png")]
+		[Embed(source="/assets/images/minimal.png")]
 		protected static const ATLAS_IMAGE:Class;
 		
-		[Embed(source="/../assets/images/minimal.xml",mimeType="application/octet-stream")]
+		[Embed(source="/assets/images/minimal.xml",mimeType="application/octet-stream")]
 		protected static const ATLAS_XML:Class;
 		
 		protected static const ATLAS:TextureAtlas = new TextureAtlas(Texture.fromBitmap(new ATLAS_IMAGE(), false), XML(new ATLAS_XML()));
@@ -91,7 +91,7 @@ package org.josht.starling.foxhole.themes
 
 		protected static const CALLOUT_RIGHT_ARROW_SKIN_TEXTURE:Texture = ATLAS.getTexture("callout-arrow-right");
 		
-		[Embed(source="/../assets/fonts/pf_ronda_seven.fnt",mimeType="application/octet-stream")]
+		[Embed(source="/assets/fonts/pf_ronda_seven.fnt",mimeType="application/octet-stream")]
 		protected static const ATLAS_FONT_XML:Class;
 		
 		protected static const BITMAP_FONT:BitmapFont = new BitmapFont(ATLAS.getTexture("pf_ronda_seven_0"), XML(new ATLAS_FONT_XML()));

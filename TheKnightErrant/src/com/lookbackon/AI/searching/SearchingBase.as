@@ -2,6 +2,8 @@ package com.lookbackon.AI.searching
 {
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.model.ChessBoardModel;
+	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
@@ -65,6 +67,10 @@ package com.lookbackon.AI.searching
 		//Add this variables for save loops and time cost at the green thread run.
 		private var _movesHasGenerated:Boolean = false;
 		protected var generatedMoves:Vector.<ConductVO> = new Vector.<ConductVO>();
+		//Models
+		protected var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
+		protected var chessGasketsModel:ChessGasketsModel = FlexGlobals.chessGasketsModel;
+		protected var chessBoardModel:ChessBoardModel = FlexGlobals.chessBoardModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
