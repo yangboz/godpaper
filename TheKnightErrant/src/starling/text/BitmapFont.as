@@ -15,6 +15,7 @@ package starling.text
     
     import starling.display.Image;
     import starling.display.QuadBatch;
+    import starling.display.Sprite;
     import starling.textures.Texture;
     import starling.textures.TextureSmoothing;
     import starling.utils.HAlign;
@@ -53,10 +54,10 @@ package starling.text
     public class BitmapFont
     {
         // embed minimal font
-        [Embed(source="../../assets/fonts/mini.fnt", mimeType="application/octet-stream")]
+        [Embed(source="/assets/fonts/mini.fnt", mimeType="application/octet-stream")]
         private static var MiniXml:Class;
         
-        [Embed(source = "../../assets/fonts/mini.png")]
+        [Embed(source = "/assets/fonts/mini.png")]
         private static var MiniTexture:Class;
         
         /** Use this constant for the <code>fontSize</code> property of the TextField class to 
@@ -165,6 +166,32 @@ package starling.text
             mChars[charID] = bitmapChar;
         }
         
+        /** Creates a sprite that contains a certain text, made up by one image per char. */
+        public function createSprite(width:Number, height:Number, text:String,
+                                     fontSize:Number=-1, color:uint=0xffffff, 
+                                     hAlign:String="center", vAlign:String="center",      
+                                     autoScale:Boolean=true, 
+                                     kerning:Boolean=true):Sprite
+        {
+            var charLocations:Vector.<CharLocation> = arrangeChars(width, height, text, fontSize, 
+                                                                   hAlign, vAlign, autoScale, kerning);
+            var numChars:int = charLocations.length;
+            var sprite:Sprite = new Sprite();
+            
+            for (var i:int=0; i<numChars; ++i)
+            {
+                var charLocation:CharLocation = charLocations[i];
+                var char:Image = charLocation.char.createImage();
+                char.x = charLocation.x;
+                char.y = charLocation.y;
+                char.scaleX = char.scaleY = charLocation.scale;
+                char.color = color;
+                sprite.addChild(char);
+            }
+            
+            return sprite;
+        }
+        
         /** Draws text into a QuadBatch. */
         public function fillQuadBatch(quadBatch:QuadBatch, width:Number, height:Number, text:String,
                                       fontSize:Number=-1, color:uint=0xffffff, 
@@ -175,20 +202,19 @@ package starling.text
             var charLocations:Vector.<CharLocation> = arrangeChars(width, height, text, fontSize, 
                                                                    hAlign, vAlign, autoScale, kerning);
             var numChars:int = charLocations.length;
+            mHelperImage.color = color;
             
             if (numChars > 8192)
                 throw new ArgumentError("Bitmap Font text is limited to 8192 characters.");
-            
+
             for (var i:int=0; i<numChars; ++i)
             {
                 var charLocation:CharLocation = charLocations[i];
-                var char:BitmapChar = charLocation.char;
-                mHelperImage.texture = char.texture;
+                mHelperImage.texture = charLocation.char.texture;
                 mHelperImage.readjustSize();
                 mHelperImage.x = charLocation.x;
                 mHelperImage.y = charLocation.y;
                 mHelperImage.scaleX = mHelperImage.scaleY = charLocation.scale;
-                mHelperImage.color = color;
                 quadBatch.addImage(mHelperImage);
             }
         }
@@ -204,7 +230,6 @@ package starling.text
             
             var lines:Vector.<Vector.<CharLocation>>;
             var finished:Boolean = false;
-            var char:BitmapChar;
             var charLocation:CharLocation;
             var numChars:int;
             var containerWidth:Number;
@@ -232,21 +257,18 @@ package starling.text
                     {
                         var lineFull:Boolean = false;
                         var charID:int = text.charCodeAt(i);
+                        var char:BitmapChar = getChar(charID);
                         
                         if (charID == CHAR_NEWLINE)
                         {
                             lineFull = true;
                         }
+                        else if (char == null)
+                        {
+                            trace("[Starling] Missing character: " + charID);
+                        }
                         else
                         {
-                            char = getChar(charID);
-                            
-                            if (char == null)
-                            {
-                                trace("[Starling] Missing character: " + charID);
-                                continue;
-                            }
-                            
                             if (charID == CHAR_SPACE || charID == CHAR_TAB)
                                 lastWhiteSpace = i;
                             

@@ -25,7 +25,7 @@
 package org.josht.starling.foxhole.controls
 {
 	import flash.errors.IllegalOperationError;
-
+	
 	import org.josht.starling.foxhole.controls.supportClasses.LayoutContainer;
 	import org.josht.starling.foxhole.core.FoxholeControl;
 	import org.josht.starling.foxhole.core.PropertyProxy;
@@ -33,7 +33,7 @@ package org.josht.starling.foxhole.controls
 	import org.josht.starling.foxhole.layout.ILayout;
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
-
+	
 	import starling.display.DisplayObject;
 
 	/**
@@ -263,6 +263,13 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * A set of key/value pairs to be passed down to the container's scroller
 		 * instance. The scroller is a Foxhole Scroller control.
+		 *
+		 * <p>If the sub-component has its own sub-components, their properties
+		 * can be set too, using attribute <code>&#64;</code> notation. For example,
+		 * to set the skin on the thumb of a <code>SimpleScrollBar</code>
+		 * which is in a <code>Scroller</code> which is in a <code>List</code>,
+		 * you can use the following syntax:</p>
+		 * <pre>list.scrollerProperties.&#64;verticalScrollBarProperties.&#64;thumbProperties.defaultSkin = new Image(texture);</pre>
 		 */
 		public function get scrollerProperties():Object
 		{
@@ -343,17 +350,17 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
-		override public function addChildAt(child:DisplayObject, index:int):void
+		override public function addChildAt(child:DisplayObject, index:int):DisplayObject
 		{
-			this.viewPort.addChildAt(child, index);
+			return this.viewPort.addChildAt(child, index);
 		}
 
 		/**
 		 * @private
 		 */
-		override public function removeChildAt(index:int, dispose:Boolean = false):void
+		override public function removeChildAt(index:int, dispose:Boolean = false):DisplayObject
 		{
-			this.viewPort.removeChildAt(index, dispose);
+			return this.viewPort.removeChildAt(index, dispose);
 		}
 
 		/**

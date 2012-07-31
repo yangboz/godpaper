@@ -14,6 +14,8 @@ package starling.display
     import flash.geom.Point;
     import flash.geom.Rectangle;
     import flash.system.Capabilities;
+    import flash.ui.Mouse;
+    import flash.ui.MouseCursor;
     import flash.utils.getQualifiedClassName;
     
     import starling.core.RenderSupport;
@@ -22,6 +24,7 @@ package starling.display
     import starling.events.Event;
     import starling.events.EventDispatcher;
     import starling.events.TouchEvent;
+    import starling.utils.MatrixUtil;
     
     /** Dispatched when an object is added to a parent. */
     [Event(name="added", type="starling.events.Event")]
@@ -91,9 +94,9 @@ package starling.display
      *  </ul>
      *  
      *  <p>Have a look at the Quad class for a sample implementation of the 'getBounds' method.
-     *  For a sample on how to write a custom render function, you can have a look at the
-     *  <a href="https://github.com/PrimaryFeather/Starling-Extension-Particle-System">particle
-     *  system extension</a>.</p> 
+     *  For a sample on how to write a custom render function, you can have a look at this
+     *  <a href="http://wiki.starling-framework.org/manual/custom_display_objects">article</a>
+     *  in the Starling Wiki.</p> 
      * 
      *  <p>When you override the render method, it is important that you call the method
      *  'finishQuadBatch' of the support object. This forces Starling to render all quads that 
@@ -114,12 +117,15 @@ package starling.display
         private var mPivotY:Number;
         private var mScaleX:Number;
         private var mScaleY:Number;
+        private var mSkewX:Number;
+        private var mSkewY:Number;
         private var mRotation:Number;
         private var mAlpha:Number;
         private var mVisible:Boolean;
         private var mTouchable:Boolean;
         private var mBlendMode:String;
         private var mName:String;
+        private var mUseHandCursor:Boolean;
         private var mLastTouchTimestamp:Number;
         private var mParent:DisplayObjectContainer;  
         private var mTransformationMatrix:Matrix;
@@ -139,13 +145,13 @@ package starling.display
                 throw new AbstractClassError();
             }
             
-            mX = mY = mPivotX = mPivotY = mRotation = 0.0;
+            mX = mY = mPivotX = mPivotY = mRotation = mSkewX = mSkewY = 0.0;
             mScaleX = mScaleY = mAlpha = 1.0;            
             mVisible = mTouchable = true;
             mLastTouchTimestamp = -1;
             mBlendMode = BlendMode.AUTO;
             mTransformationMatrix = new Matrix();
-            mOrientationChanged = false;
+            mOrientationChanged = mUseHandCursor = false;
         }
         
         /** Disposes all resources of the display object. 
@@ -158,8 +164,7 @@ package starling.display
         /** Removes the object from its parent, if it has one. */
         public function removeFromParent(dispose:Boolean=false):void
         {
-            if (mParent) mParent.removeChild(this);
-            if (dispose) this.dispose();
+            if (mParent) mParent.removeChild(this, dispose);
         }
         
         /** Creates a matrix that represents the transformation from the local coordinate system 
@@ -277,19 +282,23 @@ package starling.display
             else return null;
         }
         
-        /** Transforms a point from the local coordinate system to global (stage) coordinates. */
-        public function localToGlobal(localPoint:Point):Point
+        /** Transforms a point from the local coordinate system to global (stage) coordinates.
+         *  If you pass a 'resultPoint', the result will be stored in this point instead of 
+         *  creating a new object. */
+        public function localToGlobal(localPoint:Point, resultPoint:Point=null):Point
         {
             getTransformationMatrix(base, sHelperMatrix);
-            return sHelperMatrix.transformPoint(localPoint);
+            return MatrixUtil.transformCoords(sHelperMatrix, localPoint.x, localPoint.y, resultPoint);
         }
         
-        /** Transforms a point from global (stage) coordinates to the local coordinate system. */
-        public function globalToLocal(globalPoint:Point):Point
+        /** Transforms a point from global (stage) coordinates to the local coordinate system.
+         *  If you pass a 'resultPoint', the result will be stored in this point instead of 
+         *  creating a new object. */
+        public function globalToLocal(globalPoint:Point, resultPoint:Point=null):Point
         {
             getTransformationMatrix(base, sHelperMatrix);
             sHelperMatrix.invert();
-            return sHelperMatrix.transformPoint(globalPoint);
+            return MatrixUtil.transformCoords(sHelperMatrix, globalPoint.x, globalPoint.y, resultPoint);
         }
         
         /** Renders the display object with the help of a support object. Never call this method
@@ -333,10 +342,18 @@ package starling.display
                 mParent = value; 
         }
         
-        // properties
+        /** @private */
+        internal function get hasVisibleArea():Boolean
+        {
+            return mAlpha != 0.0 && mVisible && mScaleX != 0.0 && mScaleY != 0.0;
+        }
         
-        /** The transformation matrix of the object relative to its parent. 
-         *  CAUTION: Returns not a copy, but the actual object! Do not change or reuse. */
+        // properties
+ 
+        /** The transformation matrix of the object relative to its parent.
+         *  If you assign a custom transformation matrix, Starling will figure out suitable values  
+         *  for the corresponding orienation properties (<code>x, y, scaleX/Y, rotation</code> etc).
+         *  CAUTION: Returns not a copy, but the actual object! */
         public function get transformationMatrix():Matrix
         {
             if (mOrientationChanged)
@@ -346,11 +363,63 @@ package starling.display
                 
                 if (mPivotX != 0.0 || mPivotY != 0.0) mTransformationMatrix.translate(-mPivotX, -mPivotY);
                 if (mScaleX != 1.0 || mScaleY != 1.0) mTransformationMatrix.scale(mScaleX, mScaleY);
+                if (mSkewX  != 0.0 || mSkewY  != 0.0) MatrixUtil.skew(mTransformationMatrix, mSkewX, mSkewY);
                 if (mRotation != 0.0)                 mTransformationMatrix.rotate(mRotation);
                 if (mX != 0.0 || mY != 0.0)           mTransformationMatrix.translate(mX, mY);
             }
             
             return mTransformationMatrix; 
+        }
+        
+        public function set transformationMatrix(matrix:Matrix):void
+        {
+            mOrientationChanged = false;
+            mX = matrix.tx;
+            mY = matrix.ty;
+            
+            var a:Number = matrix.a;
+            var b:Number = matrix.b;
+            var c:Number = matrix.c;
+            var d:Number = matrix.d;
+            
+            mScaleX = Math.sqrt(a * a + b * b);
+            if (mScaleX != 0) mRotation = Math.atan2(b, a);
+            else              mRotation = 0; // Rotation is not defined when a = b = 0
+            
+            var cosTheta:Number = Math.cos(mRotation);
+            var sinTheta:Number = Math.sin(mRotation);
+            
+            mScaleY = d * cosTheta - c * sinTheta;
+            if (mScaleY != 0) mSkewX = Math.atan2(d * sinTheta + c * cosTheta, mScaleY);
+            else              mSkewX = 0; // skewX is not defined when scaleY = 0
+            
+            // A 2-D affine transform has only 6 degrees of freedom -- two for translation,
+            // two for scale, one for rotation and one for skew. We are using 2 parameters for skew.
+            // To calculate the parameters from matrix values, one skew can be set to any arbitrary 
+            // value. Setting it to 0 makes the math simpler.
+            
+            mSkewY  = 0;
+            mPivotX = 0;
+            mPivotY = 0;
+        }
+        
+        /** Indicates if the mouse cursor should transform into a hand while it's over the sprite. 
+         *  @default false */
+        public function get useHandCursor():Boolean { return mUseHandCursor; }
+        public function set useHandCursor(value:Boolean):void
+        {
+            if (value == mUseHandCursor) return;
+            mUseHandCursor = value;
+            
+            if (mUseHandCursor)
+                addEventListener(TouchEvent.TOUCH, onTouch);
+            else
+                removeEventListener(TouchEvent.TOUCH, onTouch);
+        }
+        
+        private function onTouch(event:TouchEvent):void
+        {
+            Mouse.cursor = event.interactsWith(this) ? MouseCursor.BUTTON : MouseCursor.AUTO;
         }
         
         /** The bounds of the object relative to the local coordinates of the parent. */
@@ -444,6 +513,28 @@ package starling.display
             if (mScaleY != value)
             {
                 mScaleY = value;
+                mOrientationChanged = true;
+            }
+        }
+        
+        /** The horizontal skew angle in radians */
+        public function get skewX():Number { return mSkewX; }
+        public function set skewX(value:Number):void 
+        {
+            if (mSkewX != value)
+            {
+                mSkewX = value;
+                mOrientationChanged = true;
+            }
+        }
+        
+        /** The vertical skew angle in radians */
+        public function get skewY():Number { return mSkewY; }
+        public function set skewY(value:Number):void 
+        {
+            if (mSkewY != value)
+            {
+                mSkewY = value;
                 mOrientationChanged = true;
             }
         }

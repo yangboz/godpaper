@@ -13,7 +13,6 @@ package starling.core
     import flash.geom.*;
     
     import starling.display.*;
-    import starling.events.Event;
     import starling.textures.Texture;
     import starling.utils.*;
 
@@ -33,6 +32,7 @@ package starling.core
         private var mMvpMatrix3D:Matrix3D;
         private var mMatrixStack:Vector.<Matrix>;
         private var mMatrixStackSize:int;
+        private var mDrawCount:int;
         
         private var mBlendMode:String;
         private var mBlendModeStack:Vector.<String>;
@@ -54,6 +54,7 @@ package starling.core
             mMvpMatrix3D = new Matrix3D();
             mMatrixStack = new <Matrix>[];
             mMatrixStackSize = 0;
+            mDrawCount = 0;
             
             mBlendMode = BlendMode.NORMAL;
             mBlendModeStack = new <String>[];
@@ -63,8 +64,6 @@ package starling.core
             
             loadIdentity();
             setOrthographicProjection(400, 300);
-            
-            Starling.current.addEventListener(Event.CONTEXT3D_CREATE, onContextCreated);
         }
         
         /** Disposes all quad batches. */
@@ -72,13 +71,6 @@ package starling.core
         {
             for each (var quadBatch:QuadBatch in mQuadBatches)
                 quadBatch.dispose();
-            
-            Starling.current.removeEventListener(Event.CONTEXT3D_CREATE, onContextCreated);
-        }
-        
-        private function onContextCreated(event:Event):void
-        {
-            mQuadBatches = new <QuadBatch>[new QuadBatch()];
         }
         
         // matrix manipulation
@@ -206,35 +198,41 @@ package starling.core
         public function batchQuad(quad:Quad, parentAlpha:Number, 
                                   texture:Texture=null, smoothing:String=null):void
         {
-            if (currentQuadBatch.isStateChange(quad.tinted, parentAlpha, texture, smoothing, mBlendMode))
+            if (mQuadBatches[mCurrentQuadBatchID].isStateChange(quad.tinted, parentAlpha, texture, 
+                                                                smoothing, mBlendMode))
+            {
                 finishQuadBatch();
+            }
             
-            currentQuadBatch.addQuad(quad, parentAlpha, texture, smoothing, mModelViewMatrix, mBlendMode);
+            mQuadBatches[mCurrentQuadBatchID].addQuad(quad, parentAlpha, texture, smoothing, 
+                                                      mModelViewMatrix, mBlendMode);
         }
         
         /** Renders the current quad batch and resets it. */
         public function finishQuadBatch():void
         {
-            currentQuadBatch.renderCustom(mProjectionMatrix);
-            currentQuadBatch.reset();
+            var currentBatch:QuadBatch = mQuadBatches[mCurrentQuadBatchID];
             
-            ++mCurrentQuadBatchID;
-            
-            if (mQuadBatches.length <= mCurrentQuadBatchID)
-                mQuadBatches.push(new QuadBatch());
+            if (currentBatch.numQuads != 0)
+            {
+                currentBatch.renderCustom(mProjectionMatrix);
+                currentBatch.reset();
+                
+                ++mCurrentQuadBatchID;
+                ++mDrawCount;
+                
+                if (mQuadBatches.length <= mCurrentQuadBatchID)
+                    mQuadBatches.push(new QuadBatch());
+            }
         }
         
-        /** Resets the matrix and blend mode stacks, and the quad batch index. */
+        /** Resets the matrix and blend mode stacks, the quad batch index, and the draw count. */
         public function nextFrame():void
         {
             resetMatrix();
             resetBlendMode();
             mCurrentQuadBatchID = 0;
-        }
-        
-        private function get currentQuadBatch():QuadBatch
-        {
-            return mQuadBatches[mCurrentQuadBatchID];
+            mDrawCount = 0;
         }
         
         // other helper methods
@@ -261,5 +259,15 @@ package starling.core
                 Color.getBlue(rgb)  / 255.0,
                 alpha);
         }
+        
+        // statistics
+        
+        /** Raises the draw count by a specific value. Call this method in custom render methods
+         *  to keep the statistics display in sync. */
+        public function raiseDrawCount(value:uint=1):void { mDrawCount += value; }
+        
+        /** Indicates the number of stage3D draw calls. */
+        public function get drawCount():int { return mDrawCount; }
+        
     }
 }

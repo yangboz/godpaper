@@ -49,6 +49,11 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
+		protected static const INVALIDATION_FLAG_TAB_FACTORY:String = "tabFactory";
+
+		/**
+		 * @private
+		 */
 		private static const DEFAULT_TAB_FIELDS:Vector.<String> = new <String>
 		[
 			"defaultIcon",
@@ -59,6 +64,14 @@ package org.josht.starling.foxhole.controls
 			"selectedDownIcon",
 			"selectedDisabledIcon"
 		];
+
+		/**
+		 * @private
+		 */
+		protected static function defaultTabFactory():Button
+		{
+			return new Button();
+		}
 
 		/**
 		 * Constructor.
@@ -173,6 +186,36 @@ package org.josht.starling.foxhole.controls
 			}
 			this._gap = value;
 			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		private var _tabFactory:Function = defaultTabFactory;
+
+		/**
+		 * Creates a new tab.
+		 *
+		 * <p>This function is expected to have the following signature:</p>
+		 *
+		 * <pre>function():Button</pre>
+		 */
+		public function get tabFactory():Function
+		{
+			return this._tabFactory;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set tabFactory(value:Function):void
+		{
+			if(this._tabFactory == value)
+			{
+				return;
+			}
+			this._tabFactory = value;
+			this.invalidate(INVALIDATION_FLAG_TAB_FACTORY);
 		}
 
 		/**
@@ -311,6 +354,13 @@ package org.josht.starling.foxhole.controls
 		 * list) should be passed to tabs in another way (such as with an
 		 * <code>AddedWatcher</code>).
 		 *
+		 * <p>If the sub-component has its own sub-components, their properties
+		 * can be set too, using attribute <code>&#64;</code> notation. For example,
+		 * to set the skin on the thumb of a <code>SimpleScrollBar</code>
+		 * which is in a <code>Scroller</code> which is in a <code>List</code>,
+		 * you can use the following syntax:</p>
+		 * <pre>list.scrollerProperties.&#64;verticalScrollBarProperties.&#64;thumbProperties.defaultSkin = new Image(texture);</pre>
+		 *
 		 * @see AddedWatcher
 		 */
 		public function get tabProperties():Object
@@ -371,11 +421,12 @@ package org.josht.starling.foxhole.controls
 			const stylesInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STYLES);
 			const stateInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STATE);
 			const selectionInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_SELECTED);
+			const tabFactoryInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_TAB_FACTORY);
 			var sizeInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_SIZE);
 
-			if(dataInvalid)
+			if(dataInvalid || tabFactoryInvalid)
 			{
-				this.refreshTabs();
+				this.refreshTabs(tabFactoryInvalid);
 			}
 
 			if(dataInvalid || stylesInvalid)
@@ -459,13 +510,17 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
-		protected function refreshTabs():void
+		protected function refreshTabs(isFactoryInvalid:Boolean):void
 		{
 			var temp:Vector.<Button> = this.inactiveTabs;
 			this.inactiveTabs = this.activeTabs;
 			this.activeTabs = temp;
 			this.activeTabs.length = 0;
 			temp = null;
+			if(isFactoryInvalid)
+			{
+				this.clearInactiveTabs();
+			}
 
 			var itemCount:int = this._dataProvider ? this._dataProvider.length : 0;
 			for(var i:int = 0; i < itemCount; i++)
@@ -474,10 +529,18 @@ package org.josht.starling.foxhole.controls
 				var tab:Button = this.createTab(item);
 				this.activeTabs.push(tab);
 			}
-			itemCount = this.inactiveTabs.length;
-			for(i = 0; i < itemCount; i++)
+			this.clearInactiveTabs();
+		}
+
+		/**
+		 * @private
+		 */
+		protected function clearInactiveTabs():void
+		{
+			const itemCount:int = this.inactiveTabs.length;
+			for(var i:int = 0; i < itemCount; i++)
 			{
-				tab = this.inactiveTabs.shift();
+				var tab:Button = this.inactiveTabs.shift();
 				this.destroyTab(tab);
 			}
 		}
@@ -489,7 +552,7 @@ package org.josht.starling.foxhole.controls
 		{
 			if(this.inactiveTabs.length == 0)
 			{
-				var tab:Button = new Button();
+				var tab:Button = this._tabFactory();
 				tab.nameList.add(this.defaultTabName);
 				tab.isToggle = true;
 				this.toggleGroup.addItem(tab);

@@ -19,7 +19,7 @@ package starling.core
     /** The TouchMarker is used internally to mark touches created through "simulateMultitouch". */
     internal class TouchMarker extends Sprite
     {
-        [Embed(source="../../assets/images/touch_marker.png")]
+        [Embed(source="assets/images/touch_marker.png")]
         private static var TouchMarkerBmp:Class;
         
         private var mCenter:Point;
