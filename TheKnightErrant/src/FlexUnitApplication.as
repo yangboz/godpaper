@@ -30,7 +30,7 @@ package
 	
 	import flash.display.Sprite;
 	
-	import flexUnitTests.BitFieldTest;
+	import flexUnitTests.NumberBoardTest;
 	
 	import flexunit.flexui.FlexUnitTestRunnerUIAS;
 	
@@ -41,7 +41,7 @@ package
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 27, 2012 10:47:06 AM
+	 * Created Aug 1, 2012 4:08:41 PM
 	 */   	 
 	public class FlexUnitApplication extends Sprite
 	{		
@@ -88,7 +88,7 @@ package
 		public function currentRunTestSuite():Array
 		{
 			var testsToRun:Array = new Array();
-			testsToRun.push(flexUnitTests.BitFieldTest);
+			testsToRun.push(flexUnitTests.NumberBoardTest);
 			return testsToRun;
 		}     	
 		//--------------------------------------------------------------------------
