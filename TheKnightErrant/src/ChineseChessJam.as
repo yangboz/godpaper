@@ -23,6 +23,7 @@ package
 {
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GasketConfig;
+	import com.godpaper.as3.configs.LoggerConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.configs.TextureConfig;
@@ -30,10 +31,22 @@ package
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.chinese_chess_jam.business.PGN_Parser;
 	import com.godpaper.chinese_chess_jam.business.factory.ChessFactory_ChineseChessJam;
 	import com.godpaper.chinese_chess_jam.business.managers.ChessPieceManager_ChineseChessJam;
 	
+	import flash.display.Loader;
+	import flash.events.Event;
+	import flash.events.IEventDispatcher;
+	import flash.events.IOErrorEvent;
+	import flash.events.ProgressEvent;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
+	
 	import mx.logging.ILogger;
+	import mx.logging.LogEventLevel;
+	
+	import org.osflash.signals.natives.NativeSignal;
 	
 	import starling.display.Image;
 
@@ -150,13 +163,58 @@ package
 //			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 //			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);
 //			LOG.debug("SigletonFactory(cb) test:{0}",FlexGlobals.chessBoardModel.status.dump());
-			//
+			//LoggerConfig
+			LoggerConfig.filters = ["com.godpaper.chinese_chess_jam.business.*"];
+			LoggerConfig.levle = LogEventLevel.DEBUG;
+			//PGNs
+			var request:URLRequest = new URLRequest("assets/PGNs/N01顺炮横车破直车弃马局(UTF8).PGN");
+//			var request:URLRequest = new URLRequest("http://www.lookbackon.com/resources/N01_for_testing.PGN");
+			var loader:URLLoader = new URLLoader();
+			var signalTarget:IEventDispatcher = loader;
+			loadedSignal = new NativeSignal(signalTarget,Event.COMPLETE,Event);
+			loadedSignal.addOnce(pgnLoadedHandler);
+			progressSignal = new NativeSignal(signalTarget,ProgressEvent.PROGRESS,ProgressEvent);
+			progressSignal.addOnce(pgnProgressHandler);
+			ioErrorSignal = new NativeSignal(signalTarget,IOErrorEvent.IO_ERROR,IOErrorEvent);
+			ioErrorSignal.addOnce(pgnIoErrorHandler);
+			loader.load(request);
 		}
+		//
+		private var loadedSignal:NativeSignal;
+		private var progressSignal:NativeSignal;
+		private var ioErrorSignal:NativeSignal;
+		//
+		private var _originalString:String;
+		private var _pgnStringArray:Array;
+		private var _pgnString: String;
+		private var _pgnPtr: int;
+		private var _pgnLineIndex: int
+		private var _pgnUrl:String;
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		//
+		private function pgnIoErrorHandler(event:IOErrorEvent):void
+		{
+			progressSignal.removeAll();
+// 			trace(event.toString());
+		}
+		
+		private function pgnProgressHandler(event:ProgressEvent):void
+		{
+//			trace((event.bytesLoaded / event.bytesTotal) * 100);
+		}
+		
+		private function pgnLoadedHandler(event:Event):void
+		{
+			loadedSignal.removeAll();
+//			LOG.info(event.target.data);
+			//
+			var parser:PGN_Parser = new PGN_Parser(event.target.data);
+			parser.parse();
+		}
 	}
 	
 }

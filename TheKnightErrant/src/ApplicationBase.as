@@ -53,9 +53,9 @@ package
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
-	import flash.events.Event;
 	import flash.geom.Rectangle;
 	import flash.system.Capabilities;
+	import flash.events.Event;
 	
 	import mx.logging.ILogger;
 	import mx.logging.LogEventLevel;
