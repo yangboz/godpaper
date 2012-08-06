@@ -19,16 +19,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.chinese_chess_jam.business
+package com.godpaper.chinese_chess_jam.serialization
 {
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.chinese_chess_jam.vo.pgn.PGN_VO;
-	
-	import mx.logging.ILogger;
-	import mx.utils.StringUtil;
-	
-	import org.hamcrest.text.RegExpMatcher;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -36,52 +28,47 @@ package com.godpaper.chinese_chess_jam.business
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * A parser with PGN(Portable Game Notation) file;
-	 * @see https://github.com/mikechambers/as3corelib/tree/master/src/com/adobe/serialization/json   	
+	 * PGNToken.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Aug 3, 2012 1:09:56 PM
+	 * Created Aug 6, 2012 11:24:55 AM
 	 */   	 
-	public class PGN_Parser
+	public final class PGNToken
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _source:String;
-		private var pgnVO:PGN_VO;
+		/**
+		 * The type of the token.
+		 *
+		 * @langversion ActionScript 3.0
+		 * @playerversion Flash 9.0
+		 * @tiptext
+		 */
+		public var type:int;
+		
+		/**
+		 * The value of the token
+		 *
+		 * @langversion ActionScript 3.0
+		 * @playerversion Flash 9.0
+		 * @tiptext
+		 */
+		public var value:Object;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-//		private const WHITESPACE:Vector.<String> = new Vector.<String>(" ","\t","\n","\r","\f");//" \t\n\r\f"
-		private const WHITESPACE:String = " \t\n\r\f";
-//		private const DIGITS:String = "0123456789";
-//		private const FILES:String = "abcdefghABCDEFGH";
-//		private const RANKS:String = "12345678";
-//		private const PIECES:String = "车马象士将炮兵";
-//		private const MOVECHARACTERS:String = FILES + RANKS + PIECES + "xX:-=Oo+#";
-//		private const GAMETERMCHARACTERS:String = "01-2/";
-		//
-		private static const LOG:ILogger = LogUtil.getLogger(PGN_Parser);
-		//RegExpressions
-		private const REG_EXP_METADATA:RegExp = /\[.*\]$/igms;
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		public function get source():String
-		{
-			return _source;
-		}
 		
-		public function set source(value:String):void
-		{
-			_source = value;
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -93,52 +80,26 @@ package com.godpaper.chinese_chess_jam.business
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PGN_Parser(source:String="")
+		/**
+		 * Creates a new PGNToken with a specific token type and value.
+		 *
+		 * @param type The PGNTokenType of the token
+		 * @param value The value of the token
+		 * @langversion ActionScript 3.0
+		 * @playerversion Flash 9.0
+		 * @tiptext
+		 */
+		public function PGNToken( type:int = -1 /* PGNTokenType.UNKNOWN */, value:Object = null )
 		{
-			this._source = StringUtil.trim(source);
-			this.pgnVO = new PGN_VO();
-		}     	
+			this.type = type;
+			this.value = value;
+		}    	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		public function parse():void
-		{
-			var metaLabelStr:String = REG_EXP_METADATA.exec(this.source);
-//			LOG.debug(metaLabelStr);
-			var metaLabels:Array = metaLabelStr.split("\n");
-//			LOG.debug(metaLabels.toString());
-			//
-			for(var i:int=0;i<metaLabels.length;i++)
-			{
-				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_GAME)!=-1)
-				{
-					var gameLabels:Array = String(metaLabels[i]).split("\"");
-					this.pgnVO.game = gameLabels[1];
-					LOG.debug("pgnVO->game:{0}",this.pgnVO.game);
-				}
-				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_EVENT)!=-1)
-				{
-					var eventLabels:Array = String(metaLabels[i]).split("\"");
-					this.pgnVO.event = eventLabels[1];
-					LOG.debug("pgnVO->event:{0}",this.pgnVO.event);
-				}
-				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_SITE)!=-1)
-				{
-					var siteLabels:Array = String(metaLabels[i]).split("\"");
-					this.pgnVO.site = siteLabels[1];
-					LOG.debug("pgnVO->site:{0}",this.pgnVO.site);
-				}
-				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_DATE)!=-1)
-				{
-					var dateLabels:Array = String(metaLabels[i]).split("\"");
-					this.pgnVO.date = dateLabels[1];
-					LOG.debug("pgnVO->date:{0}",this.pgnVO.date);
-				}
-			}
-//			LOG.debug(labelStr);
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -150,6 +111,25 @@ package com.godpaper.chinese_chess_jam.business
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		/**
+		 * Reusable token instance.
+		 *
+		 * @see #create()
+		 */
+		internal static const token:PGNToken = new PGNToken();
+		
+		/**
+		 * Factory method to create instances. Because we don't need more than one instance
+		 * of a token at a time, we can always use the same instance to improve performance
+		 * and reduce memory consumption during decoding.
+		 */
+		internal static function create( type:int = -1 /* PGNTokenType.UNKNOWN */, value:Object = null ):PGNToken
+		{
+			token.type = type;
+			token.value = value;
+			
+			return token;
+		}
 	}
 	
 }

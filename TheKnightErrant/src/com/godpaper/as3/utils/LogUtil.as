@@ -61,7 +61,7 @@ package com.godpaper.as3.utils
 			_traceTarget.includeMemory = LoggerConfig.includeMemory;
 			_traceTarget.fieldSeparator = LoggerConfig.fieldSeparator;
 			_traceTarget.filters = LoggerConfig.filters;
-			_traceTarget.level = LoggerConfig.levle;
+			_traceTarget.level = LoggerConfig.level;
 			Log.addTarget(_traceTarget);
 			//
 			return Log.getLogger(className);

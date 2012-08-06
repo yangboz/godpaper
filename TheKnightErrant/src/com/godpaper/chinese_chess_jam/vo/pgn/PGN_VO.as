@@ -30,7 +30,7 @@ package com.godpaper.chinese_chess_jam.vo.pgn
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * PGN(Portable Game Notation) VO.
+	 * PGN(Portable Game Notation) VO.是棋类游戏过程的文件格式，既然国际象棋以这个规范作为记录棋谱的标准，那么对于中国象棋来说，在还没有一个统一标准的今天，PGN无疑是一个好的选择。
 	 * @see http://www.xqbase.com/protocol/cchess_pgn.htm 	
 	 * @author yangboz
 	 * @langVersion 3.0
@@ -73,7 +73,10 @@ package com.godpaper.chinese_chess_jam.vo.pgn
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		public static const META_KEY_GAME:String = "Game";
+		public static const META_KEY_EVENT:String = "Event";
+		public static const META_KEY_SITE:String = "Site";
+		public static const META_KEY_DATE:String = "Date";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

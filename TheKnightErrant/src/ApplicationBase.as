@@ -348,7 +348,7 @@ package
 			TextureConfig.AssetEmbeds_2x_class = AssetEmbeds_2x;
 			//LogConfig
 			LoggerConfig.filters = ["com.godpaper.tic_tac_toe.busniess.managers.*"];
-			LoggerConfig.levle = LogEventLevel.DEBUG;
+			LoggerConfig.level = LogEventLevel.DEBUG;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);

@@ -19,16 +19,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.chinese_chess_jam.business
+package com.godpaper.chinese_chess_jam.serialization
 {
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.chinese_chess_jam.vo.pgn.PGN_VO;
-	
-	import mx.logging.ILogger;
-	import mx.utils.StringUtil;
-	
-	import org.hamcrest.text.RegExpMatcher;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -36,52 +28,44 @@ package com.godpaper.chinese_chess_jam.business
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * A parser with PGN(Portable Game Notation) file;
-	 * @see https://github.com/mikechambers/as3corelib/tree/master/src/com/adobe/serialization/json   	
+	 * This class provides encoding and decoding of the PGN format.
+	 *
+	 * Example usage:
+	 * <code>
+	 * // create a PGN string from an internal object
+	 * PGN.encode( myObject );
+	 *
+	 * // read a PGN string into an internal object
+	 * var myObject:Object = PGN.decode( pgnString );
+	 * </code>
+	 * 
+	 * @see http://www.xqbase.com/protocol/cchess_pgn.htm
+	 * @see http://www.xqbase.com/protocol/pgnfen1.htm
+	 * 
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Aug 3, 2012 1:09:56 PM
+	 * Created Aug 6, 2012 11:16:11 AM
 	 */   	 
-	public class PGN_Parser
+	public final class PGN
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _source:String;
-		private var pgnVO:PGN_VO;
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-//		private const WHITESPACE:Vector.<String> = new Vector.<String>(" ","\t","\n","\r","\f");//" \t\n\r\f"
-		private const WHITESPACE:String = " \t\n\r\f";
-//		private const DIGITS:String = "0123456789";
-//		private const FILES:String = "abcdefghABCDEFGH";
-//		private const RANKS:String = "12345678";
-//		private const PIECES:String = "车马象士将炮兵";
-//		private const MOVECHARACTERS:String = FILES + RANKS + PIECES + "xX:-=Oo+#";
-//		private const GAMETERMCHARACTERS:String = "01-2/";
-		//
-		private static const LOG:ILogger = LogUtil.getLogger(PGN_Parser);
-		//RegExpressions
-		private const REG_EXP_METADATA:RegExp = /\[.*\]$/igms;
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		public function get source():String
-		{
-			return _source;
-		}
 		
-		public function set source(value:String):void
-		{
-			_source = value;
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -93,51 +77,43 @@ package com.godpaper.chinese_chess_jam.business
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PGN_Parser(source:String="")
-		{
-			this._source = StringUtil.trim(source);
-			this.pgnVO = new PGN_VO();
-		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		public function parse():void
+		/**
+		 * Encodes a object into a PGN string.
+		 *
+		 * @param o The object to create a PGN string for
+		 * @return the PGN string representing o
+		 * @langversion ActionScript 3.0
+		 * @playerversion Flash 9.0
+		 * @tiptext
+		 */
+		public static function encode( o:Object ):String
 		{
-			var metaLabelStr:String = REG_EXP_METADATA.exec(this.source);
-//			LOG.debug(metaLabelStr);
-			var metaLabels:Array = metaLabelStr.split("\n");
-//			LOG.debug(metaLabels.toString());
-			//
-			for(var i:int=0;i<metaLabels.length;i++)
-			{
-				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_GAME)!=-1)
-				{
-					var gameLabels:Array = String(metaLabels[i]).split("\"");
-					this.pgnVO.game = gameLabels[1];
-					LOG.debug("pgnVO->game:{0}",this.pgnVO.game);
-				}
-				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_EVENT)!=-1)
-				{
-					var eventLabels:Array = String(metaLabels[i]).split("\"");
-					this.pgnVO.event = eventLabels[1];
-					LOG.debug("pgnVO->event:{0}",this.pgnVO.event);
-				}
-				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_SITE)!=-1)
-				{
-					var siteLabels:Array = String(metaLabels[i]).split("\"");
-					this.pgnVO.site = siteLabels[1];
-					LOG.debug("pgnVO->site:{0}",this.pgnVO.site);
-				}
-				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_DATE)!=-1)
-				{
-					var dateLabels:Array = String(metaLabels[i]).split("\"");
-					this.pgnVO.date = dateLabels[1];
-					LOG.debug("pgnVO->date:{0}",this.pgnVO.date);
-				}
-			}
-//			LOG.debug(labelStr);
+			return new PGNEncoder( o ).getString();
+		}
+		
+		/**
+		 * Decodes a PGN string into a native object.
+		 *
+		 * @param s The PGN string representing the object
+		 * @param strict Flag indicating if the decoder should strictly adhere
+		 * to the PGN standard or not. The default of <code>true</code>
+		 * throws errors if the format does not match the PGN syntax exactly.
+		 * Pass <code>false</code> to allow for non-properly-formatted PGN
+		 * strings to be decoded with more leniancy.
+		 * @return A native object as specified by s
+		 * @throw PGNParseError
+		 * @langversion ActionScript 3.0
+		 * @playerversion Flash 9.0
+		 * @tiptext
+		 */
+		public static function decode( s:String, strict:Boolean = true ):*
+		{
+			return new PGNDecoder( s, strict ).getValue();
 		}
 		//--------------------------------------------------------------------------
 		//

@@ -170,7 +170,7 @@ package com.godpaper.tic_tac_toe.busniess.managers
 			//vertically.
 			if(connex[1].length)
 			{
-				LOG.debug("Computer connex[0]:{0}", connex[0]);
+				LOG.debug("Computer connex[1]:{0}", connex[1]);
 				//					trace(connex[0][0].length,(cBoard.getRow(BoardConfig.yLines).length-1),BoardConfig.numConnex);
 				//				if ( (connex[0][0].length == BoardConfig.numConnex) &&  ((cBoard.getRow(BoardConfig.yLines).length-1) == BoardConfig.numConnex) )
 				if ( (connex[1][0].length == BoardConfig.numConnex) )	
@@ -189,7 +189,7 @@ package com.godpaper.tic_tac_toe.busniess.managers
 			//forwardDiagonally.
 			if(connex[2].length)
 			{
-				LOG.debug("Computer connex[0]:{0}", connex[0]);
+				LOG.debug("Computer connex[2]:{0}", connex[2]);
 				//					trace(connex[0][0].length,(cBoard.getRow(BoardConfig.yLines).length-1),BoardConfig.numConnex);
 				//				if ( (connex[0][0].length == BoardConfig.numConnex) &&  ((cBoard.getRow(BoardConfig.yLines).length-1) == BoardConfig.numConnex) )
 				if ( (connex[2][0].length == BoardConfig.numConnex) )	
@@ -208,7 +208,7 @@ package com.godpaper.tic_tac_toe.busniess.managers
 			//backwardDiagonally.
 			if(connex[3].length)
 			{
-				LOG.debug("Computer connex[0]:{0}", connex[0]);
+				LOG.debug("Computer connex[3]:{0}", connex[3]);
 				//					trace(connex[0][0].length,(cBoard.getRow(BoardConfig.yLines).length-1),BoardConfig.numConnex);
 				//				if ( (connex[0][0].length == BoardConfig.numConnex) &&  ((cBoard.getRow(BoardConfig.yLines).length-1) == BoardConfig.numConnex) )
 				if ( (connex[3][0].length == BoardConfig.numConnex) )	
