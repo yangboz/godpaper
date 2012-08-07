@@ -1,0 +1,471 @@
+TTheRealBishop
+v5
+r1
+cCheck dependencies
+cProcessInfoPlistFile /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/Info.plist TheRealBishop/TheRealBishop-Info.plist
+cProcessPCH /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/PrecompiledHeaders/TheRealBishop-Prefix-hfqeusnnvhdsojdhchhyucvdesnz/TheRealBishop-Prefix.pch.pth TheRealBishop/TheRealBishop-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/main.o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/main.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_AppDelegate.o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_AppDelegate.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2Iterator.o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2.o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cLd /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/TheRealBishop normal i386
+cGenerateDSYMFile /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app.dSYM /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/TheRealBishop
+cCopyStringsFile /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/en.lproj/InfoPlist.strings TheRealBishop/en.lproj/InfoPlist.strings
+cTouch /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk
+c000000004F161A590000000000000110
+t1326848601
+s272
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004F34AA100000000000245480
+t1328851472
+s2380928
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004F34AA1B0000000000353830
+t1328851483
+s3487792
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004F34AA3100000000008F7390
+t1328851505
+s9401232
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/PrecompiledHeaders/TheRealBishop-Prefix-hfqeusnnvhdsojdhchhyucvdesnz/TheRealBishop-Prefix.pch.pth
+t1344347773
+s4016800
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_AppDelegate.o
+t1344347773
+s60672
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2.o
+t1344347773
+s4160
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2Iterator.o
+t1344347773
+s4020
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/TheRealBishop.LinkFileList
+c0000000050211E7C00000000000002A8
+t1344347772
+s680
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/main.o
+t1344347773
+s3120
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app
+t1344347773
+s204
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app.dSYM
+t1344347773
+s102
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/Info.plist
+t1344347772
+s914
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/PkgInfo
+t1344347772
+s8
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/TheRealBishop
+t1344347773
+s17256
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/en.lproj/InfoPlist.strings
+t1344347773
+s42
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_AppDelegate.h
+c0000000050211D310000000000000129
+t1344347441
+s297
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_AppDelegate.m
+c0000000050211D310000000000000905
+t1344347441
+s2309
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h
+c0000000050211E360000000000000489
+t1344347702
+s1161
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m
+c0000000050211E3600000000000000C1
+t1344347702
+s193
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.h
+c0000000050211E0A0000000000000109
+t1344347658
+s265
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m
+c0000000050211E0E00000000000000D9
+t1344347662
+s217
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h
+c0000000050211DE80000000000000457
+t1344347624
+s1111
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h
+c0000000050211E120000000000000415
+t1344347666
+s1045
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/TheRealBishop-Prefix.pch
+c0000000050211D310000000000000149
+t1344347441
+s329
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/en.lproj/InfoPlist.strings
+c0000000050211D31000000000000002D
+t1344347441
+s45
+
+N/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/main.m
+c0000000050211D310000000000000164
+t1344347441
+s356
+
+NTheRealBishop/TheRealBishop-Info.plist
+c0000000050211D3100000000000005AF
+t1344347441
+s1455
+
+CBuild AST from /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_AppDelegate.m
+r0
+
+CBuild AST from /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m
+r0
+
+CBuild AST from /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m
+r0
+
+CBuild AST from /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/main.m
+r0
+
+CCheck dependencies
+r0
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies1976441a56d1b541^6ccb441a56d1b541^---0#1#0#--18"Check dependencies36"57C82B1E-92A4-46CB-9804-578FB759E137-
+
+CCompileC Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_AppDelegate.o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_AppDelegate.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s366040573.275050
+e366040573.359938
+r1
+xCompileC
+xBuild/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_AppDelegate.o
+x/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_AppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection92"Compile /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_AppDelegate.mddd349fd55d1b541^b3245cfd55d1b541^---0#0#0#-19%DVTDocumentLocation2@100"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_AppDelegate.m0000000000000000^3762"CompileC Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_AppDelegate.o TheRealBishop/GP_AppDelegate.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/smartkit/Desktop/Github/godpaper/TheRealBishop    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk -fexceptions -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=50000 -iquote /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-generated-files.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-own-target-headers.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-all-target-headers.hmap -iquote /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-project-headers.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/include -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/DerivedSources/i386 -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/DerivedSources -F/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator -include /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/PrecompiledHeaders/TheRealBishop-Prefix-hfqeusnnvhdsojdhchhyucvdesnz/TheRealBishop-Prefix.pch -MMD -MT dependencies -MF /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_AppDelegate.d --serialize-diagnostics /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_AppDelegate.dia -c /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_AppDelegate.m -o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_AppDelegate.o36"7BEB2468-4D13-402E-90F4-3A26ACA51F41-
+
+CCompileC Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2.o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s366040573.275091
+e366040573.336836
+r1
+xCompileC
+xBuild/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2.o
+x/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'width' requires method 'width' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation
+o@implementation GP_Array2
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:14:29: note: property declared here
+o@property(assign) NSInteger width;
+o                            ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'width' requires method 'setWidth:' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation
+o@implementation GP_Array2
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:14:29: note: property declared here
+o@property(assign) NSInteger width;
+o                            ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'height' requires method 'height' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation
+o@implementation GP_Array2
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:15:29: note: property declared here
+o@property(assign) NSInteger height;
+o                            ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'height' requires method 'setHeight:' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation
+o@implementation GP_Array2
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:15:29: note: property declared here
+o@property(assign) NSInteger height;
+o                            ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'celled' requires method 'celled' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation
+o@implementation GP_Array2
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:51:31: note: property declared here
+o@property(readonly) NSInteger celled;
+o                              ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'size' requires method 'size' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation
+o@implementation GP_Array2
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:42:29: note: property declared here
+o@property(assign) NSInteger size;
+o                            ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'size' requires method 'setSize:' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation
+o@implementation GP_Array2
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:42:29: note: property declared here
+o@property(assign) NSInteger size;
+o                            ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: incomplete implementation [-Wincomplete-implementation]
+o@implementation GP_Array2
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:17:1: note: method definition for 'fill:' not found
+o-(void)fill:(id *)obj;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:19:1: note: method definition for 'get:intValue:' not found
+o-(id *)get:(int)x intValue:(int)y;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:20:1: note: method definition for 'set:intValue:' not found
+o-(void)set:(int)x intValue:(int)y;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:22:1: note: method definition for 'setXs:arrayValue:' not found
+o-(void)setXs:(int)y arrayValue:(NSMutableArray *)xArray;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:23:1: note: method definition for 'setYs:arrayValue:' not found
+o-(void)setYs:(int)x arrayValue:(NSMutableArray *)yArray;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:25:1: note: method definition for 'resize:intValue:' not found
+o-(void)resize:(int)width intValue:(int)height;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:27:1: note: method definition for 'getRow:' not found
+o-(NSMutableArray *)getRow:(int)y;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:28:1: note: method definition for 'setRow:arrayValue:' not found
+o-(void)setRow:(int)y arrayValue:(NSMutableArray *)rowArray;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:30:1: note: method definition for 'getCol:' not found
+o-(NSMutableArray *)getCol:(int)y;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:31:1: note: method definition for 'setCol:arrayValue:' not found
+o-(void)setCol:(int)x arrayValue:(NSMutableArray *)rolArray;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:33:1: note: method definition for 'shiftLeft' not found
+o-(void)shiftLeft;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:34:1: note: method definition for 'shiftRight' not found
+o-(void)shiftRight;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:35:1: note: method definition for 'shiftUp' not found
+o-(void)shiftUp;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:36:1: note: method definition for 'shiftDown' not found
+o-(void)shiftDown;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:38:1: note: method definition for 'appendRow:' not found
+o-(void)appendRow:(NSMutableArray *)rowArray;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:39:1: note: method definition for 'prependRow:' not found
+o-(void)prependRow:(NSMutableArray *)rowArray;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:41:1: note: method definition for 'appendCol:' not found
+o-(void)appendCol:(NSMutableArray *)colArray;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:42:1: note: method definition for 'prependCol:' not found
+o-(void)prependCol:(NSMutableArray *)colArray;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:44:1: note: method definition for 'transpose' not found
+o-(void)transpose;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:46:1: note: method definition for 'getArray' not found
+o-(NSMutableArray *)getArray;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:48:1: note: method definition for 'toString' not found
+o-(NSString *)toString;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:49:1: note: method definition for 'dump' not found
+o-(NSString *)dump;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: method in protocol not implemented [-Wprotocol]
+o@implementation GP_Array2
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:22:1: note: method declared here
+o-(BOOL)contains:(id *)obj;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:12:12: note: required for direct or indirect protocol 'GP_Collection'
+o@interface GP_Array2 : NSObject <GP_Collection>
+o           ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: method in protocol not implemented [-Wprotocol]
+o@implementation GP_Array2
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:27:1: note: method declared here
+o-(void)clear;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:12:12: note: required for direct or indirect protocol 'GP_Collection'
+o@interface GP_Array2 : NSObject <GP_Collection>
+o           ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: method in protocol not implemented [-Wprotocol]
+o@implementation GP_Array2
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:35:1: note: method declared here
+o-(id *)getIterator;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:12:12: note: required for direct or indirect protocol 'GP_Collection'
+o@interface GP_Array2 : NSObject <GP_Collection>
+o           ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: method in protocol not implemented [-Wprotocol]
+o@implementation GP_Array2
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:50:1: note: method declared here
+o-(BOOL)isEmpty;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:12:12: note: required for direct or indirect protocol 'GP_Collection'
+o@interface GP_Array2 : NSObject <GP_Collection>
+o           ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: method in protocol not implemented [-Wprotocol]
+o@implementation GP_Array2
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:58:1: note: method declared here
+o-(NSMutableArray *)toArray;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:12:12: note: required for direct or indirect protocol 'GP_Collection'
+o@interface GP_Array2 : NSObject <GP_Collection>
+o           ^
+o13 warnings generated.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection87"Compile /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.ma88e49fd55d1b541^9c3558fd55d1b541^-10076"/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'width' requires method 'width' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation@implementation GP_Array2                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:14:29: note: property declared here@property(assign) NSInteger width;                            ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'width' requires method 'setWidth:' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation@implementation GP_Array2                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:14:29: note: property declared here@property(assign) NSInteger width;                            ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'height' requires method 'height' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation@implementation GP_Array2                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:15:29: note: property declared here@property(assign) NSInteger height;                            ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'height' requires method 'setHeight:' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation@implementation GP_Array2                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:15:29: note: property declared here@property(assign) NSInteger height;                            ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'celled' requires method 'celled' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation@implementation GP_Array2                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:51:31: note: property declared here@property(readonly) NSInteger celled;                              ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'size' requires method 'size' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation@implementation GP_Array2                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:42:29: note: property declared here@property(assign) NSInteger size;                            ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: property 'size' requires method 'setSize:' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation@implementation GP_Array2                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:42:29: note: property declared here@property(assign) NSInteger size;                            ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: incomplete implementation [-Wincomplete-implementation]@implementation GP_Array2                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:17:1: note: method definition for 'fill:' not found-(void)fill:(id *)obj;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:19:1: note: method definition for 'get:intValue:' not found-(id *)get:(int)x intValue:(int)y;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:20:1: note: method definition for 'set:intValue:' not found-(void)set:(int)x intValue:(int)y;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:22:1: note: method definition for 'setXs:arrayValue:' not found-(void)setXs:(int)y arrayValue:(NSMutableArray *)xArray;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:23:1: note: method definition for 'setYs:arrayValue:' not found-(void)setYs:(int)x arrayValue:(NSMutableArray *)yArray;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:25:1: note: method definition for 'resize:intValue:' not found-(void)resize:(int)width intValue:(int)height;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:27:1: note: method definition for 'getRow:' not found-(NSMutableArray *)getRow:(int)y;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:28:1: note: method definition for 'setRow:arrayValue:' not found-(void)setRow:(int)y arrayValue:(NSMutableArray *)rowArray;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:30:1: note: method definition for 'getCol:' not found-(NSMutableArray *)getCol:(int)y;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:31:1: note: method definition for 'setCol:arrayValue:' not found-(void)setCol:(int)x arrayValue:(NSMutableArray *)rolArray;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:33:1: note: method definition for 'shiftLeft' not found-(void)shiftLeft;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:34:1: note: method definition for 'shiftRight' not found-(void)shiftRight;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:35:1: note: method definition for 'shiftUp' not found-(void)shiftUp;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:36:1: note: method definition for 'shiftDown' not found-(void)shiftDown;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:38:1: note: method definition for 'appendRow:' not found-(void)appendRow:(NSMutableArray *)rowArray;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:39:1: note: method definition for 'prependRow:' not found-(void)prependRow:(NSMutableArray *)rowArray;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:41:1: note: method definition for 'appendCol:' not found-(void)appendCol:(NSMutableArray *)colArray;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:42:1: note: method definition for 'prependCol:' not found-(void)prependCol:(NSMutableArray *)colArray;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:44:1: note: method definition for 'transpose' not found-(void)transpose;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:46:1: note: method definition for 'getArray' not found-(NSMutableArray *)getArray;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:48:1: note: method definition for 'toString' not found-(NSString *)toString;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:49:1: note: method definition for 'dump' not found-(NSString *)dump;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: method in protocol not implemented [-Wprotocol]@implementation GP_Array2                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:22:1: note: method declared here-(BOOL)contains:(id *)obj;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:12:12: note: required for direct or indirect protocol 'GP_Collection'@interface GP_Array2 : NSObject <GP_Collection>           ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: method in protocol not implemented [-Wprotocol]@implementation GP_Array2                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:27:1: note: method declared here-(void)clear;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:12:12: note: required for direct or indirect protocol 'GP_Collection'@interface GP_Array2 : NSObject <GP_Collection>           ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: method in protocol not implemented [-Wprotocol]@implementation GP_Array2                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:35:1: note: method declared here-(id *)getIterator;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:12:12: note: required for direct or indirect protocol 'GP_Collection'@interface GP_Array2 : NSObject <GP_Collection>           ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: method in protocol not implemented [-Wprotocol]@implementation GP_Array2                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:50:1: note: method declared here-(BOOL)isEmpty;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:12:12: note: required for direct or indirect protocol 'GP_Collection'@interface GP_Array2 : NSObject <GP_Collection>           ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m:11:17: warning: method in protocol not implemented [-Wprotocol]@implementation GP_Array2                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h:58:1: note: method declared here-(NSMutableArray *)toArray;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h:12:12: note: required for direct or indirect protocol 'GP_Collection'@interface GP_Array2 : NSObject <GP_Collection>           ^13 warnings generated.13(36%IDEClangDiagnosticActivityLogMessage2@146"Property 'width' requires method 'width' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation-366040573#18446744073709551615#0#1(2@22"Property declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^13#28#13#28#276#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^10#16#10#16#177#0#14"Semantic Issue--2@150"Property 'width' requires method 'setWidth:' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation-366040573#18446744073709551615#0#1(2@22"Property declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^13#28#13#28#276#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^10#16#10#16#177#0#14"Semantic Issue--2@148"Property 'height' requires method 'height' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation-366040573#18446744073709551615#0#1(2@22"Property declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^14#28#14#28#311#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^10#16#10#16#177#0#14"Semantic Issue--2@152"Property 'height' requires method 'setHeight:' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation-366040573#18446744073709551615#0#1(2@22"Property declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^14#28#14#28#311#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^10#16#10#16#177#0#14"Semantic Issue--2@148"Property 'celled' requires method 'celled' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation-366040573#18446744073709551615#0#1(2@22"Property declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^50#30#50#30#1146#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^10#16#10#16#177#0#14"Semantic Issue--2@144"Property 'size' requires method 'size' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation-366040573#18446744073709551615#0#1(2@22"Property declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@99"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h0000000000000000^41#28#41#28#827#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^10#16#10#16#177#0#14"Semantic Issue--2@148"Property 'size' requires method 'setSize:' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation-366040573#18446744073709551615#0#1(2@22"Property declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@99"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h0000000000000000^41#28#41#28#827#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^10#16#10#16#177#0#14"Semantic Issue--2@25"Incomplete implementation-366040573#18446744073709551615#0#22(2@39"Method definition for 'fill:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^16#0#16#0#320#0#14"Semantic Issue--2@47"Method definition for 'get:intValue:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^18#0#18#0#344#0#14"Semantic Issue--2@47"Method definition for 'set:intValue:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^19#0#19#0#379#0#14"Semantic Issue--2@51"Method definition for 'setXs:arrayValue:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^21#0#21#0#415#0#14"Semantic Issue--2@51"Method definition for 'setYs:arrayValue:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^22#0#22#0#472#0#14"Semantic Issue--2@50"Method definition for 'resize:intValue:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^24#0#24#0#530#0#14"Semantic Issue--2@41"Method definition for 'getRow:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^26#0#26#0#578#0#14"Semantic Issue--2@52"Method definition for 'setRow:arrayValue:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^27#0#27#0#612#0#14"Semantic Issue--2@41"Method definition for 'getCol:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^29#0#29#0#673#0#14"Semantic Issue--2@52"Method definition for 'setCol:arrayValue:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^30#0#30#0#707#0#14"Semantic Issue--2@43"Method definition for 'shiftLeft' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^32#0#32#0#768#0#14"Semantic Issue--2@44"Method definition for 'shiftRight' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^33#0#33#0#786#0#14"Semantic Issue--2@41"Method definition for 'shiftUp' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^34#0#34#0#805#0#14"Semantic Issue--2@43"Method definition for 'shiftDown' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^35#0#35#0#821#0#14"Semantic Issue--2@44"Method definition for 'appendRow:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^37#0#37#0#840#0#14"Semantic Issue--2@45"Method definition for 'prependRow:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^38#0#38#0#885#0#14"Semantic Issue--2@44"Method definition for 'appendCol:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^40#0#40#0#932#0#14"Semantic Issue--2@45"Method definition for 'prependCol:' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^41#0#41#0#977#0#14"Semantic Issue--2@43"Method definition for 'transpose' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^43#0#43#0#1024#0#14"Semantic Issue--2@42"Method definition for 'getArray' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^45#0#45#0#1043#0#14"Semantic Issue--2@42"Method definition for 'toString' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^47#0#47#0#1073#0#14"Semantic Issue--2@38"Method definition for 'dump' not found-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^48#0#48#0#1096#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^10#16#10#16#177#0#14"Semantic Issue--2@34"Method in protocol not implemented-366040573#18446744073709551615#0#2(2@20"Method declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@99"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h0000000000000000^21#0#21#0#436#0#14"Semantic Issue--2@56"Required for direct or indirect protocol 'GP_Collection'-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^11#11#11#11#210#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^10#16#10#16#177#0#14"Semantic Issue--2@34"Method in protocol not implemented-366040573#18446744073709551615#0#2(2@20"Method declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@99"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h0000000000000000^26#0#26#0#516#0#14"Semantic Issue--2@56"Required for direct or indirect protocol 'GP_Collection'-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^11#11#11#11#210#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^10#16#10#16#177#0#14"Semantic Issue--2@34"Method in protocol not implemented-366040573#18446744073709551615#0#2(2@20"Method declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@99"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h0000000000000000^34#0#34#0#689#0#14"Semantic Issue--2@56"Required for direct or indirect protocol 'GP_Collection'-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^11#11#11#11#210#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^10#16#10#16#177#0#14"Semantic Issue--2@34"Method in protocol not implemented-366040573#18446744073709551615#0#2(2@20"Method declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@99"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h0000000000000000^49#0#49#0#957#0#14"Semantic Issue--2@56"Required for direct or indirect protocol 'GP_Collection'-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^11#11#11#11#210#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^10#16#10#16#177#0#14"Semantic Issue--2@34"Method in protocol not implemented-366040573#18446744073709551615#0#2(2@20"Method declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@99"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Collection.h0000000000000000^57#0#57#0#1077#0#14"Semantic Issue--2@56"Required for direct or indirect protocol 'GP_Collection'-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.h0000000000000000^11#11#11#11#210#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^10#16#10#16#177#0#14"Semantic Issue--0#0#0#-19%DVTDocumentLocation4@95"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m0000000000000000^3732"CompileC Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2.o TheRealBishop/GP_Array2.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/smartkit/Desktop/Github/godpaper/TheRealBishop    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk -fexceptions -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=50000 -iquote /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-generated-files.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-own-target-headers.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-all-target-headers.hmap -iquote /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-project-headers.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/include -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/DerivedSources/i386 -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/DerivedSources -F/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator -include /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/PrecompiledHeaders/TheRealBishop-Prefix-hfqeusnnvhdsojdhchhyucvdesnz/TheRealBishop-Prefix.pch -MMD -MT dependencies -MF /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2.d --serialize-diagnostics /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2.dia -c /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2.m -o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2.o36"0F1EA54A-1A0F-4108-BD02-5B0DAA275241-
+
+CCompileC Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2Iterator.o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s366040573.276695
+e366040573.347965
+r1
+xCompileC
+xBuild/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2Iterator.o
+x/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m:11:17: warning: property 'data' requires method 'data' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation
+o@implementation GP_Array2Iterator
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h:44:39: note: property declared here
+o@property(nonatomic,retain) NSObject *data;
+o                                      ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m:11:17: warning: property 'data' requires method 'setData:' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation
+o@implementation GP_Array2Iterator
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h:44:39: note: property declared here
+o@property(nonatomic,retain) NSObject *data;
+o                                      ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m:11:17: warning: incomplete implementation [-Wincomplete-implementation]
+o@implementation GP_Array2Iterator
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m:11:17: warning: method in protocol not implemented [-Wprotocol]
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h:22:1: note: method declared here
+o-(id)next;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.h:12:12: note: required for direct or indirect protocol 'GP_Iterator'
+o@interface GP_Array2Iterator : NSObject <GP_Iterator>
+o           ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m:11:17: warning: method in protocol not implemented [-Wprotocol]
+o@implementation GP_Array2Iterator
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h:29:1: note: method declared here
+o-(BOOL)hasNext;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.h:12:12: note: required for direct or indirect protocol 'GP_Iterator'
+o@interface GP_Array2Iterator : NSObject <GP_Iterator>
+o           ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m:11:17: warning: method in protocol not implemented [-Wprotocol]
+o@implementation GP_Array2Iterator
+o                ^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h:34:1: note: method declared here
+o-(void)start;
+o^
+o/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.h:12:12: note: required for direct or indirect protocol 'GP_Iterator'
+o@interface GP_Array2Iterator : NSObject <GP_Iterator>
+o           ^
+o6 warnings generated.
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection95"Compile /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m06f149fd55d1b541^273059fd55d1b541^-2865"/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m:11:17: warning: property 'data' requires method 'data' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation@implementation GP_Array2Iterator                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h:44:39: note: property declared here@property(nonatomic,retain) NSObject *data;                                      ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m:11:17: warning: property 'data' requires method 'setData:' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation@implementation GP_Array2Iterator                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h:44:39: note: property declared here@property(nonatomic,retain) NSObject *data;                                      ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m:11:17: warning: incomplete implementation [-Wincomplete-implementation]@implementation GP_Array2Iterator                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m:11:17: warning: method in protocol not implemented [-Wprotocol]/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h:22:1: note: method declared here-(id)next;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.h:12:12: note: required for direct or indirect protocol 'GP_Iterator'@interface GP_Array2Iterator : NSObject <GP_Iterator>           ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m:11:17: warning: method in protocol not implemented [-Wprotocol]@implementation GP_Array2Iterator                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h:29:1: note: method declared here-(BOOL)hasNext;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.h:12:12: note: required for direct or indirect protocol 'GP_Iterator'@interface GP_Array2Iterator : NSObject <GP_Iterator>           ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m:11:17: warning: method in protocol not implemented [-Wprotocol]@implementation GP_Array2Iterator                ^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h:34:1: note: method declared here-(void)start;^/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.h:12:12: note: required for direct or indirect protocol 'GP_Iterator'@interface GP_Array2Iterator : NSObject <GP_Iterator>           ^6 warnings generated.6(36%IDEClangDiagnosticActivityLogMessage2@144"Property 'data' requires method 'data' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation-366040573#18446744073709551615#0#1(2@22"Property declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@97"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h0000000000000000^43#38#43#38#1031#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@103"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m0000000000000000^10#16#10#16#193#0#14"Semantic Issue--2@148"Property 'data' requires method 'setData:' to be defined - use @synthesize, @dynamic or provide a method implementation in this class implementation-366040573#18446744073709551615#0#1(2@22"Property declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@97"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h0000000000000000^43#38#43#38#1031#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@103"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m0000000000000000^10#16#10#16#193#0#14"Semantic Issue--2@25"Incomplete implementation-366040573#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic3@103"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m0000000000000000^10#16#10#16#193#0#14"Semantic Issue--2@34"Method in protocol not implemented-366040573#18446744073709551615#0#2(2@20"Method declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@97"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h0000000000000000^21#0#21#0#512#0#14"Semantic Issue--2@54"Required for direct or indirect protocol 'GP_Iterator'-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@103"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.h0000000000000000^11#11#11#11#216#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@103"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m0000000000000000^10#16#10#16#193#0#14"Semantic Issue--2@34"Method in protocol not implemented-366040573#18446744073709551615#0#2(2@20"Method declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@97"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h0000000000000000^28#0#28#0#653#0#14"Semantic Issue--2@54"Required for direct or indirect protocol 'GP_Iterator'-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@103"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.h0000000000000000^11#11#11#11#216#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@103"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m0000000000000000^10#16#10#16#193#0#14"Semantic Issue--2@34"Method in protocol not implemented-366040573#18446744073709551615#0#2(2@20"Method declared here-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@97"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Iterator.h0000000000000000^33#0#33#0#760#0#14"Semantic Issue--2@54"Required for direct or indirect protocol 'GP_Iterator'-366040573#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@103"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.h0000000000000000^11#11#11#11#216#0#14"Semantic Issue--1#27"com.apple.dt.IDE.diagnostic3@103"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m0000000000000000^10#16#10#16#193#0#14"Semantic Issue--0#0#0#-19%DVTDocumentLocation4@103"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m0000000000000000^3780"CompileC Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2Iterator.o TheRealBishop/GP_Array2Iterator.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/smartkit/Desktop/Github/godpaper/TheRealBishop    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk -fexceptions -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=50000 -iquote /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-generated-files.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-own-target-headers.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-all-target-headers.hmap -iquote /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-project-headers.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/include -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/DerivedSources/i386 -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/DerivedSources -F/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator -include /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/PrecompiledHeaders/TheRealBishop-Prefix-hfqeusnnvhdsojdhchhyucvdesnz/TheRealBishop-Prefix.pch -MMD -MT dependencies -MF /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2Iterator.d --serialize-diagnostics /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2Iterator.dia -c /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/GP_Array2Iterator.m -o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/GP_Array2Iterator.o36"FB5C1930-7D27-415C-A2FC-79E1D4E4935C-
+
+CCompileC Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/main.o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/main.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s366040573.275076
+e366040573.331064
+r1
+xCompileC
+xBuild/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/main.o
+x/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection82"Compile /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/main.m09e046fd55d1b541^74d154fd55d1b541^---0#0#0#-19%DVTDocumentLocation2@90"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/main.m0000000000000000^3702"CompileC Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/main.o TheRealBishop/main.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/smartkit/Desktop/Github/godpaper/TheRealBishop    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk -fexceptions -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=50000 -iquote /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-generated-files.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-own-target-headers.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-all-target-headers.hmap -iquote /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-project-headers.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/include -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/DerivedSources/i386 -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/DerivedSources -F/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator -include /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/PrecompiledHeaders/TheRealBishop-Prefix-hfqeusnnvhdsojdhchhyucvdesnz/TheRealBishop-Prefix.pch -MMD -MT dependencies -MF /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/main.d --serialize-diagnostics /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/main.dia -c /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/main.m -o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/main.o36"A980D058-0F9E-4757-8E2C-29A4AF4C5D40-
+
+CCopyStringsFile /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/en.lproj/InfoPlist.strings TheRealBishop/en.lproj/InfoPlist.strings
+s366040573.468511
+e366040573.475832
+r1
+xCopyStringsFile
+x/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/en.lproj/InfoPlist.strings
+xTheRealBishop/en.lproj/InfoPlist.strings
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection45"Copy TheRealBishop/en.lproj/InfoPlist.strings680778fd55d1b541^42d079fd55d1b541^---0#0#0#-19%DVTDocumentLocation2@110"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/en.lproj/InfoPlist.strings0000000000000000^647"CopyStringsFile Build/Products/Debug-iphonesimulator/TheRealBishop.app/en.lproj/InfoPlist.strings TheRealBishop/en.lproj/InfoPlist.strings    cd /Users/smartkit/Desktop/Github/godpaper/TheRealBishop    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-copyStrings --validate --inputencoding utf-8 --outputencoding binary --outdir /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/en.lproj -- TheRealBishop/en.lproj/InfoPlist.strings36"7F709AB2-8C11-4689-A860-F94DB9C53755-
+
+CGenerateDSYMFile /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app.dSYM /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/TheRealBishop
+s366040573.435918
+e366040573.459467
+r1
+xGenerateDSYMFile
+x/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app.dSYM
+x/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/TheRealBishop
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection124"Generating /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app.dSYM562d71fd55d1b541^3c9f75fd55d1b541^---0#0#0#-19%DVTDocumentLocation2@129"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app.dSYM000000000080d041^751"GenerateDSYMFile Build/Products/Debug-iphonesimulator/TheRealBishop.app.dSYM Build/Products/Debug-iphonesimulator/TheRealBishop.app/TheRealBishop    cd /Users/smartkit/Desktop/Github/godpaper/TheRealBishop    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/dsymutil /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/TheRealBishop -o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app.dSYM36"D308F25D-965D-444C-8096-88DF0142CD84-
+
+CLd /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/TheRealBishop normal i386
+s366040573.366811
+e366040573.429452
+r1
+xLd
+x/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/TheRealBishop
+xnormal
+xi386
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection127"Link /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/TheRealBishop45ba5ffd55d1b541^75916efd55d1b541^---0#0#0#--1317"Ld Build/Products/Debug-iphonesimulator/TheRealBishop.app/TheRealBishop normal i386    cd /Users/smartkit/Desktop/Github/godpaper/TheRealBishop    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -arch i386 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk -L/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator -F/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator -filelist /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/Objects-normal/i386/TheRealBishop.LinkFileList -mmacosx-version-min=10.6 -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -no_implicit_dylibs -D__IPHONE_OS_VERSION_MIN_REQUIRED=50000 -framework UIKit -framework Foundation -framework CoreGraphics -o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/TheRealBishop36"A7156D6D-0FDA-4CBA-9018-13A2D5B25AA2-
+
+CProcessInfoPlistFile /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/Info.plist TheRealBishop/TheRealBishop-Info.plist
+s366040572.962200
+e366040572.965547
+r1
+xProcessInfoPlistFile
+x/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/Info.plist
+xTheRealBishop/TheRealBishop-Info.plist
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection46"Process TheRealBishop/TheRealBishop-Info.plist0262f6fc55d1b541^492ef7fc55d1b541^---0#0#0#-19%DVTDocumentLocation2@108"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/TheRealBishop-Info.plist0000000000000000^764"ProcessInfoPlistFile Build/Products/Debug-iphonesimulator/TheRealBishop.app/Info.plist TheRealBishop/TheRealBishop-Info.plist    cd /Users/smartkit/Desktop/Github/godpaper/TheRealBishop    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility TheRealBishop/TheRealBishop-Info.plist -genpkginfo /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app/Info.plist36"77C85914-A81E-422E-B742-425BD6487A6C-
+
+CProcessPCH /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/PrecompiledHeaders/TheRealBishop-Prefix-hfqeusnnvhdsojdhchhyucvdesnz/TheRealBishop-Prefix.pch.pth TheRealBishop/TheRealBishop-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s366040572.975339
+e366040573.267178
+r1
+xProcessPCH
+x/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/PrecompiledHeaders/TheRealBishop-Prefix-hfqeusnnvhdsojdhchhyucvdesnz/TheRealBishop-Prefix.pch.pth
+xTheRealBishop/TheRealBishop-Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection49"Precompile TheRealBishop/TheRealBishop-Prefix.pch5d32fafc55d1b541^c16e44fd55d1b541^---0#0#0#-19%DVTDocumentLocation2@108"file://localhost/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/TheRealBishop-Prefix.pch0000000000000000^3602"ProcessPCH Build/Intermediates/PrecompiledHeaders/TheRealBishop-Prefix-hfqeusnnvhdsojdhchhyucvdesnz/TheRealBishop-Prefix.pch.pth TheRealBishop/TheRealBishop-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/smartkit/Desktop/Github/godpaper/TheRealBishop    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c-header -arch i386 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk -fexceptions -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -D__IPHONE_OS_VERSION_MIN_REQUIRED=50000 -iquote /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-generated-files.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-own-target-headers.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-all-target-headers.hmap -iquote /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/TheRealBishop-project-headers.hmap -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/include -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/DerivedSources/i386 -I/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/TheRealBishop.build/Debug-iphonesimulator/TheRealBishop.build/DerivedSources -F/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator --serialize-diagnostics /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/PrecompiledHeaders/TheRealBishop-Prefix-hfqeusnnvhdsojdhchhyucvdesnz/TheRealBishop-Prefix.pch.dia -c /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/TheRealBishop/TheRealBishop-Prefix.pch -o /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/PrecompiledHeaders/TheRealBishop-Prefix-hfqeusnnvhdsojdhchhyucvdesnz/TheRealBishop-Prefix.pch.pth -MMD -MT dependencies -MF /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Intermediates/PrecompiledHeaders/TheRealBishop-Prefix-hfqeusnnvhdsojdhchhyucvdesnz/TheRealBishop-Prefix.pch.d36"36D262E2-5537-40D9-BD3E-8025650574F7-
+
+CProcessPCH /Users/smartkit/Library/Developer/Xcode/DerivedData/TheRealBishop-bphnlpgjxnfoqvaflbqxjthidrlm/Index/PrecompiledHeaders/TheRealBishop-Prefix-dtjtidjwyrerzzdxkbbaidtfmiqz_ast/TheRealBishop-Prefix.pch.pth TheRealBishop/TheRealBishop-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CTouch /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app
+s366040573.486082
+e366040573.491368
+r1
+xTouch
+x/Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection114"Touch /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app997f7cfd55d1b541^5cca7dfd55d1b541^---0#0#0#--448"Touch Build/Products/Debug-iphonesimulator/TheRealBishop.app    cd /Users/smartkit/Desktop/Github/godpaper/TheRealBishop    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/smartkit/Desktop/Github/godpaper/TheRealBishop/Build/Products/Debug-iphonesimulator/TheRealBishop.app36"F3DAE876-C66C-4234-B027-926CC71B0583-
+

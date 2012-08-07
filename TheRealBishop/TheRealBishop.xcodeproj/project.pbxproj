@@ -1,0 +1,462 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A4F0D00C15D154B10034FF28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00B15D154B10034FF28 /* UIKit.framework */; };
+		A4F0D00E15D154B10034FF28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00D15D154B10034FF28 /* Foundation.framework */; };
+		A4F0D01015D154B10034FF28 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00F15D154B10034FF28 /* CoreGraphics.framework */; };
+		A4F0D01615D154B10034FF28 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4F0D01415D154B10034FF28 /* InfoPlist.strings */; };
+		A4F0D01815D154B10034FF28 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F0D01715D154B10034FF28 /* main.m */; };
+		A4F0D01C15D154B10034FF28 /* GP_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F0D01B15D154B10034FF28 /* GP_AppDelegate.m */; };
+		A4F0D02415D154B10034FF28 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D02315D154B10034FF28 /* SenTestingKit.framework */; };
+		A4F0D02515D154B10034FF28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00B15D154B10034FF28 /* UIKit.framework */; };
+		A4F0D02615D154B10034FF28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00D15D154B10034FF28 /* Foundation.framework */; };
+		A4F0D02E15D154B10034FF28 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4F0D02C15D154B10034FF28 /* InfoPlist.strings */; };
+		A4F0D03115D154B10034FF28 /* TheRealBishopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F0D03015D154B10034FF28 /* TheRealBishopTests.m */; };
+		A4F0D04215D154EE0034FF28 /* GP_Array2.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F0D03D15D154EE0034FF28 /* GP_Array2.m */; };
+		A4F0D04315D154EE0034FF28 /* GP_Array2Iterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F0D03F15D154EE0034FF28 /* GP_Array2Iterator.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A4F0D02715D154B10034FF28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A4F0CFFE15D154B10034FF28 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A4F0D00615D154B10034FF28;
+			remoteInfo = TheRealBishop;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A4F0D00715D154B10034FF28 /* TheRealBishop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheRealBishop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4F0D00B15D154B10034FF28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A4F0D00D15D154B10034FF28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A4F0D00F15D154B10034FF28 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A4F0D01315D154B10034FF28 /* TheRealBishop-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TheRealBishop-Info.plist"; sourceTree = "<group>"; };
+		A4F0D01515D154B10034FF28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A4F0D01715D154B10034FF28 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A4F0D01915D154B10034FF28 /* TheRealBishop-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheRealBishop-Prefix.pch"; sourceTree = "<group>"; };
+		A4F0D01A15D154B10034FF28 /* GP_AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GP_AppDelegate.h; sourceTree = "<group>"; };
+		A4F0D01B15D154B10034FF28 /* GP_AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GP_AppDelegate.m; sourceTree = "<group>"; };
+		A4F0D02215D154B10034FF28 /* TheRealBishopTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheRealBishopTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4F0D02315D154B10034FF28 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		A4F0D02B15D154B10034FF28 /* TheRealBishopTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TheRealBishopTests-Info.plist"; sourceTree = "<group>"; };
+		A4F0D02D15D154B10034FF28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A4F0D02F15D154B10034FF28 /* TheRealBishopTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TheRealBishopTests.h; sourceTree = "<group>"; };
+		A4F0D03015D154B10034FF28 /* TheRealBishopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheRealBishopTests.m; sourceTree = "<group>"; };
+		A4F0D03C15D154EE0034FF28 /* GP_Array2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array2.h; sourceTree = "<group>"; };
+		A4F0D03D15D154EE0034FF28 /* GP_Array2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array2.m; sourceTree = "<group>"; };
+		A4F0D03E15D154EE0034FF28 /* GP_Array2Iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array2Iterator.h; sourceTree = "<group>"; };
+		A4F0D03F15D154EE0034FF28 /* GP_Array2Iterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array2Iterator.m; sourceTree = "<group>"; };
+		A4F0D04015D154EE0034FF28 /* GP_Collection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Collection.h; sourceTree = "<group>"; };
+		A4F0D04115D154EE0034FF28 /* GP_Iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Iterator.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A4F0D00415D154B10034FF28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4F0D00C15D154B10034FF28 /* UIKit.framework in Frameworks */,
+				A4F0D00E15D154B10034FF28 /* Foundation.framework in Frameworks */,
+				A4F0D01015D154B10034FF28 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4F0D01E15D154B10034FF28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4F0D02415D154B10034FF28 /* SenTestingKit.framework in Frameworks */,
+				A4F0D02515D154B10034FF28 /* UIKit.framework in Frameworks */,
+				A4F0D02615D154B10034FF28 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A4F0CFFC15D154B10034FF28 = {
+			isa = PBXGroup;
+			children = (
+				A4F0D01115D154B10034FF28 /* TheRealBishop */,
+				A4F0D02915D154B10034FF28 /* TheRealBishopTests */,
+				A4F0D00A15D154B10034FF28 /* Frameworks */,
+				A4F0D00815D154B10034FF28 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A4F0D00815D154B10034FF28 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A4F0D00715D154B10034FF28 /* TheRealBishop.app */,
+				A4F0D02215D154B10034FF28 /* TheRealBishopTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A4F0D00A15D154B10034FF28 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A4F0D00B15D154B10034FF28 /* UIKit.framework */,
+				A4F0D00D15D154B10034FF28 /* Foundation.framework */,
+				A4F0D00F15D154B10034FF28 /* CoreGraphics.framework */,
+				A4F0D02315D154B10034FF28 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A4F0D01115D154B10034FF28 /* TheRealBishop */ = {
+			isa = PBXGroup;
+			children = (
+				A4F0D03A15D154D60034FF28 /* ds */,
+				A4F0D01A15D154B10034FF28 /* GP_AppDelegate.h */,
+				A4F0D01B15D154B10034FF28 /* GP_AppDelegate.m */,
+				A4F0D01215D154B10034FF28 /* Supporting Files */,
+			);
+			path = TheRealBishop;
+			sourceTree = "<group>";
+		};
+		A4F0D01215D154B10034FF28 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A4F0D01315D154B10034FF28 /* TheRealBishop-Info.plist */,
+				A4F0D01415D154B10034FF28 /* InfoPlist.strings */,
+				A4F0D01715D154B10034FF28 /* main.m */,
+				A4F0D01915D154B10034FF28 /* TheRealBishop-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A4F0D02915D154B10034FF28 /* TheRealBishopTests */ = {
+			isa = PBXGroup;
+			children = (
+				A4F0D02F15D154B10034FF28 /* TheRealBishopTests.h */,
+				A4F0D03015D154B10034FF28 /* TheRealBishopTests.m */,
+				A4F0D02A15D154B10034FF28 /* Supporting Files */,
+			);
+			path = TheRealBishopTests;
+			sourceTree = "<group>";
+		};
+		A4F0D02A15D154B10034FF28 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A4F0D02B15D154B10034FF28 /* TheRealBishopTests-Info.plist */,
+				A4F0D02C15D154B10034FF28 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A4F0D03A15D154D60034FF28 /* ds */ = {
+			isa = PBXGroup;
+			children = (
+				A4F0D03C15D154EE0034FF28 /* GP_Array2.h */,
+				A4F0D03D15D154EE0034FF28 /* GP_Array2.m */,
+				A4F0D03E15D154EE0034FF28 /* GP_Array2Iterator.h */,
+				A4F0D03F15D154EE0034FF28 /* GP_Array2Iterator.m */,
+				A4F0D04015D154EE0034FF28 /* GP_Collection.h */,
+				A4F0D04115D154EE0034FF28 /* GP_Iterator.h */,
+				A4F0D03B15D154DA0034FF28 /* sort */,
+			);
+			name = ds;
+			sourceTree = "<group>";
+		};
+		A4F0D03B15D154DA0034FF28 /* sort */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = sort;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A4F0D00615D154B10034FF28 /* TheRealBishop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4F0D03415D154B10034FF28 /* Build configuration list for PBXNativeTarget "TheRealBishop" */;
+			buildPhases = (
+				A4F0D00315D154B10034FF28 /* Sources */,
+				A4F0D00415D154B10034FF28 /* Frameworks */,
+				A4F0D00515D154B10034FF28 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TheRealBishop;
+			productName = TheRealBishop;
+			productReference = A4F0D00715D154B10034FF28 /* TheRealBishop.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A4F0D02115D154B10034FF28 /* TheRealBishopTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4F0D03715D154B10034FF28 /* Build configuration list for PBXNativeTarget "TheRealBishopTests" */;
+			buildPhases = (
+				A4F0D01D15D154B10034FF28 /* Sources */,
+				A4F0D01E15D154B10034FF28 /* Frameworks */,
+				A4F0D01F15D154B10034FF28 /* Resources */,
+				A4F0D02015D154B10034FF28 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A4F0D02815D154B10034FF28 /* PBXTargetDependency */,
+			);
+			name = TheRealBishopTests;
+			productName = TheRealBishopTests;
+			productReference = A4F0D02215D154B10034FF28 /* TheRealBishopTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A4F0CFFE15D154B10034FF28 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = GP_;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = GODPAPER;
+			};
+			buildConfigurationList = A4F0D00115D154B10034FF28 /* Build configuration list for PBXProject "TheRealBishop" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A4F0CFFC15D154B10034FF28;
+			productRefGroup = A4F0D00815D154B10034FF28 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A4F0D00615D154B10034FF28 /* TheRealBishop */,
+				A4F0D02115D154B10034FF28 /* TheRealBishopTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A4F0D00515D154B10034FF28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4F0D01615D154B10034FF28 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4F0D01F15D154B10034FF28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4F0D02E15D154B10034FF28 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A4F0D02015D154B10034FF28 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A4F0D00315D154B10034FF28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4F0D01815D154B10034FF28 /* main.m in Sources */,
+				A4F0D01C15D154B10034FF28 /* GP_AppDelegate.m in Sources */,
+				A4F0D04215D154EE0034FF28 /* GP_Array2.m in Sources */,
+				A4F0D04315D154EE0034FF28 /* GP_Array2Iterator.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4F0D01D15D154B10034FF28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4F0D03115D154B10034FF28 /* TheRealBishopTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A4F0D02815D154B10034FF28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A4F0D00615D154B10034FF28 /* TheRealBishop */;
+			targetProxy = A4F0D02715D154B10034FF28 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A4F0D01415D154B10034FF28 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4F0D01515D154B10034FF28 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A4F0D02C15D154B10034FF28 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4F0D02D15D154B10034FF28 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A4F0D03215D154B10034FF28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A4F0D03315D154B10034FF28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A4F0D03515D154B10034FF28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TheRealBishop/TheRealBishop-Prefix.pch";
+				INFOPLIST_FILE = "TheRealBishop/TheRealBishop-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A4F0D03615D154B10034FF28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TheRealBishop/TheRealBishop-Prefix.pch";
+				INFOPLIST_FILE = "TheRealBishop/TheRealBishop-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		A4F0D03815D154B10034FF28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TheRealBishop.app/TheRealBishop";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TheRealBishop/TheRealBishop-Prefix.pch";
+				INFOPLIST_FILE = "TheRealBishopTests/TheRealBishopTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		A4F0D03915D154B10034FF28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TheRealBishop.app/TheRealBishop";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TheRealBishop/TheRealBishop-Prefix.pch";
+				INFOPLIST_FILE = "TheRealBishopTests/TheRealBishopTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A4F0D00115D154B10034FF28 /* Build configuration list for PBXProject "TheRealBishop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4F0D03215D154B10034FF28 /* Debug */,
+				A4F0D03315D154B10034FF28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4F0D03415D154B10034FF28 /* Build configuration list for PBXNativeTarget "TheRealBishop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4F0D03515D154B10034FF28 /* Debug */,
+				A4F0D03615D154B10034FF28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4F0D03715D154B10034FF28 /* Build configuration list for PBXNativeTarget "TheRealBishopTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4F0D03815D154B10034FF28 /* Debug */,
+				A4F0D03915D154B10034FF28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A4F0CFFE15D154B10034FF28 /* Project object */;
+}
