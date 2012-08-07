@@ -22,6 +22,8 @@
 package com.godpaper.chinese_chess_jam.business
 {
 	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.chinese_chess_jam.vo.pgn.ChessBookMoveVO;
+	import com.godpaper.chinese_chess_jam.vo.pgn.ChessBookVO;
 	import com.godpaper.chinese_chess_jam.vo.pgn.PGN_VO;
 	
 	import mx.logging.ILogger;
@@ -53,6 +55,7 @@ package com.godpaper.chinese_chess_jam.business
 		//--------------------------------------------------------------------------
 		private var _source:String;
 		private var pgnVO:PGN_VO;
+		private var chessbookVO:ChessBookVO;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -67,7 +70,8 @@ package com.godpaper.chinese_chess_jam.business
 		//
 		private static const LOG:ILogger = LogUtil.getLogger(PGN_Parser);
 		//RegExpressions
-		private const REG_EXP_METADATA:RegExp = /\[.*\]$/igms;
+		private const REG_EXP_META_DATA:RegExp = /\[.*\]$/igms;//metadata
+		private const REG_EXP_CHESS_BOOK:RegExp = /\{.*\}$/igms;//chessbook
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -97,6 +101,7 @@ package com.godpaper.chinese_chess_jam.business
 		{
 			this._source = StringUtil.trim(source);
 			this.pgnVO = new PGN_VO();
+			this.chessbookVO = new ChessBookVO();
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -105,39 +110,8 @@ package com.godpaper.chinese_chess_jam.business
 		//--------------------------------------------------------------------------
 		public function parse():void
 		{
-			var metaLabelStr:String = REG_EXP_METADATA.exec(this.source);
-//			LOG.debug(metaLabelStr);
-			var metaLabels:Array = metaLabelStr.split("\n");
-//			LOG.debug(metaLabels.toString());
-			//
-			for(var i:int=0;i<metaLabels.length;i++)
-			{
-				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_GAME)!=-1)
-				{
-					var gameLabels:Array = String(metaLabels[i]).split("\"");
-					this.pgnVO.game = gameLabels[1];
-					LOG.debug("pgnVO->game:{0}",this.pgnVO.game);
-				}
-				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_EVENT)!=-1)
-				{
-					var eventLabels:Array = String(metaLabels[i]).split("\"");
-					this.pgnVO.event = eventLabels[1];
-					LOG.debug("pgnVO->event:{0}",this.pgnVO.event);
-				}
-				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_SITE)!=-1)
-				{
-					var siteLabels:Array = String(metaLabels[i]).split("\"");
-					this.pgnVO.site = siteLabels[1];
-					LOG.debug("pgnVO->site:{0}",this.pgnVO.site);
-				}
-				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_DATE)!=-1)
-				{
-					var dateLabels:Array = String(metaLabels[i]).split("\"");
-					this.pgnVO.date = dateLabels[1];
-					LOG.debug("pgnVO->date:{0}",this.pgnVO.date);
-				}
-			}
-//			LOG.debug(labelStr);
+			this.chessbookParse();
+			this.metaDataParse();
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -150,6 +124,154 @@ package com.godpaper.chinese_chess_jam.business
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		//
+		private function metaDataParse():void
+		{
+			var metaLabelStr:String = REG_EXP_META_DATA.exec(this.source);
+			//			LOG.debug(metaLabelStr);
+			var metaLabels:Array = metaLabelStr.split("\n");
+			//			LOG.debug(metaLabels.toString());
+			//
+			for(var i:int=0;i<metaLabels.length;i++)
+			{
+				//Game
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_GAME)!=-1)
+				{
+					var gameLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.game = gameLabels[1];
+					LOG.debug("pgnVO->game:{0}",this.pgnVO.game);
+				}
+				//Event
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_EVENT)!=-1)
+				{
+					var eventLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.event = eventLabels[1];
+					LOG.debug("pgnVO->event:{0}",this.pgnVO.event);
+				}
+				//Site
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_SITE)!=-1)
+				{
+					var siteLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.site = siteLabels[1];
+					LOG.debug("pgnVO->site:{0}",this.pgnVO.site);
+				}
+				//Date
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_DATE)!=-1)
+				{
+					var dateLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.date = dateLabels[1];
+					LOG.debug("pgnVO->date:{0}",this.pgnVO.date);
+				}
+				//Round
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_ROUND)!=-1)
+				{
+					var roundLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.round = roundLabels[1];
+					LOG.debug("pgnVO->round:{0}",this.pgnVO.round);
+				}
+				//Red
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_RED)!=-1)
+				{
+					var redLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.red = redLabels[1];
+					LOG.debug("pgnVO->red:{0}",this.pgnVO.red);
+				}
+				//RedTeam
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_RED_TEAM)!=-1)
+				{
+					var redTeamLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.redTeam = redTeamLabels[1];
+					LOG.debug("pgnVO->redTeam:{0}",this.pgnVO.redTeam);
+				}
+				//Black
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_BLACK)!=-1)
+				{
+					var blackLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.black = blackLabels[1];
+					LOG.debug("pgnVO->black:{0}",this.pgnVO.black);
+				}
+				//BlackTeam
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_BLACK_TEAM)!=-1)
+				{
+					var blackTeamLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.blackTeam = blackTeamLabels[1];
+					LOG.debug("pgnVO->blackTeam:{0}",this.pgnVO.blackTeam);
+				}
+				//Result
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_RESULT)!=-1)
+				{
+					var resultLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.result = resultLabels[1];
+					LOG.debug("pgnVO->result:{0}",this.pgnVO.result);
+				}
+				//ECCO
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_ECCO)!=-1)
+				{
+					var eccoLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.ECCO = eccoLabels[1];
+					LOG.debug("pgnVO->ECCO:{0}",this.pgnVO.ECCO);
+				}
+				//Opening
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_OPENING)!=-1)
+				{
+					var openingLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.opening = openingLabels[1];
+					LOG.debug("pgnVO->opening:{0}",this.pgnVO.opening);
+				}
+				//Variation
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_VARIATION)!=-1)
+				{
+					var variationLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.variation = variationLabels[1];
+					LOG.debug("pgnVO->variation:{0}",this.pgnVO.variation);
+				}
+				//...
+			}
+			//			LOG.debug(labelStr);
+		}
+		//
+		private function chessbookParse():void
+		{
+			//
+			var allLables:Array = this.source.split("\n");
+//			LOG.debug(allLables.toString());//TODO:double check the position assure is valid.
+			this.chessbookVO.footer = allLables[allLables.length-1];
+			//
+			var chessbookLabelStr:String = REG_EXP_CHESS_BOOK.exec(this.source);
+//			LOG.debug("chessbook:{0}",chessbookLabelStr);
+			var chessbookLabels:Array = chessbookLabelStr.split("\n");
+			LOG.debug("chessbook:{0}",chessbookLabels.toString());
+			//ChessBookVO assemble
+			//title
+			this.chessbookVO.title = chessbookLabels[0];
+			//shift the chessbook' title.
+			chessbookLabels.shift();
+			var bodyStr:String = StringUtil.trim(this.source);
+			//First off,group the chessbook label
+			var index:int = 1;
+			var chessbookLabelGroups:Array = new Array();
+			//
+			for(var i:int=0;i<bodyStr.length;i++)
+			{
+				var indexStr:String = String(index).concat(".");
+				var currIndex:int = bodyStr.indexOf(indexStr);
+				var lastIndex:int = bodyStr.lastIndexOf(indexStr);
+				var nextIndexStr:String = String(index+1).concat(".");
+				var nextIndex:int = bodyStr.indexOf(nextIndexStr,index);
+				chessbookLabelGroups[index-1] = bodyStr.substring(currIndex,nextIndex);
+			}
+			LOG.debug(chessbookLabelGroups.toString());
+			//move list
+//			var moveList:Array = bodyStr.split(".")
+//			LOG.debug(moveList.toString());
+			//@example as follows:
+//			10. 车六进一 
+//			{ 去士，下着变二 }
+//			10...        士５退４ 
+//			{ 去车，变二 }
+			//
+			LOG.debug("#0,chessbookMoveVO:{0}",this.chessbookVO.body[0].toString());
+		}
 	}
 	
 }

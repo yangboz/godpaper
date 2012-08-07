@@ -70,6 +70,8 @@ package com.godpaper.chinese_chess_jam.vo.pgn
 //		　　(3) 时限：以TimeControl为标签的多种表示。
 //		　　(4) 对局结论，以Termination为标签的多种表示。
 //		　　(5) 其他，诸如Annotator、Mode、PlyCount等，请参阅《国际象棋译文苑》文摘——关于PGN和FEN记谱规范(上)一文。
+		//The chess book
+		public var chessbook:ChessBookVO = new ChessBookVO();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -77,6 +79,18 @@ package com.godpaper.chinese_chess_jam.vo.pgn
 		public static const META_KEY_EVENT:String = "Event";
 		public static const META_KEY_SITE:String = "Site";
 		public static const META_KEY_DATE:String = "Date";
+		//
+		public static const META_KEY_ROUND:String = "Round";
+		public static const META_KEY_RED:String = "Red";
+		public static const META_KEY_RED_TEAM:String = "RedTeam";
+		public static const META_KEY_BLACK:String = "Black";
+		public static const META_KEY_BLACK_TEAM:String = "BlackTeam";
+		//
+		public static const META_KEY_RESULT:String = "Result";
+		public static const META_KEY_ECCO:String = "ECCO";
+		public static const META_KEY_OPENING:String = "Opening";
+		public static const META_KEY_VARIATION:String = "Variation";
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

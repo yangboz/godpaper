@@ -19,43 +19,39 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package
+package com.godpaper.chinese_chess_jam.vo.pgn
 {
+	import mx.utils.ObjectUtil;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import Array;
-	
-	import flash.display.Sprite;
-	
-	import flexUnitTests.BitFieldTest;
-	import flexUnitTests.NumberBoardTest;
-	
-	import flexunit.flexui.FlexUnitTestRunnerUIAS;
-	
 	
 	/**
-	 * FlexUnitApplication.as class.   	
+	 * ChessMoveVO.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Aug 7, 2012 10:07:49 AM
+	 * Created Aug 7, 2012 11:33:24 AM
 	 */   	 
-	public class FlexUnitApplication extends Sprite
+	public class ChessBookMoveVO
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		public var redMove:String = "";
+		public var redComments:String = "";
+		public var blackMove:String = "";
+		public var blackComments:String = "";
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		public static const LEN_OF_MOVE_CHAR:int = 4;//"炮2平5"
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -73,32 +69,16 @@ package
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function FlexUnitApplication()
-		{
-			onCreationComplete();
-		}
-		
-		private function onCreationComplete():void
-		{
-			var testRunner:FlexUnitTestRunnerUIAS=new FlexUnitTestRunnerUIAS();
-			testRunner.portNumber=8765; 
-			this.addChild(testRunner); 
-			testRunner.runWithFlexUnit4Runner(currentRunTestSuite(), "TheKnightErrant");
-		}
-		
-		public function currentRunTestSuite():Array
-		{
-			var testsToRun:Array = new Array();
-			testsToRun.push(flexUnitTests.BitFieldTest);
-			testsToRun.push(flexUnitTests.NumberBoardTest);
-			return testsToRun;
-		}     	
+		     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		public function toString():String
+		{
+			return ObjectUtil.toString(this);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

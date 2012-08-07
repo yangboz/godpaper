@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testrun name="" >
 <testsuite  name="Default Test Suite" project="TheKnightErrant">
+<testsuite name="flexUnitTests:BitFieldTest" type="testcaseclass"/>
 <testsuite name="flexUnitTests:NumberBoardTest" type="testcaseclass"/>
 </testsuite>
 <portNumber value="8765" />
