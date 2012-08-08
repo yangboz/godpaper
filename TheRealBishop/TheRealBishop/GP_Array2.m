@@ -9,7 +9,7 @@
 #import "GP_Array2.h"
 
 @implementation GP_Array2
-//@synthesize width,height,celled;
+//@synthesize width,height,celled,size;
 
 /**
  * Initializes a two-dimensional array to match a given width and
@@ -38,7 +38,8 @@
 //width
 -(void)setWidth:(NSInteger)width
 {
-    _w = width;
+//    resize(w, _h);
+    [self resize:width intValue:_h];
 }
 /**
  * Indicates the width (colums).
@@ -52,7 +53,8 @@
 //height
 -(void)setHeight:(NSInteger)height
 {
-    _h = height;
+//    resize(_w, h);
+    [self resize:_w intValue:height];
 }
 /**
  * Indicates the height (rows).
@@ -79,7 +81,15 @@
 //            }
 //        }
 //    }
-    return _celled;
+    int celled=0;
+    for (int h=0; h< _h; h++) {
+        for (int w=0; w< _w; w++) {
+            if ([self gett:w intValue:h]) {
+                celled++;
+            }
+        }
+    }
+    return celled;
 }
 //Methods
 
@@ -174,7 +184,13 @@
  */
 -(void)setYs:(int)x arrayValue:(NSMutableArray *)objs
 {
-
+//    for(var i:int=0;i<objs.length;i++)
+//    {
+//        this.sett(x,i,objs[i]);
+//    }
+    for (int i=0; i<[objs count]; i++) {
+        [self sett:x intValue:i idValue:[objs objectAtIndex:i]];
+    }
 }
 /**
  * Resizes the array to match the given width and height. If the new
@@ -185,9 +201,56 @@
  * @param w The new width (cols).
  * @param h The new height (rows).
  */
--(void)resize:(int)width intValue:(int)height
+-(void)resize:(int)w intValue:(int)h
 {
-
+//    if (w < 1 || h < 1)
+//        throw new Error("illegal size");
+//    
+//    var copy:Array = _a.concat();
+//    
+//    _a.length = 0;
+//    _a.length = w * h;
+//    
+//    var minx:int = w < _w ? w : _w;
+//    var miny:int = h < _h ? h : _h;
+//    
+//    var x:int, y:int, t1:int, t2:int;
+//    for (y = 0; y < miny; y++)
+//    {
+//        t1 = y *  w;
+//        t2 = y * _w;
+//        
+//        for (x = 0; x < minx; x++)
+//            _a[int(t1 + x)] = copy[int(t2 + x)];
+//    }
+//    
+//    _w = w;
+//    _h = h;
+    if (w<1 || h<1) {
+        @throw([NSException exceptionWithName:@"illegal size" reason:@"Array2->resize" userInfo:NULL]);
+    }
+    //
+    NSMutableArray *copy = [_a copy];
+    [_a removeAllObjects];
+    _a = [[NSMutableArray alloc] initWithCapacity:(w*h) ];
+    //
+    int minx = (w<_w)?w:_w;
+    int miny = (h<_h)?h:_h;
+    //
+    int x,y,t1,t2;
+    for( y=0; y < miny; y++)
+    {
+        t1 = y * w;
+        t2 = y * _w;
+        //
+        for( x=0; x < minx; x++)
+        {
+            [_a insertObject:[copy objectAtIndex:(t2+x)] atIndex:(t1+x)];
+        }
+    }
+    //
+    _w = w;
+    _h = h;
 }
 /**
  * Extracts a row from a given index.
@@ -198,7 +261,11 @@
  */
 -(NSMutableArray *)getRow:(int)y
 {
-
+//    var offset:int = y * _w;
+//    return _a.slice(offset, offset + _w);
+    int offset = y * _w;
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[_a subarrayWithRange:NSMakeRange(offset, offset + _w)]];
+    return array;
 }
 /**
  * Inserts new values into a complete row of the two-dimensional array. 
@@ -209,7 +276,19 @@
  */
 -(void)setRow:(int)y arrayValue:(NSMutableArray *)rowArray
 {
-
+//    if (y < 0 || y > _h) throw new Error("row index out of bounds");
+//    
+//    var offset:int = y * _w;
+//    for (var x:int = 0; x < _w; x++)
+//        _a[int(offset + x)] = a[x];	
+    if (y <0 || y > _h) {
+        @throw([NSException exceptionWithName:@"row index out of bounds" reason:@"Array2->setRow" userInfo:NULL]);
+    }
+    //
+    int offset = y * _w;
+    for (int x=0; x < _w; x++) {
+        [_a insertObject:[_a objectAtIndex:x] atIndex:(offset + x)];
+    }
 }
 /**
  * Extracts a column from a given index.
@@ -218,9 +297,17 @@
  * 
  * @return An array storing the values of the column.
  */
--(NSMutableArray *)getCol:(int)y
+-(NSMutableArray *)getCol:(int)x
 {
-
+//    var t:Array = [];
+//    for (var i:int = 0; i < _h; i++)
+//        t[i] = _a[int(i * _w + x)];
+//    return t;
+    NSMutableArray *t = [[NSMutableArray alloc] init];
+    for (int i=0; i < _h; i++) {
+        [t insertObject:[_a objectAtIndex:(i * _w +x)] atIndex:i];
+    }
+    return t;
 }
 /**
  * Inserts new values into a complete column of the two-dimensional
@@ -231,7 +318,17 @@
  */
 -(void)setCol:(int)x arrayValue:(NSMutableArray *)rolArray
 {
-
+//    if (x < 0 || x > _w) throw new Error("column index out of bounds");
+//    
+//    for (var y:int = 0; y < _h; y++)
+//        _a[int(y * _w + x)] = a[y];	
+    if (x < 0 || x > _w) {
+        @throw([NSException exceptionWithName:@"column index out of bounds" reason:@"Array2->setCol" userInfo:NULL]);
+    }
+    //
+    for ( int y=0; y < _h; y++) {
+        [_a insertObject:[_a objectAtIndex:y ] atIndex:( y * _w + x)];
+    }
 }
 /**
  * Shifts all columns by one column to the left. Columns are wrapped,
@@ -240,7 +337,21 @@
  */
 -(void)shiftLeft
 {
-
+//    if (_w == 1) return;
+//    
+//    var j:int = _w - 1, k:int;
+//    for (var i:int = 0; i < _h; i++)
+//    {
+//        k = i * _w + j;
+//        _a.splice(k, 0, _a.splice(k - j, 1));
+//    }
+    if( _w == 1 ) return;
+    //
+    int j = _w - 1, k;
+    for (int i=0; i< _h; i++) {
+        k = i * _w + j;
+        [_a removeObjectAtIndex:(k - j)];//FIXME:double check here. 
+    }
 }
 /**
  * Shifts all columns by one column to the right. Columns are wrapped,
@@ -249,7 +360,21 @@
  */
 -(void)shiftRight
 {
-
+//    if (_w == 1) return;
+//    
+//    var j:int = _w - 1, k:int;
+//    for (var i:int = 0; i < _h; i++)
+//    {
+//        k = i * _w + j;
+//        _a.splice(k - j, 0, _a.splice(k, 1));
+//    }
+    if (_w == 1) return;
+    //
+    int j = _w - 1, k;
+    for (int i=0; i < _h; i++) {
+        k = i * _w + j;
+        [_a removeObjectAtIndex:k];//FIXME:double check here.
+    }
 }
 /**
  * Shifts all rows up by one row. Rows are wrapped, so the first row
@@ -257,7 +382,14 @@
  */
 -(void)shiftUp
 {
-
+//    if (_h == 1) return;
+//    
+//    _a = _a.concat(_a.slice(0, _w));
+//    _a.splice(0, _w);
+    if ( _h == 1) return;
+    //
+    _a = [NSMutableArray arrayWithArray: [_a arrayByAddingObjectsFromArray:[_a subarrayWithRange:NSMakeRange(0, _w)] ] ];
+    [_a removeObjectsInRange:NSMakeRange(0, _w)];
 }
 /**
  * Shifts all rows down by one row. Rows are wrapped, so the last row
@@ -265,7 +397,18 @@
  */
 -(void)shiftDown
 {
-
+//    if (_h == 1) return;
+//    
+//    var offset:int = (_h - 1) * _w;
+//    _a = _a.slice(offset, offset + _w).concat(_a);
+//    _a.splice(_h * _w, _w);
+    if (_h == 1) return;
+    //
+    int offset = (_h - 1) * _w;
+    NSArray *sub = [_a subarrayWithRange:NSMakeRange(offset, offset + _w)];
+    _a = [ [NSMutableArray alloc] initWithArray:sub];
+    [_a addObjectsFromArray:[_a copy] ];
+    [_a removeObjectsInRange:NSMakeRange(_h * _w, _w)];
 }
 /**
  * Appends a new row. If the new row doesn't match the current width,
@@ -274,9 +417,14 @@
  *
  * @param a The row to append.
  */
--(void)appendRow:(NSMutableArray *)rowArray
+-(void)appendRow:(NSMutableArray *)a
 {
-
+//    a.length = _w;
+//    _a = _a.concat(a);
+//    _h++;
+    a = [NSMutableArray arrayWithCapacity:_w];
+    _a = [NSMutableArray arrayWithArray: [_a arrayByAddingObjectsFromArray:[a copy]] ];
+    _h++;
 }
 /**
  * Prepends a new row. If the new row doesn't match the current width,
@@ -285,9 +433,14 @@
  *
  * @param a The row to prepend.
  */
--(void)prependRow:(NSMutableArray *)rowArray
+-(void)prependRow:(NSMutableArray *)a
 {
-
+//    a.length = _w;
+//    _a = a.concat(_a);
+//    _h++;
+    a = [NSMutableArray arrayWithCapacity:_w];
+    _a =[NSMutableArray arrayWithArray: [a arrayByAddingObjectsFromArray:[_a copy]] ] ;
+    _h++;
 }
 /**
  * Appends a new column. If the new column doesn't match the current
@@ -296,9 +449,18 @@
  *
  * @param a The column to append.
  */
--(void)appendCol:(NSMutableArray *)colArray
+-(void)appendCol:(NSMutableArray *)a
 {
-
+//    a.length = _h;
+//    for (var y:int = 0; y < _h; y++)
+//        _a.splice(y * _w + _w + y, 0, a[y]);
+//    _w++;
+    a = [NSMutableArray arrayWithCapacity:_w];
+    for (int y=0; y < _h; y++) {
+//        [_a removeObjectAtIndex:(y * _w + _w + y)];//FIXME:double check here.
+        [_a insertObject:[a objectAtIndex:y] atIndex:(y * _w + _w + y)];
+    }
+    _w++;
 }
 /**
  * Prepends a new column. If the new column doesn't match the current
@@ -307,16 +469,36 @@
  *
  * @param a The column to prepend.
  */
--(void)prependCol:(NSMutableArray *)colArray
+-(void)prependCol:(NSMutableArray *)a
 {
-
+//    a.length = _h;
+//    for (var y:int = 0; y < _h; y++)
+//        _a.splice(y * _w + y, 0, a[y]);
+//    _w++;
+    a = [NSMutableArray arrayWithCapacity:_w];
+    for (int y=0; y < _h; y++) {
+//        [_a removeObjectAtIndex:(y * _w + y)];//FIXME:double check here.
+        [_a insertObject:[a objectAtIndex:y] atIndex:(y * _w + y)];
+    }
+    _w++;
 }
 /**
  * Flips rows with cols and vice versa.
  */
 -(void)transpose
 {
-
+//    var a:Array = _a.concat();
+//    for (var y:int = 0; y < _h; y++)
+//    {
+//        for (var x:int = 0; x < _w; x++)
+//            _a[int(x * _w + y)] = a[int(y * _w + x)];
+//    }
+    NSMutableArray *a = [_a copy];
+    for (int y=0; y < _h; y++) {
+        for (int x = 0; x < _w; x++) {
+            [_a insertObject:[a objectAtIndex:(y * _w + x)] atIndex:(x * _w + y)];
+        }
+    }
 }
 /**
  * Grants access to the the linear array which is used internally to
@@ -325,7 +507,7 @@
  */
 -(NSMutableArray *)getArray
 {
-
+    return _a;
 }
 //Protocol implementations
 #pragma mark protocol#GP_Collection
@@ -342,7 +524,13 @@
 //        return true;
 //}
 //return false;
-    
+    int k = [self size];
+    for (int i=0; i < k; i++) {
+        if ( [[_a objectAtIndex:i] isEqual:obj]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 /**
@@ -352,7 +540,7 @@
 -(void)clear
 {
 //    _a = new Array(size);
-    [_a removeAllObjects];//FIXME:equal to clear?
+    _a = [[NSMutableArray alloc] initWithCapacity:[self size]];
 }
 
 /**
@@ -403,7 +591,7 @@
  */
 -(NSString *)toString
 {
-
+//    return "[Array2, width=" + width + ", height=" + height + "]";
 }
 /**
  * Prints out all elements (for debug/demo purposes).
@@ -412,7 +600,20 @@
  */
 -(NSString *)dump
 {
-
+//    var s:String = "Array2\n{";
+//    var offset:int, value:*;
+//    for (var y:int = 0; y < _h; y++)
+//    {
+//        s += "\n" + "\t";
+//        offset = y * _w;
+//        for (var x:int = 0; x < _w; x++)
+//        {
+//            value = _a[int(offset + x)];
+//            s += "[" + (value != undefined ? value : "?") + "]";
+//        }
+//    }
+//    s += "\n}";
+//    return s;
 }
 
 

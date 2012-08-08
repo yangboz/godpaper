@@ -29,12 +29,12 @@
 -(void)setXs:(int)y arrayValue:(NSMutableArray *)objs;
 -(void)setYs:(int)x arrayValue:(NSMutableArray *)objs;
 
--(void)resize:(int)width intValue:(int)height;
+-(void)resize:(int)w intValue:(int)h;
 
 -(NSMutableArray *)getRow:(int)y;
 -(void)setRow:(int)y arrayValue:(NSMutableArray *)rowArray;
 
--(NSMutableArray *)getCol:(int)y;
+-(NSMutableArray *)getCol:(int)x;
 -(void)setCol:(int)x arrayValue:(NSMutableArray *)rolArray;
 
 -(void)shiftLeft;
@@ -42,11 +42,11 @@
 -(void)shiftUp;
 -(void)shiftDown;
 
--(void)appendRow:(NSMutableArray *)rowArray;
--(void)prependRow:(NSMutableArray *)rowArray;
+-(void)appendRow:(NSMutableArray *)a;
+-(void)prependRow:(NSMutableArray *)a;
 
--(void)appendCol:(NSMutableArray *)colArray;
--(void)prependCol:(NSMutableArray *)colArray;
+-(void)appendCol:(NSMutableArray *)a;
+-(void)prependCol:(NSMutableArray *)a;
 
 -(void)transpose;
 

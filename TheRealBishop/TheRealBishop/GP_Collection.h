@@ -19,7 +19,7 @@
  * @return True if the item exists, otherwise false.
  */
 //function contains(obj:*):Boolean
--(BOOL)contains:(id *)obj;
+-(BOOL)contains:(id)obj;
 /**
  * Clears all items.
  */
@@ -39,7 +39,7 @@
  * @return The size.
  */
 //function get size():int;
-@property(assign) NSInteger size;
+@property(readonly) NSInteger size;
 
 /**
  * Checks if the collection is empty.
