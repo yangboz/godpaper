@@ -41,6 +41,6 @@
  * @private
  */
 //function set data(obj:*):void
-@property(nonatomic,retain) NSObject *data;
+@property(nonatomic,retain) id data;
 //
 @end

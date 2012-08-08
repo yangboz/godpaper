@@ -32,7 +32,7 @@
  * @return An iterator object.
  */
 //function getIterator():Iterator
--(id *)getIterator;
+-(id)getIterator;
 /**
  * The total number of items.
  * 

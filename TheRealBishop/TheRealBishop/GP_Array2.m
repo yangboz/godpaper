@@ -7,6 +7,7 @@
 //
 
 #import "GP_Array2.h"
+#import "GP_Array2Iterator.h"
 
 @implementation GP_Array2
 //@synthesize width,height,celled,size;
@@ -264,7 +265,7 @@
 //    var offset:int = y * _w;
 //    return _a.slice(offset, offset + _w);
     int offset = y * _w;
-    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[_a subarrayWithRange:NSMakeRange(offset, offset + _w)]];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[_a subarrayWithRange:NSMakeRange(offset, _w)]];
     return array;
 }
 /**
@@ -405,7 +406,7 @@
     if (_h == 1) return;
     //
     int offset = (_h - 1) * _w;
-    NSArray *sub = [_a subarrayWithRange:NSMakeRange(offset, offset + _w)];
+    NSArray *sub = [_a subarrayWithRange:NSMakeRange(offset,_w)];
     _a = [ [NSMutableArray alloc] initWithArray:sub];
     [_a addObjectsFromArray:[_a copy] ];
     [_a removeObjectsInRange:NSMakeRange(_h * _w, _w)];
@@ -547,9 +548,10 @@
  * @inheritDoc
  */
 //public function getIterator():Iterator
--(id *)getIterator
+-(id)getIterator
 {
 //return new Array2Iterator(this);
+    return [[GP_Array2Iterator alloc] Array2Iterator:self];
 }
 
 /**
@@ -582,6 +584,13 @@
 //var k:int = size;
 //if (a.length > k) a.length = k;
 //return a;
+    NSMutableArray *a = [NSMutableArray arrayWithArray:[_a copy]];
+    //
+    int k = [self size];
+    if ([a count] > k) {
+        [a removeObjectsInRange:NSMakeRange(k, ([a count]-k))];
+    }
+    return a;
 }
 #pragma mark Utility
 /**
@@ -592,6 +601,9 @@
 -(NSString *)toString
 {
 //    return "[Array2, width=" + width + ", height=" + height + "]";
+    NSString *result = [[[NSString alloc] initWithString:@"[Array2, width="] stringByAppendingFormat:@"%i",[self width]];
+    result = [result stringByAppendingFormat:@"%@ %i %@",@"height= ",[self height],@"["];
+    return result;
 }
 /**
  * Prints out all elements (for debug/demo purposes).
@@ -614,6 +626,8 @@
 //    }
 //    s += "\n}";
 //    return s;
+//TDODO:
+    return @"";
 }
 
 
