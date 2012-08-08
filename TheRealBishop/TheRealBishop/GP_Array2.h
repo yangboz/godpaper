@@ -10,17 +10,24 @@
 #import "GP_Collection.h"
 
 @interface GP_Array2 : NSObject <GP_Collection>
+{
+    int _w,_h;
+    BOOL _celled;
+    
+    @private 
+        NSMutableArray *_a;
+}
 
 @property(assign) NSInteger width;
 @property(assign) NSInteger height;
 
--(void)fill:(id *)obj;
+-(void)fill:(id)obj;
 
--(id *)get:(int)x intValue:(int)y;
--(void)set:(int)x intValue:(int)y;
+-(id)gett:(int)x intValue:(int)y;
+-(void)sett:(int)x intValue:(int)y idValue:(id)obj;
 
--(void)setXs:(int)y arrayValue:(NSMutableArray *)xArray;
--(void)setYs:(int)x arrayValue:(NSMutableArray *)yArray;
+-(void)setXs:(int)y arrayValue:(NSMutableArray *)objs;
+-(void)setYs:(int)x arrayValue:(NSMutableArray *)objs;
 
 -(void)resize:(int)width intValue:(int)height;
 
@@ -49,6 +56,7 @@
 -(NSString *)dump;
 
 @property(readonly) NSInteger celled;
-
+//Constructor
+-(void)Array2:(int)w intValue:(int)h;
 
 @end
