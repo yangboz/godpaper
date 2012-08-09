@@ -7,6 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4EB7F5C15D2AE7A007400CE /* GP_Array2Iterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F5B15D2AE7A007400CE /* GP_Array2Iterator.m */; };
+		A4EB7F5F15D2B459007400CE /* GP_Array3.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F5E15D2B458007400CE /* GP_Array3.m */; };
+		A4EB7F6215D2B47D007400CE /* GP_ArrayedQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F6115D2B47D007400CE /* GP_ArrayedQueue.m */; };
+		A4EB7F6515D2B496007400CE /* GP_ArrayedStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F6415D2B496007400CE /* GP_ArrayedStack.m */; };
+		A4EB7F6815D2B4AF007400CE /* GP_BinarySearchTree.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F6715D2B4AF007400CE /* GP_BinarySearchTree.m */; };
+		A4EB7F6B15D2B4BF007400CE /* GP_BinaryTreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F6A15D2B4BF007400CE /* GP_BinaryTreeNode.m */; };
+		A4EB7F6E15D2B4D0007400CE /* GP_DLinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F6D15D2B4D0007400CE /* GP_DLinkedList.m */; };
+		A4EB7F7115D2B4ED007400CE /* GP_DListIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F7015D2B4ED007400CE /* GP_DListIterator.m */; };
+		A4EB7F7415D2B501007400CE /* GP_Graph.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F7315D2B501007400CE /* GP_Graph.m */; };
+		A4EB7F7715D2B511007400CE /* GP_GraphArc.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F7615D2B511007400CE /* GP_GraphArc.m */; };
+		A4EB7F7A15D2B520007400CE /* GP_GraphNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F7915D2B51F007400CE /* GP_GraphNode.m */; };
+		A4EB7F7D15D2B531007400CE /* GP_HashMap.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F7C15D2B531007400CE /* GP_HashMap.m */; };
+		A4EB7F8015D2B541007400CE /* GP_HashTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F7F15D2B540007400CE /* GP_HashTable.m */; };
+		A4EB7F8315D2B54D007400CE /* GP_Heap.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F8215D2B54C007400CE /* GP_Heap.m */; };
+		A4EB7F8615D2B55E007400CE /* GP_LinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F8515D2B55E007400CE /* GP_LinkedList.m */; };
+		A4EB7F8915D2B56C007400CE /* GP_LinkedListNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F8815D2B56C007400CE /* GP_LinkedListNode.m */; };
+		A4EB7F8C15D2B582007400CE /* GP_LinkedQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F8B15D2B581007400CE /* GP_LinkedQueue.m */; };
+		A4EB7F8F15D2B599007400CE /* GP_BitVector.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F8E15D2B598007400CE /* GP_BitVector.m */; };
+		A4EB7F9215D2B5AB007400CE /* GP_LinkedStack.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F9115D2B5AB007400CE /* GP_LinkedStack.m */; };
+		A4EB7F9515D2B5BD007400CE /* GP_NullIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F9415D2B5BC007400CE /* GP_NullIterator.m */; };
+		A4EB7F9815D2B5DA007400CE /* GP_Prioritizable.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F9715D2B5D9007400CE /* GP_Prioritizable.m */; };
+		A4EB7F9B15D2B5F7007400CE /* GP_PriorityQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F9A15D2B5F6007400CE /* GP_PriorityQueue.m */; };
+		A4EB7F9E15D2B60A007400CE /* GP_SLinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F9D15D2B609007400CE /* GP_SLinkedList.m */; };
+		A4EB7FA115D2B622007400CE /* GP_SListIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7FA015D2B621007400CE /* GP_SListIterator.m */; };
+		A4EB7FA415D2B63A007400CE /* GP_SListNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7FA315D2B639007400CE /* GP_SListNode.m */; };
+		A4EB7FA715D2B64A007400CE /* GP_Set.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7FA615D2B649007400CE /* GP_Set.m */; };
+		A4EB7FAA15D2B659007400CE /* GP_TreeIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7FA915D2B659007400CE /* GP_TreeIterator.m */; };
+		A4EB7FAD15D2B666007400CE /* GP_TreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7FAC15D2B665007400CE /* GP_TreeNode.m */; };
+		A4ED98C915D3DB1F00C450E8 /* GP_Array3Iterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED98C815D3DB1F00C450E8 /* GP_Array3Iterator.m */; };
+		A4ED98CC15D3E73200C450E8 /* GP_Array2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED98CB15D3E73200C450E8 /* GP_Array2Tests.m */; };
 		A4F0D00C15D154B10034FF28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00B15D154B10034FF28 /* UIKit.framework */; };
 		A4F0D00E15D154B10034FF28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00D15D154B10034FF28 /* Foundation.framework */; };
 		A4F0D01015D154B10034FF28 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00F15D154B10034FF28 /* CoreGraphics.framework */; };
@@ -19,7 +49,6 @@
 		A4F0D02E15D154B10034FF28 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4F0D02C15D154B10034FF28 /* InfoPlist.strings */; };
 		A4F0D03115D154B10034FF28 /* TheRealBishopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F0D03015D154B10034FF28 /* TheRealBishopTests.m */; };
 		A4F0D04215D154EE0034FF28 /* GP_Array2.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F0D03D15D154EE0034FF28 /* GP_Array2.m */; };
-		A4F0D04315D154EE0034FF28 /* GP_Array2Iterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F0D03F15D154EE0034FF28 /* GP_Array2Iterator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +62,66 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A4EB7F5A15D2AE7A007400CE /* GP_Array2Iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array2Iterator.h; sourceTree = "<group>"; };
+		A4EB7F5B15D2AE7A007400CE /* GP_Array2Iterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array2Iterator.m; sourceTree = "<group>"; };
+		A4EB7F5D15D2B458007400CE /* GP_Array3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array3.h; sourceTree = "<group>"; };
+		A4EB7F5E15D2B458007400CE /* GP_Array3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array3.m; sourceTree = "<group>"; };
+		A4EB7F6015D2B47D007400CE /* GP_ArrayedQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_ArrayedQueue.h; sourceTree = "<group>"; };
+		A4EB7F6115D2B47D007400CE /* GP_ArrayedQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_ArrayedQueue.m; sourceTree = "<group>"; };
+		A4EB7F6315D2B496007400CE /* GP_ArrayedStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_ArrayedStack.h; sourceTree = "<group>"; };
+		A4EB7F6415D2B496007400CE /* GP_ArrayedStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_ArrayedStack.m; sourceTree = "<group>"; };
+		A4EB7F6615D2B4AF007400CE /* GP_BinarySearchTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_BinarySearchTree.h; sourceTree = "<group>"; };
+		A4EB7F6715D2B4AF007400CE /* GP_BinarySearchTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_BinarySearchTree.m; sourceTree = "<group>"; };
+		A4EB7F6915D2B4BF007400CE /* GP_BinaryTreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_BinaryTreeNode.h; sourceTree = "<group>"; };
+		A4EB7F6A15D2B4BF007400CE /* GP_BinaryTreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_BinaryTreeNode.m; sourceTree = "<group>"; };
+		A4EB7F6C15D2B4D0007400CE /* GP_DLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_DLinkedList.h; sourceTree = "<group>"; };
+		A4EB7F6D15D2B4D0007400CE /* GP_DLinkedList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_DLinkedList.m; sourceTree = "<group>"; };
+		A4EB7F6F15D2B4ED007400CE /* GP_DListIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_DListIterator.h; sourceTree = "<group>"; };
+		A4EB7F7015D2B4ED007400CE /* GP_DListIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_DListIterator.m; sourceTree = "<group>"; };
+		A4EB7F7215D2B501007400CE /* GP_Graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Graph.h; sourceTree = "<group>"; };
+		A4EB7F7315D2B501007400CE /* GP_Graph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Graph.m; sourceTree = "<group>"; };
+		A4EB7F7515D2B510007400CE /* GP_GraphArc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_GraphArc.h; sourceTree = "<group>"; };
+		A4EB7F7615D2B511007400CE /* GP_GraphArc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_GraphArc.m; sourceTree = "<group>"; };
+		A4EB7F7815D2B51F007400CE /* GP_GraphNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_GraphNode.h; sourceTree = "<group>"; };
+		A4EB7F7915D2B51F007400CE /* GP_GraphNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_GraphNode.m; sourceTree = "<group>"; };
+		A4EB7F7B15D2B531007400CE /* GP_HashMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_HashMap.h; sourceTree = "<group>"; };
+		A4EB7F7C15D2B531007400CE /* GP_HashMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_HashMap.m; sourceTree = "<group>"; };
+		A4EB7F7E15D2B540007400CE /* GP_HashTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_HashTable.h; sourceTree = "<group>"; };
+		A4EB7F7F15D2B540007400CE /* GP_HashTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_HashTable.m; sourceTree = "<group>"; };
+		A4EB7F8115D2B54C007400CE /* GP_Heap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Heap.h; sourceTree = "<group>"; };
+		A4EB7F8215D2B54C007400CE /* GP_Heap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Heap.m; sourceTree = "<group>"; };
+		A4EB7F8415D2B55E007400CE /* GP_LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_LinkedList.h; sourceTree = "<group>"; };
+		A4EB7F8515D2B55E007400CE /* GP_LinkedList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_LinkedList.m; sourceTree = "<group>"; };
+		A4EB7F8715D2B56C007400CE /* GP_LinkedListNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_LinkedListNode.h; sourceTree = "<group>"; };
+		A4EB7F8815D2B56C007400CE /* GP_LinkedListNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_LinkedListNode.m; sourceTree = "<group>"; };
+		A4EB7F8A15D2B581007400CE /* GP_LinkedQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_LinkedQueue.h; sourceTree = "<group>"; };
+		A4EB7F8B15D2B581007400CE /* GP_LinkedQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_LinkedQueue.m; sourceTree = "<group>"; };
+		A4EB7F8D15D2B598007400CE /* GP_BitVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_BitVector.h; sourceTree = "<group>"; };
+		A4EB7F8E15D2B598007400CE /* GP_BitVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_BitVector.m; sourceTree = "<group>"; };
+		A4EB7F9015D2B5AA007400CE /* GP_LinkedStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_LinkedStack.h; sourceTree = "<group>"; };
+		A4EB7F9115D2B5AB007400CE /* GP_LinkedStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_LinkedStack.m; sourceTree = "<group>"; };
+		A4EB7F9315D2B5BC007400CE /* GP_NullIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_NullIterator.h; sourceTree = "<group>"; };
+		A4EB7F9415D2B5BC007400CE /* GP_NullIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_NullIterator.m; sourceTree = "<group>"; };
+		A4EB7F9615D2B5D9007400CE /* GP_Prioritizable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Prioritizable.h; sourceTree = "<group>"; };
+		A4EB7F9715D2B5D9007400CE /* GP_Prioritizable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Prioritizable.m; sourceTree = "<group>"; };
+		A4EB7F9915D2B5F6007400CE /* GP_PriorityQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_PriorityQueue.h; sourceTree = "<group>"; };
+		A4EB7F9A15D2B5F6007400CE /* GP_PriorityQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_PriorityQueue.m; sourceTree = "<group>"; };
+		A4EB7F9C15D2B609007400CE /* GP_SLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_SLinkedList.h; sourceTree = "<group>"; };
+		A4EB7F9D15D2B609007400CE /* GP_SLinkedList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_SLinkedList.m; sourceTree = "<group>"; };
+		A4EB7F9F15D2B620007400CE /* GP_SListIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_SListIterator.h; sourceTree = "<group>"; };
+		A4EB7FA015D2B621007400CE /* GP_SListIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_SListIterator.m; sourceTree = "<group>"; };
+		A4EB7FA215D2B639007400CE /* GP_SListNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_SListNode.h; sourceTree = "<group>"; };
+		A4EB7FA315D2B639007400CE /* GP_SListNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_SListNode.m; sourceTree = "<group>"; };
+		A4EB7FA515D2B649007400CE /* GP_Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Set.h; sourceTree = "<group>"; };
+		A4EB7FA615D2B649007400CE /* GP_Set.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Set.m; sourceTree = "<group>"; };
+		A4EB7FA815D2B658007400CE /* GP_TreeIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_TreeIterator.h; sourceTree = "<group>"; };
+		A4EB7FA915D2B659007400CE /* GP_TreeIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_TreeIterator.m; sourceTree = "<group>"; };
+		A4EB7FAB15D2B664007400CE /* GP_TreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_TreeNode.h; sourceTree = "<group>"; };
+		A4EB7FAC15D2B665007400CE /* GP_TreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_TreeNode.m; sourceTree = "<group>"; };
+		A4ED98C715D3DB1F00C450E8 /* GP_Array3Iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array3Iterator.h; sourceTree = "<group>"; };
+		A4ED98C815D3DB1F00C450E8 /* GP_Array3Iterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array3Iterator.m; sourceTree = "<group>"; };
+		A4ED98CA15D3E73200C450E8 /* GP_Array2Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array2Tests.h; sourceTree = "<group>"; };
+		A4ED98CB15D3E73200C450E8 /* GP_Array2Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array2Tests.m; sourceTree = "<group>"; };
 		A4F0D00715D154B10034FF28 /* TheRealBishop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheRealBishop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4F0D00B15D154B10034FF28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A4F0D00D15D154B10034FF28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -51,8 +140,6 @@
 		A4F0D03015D154B10034FF28 /* TheRealBishopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheRealBishopTests.m; sourceTree = "<group>"; };
 		A4F0D03C15D154EE0034FF28 /* GP_Array2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array2.h; sourceTree = "<group>"; };
 		A4F0D03D15D154EE0034FF28 /* GP_Array2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array2.m; sourceTree = "<group>"; };
-		A4F0D03E15D154EE0034FF28 /* GP_Array2Iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array2Iterator.h; sourceTree = "<group>"; };
-		A4F0D03F15D154EE0034FF28 /* GP_Array2Iterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array2Iterator.m; sourceTree = "<group>"; };
 		A4F0D04015D154EE0034FF28 /* GP_Collection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Collection.h; sourceTree = "<group>"; };
 		A4F0D04115D154EE0034FF28 /* GP_Iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Iterator.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +168,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A4ED98C515D3DAEE00C450E8 /* iterators */ = {
+			isa = PBXGroup;
+			children = (
+				A4EB7F9315D2B5BC007400CE /* GP_NullIterator.h */,
+				A4EB7F5A15D2AE7A007400CE /* GP_Array2Iterator.h */,
+				A4EB7F5B15D2AE7A007400CE /* GP_Array2Iterator.m */,
+				A4F0D04115D154EE0034FF28 /* GP_Iterator.h */,
+				A4ED98C715D3DB1F00C450E8 /* GP_Array3Iterator.h */,
+				A4ED98C815D3DB1F00C450E8 /* GP_Array3Iterator.m */,
+			);
+			name = iterators;
+			sourceTree = "<group>";
+		};
 		A4F0CFFC15D154B10034FF28 = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +236,8 @@
 		A4F0D02915D154B10034FF28 /* TheRealBishopTests */ = {
 			isa = PBXGroup;
 			children = (
+				A4ED98CA15D3E73200C450E8 /* GP_Array2Tests.h */,
+				A4ED98CB15D3E73200C450E8 /* GP_Array2Tests.m */,
 				A4F0D02F15D154B10034FF28 /* TheRealBishopTests.h */,
 				A4F0D03015D154B10034FF28 /* TheRealBishopTests.m */,
 				A4F0D02A15D154B10034FF28 /* Supporting Files */,
@@ -155,13 +257,64 @@
 		A4F0D03A15D154D60034FF28 /* ds */ = {
 			isa = PBXGroup;
 			children = (
+				A4ED98C515D3DAEE00C450E8 /* iterators */,
+				A4EB7F6015D2B47D007400CE /* GP_ArrayedQueue.h */,
+				A4EB7F6115D2B47D007400CE /* GP_ArrayedQueue.m */,
+				A4EB7F5D15D2B458007400CE /* GP_Array3.h */,
+				A4EB7F5E15D2B458007400CE /* GP_Array3.m */,
 				A4F0D03C15D154EE0034FF28 /* GP_Array2.h */,
 				A4F0D03D15D154EE0034FF28 /* GP_Array2.m */,
-				A4F0D03E15D154EE0034FF28 /* GP_Array2Iterator.h */,
-				A4F0D03F15D154EE0034FF28 /* GP_Array2Iterator.m */,
 				A4F0D04015D154EE0034FF28 /* GP_Collection.h */,
-				A4F0D04115D154EE0034FF28 /* GP_Iterator.h */,
 				A4F0D03B15D154DA0034FF28 /* sort */,
+				A4EB7F6315D2B496007400CE /* GP_ArrayedStack.h */,
+				A4EB7F6415D2B496007400CE /* GP_ArrayedStack.m */,
+				A4EB7F6615D2B4AF007400CE /* GP_BinarySearchTree.h */,
+				A4EB7F6715D2B4AF007400CE /* GP_BinarySearchTree.m */,
+				A4EB7F6915D2B4BF007400CE /* GP_BinaryTreeNode.h */,
+				A4EB7F6A15D2B4BF007400CE /* GP_BinaryTreeNode.m */,
+				A4EB7F6C15D2B4D0007400CE /* GP_DLinkedList.h */,
+				A4EB7F6D15D2B4D0007400CE /* GP_DLinkedList.m */,
+				A4EB7F6F15D2B4ED007400CE /* GP_DListIterator.h */,
+				A4EB7F7015D2B4ED007400CE /* GP_DListIterator.m */,
+				A4EB7F7215D2B501007400CE /* GP_Graph.h */,
+				A4EB7F7315D2B501007400CE /* GP_Graph.m */,
+				A4EB7F7515D2B510007400CE /* GP_GraphArc.h */,
+				A4EB7F7615D2B511007400CE /* GP_GraphArc.m */,
+				A4EB7F7815D2B51F007400CE /* GP_GraphNode.h */,
+				A4EB7F7915D2B51F007400CE /* GP_GraphNode.m */,
+				A4EB7F7B15D2B531007400CE /* GP_HashMap.h */,
+				A4EB7F7C15D2B531007400CE /* GP_HashMap.m */,
+				A4EB7F7E15D2B540007400CE /* GP_HashTable.h */,
+				A4EB7F7F15D2B540007400CE /* GP_HashTable.m */,
+				A4EB7F8115D2B54C007400CE /* GP_Heap.h */,
+				A4EB7F8215D2B54C007400CE /* GP_Heap.m */,
+				A4EB7F8415D2B55E007400CE /* GP_LinkedList.h */,
+				A4EB7F8515D2B55E007400CE /* GP_LinkedList.m */,
+				A4EB7F8715D2B56C007400CE /* GP_LinkedListNode.h */,
+				A4EB7F8815D2B56C007400CE /* GP_LinkedListNode.m */,
+				A4EB7F8A15D2B581007400CE /* GP_LinkedQueue.h */,
+				A4EB7F8B15D2B581007400CE /* GP_LinkedQueue.m */,
+				A4EB7F8D15D2B598007400CE /* GP_BitVector.h */,
+				A4EB7F8E15D2B598007400CE /* GP_BitVector.m */,
+				A4EB7F9015D2B5AA007400CE /* GP_LinkedStack.h */,
+				A4EB7F9115D2B5AB007400CE /* GP_LinkedStack.m */,
+				A4EB7F9415D2B5BC007400CE /* GP_NullIterator.m */,
+				A4EB7F9615D2B5D9007400CE /* GP_Prioritizable.h */,
+				A4EB7F9715D2B5D9007400CE /* GP_Prioritizable.m */,
+				A4EB7F9915D2B5F6007400CE /* GP_PriorityQueue.h */,
+				A4EB7F9A15D2B5F6007400CE /* GP_PriorityQueue.m */,
+				A4EB7F9C15D2B609007400CE /* GP_SLinkedList.h */,
+				A4EB7F9D15D2B609007400CE /* GP_SLinkedList.m */,
+				A4EB7F9F15D2B620007400CE /* GP_SListIterator.h */,
+				A4EB7FA015D2B621007400CE /* GP_SListIterator.m */,
+				A4EB7FA215D2B639007400CE /* GP_SListNode.h */,
+				A4EB7FA315D2B639007400CE /* GP_SListNode.m */,
+				A4EB7FA515D2B649007400CE /* GP_Set.h */,
+				A4EB7FA615D2B649007400CE /* GP_Set.m */,
+				A4EB7FA815D2B658007400CE /* GP_TreeIterator.h */,
+				A4EB7FA915D2B659007400CE /* GP_TreeIterator.m */,
+				A4EB7FAB15D2B664007400CE /* GP_TreeNode.h */,
+				A4EB7FAC15D2B665007400CE /* GP_TreeNode.m */,
 			);
 			name = ds;
 			sourceTree = "<group>";
@@ -283,7 +436,35 @@
 				A4F0D01815D154B10034FF28 /* main.m in Sources */,
 				A4F0D01C15D154B10034FF28 /* GP_AppDelegate.m in Sources */,
 				A4F0D04215D154EE0034FF28 /* GP_Array2.m in Sources */,
-				A4F0D04315D154EE0034FF28 /* GP_Array2Iterator.m in Sources */,
+				A4EB7F5C15D2AE7A007400CE /* GP_Array2Iterator.m in Sources */,
+				A4EB7F5F15D2B459007400CE /* GP_Array3.m in Sources */,
+				A4EB7F6215D2B47D007400CE /* GP_ArrayedQueue.m in Sources */,
+				A4EB7F6515D2B496007400CE /* GP_ArrayedStack.m in Sources */,
+				A4EB7F6815D2B4AF007400CE /* GP_BinarySearchTree.m in Sources */,
+				A4EB7F6B15D2B4BF007400CE /* GP_BinaryTreeNode.m in Sources */,
+				A4EB7F6E15D2B4D0007400CE /* GP_DLinkedList.m in Sources */,
+				A4EB7F7115D2B4ED007400CE /* GP_DListIterator.m in Sources */,
+				A4EB7F7415D2B501007400CE /* GP_Graph.m in Sources */,
+				A4EB7F7715D2B511007400CE /* GP_GraphArc.m in Sources */,
+				A4EB7F7A15D2B520007400CE /* GP_GraphNode.m in Sources */,
+				A4EB7F7D15D2B531007400CE /* GP_HashMap.m in Sources */,
+				A4EB7F8015D2B541007400CE /* GP_HashTable.m in Sources */,
+				A4EB7F8315D2B54D007400CE /* GP_Heap.m in Sources */,
+				A4EB7F8615D2B55E007400CE /* GP_LinkedList.m in Sources */,
+				A4EB7F8915D2B56C007400CE /* GP_LinkedListNode.m in Sources */,
+				A4EB7F8C15D2B582007400CE /* GP_LinkedQueue.m in Sources */,
+				A4EB7F8F15D2B599007400CE /* GP_BitVector.m in Sources */,
+				A4EB7F9215D2B5AB007400CE /* GP_LinkedStack.m in Sources */,
+				A4EB7F9515D2B5BD007400CE /* GP_NullIterator.m in Sources */,
+				A4EB7F9815D2B5DA007400CE /* GP_Prioritizable.m in Sources */,
+				A4EB7F9B15D2B5F7007400CE /* GP_PriorityQueue.m in Sources */,
+				A4EB7F9E15D2B60A007400CE /* GP_SLinkedList.m in Sources */,
+				A4EB7FA115D2B622007400CE /* GP_SListIterator.m in Sources */,
+				A4EB7FA415D2B63A007400CE /* GP_SListNode.m in Sources */,
+				A4EB7FA715D2B64A007400CE /* GP_Set.m in Sources */,
+				A4EB7FAA15D2B659007400CE /* GP_TreeIterator.m in Sources */,
+				A4EB7FAD15D2B666007400CE /* GP_TreeNode.m in Sources */,
+				A4ED98C915D3DB1F00C450E8 /* GP_Array3Iterator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4F0D03115D154B10034FF28 /* TheRealBishopTests.m in Sources */,
+				A4ED98CC15D3E73200C450E8 /* GP_Array2Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

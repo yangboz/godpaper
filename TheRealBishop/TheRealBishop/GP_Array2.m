@@ -21,7 +21,7 @@
  * @param h The height (equals number of rows).
  */
 //Constructor
--(void)Array2:(int)w intValue:(int)h
+-(id)Array2:(int)w intValue:(int)h
 {
 //    if (w < 1 || h < 1)
 //        throw new Error("illegal size");
@@ -31,8 +31,11 @@
         @throw([NSException exceptionWithName:@"illegal siz" reason:@"Array2" userInfo:NULL]);
     }
     _w = w; _h = h;
-    _a = [NSMutableArray arrayWithObjects:(NSNumber *)_w,(NSNumber *)_h, nil];
-    [self fill:NULL];
+//    _a = [NSMutableArray arrayWithObjects:(NSNumber *)_w,(NSNumber *)_h, nil];
+    _a = [[NSMutableArray alloc] initWithCapacity:(_w * _h)];
+//    [self fill:NULL];
+    //
+    return self;
 }
 
 //@properties

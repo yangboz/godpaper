@@ -3,7 +3,7 @@
 //  TheRealBishopTests
 //
 //  Created by zhou Yangbo on 12-8-7.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012年 GODPAPER. All rights reserved.
 //
 
 #import "TheRealBishopTests.h"
@@ -24,9 +24,9 @@
     [super tearDown];
 }
 
-- (void)testExample
-{
-    STFail(@"Unit tests are not implemented yet in TheRealBishopTests");
-}
+//- (void)testExample
+//{
+//    STFail(@"Unit tests are not implemented yet in TheRealBishopTests");
+//}
 
 @end

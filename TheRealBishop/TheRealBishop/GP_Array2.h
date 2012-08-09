@@ -57,6 +57,6 @@
 
 @property(readonly) NSInteger celled;
 //Constructor
--(void)Array2:(int)w intValue:(int)h;
+-(id)Array2:(int)w intValue:(int)h;
 
 @end
