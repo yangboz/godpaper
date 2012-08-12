@@ -30,6 +30,12 @@
 //    _a = new Array((_w = w) * (_h = h) * (_d = d));
 //    
 //    fill(null);
+    if (w < 1 || h < 1 || d < 1) @throw([NSException exceptionWithName:@"illegal size" reason:@"Array3" userInfo:NULL]);
+    //
+    _a = [[NSMutableArray alloc] initWithCapacity:( (_w = w) * (_h = h) * (_d = d) )];
+    //
+//    [self fill:NULL];
+    return self;
 }
 
 /**
@@ -50,6 +56,7 @@
 -(void)setWidth:(NSInteger)width;
 {
 //    resize(w, _h, _d);
+    [self resize:width intValue:_h intValue:_d];
 }
 
 /**
@@ -70,6 +77,7 @@
 -(void)setHeight:(NSInteger)height
 {
 //    resize(_w, h, _d);
+    [self resize:_w intValue:height intValue:_d];
 }
 
 /**
@@ -90,6 +98,7 @@
 -(void)setDepth:(NSInteger)depth
 {
 //    resize(_w, _h, d);
+    [self resize:_w intValue:_h intValue:depth];
 }
 
 /**
@@ -103,6 +112,10 @@
 //    var k:int = size;
 //    for (var i:int = 0; i < k; i++)
 //        _a[i] = obj;
+    int k = [self size];
+    for (int i=0; i < k; i++) {
+        [_a insertObject:obj atIndex:i];
+    }
 }
 
 /**
@@ -120,6 +133,7 @@
 -(id)gett:(int)x intValue:(int)y intValue:(int)z
 {
 //    return _a[int((z * _w * _h) + (y * _w) + x)];
+    return [_a objectAtIndex:((z * _w * _h) + (y * _w) + x) ];
 }
 
 /**
@@ -136,6 +150,7 @@
 -(void)sett:(int)x intValue:(int)y intValue:(int)z idValue:(id)obj
 {
 //    _a[int((z * _w * _h) + (y * _w) + x)] = obj;
+    [_a insertObject:obj atIndex:((z * _w * _h) + (y * _w) + x)];
 }
 
 /**
@@ -186,6 +201,37 @@
 //    _w = w;
 //    _h = h;
 //    _d = d;
+    if (w < 1 || h < 1 || d < 1) @throw([NSException exceptionWithName:@"illegal size" reason:@"Array3->resize" userInfo:NULL]);
+    //
+    NSArray *tmp = [_a copy];
+    [_a removeAllObjects];
+    _a = [[NSMutableArray alloc] initWithCapacity:(w * h * d)];
+    if ( [_a count] ==0) return;
+    //
+    int xMin = w < _w ? w : _w;
+    int yMin = h < _h ? h : _h;
+    int zMin = d < _d ? d : _d;
+    //
+    int x,y,z;
+    int t1,t2,t3,t4;
+    //
+    for (z=0; z < zMin; z++) {
+        t1 = z * w * h;
+        t2 = z * _w * _h;
+        //
+        for (y=0; y < yMin; y++) {
+            t3 = y * w;
+            t4 = y * _w;
+            //
+            for (x=0; x < xMin; x++) {
+                [_a insertObject:[tmp objectAtIndex:(t2 + t4 + x)] atIndex:(t1 + t3 + x)];
+            }
+        }
+    }
+    //
+    _w = w;
+    _h = h;
+    _d = d;
 }
 
 /**
@@ -207,6 +253,14 @@
 //a.sett(x, y, _a[int(offset + (y * _w) + x)]);
 //
 //return a;
+    GP_Array2 *a = [[GP_Array2 alloc] Array2:_w intValue:_h];
+    int offset = z * _w * _h;
+    for (int x=0; x < _w; x++) {
+        for (int y=0; y < _h; y++) {
+            [a sett:x intValue:y idValue:[_a objectAtIndex:(offset + (y * _w) +x)]];
+        }
+    }
+    return a;
 }
 
 /**
@@ -222,6 +276,9 @@
 {
 //var offset:int =  z * _w * _h + y * _w;
 //return _a.slice(offset, offset + _w);
+    int offset = z * _w * _h + y * _w;
+    NSArray *sliced = [_a subarrayWithRange:NSMakeRange(offset, _w)];
+    return [[NSMutableArray alloc] initWithArray:sliced];
 }
 
 /**
@@ -239,6 +296,10 @@
 //    var offset:int =  z * _w * _h + y * _w;
 //    for (var i:int = 0; i < _w; i++)
 //        _a[int(offset + i)] = a[i];
+    int offset = z * _w * _h + y * _w;
+    for (int i=0; i < _w ; i++) {
+        [_a insertObject:[_a objectAtIndex:i] atIndex:(offset + i)];
+    }
 }
 
 /**
@@ -257,6 +318,12 @@
 //for (var i:int = 0; i < _h; i++)
 //t[i] = _a[int(offset + (i * _w + x))];
 //return t;
+    NSMutableArray *t = [[NSMutableArray alloc] init];
+    int offset = z * _w * _h;
+    for (int i=0; i < _h; i++) {
+        [t insertObject:[_a objectAtIndex:(offset + (i * _w + x))] atIndex:i];
+    }
+    return t;
 }
 
 /**
@@ -274,6 +341,10 @@
 //    var offset:int = z * _w * _h;
 //    for (var i:int = 0; i < _h; i++)
 //        _a[int(offset + (i * _w + x))] = a[i];
+    int offset = z * _w * _h;
+    for (int i=0; i < _h; i++) {
+        [_a insertObject:[_a objectAtIndex:i] atIndex:(offset + (i * _w + x))];
+    }
 }
 
 /**
@@ -294,6 +365,13 @@
 //for (var i:int = 0; i < _d; i++)
 //t[i] = _a[int(i * offset1 + offset2)];
 //return t;
+    NSMutableArray *t = [[NSMutableArray alloc] init];
+    int offset1 = _w * _h;
+    int offset2 = y * _w + x;
+    for (int i=0; i < _d ; i++) {
+        [t insertObject:[_a objectAtIndex:(i * offset1 + offset2)] atIndex:i];
+    }
+    return t;
 }
 
 /**
@@ -312,6 +390,11 @@
 //    var offset2:int = (y * _w + x);
 //    for (var i:int = 0; i < _d; i++)
 //        _a[int(i * offset1 + offset2)] = a[i];
+    int offset1 = _w * _h;
+    int offset2 = y * _w + x;
+    for (int i=0; i < _d; i++) {
+        [_a insertObject:[_a objectAtIndex:i] atIndex:(i * offset1 + offset2)];
+    }
 }
 #pragma mark Protocol_GP_collection.
 /**
@@ -327,6 +410,13 @@
 //        return true;
 //}
 //return false;
+    int k = [self size];
+    for (int i=0; i < k; i++) {
+        if ([[_a objectAtIndex:i] isEqual:obj]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 /**
@@ -336,6 +426,7 @@
 -(void)clear
 {
 //    _a = new Array(size);
+    _a = [[NSMutableArray alloc] initWithCapacity:[self size]];
 }
 
 /**
@@ -345,6 +436,7 @@
 -(GP_Array3Iterator *)getIterator
 {
 //return new Array3Iterator(this);
+    return [[GP_Array3Iterator alloc] Array3Iterator:self];
 }
 
 /**
@@ -362,7 +454,8 @@
 //public function isEmpty():Boolean
 -(BOOL)isEmpty
 {
-return false;
+//    return false;
+    return NO;
 }
 
 /**
@@ -376,6 +469,13 @@ return false;
 //var k:int = size;
 //if (a.length > k) a.length = k;
 //return a;
+    NSMutableArray *a = [_a copy];
+    //
+    int k = [self size];
+    if ([a count] > k) {
+        [a removeObjectsInRange:NSMakeRange(k, ([a count]-k))];
+    }
+    return a;
 }
 
 /**
@@ -387,7 +487,9 @@ return false;
 -(NSString *)toString
 {
 //return "[Array3, size=" + size + "]";
-    return @"";
+    NSString *result = [[[NSString alloc] initWithString:@"[Array3, size="] stringByAppendingFormat:@"%i",[self size]];
+    return result;
+
 }
 
 /**
@@ -400,6 +502,6 @@ return false;
 -(NSString *)dump:(int)z
 {
 //return getLayer(z).dump();
-    return @"";
+    return [[self getLayer:z] dump];
 }
 @end

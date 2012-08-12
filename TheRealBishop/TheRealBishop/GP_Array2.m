@@ -605,7 +605,7 @@
 {
 //    return "[Array2, width=" + width + ", height=" + height + "]";
     NSString *result = [[[NSString alloc] initWithString:@"[Array2, width="] stringByAppendingFormat:@"%i",[self width]];
-    result = [result stringByAppendingFormat:@"%@ %i %@",@"height= ",[self height],@"["];
+    result = [result stringByAppendingFormat:@"%@ %i %@",@"height= ",[self height],@"]"];
     return result;
 }
 /**
@@ -629,8 +629,20 @@
 //    }
 //    s += "\n}";
 //    return s;
-//TDODO:
-    return @"";
+    NSString *s = @"Array2\n{";
+    int offset;
+    id value;
+    for (int y=0; y < _h; y++) {
+        s = [NSString stringWithFormat:@"%@ %@",@"\n",@"\t"];
+        offset = y * _w;
+        for (int x=0; x < _w; x++) {
+            value = [_a objectAtIndex:(offset + x)];
+//            s = [NSString stringWithFormat:@"%@ %@ %@",@"]",(value isEmpty)?value : @"?",@"]"];//FIXME:obj-c trace object string;
+            s = [NSString stringWithFormat:@"%@ %@ %@",@"]",@"?",@"]"];
+        }
+    }
+    s = [NSString stringWithString:@"\n}"];
+    return s;
 }
 
 

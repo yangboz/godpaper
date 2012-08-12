@@ -11,14 +11,16 @@
 @implementation GP_Array3Iterator
 
 //public function Array3Iterator(a3:Array3)
--(void)Array3Iterator:(NSMutableArray *)a3;
+-(GP_Array3Iterator *)Array3Iterator:(GP_Array3 *)a3;
 {
 //    _values = a3.toArray();
 //    _length = _values.length;
 //    _cursor = 0;
     _values = [a3 copy];
-    _length = [a3 count];
+    _length = [a3 size];
     _cursor = 0;
+    //
+    return self;
 }
 #pragma mark Protocol_GP_Iterator
 //public function get data():*

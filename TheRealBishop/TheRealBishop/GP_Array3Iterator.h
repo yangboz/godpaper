@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "GP_Iterator.h"
+#import "GP_Array3.h"
+#import "GP_Array3Iterator.h"
 
 @interface GP_Array3Iterator : NSObject <GP_Iterator>
 {
@@ -19,5 +21,5 @@
         int _length,_cursor;
 }
 //Method
--(void)Array3Iterator:(NSMutableArray *)a3;
+-(GP_Array3Iterator *)Array3Iterator:(GP_Array3 *)a3;
 @end
