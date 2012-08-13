@@ -203,7 +203,7 @@
 //    _d = d;
     if (w < 1 || h < 1 || d < 1) @throw([NSException exceptionWithName:@"illegal size" reason:@"Array3->resize" userInfo:NULL]);
     //
-    NSArray *tmp = [_a copy];
+    NSMutableArray *tmp = [_a copy];
     [_a removeAllObjects];
     _a = [[NSMutableArray alloc] initWithCapacity:(w * h * d)];
     if ( [_a count] ==0) return;

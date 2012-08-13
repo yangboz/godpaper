@@ -73,6 +73,10 @@
 //    var cell:int = index / 31;
 //    var mask:int = 1 << index % 31;
 //    _bits[cell] = b ? (_bits[cell] | mask) : (_bits[cell] & (~mask));
+    int cell = index / 31;
+    int mask = 1 << index % 31;
+    NSNumber *num = [NSNumber numberWithBool:( b ? ((int)[_bits objectAtIndex:cell] | mask) : ((int)[_bits objectAtIndex:cell] & (~mask)) )];
+    [_bits insertObject:num atIndex:cell];
 }
 
 /**
@@ -102,6 +106,22 @@
 //        _bits = _bits.concat(new Array(size - _arrSize));
 //        _arrSize = _bits.length;
 //    }
+    if (size == _bitSize) return;
+    _bitSize = size;
+    //convert the bit-size to integer-size
+    if (size % 31 == 0) {
+        size /= 31;
+    }else {
+        size = (size / 31) + 1;
+    }
+    //
+    if (size < _arrSize) {
+        [_bits removeObjectsInRange:NSMakeRange(size, (_arrSize-size))];
+    }else {
+        NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:(size - _arrSize)];
+        [_bits addObjectsFromArray:arr];
+        _arrSize = [_bits count];
+    }
 }
 
 /**
@@ -113,6 +133,10 @@
 //    var k:int = _bits.length;
 //    for (var i:int = 0; i < k; i++)
 //        _bits[i] = 0;
+    int k = [_bits count];
+    for (int i=0; i < k; i++) {
+        [_bits insertObject:[NSNumber numberWithInt:0] atIndex:i];
+    }
 }
 
 /**
@@ -124,6 +148,10 @@
 //    var k:int = _bits.length;
 //    for (var i:int = 0; i < k; i++)
 //        _bits[i] = int.MAX_VALUE;
+    int k = [_bits count];
+    for (int i = 0; i < k;  i++) {
+        [_bits insertObject:[NSNumber numberWithInt:(int)(FLT_MAX)] atIndex:i];
+    }
 }
 
 /**
