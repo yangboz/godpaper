@@ -240,7 +240,7 @@ package com.godpaper.chinese_chess_jam.business
 			var chessbookLabelStr:String = REG_EXP_CHESS_BOOK.exec(this.source);
 //			LOG.debug("chessbook:{0}",chessbookLabelStr);
 			var chessbookLabels:Array = chessbookLabelStr.split("\n");
-			LOG.debug("chessbook:{0}",chessbookLabels.toString());
+//			LOG.debug("origin chessbook:{0}",chessbookLabels.toString());
 			//ChessBookVO assemble
 			//title
 			this.chessbookVO.title = chessbookLabels[0];
@@ -248,27 +248,85 @@ package com.godpaper.chinese_chess_jam.business
 			chessbookLabels.shift();
 			var bodyStr:String = StringUtil.trim(this.source);
 			//First off,group the chessbook label
-			var index:int = 1;
-			var chessbookLabelGroups:Array = new Array();
-			//
-			for(var i:int=0;i<bodyStr.length;i++)
+			var chessbookLabelGroups:Vector.<String> = new Vector.<String>();
+			//XXX:double check all of the PGN file's chess book index identify with this flags "1/2/3."
+			for(var i:int=1;i<bodyStr.length;i++)
 			{
-				var indexStr:String = String(index).concat(".");
+				var indexStr:String = String(i).concat(".");
 				var currIndex:int = bodyStr.indexOf(indexStr);
 				var lastIndex:int = bodyStr.lastIndexOf(indexStr);
-				var nextIndexStr:String = String(index+1).concat(".");
-				var nextIndex:int = bodyStr.indexOf(nextIndexStr,index);
-				chessbookLabelGroups[index-1] = bodyStr.substring(currIndex,nextIndex);
+				var nextIndexStr:String = String(i+1).concat(".");
+				var nextIndex:int = bodyStr.indexOf(nextIndexStr,i);
+				if(nextIndex==-1) break;//cut off the string stack process.
+				var chessBookStr:String = bodyStr.substring(currIndex,nextIndex);
+				chessBookStr = chessBookStr.split("\n").join("");
+				chessBookStr = chessBookStr.split("\r").join("");
+				chessBookStr = chessBookStr.split("\s").join("");
+				chessBookStr = chessBookStr.split("\t").join("");
+				chessBookStr = chessBookStr.split(" ").join("");
+				//Assemble the string stack.
+//				chessbookLabelGroups[i-1] = StringUtil.trim(chessBookStr);
+				chessbookLabelGroups[i-1] = chessBookStr;
 			}
-			LOG.debug(chessbookLabelGroups.toString());
-			//move list
-//			var moveList:Array = bodyStr.split(".")
-//			LOG.debug(moveList.toString());
+			LOG.debug("trimmed chessbook labels:{0}",chessbookLabelGroups.toString());
+			//move list assemble
 			//@example as follows:
 //			10. 车六进一 
 //			{ 去士，下着变二 }
 //			10...        士５退４ 
 //			{ 去车，变二 }
+			const curlyBracesLeft:String = "{";
+			const curlyBracesRight:String = "}";
+			var cbMoveVO:ChessBookMoveVO;
+			for(var j:int=0;j<chessbookLabelGroups.length;j++)
+			{
+				cbMoveVO = new ChessBookMoveVO();
+				//Option 01(no comments,one sentence)
+				if(chessbookLabelGroups[j].indexOf(curlyBracesLeft)==-1)//no comments
+				{
+					var dotIndex:int;
+					var strLen:int = chessbookLabelGroups[j].length;
+					//simplify to one sentence
+					if(chessbookLabelGroups[j].indexOf("...")==-1)
+					{
+						//move info
+						dotIndex = chessbookLabelGroups[j].lastIndexOf(".");
+						cbMoveVO.redMove = chessbookLabelGroups[j].substr(dotIndex+1,ChessBookMoveVO.LEN_OF_MOVE_CHAR);//one for red
+						cbMoveVO.blackMove = chessbookLabelGroups[j].substring(strLen-ChessBookMoveVO.LEN_OF_MOVE_CHAR,strLen);//the other for black
+					}
+				}
+				//Option 02(one or more comments)
+				else if(chessbookLabelGroups[j].indexOf(curlyBracesLeft)!=-1)
+				{
+					//comments parse
+					if(chessbookLabelGroups[j].indexOf(curlyBracesLeft)!=-1 && chessbookLabelGroups[j].indexOf(curlyBracesRight)!=-1)//a pair of curly braces.
+					{
+						//move info
+						dotIndex = chessbookLabelGroups[j].indexOf(".");
+						var dotLastIndex:int = chessbookLabelGroups[j].lastIndexOf(".");
+						cbMoveVO.redMove = chessbookLabelGroups[j].substr(dotIndex+1,ChessBookMoveVO.LEN_OF_MOVE_CHAR);//one for red
+						cbMoveVO.blackMove = chessbookLabelGroups[j].substr(dotLastIndex+1,ChessBookMoveVO.LEN_OF_MOVE_CHAR);//the other for black
+						//comments
+						var index_curlyBraceLeft01:int = chessbookLabelGroups[j].indexOf(curlyBracesLeft);
+						var index_curlyBraceLeft02:int = chessbookLabelGroups[j].lastIndexOf(curlyBracesLeft);
+						var index_curlyBraceRight01:int = chessbookLabelGroups[j].indexOf(curlyBracesRight);
+						var index_curlyBraceRight02:int = chessbookLabelGroups[j].lastIndexOf(curlyBracesRight);
+						if(index_curlyBraceLeft01!=-1 && index_curlyBraceRight01!=-1)
+						{
+							cbMoveVO.redComments = chessbookLabelGroups[j].substring(index_curlyBraceLeft01+1,index_curlyBraceRight01);
+						}
+						if(index_curlyBraceLeft02!=-1 && index_curlyBraceRight02!=-1)
+						{
+							cbMoveVO.blackComments = chessbookLabelGroups[j].substring(index_curlyBraceLeft02+1,index_curlyBraceRight02);
+						}
+					}
+				}else
+				{
+					//
+				}
+				//
+				this.chessbookVO.body.push(cbMoveVO);
+			}
 			//
 			LOG.debug("#0,chessbookMoveVO:{0}",this.chessbookVO.body[0].toString());
 		}
