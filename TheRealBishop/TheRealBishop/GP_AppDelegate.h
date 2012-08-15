@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Sparrow.h"
 @interface GP_AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+//@interface GP_AppDelegate : NSObject <UIApplicationDelegate>
+{
+    UIWindow *window;
+    SPView *sparrowView;
+}
+//@property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet SPView *sparrowView;
 
 @end

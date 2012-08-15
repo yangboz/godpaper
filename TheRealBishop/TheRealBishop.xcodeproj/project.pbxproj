@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A41103C915DBDB4800CCD0DE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A41103C815DBDB4700CCD0DE /* AudioToolbox.framework */; };
+		A41103CB15DBDB5600CCD0DE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A41103CA15DBDB5600CCD0DE /* AVFoundation.framework */; };
+		A41103CD15DBDB5F00CCD0DE /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A41103CC15DBDB5F00CCD0DE /* OpenAL.framework */; };
+		A41103CF15DBDB6500CCD0DE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A41103CE15DBDB6500CCD0DE /* OpenGLES.framework */; };
+		A41103D115DBDB6D00CCD0DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A41103D015DBDB6D00CCD0DE /* QuartzCore.framework */; };
+		A41103D315DBDB7900CCD0DE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A41103D215DBDB7900CCD0DE /* libz.dylib */; };
+		A41103D515DBDB9100CCD0DE /* libSparrow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A41103D415DBDB9100CCD0DE /* libSparrow.a */; };
+		A41103D815DBDBEA00CCD0DE /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = A41103D715DBDBEA00CCD0DE /* Game.m */; };
+		A41103DA15DBDF8100CCD0DE /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A41103D915DBDF8100CCD0DE /* MainWindow.xib */; };
 		A4EB7F5C15D2AE7A007400CE /* GP_Array2Iterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F5B15D2AE7A007400CE /* GP_Array2Iterator.m */; };
 		A4EB7F5F15D2B459007400CE /* GP_Array3.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F5E15D2B458007400CE /* GP_Array3.m */; };
 		A4EB7F6215D2B47D007400CE /* GP_ArrayedQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F6115D2B47D007400CE /* GP_ArrayedQueue.m */; };
@@ -62,6 +71,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A41103BB15DBD96B00CCD0DE /* Sparrow.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Sparrow.xcodeproj; sourceTree = SPARROW_SRC; };
+		A41103C815DBDB4700CCD0DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		A41103CA15DBDB5600CCD0DE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A41103CC15DBDB5F00CCD0DE /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		A41103CE15DBDB6500CCD0DE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		A41103D015DBDB6D00CCD0DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A41103D215DBDB7900CCD0DE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A41103D415DBDB9100CCD0DE /* libSparrow.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libSparrow.a; path = "../../../../Documents/GitHub/Sparrow13/sparrow/src/build/Release-iphoneos/libSparrow.a"; sourceTree = "<group>"; };
+		A41103D615DBDBEA00CCD0DE /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		A41103D715DBDBEA00CCD0DE /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		A41103D915DBDF8100CCD0DE /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		A4EB7F5A15D2AE7A007400CE /* GP_Array2Iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array2Iterator.h; sourceTree = "<group>"; };
 		A4EB7F5B15D2AE7A007400CE /* GP_Array2Iterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array2Iterator.m; sourceTree = "<group>"; };
 		A4EB7F5D15D2B458007400CE /* GP_Array3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array3.h; sourceTree = "<group>"; };
@@ -149,6 +169,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A41103D515DBDB9100CCD0DE /* libSparrow.a in Frameworks */,
+				A41103D315DBDB7900CCD0DE /* libz.dylib in Frameworks */,
+				A41103D115DBDB6D00CCD0DE /* QuartzCore.framework in Frameworks */,
+				A41103CF15DBDB6500CCD0DE /* OpenGLES.framework in Frameworks */,
+				A41103CD15DBDB5F00CCD0DE /* OpenAL.framework in Frameworks */,
+				A41103CB15DBDB5600CCD0DE /* AVFoundation.framework in Frameworks */,
+				A41103C915DBDB4800CCD0DE /* AudioToolbox.framework in Frameworks */,
 				A4F0D00C15D154B10034FF28 /* UIKit.framework in Frameworks */,
 				A4F0D00E15D154B10034FF28 /* Foundation.framework in Frameworks */,
 				A4F0D01015D154B10034FF28 /* CoreGraphics.framework in Frameworks */,
@@ -184,6 +211,9 @@
 		A4F0CFFC15D154B10034FF28 = {
 			isa = PBXGroup;
 			children = (
+				A41103D915DBDF8100CCD0DE /* MainWindow.xib */,
+				A41103D415DBDB9100CCD0DE /* libSparrow.a */,
+				A41103BB15DBD96B00CCD0DE /* Sparrow.xcodeproj */,
 				A4F0D01115D154B10034FF28 /* TheRealBishop */,
 				A4F0D02915D154B10034FF28 /* TheRealBishopTests */,
 				A4F0D00A15D154B10034FF28 /* Frameworks */,
@@ -203,6 +233,12 @@
 		A4F0D00A15D154B10034FF28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A41103D215DBDB7900CCD0DE /* libz.dylib */,
+				A41103D015DBDB6D00CCD0DE /* QuartzCore.framework */,
+				A41103CE15DBDB6500CCD0DE /* OpenGLES.framework */,
+				A41103CC15DBDB5F00CCD0DE /* OpenAL.framework */,
+				A41103CA15DBDB5600CCD0DE /* AVFoundation.framework */,
+				A41103C815DBDB4700CCD0DE /* AudioToolbox.framework */,
 				A4F0D00B15D154B10034FF28 /* UIKit.framework */,
 				A4F0D00D15D154B10034FF28 /* Foundation.framework */,
 				A4F0D00F15D154B10034FF28 /* CoreGraphics.framework */,
@@ -215,9 +251,11 @@
 			isa = PBXGroup;
 			children = (
 				A4F0D03A15D154D60034FF28 /* ds */,
+				A4F0D01215D154B10034FF28 /* Supporting Files */,
+				A41103D615DBDBEA00CCD0DE /* Game.h */,
 				A4F0D01A15D154B10034FF28 /* GP_AppDelegate.h */,
 				A4F0D01B15D154B10034FF28 /* GP_AppDelegate.m */,
-				A4F0D01215D154B10034FF28 /* Supporting Files */,
+				A41103D715DBDBEA00CCD0DE /* Game.m */,
 			);
 			path = TheRealBishop;
 			sourceTree = "<group>";
@@ -399,6 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4F0D01615D154B10034FF28 /* InfoPlist.strings in Resources */,
+				A41103DA15DBDF8100CCD0DE /* MainWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +504,7 @@
 				A4EB7FAA15D2B659007400CE /* GP_TreeIterator.m in Sources */,
 				A4EB7FAD15D2B666007400CE /* GP_TreeNode.m in Sources */,
 				A4ED98C915D3DB1F00C450E8 /* GP_Array3Iterator.m in Sources */,
+				A41103D815DBDBEA00CCD0DE /* Game.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,8 +567,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = " ${SPARROW_SRC}/**";
 			};
 			name = Debug;
 		};
@@ -546,8 +591,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = " ${SPARROW_SRC}/**";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -585,8 +635,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TheRealBishop/TheRealBishop-Prefix.pch";
 				INFOPLIST_FILE = "TheRealBishopTests/TheRealBishopTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				USER_HEADER_SEARCH_PATHS = "${SPARROW_SRC}/**";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -602,8 +657,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TheRealBishop/TheRealBishop-Prefix.pch";
 				INFOPLIST_FILE = "TheRealBishopTests/TheRealBishopTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				USER_HEADER_SEARCH_PATHS = "${SPARROW_SRC}/**";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
