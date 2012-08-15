@@ -22,6 +22,7 @@
 package com.godpaper.chinese_chess_jam.business
 {
 	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.chinese_chess_jam.model.PGN_Model;
 	import com.godpaper.chinese_chess_jam.vo.pgn.ChessBookMoveVO;
 	import com.godpaper.chinese_chess_jam.vo.pgn.ChessBookVO;
 	import com.godpaper.chinese_chess_jam.vo.pgn.PGN_VO;
@@ -72,6 +73,8 @@ package com.godpaper.chinese_chess_jam.business
 		//RegExpressions
 		private const REG_EXP_META_DATA:RegExp = /\[.*\]$/igms;//metadata
 		private const REG_EXP_CHESS_BOOK:RegExp = /\{.*\}$/igms;//chessbook
+		//Model
+		private var pgnModel:PGN_Model = PGN_Model.getInstance();
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -85,6 +88,8 @@ package com.godpaper.chinese_chess_jam.business
 		public function set source(value:String):void
 		{
 			_source = value;
+			//Update model
+			pgnModel.source = value;
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -112,6 +117,8 @@ package com.godpaper.chinese_chess_jam.business
 		{
 			this.chessbookParse();
 			this.metaDataParse();
+			var pgnModel:PGN_Model = PGN_Model.getInstance();
+			trace(pgnModel);
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -228,6 +235,8 @@ package com.godpaper.chinese_chess_jam.business
 				//...
 			}
 			//			LOG.debug(labelStr);
+			//Update model
+			pgnModel.pgnVO = this.pgnVO;
 		}
 		//
 		private function chessbookParse():void
@@ -329,6 +338,8 @@ package com.godpaper.chinese_chess_jam.business
 			}
 			//
 			LOG.debug("#0,chessbookMoveVO:{0}",this.chessbookVO.body[0].toString());
+			//Update model
+			pgnModel.chessbookVO = this.chessbookVO;
 		}
 	}
 	
