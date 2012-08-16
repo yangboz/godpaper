@@ -24,7 +24,9 @@
  */
 package org.josht.starling.foxhole.controls
 {
+	import flash.events.TimerEvent;
 	import flash.geom.Point;
+	import flash.utils.Timer;
 
 	import org.josht.starling.foxhole.core.FoxholeControl;
 	import org.josht.starling.foxhole.core.PropertyProxy;
@@ -33,6 +35,8 @@ package org.josht.starling.foxhole.controls
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
 
+	import starling.display.Quad;
+	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -44,12 +48,17 @@ package org.josht.starling.foxhole.controls
 	public class SimpleScrollBar extends FoxholeControl implements IScrollBar
 	{
 		/**
-		 * The scrollbar's thumb may be dragged horizontally (on the x-axis).
+		 * @private
+		 */
+		private static const HELPER_POINT:Point = new Point();
+
+		/**
+		 * The scroll bar's thumb may be dragged horizontally (on the x-axis).
 		 */
 		public static const DIRECTION_HORIZONTAL:String = "horizontal";
 
 		/**
-		 * The scrollbar's thumb may be dragged vertically (on the y-axis).
+		 * The scroll bar's thumb may be dragged vertically (on the y-axis).
 		 */
 		public static const DIRECTION_VERTICAL:String = "vertical";
 
@@ -58,6 +67,7 @@ package org.josht.starling.foxhole.controls
 		 */
 		public function SimpleScrollBar()
 		{
+			this.addEventListener(Event.REMOVED_FROM_STAGE, removedFromStageHandler);
 		}
 
 		/**
@@ -79,6 +89,11 @@ package org.josht.starling.foxhole.controls
 		 * @private
 		 */
 		protected var thumb:Button;
+
+		/**
+		 * @private
+		 */
+		protected var track:Quad;
 
 		/**
 		 * @private
@@ -133,10 +148,6 @@ package org.josht.starling.foxhole.controls
 		 */
 		public function set value(newValue:Number):void
 		{
-			if(this._step != 0)
-			{
-				newValue = roundToNearest(newValue, this._step);
-			}
 			if(this.clampToRange)
 			{
 				newValue = clamp(newValue, this._minimum, this._maximum);
@@ -223,24 +234,20 @@ package org.josht.starling.foxhole.controls
 		 */
 		public function set step(value:Number):void
 		{
-			if(this._step == value)
-			{
-				return;
-			}
 			this._step = value;
 		}
 
 		/**
 		 * @private
 		 */
-		private var _pageStep:Number = 0;
+		private var _page:Number = 0;
 
 		/**
 		 * @inheritDoc
 		 */
 		public function get page():Number
 		{
-			return this._pageStep;
+			return this._page;
 		}
 
 		/**
@@ -248,11 +255,11 @@ package org.josht.starling.foxhole.controls
 		 */
 		public function set page(value:Number):void
 		{
-			if(this._pageStep == value)
+			if(this._page == value)
 			{
 				return;
 			}
-			this._pageStep = value;
+			this._page = value;
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}
 
@@ -363,6 +370,43 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
+		protected var currentRepeatAction:Function;
+
+		/**
+		 * @private
+		 */
+		protected var _repeatDelay:Number = 0.05;
+
+		/**
+		 * @private
+		 */
+		protected var _repeatTimer:Timer;
+
+		/**
+		 * The time, in seconds, before actions are repeated. The first repeat
+		 * happens five times longer than the others.
+		 */
+		public function get repeatDelay():Number
+		{
+			return this._repeatDelay;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set repeatDelay(value:Number):void
+		{
+			if(this._repeatDelay == value)
+			{
+				return;
+			}
+			this._repeatDelay = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
 		protected var isDragging:Boolean = false;
 
 		/**
@@ -413,13 +457,13 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
-		private var _thumbProperties:PropertyProxy = new PropertyProxy(thumbProperties_onChange);
+		private var _thumbProperties:PropertyProxy;
 
 		/**
 		 * A set of key/value pairs to be passed down to the scroll bar's thumb
 		 * instance. The thumb is a Foxhole Button control.
 		 *
-		 * <p>If the sub-component has its own sub-components, their properties
+		 * <p>If the subcomponent has its own subcomponents, their properties
 		 * can be set too, using attribute <code>&#64;</code> notation. For example,
 		 * to set the skin on the thumb of a <code>SimpleScrollBar</code>
 		 * which is in a <code>Scroller</code> which is in a <code>List</code>,
@@ -428,6 +472,10 @@ package org.josht.starling.foxhole.controls
 		 */
 		public function get thumbProperties():Object
 		{
+			if(!this._thumbProperties)
+			{
+				this._thumbProperties = new PropertyProxy(thumbProperties_onChange);
+			}
 			return this._thumbProperties;
 		}
 
@@ -470,6 +518,7 @@ package org.josht.starling.foxhole.controls
 		private var _touchStartY:Number = NaN;
 		private var _thumbStartX:Number = NaN;
 		private var _thumbStartY:Number = NaN;
+		private var _touchValue:Number;
 
 		/**
 		 * @inheritDoc
@@ -487,6 +536,14 @@ package org.josht.starling.foxhole.controls
 		 */
 		override protected function initialize():void
 		{
+			if(!this.track)
+			{
+				this.track = new Quad(10, 10, 0xff00ff);
+				this.track.alpha = 0;
+				this.track.addEventListener(TouchEvent.TOUCH, track_touchHandler);
+				this.addChild(this.track);
+			}
+
 			if(!this.thumb)
 			{
 				this.thumb = new Button();
@@ -515,7 +572,7 @@ package org.josht.starling.foxhole.controls
 
 			if(stateInvalid)
 			{
-				this.thumb.isEnabled = isEnabled;
+				this.thumb.isEnabled = this._isEnabled;
 			}
 
 			sizeInvalid = this.autoSizeIfNeeded() || sizeInvalid;
@@ -546,13 +603,8 @@ package org.josht.starling.foxhole.controls
 			}
 
 			const range:Number = this._maximum - this._minimum;
-			if(range <= 0)
-			{
-				return false;
-			}
-
 			//we're just going to make something up in this case
-			const adjustedPageStep:Number = this._pageStep == 0 ? range / 10 : this._pageStep;
+			const adjustedPageStep:Number = this._page == 0 ? range / 10 : this._page;
 			var newWidth:Number = this.explicitWidth;
 			var newHeight:Number = this.explicitHeight;
 			if(needsWidth)
@@ -563,7 +615,14 @@ package org.josht.starling.foxhole.controls
 				}
 				else //horizontal
 				{
-					newWidth = Math.max(this.thumbOriginalWidth, this.thumbOriginalWidth * range / adjustedPageStep);
+					if(range > 0)
+					{
+						newWidth = 0;
+					}
+					else
+					{
+						newWidth = Math.max(this.thumbOriginalWidth, this.thumbOriginalWidth * range / adjustedPageStep);
+					}
 				}
 				newWidth += this._paddingLeft + this._paddingRight;
 			}
@@ -571,7 +630,14 @@ package org.josht.starling.foxhole.controls
 			{
 				if(this._direction == DIRECTION_VERTICAL)
 				{
-					newHeight = Math.max(this.thumbOriginalHeight, this.thumbOriginalHeight * range / adjustedPageStep);
+					if(range > 0)
+					{
+						newHeight = 0;
+					}
+					else
+					{
+						newHeight = Math.max(this.thumbOriginalHeight, this.thumbOriginalHeight * range / adjustedPageStep);
+					}
 				}
 				else //horizontal
 				{
@@ -602,6 +668,9 @@ package org.josht.starling.foxhole.controls
 		 */
 		protected function layout():void
 		{
+			this.track.width = this.actualWidth;
+			this.track.height = this.actualHeight;
+
 			const range:Number = this._maximum - this._minimum;
 			this.thumb.visible = range > 0;
 			if(!this.thumb.visible)
@@ -614,7 +683,7 @@ package org.josht.starling.foxhole.controls
 
 			const contentWidth:Number = this.actualWidth - this._paddingLeft - this._paddingRight;
 			const contentHeight:Number = this.actualHeight - this._paddingTop - this._paddingBottom;
-			const adjustedPageStep:Number = Math.min(range, this._pageStep == 0 ? range : this._pageStep);
+			const adjustedPageStep:Number = Math.min(range, this._page == 0 ? range : this._page);
 			var adjustedRange:Number = range;
 			if(this._value < this._minimum)
 			{
@@ -624,18 +693,19 @@ package org.josht.starling.foxhole.controls
 			{
 				adjustedRange += (this._value - this._maximum);
 			}
-
 			if(this._direction == DIRECTION_VERTICAL)
 			{
+				const thumbMinHeight:Number = this.thumb.minHeight > 0 ? this.thumb.minHeight : this.thumbOriginalHeight;
 				this.thumb.width = this.thumbOriginalWidth;
-				this.thumb.height = Math.max(this.thumbOriginalHeight, contentHeight * adjustedPageStep / (adjustedRange + adjustedPageStep));
+				this.thumb.height = Math.max(thumbMinHeight, contentHeight * adjustedPageStep / (adjustedRange + adjustedPageStep));
 				const trackScrollableHeight:Number = contentHeight - this.thumb.height;
 				this.thumb.x = (this.actualWidth - this.thumb.width) / 2;
 				this.thumb.y = this._paddingTop + Math.max(0, Math.min(trackScrollableHeight, trackScrollableHeight * (this._value - this._minimum) / range));
 			}
 			else //horizontal
 			{
-				this.thumb.width = Math.max(this.thumbOriginalWidth, contentWidth * adjustedPageStep / (adjustedRange + adjustedPageStep));
+				const thumbMinWidth:Number = this.thumb.minWidth > 0 ? this.thumb.minWidth : this.thumbOriginalWidth;
+				this.thumb.width = Math.max(thumbMinWidth, contentWidth * adjustedPageStep / (adjustedRange + adjustedPageStep));
 				this.thumb.height = this.thumbOriginalHeight;
 				const trackScrollableWidth:Number = contentWidth - this.thumb.width;
 				this.thumb.x = this._paddingLeft + Math.max(0, Math.min(trackScrollableWidth, trackScrollableWidth * (this._value - this._minimum) / range));
@@ -646,7 +716,7 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
-		protected function dragTo(location:Point):void
+		protected function locationToValue(location:Point):Number
 		{
 			var percentage:Number;
 			if(this._direction == DIRECTION_VERTICAL)
@@ -664,7 +734,54 @@ package org.josht.starling.foxhole.controls
 				percentage = xPosition / trackScrollableWidth;
 			}
 
-			this.value = this._minimum + percentage * (this._maximum - this._minimum);
+			return this._minimum + percentage * (this._maximum - this._minimum);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function adjustPage():void
+		{
+			if(this._touchValue < this._value)
+			{
+				var newValue:Number = Math.max(this._touchValue, this._value - this._page);
+				if(this._step != 0)
+				{
+					newValue = roundToNearest(newValue, this._step);
+				}
+				this.value = newValue;
+			}
+			else if(this._touchValue > this._value)
+			{
+				newValue = Math.min(this._touchValue, this._value + this._page);
+				if(this._step != 0)
+				{
+					newValue = roundToNearest(newValue, this._step);
+				}
+				this.value = newValue;
+			}
+		}
+
+		/**
+		 * @private
+		 */
+		protected function startRepeatTimer(action:Function):void
+		{
+			this.currentRepeatAction = action;
+			if(this._repeatDelay > 0)
+			{
+				if(!this._repeatTimer)
+				{
+					this._repeatTimer = new Timer(this._repeatDelay * 1000);
+					this._repeatTimer.addEventListener(TimerEvent.TIMER, repeatTimer_timerHandler);
+				}
+				else
+				{
+					this._repeatTimer.reset();
+					this._repeatTimer.delay = this._repeatDelay * 1000;
+				}
+				this._repeatTimer.start();
+			}
 		}
 
 		/**
@@ -678,43 +795,154 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
+		protected function removedFromStageHandler(event:Event):void
+		{
+			this._touchPointID = -1;
+			if(this._repeatTimer)
+			{
+				this._repeatTimer.stop();
+			}
+		}
+
+		/**
+		 * @private
+		 */
+		protected function track_touchHandler(event:TouchEvent):void
+		{
+			if(!this._isEnabled)
+			{
+				return;
+			}
+			const touches:Vector.<Touch> = event.getTouches(this.track);
+			if(touches.length == 0)
+			{
+				return;
+			}
+			if(this._touchPointID >= 0)
+			{
+				var touch:Touch;
+				for each(var currentTouch:Touch in touches)
+				{
+					if(currentTouch.id == this._touchPointID)
+					{
+						touch = currentTouch;
+						break;
+					}
+				}
+				if(!touch)
+				{
+					return;
+				}
+				if(touch.phase == TouchPhase.ENDED)
+				{
+					this._touchPointID = -1;
+					this._repeatTimer.stop();
+					return;
+				}
+			}
+			else
+			{
+				for each(touch in touches)
+				{
+					if(touch.phase == TouchPhase.BEGAN)
+					{
+						this._touchPointID = touch.id;
+						touch.getLocation(this, HELPER_POINT);
+						this._touchStartX = HELPER_POINT.x;
+						this._touchStartY = HELPER_POINT.y;
+						this._thumbStartX = HELPER_POINT.x;
+						this._thumbStartY = HELPER_POINT.y;
+						this._touchValue = this.locationToValue(HELPER_POINT);
+						this.adjustPage();
+						this.startRepeatTimer(this.adjustPage);
+						return;
+					}
+				}
+			}
+		}
+
+		/**
+		 * @private
+		 */
 		protected function thumb_touchHandler(event:TouchEvent):void
 		{
 			if(!this._isEnabled)
 			{
 				return;
 			}
-			const touch:Touch = event.getTouch(this.thumb);
-			if(!touch || (this._touchPointID >= 0 && this._touchPointID != touch.id))
+			const touches:Vector.<Touch> = event.getTouches(this.thumb);
+			if(touches.length == 0)
 			{
 				return;
 			}
-			event.stopPropagation();
-			const location:Point = touch.getLocation(this);
-			if(touch.phase == TouchPhase.BEGAN)
+			if(this._touchPointID >= 0)
 			{
-				this._touchPointID = touch.id;
-				this._thumbStartX = this.thumb.x;
-				this._thumbStartY = this.thumb.y;
-				this._touchStartX = location.x;
-				this._touchStartY = location.y;
-				this.isDragging = true;
-				this._onDragStart.dispatch(this);
-			}
-			else if(touch.phase == TouchPhase.MOVED)
-			{
-				this.dragTo(location);
-			}
-			else if(touch.phase == TouchPhase.ENDED)
-			{
-				this._touchPointID = -1;
-				this.isDragging = false;
-				if(!this.liveDragging)
+				var touch:Touch;
+				for each(var currentTouch:Touch in touches)
 				{
-					this._onChange.dispatch(this);
+					if(currentTouch.id == this._touchPointID)
+					{
+						touch = currentTouch;
+						break;
+					}
 				}
-				this._onDragEnd.dispatch(this);
+				if(!touch)
+				{
+					return;
+				}
+
+				if(touch.phase == TouchPhase.MOVED)
+				{
+					touch.getLocation(this, HELPER_POINT);
+					var newValue:Number = this.locationToValue(HELPER_POINT);
+					if(this._step != 0)
+					{
+						newValue = roundToNearest(newValue, this._step);
+					}
+					this.value = newValue;
+				}
+				else if(touch.phase == TouchPhase.ENDED)
+				{
+					this._touchPointID = -1;
+					this.isDragging = false;
+					if(!this.liveDragging)
+					{
+						this._onChange.dispatch(this);
+					}
+					this._onDragEnd.dispatch(this);
+					return;
+				}
 			}
+			else
+			{
+				for each(touch in touches)
+				{
+					if(touch.phase == TouchPhase.BEGAN)
+					{
+						touch.getLocation(this, HELPER_POINT);
+						this._touchPointID = touch.id;
+						this._thumbStartX = this.thumb.x;
+						this._thumbStartY = this.thumb.y;
+						this._touchStartX = HELPER_POINT.x;
+						this._touchStartY = HELPER_POINT.y;
+						this.isDragging = true;
+						this._onDragStart.dispatch(this);
+						return;
+					}
+				}
+			}
+		}
+
+		/**
+		 * @private
+		 */
+		protected function repeatTimer_timerHandler(event:TimerEvent):void
+		{
+			if(this._repeatTimer.currentCount < 5)
+			{
+				return;
+			}
+			this.currentRepeatAction();
 		}
 	}
 }

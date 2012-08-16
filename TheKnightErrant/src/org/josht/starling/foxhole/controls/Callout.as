@@ -28,21 +28,17 @@ package org.josht.starling.foxhole.controls
 	import flash.geom.Rectangle;
 	import flash.ui.Keyboard;
 
-	import org.josht.starling.foxhole.core.FoxholeControl;
-
+	import org.josht.starling.display.ScrollRectManager;
 	import org.josht.starling.foxhole.core.FoxholeControl;
 	import org.josht.starling.foxhole.core.PopUpManager;
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
 
 	import starling.core.Starling;
-
 	import starling.display.DisplayObject;
 	import starling.display.Quad;
 	import starling.events.EnterFrameEvent;
 	import starling.events.Event;
-	import starling.events.ResizeEvent;
-	import starling.events.Touch;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -149,13 +145,13 @@ package org.josht.starling.foxhole.controls
 			callout._isPopUp = true;
 			PopUpManager.addPopUp(callout, true, false, calloutOverlayFactory);
 
-			var globalBounds:Rectangle = origin.getBounds(Starling.current.stage);
+			var globalBounds:Rectangle = ScrollRectManager.getBounds(origin, Starling.current.stage);
 			positionCalloutByDirection(callout, globalBounds, direction);
 			callouts.push(callout);
 
 			function enterFrameHandler(event:EnterFrameEvent):void
 			{
-				origin.getBounds(Starling.current.stage, helperRect);
+				ScrollRectManager.getBounds(origin, Starling.current.stage, helperRect);
 				if(globalBounds.equals(helperRect))
 				{
 					return;
@@ -1162,6 +1158,7 @@ package org.josht.starling.foxhole.controls
 		 */
 		protected function removedFromStageHandler(event:Event):void
 		{
+			this._touchPointID = -1;
 			this.stage.removeEventListener(TouchEvent.TOUCH, stage_touchHandler);
 			Starling.current.nativeStage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
 		}
@@ -1175,22 +1172,43 @@ package org.josht.starling.foxhole.controls
 			{
 				return;
 			}
-			const touch:Touch = event.getTouch(this.stage);
-			if(!touch || (this._touchPointID >= 0 && this._touchPointID != touch.id))
+
+			const touches:Vector.<Touch> = event.getTouches(this.stage);
+			if(touches.length == 0)
 			{
 				return;
 			}
-
-			if(touch.phase == TouchPhase.BEGAN)
+			if(this._touchPointID >= 0)
 			{
-				this._touchPointID = touch.id;
-			}
-			else if(this._touchPointID >= 0)
-			{
+				var touch:Touch;
+				for each(var currentTouch:Touch in touches)
+				{
+					if(currentTouch.id == this._touchPointID)
+					{
+						touch = currentTouch;
+						break;
+					}
+				}
+				if(!touch)
+				{
+					return;
+				}
 				if(touch.phase == TouchPhase.ENDED)
 				{
 					this._touchPointID = -1;
 					this.close();
+					return;
+				}
+			}
+			else
+			{
+				for each(touch in touches)
+				{
+					if(touch.phase == TouchPhase.BEGAN)
+					{
+						this._touchPointID = touch.id;
+						return;
+					}
 				}
 			}
 		}

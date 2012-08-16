@@ -27,14 +27,14 @@ package org.josht.starling.display
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	
+
 	import starling.core.RenderSupport;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.textures.Texture;
-	import starling.utils.transformCoords;
-	
+	import starling.utils.MatrixUtil;
+
 	/**
 	 * Adds capabilities to Starling's <code>Image</code> class, including
 	 * <code>scrollRect</code> and pixel snapping.
@@ -176,7 +176,7 @@ package org.josht.starling.display
 				else
 				{
 					this.getTransformationMatrix(targetSpace, helperMatrix);
-					transformCoords(helperMatrix, 0, 0, helperPoint);
+					MatrixUtil.transformCoords(helperMatrix, 0, 0, helperPoint);
 					resultRect.x = helperPoint.x;
 					resultRect.y = helperPoint.y;
 					resultRect.width = helperMatrix.a * this._scrollRect.width + helperMatrix.c * this._scrollRect.height;

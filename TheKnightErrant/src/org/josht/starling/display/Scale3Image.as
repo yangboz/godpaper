@@ -24,16 +24,19 @@
  */
 package org.josht.starling.display
 {
+	import flash.errors.IllegalOperationError;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 
+	import org.josht.starling.textures.Scale3Textures;
+
 	import starling.core.RenderSupport;
 	import starling.display.DisplayObject;
 	import starling.display.QuadBatch;
-	import starling.textures.Texture;
+	import starling.events.Event;
 	import starling.textures.TextureSmoothing;
-	import starling.utils.transformCoords;
+	import starling.utils.MatrixUtil;
 
 	/**
 	 * Scales an image like a "pill" shape with three regions, either
@@ -48,36 +51,63 @@ package org.josht.starling.display
 		private static var helperImage:starling.display.Image;
 
 		/**
-		 * If the direction is horizontal, the layout will start on the left and continue to the right.
-		 */
-		public static const DIRECTION_HORIZONTAL:String = "horizontal";
-
-		/**
-		 * If the direction is vertical, the layout will start on the top and continue to the bottom.
-		 */
-		public static const DIRECTION_VERTICAL:String = "vertical";
-
-		/**
 		 * Constructor.
 		 */
-		public function Scale3Image(texture:Texture, firstRegionSize:Number, secondRegionSize:Number, direction:String = DIRECTION_HORIZONTAL, textureScale:Number = 1)
+		public function Scale3Image(textures:Scale3Textures, textureScale:Number = 1)
 		{
 			super();
-			this._hitArea = new Rectangle();
-			this._firstRegionSize = firstRegionSize;
-			this._secondRegionSize = secondRegionSize;
-			this._direction = direction;
+			this._textures = textures;
 			this._textureScale = textureScale;
-			this.createImages(texture);
-			this.initializeWidthAndHeight();
+			this._hitArea = new Rectangle();
+			this.readjustSize();
 
 			this._batch = new QuadBatch();
 			this._batch.touchable = false;
 			this.addChild(this._batch);
+
+			this.addEventListener(Event.FLATTEN, flattenHandler);
 		}
 
+		/**
+		 * @private
+		 */
 		private var _propertiesChanged:Boolean = true;
+
+		/**
+		 * @private
+		 */
 		private var _layoutChanged:Boolean = true;
+
+		/**
+		 * @private
+		 */
+		private var _textures:Scale3Textures;
+
+		/**
+		 * The textures displayed by this image.
+		 */
+		public function get textures():Scale3Textures
+		{
+			return this._textures;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set textures(value:Scale3Textures):void
+		{
+			if(!value)
+			{
+				throw new IllegalOperationError("Scale3Image textures cannot be null.")
+			}
+			if(this._textures == value)
+			{
+				return;
+			}
+			this._textures = value;
+			this._layoutChanged = true;
+			this._propertiesChanged = true;
+		}
 
 		/**
 		 * @private
@@ -212,16 +242,7 @@ package org.josht.starling.display
 		}
 
 		private var _hitArea:Rectangle;
-		private var _firstRegionSize:Number;
-		private var _secondRegionSize:Number;
-		private var _thirdRegionSize:Number;
-		private var _oppositeEdgeSize:Number;
-		private var _direction:String;
-
 		private var _batch:QuadBatch;
-		private var _first:Texture;
-		private var _second:Texture;
-		private var _third:Texture;
 
 		/**
 		 * @private
@@ -252,25 +273,25 @@ package org.josht.starling.display
 			{
 				this.getTransformationMatrix(targetSpace, helperMatrix);
 
-				transformCoords(helperMatrix, this._hitArea.x, this._hitArea.y, helperPoint);
+				MatrixUtil.transformCoords(helperMatrix, this._hitArea.x, this._hitArea.y, helperPoint);
 				minX = minX < helperPoint.x ? minX : helperPoint.x;
 				maxX = maxX > helperPoint.x ? maxX : helperPoint.x;
 				minY = minY < helperPoint.y ? minY : helperPoint.y;
 				maxY = maxY > helperPoint.y ? maxY : helperPoint.y;
 
-				transformCoords(helperMatrix, this._hitArea.x, this._hitArea.y + this._hitArea.height, helperPoint);
+				MatrixUtil.transformCoords(helperMatrix, this._hitArea.x, this._hitArea.y + this._hitArea.height, helperPoint);
 				minX = minX < helperPoint.x ? minX : helperPoint.x;
 				maxX = maxX > helperPoint.x ? maxX : helperPoint.x;
 				minY = minY < helperPoint.y ? minY : helperPoint.y;
 				maxY = maxY > helperPoint.y ? maxY : helperPoint.y;
 
-				transformCoords(helperMatrix, this._hitArea.x + this._hitArea.width, this._hitArea.y, helperPoint);
+				MatrixUtil.transformCoords(helperMatrix, this._hitArea.x + this._hitArea.width, this._hitArea.y, helperPoint);
 				minX = minX < helperPoint.x ? minX : helperPoint.x;
 				maxX = maxX > helperPoint.x ? maxX : helperPoint.x;
 				minY = minY < helperPoint.y ? minY : helperPoint.y;
 				maxY = maxY > helperPoint.y ? maxY : helperPoint.y;
 
-				transformCoords(helperMatrix, this._hitArea.x + this._hitArea.width, this._hitArea.y + this._hitArea.height, helperPoint);
+				MatrixUtil.transformCoords(helperMatrix, this._hitArea.x + this._hitArea.width, this._hitArea.y + this._hitArea.height, helperPoint);
 				minX = minX < helperPoint.x ? minX : helperPoint.x;
 				maxX = maxX > helperPoint.x ? maxX : helperPoint.x;
 				minY = minY < helperPoint.y ? minY : helperPoint.y;
@@ -300,70 +321,37 @@ package org.josht.starling.display
 		/**
 		 * @private
 		 */
-		private function createImages(texture:Texture):void
+		override public function flatten():void
 		{
-			const textureFrame:Rectangle = texture.frame;
-			if(this._direction == DIRECTION_VERTICAL)
-			{
-				this._thirdRegionSize = textureFrame.height - this._firstRegionSize - this._secondRegionSize;
-				this._oppositeEdgeSize = textureFrame.width;
-			}
-			else
-			{
-				this._thirdRegionSize = textureFrame.width - this._firstRegionSize - this._secondRegionSize;
-				this._oppositeEdgeSize = textureFrame.height;
-			}
-
-			if(this._direction == DIRECTION_VERTICAL)
-			{
-				const regionTopHeight:Number = this._firstRegionSize + textureFrame.y;
-				const regionBottomHeight:Number = this._thirdRegionSize - (textureFrame.height - texture.height) - textureFrame.y;
-
-				var hasTopFrame:Boolean = regionTopHeight != this._firstRegionSize;
-				var hasRightFrame:Boolean = (textureFrame.width - textureFrame.x) != texture.width;
-				var hasBottomFrame:Boolean = regionBottomHeight != this._thirdRegionSize;
-				var hasLeftFrame:Boolean = textureFrame.x != 0;
-
-				var firstRegion:Rectangle = new Rectangle(0, 0, texture.width, regionTopHeight);
-				var firstFrame:Rectangle = (hasLeftFrame || hasRightFrame || hasTopFrame) ? new Rectangle(textureFrame.x, textureFrame.y, this._oppositeEdgeSize, this._firstRegionSize) : null;
-				this._first = Texture.fromTexture(texture, firstRegion, firstFrame);
-
-				var secondRegion:Rectangle = new Rectangle(0, regionTopHeight, texture.width, this._secondRegionSize);
-				var secondFrame:Rectangle = (hasLeftFrame || hasRightFrame) ? new Rectangle(textureFrame.x, 0, this._oppositeEdgeSize, this._secondRegionSize) : null;
-				this._second = Texture.fromTexture(texture, secondRegion, secondFrame);
-
-				var thirdRegion:Rectangle = new Rectangle(0, regionTopHeight + this._secondRegionSize, texture.width, regionBottomHeight);
-				var thirdFrame:Rectangle = (hasLeftFrame || hasRightFrame || hasBottomFrame) ? new Rectangle(textureFrame.x, 0, this._oppositeEdgeSize, this._thirdRegionSize) : null;
-				this._third = Texture.fromTexture(texture, thirdRegion, thirdFrame);
-			}
-			else //horizontal
-			{
-				const regionLeftWidth:Number = this._firstRegionSize + textureFrame.x;
-				const regionRightWidth:Number = this._thirdRegionSize - (textureFrame.width - texture.width) - textureFrame.x;
-
-				hasTopFrame = textureFrame.y != 0;
-				hasRightFrame = regionRightWidth != this._thirdRegionSize;
-				hasBottomFrame = (textureFrame.height - textureFrame.y) != texture.height;
-				hasLeftFrame = regionLeftWidth != this._firstRegionSize;
-
-				firstRegion = new Rectangle(0, 0, regionLeftWidth, texture.height);
-				firstFrame = (hasLeftFrame || hasTopFrame || hasBottomFrame) ? new Rectangle(textureFrame.x, textureFrame.y, this._firstRegionSize, this._oppositeEdgeSize) : null;
-				this._first = Texture.fromTexture(texture, firstRegion, firstFrame);
-
-				secondRegion = new Rectangle(regionLeftWidth, 0, this._secondRegionSize, texture.height);
-				secondFrame = (hasTopFrame || hasBottomFrame) ? new Rectangle(0, textureFrame.y, this._secondRegionSize, this._oppositeEdgeSize) : null;
-				this._second = Texture.fromTexture(texture, secondRegion, secondFrame);
-
-				thirdRegion = new Rectangle(regionLeftWidth + this._secondRegionSize, 0, regionRightWidth, texture.height);
-				thirdFrame = (hasTopFrame || hasBottomFrame || hasRightFrame) ? new Rectangle(0, textureFrame.y, this._thirdRegionSize, this._oppositeEdgeSize) : null;
-				this._third = Texture.fromTexture(texture, thirdRegion, thirdFrame);
-			}
+			this.validate();
+			super.flatten();
 		}
 
 		/**
 		 * @private
 		 */
-		override public function render(support:RenderSupport, alpha:Number):void
+		override public function render(support:RenderSupport, parentAlpha:Number):void
+		{
+			this.validate();
+			super.render(support, parentAlpha);
+		}
+
+		/**
+		 * Readjusts the dimensions of the image according to its current
+		 * textures. Call this method to synchronize image and texture size
+		 * after assigning textures with a different size.
+		 */
+		public function readjustSize():void
+		{
+			const frame:Rectangle = this._textures.texture.frame;
+			this.width = frame.width * this._textureScale;
+			this.height = frame.height * this._textureScale;
+		}
+
+		/**
+		 * @private
+		 */
+		protected function validate():void
 		{
 			if(this._propertiesChanged || this._layoutChanged)
 			{
@@ -371,22 +359,23 @@ package org.josht.starling.display
 
 				if(!helperImage)
 				{
-					helperImage = new starling.display.Image(this._first);
+					helperImage = new starling.display.Image(this._textures.first);
 				}
 				helperImage.smoothing = this._smoothing;
 				helperImage.color = this._color;
 
-				if(this._direction == DIRECTION_VERTICAL)
+				const frame:Rectangle = this._textures.texture.frame;
+				if(this._textures.direction == Scale3Textures.DIRECTION_VERTICAL)
 				{
 					var scaledOppositeEdgeSize:Number = this._width;
-					var oppositeEdgeScale:Number = scaledOppositeEdgeSize / this._oppositeEdgeSize;
-					var scaledFirstRegionSize:Number = this._firstRegionSize * oppositeEdgeScale;
-					var scaledThirdRegionSize:Number = this._thirdRegionSize * oppositeEdgeScale;
+					var oppositeEdgeScale:Number = scaledOppositeEdgeSize / frame.width;
+					var scaledFirstRegionSize:Number = this._textures.firstRegionSize * oppositeEdgeScale;
+					var scaledThirdRegionSize:Number = (frame.height - this._textures.firstRegionSize - this._textures.secondRegionSize) * oppositeEdgeScale;
 					var scaledSecondRegionSize:Number = this._height - scaledFirstRegionSize - scaledThirdRegionSize;
 
 					if(scaledOppositeEdgeSize > 0)
 					{
-						helperImage.texture = this._first;
+						helperImage.texture = this._textures.first;
 						helperImage.readjustSize();
 						helperImage.x = 0;
 						helperImage.y = 0;
@@ -397,7 +386,7 @@ package org.josht.starling.display
 							this._batch.addImage(helperImage);
 						}
 
-						helperImage.texture = this._second;
+						helperImage.texture = this._textures.second;
 						helperImage.readjustSize();
 						helperImage.x = 0;
 						helperImage.y = scaledFirstRegionSize;
@@ -408,7 +397,7 @@ package org.josht.starling.display
 							this._batch.addImage(helperImage);
 						}
 
-						helperImage.texture = this._third;
+						helperImage.texture = this._textures.third;
 						helperImage.readjustSize();
 						helperImage.x = 0;
 						helperImage.y = this._height - scaledThirdRegionSize;
@@ -423,14 +412,14 @@ package org.josht.starling.display
 				else //horizontal
 				{
 					scaledOppositeEdgeSize = this._height;
-					oppositeEdgeScale = scaledOppositeEdgeSize / this._oppositeEdgeSize;
-					scaledFirstRegionSize = this._firstRegionSize * oppositeEdgeScale;
-					scaledThirdRegionSize = this._thirdRegionSize * oppositeEdgeScale;
+					oppositeEdgeScale = scaledOppositeEdgeSize / frame.height;
+					scaledFirstRegionSize = this._textures.firstRegionSize * oppositeEdgeScale;
+					scaledThirdRegionSize = (frame.width - this._textures.firstRegionSize - this._textures.secondRegionSize) * oppositeEdgeScale;
 					scaledSecondRegionSize = this._width - scaledFirstRegionSize - scaledThirdRegionSize;
 
 					if(scaledOppositeEdgeSize > 0)
 					{
-						helperImage.texture = this._first;
+						helperImage.texture = this._textures.first;
 						helperImage.readjustSize();
 						helperImage.x = 0;
 						helperImage.y = 0;
@@ -441,7 +430,7 @@ package org.josht.starling.display
 							this._batch.addImage(helperImage);
 						}
 
-						helperImage.texture = this._second;
+						helperImage.texture = this._textures.second;
 						helperImage.readjustSize();
 						helperImage.x = scaledFirstRegionSize;
 						helperImage.y = 0;
@@ -452,7 +441,7 @@ package org.josht.starling.display
 							this._batch.addImage(helperImage);
 						}
 
-						helperImage.texture = this._third;
+						helperImage.texture = this._textures.third;
 						helperImage.readjustSize();
 						helperImage.x = this._width - scaledThirdRegionSize;
 						helperImage.y = 0;
@@ -467,24 +456,14 @@ package org.josht.starling.display
 			}
 			this._propertiesChanged = false;
 			this._layoutChanged = false;
-			super.render(support, alpha);
 		}
 
 		/**
 		 * @private
 		 */
-		private function initializeWidthAndHeight():void
+		private function flattenHandler(event:Event):void
 		{
-			if(this._direction == DIRECTION_VERTICAL)
-			{
-				this.width = this._oppositeEdgeSize * this._textureScale;
-				this.height = (this._firstRegionSize + this._secondRegionSize + this._thirdRegionSize) * this._textureScale;
-			}
-			else //horizontal
-			{
-				this.width = (this._firstRegionSize + this._secondRegionSize + this._thirdRegionSize) * this._textureScale;
-				this.height = this._oppositeEdgeSize * this._textureScale;
-			}
+			this.validate();
 		}
 	}
 }

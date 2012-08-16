@@ -3,7 +3,7 @@ package org.josht.starling.display
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	
+
 	import starling.display.DisplayObject;
 
 	/**
@@ -81,6 +81,40 @@ package org.josht.starling.display
 					location.y -= scrollRect.y * matrix.d;
 				}
 			}
+		}
+
+		/**
+		 * Enhances <code>getBounds()</code> with correction for <code>scrollRect</code>
+		 * offsets.
+		 */
+		public static function getBounds(object:DisplayObject, targetSpace:DisplayObject, result:Rectangle = null):Rectangle
+		{
+			if(!result)
+			{
+				result = new Rectangle();
+			}
+
+			object.getBounds(targetSpace, result);
+
+			var matrix:Matrix;
+			var newTarget:DisplayObject = object;
+			while(newTarget.parent)
+			{
+				newTarget = newTarget.parent;
+				if(newTarget is IDisplayObjectWithScrollRect)
+				{
+					var targetWithScrollRect:IDisplayObjectWithScrollRect = IDisplayObjectWithScrollRect(newTarget);
+					var scrollRect:Rectangle = targetWithScrollRect.scrollRect;
+					if(!scrollRect || (scrollRect.x == 0 && scrollRect.y == 0))
+					{
+						continue;
+					}
+					matrix = newTarget.getTransformationMatrix(object, matrix);
+					result.x -= scrollRect.x * matrix.a;
+					result.y -= scrollRect.y * matrix.d;
+				}
+			}
+			return result;
 		}
 	}
 }

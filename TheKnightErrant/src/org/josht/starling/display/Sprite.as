@@ -27,13 +27,13 @@ package org.josht.starling.display
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	
+
 	import starling.core.RenderSupport;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
-	import starling.utils.transformCoords;
-	
+	import starling.utils.MatrixUtil;
+
 	/**
 	 * Adds <code>scrollRect</code> to <code>Sprite</code>.
 	 */
@@ -112,7 +112,7 @@ package org.josht.starling.display
 				else
 				{
 					this.getTransformationMatrix(targetSpace, helperMatrix);
-					transformCoords(helperMatrix, 0, 0, helperPoint);
+					MatrixUtil.transformCoords(helperMatrix, 0, 0, helperPoint);
 					resultRect.x = helperPoint.x;
 					resultRect.y = helperPoint.y;
 					resultRect.width = helperMatrix.a * this._scrollRect.width + helperMatrix.c * this._scrollRect.height;

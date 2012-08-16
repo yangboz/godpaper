@@ -25,7 +25,6 @@
 package org.josht.starling.foxhole.layout
 {
 	import flash.geom.Point;
-	import flash.geom.Rectangle;
 
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
@@ -121,6 +120,22 @@ package org.josht.starling.foxhole.layout
 		 * The item will be resized to fit the width of the tile.
 		 */
 		public static const TILE_HORIZONTAL_ALIGN_JUSTIFY:String = "justify";
+
+		/**
+		 * The items will be positioned in pages horizontally from left to right.
+		 */
+		public static const PAGING_HORIZONTAL:String = "horizontal";
+
+		/**
+		 * The items will be positioned in pages vertically from top to bottom.
+		 */
+		public static const PAGING_VERTICAL:String = "vertical";
+
+		/**
+		 * The items will not be paged. In other words, they will be positioned
+		 * in a continuous set of rows without gaps.
+		 */
+		public static const PAGING_NONE:String = "none";
 
 		/**
 		 * Constructor.
@@ -370,6 +385,62 @@ package org.josht.starling.foxhole.layout
 		/**
 		 * @private
 		 */
+		private var _paging:String = PAGING_NONE;
+
+		/**
+		 * If the total combined height of the rows is larger than the height
+		 * of the view port, the layout will be split into pages where each
+		 * page is filled with the maximum number of rows that may be displayed
+		 * without cutting off any items.
+		 */
+		public function get paging():String
+		{
+			return this._paging;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set paging(value:String):void
+		{
+			if(this._paging == value)
+			{
+				return;
+			}
+			this._paging = value;
+			this._onLayoutChange.dispatch(this);
+		}
+
+		/**
+		 * @private
+		 */
+		private var _useSquareTiles:Boolean = true;
+
+		/**
+		 * Determines if the tiles must be square or if their width and height
+		 * may have different values.
+		 */
+		public function get useSquareTiles():Boolean
+		{
+			return this._useSquareTiles;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set useSquareTiles(value:Boolean):void
+		{
+			if(this._useSquareTiles == value)
+			{
+				return;
+			}
+			this._useSquareTiles = value;
+			this._onLayoutChange.dispatch(this);
+		}
+
+		/**
+		 * @private
+		 */
 		private var _useVirtualLayout:Boolean = true;
 
 		/**
@@ -459,14 +530,20 @@ package org.josht.starling.foxhole.layout
 		/**
 		 * @inheritDoc
 		 */
-		public function layout(items:Vector.<DisplayObject>, suggestedBounds:Rectangle, resultDimensions:Point = null):Point
+		public function layout(items:Vector.<DisplayObject>, viewPortBounds:ViewPortBounds = null, result:LayoutBoundsResult = null):LayoutBoundsResult
 		{
-			if(!resultDimensions)
-			{
-				resultDimensions = new Point();
-			}
+			const boundsX:Number = viewPortBounds ? viewPortBounds.x : 0;
+			const boundsY:Number = viewPortBounds ? viewPortBounds.y : 0;
+			const minWidth:Number = viewPortBounds ? viewPortBounds.minWidth : 0;
+			const minHeight:Number = viewPortBounds ? viewPortBounds.minHeight : 0;
+			const maxWidth:Number = viewPortBounds ? viewPortBounds.maxWidth : Number.POSITIVE_INFINITY;
+			const maxHeight:Number = viewPortBounds ? viewPortBounds.maxHeight : Number.POSITIVE_INFINITY;
+			const explicitWidth:Number = viewPortBounds ? viewPortBounds.explicitWidth : NaN;
+			const explicitHeight:Number = viewPortBounds ? viewPortBounds.explicitHeight : NaN;
+
 			const itemCount:int = items.length;
-			var tileSize:Number = Math.max(0, this._typicalItemWidth, this._typicalItemHeight);
+			var tileWidth:Number = this._useSquareTiles ? Math.max(0, this._typicalItemWidth, this._typicalItemHeight) : this._typicalItemWidth;
+			var tileHeight:Number = this._useSquareTiles ? tileWidth : this._typicalItemHeight;
 			//a virtual layout assumes that all items are the same size as
 			//the typical item, so we don't need to measure every item in
 			//that case
@@ -479,26 +556,82 @@ package org.josht.starling.foxhole.layout
 					{
 						continue;
 					}
-					tileSize = Math.max(tileSize, item.width, item.height);
+					tileWidth = this._useSquareTiles ? Math.max(tileWidth, item.width, item.height) : Math.max(tileWidth, item.width);
+					tileHeight = this._useSquareTiles ? Math.max(tileWidth, tileHeight) : Math.max(tileHeight, item.height);
 				}
 			}
+			var availableWidth:Number = NaN;
+			var availableHeight:Number = NaN;
 
 			var horizontalTileCount:int = itemCount;
-			if(!isNaN(suggestedBounds.width))
+			if(!isNaN(explicitWidth))
 			{
-				horizontalTileCount = (suggestedBounds.width - this._paddingLeft - this._paddingRight + this._gap) / (tileSize + this._gap);
+				availableWidth = explicitWidth;
+				horizontalTileCount = (explicitWidth - this._paddingLeft - this._paddingRight + this._gap) / (tileWidth + this._gap);
+			}
+			else if(!isNaN(maxWidth))
+			{
+				availableWidth = maxWidth;
+				horizontalTileCount = (maxWidth - this._paddingLeft - this._paddingRight + this._gap) / (tileWidth + this._gap);
+			}
+			var verticalTileCount:int = 1;
+			if(!isNaN(explicitHeight))
+			{
+				availableHeight = explicitHeight;
+				verticalTileCount = (explicitHeight - this._paddingTop - this._paddingBottom + this._gap) / (tileHeight + this._gap);
+			}
+			else if(!isNaN(maxHeight))
+			{
+				availableHeight = maxHeight;
+				verticalTileCount = (maxHeight - this._paddingTop - this._paddingBottom + this._gap) / (tileHeight + this._gap);
 			}
 
-			const startX:Number = suggestedBounds.x + this._paddingLeft;
+			const totalPageWidth:Number = horizontalTileCount * (tileWidth + this._gap) - this._gap + this._paddingLeft + this._paddingRight;
+			const totalPageHeight:Number = verticalTileCount * (tileHeight + this._gap) - this._gap + this._paddingTop + this._paddingBottom;
+			const availablePageWidth:Number = isNaN(availableWidth) ? totalPageWidth : availableWidth;
+			const availablePageHeight:Number = isNaN(availableHeight) ? totalPageHeight : availableHeight;
+
+			const startX:Number = boundsX + this._paddingLeft;
+			const startY:Number = boundsY + this._paddingTop;
+
+			const perPage:int = horizontalTileCount * verticalTileCount;
+			var pageIndex:int = 0;
+			var nextPageStartIndex:int = perPage;
+			var pageStartX:Number = startX;
 			var positionX:Number = startX;
-			var positionY:Number = suggestedBounds.y + this._paddingTop;
+			var positionY:Number = startY;
 			for(i = 0; i < itemCount; i++)
 			{
 				item = items[i];
 				if(i != 0 && i % horizontalTileCount == 0)
 				{
-					positionX = startX;
-					positionY += tileSize + this._gap;
+					positionX = pageStartX;
+					positionY += tileHeight + this._gap;
+				}
+				if(i == nextPageStartIndex)
+				{
+					//we're starting a new page, so handle alignment of the
+					//items on the current page and update the positions
+					if(this._paging != PAGING_NONE)
+					{
+						this.applyHorizontalAlign(items, i - perPage, i - 1, totalPageWidth, availablePageWidth);
+						this.applyVerticalAlign(items, i - perPage, i - 1, totalPageHeight, availablePageHeight);
+					}
+					pageIndex++;
+					nextPageStartIndex += perPage;
+
+					//we can use availableWidth and availableHeight here without
+					//checking if they're NaN because we will never reach a
+					//new page without them already being calculated.
+					if(this._paging == PAGING_HORIZONTAL)
+					{
+						positionX = pageStartX = startX + availableWidth * pageIndex;
+						positionY = startY;
+					}
+					else if(this._paging == PAGING_VERTICAL)
+					{
+						positionY = startY + availableHeight * pageIndex;
+					}
 				}
 				if(item)
 				{
@@ -507,7 +640,7 @@ package org.josht.starling.foxhole.layout
 						case TILE_HORIZONTAL_ALIGN_JUSTIFY:
 						{
 							item.x = positionX;
-							item.width = tileSize;
+							item.width = tileWidth;
 							break;
 						}
 						case TILE_HORIZONTAL_ALIGN_LEFT:
@@ -517,12 +650,12 @@ package org.josht.starling.foxhole.layout
 						}
 						case TILE_HORIZONTAL_ALIGN_RIGHT:
 						{
-							item.x = positionX + tileSize - item.width;
+							item.x = positionX + tileWidth - item.width;
 							break;
 						}
 						default: //center or unknown
 						{
-							item.x = positionX + (tileSize - item.width) / 2;
+							item.x = positionX + (tileWidth - item.width) / 2;
 						}
 					}
 					switch(this._tileVerticalAlign)
@@ -530,7 +663,7 @@ package org.josht.starling.foxhole.layout
 						case TILE_VERTICAL_ALIGN_JUSTIFY:
 						{
 							item.y = positionY;
-							item.height = tileSize;
+							item.height = tileHeight;
 							break;
 						}
 						case TILE_VERTICAL_ALIGN_TOP:
@@ -540,75 +673,188 @@ package org.josht.starling.foxhole.layout
 						}
 						case TILE_VERTICAL_ALIGN_BOTTOM:
 						{
-							item.y = positionY + tileSize - item.height;
+							item.y = positionY + tileHeight - item.height;
 							break;
 						}
 						default: //middle or unknown
 						{
-							item.y = positionY + (tileSize - item.height) / 2;
+							item.y = positionY + (tileHeight - item.height) / 2;
 						}
 					}
 				}
-				positionX += tileSize + this._gap;
+				positionX += tileWidth + this._gap;
 			}
-			const totalWidth:Number = horizontalTileCount * (tileSize + this._gap) - this._gap + this._paddingLeft + this._paddingRight;
-			const suggestedWidth:Number = isNaN(suggestedBounds.width) ? totalWidth : suggestedBounds.width;
-			resultDimensions.x = suggestedWidth;
-			if(totalWidth < suggestedWidth)
+			//align the last page
+			if(this._paging != PAGING_NONE)
 			{
-				var horizontalAlignOffsetX:Number = 0;
-				if(this._horizontalAlign == HORIZONTAL_ALIGN_RIGHT)
-				{
-					horizontalAlignOffsetX = suggestedWidth - totalWidth;
-				}
-				else if(this._horizontalAlign != HORIZONTAL_ALIGN_LEFT)
-				{
-					//we're going to default to center if we encounter an
-					//unknown value
-					horizontalAlignOffsetX = (suggestedWidth - totalWidth) / 2;
-				}
-				if(horizontalAlignOffsetX != 0)
-				{
-					for(i = 0; i < itemCount; i++)
-					{
-						item = items[i];
-						if(!item)
-						{
-							continue;
-						}
-						item.x += horizontalAlignOffsetX;
-					}
-				}
+				this.applyHorizontalAlign(items, nextPageStartIndex - perPage, i - 1, totalPageWidth, availablePageWidth);
+				this.applyVerticalAlign(items, nextPageStartIndex - perPage, i - 1, totalPageHeight, availablePageHeight);
 			}
-			const totalHeight:Number = positionY + tileSize + this._paddingBottom;
-			const suggestedHeight:Number = isNaN(suggestedBounds.height) ? totalHeight : suggestedBounds.height;
-			resultDimensions.y = totalHeight;
-			if(totalHeight < suggestedHeight)
+
+			var totalWidth:Number = totalPageWidth;
+			if(!isNaN(availableWidth) && this._paging == PAGING_HORIZONTAL)
 			{
-				//we're going to default to top if we encounter an unknown value
-				var verticalAlignOffsetY:Number = 0;
-				if(this._verticalAlign == VERTICAL_ALIGN_BOTTOM)
+				totalWidth = Math.ceil(itemCount / perPage) * availableWidth;
+			}
+			var totalHeight:Number = positionY + tileHeight + this._paddingBottom;
+			if(!isNaN(availableHeight))
+			{
+				if(this._paging == PAGING_HORIZONTAL)
 				{
-					verticalAlignOffsetY = suggestedHeight - totalHeight;
+					totalHeight = availableHeight;
 				}
-				else if(this._verticalAlign == VERTICAL_ALIGN_MIDDLE)
+				else if(this._paging == PAGING_VERTICAL)
 				{
-					verticalAlignOffsetY = (suggestedHeight - totalHeight) / 2;
+					totalHeight = Math.ceil(itemCount / perPage) * availableHeight;
 				}
-				if(verticalAlignOffsetY != 0)
+			}
+			if(isNaN(availableWidth))
+			{
+				availableWidth = totalWidth;
+			}
+			if(isNaN(availableHeight))
+			{
+				availableHeight = totalHeight;
+			}
+			availableWidth = Math.max(minWidth, availableWidth);
+			availableHeight = Math.max(minHeight, availableHeight);
+
+			if(this._paging == PAGING_NONE)
+			{
+				this.applyHorizontalAlign(items, 0, itemCount - 1, totalWidth, availableWidth);
+				this.applyVerticalAlign(items, 0, itemCount - 1, totalHeight, availableHeight);
+			}
+
+			if(!result)
+			{
+				result = new LayoutBoundsResult();
+			}
+			result.contentWidth = totalWidth;
+			result.contentHeight = totalHeight;
+			result.viewPortWidth = availableWidth;
+			result.viewPortHeight = availableHeight;
+
+			return result;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function measureViewPort(itemCount:int, viewPortBounds:ViewPortBounds = null, result:Point = null):Point
+		{
+			if(!result)
+			{
+				result = new Point();
+			}
+			const explicitWidth:Number = viewPortBounds ? viewPortBounds.explicitWidth : NaN;
+			const explicitHeight:Number = viewPortBounds ? viewPortBounds.explicitHeight : NaN;
+			const needsWidth:Boolean = isNaN(explicitWidth);
+			const needsHeight:Boolean = isNaN(explicitHeight);
+			if(!needsWidth && !needsHeight)
+			{
+				result.x = explicitWidth;
+				result.y = explicitHeight;
+				return result;
+			}
+
+			const boundsX:Number = viewPortBounds ? viewPortBounds.x : 0;
+			const boundsY:Number = viewPortBounds ? viewPortBounds.y : 0;
+			const minWidth:Number = viewPortBounds ? viewPortBounds.minWidth : 0;
+			const minHeight:Number = viewPortBounds ? viewPortBounds.minHeight : 0;
+			const maxWidth:Number = viewPortBounds ? viewPortBounds.maxWidth : Number.POSITIVE_INFINITY;
+			const maxHeight:Number = viewPortBounds ? viewPortBounds.maxHeight : Number.POSITIVE_INFINITY;
+
+			const tileWidth:Number = this._useSquareTiles ? Math.max(0, this._typicalItemWidth, this._typicalItemHeight) : this._typicalItemWidth;
+			const tileHeight:Number = this._useSquareTiles ? tileWidth : this._typicalItemHeight;
+
+			var availableWidth:Number = NaN;
+			var availableHeight:Number = NaN;
+
+			var horizontalTileCount:int = itemCount;
+			if(!isNaN(explicitWidth))
+			{
+				availableWidth = explicitWidth;
+				horizontalTileCount = (explicitWidth - this._paddingLeft - this._paddingRight + this._gap) / (tileWidth + this._gap);
+			}
+			else if(!isNaN(maxWidth))
+			{
+				availableWidth = maxWidth;
+				horizontalTileCount = (maxWidth - this._paddingLeft - this._paddingRight + this._gap) / (tileWidth + this._gap);
+			}
+			var verticalTileCount:int = 1;
+			if(!isNaN(explicitHeight))
+			{
+				availableHeight = explicitHeight;
+				verticalTileCount = (explicitHeight - this._paddingTop - this._paddingBottom + this._gap) / (tileHeight + this._gap);
+			}
+			else if(!isNaN(maxHeight))
+			{
+				availableHeight = maxHeight;
+				verticalTileCount = (maxHeight - this._paddingTop - this._paddingBottom + this._gap) / (tileHeight + this._gap);
+			}
+
+			const totalPageWidth:Number = horizontalTileCount * (tileWidth + this._gap) - this._gap + this._paddingLeft + this._paddingRight;
+			const totalPageHeight:Number = verticalTileCount * (tileHeight + this._gap) - this._gap + this._paddingTop + this._paddingBottom;
+			const availablePageWidth:Number = isNaN(availableWidth) ? totalPageWidth : availableWidth;
+			const availablePageHeight:Number = isNaN(availableHeight) ? totalPageHeight : availableHeight;
+
+			const startX:Number = boundsX + this._paddingLeft;
+			const startY:Number = boundsY + this._paddingTop;
+
+			const perPage:int = horizontalTileCount * verticalTileCount;
+			var pageIndex:int = 0;
+			var nextPageStartIndex:int = perPage;
+			var pageStartX:Number = startX;
+			var positionX:Number = startX;
+			var positionY:Number = startY;
+			for(var i:int = 0; i < itemCount; i++)
+			{
+				if(i != 0 && i % horizontalTileCount == 0)
 				{
-					for(i = 0; i < itemCount; i++)
+					positionX = pageStartX;
+					positionY += tileHeight + this._gap;
+				}
+				if(i == nextPageStartIndex)
+				{
+					pageIndex++;
+					nextPageStartIndex += perPage;
+
+					//we can use availableWidth and availableHeight here without
+					//checking if they're NaN because we will never reach a
+					//new page without them already being calculated.
+					if(this._paging == PAGING_HORIZONTAL)
 					{
-						item = items[i];
-						if(!item)
-						{
-							continue;
-						}
-						item.y += verticalAlignOffsetY;
+						positionX = pageStartX = startX + availableWidth * pageIndex;
+						positionY = startY;
+					}
+					else if(this._paging == PAGING_VERTICAL)
+					{
+						positionY = startY + availableHeight * pageIndex;
 					}
 				}
 			}
-			return resultDimensions;
+
+			var totalWidth:Number = totalPageWidth;
+			if(!isNaN(availableWidth) && this._paging == PAGING_HORIZONTAL)
+			{
+				totalWidth = Math.ceil(itemCount / perPage) * availableWidth;
+			}
+			var totalHeight:Number = positionY + tileHeight + this._paddingBottom;
+			if(!isNaN(availableHeight))
+			{
+				if(this._paging == PAGING_HORIZONTAL)
+				{
+					totalHeight = availableHeight;
+				}
+				else if(this._paging == PAGING_VERTICAL)
+				{
+					totalHeight = Math.ceil(itemCount / perPage) * availableHeight;
+				}
+			}
+
+			result.x = needsWidth ? Math.max(minWidth, totalWidth) : explicitWidth;
+			result.y = needsHeight ? Math.max(minHeight, totalHeight) : explicitHeight;
+			return result;
 		}
 
 		/**
@@ -616,23 +862,37 @@ package org.josht.starling.foxhole.layout
 		 */
 		public function getMinimumItemIndexAtScrollPosition(scrollX:Number, scrollY:Number, width:Number, height:Number, itemCount:int):int
 		{
-			const tileSize:Number = Math.max(0, this._typicalItemWidth, this._typicalItemHeight);
-			const horizontalTileCount:int = (width - this._paddingLeft - this._paddingRight + this._gap) / (tileSize + this._gap);
-			const verticalTileCount:int = Math.ceil((height - this._paddingTop + this._gap) / (tileSize + this._gap)) + 1;
+			const tileWidth:Number = this._useSquareTiles ? Math.max(0, this._typicalItemWidth, this._typicalItemHeight) : this._typicalItemWidth;
+			const tileHeight:Number = this._useSquareTiles ? tileWidth : this._typicalItemHeight;
+			const horizontalTileCount:int = (width - this._paddingLeft - this._paddingRight + this._gap) / (tileWidth + this._gap);
+			if(this._paging != PAGING_NONE)
+			{
+				const verticalTileCount:int = (height - this._paddingTop - this._paddingBottom + this._gap) / (tileHeight + this._gap);
+				const perPage:Number = horizontalTileCount * verticalTileCount;
+				if(this._paging == PAGING_HORIZONTAL)
+				{
+					var pageIndex:int = scrollX / width;
+				}
+				else
+				{
+					pageIndex = scrollY / height;
+				}
+				return pageIndex * perPage;
+			}
 			var rowIndexOffset:int = 0;
-			const totalRowHeight:Number = Math.ceil(itemCount / horizontalTileCount) * (tileSize + this._gap) - this._gap;
+			const totalRowHeight:Number = Math.ceil(itemCount / horizontalTileCount) * (tileHeight + this._gap) - this._gap;
 			if(totalRowHeight < height)
 			{
 				if(this._verticalAlign == VERTICAL_ALIGN_BOTTOM)
 				{
-					rowIndexOffset = Math.ceil((height - totalRowHeight) / (tileSize + this._gap));
+					rowIndexOffset = Math.ceil((height - totalRowHeight) / (tileHeight + this._gap));
 				}
 				else if(this._verticalAlign == VERTICAL_ALIGN_MIDDLE)
 				{
-					rowIndexOffset = Math.ceil((height - totalRowHeight) / (tileSize + this._gap) / 2);
+					rowIndexOffset = Math.ceil((height - totalRowHeight) / (tileHeight + this._gap) / 2);
 				}
 			}
-			const rowIndex:int = -rowIndexOffset + Math.floor((scrollY - this._paddingTop + this._gap) / (tileSize + this._gap));
+			const rowIndex:int = -rowIndexOffset + Math.floor((scrollY - this._paddingTop + this._gap) / (tileHeight + this._gap));
 			return rowIndex * horizontalTileCount;
 		}
 
@@ -641,23 +901,38 @@ package org.josht.starling.foxhole.layout
 		 */
 		public function getMaximumItemIndexAtScrollPosition(scrollX:Number, scrollY:Number, width:Number, height:Number, itemCount:int):int
 		{
-			const tileSize:Number = Math.max(0, this._typicalItemWidth, this._typicalItemHeight);
-			const horizontalTileCount:int = (width - this._paddingLeft - this._paddingRight + this._gap) / (tileSize + this._gap);
-			const verticalTileCount:int = Math.ceil((height - this._paddingTop + this._gap) / (tileSize + this._gap)) + 1;
+			const tileWidth:Number = this._useSquareTiles ? Math.max(0, this._typicalItemWidth, this._typicalItemHeight) : this._typicalItemWidth;
+			const tileHeight:Number = this._useSquareTiles ? tileWidth : this._typicalItemHeight;
+			const horizontalTileCount:int = (width - this._paddingLeft - this._paddingRight + this._gap) / (tileWidth + this._gap);
+			if(this._paging != PAGING_NONE)
+			{
+				var verticalTileCount:int = (height - this._paddingTop - this._paddingBottom + this._gap) / (tileHeight + this._gap);
+				const perPage:Number = horizontalTileCount * verticalTileCount;
+				if(this._paging == PAGING_HORIZONTAL)
+				{
+					var pageIndex:int = scrollX / width;
+				}
+				else
+				{
+					pageIndex = scrollY / height;
+				}
+				return (pageIndex + 2) * perPage;
+			}
+			verticalTileCount = Math.ceil((height - this._paddingTop + this._gap) / (tileHeight + this._gap)) + 1;
 			var rowIndexOffset:int = 0;
-			const totalRowHeight:Number = Math.ceil(itemCount / horizontalTileCount) * (tileSize + this._gap) - this._gap;
+			const totalRowHeight:Number = Math.ceil(itemCount / horizontalTileCount) * (tileHeight + this._gap) - this._gap;
 			if(totalRowHeight < height)
 			{
 				if(this._verticalAlign == VERTICAL_ALIGN_BOTTOM)
 				{
-					rowIndexOffset = Math.ceil((height - totalRowHeight) / (tileSize + this._gap));
+					rowIndexOffset = Math.ceil((height - totalRowHeight) / (tileHeight + this._gap));
 				}
 				else if(this._verticalAlign == VERTICAL_ALIGN_MIDDLE)
 				{
-					rowIndexOffset = Math.ceil((height - totalRowHeight) / (tileSize + this._gap) / 2);
+					rowIndexOffset = Math.ceil((height - totalRowHeight) / (tileHeight + this._gap) / 2);
 				}
 			}
-			const rowIndex:int = -rowIndexOffset + Math.floor((scrollY - this._paddingTop + this._gap) / (tileSize + this._gap));
+			const rowIndex:int = -rowIndexOffset + Math.floor((scrollY - this._paddingTop + this._gap) / (tileHeight + this._gap));
 			return rowIndex * horizontalTileCount + horizontalTileCount * verticalTileCount;
 		}
 
@@ -671,11 +946,97 @@ package org.josht.starling.foxhole.layout
 				result = new Point();
 			}
 
-			const tileSize:Number = Math.max(0, this._typicalItemWidth, this._typicalItemHeight);
-			const horizontalTileCount:int = (width - this._paddingLeft - this._paddingRight + this._gap) / (tileSize + this._gap);
-			result.x = 0;
-			result.y = this._paddingTop + ((tileSize + this._gap) * index / horizontalTileCount) + (height - tileSize) / 2;
+			const tileWidth:Number = this._useSquareTiles ? Math.max(0, this._typicalItemWidth, this._typicalItemHeight) : this._typicalItemWidth;
+			const tileHeight:Number = this._useSquareTiles ? tileWidth : this._typicalItemHeight;
+			const horizontalTileCount:int = (width - this._paddingLeft - this._paddingRight + this._gap) / (tileWidth + this._gap);
+			if(this._paging != PAGING_NONE)
+			{
+				const verticalTileCount:int = (height - this._paddingTop - this._paddingBottom + this._gap) / (tileHeight + this._gap);
+				const perPage:Number = horizontalTileCount * verticalTileCount;
+				const pageIndex:int = index / perPage;
+				if(this._paging == PAGING_HORIZONTAL)
+				{
+					result.x = pageIndex * width;
+					result.y = 0;
+				}
+				else
+				{
+					result.x = 0;
+					result.y = pageIndex * height;
+				}
+			}
+			else
+			{
+				result.x = 0;
+				result.y = this._paddingTop + ((tileHeight + this._gap) * index / horizontalTileCount) + (height - tileHeight) / 2;
+			}
 			return result;
+		}
+
+		/**
+		 * @private
+		 */
+		protected function applyHorizontalAlign(items:Vector.<DisplayObject>, startIndex:int, endIndex:int, totalItemWidth:Number, availableWidth:Number):void
+		{
+			if(totalItemWidth >= availableWidth)
+			{
+				return;
+			}
+			var horizontalAlignOffsetX:Number = 0;
+			if(this._horizontalAlign == HORIZONTAL_ALIGN_RIGHT)
+			{
+				horizontalAlignOffsetX = availableWidth - totalItemWidth;
+			}
+			else if(this._horizontalAlign != HORIZONTAL_ALIGN_LEFT)
+			{
+				//we're going to default to center if we encounter an
+				//unknown value
+				horizontalAlignOffsetX = (availableWidth - totalItemWidth) / 2;
+			}
+			if(horizontalAlignOffsetX != 0)
+			{
+				for(var i:int = startIndex; i <= endIndex; i++)
+				{
+					var item:DisplayObject = items[i];
+					if(!item)
+					{
+						continue;
+					}
+					item.x += horizontalAlignOffsetX;
+				}
+			}
+		}
+
+		/**
+		 * @private
+		 */
+		protected function applyVerticalAlign(items:Vector.<DisplayObject>, startIndex:int, endIndex:int, totalItemHeight:Number, availableHeight:Number):void
+		{
+			if(totalItemHeight >= availableHeight)
+			{
+				return;
+			}
+			var verticalAlignOffsetY:Number = 0;
+			if(this._verticalAlign == VERTICAL_ALIGN_BOTTOM)
+			{
+				verticalAlignOffsetY = availableHeight - totalItemHeight;
+			}
+			else if(this._verticalAlign == VERTICAL_ALIGN_MIDDLE)
+			{
+				verticalAlignOffsetY = (availableHeight - totalItemHeight) / 2;
+			}
+			if(verticalAlignOffsetY != 0)
+			{
+				for(var i:int = startIndex; i <= endIndex; i++)
+				{
+					var item:DisplayObject = items[i];
+					if(!item)
+					{
+						continue;
+					}
+					item.y += verticalAlignOffsetY;
+				}
+			}
 		}
 	}
 }

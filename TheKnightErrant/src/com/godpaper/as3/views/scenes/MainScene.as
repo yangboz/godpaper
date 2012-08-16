@@ -21,6 +21,8 @@
  */
 package com.godpaper.as3.views.scenes
 {
+	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.configs.ThemeConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
@@ -31,11 +33,14 @@ package com.godpaper.as3.views.scenes
 	
 	import flash.ui.Mouse;
 	
+	import mx.core.ClassFactory;
 	import mx.logging.ILogger;
 	
 	import org.josht.starling.foxhole.controls.FPSDisplay;
 	import org.josht.starling.foxhole.controls.ScreenNavigator;
 	import org.josht.starling.foxhole.controls.ScreenNavigatorItem;
+	import org.josht.starling.foxhole.themes.AeonDesktopTheme;
+	import org.josht.starling.foxhole.themes.AzureTheme;
 	import org.josht.starling.foxhole.themes.IFoxholeTheme;
 	import org.josht.starling.foxhole.themes.MinimalTheme;
 	import org.josht.starling.foxhole.transitions.ScreenSlidingStackTransitionManager;
@@ -112,7 +117,10 @@ package com.godpaper.as3.views.scenes
 			//case to pretend that the web SWF is running in the theme's "ideal"
 			//DPI. official themes usually target an iPhone Retina display.
 			const isDesktop:Boolean = Mouse.supportsCursor;
-			this._theme = new MinimalTheme(this.stage, !isDesktop);
+//			this._theme = new MinimalTheme(this.stage, !isDesktop);
+//			this._theme = new AeonDesktopTheme(this.stage);
+//			this._theme = new AzureTheme(this.stage, !isDesktop);
+			this._theme = ThemeConfig.getThemeImpl(this.stage, !isDesktop);
 			const originalThemeDPI:int = this._theme.originalDPI;
 			
 			this._navigator = new ScreenNavigator();

@@ -26,7 +26,9 @@ package com.godpaper.as3.views.plugin
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.IndicatorConfig;
+	import com.godpaper.as3.configs.ThemeConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
@@ -42,6 +44,8 @@ package com.godpaper.as3.views.plugin
 	import org.josht.starling.foxhole.controls.Label;
 	import org.josht.starling.foxhole.controls.TabBar;
 	import org.josht.starling.foxhole.data.ListCollection;
+	import org.josht.starling.foxhole.themes.AeonDesktopTheme;
+	import org.josht.starling.foxhole.themes.AzureTheme;
 	import org.josht.starling.foxhole.themes.IFoxholeTheme;
 	import org.josht.starling.foxhole.themes.MinimalTheme;
 	
@@ -149,7 +153,10 @@ package com.godpaper.as3.views.plugin
 			//Tab bar view initialize
 			const isDesktop:Boolean = Mouse.supportsCursor;
 			//			this._theme = new AzureTheme(this.stage, !isDesktop);
-			this.theme = new MinimalTheme(this.stage, !isDesktop);
+//			this.theme = new MinimalTheme(this.stage, !isDesktop);
+//			this.theme = new AeonDesktopTheme(this.stage);
+//			this.theme = new AzureTheme(this.stage, !isDesktop);
+			this.theme = ThemeConfig.getThemeImpl(this.stage, !isDesktop);
 			//Custom tab bar data provider
 			var gameLevel:int = 0;//Should dynnamic and configurable.
 			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();

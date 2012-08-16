@@ -32,7 +32,15 @@ package org.josht.starling.foxhole.controls
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
+	import flash.text.engine.FontPosture;
+	import flash.text.engine.FontWeight;
 	import flash.ui.Keyboard;
+	import flash.ui.Mouse;
+	import flash.ui.MouseCursor;
 	import flash.utils.getDefinitionByName;
 
 	import org.josht.starling.display.ScrollRectManager;
@@ -50,7 +58,7 @@ package org.josht.starling.foxhole.controls
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.textures.Texture;
-	import starling.utils.transformCoords;
+	import starling.utils.MatrixUtil;
 
 	/**
 	 * A text entry control that allows users to enter and edit a single line of
@@ -82,6 +90,8 @@ package org.josht.starling.foxhole.controls
 		public function TextInput()
 		{
 			this.isQuickHitAreaEnabled = true;
+			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, addedToStageHandler);
+			this.addEventListener(starling.events.Event.REMOVED_FROM_STAGE, removedFromStageHandler);
 			this.addEventListener(TouchEvent.TOUCH, touchHandler);
 		}
 
@@ -90,6 +100,16 @@ package org.josht.starling.foxhole.controls
 		 * can be used in browser-based Flash Player.
 		 */
 		protected var stageText:Object;
+
+		/**
+		 * @private
+		 */
+		protected var _touchPointID:int = -1;
+
+		/**
+		 * @private
+		 */
+		protected var _measureTextField:TextField;
 
 		/**
 		 * @private
@@ -110,6 +130,11 @@ package org.josht.starling.foxhole.controls
 		 * @private
 		 */
 		private var _oldGlobalY:Number = 0;
+
+		/**
+		 * @private
+		 */
+		private var _savedSelectionIndex:int = -1;
 
 		/**
 		 * @private
@@ -378,6 +403,11 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
+		protected var _oldMouseCursor:String = null;
+
+		/**
+		 * @private
+		 */
 		protected var _onChange:Signal = new Signal(TextInput);
 
 		/**
@@ -391,13 +421,27 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
-		private var _stageTextProperties:PropertyProxy = new PropertyProxy(stageTextProperties_onChange);
+		protected var _onEnter:Signal = new Signal(TextInput);
+
+		/**
+		 * Dispatched when the user presses the Enter key while the text input
+		 * has focus.
+		 */
+		public function get onEnter():ISignal
+		{
+			return this._onEnter;
+		}
+
+		/**
+		 * @private
+		 */
+		private var _stageTextProperties:PropertyProxy;
 
 		/**
 		 * A set of key/value pairs to be passed down to the text input's
 		 * StageText instance.
 		 *
-		 * <p>If the sub-component has its own sub-components, their properties
+		 * <p>If the subcomponent has its own subcomponents, their properties
 		 * can be set too, using attribute <code>&#64;</code> notation. For example,
 		 * to set the skin on the thumb of a <code>SimpleScrollBar</code>
 		 * which is in a <code>Scroller</code> which is in a <code>List</code>,
@@ -406,6 +450,10 @@ package org.josht.starling.foxhole.controls
 		 */
 		public function get stageTextProperties():Object
 		{
+			if(!this._stageTextProperties)
+			{
+				this._stageTextProperties = new PropertyProxy(stageTextProperties_onChange);
+			}
 			return this._stageTextProperties;
 		}
 
@@ -448,14 +496,7 @@ package org.josht.starling.foxhole.controls
 		 */
 		public function setFocus():void
 		{
-			if(this.stageText)
-			{
-				this.stageText.assignFocus();
-			}
-			else
-			{
-				this._isWaitingToSetFocus = true;
-			}
+			this.setFocusInternal(null);
 		}
 
 		/**
@@ -463,21 +504,13 @@ package org.josht.starling.foxhole.controls
 		 */
 		override public function dispose():void
 		{
-			if(this.stageText)
-			{
-				this.stageText.removeEventListener(Event.CHANGE, stageText_changeHandler);
-				this.stageText.removeEventListener(KeyboardEvent.KEY_DOWN, stageText_keyDownHandler);
-				this.stageText.removeEventListener(FocusEvent.FOCUS_IN, stageText_focusInHandler);
-				this.stageText.removeEventListener(FocusEvent.FOCUS_OUT, stageText_focusOutHandler);
-				this.stageText.dispose();
-				this.stageText = null;
-			}
-
 			if(this._textSnapshotBitmapData)
 			{
 				this._textSnapshotBitmapData.dispose();
 				this._textSnapshotBitmapData = null;
 			}
+
+			this._onChange.removeAll();
 			super.dispose();
 		}
 
@@ -489,7 +522,7 @@ package org.josht.starling.foxhole.controls
 			super.render(support, alpha);
 			helperPoint.x = helperPoint.y = 0;
 			this.getTransformationMatrix(this.stage, helperMatrix);
-			transformCoords(helperMatrix, 0, 0, helperPoint);
+			MatrixUtil.transformCoords(helperMatrix, 0, 0, helperPoint);
 			ScrollRectManager.toStageCoordinates(helperPoint, this);
 			if(helperPoint.x != this._oldGlobalX || helperPoint.y != this._oldGlobalY)
 			{
@@ -517,27 +550,18 @@ package org.josht.starling.foxhole.controls
 		 */
 		override protected function initialize():void
 		{
-			var StageTextType:Class;
-			var initOptions:Object;
-			try
+			if(!this._measureTextField)
 			{
-				StageTextType = Class(getDefinitionByName("flash.text.StageText"));
-				const StageTextInitOptionsType:Class = Class(getDefinitionByName("flash.text.StageTextInitOptions"));
-				initOptions = new StageTextInitOptionsType(false);
+				this._measureTextField = new TextField();
+				this._measureTextField.visible = false;
+				this._measureTextField.mouseEnabled = this._measureTextField.mouseWheelEnabled = false;
+				this._measureTextField.autoSize = TextFieldAutoSize.LEFT;
+				this._measureTextField.multiline = false;
+				this._measureTextField.wordWrap = false;
+				this._measureTextField.embedFonts = false;
+				this._measureTextField.defaultTextFormat = new TextFormat(null, 11, 0x000000, false, false, false);
+				Starling.current.nativeStage.addChild(this._measureTextField);
 			}
-			catch(error:Error)
-			{
-				StageTextType = StageTextField;
-				initOptions = { multiline: false };
-			}
-			this.stageText = new StageTextType(initOptions);
-			this.stageText.visible = false;
-			this.stageText.stage = Starling.current.nativeStage;
-			this.stageText.addEventListener(Event.CHANGE, stageText_changeHandler);
-			this.stageText.addEventListener(KeyboardEvent.KEY_DOWN, stageText_keyDownHandler);
-			this.stageText.addEventListener(FocusEvent.FOCUS_IN, stageText_focusInHandler);
-			this.stageText.addEventListener(FocusEvent.FOCUS_OUT, stageText_focusOutHandler);
-			this.stageText.addEventListener(Event.COMPLETE, stageText_completeHandler);
 		}
 
 		/**
@@ -562,11 +586,17 @@ package org.josht.starling.foxhole.controls
 				{
 					this.stageText.text = this._text;
 				}
+				this._measureTextField.text = this.stageText.text;
 			}
 
 			if(stateInvalid)
 			{
 				this.stageText.editable = this._isEnabled;
+				if(!this._isEnabled && Mouse.supportsNativeCursor && this._oldMouseCursor)
+				{
+					Mouse.cursor = this._oldMouseCursor;
+					this._oldMouseCursor = null;
+				}
 			}
 
 			if(stateInvalid || stylesInvalid)
@@ -625,6 +655,28 @@ package org.josht.starling.foxhole.controls
 					this.stageText[propertyName] = propertyValue;
 				}
 			}
+
+			this._measureTextField.displayAsPassword = this.stageText.displayAsPassword;
+			this._measureTextField.maxChars = this.stageText.maxChars;
+			this._measureTextField.restrict = this.stageText.restrict;
+			const format:TextFormat = this._measureTextField.defaultTextFormat;
+			format.color = this.stageText.color;
+			format.font = this.stageText.fontFamily;
+			format.italic = this.stageText.fontPosture == FontPosture.ITALIC;
+			format.size = this.stageText.fontSize;
+			format.bold = this.stageText.fontWeight == FontWeight.BOLD;
+			var alignValue:String = this.stageText.textAlign;
+			if(alignValue == TextFormatAlign.START)
+			{
+				alignValue = TextFormatAlign.LEFT;
+			}
+			else if(alignValue == TextFormatAlign.END)
+			{
+				alignValue = TextFormatAlign.RIGHT;
+			}
+			format.align = alignValue;
+			this._measureTextField.defaultTextFormat = format;
+			this._measureTextField.setTextFormat(format);
 		}
 
 		/**
@@ -691,7 +743,7 @@ package org.josht.starling.foxhole.controls
 			this.stageText.drawViewPortToBitmapData(this._textSnapshotBitmapData);
 			if(!this._textSnapshot)
 			{
-				this._textSnapshot = new Image(starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData));
+				this._textSnapshot = new Image(starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor));
 				this.addChild(this._textSnapshot);
 			}
 			else
@@ -699,7 +751,7 @@ package org.josht.starling.foxhole.controls
 				if(needsNewBitmap)
 				{
 					this._textSnapshot.texture.dispose();
-					this._textSnapshot.texture = starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData);
+					this._textSnapshot.texture = starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor);
 					this._textSnapshot.readjustSize();
 				}
 				else
@@ -717,6 +769,40 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
+		protected function setFocusInternal(touch:Touch):void
+		{
+			if(this.stageText)
+			{
+				if(touch)
+				{
+					touch.getLocation(this, helperPoint);
+					helperPoint.x -= this._paddingLeft;
+					helperPoint.y -= this._paddingTop;
+					if(helperPoint.x < 0)
+					{
+						this._savedSelectionIndex = 0;
+					}
+					else
+					{
+						this._savedSelectionIndex = this._measureTextField.getCharIndexAtPoint(helperPoint.x, helperPoint.y);
+						const bounds:Rectangle = this._measureTextField.getCharBoundaries(this._savedSelectionIndex);
+						if(bounds && (bounds.x + bounds.width - helperPoint.x) < (helperPoint.x - bounds.x))
+						{
+							this._savedSelectionIndex++;
+						}
+					}
+				}
+				this.stageText.assignFocus();
+			}
+			else
+			{
+				this._isWaitingToSetFocus = true;
+			}
+		}
+
+		/**
+		 * @private
+		 */
 		protected function layout():void
 		{
 			if(this.currentBackground)
@@ -727,15 +813,27 @@ package org.josht.starling.foxhole.controls
 				this.currentBackground.height = this.actualHeight;
 			}
 
+			this.refreshViewPort();
+		}
+
+		/**
+		 * @private
+		 */
+		protected function refreshViewPort():void
+		{
 			var viewPort:Rectangle = this.stageText.viewPort;
 			if(!viewPort)
 			{
 				viewPort = new Rectangle();
 			}
+			if(!this.stageText.stage)
+			{
+				this.stageText.stage = Starling.current.nativeStage;
+			}
 
 			helperPoint.x = helperPoint.y = 0;
 			this.getTransformationMatrix(this.stage, helperMatrix);
-			transformCoords(helperMatrix, 0, 0, helperPoint);
+			MatrixUtil.transformCoords(helperMatrix, 0, 0, helperPoint);
 			ScrollRectManager.toStageCoordinates(helperPoint, this);
 			this._oldGlobalX = helperPoint.x;
 			this._oldGlobalY = helperPoint.y;
@@ -763,17 +861,128 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
+		protected function addedToStageHandler(event:starling.events.Event):void
+		{
+			if(this._measureTextField && !this._measureTextField.parent)
+			{
+				Starling.current.nativeStage.addChild(this._measureTextField);
+			}
+
+			var StageTextType:Class;
+			var initOptions:Object;
+			try
+			{
+				StageTextType = Class(getDefinitionByName("flash.text.StageText"));
+				const StageTextInitOptionsType:Class = Class(getDefinitionByName("flash.text.StageTextInitOptions"));
+				initOptions = new StageTextInitOptionsType(false);
+			}
+			catch(error:Error)
+			{
+				StageTextType = StageTextField;
+				initOptions = { multiline: false };
+			}
+			this.stageText = new StageTextType(initOptions);
+			this.stageText.visible = false;
+			this.stageText.addEventListener(Event.CHANGE, stageText_changeHandler);
+			this.stageText.addEventListener(KeyboardEvent.KEY_DOWN, stageText_keyDownHandler);
+			this.stageText.addEventListener(FocusEvent.FOCUS_IN, stageText_focusInHandler);
+			this.stageText.addEventListener(FocusEvent.FOCUS_OUT, stageText_focusOutHandler);
+			this.stageText.addEventListener(Event.COMPLETE, stageText_completeHandler);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function removedFromStageHandler(event:starling.events.Event):void
+		{
+			Starling.current.nativeStage.removeChild(this._measureTextField);
+
+			this._touchPointID = -1;
+
+			this.stageText.removeEventListener(Event.CHANGE, stageText_changeHandler);
+			this.stageText.removeEventListener(KeyboardEvent.KEY_DOWN, stageText_keyDownHandler);
+			this.stageText.removeEventListener(FocusEvent.FOCUS_IN, stageText_focusInHandler);
+			this.stageText.removeEventListener(FocusEvent.FOCUS_OUT, stageText_focusOutHandler);
+			this.stageText.removeEventListener(Event.COMPLETE, stageText_completeHandler);
+			this.stageText.stage = null;
+			this.stageText.dispose();
+			this.stageText = null;
+		}
+
+		/**
+		 * @private
+		 */
 		protected function touchHandler(event:TouchEvent):void
 		{
-			if(!this._isEnabled || this._stageTextHasFocus)
+			if(!this._isEnabled)
 			{
 				return;
 			}
 
-			const touch:Touch = event.getTouch(this, TouchPhase.ENDED);
-			if(touch)
+			const touches:Vector.<Touch> = event.getTouches(this);
+			if(touches.length == 0)
 			{
-				this.setFocus();
+				//end hover
+				if(Mouse.supportsNativeCursor && this._oldMouseCursor)
+				{
+					Mouse.cursor = this._oldMouseCursor;
+					this._oldMouseCursor = null;
+				}
+				return;
+			}
+			if(this._touchPointID >= 0)
+			{
+				var touch:Touch;
+				for each(var currentTouch:Touch in touches)
+				{
+					if(currentTouch.id == this._touchPointID)
+					{
+						touch = currentTouch;
+						break;
+					}
+				}
+				if(!touch)
+				{
+					//end hover
+					if(Mouse.supportsNativeCursor && this._oldMouseCursor)
+					{
+						Mouse.cursor = this._oldMouseCursor;
+						this._oldMouseCursor = null;
+					}
+					return;
+				}
+				if(touch.phase == TouchPhase.ENDED)
+				{
+					this._touchPointID = -1;
+					touch.getLocation(this, helperPoint);
+					ScrollRectManager.adjustTouchLocation(helperPoint, this);
+					var isInBounds:Boolean = this.hitTest(helperPoint, true) != null;
+					if(!this._stageTextHasFocus && isInBounds)
+					{
+						this.setFocusInternal(touch);
+					}
+					return;
+				}
+			}
+			else
+			{
+				for each(touch in touches)
+				{
+					if(touch.phase == TouchPhase.HOVER)
+					{
+						if(Mouse.supportsNativeCursor && !this._oldMouseCursor)
+						{
+							this._oldMouseCursor = Mouse.cursor;
+							Mouse.cursor = MouseCursor.IBEAM;
+						}
+						return;
+					}
+					else if(touch.phase == TouchPhase.BEGAN)
+					{
+						this._touchPointID = touch.id;
+						return;
+					}
+				}
 			}
 		}
 
@@ -791,12 +1000,7 @@ package org.josht.starling.foxhole.controls
 		protected function stageText_completeHandler(event:Event):void
 		{
 			this.stageText.removeEventListener(Event.COMPLETE, stageText_completeHandler);
-			//we can't take a proper snapshot of the StageText until after the
-			//complete event is dispatched
-			if(this._isWaitingToSetFocus || this._text)
-			{
-				this.invalidate(INVALIDATION_FLAG_DATA);
-			}
+			this.invalidate();
 
 			if(this._isWaitingToSetFocus && this._text)
 			{
@@ -815,9 +1019,14 @@ package org.josht.starling.foxhole.controls
 			{
 				this._textSnapshot.visible = false;
 			}
-			//we can't detect what character was tapped, so put the cursor at
-			//the end of the text
-			this.stageText.selectRange(this.stageText.text.length, this.stageText.text.length);
+			if(this._savedSelectionIndex < 0)
+			{
+				//we can't detect what character was tapped, so put the cursor at
+				//the end of the text
+				this._savedSelectionIndex = this.stageText.text.length;
+			}
+			this.stageText.selectRange(this._savedSelectionIndex, this._savedSelectionIndex);
+			this._savedSelectionIndex = -1;
 		}
 
 		/**
@@ -826,6 +1035,11 @@ package org.josht.starling.foxhole.controls
 		protected function stageText_focusOutHandler(event:FocusEvent):void
 		{
 			this._stageTextHasFocus = false;
+			//since StageText doesn't expose its scroll position, we need to
+			//set the selection back to the beginning to scroll there. it's a
+			//hack, but so is everything about StageText.
+			//in other news, why won't 0,0 work here?
+			this.stageText.selectRange(1, 1);
 
 			this.refreshSnapshot(false);
 			if(this._textSnapshot)
@@ -839,11 +1053,15 @@ package org.josht.starling.foxhole.controls
 		 */
 		protected function stageText_keyDownHandler(event:KeyboardEvent):void
 		{
-			//even a listener on the stage won't detect the back key press that
-			//will close the application if the StageText has focus, so we
-			//always need to prevent it here
-			if(event.keyCode == Keyboard.BACK)
+			if(event.keyCode == Keyboard.ENTER)
 			{
+				this._onEnter.dispatch(this);
+			}
+			else if(event.keyCode == Keyboard.BACK)
+			{
+				//even a listener on the stage won't detect the back key press that
+				//will close the application if the StageText has focus, so we
+				//always need to prevent it here
 				event.preventDefault();
 				Starling.current.nativeStage.focus = Starling.current.nativeStage;
 			}

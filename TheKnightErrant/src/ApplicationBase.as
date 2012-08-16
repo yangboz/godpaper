@@ -35,6 +35,7 @@ package
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.configs.TextureConfig;
+	import com.godpaper.as3.configs.ThemeConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessPieceManager;
@@ -53,9 +54,9 @@ package
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
+	import flash.events.Event;
 	import flash.geom.Rectangle;
 	import flash.system.Capabilities;
-	import flash.events.Event;
 	
 	import mx.logging.ILogger;
 	import mx.logging.LogEventLevel;
@@ -349,6 +350,8 @@ package
 			//LogConfig
 			LoggerConfig.filters = ["com.godpaper.tic_tac_toe.busniess.managers.*"];
 			LoggerConfig.level = LogEventLevel.DEBUG;
+			//ThemeConfig
+//			ThemeConfig.theme = ThemeConfig.THEME_AZURE;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);

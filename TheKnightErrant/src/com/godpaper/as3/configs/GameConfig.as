@@ -5,7 +5,10 @@ package com.godpaper.as3.configs
 	import com.godpaper.as3.consts.DefaultTollgatesConstant;
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.core.IGameStateManager;
-
+	
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
+	
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -124,7 +127,7 @@ package com.godpaper.as3.configs
 //		{
 //			_playMode = value;
 //		}
-		//--------------------------------------------------------------------------
+		//---------------------------------------------------------h-----------------
 		//
 		//  Protected properties
 		//

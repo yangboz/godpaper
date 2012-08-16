@@ -41,6 +41,16 @@ package org.josht.starling.foxhole.core
 	 */
 	public dynamic class PropertyProxy extends Proxy
 	{
+		public static function fromObject(source:Object, onChangeListener:Function = null):PropertyProxy
+		{
+			const newValue:PropertyProxy = new PropertyProxy(onChangeListener);
+			for(var propertyName:String in source)
+			{
+				newValue[propertyName] = source[propertyName];
+			}
+			return newValue;
+		}
+
 		/**
 		 * Constructor.
 		 */
@@ -69,6 +79,9 @@ package org.josht.starling.foxhole.core
 
 		/**
 		 * Dispatched when a property changes.
+		 *
+		 * <p>Listeners are expected to have the following function signature:</p>
+		 * <pre>function(proxy:PropertyProxy, propertyName:String):void</pre>
 		 */
 		public function get onChange():ISignal
 		{

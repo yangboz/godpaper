@@ -39,6 +39,7 @@ package org.josht.starling.foxhole.controls
 
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
+	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -50,22 +51,28 @@ package org.josht.starling.foxhole.controls
 	public class PickerList extends FoxholeControl
 	{
 		/**
+		 * @private
+		 */
+		private static const HELPER_POINT:Point = new Point();
+
+		/**
 		 * Constructor.
 		 */
 		public function PickerList()
 		{
 			super();
+			this.addEventListener(Event.REMOVED_FROM_STAGE, removedFromStageHandler);
 		}
 
 		/**
 		 * The value added to the <code>nameList</code> of the button.
 		 */
-		protected var defaultButtonName:String = "foxhole-pickerlist-button";
+		protected var defaultButtonName:String = "foxhole-picker-list-button";
 
 		/**
 		 * The value added to the <code>nameList</code> of the pop-up list.
 		 */
-		protected var defaultListName:String = "foxhole-pickerlist-list";
+		protected var defaultListName:String = "foxhole-picker-list-list";
 		
 		private var _button:Button;
 		private var _list:List;
@@ -310,13 +317,13 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
-		private var _buttonProperties:PropertyProxy = new PropertyProxy(buttonProperties_onChange);
+		private var _buttonProperties:PropertyProxy;
 		
 		/**
 		 * A set of key/value pairs to be passed down to the picker's button
 		 * instance. It is a Foxhole Button control.
 		 *
-		 * <p>If the sub-component has its own sub-components, their properties
+		 * <p>If the subcomponent has its own subcomponents, their properties
 		 * can be set too, using attribute <code>&#64;</code> notation. For example,
 		 * to set the skin on the thumb of a <code>SimpleScrollBar</code>
 		 * which is in a <code>Scroller</code> which is in a <code>List</code>,
@@ -325,6 +332,10 @@ package org.josht.starling.foxhole.controls
 		 */
 		public function get buttonProperties():Object
 		{
+			if(!this._buttonProperties)
+			{
+				this._buttonProperties = new PropertyProxy(buttonProperties_onChange);
+			}
 			return this._buttonProperties;
 		}
 		
@@ -365,13 +376,13 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
-		private var _listProperties:PropertyProxy = new PropertyProxy(listProperties_onChange);
+		private var _listProperties:PropertyProxy;
 		
 		/**
 		 * A set of key/value pairs to be passed down to the picker's internal
 		 * List instance. The track is a Foxhole Button control.
 		 *
-		 * <p>If the sub-component has its own sub-components, their properties
+		 * <p>If the subcomponent has its own subcomponents, their properties
 		 * can be set too, using attribute <code>&#64;</code> notation. For example,
 		 * to set the skin on the thumb of a <code>SimpleScrollBar</code>
 		 * which is in a <code>Scroller</code> which is in a <code>List</code>,
@@ -380,6 +391,10 @@ package org.josht.starling.foxhole.controls
 		 */
 		public function get listProperties():Object
 		{
+			if(!this._listProperties)
+			{
+				this._listProperties = new PropertyProxy(listProperties_onChange);
+			}
 			return this._listProperties;
 		}
 		
@@ -701,36 +716,87 @@ package org.josht.starling.foxhole.controls
 		 */
 		protected function list_onItemTouch(list:List, item:Object, index:int, event:TouchEvent):void
 		{
-			const displayRenderer:DisplayObject = DisplayObject(event.currentTarget);
-			const touch:Touch = event.getTouch(displayRenderer);
-			if(this._hasBeenScrolled || !touch || this._listTouchPointID != touch.id || touch.phase != TouchPhase.ENDED)
+			if(this._hasBeenScrolled || this._listTouchPointID < 0)
 			{
 				return;
 			}
-			
-			const location:Point = touch.getLocation(displayRenderer);
-			ScrollRectManager.adjustTouchLocation(location, displayRenderer);
-			if(displayRenderer.hitTest(location, true))
+			const displayRenderer:DisplayObject = DisplayObject(event.currentTarget);
+			const touches:Vector.<Touch> = event.getTouches(displayRenderer, TouchPhase.ENDED);
+			if(touches.length == 0)
+			{
+				return;
+			}
+			var touch:Touch;
+			for each(var currentTouch:Touch in touches)
+			{
+				if(currentTouch.id == this._listTouchPointID)
+				{
+					touch = currentTouch;
+					break;
+				}
+			}
+			if(!touch)
+			{
+				return;
+			}
+			touch.getLocation(displayRenderer, HELPER_POINT);
+			ScrollRectManager.adjustTouchLocation(HELPER_POINT, displayRenderer);
+			if(displayRenderer.hitTest(HELPER_POINT, true))
 			{
 				this.closePopUpList();
 			}
 		}
 
+		/**
+		 * @private
+		 */
+		protected function removedFromStageHandler(event:Event):void
+		{
+			this._buttonTouchPointID = -1;
+			this._listTouchPointID = -1;
+		}
+
+		/**
+		 * @private
+		 */
 		protected function button_touchHandler(event:TouchEvent):void
 		{
-			const touch:Touch = event.getTouch(this._button);
-			if(!touch || (this._buttonTouchPointID >= 0 && this._buttonTouchPointID != touch.id))
+			const touches:Vector.<Touch> = event.getTouches(this._button);
+			if(touches.length == 0)
 			{
 				return;
 			}
-			event.stopPropagation();
-			if(touch.phase == TouchPhase.BEGAN)
+			if(this._buttonTouchPointID >= 0)
 			{
-				this._buttonTouchPointID = touch.id;
+				var touch:Touch;
+				for each(var currentTouch:Touch in touches)
+				{
+					if(currentTouch.id == this._buttonTouchPointID)
+					{
+						touch = currentTouch;
+						break;
+					}
+				}
+				if(!touch)
+				{
+					return;
+				}
+				if(touch.phase == TouchPhase.ENDED)
+				{
+					this._buttonTouchPointID = -1;
+					return;
+				}
 			}
-			else if(touch.phase == TouchPhase.ENDED)
+			else
 			{
-				this._buttonTouchPointID = -1;
+				for each(touch in touches)
+				{
+					if(touch.phase == TouchPhase.BEGAN)
+					{
+						this._buttonTouchPointID = touch.id;
+						return;
+					}
+				}
 			}
 		}
 		
@@ -739,19 +805,41 @@ package org.josht.starling.foxhole.controls
 		 */
 		protected function list_touchHandler(event:TouchEvent):void
 		{
-			const touch:Touch = event.getTouch(this._list);
-			if(!touch || (this._listTouchPointID >= 0 && this._listTouchPointID != touch.id))
+			const touches:Vector.<Touch> = event.getTouches(this._list);
+			if(touches.length == 0)
 			{
 				return;
 			}
-			if(touch.phase == TouchPhase.BEGAN)
+			if(this._listTouchPointID >= 0)
 			{
-				this._listTouchPointID = touch.id;
-				this._hasBeenScrolled = false;
+				var touch:Touch;
+				for each(var currentTouch:Touch in touches)
+				{
+					if(currentTouch.id == this._listTouchPointID)
+					{
+						touch = currentTouch;
+						break;
+					}
+				}
+				if(!touch)
+				{
+					return;
+				}
+				if(touch.phase == TouchPhase.ENDED)
+				{
+					this._listTouchPointID = -1;
+				}
 			}
-			else if(touch.phase == TouchPhase.ENDED)
+			else
 			{
-				this._listTouchPointID = -1;
+				for each(touch in touches)
+				{
+					if(touch.phase == TouchPhase.BEGAN)
+					{
+						this._listTouchPointID = touch.id;
+						this._hasBeenScrolled = false;
+					}
+				}
 			}
 		}
 	}

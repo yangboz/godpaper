@@ -45,6 +45,12 @@ package org.josht.starling.foxhole.layout
 		function set typicalItemHeight(value:Number):void;
 
 		/**
+		 * Using the typical item bounds and suggested bounds, returns a set of
+		 * calculated dimensions for the view port.
+		 */
+		function measureViewPort(itemCount:int, viewPortBounds:ViewPortBounds = null, result:Point = null):Point;
+
+		/**
 		 * Determines which index (using the typical item dimensions) is the
 		 * first to appear at the specified scroll position (it may be partially
 		 * cut off at the edge). Items appearing before the specified index are

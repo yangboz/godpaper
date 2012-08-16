@@ -24,16 +24,14 @@
  */
 package org.josht.starling.foxhole.controls
 {
-	import flash.errors.IllegalOperationError;
-	
-	import org.josht.starling.foxhole.controls.supportClasses.LayoutContainer;
+	import org.josht.starling.foxhole.controls.supportClasses.LayoutViewPort;
 	import org.josht.starling.foxhole.core.FoxholeControl;
 	import org.josht.starling.foxhole.core.PropertyProxy;
-	import org.josht.starling.foxhole.data.ListCollection;
 	import org.josht.starling.foxhole.layout.ILayout;
+	import org.josht.starling.foxhole.layout.IVirtualLayout;
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
-	
+
 	import starling.display.DisplayObject;
 
 	/**
@@ -62,7 +60,7 @@ package org.josht.starling.foxhole.controls
 		 */
 		public function ScrollContainer()
 		{
-			this.viewPort = new LayoutContainer();
+			this.viewPort = new LayoutViewPort();
 		}
 
 		/**
@@ -78,7 +76,7 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
-		protected var viewPort:LayoutContainer;
+		protected var viewPort:LayoutViewPort;
 
 		/**
 		 * @private
@@ -258,13 +256,13 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
-		private var _scrollerProperties:PropertyProxy = new PropertyProxy(scrollerProperties_onChange);
+		private var _scrollerProperties:PropertyProxy;
 
 		/**
 		 * A set of key/value pairs to be passed down to the container's scroller
 		 * instance. The scroller is a Foxhole Scroller control.
 		 *
-		 * <p>If the sub-component has its own sub-components, their properties
+		 * <p>If the subcomponent has its own subcomponents, their properties
 		 * can be set too, using attribute <code>&#64;</code> notation. For example,
 		 * to set the skin on the thumb of a <code>SimpleScrollBar</code>
 		 * which is in a <code>Scroller</code> which is in a <code>List</code>,
@@ -273,6 +271,10 @@ package org.josht.starling.foxhole.controls
 		 */
 		public function get scrollerProperties():Object
 		{
+			if(!this._scrollerProperties)
+			{
+				this._scrollerProperties = new PropertyProxy(scrollerProperties_onChange);
+			}
 			return this._scrollerProperties;
 		}
 
@@ -398,6 +400,31 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
+		override public function dispose():void
+		{
+			this._onScroll.removeAll();
+			super.dispose();
+		}
+
+		/**
+		 * If the user is dragging the scroll, calling stopScrolling() will
+		 * cause the container to ignore the drag. The children of the container
+		 * will still receive touches, so it's useful to call this if the
+		 * children need to support touches or dragging without the container
+		 * also scrolling.
+		 */
+		public function stopScrolling():void
+		{
+			if(!this.scroller)
+			{
+				return;
+			}
+			this.scroller.stopScrolling();
+		}
+
+		/**
+		 * @private
+		 */
 		override protected function initialize():void
 		{
 			if(!this.scroller)
@@ -422,6 +449,10 @@ package org.josht.starling.foxhole.controls
 
 			if(dataInvalid)
 			{
+				if(this._layout is IVirtualLayout)
+				{
+					IVirtualLayout(this._layout).useVirtualLayout = false;
+				}
 				this.viewPort.layout = this._layout;
 			}
 
@@ -432,35 +463,34 @@ package org.josht.starling.foxhole.controls
 
 			if(scrollInvalid)
 			{
-				this.scroller.verticalScrollPosition = this.verticalScrollPosition;
-				this.scroller.horizontalScrollPosition = this.horizontalScrollPosition;
-				this.scroller.verticalScrollPolicy = this.verticalScrollPolicy;
-				this.scroller.horizontalScrollPolicy = this.horizontalScrollPolicy;
+				this.scroller.verticalScrollPosition = this._verticalScrollPosition;
+				this.scroller.horizontalScrollPosition = this._horizontalScrollPosition;
+				this.scroller.verticalScrollPolicy = this._verticalScrollPolicy;
+				this.scroller.horizontalScrollPolicy = this._horizontalScrollPolicy;
 			}
 
 			if(sizeInvalid)
 			{
-				if(isNaN(this.explicitWidth) && this._maxWidth < Number.POSITIVE_INFINITY)
+				if(isNaN(this.explicitWidth))
 				{
-					this.viewPort.visibleWidth = this._maxWidth;
+					this.scroller.width = NaN;
 				}
 				else
 				{
-					this.viewPort.visibleWidth = this.explicitWidth;
+					this.scroller.width = Math.max(0, this.explicitWidth);
 				}
-				if(isNaN(this.explicitHeight) && this._maxHeight < Number.POSITIVE_INFINITY)
+				if(isNaN(this.explicitHeight))
 				{
-					this.viewPort.visibleHeight = this._maxHeight;
+					this.scroller.height = NaN;
 				}
 				else
 				{
-					this.viewPort.visibleHeight = this.explicitHeight;
+					this.scroller.height = Math.max(0, this.explicitHeight);
 				}
-
-				this.scroller.minWidth = Math.max(0, (isNaN(this.explicitWidth) ? this._minWidth : this.explicitWidth));
-				this.scroller.maxWidth = isNaN(this.explicitWidth) ? this._maxWidth : this.explicitWidth;
-				this.scroller.minHeight = Math.max(0, (isNaN(this.explicitHeight) ? this._minHeight : this.explicitHeight));
-				this.scroller.maxHeight = isNaN(this.explicitHeight) ? this._maxHeight : this.explicitHeight;
+				this.scroller.minWidth = Math.max(0,  this._minWidth);
+				this.scroller.maxWidth = Math.max(0, this._maxWidth);
+				this.scroller.minHeight = Math.max(0, this._minHeight);
+				this.scroller.maxHeight = Math.max(0, this._maxHeight);
 			}
 
 			sizeInvalid = this.autoSizeIfNeeded() || sizeInvalid;

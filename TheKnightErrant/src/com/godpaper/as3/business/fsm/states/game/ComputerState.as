@@ -119,15 +119,16 @@ package com.godpaper.as3.business.fsm.states.game
 			//Using the class reflection architure to dynamic instance the configed class,
 			//@see the DefaultTollgatesConstant.as
 			//process the searching class reflection.
-			var className:String=getQualifiedClassName(GameConfig.tollgates[time].searching);
-			var implementation:Object=getDefinitionByName(className);
-			searching=new implementation(FlexGlobals.chessBoardModel.status);
+//			var className:String=getQualifiedClassName(GameConfig.tollgates[time].searching);
+//			var implementation:Object=getDefinitionByName(className);
+//			searching=new implementation(FlexGlobals.chessBoardModel.status);
+			searching=new GameConfig.tollgates[time].searching(FlexGlobals.chessBoardModel.status);
 			//process the evaluation class reflection.
 			var evaluationClassName:String = getQualifiedClassName(GameConfig.tollgates[time].evaluation);
 			var evaluationClass:Object = getDefinitionByName(evaluationClassName);
 			searching.evaluation = new evaluationClass();
 			//
-			LOG.info("current toll gate is:{0}", getQualifiedClassName(implementation));
+			LOG.info("current toll gate is:{0}", getQualifiedClassName(GameConfig.tollgates[time].searching));
 			//using this flash green thread algorithm to avoid script time limition only 15s.
 			processes=new Vector.<IRunnable>();
 			processes.push(searching);

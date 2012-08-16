@@ -345,7 +345,7 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
-		private var _tabProperties:PropertyProxy = new PropertyProxy(tabProperties_onChange);
+		private var _tabProperties:PropertyProxy;
 
 		/**
 		 * A set of key/value pairs to be passed down to all of the tab bar's
@@ -354,7 +354,7 @@ package org.josht.starling.foxhole.controls
 		 * list) should be passed to tabs in another way (such as with an
 		 * <code>AddedWatcher</code>).
 		 *
-		 * <p>If the sub-component has its own sub-components, their properties
+		 * <p>If the subcomponent has its own subcomponents, their properties
 		 * can be set too, using attribute <code>&#64;</code> notation. For example,
 		 * to set the skin on the thumb of a <code>SimpleScrollBar</code>
 		 * which is in a <code>Scroller</code> which is in a <code>List</code>,
@@ -365,6 +365,10 @@ package org.josht.starling.foxhole.controls
 		 */
 		public function get tabProperties():Object
 		{
+			if(!this._tabProperties)
+			{
+				this._tabProperties = new PropertyProxy(tabProperties_onChange);
+			}
 			return this._tabProperties;
 		}
 
@@ -400,6 +404,15 @@ package org.josht.starling.foxhole.controls
 				this._tabProperties.onChange.add(tabProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		override public function dispose():void
+		{
+			this._onChange.removeAll();
+			super.dispose();
 		}
 
 		/**

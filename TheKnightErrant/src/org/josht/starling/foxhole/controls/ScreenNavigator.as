@@ -32,6 +32,7 @@ package org.josht.starling.foxhole.controls
 	import org.osflash.signals.Signal;
 
 	import starling.display.DisplayObject;
+	import starling.events.Event;
 	import starling.events.ResizeEvent;
 
 	/**
@@ -49,6 +50,8 @@ package org.josht.starling.foxhole.controls
 		public function ScreenNavigator()
 		{
 			super();
+			this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
+			this.addEventListener(Event.REMOVED_FROM_STAGE, removedFromStageHandler);
 		}
 
 		/**
@@ -121,6 +124,7 @@ package org.josht.starling.foxhole.controls
 		public var defaultScreenID:String;
 
 		private var _transitionIsActive:Boolean = false;
+		private var _previousScreenInTransitionID:String;
 		private var _previousScreenInTransition:DisplayObject;
 		private var _nextScreenID:String = null;
 		private var _clearAfterTransition:Boolean = false;
@@ -128,7 +132,7 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
-		private var _onChange:Signal = new Signal(ScreenNavigator, DisplayObject);
+		private var _onChange:Signal = new Signal(ScreenNavigator);
 
 		/**
 		 * Dispatched when the active screen changes.
@@ -177,6 +181,7 @@ package org.josht.starling.foxhole.controls
 			}
 
 			this._previousScreenInTransition = this._activeScreen;
+			this._previousScreenInTransitionID = this._activeScreenID;
 			if(this._activeScreen)
 			{
 				this.clearScreenInternal(false);
@@ -230,7 +235,7 @@ package org.josht.starling.foxhole.controls
 			this.transition(this._previousScreenInTransition, this._activeScreen, transitionComplete);
 
 			this.invalidate(INVALIDATION_FLAG_SELECTED);
-			this._onChange.dispatch(this, this._activeScreen);
+			this._onChange.dispatch(this);
 			return this._activeScreen;
 		}
 
@@ -312,6 +317,7 @@ package org.josht.starling.foxhole.controls
 			{
 				this._transitionIsActive = true;
 				this._previousScreenInTransition = this._activeScreen;
+				this._previousScreenInTransitionID = this._activeScreenID;
 				this.transition(this._previousScreenInTransition, null, transitionComplete);
 			}
 			this._screenEvents[this._activeScreenID] = null;
@@ -354,9 +360,11 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
-		override protected function initialize():void
+		override public function dispose():void
 		{
-			this.stage.addEventListener(ResizeEvent.RESIZE, stage_resizeHandler);
+			this._onChange.removeAll();
+			this._onClear.removeAll();
+			super.dispose();
 		}
 
 		/**
@@ -441,9 +449,10 @@ package org.josht.starling.foxhole.controls
 		{
 			if(this._previousScreenInTransition)
 			{
-				this.removeChild(this._previousScreenInTransition);
-				this._previousScreenInTransition.dispose();
+				const item:ScreenNavigatorItem = this._screens[this._previousScreenInTransitionID];
+				this.removeChild(this._previousScreenInTransition, !(item.screen is DisplayObject));
 				this._previousScreenInTransition = null;
+				this._previousScreenInTransitionID = null;
 			}
 			this._transitionIsActive = false;
 
@@ -472,6 +481,22 @@ package org.josht.starling.foxhole.controls
 			}
 
 			return eventListener;
+		}
+
+		/**
+		 * @private
+		 */
+		protected function addedToStageHandler(event:Event):void
+		{
+			this.stage.addEventListener(ResizeEvent.RESIZE, stage_resizeHandler);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function removedFromStageHandler(event:Event):void
+		{
+			this.stage.removeEventListener(ResizeEvent.RESIZE, stage_resizeHandler);
 		}
 
 		/**
