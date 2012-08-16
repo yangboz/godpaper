@@ -61,6 +61,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A4EDDD1915DD1B95009CFD0E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A41103BB15DBD96B00CCD0DE /* Sparrow.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DEFE4BC2101B317600E22471;
+			remoteInfo = Sparrow;
+		};
+		A4EDDD1B15DD1B95009CFD0E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A41103BB15DBD96B00CCD0DE /* Sparrow.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DEEA9335101E32A30071DD21;
+			remoteInfo = UnitTests;
+		};
 		A4F0D02715D154B10034FF28 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A4F0CFFE15D154B10034FF28 /* Project object */;
@@ -78,7 +92,7 @@
 		A41103CE15DBDB6500CCD0DE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		A41103D015DBDB6D00CCD0DE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A41103D215DBDB7900CCD0DE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		A41103D415DBDB9100CCD0DE /* libSparrow.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libSparrow.a; path = "../../../../Documents/GitHub/Sparrow13/sparrow/src/build/Release-iphoneos/libSparrow.a"; sourceTree = "<group>"; };
+		A41103D415DBDB9100CCD0DE /* libSparrow.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSparrow.a; path = "../../../../Documents/GitHub/Sparrow13/sparrow/src/build/Release-iphoneos/libSparrow.a"; sourceTree = "<group>"; };
 		A41103D615DBDBEA00CCD0DE /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		A41103D715DBDBEA00CCD0DE /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		A41103D915DBDF8100CCD0DE /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -142,6 +156,10 @@
 		A4ED98C815D3DB1F00C450E8 /* GP_Array3Iterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array3Iterator.m; sourceTree = "<group>"; };
 		A4ED98CA15D3E73200C450E8 /* GP_Array2Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array2Tests.h; sourceTree = "<group>"; };
 		A4ED98CB15D3E73200C450E8 /* GP_Array2Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array2Tests.m; sourceTree = "<group>"; };
+		A4EDDD3915DD2012009CFD0E /* GP_IType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IType.h; sourceTree = "<group>"; };
+		A4EDDD3A15DD2457009CFD0E /* GP_IPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IPosition.h; sourceTree = "<group>"; };
+		A4EDDD3B15DD330F009CFD0E /* GP_IUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IUID.h; sourceTree = "<group>"; };
+		A4EDDD3C15DD33D3009CFD0E /* GP_IVisualElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IVisualElement.h; sourceTree = "<group>"; };
 		A4F0D00715D154B10034FF28 /* TheRealBishop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheRealBishop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4F0D00B15D154B10034FF28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A4F0D00D15D154B10034FF28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -208,6 +226,59 @@
 			name = iterators;
 			sourceTree = "<group>";
 		};
+		A4EDDD1515DD1B95009CFD0E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A4EDDD1A15DD1B95009CFD0E /* libSparrow.a */,
+				A4EDDD1C15DD1B95009CFD0E /* UnitTest.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A4EDDD3415DD1F5C009CFD0E /* com */ = {
+			isa = PBXGroup;
+			children = (
+				A4EDDD3815DD1F8C009CFD0E /* lookbackon */,
+				A4EDDD3515DD1F63009CFD0E /* godpaper */,
+			);
+			name = com;
+			sourceTree = "<group>";
+		};
+		A4EDDD3515DD1F63009CFD0E /* godpaper */ = {
+			isa = PBXGroup;
+			children = (
+				A4EDDD3615DD1F71009CFD0E /* obj-c */,
+			);
+			name = godpaper;
+			sourceTree = "<group>";
+		};
+		A4EDDD3615DD1F71009CFD0E /* obj-c */ = {
+			isa = PBXGroup;
+			children = (
+				A4EDDD3715DD1F82009CFD0E /* core */,
+			);
+			name = "obj-c";
+			sourceTree = "<group>";
+		};
+		A4EDDD3715DD1F82009CFD0E /* core */ = {
+			isa = PBXGroup;
+			children = (
+				A4EDDD3915DD2012009CFD0E /* GP_IType.h */,
+				A4EDDD3A15DD2457009CFD0E /* GP_IPosition.h */,
+				A4EDDD3B15DD330F009CFD0E /* GP_IUID.h */,
+				A4EDDD3C15DD33D3009CFD0E /* GP_IVisualElement.h */,
+			);
+			name = core;
+			sourceTree = "<group>";
+		};
+		A4EDDD3815DD1F8C009CFD0E /* lookbackon */ = {
+			isa = PBXGroup;
+			children = (
+				A4F0D03A15D154D60034FF28 /* ds */,
+			);
+			name = lookbackon;
+			sourceTree = "<group>";
+		};
 		A4F0CFFC15D154B10034FF28 = {
 			isa = PBXGroup;
 			children = (
@@ -250,7 +321,7 @@
 		A4F0D01115D154B10034FF28 /* TheRealBishop */ = {
 			isa = PBXGroup;
 			children = (
-				A4F0D03A15D154D60034FF28 /* ds */,
+				A4EDDD3415DD1F5C009CFD0E /* com */,
 				A4F0D01215D154B10034FF28 /* Supporting Files */,
 				A41103D615DBDBEA00CCD0DE /* Game.h */,
 				A4F0D01A15D154B10034FF28 /* GP_AppDelegate.h */,
@@ -423,6 +494,12 @@
 			mainGroup = A4F0CFFC15D154B10034FF28;
 			productRefGroup = A4F0D00815D154B10034FF28 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A4EDDD1515DD1B95009CFD0E /* Products */;
+					ProjectRef = A41103BB15DBD96B00CCD0DE /* Sparrow.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A4F0D00615D154B10034FF28 /* TheRealBishop */,
@@ -430,6 +507,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A4EDDD1A15DD1B95009CFD0E /* libSparrow.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSparrow.a;
+			remoteRef = A4EDDD1915DD1B95009CFD0E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A4EDDD1C15DD1B95009CFD0E /* UnitTest.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UnitTest.octest;
+			remoteRef = A4EDDD1B15DD1B95009CFD0E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A4F0D00515D154B10034FF28 /* Resources */ = {
