@@ -160,6 +160,12 @@
 		A4EDDD3A15DD2457009CFD0E /* GP_IPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IPosition.h; sourceTree = "<group>"; };
 		A4EDDD3B15DD330F009CFD0E /* GP_IUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IUID.h; sourceTree = "<group>"; };
 		A4EDDD3C15DD33D3009CFD0E /* GP_IVisualElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IVisualElement.h; sourceTree = "<group>"; };
+		A4EDDD3D15DD442E009CFD0E /* GP_IChessPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IChessPiece.h; sourceTree = "<group>"; };
+		A4EDDD3E15DD44E6009CFD0E /* GP_IChessBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IChessBoard.h; sourceTree = "<group>"; };
+		A4EDDD3F15DD4573009CFD0E /* GP_IPiecesBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IPiecesBox.h; sourceTree = "<group>"; };
+		A4EDDD4015DD45C4009CFD0E /* GP_IDragdropable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IDragdropable.h; sourceTree = "<group>"; };
+		A4EDDD4115DD4608009CFD0E /* GP_IChessGasket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IChessGasket.h; sourceTree = "<group>"; };
+		A4EDDD4215DD46DD009CFD0E /* GP_IChessVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IChessVO.h; sourceTree = "<group>"; };
 		A4F0D00715D154B10034FF28 /* TheRealBishop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheRealBishop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4F0D00B15D154B10034FF28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A4F0D00D15D154B10034FF28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -267,6 +273,12 @@
 				A4EDDD3A15DD2457009CFD0E /* GP_IPosition.h */,
 				A4EDDD3B15DD330F009CFD0E /* GP_IUID.h */,
 				A4EDDD3C15DD33D3009CFD0E /* GP_IVisualElement.h */,
+				A4EDDD3D15DD442E009CFD0E /* GP_IChessPiece.h */,
+				A4EDDD3E15DD44E6009CFD0E /* GP_IChessBoard.h */,
+				A4EDDD3F15DD4573009CFD0E /* GP_IPiecesBox.h */,
+				A4EDDD4015DD45C4009CFD0E /* GP_IDragdropable.h */,
+				A4EDDD4115DD4608009CFD0E /* GP_IChessGasket.h */,
+				A4EDDD4215DD46DD009CFD0E /* GP_IChessVO.h */,
 			);
 			name = core;
 			sourceTree = "<group>";
