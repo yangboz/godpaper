@@ -72,6 +72,10 @@ package com.godpaper.chinese_chess_jam.vo.pgn
 //		　　(5) 其他，诸如Annotator、Mode、PlyCount等，请参阅《国际象棋译文苑》文摘——关于PGN和FEN记谱规范(上)一文。
 		//The chess book
 		public var chessbook:ChessBookVO = new ChessBookVO();
+		//Misc
+		public var annotator:String="";//评注者(们)的名字
+		public var mode:String="";//这是下该局的方式，比如OTB代表棋盘上，PM代表通过书面邮件，EM代表通过电子邮件，ICS指在网上站点下的，TC代表通过通常的长途电讯
+		public var plyCount :String="";//表示该局的步数，严格来说是指“半”步数
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -90,7 +94,10 @@ package com.godpaper.chinese_chess_jam.vo.pgn
 		public static const META_KEY_ECCO:String = "ECCO";
 		public static const META_KEY_OPENING:String = "Opening";
 		public static const META_KEY_VARIATION:String = "Variation";
-		
+		//
+		public static const META_KEY_ANNOTATOR:String = "Annotator";
+		public static const META_KEY_MODE:String = "Mode";
+		public static const META_KEY_PLY_COUNT:String = "PlyCount";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

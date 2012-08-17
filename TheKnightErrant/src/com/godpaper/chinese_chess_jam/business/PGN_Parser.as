@@ -232,6 +232,27 @@ package com.godpaper.chinese_chess_jam.business
 					this.pgnVO.variation = variationLabels[1];
 					LOG.debug("pgnVO->variation:{0}",this.pgnVO.variation);
 				}
+				//Annotator
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_ANNOTATOR)!=-1)
+				{
+					var annotatorLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.annotator = annotatorLabels[1];
+					LOG.debug("pgnVO->annotator:{0}",this.pgnVO.annotator);
+				}
+				//Mode
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_MODE)!=-1)
+				{
+					var modeLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.mode = modeLabels[1];
+					LOG.debug("pgnVO->mode:{0}",this.pgnVO.mode);
+				}
+				//PlyCount
+				if(String(metaLabels[i]).indexOf(PGN_VO.META_KEY_PLY_COUNT)!=-1)
+				{
+					var plyCountLabels:Array = String(metaLabels[i]).split("\"");
+					this.pgnVO.plyCount = plyCountLabels[1];
+					LOG.debug("pgnVO->plyCount:{0}",this.pgnVO.plyCount);
+				}
 				//...
 			}
 			//			LOG.debug(labelStr);

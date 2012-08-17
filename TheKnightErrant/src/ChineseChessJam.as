@@ -154,7 +154,7 @@ package
 			LoggerConfig.level = LogEventLevel.DEBUG;
 			//PGNs
 			var pgnProxy:PGN_Proxy = new PGN_Proxy();
-			pgnProxy.load("assets/PGNs/N01_for_testing.PGN");
+			pgnProxy.load("assets/PGNs/N01顺炮横车破直车弃马局(UTF8).PGN");//和合二炮(utf8).PGN//N01顺炮横车破直车弃马局(UTF8).PGN
 		}
 		//--------------------------------------------------------------------------
 		//
