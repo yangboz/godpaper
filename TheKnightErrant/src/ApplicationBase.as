@@ -351,7 +351,7 @@ package
 			LoggerConfig.filters = ["com.godpaper.tic_tac_toe.busniess.managers.*"];
 			LoggerConfig.level = LogEventLevel.DEBUG;
 			//ThemeConfig
-//			ThemeConfig.theme = ThemeConfig.THEME_AZURE;
+//			ThemeConfig.theme = ThemeConfig.THEME_MINIMAL;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);

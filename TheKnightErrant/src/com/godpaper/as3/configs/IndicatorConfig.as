@@ -64,7 +64,7 @@ package com.godpaper.as3.configs
 			//Call out view(progress bar).
 			if(value)
 			{
-				computerWinIndicatory = new ComputerWinIndicatory();
+				if(computerWinIndicatory == null) computerWinIndicatory = new ComputerWinIndicatory();
 //				Callout.show(computerWinIndicatory, getChessBoard(), Callout.DIRECTION_ANY);
 //				_callout.open(computerWinIndicatory,FlexGlobals.gameScene);
 				PopUpManager.addPopUp(computerWinIndicatory);
@@ -74,6 +74,7 @@ package com.godpaper.as3.configs
 				if(computerWinIndicatory)
 				{
 					PopUpManager.removePopUp(computerWinIndicatory);
+					computerWinIndicatory = null;
 				}
 			}
 		}
@@ -90,7 +91,7 @@ package com.godpaper.as3.configs
 			//Call out view(progress bar).
 			if(value)
 			{
-				thinkIndicatory = new ThinkIndicatory();
+				if(thinkIndicatory == null) thinkIndicatory = new ThinkIndicatory();
 //				Callout.show(thinkIndicatory, getChessBoard(), Callout.DIRECTION_DOWN);
 //				_callout.open(thinkIndicatory,FlexGlobals.gameScene);
 				PopUpManager.addPopUp(thinkIndicatory);
@@ -100,6 +101,7 @@ package com.godpaper.as3.configs
 				if(thinkIndicatory)
 				{
 					PopUpManager.removePopUp(thinkIndicatory);
+					thinkIndicatory = null;
 				}
 			}
 		}
@@ -116,7 +118,7 @@ package com.godpaper.as3.configs
 			//Call out view(progress bar).
 			if(value)
 			{
-				humanWinIndicatory = new HumanWinIndicatory();
+				if(humanWinIndicatory == null) humanWinIndicatory = new HumanWinIndicatory();
 				//				Callout.show(computerWinIndicatory, getChessBoard(), Callout.DIRECTION_ANY);
 				//				_callout.open(computerWinIndicatory,FlexGlobals.gameScene);
 				PopUpManager.addPopUp(humanWinIndicatory);
@@ -126,6 +128,7 @@ package com.godpaper.as3.configs
 				if(humanWinIndicatory)
 				{
 					PopUpManager.removePopUp(humanWinIndicatory);
+					humanWinIndicatory = null;
 				}
 			}
 		}
@@ -158,10 +161,10 @@ package com.godpaper.as3.configs
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-//		private static function getChessBoard():DisplayObject
-//		{
-//			return DisplayObject(FlexGlobals.gameScene.chessBoard);
-//		}
+		private static function getChessBoard():DisplayObject
+		{
+			return DisplayObject(FlexGlobals.gameScreen.chessBoard);
+		}
 
 	}
 

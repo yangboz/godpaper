@@ -371,7 +371,8 @@ package com.lookbackon.ds
 						var bk:int=0;
 						while(bk<len)
 						{
-							bGroup.unshift(board.gett(x-bk,y+bk));
+//							bGroup.unshift(board.gett(x-bk,y+bk));
+							bGroup.push(board.gett(x-bk,y+bk));
 							bk++;
 						}
 						//get successionalGroup.

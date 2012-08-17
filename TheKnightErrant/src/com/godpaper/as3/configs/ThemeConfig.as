@@ -45,7 +45,11 @@ package com.godpaper.as3.configs
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		//Theme customize.
+		public static var theme:Class = MinimalTheme;
+//		public static var theme:Class;
+		//Keep the one instance.
+		private static var _instance:IFoxholeTheme;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -58,18 +62,7 @@ package com.godpaper.as3.configs
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//Theme customize.
-		private static var _theme:Class = MinimalTheme;
-		public static function set theme(value:Class):void
-		{
-			_theme = value;
-		}
-		//
-		private static var _instance:IFoxholeTheme;
-		public static function get instance():IFoxholeTheme
-		{
-			return _instance;
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -88,7 +81,7 @@ package com.godpaper.as3.configs
 		//--------------------------------------------------------------------------
 		public static function getThemeImpl(...args):IFoxholeTheme
 		{
-			if(_instance==null) _instance = new _theme(args[0]);//TODO:more arguments assemble.
+			if(_instance==null) _instance = new theme(args[0]);//TODO:more arguments assemble.
 			return _instance;
 		}
 		//--------------------------------------------------------------------------
