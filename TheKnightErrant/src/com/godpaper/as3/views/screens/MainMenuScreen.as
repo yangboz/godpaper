@@ -26,6 +26,7 @@ package com.godpaper.as3.views.screens
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	
@@ -104,6 +105,7 @@ package com.godpaper.as3.views.screens
 			_multiPlayButton = new Button();
 			_multiPlayButton.label = "Multi Play";
 			_multiPlayButton.width = _multiPlayButton.height = 100 * this.dpiScale;
+			_multiPlayButton.onRelease.addOnce(multiPlayButton_onRelease);
 			this._container.addChild(_multiPlayButton);
 			
 			this._settingsButton = new Button();
@@ -126,7 +128,6 @@ package com.godpaper.as3.views.screens
 		//--------------------------------------------------------------------------
 		public function MainMenuScreen()
 		{
-			//TODO: implement function
 			super();
 		}     	
 		//--------------------------------------------------------------------------
@@ -165,7 +166,20 @@ package com.godpaper.as3.views.screens
 		//
 		private function singlePlayButton_onRelease(button:Button):void
 		{
-			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);//Screen swither here.
+			//Register the play mode of game.
+			GameConfig.playMode = GameConfig.HUMAN_VS_COMPUTER;
+			//Screen swither here.
+			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);
+		}
+		//
+		private function multiPlayButton_onRelease(button:Button):void
+		{
+			//P2pService testing.
+			FlexGlobals.conductService.initialization(null,null);
+			//Register the play mode of game.
+			GameConfig.playMode = GameConfig.HUMAN_VS_HUMAN;
+			//Screen swither here.
+			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);
 		}
 	}
 	

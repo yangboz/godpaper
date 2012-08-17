@@ -10,12 +10,15 @@ package com.godpaper.as3.services
 	import com.godpaper.as3.model.UserModel;
 	import com.godpaper.as3.model.vos.PostVO;
 	import com.godpaper.as3.plugins.IPlug;
+	import com.godpaper.as3.utils.LogUtil;
 	
 	import flash.events.AsyncErrorEvent;
 	import flash.events.NetStatusEvent;
 	import flash.net.GroupSpecifier;
 	import flash.net.NetConnection;
 	import flash.net.NetGroup;
+	
+	import mx.logging.ILogger;
 	
 	//Framework internal usage only.
 	[ExcludeClass]
@@ -28,6 +31,11 @@ package com.godpaper.as3.services
 	 */
 	public class ConductService implements IConductService
 	{
+		//--------------------------------------------------------------------------
+		//
+		//  Variables
+		//
+		//--------------------------------------------------------------------------
 		private var netConnection:NetConnection;
 		private var netGroup:NetGroup;
 		//
@@ -39,6 +47,10 @@ package com.godpaper.as3.services
 		public static const SPECIFIER_NAME:String  = "GODPAPER_specifier";
 		//Model
 //		private var userModel:UserModel = FlexGlobals.userModel;
+		//----------------------------------
+		//  CONSTANTS
+		//----------------------------------
+		private static const LOG:ILogger = LogUtil.getLogger(ConductService);
 		//
 		//--------------------------------------------------------------------------
 		//
@@ -139,22 +151,22 @@ package com.godpaper.as3.services
 			{
 				//connection succeeded so setup a group
 				case "NetConnection.Connect.Success":
-					trace("NetConnection.Connect.Success(nearID):"+this.netConnection.nearID);
+					LOG.debug("NetConnection.Connect.Success(nearID):{0}",this.netConnection.nearID);
 					FlexGlobals.userModel.hosterPeerId = this.netConnection.nearID;
 					//					//Refresh user list.
 					FlexGlobals.userModel.addUser(this.netConnection.nearID);//Default index(0) as well as hoster.
-					trace("[NetConnection.Connect.Success]:Currently total users(after addUser):",FlexGlobals.userModel.totalUsers());
+					LOG.debug("[NetConnection.Connect.Success]:Currently total users(after addUser):{0}",FlexGlobals.userModel.totalUsers());
 					//ready to set up the net group.
 					setupNetGroup();
 					break;
 				//group setup succeeded so enable submit
 				case "NetGroup.Connect.Success":
-					trace("NetGroup.Connect.Success:"+this.netGroup.info);
+					LOG.debug("NetGroup.Connect.Success:{0}",this.netGroup.info);
 					//
 					break;
 				//posting received so add to output
 				case "NetGroup.Posting.Notify":
-					trace("[RECEIVED(Posting.Notify)] from:",event.info.message.peerID,"status:",event.info.message.status,"roleIndex",event.info.message.roleIndex);
+					LOG.debug("[RECEIVED(Posting.Notify)] from:{0},{1},{2},{3},{4}",event.info.message.peerID,"status:",event.info.message.status,"roleIndex",event.info.message.roleIndex);
 					//handle status message
 					if (event.info.message.status!=null)
 					{
@@ -163,7 +175,7 @@ package com.godpaper.as3.services
 						{
 							//store peer info
 							FlexGlobals.userModel.addUser(event.info.message.peerID);
-							trace("[NetGroup.Posting.Notify]:Currently total users(after addUser):",FlexGlobals.userModel.totalUsers());
+							LOG.debug("[NetGroup.Posting.Notify]:Currently total users(after addUser):{0}",FlexGlobals.userModel.totalUsers());
 							//send this peers' info back to originator
 							var extantConnObj:PostVO = createStatusMessageObject(STATUS_CONNECTED);
 							extantConnObj.destination = this.netGroup.convertPeerIDToGroupAddress(event.info.message.peerID);
@@ -173,12 +185,12 @@ package com.godpaper.as3.services
 						{
 							//refresh the user list.
 							FlexGlobals.userModel.removeUser(event.info.message.peerID);
-							trace("[NetGroup.Posting.Notify]:Currently total users(after removeUser):",FlexGlobals.userModel.totalUsers());
+							LOG.debug("[NetGroup.Posting.Notify]:Currently total users(after removeUser):{0}",FlexGlobals.userModel.totalUsers());
 						}
 					}
 					else//handle  message with role information
 					{
-						trace("[RECEIVED] from:",truncateString(event.info.message.peerID),event.info.message.roleIndex,",state:",event.info.message.state);
+						LOG.debug("[RECEIVED] from:{0},{1},{2}",truncateString(event.info.message.peerID),event.info.message.roleIndex,",state:",event.info.message.state);
 						//state switcher
 						if(event.info.message.state)
 						{
@@ -194,7 +206,7 @@ package com.godpaper.as3.services
 					break;
 				//neighbour connected so add details to list
 				case "NetGroup.Neighbor.Connect":
-					trace("[Neighbor(join)]:"+event.info.peerID);
+					LOG.debug("[Neighbor(join)]:{0}",event.info.peerID);
 					//send this peers' info back to hoster
 					//see if this is first connect event
 					if (!hasConnected)
@@ -208,12 +220,12 @@ package com.godpaper.as3.services
 					break;
 				//neighbour disconnected so remove details from list
 				case "NetGroup.Neighbor.Disconnect":
-					trace("[Neighbor(left)]:"+event.info.peerID);
+					LOG.debug("[Neighbor(left)]:{0}",event.info.peerID);
 					//unregisterRole
 					FlexGlobals.userModel.unregisterRole(event.info.peerID);
 					//refresh the user list.
 					FlexGlobals.userModel.removeUser(event.info.peerID);
-					trace("[NetGroup.Posting.Notify]:Currently total users(after removeUser):",FlexGlobals.userModel.totalUsers());
+					LOG.debug("[NetGroup.Posting.Notify]:Currently total users(after removeUser):{0}",FlexGlobals.userModel.totalUsers());
 					//tell entire group about peer disconnecting
 					var disconPost:PostVO = createStatusMessageObject(STATUS_DISCONNECTED);
 					disconPost.peerID = event.info.peerID;
@@ -229,16 +241,16 @@ package com.godpaper.as3.services
 						{
 							//refresh user list
 							FlexGlobals.userModel.addUser(event.info.message.peerID);
-							trace("[NetGroup.SendTo.Notify]:Currently total users(after addUser):",FlexGlobals.userModel.totalUsers());
+							LOG.debug("[NetGroup.SendTo.Notify]:Currently total users(after addUser):{0}",FlexGlobals.userModel.totalUsers());
 						}
 						else//handle  message with role information
 						{
-							trace("[RECEIVED] from:",truncateString(event.info.message.peerID),event.info.message.roleIndex);
+							LOG.debug("[RECEIVED] from:{0},{1}",truncateString(event.info.message.peerID),event.info.message.roleIndex);
 						}
 					}	
 					else
 					{
-						trace("[RECEIVED(SendTo.Notify)] from:",event.info.message.peerID,"status:",event.info.message.status,"roleIndex",event.info.message.roleIndex);
+						LOG.debug("[RECEIVED(SendTo.Notify)] from:{0},{1},{2},{3},{4}",event.info.message.peerID,"status:",event.info.message.status,"roleIndex",event.info.message.roleIndex);
 						//not destination so re-send
 						netGroup.sendToNearest(event.info.message, event.info.message.destination);
 					}
@@ -265,12 +277,12 @@ package com.godpaper.as3.services
 			//listen for result of setup.
 			this.netGroup.addEventListener(NetStatusEvent.NET_STATUS,netConnHandler);
 			//
-			trace(this.netGroup.info.toString());
+			LOG.info(this.netGroup.info.toString());
 		}
 		//
 		private function asyncErrorHandler(event:AsyncErrorEvent):void
 		{
-			trace(event.toString());
+			LOG.error(event.toString());
 		}
 	}
 }

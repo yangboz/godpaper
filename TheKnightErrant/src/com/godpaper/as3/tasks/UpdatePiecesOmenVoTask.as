@@ -76,8 +76,8 @@ package com.godpaper.as3.tasks
 			{
 				var chessPiece:ChessPiece = chessPiecesModel.pieces[i];
 				//update omenVO.
-				chessPiece.omenVO.flexibility  = chessPiece.chessVO.moves.cellCount;
-				chessPiece.omenVO.threat  = chessPiece.chessVO.captures.cellCount - chessPiece.chessVO.defends.cellCount;
+				chessPiece.omenVO.flexibility  = chessPiece.chessVO.moves.celled;
+				chessPiece.omenVO.threat  = chessPiece.chessVO.captures.celled - chessPiece.chessVO.defends.celled;
 			}
 			LOG.info("{0} Chess Pieces' OmenVO Updated !",chessPiecesModel.pieces.length.toString());
 			//

@@ -89,11 +89,10 @@ package
 		//Default mochi dashboard hint.
 		public var _mochiads_game_id:String = "c7278f158e32f9a0";
 		//For children dynamic factory config.
-//		[Bindable]protected var pcFactory:Class = PieceConfig.factory;
 		protected var pcFactory:Class = PieceConfig.factory;
 		//Views(esp for plugin display)
 		public var pluginUIComponent:PluginUIComponent;
-		//
+		//Staring ref.
 		private var mStarling:Starling;
 		//Signals
 		
@@ -312,16 +311,16 @@ package
 		{
 			//config initialization here.
 			//about chess board:
-			BoardConfig.xLines=3;
-			BoardConfig.yLines=3;
-			BoardConfig.xOffset=100;
-			BoardConfig.yOffset=100;	
+			BoardConfig.xLines=3;//
+			BoardConfig.yLines=3;//
+			BoardConfig.xOffset=100;//
+			BoardConfig.yOffset=100;//	
 //			BoardConfig.width=300;
 //			BoardConfig.height=300;
-			BoardConfig.xScale=1;
-			BoardConfig.yScale=1;
-			BoardConfig.xAdjust=50;
-			BoardConfig.yAdjust=50;
+			BoardConfig.xScale=1;//
+			BoardConfig.yScale=1;//
+			BoardConfig.xAdjust=50;//
+			BoardConfig.yAdjust=50;//
 			//for connex
 			BoardConfig.hConnex = true;//enable the horizontal connection.
 			BoardConfig.vConnex = true;//enable the vertical connection.
@@ -332,12 +331,12 @@ package
 //			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 //			BoardConfig.backgroundImage = new Image(texture);
 			//Pieces box config:
-			BoardConfig.piecesBoxRequired = true;
-			BoardConfig.backgroundImageRequired = false;
+			BoardConfig.piecesBoxRequired = true;//Pieces box used to obtain chess pieces as a container.
+			BoardConfig.backgroundImageRequired = false;//
 			//gasket config:
 			GasketConfig.maxPoolSize = 9;//Notices:Object pools full of objects with dangerously stale state are sometimes called object cesspools and regarded as an anti-pattern.
-			GasketConfig.tipsVisible = true;
-			GasketConfig.backgroundAlpha = 0.2;
+			GasketConfig.tipsVisible = true;//Gasket label used to debugger.
+			GasketConfig.backgroundAlpha = 0.2;//
 			GasketConfig.width = 30;
 			GasketConfig.height = 30;
 			//about piece:
@@ -355,7 +354,7 @@ package
 			TextureConfig.AssetEmbeds_1x_class = AssetEmbeds_1x;
 			TextureConfig.AssetEmbeds_2x_class = AssetEmbeds_2x;
 			//LogConfig
-			LoggerConfig.filters = ["com.godpaper.tic_tac_toe.busniess.managers.*"];
+			LoggerConfig.filters = ["com.godpaper.tic_tac_toe.busniess.managers.*","com.godpaper.as3.services.*"];
 			LoggerConfig.level = LogEventLevel.DEBUG;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());

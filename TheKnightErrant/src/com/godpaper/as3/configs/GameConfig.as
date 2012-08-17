@@ -36,7 +36,7 @@ package com.godpaper.as3.configs
 //		private static var _chessPieceManager:IChessPieceManager = new ChessPieceManagerDefault();
 //		private static var _gameStateManager:IGameStateManager = new GameStateManagerDefault();
 		//The game play mode(computer vs human,human vs human);
-		private static var _playMode:String = HUMAN_VS_COMPUTER;
+		public static var playMode:String = HUMAN_VS_COMPUTER;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -112,20 +112,6 @@ package com.godpaper.as3.configs
 //		public static function set chessPieceManager(value:IChessPieceManager):void
 //		{
 //			_chessPieceManager=value;
-//		}
-		//----------------------------------
-		//  playMode(read-only)
-		//----------------------------------
-		/**
-		 * The human vs human feature under construction. 
-		 */		
-		public static function get playMode():String
-		{
-			return _playMode;
-		}
-//		public static function set playMode(value:String):void
-//		{
-//			_playMode = value;
 //		}
 		//---------------------------------------------------------h-----------------
 		//

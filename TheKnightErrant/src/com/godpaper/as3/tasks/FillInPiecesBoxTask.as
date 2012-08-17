@@ -27,7 +27,7 @@ package com.godpaper.as3.tasks
 	
 
 	/**
-	 * FillInPiecesBoxTask.as class.   	
+	 * FillInPiecesBoxTask.as class.Actually it with "put on" busniess logic.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
