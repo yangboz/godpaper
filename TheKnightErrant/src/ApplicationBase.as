@@ -131,6 +131,13 @@ package
 		{
 			return new GameStateManagerDefault();
 		}
+		/**
+		 * Override this for customize game theme.
+		 */
+		public function get themeClass():Class
+		{
+			return ThemeConfig.THEME_AEON_DESKTOP;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -350,8 +357,6 @@ package
 			//LogConfig
 			LoggerConfig.filters = ["com.godpaper.tic_tac_toe.busniess.managers.*"];
 			LoggerConfig.level = LogEventLevel.DEBUG;
-			//ThemeConfig
-//			ThemeConfig.theme = ThemeConfig.THEME_MINIMAL;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);

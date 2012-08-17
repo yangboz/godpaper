@@ -114,7 +114,7 @@ package com.godpaper.as3.tasks
 			var childAreaHeight:Number = 25;
 			var bluePiecesBox:PiecesBox = new PiecesBox();
 			bluePiecesBox.width = 100;
-			bluePiecesBox.height = 100;
+			bluePiecesBox.height = 70;
 			bluePiecesBox.background = BoardConfig.piecesBoxBgImage;
 			bluePiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);//Default setting.
 			bluePiecesBox.type = DefaultConstants.BLUE;
@@ -125,7 +125,7 @@ package com.godpaper.as3.tasks
 			//
 			var redPiecesBox:PiecesBox = new PiecesBox();
 			redPiecesBox.width = 100;
-			redPiecesBox.height = 100;
+			redPiecesBox.height = 70;
 			redPiecesBox.background = BoardConfig.piecesBoxBgImage;
 			redPiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);//Default setting.
 			redPiecesBox.type = DefaultConstants.RED;

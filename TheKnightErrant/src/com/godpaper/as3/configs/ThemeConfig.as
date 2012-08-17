@@ -26,10 +26,13 @@ package com.godpaper.as3.configs
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.core.FlexGlobals;
+	
 	import org.josht.starling.foxhole.themes.AeonDesktopTheme;
 	import org.josht.starling.foxhole.themes.AzureTheme;
 	import org.josht.starling.foxhole.themes.IFoxholeTheme;
 	import org.josht.starling.foxhole.themes.MinimalTheme;
+
 	/**
 	 * ThemeConfig.as class.Used to customize the whole application's theme.
 	 * @author yangboz
@@ -45,18 +48,15 @@ package com.godpaper.as3.configs
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//Theme customize.
-		public static var theme:Class = MinimalTheme;
-//		public static var theme:Class;
 		//Keep the one instance.
 		private static var _instance:IFoxholeTheme;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
 		//Theme class enum list.
-		public static const THEME_MINIMAL:Class = MinimalTheme;
-		public static const THEME_AZURE:Class = AzureTheme;
-		public static const THEME_AEON_DESKTOP:Class = AeonDesktopTheme;
+		public static var THEME_MINIMAL:Class = MinimalTheme;
+		public static var THEME_AZURE:Class = AzureTheme;
+		public static var THEME_AEON_DESKTOP:Class = AeonDesktopTheme;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -81,7 +81,8 @@ package com.godpaper.as3.configs
 		//--------------------------------------------------------------------------
 		public static function getThemeImpl(...args):IFoxholeTheme
 		{
-			if(_instance==null) _instance = new theme(args[0]);//TODO:more arguments assemble.
+			var themeClass:Class = FlexGlobals.topLevelApplication.themeClass;
+			if(_instance==null) _instance = new themeClass(args[0]);//TODO:more arguments assemble.
 			return _instance;
 		}
 		//--------------------------------------------------------------------------

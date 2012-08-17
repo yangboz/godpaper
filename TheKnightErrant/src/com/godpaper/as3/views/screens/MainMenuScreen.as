@@ -26,11 +26,22 @@ package com.godpaper.as3.views.screens
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.FlexGlobals;
+	
+	import org.josht.starling.foxhole.controls.Button;
 	import org.josht.starling.foxhole.controls.Screen;
+	import org.josht.starling.foxhole.controls.ScreenHeader;
+	import org.josht.starling.foxhole.controls.ScrollContainer;
+	import org.josht.starling.foxhole.layout.VerticalLayout;
+	import org.osflash.signals.ISignal;
+	import org.osflash.signals.Signal;
+	
+	import starling.display.DisplayObject;
 	
 	
 	/**
-	 * MainMenuScreen.as class.   	
+	 * MainMenuScreen.as class.Create an exciting and dynamic main menu screen for your game.	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
@@ -44,7 +55,16 @@ package com.godpaper.as3.views.screens
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		//
+		private var _container:ScrollContainer;
+		private var _header:ScreenHeader;
+		private var _settingsButton:Button;
+		//Menu buttons
+		private var _singlePlayButton:Button;
+		private var _multiPlayButton:Button;
+		private var _creditButton:Button;
+		private var _helpButton:Button;
+		private var _aboutButton:Button;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -60,7 +80,45 @@ package com.godpaper.as3.views.screens
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		override protected function initialize():void
+		{
+			const layout:VerticalLayout = new VerticalLayout();
+			layout.gap = 10;
+			layout.paddingTop = 10;
+			layout.paddingRight = 10;
+			layout.paddingBottom = 10;
+			layout.paddingLeft = 10;
+			layout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			layout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
+			
+			this._container = new ScrollContainer();
+			this._container.layout = layout;
+			this.addChild(this._container);
+			//
+			_singlePlayButton = new Button();
+			_singlePlayButton.label = "Single Play";
+			_singlePlayButton.width = _singlePlayButton.height = 100 * this.dpiScale;
+			_singlePlayButton.onRelease.addOnce(singlePlayButton_onRelease);
+			this._container.addChild(_singlePlayButton);
+			//
+			_multiPlayButton = new Button();
+			_multiPlayButton.label = "Multi Play";
+			_multiPlayButton.width = _multiPlayButton.height = 100 * this.dpiScale;
+			this._container.addChild(_multiPlayButton);
+			
+			this._settingsButton = new Button();
+			this._settingsButton.label = "Settings";
+			this._settingsButton.onRelease.add(settingsButton_onRelease);
+			
+			this._header = new ScreenHeader();
+			this._header.title = "Main Menu";
+			this.addChild(this._header);
+			this._header.rightItems = new <DisplayObject>
+				[
+					this._settingsButton
+				];
+			
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -76,18 +134,39 @@ package com.godpaper.as3.views.screens
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		private var _onSettings:Signal = new Signal();//TODO:with setting screen.
+		public function get onSettings():ISignal
+		{
+			return this._onSettings;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+		override protected function draw():void
+		{
+			this._header.width = this.actualWidth;
+			this._header.validate();
+			
+			this._container.y = this._header.height;
+			this._container.width = this.actualWidth;
+			this._container.height = this.actualHeight - this._container.y;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		private function settingsButton_onRelease(button:Button):void
+		{
+			this._onSettings.dispatch(this);
+		}
+		//
+		private function singlePlayButton_onRelease(button:Button):void
+		{
+			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);//Screen swither here.
+		}
 	}
 	
 }

@@ -126,6 +126,7 @@ package com.godpaper.as3.views.screens
 			this._progressTween.onComplete =  function():void
 			{
 				FlexGlobals.screenNavigator.showScreen((DefaultConstants.SCREEN_GAME));//Screen swither here.
+//				FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);//Screen swither here.
 			}
 		}
 		

@@ -40,6 +40,8 @@ package com.godpaper.as3.views.popups
 	import org.josht.starling.foxhole.layout.HorizontalLayout;
 	import org.josht.starling.foxhole.layout.VerticalLayout;
 	
+	import starling.display.DisplayObject;
+	
 	
 	/**
 	 * Callout/popup view component that indicated the human win status.  	
@@ -86,6 +88,7 @@ package com.godpaper.as3.views.popups
 		//--------------------------------------------------------------------------
 		public function HumanWinIndicatory()
 		{
+			super();
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -138,19 +141,20 @@ package com.godpaper.as3.views.popups
 			//buttons 
 			this._submitBtn = new Button();
 			this._submitBtn.label = "SUBMIT";
-			this._submitBtn.width = this._submitBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
 			this._buttonsContainer.addChild(this._submitBtn);
 			this._nextBtn = new Button();
 			this._nextBtn.label = "NEXT";
-			this._nextBtn.width = this._nextBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
-			this._buttonsContainer.addChild(this._nextBtn);
+//			this._buttonsContainer.addChild(this._nextBtn);
 			//event listener
 			this._submitBtn.onRelease.add(submitButtonOnRelease);
 			this._nextBtn.onRelease.add(nextButtonOnRelease);
 			//Default iPlug trigger.
 			iPlug.saveData({"boardID": null});
 			//				MochiScores.setBoardID(PluginConfig.mochiBoardID);
-			//
+			this._header.rightItems = new <DisplayObject>
+				[
+					this._nextBtn
+				];
 		}
 		//
 		override protected function draw():void
@@ -159,8 +163,27 @@ package com.godpaper.as3.views.popups
 			this._header.validate();
 			//
 			this._nameInput.validate();
+			this._nameInput.width = 100;
+			this._nameInput.height = 20;
 			this._nameInput.x = (this.actualWidth - this._nameInput.width) / 2;
 			this._nameInput.y = (this.actualHeight - this._nameInput.height) / 2;
+			//
+			this._scoreInput.validate();
+			this._scoreInput.width = 100;
+			this._scoreInput.height = 20;
+			this._scoreInput.x = (this.actualWidth - this._nameInput.width) / 2;
+			this._scoreInput.y = (this.actualHeight - this._nameInput.height) / 2 + 30;
+			//
+			this._submitBtn.width = this._submitBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
+			this._nextBtn.width = this._nextBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
+			//
+			this._inputsContainer.y = this._header.height;
+			this._inputsContainer.width = this.actualWidth;
+			this._inputsContainer.height = this.actualHeight - this._inputsContainer.y;
+//			this._buttonsContainer
+			//
+			this.width = 200;
+			this.height = 100;
 		}
 		//
 		protected function get currentScore():int

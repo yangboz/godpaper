@@ -132,7 +132,7 @@ package com.godpaper.as3.views.scenes
 			
 			//Store the navigator ref to FlexGlobals.
 			FlexGlobals.screenNavigator = this._navigator;
-			FlexGlobals.screenNavigator.showScreen((DefaultConstants.SCREEN_SPLASH));//Screen swither here.
+			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_SPLASH);//Screen swither here.
 			
 			this._transitionManager = new ScreenSlidingStackTransitionManager(this._navigator);
 			this._transitionManager.duration = 0.4;
