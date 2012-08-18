@@ -20,4 +20,5 @@
 //function set position(value:Point):void;
 //function get position():Point;
 @property(nonatomic,retain)CGPoint *position;
+//
 @end

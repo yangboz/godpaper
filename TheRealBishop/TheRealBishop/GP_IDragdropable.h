@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SPTouchEvent.h"
 /**
  * IDragdropable.as class.Customize chess piece's Drag-and-Drop inside of AS3/starling system. 	
  */   
 @protocol GP_IDragdropable <NSObject>
-{}
+{
+}
 //
 //--------------------------------------------------------------------------
 //
@@ -20,9 +22,12 @@
 //--------------------------------------------------------------------------
 ////dragEnterHandler
 //function dragEnterHandler(event:TouchEvent):Boolean;
+-(BOOL)dragEnterHandler:(SPTouchEvent *)event;
 ////dragOutHandler
 //function dragOutHandler(event:TouchEvent):void;
+-(BOOL)dragOutHandler:(SPTouchEvent *)event;
 ////dragDropHandler
 //function dragDropHandler(event:TouchEvent):void;
+-(BOOL)dragDropHandler:(SPTouchEvent *)event;
 //
 @end
