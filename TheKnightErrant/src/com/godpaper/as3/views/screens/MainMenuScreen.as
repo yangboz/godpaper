@@ -30,10 +30,13 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	
+	import flash.geom.Rectangle;
+	
 	import org.josht.starling.foxhole.controls.Button;
 	import org.josht.starling.foxhole.controls.Screen;
 	import org.josht.starling.foxhole.controls.ScreenHeader;
 	import org.josht.starling.foxhole.controls.ScrollContainer;
+	import org.josht.starling.foxhole.controls.Scroller;
 	import org.josht.starling.foxhole.layout.VerticalLayout;
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
@@ -94,24 +97,29 @@ package com.godpaper.as3.views.screens
 			
 			this._container = new ScrollContainer();
 			this._container.layout = layout;
+			this._container.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this.addChild(this._container);
 			//
 			_singlePlayButton = new Button();
 			_singlePlayButton.label = "Single Play";
-			_singlePlayButton.width = _singlePlayButton.height = 100 * this.dpiScale;
+			_singlePlayButton.width =  200 * this.dpiScale;
+			_singlePlayButton.height = 100 * this.dpiScale;
 			_singlePlayButton.onRelease.addOnce(singlePlayButton_onRelease);
 			this._container.addChild(_singlePlayButton);
+//			this.addChild(_singlePlayButton);
 			//
 			_multiPlayButton = new Button();
 			_multiPlayButton.label = "Multi Play";
-			_multiPlayButton.width = _multiPlayButton.height = 100 * this.dpiScale;
+			_multiPlayButton.width  = 200 * this.dpiScale;
+			_multiPlayButton.height = 100 * this.dpiScale;
 			_multiPlayButton.onRelease.addOnce(multiPlayButton_onRelease);
 			this._container.addChild(_multiPlayButton);
-			
+//			this.addChild(_multiPlayButton);
+			//
 			this._settingsButton = new Button();
 			this._settingsButton.label = "Settings";
 			this._settingsButton.onRelease.add(settingsButton_onRelease);
-			
+			//
 			this._header = new ScreenHeader();
 			this._header.title = "Main Menu";
 			this.addChild(this._header);
@@ -140,6 +148,12 @@ package com.godpaper.as3.views.screens
 		{
 			return this._onSettings;
 		}
+		//
+//		override public function dispose():void
+//		{
+//			this._container.dispose();
+//			super.dispose();
+//		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
