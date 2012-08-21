@@ -113,8 +113,9 @@ package com.godpaper.as3.services
 			var message:PostVO = new PostVO();
 			message.peerID = this.netConnection.nearID;
 			message.state = PostVO.STATE_UPDATE;
+			message.brivity = value;
 			//send to all of players at this group.
-			return this.netGroup.post(message);
+			return this.netGroupPost(message);
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -166,7 +167,7 @@ package com.godpaper.as3.services
 					break;
 				//posting received so add to output
 				case "NetGroup.Posting.Notify":
-					LOG.debug("[RECEIVED(Posting.Notify)] from:{0},{1},{2},{3},{4}",event.info.message.peerID,"status:",event.info.message.status,"roleIndex",event.info.message.roleIndex);
+					LOG.debug("[RECEIVED(Posting.Notify)] from:{0},status:{1},roleIndex:{2}",event.info.message.peerID,event.info.message.status,event.info.message.roleIndex);
 					//handle status message
 					if (event.info.message.status!=null)
 					{
@@ -190,7 +191,7 @@ package com.godpaper.as3.services
 					}
 					else//handle  message with role information
 					{
-						LOG.debug("[RECEIVED] from:{0},{1},{2}",truncateString(event.info.message.peerID),event.info.message.roleIndex,",state:",event.info.message.state);
+						LOG.debug("[RECEIVED] from:{0},state:{1},roleIndex:{2},brivity:{3}",truncateString(event.info.message.peerID),event.info.message.state,event.info.message.roleIndex,event.info.message.brivity);
 						//state switcher
 						if(event.info.message.state)
 						{
@@ -200,6 +201,7 @@ package com.godpaper.as3.services
 							}
 							if(PostVO.STATE_UPDATE == event.info.message.state)//updateRole
 							{
+								//TODO:brivity update.
 							}
 						}
 					}
@@ -245,12 +247,12 @@ package com.godpaper.as3.services
 						}
 						else//handle  message with role information
 						{
-							LOG.debug("[RECEIVED] from:{0},{1}",truncateString(event.info.message.peerID),event.info.message.roleIndex);
+							LOG.debug("[RECEIVED] from:{0},roleIndex:{1}",truncateString(event.info.message.peerID),event.info.message.roleIndex);
 						}
 					}	
 					else
 					{
-						LOG.debug("[RECEIVED(SendTo.Notify)] from:{0},{1},{2},{3},{4}",event.info.message.peerID,"status:",event.info.message.status,"roleIndex",event.info.message.roleIndex);
+						LOG.debug("[RECEIVED(SendTo.Notify)] from:{0},status:{1},roleIndex:{2},brivity:{3}",event.info.message.peerID,event.info.message.status,event.info.message.roleIndex,event.info.message.brivity);
 						//not destination so re-send
 						netGroup.sendToNearest(event.info.message, event.info.message.destination);
 					}

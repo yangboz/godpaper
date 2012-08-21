@@ -80,6 +80,7 @@ package com.godpaper.as3.business.fsm.states.game
 			//about view
 			//TODO:No more draging chess piece.
 			//about data
+			FlexGlobals.conductService.transforBrevity("a3b2");//For testing...
 		}
 		//
 		override public function update(time:Number=0):void
