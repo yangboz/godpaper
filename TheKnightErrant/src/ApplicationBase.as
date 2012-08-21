@@ -380,10 +380,10 @@ package
 			//number of tollgate tips would be matched with tollgates!
 			//			GameConfig.tollgates = [RandomWalk,ShortSighted,AttackFalse,AttackFalse,MiniMax];
 			//			GameConfig.tollgateTips = ["baby intelligence","fellow intelligence","man intelligence","guru intelligence"];
-			GameConfig.turnFlag = DefaultConstants.FLAG_RED;
+			GameConfig.turnFlag = DefaultConstants.FLAG_RED;//Default flag to human(play first).
 			GameConfig.chessPieceManager = this.chessPiecesManager;
 			GameConfig.gameStateManager = this.gameStateManager;
-			GameConfig.gameStateManager.start();
+//			GameConfig.gameStateManager.start();//Avoid call start() at this entry point.
 			//P2pService testing.
 //			FlexGlobals.conductService.initialization(null,null);
 		}

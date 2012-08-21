@@ -8,6 +8,7 @@ package com.godpaper.as3.business.managers
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IGameStateManager;
+	import com.godpaper.as3.errors.DefaultErrors;
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.PositionVO;
@@ -133,34 +134,40 @@ package com.godpaper.as3.business.managers
 		}
 		//--------------------------------------------------------------------------
 		//
+		//  Constructor
+		//
+		//--------------------------------------------------------------------------
+		public function GameStateManagerDefault()
+		{
+			//agent initialization.
+//			agent=new GameAgent("CCJGameAgent", FlexGlobals.topLevelApplication as IVisualElement);
+			this.agent=new GameAgent("CCJGameAgent", null);
+		}
+		//--------------------------------------------------------------------------
+		//
 		//  Methods
 		//
 		//--------------------------------------------------------------------------
 		//----------------------------------
-		//  startGame
+		//  start(game start)
 		//----------------------------------
 		public function start():void
 		{
-			//TODO:
-			//agent initialization.
-//			agent=new GameAgent("CCJGameAgent", FlexGlobals.topLevelApplication as IVisualElement);
-			agent=new GameAgent("CCJGameAgent", null);
-			//logic condition who's turn now at first.
-			if (GameConfig.turnFlag == DefaultConstants.FLAG_BLUE)
+			//First start up by flag.
+			switch(GameConfig.turnFlag)
 			{
-				isComputerTurnNow();
-			}
-			else if (GameConfig.turnFlag == DefaultConstants.FLAG_RED)
-			{
-				isHumanTurnNow();
-			}
-			else
-			{
-				//TODO,another human turn now.
-				isAnotherHumanTurnNow();
+				case DefaultConstants.FLAG_BLUE:
+					isComputerTurnNow();
+					break;
+				case DefaultConstants.FLAG_RED:
+					isHumanTurnNow();
+					break;
+				case DefaultConstants.FLAG_GREEN:
+					isAnotherHumanTurnNow();
+					break;
 			}
 			//flag game is running.
-			isRunning=true;
+			this.isRunning=true;
 		}
 
 		//----------------------------------
@@ -259,8 +266,37 @@ package com.godpaper.as3.business.managers
 		{
 			return BitFlagUtil.isSet(_roles,flagMask);
 		}
-		
-		
+		//----------------------------------
+		//  loop(game loop)
+		//----------------------------------
+		public function loop():void
+		{
+//			while(!isRunning)//@see http://obviam.net/index.php/the-android-game-loop/
+//			{
+				//logic condition who's turn now at first.
+				if (GameConfig.playMode == GameConfig.HUMAN_VS_COMPUTER)
+				{
+					if (GameConfig.turnFlag == DefaultConstants.FLAG_RED)
+					{
+						isComputerTurnNow();
+					}
+					else if (GameConfig.turnFlag == DefaultConstants.FLAG_BLUE)
+					{
+						isHumanTurnNow();
+					}
+				} else //(GameConfig.playMode == GameConfig.HUMAN_VS_HUMAN)
+				{
+					if (GameConfig.turnFlag == DefaultConstants.FLAG_RED)
+					{
+						isAnotherHumanTurnNow();
+					}
+					else if (GameConfig.turnFlag == DefaultConstants.FLAG_GREEN)
+					{
+						isHumanTurnNow();
+					}
+				}
+//			}
+		}
 	}
 }
 

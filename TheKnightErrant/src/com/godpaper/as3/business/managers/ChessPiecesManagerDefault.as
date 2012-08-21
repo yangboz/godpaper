@@ -538,18 +538,8 @@ package com.godpaper.as3.business.managers
 			//
 			task.addEventListener(TaskEvent.TASK_COMPLETE, function(event:TaskEvent):void
 			{
-				//Trigger in-turn system .
-				if (GameConfig.gameStateManager.isRunning)
-				{
-					if (GameConfig.turnFlag == DefaultConstants.FLAG_RED)
-					{
-						GameConfig.gameStateManager.isComputerTurnNow();
-					}
-					else
-					{
-						GameConfig.gameStateManager.isHumanTurnNow();
-					}
-				}
+				//Trigger in-turn system(game loop).
+				GameConfig.gameStateManager.loop();
 			});
 			//
 			task.start();

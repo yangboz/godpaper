@@ -28,9 +28,11 @@ package com.godpaper.as3.views.screens
 	//--------------------------------------------------------------------------
 	
 	import com.adobe.cairngorm.task.SequenceTask;
+	import com.adobe.cairngorm.task.TaskEvent;
 	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.core.IChessBoard;
+	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.tasks.CreateChessBoardTask;
 	import com.godpaper.as3.tasks.CreateChessGasketTask;
 	import com.godpaper.as3.tasks.CreateChessPieceTask;
@@ -142,6 +144,8 @@ package com.godpaper.as3.views.screens
 			this.startUpSequenceTask.addChild(new CreateChessVoTask());//34.922M
 			//Plugin button bar view init
 			this.startUpSequenceTask.addChild(new CreatePluginButtonBarTask());
+			//task complete
+			this.startUpSequenceTask.addEventListener(TaskEvent.TASK_COMPLETE,startUpTaskCompleteHandler);
 			//task start
 			this.startUpSequenceTask.start();
 		}
@@ -155,6 +159,12 @@ package com.godpaper.as3.views.screens
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		private function startUpTaskCompleteHandler(event:TaskEvent):void
+		{
+			this.startUpSequenceTask.removeEventListener(TaskEvent.TASK_COMPLETE,startUpTaskCompleteHandler);
+			//
+			GameConfig.gameStateManager.start();
+		}
 	}
 	
 }

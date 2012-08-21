@@ -16,7 +16,7 @@ package com.godpaper.as3.business.fsm.states.game
 
 
 	/**
-	 * HumanState.as class.
+	 * HumanState.as class.The game statement of Human with flag(red).
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -67,16 +67,21 @@ package com.godpaper.as3.business.fsm.states.game
 			GameConfig.turnFlag = DefaultConstants.FLAG_RED;
 			//
 			IndicatorConfig.readOut=false;
+			//about view
+			
 			//about data
 			chessPiecesModel.selectedPiece = null;
 		}
-
+		//
 		override public function exit():void
 		{
 			//increase the game step number.
 			chessBoardModel.stepNumber++;
+			//about view
+			//TODO:No more draging chess piece.
+			//about data
 		}
-
+		//
 		override public function update(time:Number=0):void
 		{
 			//TODO: implement function

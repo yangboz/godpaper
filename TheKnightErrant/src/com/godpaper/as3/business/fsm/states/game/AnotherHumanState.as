@@ -10,13 +10,16 @@ package com.godpaper.as3.business.fsm.states.game
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.lookbackon.AI.FSM.states.StateBase;
+	import com.godpaper.as3.model.ChessBoardModel;
+	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.core.FlexGlobals;
 	
 //	import mx.managers.CursorManager;
 	import pl.mateuszmackowiak.visuals.CursorManager;
 
 
 	/**
-	 * AnotherHumanState.as class.This state internal hold on another human state,such as board,chess pice,game info,etc..
+	 * AnotherHumanState.as class.The game statement of AnotherHuman with flag(green).
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -29,6 +32,8 @@ package com.godpaper.as3.business.fsm.states.game
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
+		private var chessPiecesModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
+		private var chessBoardModel:ChessBoardModel = FlexGlobals.chessBoardModel;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -66,14 +71,16 @@ package com.godpaper.as3.business.fsm.states.game
 			//TODO:logicly decide read out transition on this stage.(Opponent/Network transform wating).
 			IndicatorConfig.readOut=false;
 			//about view
-			CursorManager.setBusyCursor();
+			
 			//about data
 		}
 
 		override public function exit():void
 		{
 			//about view
-			CursorManager.removeBusyCursor();
+//			CursorManager.removeBusyCursor();
+			//increase the game step number.
+			chessBoardModel.stepNumber++;
 		}
 
 		override public function update(time:Number=0):void

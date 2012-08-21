@@ -83,6 +83,10 @@ package com.godpaper.as3.core
 		//  getRolePlaying
 		//----------------------------------
 		function getRolePlaying(flagMask:uint):Boolean;
+		//----------------------------------
+		//  loop(game loop)
+		//----------------------------------
+		function loop():void;
 	}
 }
 

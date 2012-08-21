@@ -181,6 +181,7 @@ package com.godpaper.as3.views.components
 //				this.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 //				this.addEventListener(MouseEvent.CLICK,mouseClickHandler);
 			}
+			//Touch bool connection.
 			this.touchable = (value != DefaultConstants.FLAG_BLUE);
 		}
 		//----------------------------------

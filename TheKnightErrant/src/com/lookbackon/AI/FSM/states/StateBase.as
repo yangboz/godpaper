@@ -3,7 +3,7 @@ package com.lookbackon.AI.FSM.states
 	import com.lookbackon.AI.FSM.IAgent;
 
 	/**
-	 * The base class of FSM state.
+	 * The base class of FSM state.This state internal hold on another human state,such as board,chess pice,game info,etc..
 	 * @author Knight.zhou
 	 * 
 	 */	
@@ -46,19 +46,19 @@ package com.lookbackon.AI.FSM.states
 		//
 		//--------------------------------------------------------------------------
 		//enter
-		virtual public function enter():void
+		public function enter():void
 		{
-			//TODO: implement function
+			//TODO: virtual implement function
 		}
 		//exit
-		virtual public function exit():void
+		public function exit():void
 		{
-			//TODO: implement function
+			//TODO:virtual implement function
 		}
 		//update
-		virtual public function update(time:Number=0):void
+		public function update(time:Number=0):void
 		{
-			//TODO: implement function
+			//TODO:virtual implement function
 		}
 	}
 }

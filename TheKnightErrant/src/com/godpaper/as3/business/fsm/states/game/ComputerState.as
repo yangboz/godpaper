@@ -30,7 +30,7 @@ package com.godpaper.as3.business.fsm.states.game
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	/**
-	 * ComputerState.as class.
+	 * ComputerState.as class.The game statement of Computer with flag(blue).
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0

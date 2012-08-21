@@ -122,6 +122,7 @@ package com.godpaper.as3.tasks
 			FlexGlobals.gameStage.addChild(bluePiecesBox);
 			bluePiecesBox.x = xGap;
 			bluePiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-PluginConfig.buttonBarHeight - childAreaHeight - yGap;
+			FlexGlobals.bluePiecesBox = bluePiecesBox;//keep ref.
 			//
 			var redPiecesBox:PiecesBox = new PiecesBox();
 			redPiecesBox.width = 100;
@@ -133,6 +134,7 @@ package com.godpaper.as3.tasks
 			FlexGlobals.gameStage.addChild(redPiecesBox);
 			redPiecesBox.x = FlexGlobals.topLevelApplication.stage.stageWidth-redPiecesBox.width - xGap;
 			redPiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-PluginConfig.buttonBarHeight - childAreaHeight - yGap;
+			FlexGlobals.redPiecesBox = redPiecesBox;//keep ref.
 			//
 			this.complete();
 		}

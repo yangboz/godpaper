@@ -27,6 +27,7 @@ package com.godpaper.as3.core
 	import com.godpaper.as3.model.UserModel;
 	import com.godpaper.as3.services.ConductService;
 	import com.godpaper.as3.utils.SingletonFactory;
+	import com.godpaper.as3.views.components.PiecesBox;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
 	import com.godpaper.as3.views.screens.GameScreen;
 	import com.lookbackon.AI.FSM.Message;
@@ -73,6 +74,8 @@ package com.godpaper.as3.core
 //		public static var gameScene:GameScene;//The scene of game.
 		public static var gameScreen:GameScreen;//The screen of game.
 		public static var gameStage:Stage;//The stage of game.
+		public static var bluePiecesBox:PiecesBox;//The pieces box(blue).
+		public static var redPiecesBox:PiecesBox;//The pieces box(red).
 		//Models.
 		public static var chessPiecesModel:ChessPiecesModel = SingletonFactory.produce(ChessPiecesModel);
 		public static var chessGasketsModel:ChessGasketsModel = SingletonFactory.produce(ChessGasketsModel);
