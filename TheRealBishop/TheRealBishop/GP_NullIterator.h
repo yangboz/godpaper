@@ -7,7 +7,36 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GP_Iterator.h"
 
-@interface GP_NullIterator : NSObject
-
+@interface GP_NullIterator : NSObject <GP_Iterator>
+{
+    @private
+        id data;
+}
+/**
+ * Nullified behaviour.
+ */
+//public function start():void
+-(void)start;
+/**
+ * Nullified behaviour.
+ */
+//public function next():*
+-(id *)next;
+/**
+ * Nullified behaviour.
+ */
+//public function hasNext():Boolean
+-(BOOL)hasNext;
+/**
+ * Always returns null.
+ */
+//public function get data():*
+/**
+ * Nullified behaviour.
+ */
+//public function set data(obj:*):void
+@property(nonatomic,retain) id data;
+//
 @end
