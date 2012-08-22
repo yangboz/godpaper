@@ -9,6 +9,7 @@ package com.godpaper.as3.services
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.UserModel;
 	import com.godpaper.as3.model.vos.PostVO;
+	import com.godpaper.as3.model.vos.UserVO;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.utils.LogUtil;
 	
@@ -19,6 +20,8 @@ package com.godpaper.as3.services
 	import flash.net.NetGroup;
 	
 	import mx.logging.ILogger;
+	
+	import org.osflash.signals.Signal;
 	
 	//Framework internal usage only.
 	[ExcludeClass]
@@ -47,6 +50,11 @@ package com.godpaper.as3.services
 		public static const SPECIFIER_NAME:String  = "GODPAPER_specifier";
 		//Model
 //		private var userModel:UserModel = FlexGlobals.userModel;
+		//Signals
+		public var connectSignal:Signal = new Signal(String);
+		public var disconnectSignal:Signal = new Signal(String);
+		public var userVoSignal:Signal = new Signal(UserVO);
+		public var postVoSignal:Signal = new Signal(PostVO);
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -113,7 +121,7 @@ package com.godpaper.as3.services
 			var message:PostVO = new PostVO();
 			message.peerID = this.netConnection.nearID;
 			message.state = PostVO.STATE_UPDATE;
-			message.brivity = value;
+			message.brevity = value;
 			//send to all of players at this group.
 			return this.netGroupPost(message);
 		}
@@ -191,17 +199,35 @@ package com.godpaper.as3.services
 					}
 					else//handle  message with role information
 					{
-						LOG.debug("[RECEIVED] from:{0},state:{1},roleIndex:{2},brivity:{3}",truncateString(event.info.message.peerID),event.info.message.state,event.info.message.roleIndex,event.info.message.brivity);
+						LOG.debug("[RECEIVED] from:{0},state:{1},roleIndex:{2},brevity:{3}",truncateString(event.info.message.peerID),event.info.message.state,event.info.message.roleIndex,event.info.message.brevity);
 						//state switcher
 						if(event.info.message.state)
 						{
 							if(PostVO.STATE_REG == event.info.message.state)//registerRole
 							{
-								FlexGlobals.userModel.registerRole(event.info.message.peerID,event.info.message.roleIndex,event.info.message.roleName);
+								//user vo assemble
+								var userVO:UserVO = new UserVO();
+								userVO.peerID = event.info.message.peerID;
+								userVO.roleIndex = event.info.message.roleIndex;
+								userVO.roleName = event.info.message.roleName;
+								//model cache.
+								FlexGlobals.userModel.registerRole( userVO.peerID,userVO.roleIndex,userVO.roleName);
+								//broadcast signal.
+								this.userVoSignal.dispatch(userVO);
 							}
 							if(PostVO.STATE_UPDATE == event.info.message.state)//updateRole
 							{
-								//TODO:brivity update.
+								//user vo assemble
+								var postVO:PostVO = new PostVO();
+								postVO.peerID = event.info.message.peerID;
+								postVO.roleIndex = event.info.message.roleIndex;
+								postVO.roleName = event.info.message.roleName;
+								//
+								postVO.state = event.info.message.state;
+								postVO.brevity = event.info.message.brevity;
+								//model cache.
+								//broadcast signal.
+								this.postVoSignal.dispatch(postVO);
 							}
 						}
 					}
@@ -219,6 +245,8 @@ package com.godpaper.as3.services
 						var conObj:PostVO = createStatusMessageObject(STATUS_CONNECTED);
 						this.netGroup.post(conObj);
 					}
+					//broadcast signal.
+					this.connectSignal.dispatch( event.info.peerID );
 					break;
 				//neighbour disconnected so remove details from list
 				case "NetGroup.Neighbor.Disconnect":
@@ -232,6 +260,8 @@ package com.godpaper.as3.services
 					var disconPost:PostVO = createStatusMessageObject(STATUS_DISCONNECTED);
 					disconPost.peerID = event.info.peerID;
 					this.netGroup.post(disconPost);
+					//broadcast signal.
+					this.disconnectSignal.dispatch( event.info.peerID );
 					break;
 				//directed message received so check if this is the final destination
 				case "NetGroup.SendTo.Notify":
@@ -252,7 +282,7 @@ package com.godpaper.as3.services
 					}	
 					else
 					{
-						LOG.debug("[RECEIVED(SendTo.Notify)] from:{0},status:{1},roleIndex:{2},brivity:{3}",event.info.message.peerID,event.info.message.status,event.info.message.roleIndex,event.info.message.brivity);
+						LOG.debug("[RECEIVED(SendTo.Notify)] from:{0},status:{1},roleIndex:{2},brevity:{3}",event.info.message.peerID,event.info.message.status,event.info.message.roleIndex,event.info.message.brivity);
 						//not destination so re-send
 						netGroup.sendToNearest(event.info.message, event.info.message.destination);
 					}

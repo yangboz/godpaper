@@ -225,6 +225,12 @@ package com.godpaper.as3.business.managers
 			{
 				this.greenSideHandler();	
 			}
+			//conduct service transform
+			if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
+			{
+				var brevity:String = conductVO.brevity;//conduct brevity
+				FlexGlobals.conductService.transforBrevity( brevity );
+			}
 		}
 
 		/**

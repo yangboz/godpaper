@@ -43,7 +43,6 @@ package
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.PluginUIComponent;
 	import com.godpaper.as3.plugins.kongregate.KongregatePlugin;
-	import com.godpaper.as3.plugins.mochi.MochiPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
 	import com.godpaper.as3.views.scenes.MainScene;
@@ -354,7 +353,7 @@ package
 			TextureConfig.AssetEmbeds_1x_class = AssetEmbeds_1x;
 			TextureConfig.AssetEmbeds_2x_class = AssetEmbeds_2x;
 			//LogConfig
-			LoggerConfig.filters = ["com.godpaper.tic_tac_toe.busniess.managers.*","com.godpaper.as3.services.*"];
+			LoggerConfig.filters = ["com.godpaper.tic_tac_toe.busniess.managers.*","com.godpaper.as3.services.*","com.godpaper.as3.views.screens.HandshakeScreen"];
 			LoggerConfig.level = LogEventLevel.DEBUG;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());

@@ -27,6 +27,7 @@ package com.godpaper.as3.views.scenes
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.screens.GameScreen;
+	import com.godpaper.as3.views.screens.HandshakeScreen;
 	import com.godpaper.as3.views.screens.MainMenuScreen;
 	import com.godpaper.as3.views.screens.SplashScreen;
 	import com.gskinner.motion.easing.Cubic;
@@ -128,6 +129,7 @@ package com.godpaper.as3.views.scenes
 			//
 			this._navigator.addScreen(DefaultConstants.SCREEN_SPLASH, new ScreenNavigatorItem(SplashScreen));
 			this._navigator.addScreen(DefaultConstants.SCREEN_MAIN_MENU, new ScreenNavigatorItem(MainMenuScreen));
+			this._navigator.addScreen(DefaultConstants.SCREEN_HANDSHAKE, new ScreenNavigatorItem(HandshakeScreen));
 			this._navigator.addScreen(DefaultConstants.SCREEN_GAME, new ScreenNavigatorItem(GameScreen));
 			
 			//Store the navigator ref to FlexGlobals.

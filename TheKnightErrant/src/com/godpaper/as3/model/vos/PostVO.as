@@ -1,5 +1,7 @@
 package com.godpaper.as3.model.vos
 {
+	import mx.utils.ObjectUtil;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -25,7 +27,7 @@ package com.godpaper.as3.model.vos
 		public var destination:String = "";//destination peer id.
 		public var status:String = null;
 		public var state:String = STATE_REG;
-		public var brivity:String = null;//brivity text.
+		public var brevity:String = null;//brevity text.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -54,7 +56,10 @@ package com.godpaper.as3.model.vos
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		override public function toString():String
+		{
+			return  ObjectUtil.toString(this);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

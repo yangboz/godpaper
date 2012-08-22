@@ -70,8 +70,6 @@ TODO/Wish List:
 
 13.Flash player 11.4,concurrency(worker) implementation;(Plan)
 
-14.PGN file parse and implementation.(Done)
+14.PGN file parse and implementation.(Start)
 
-15.UCI protocol implementation with FEN/ECCO string.(Plan)
-
-16.Maven(pom.xm) project feature apply.(Plan)
+15.UCI protocol implementation with FEN string.(Plan)

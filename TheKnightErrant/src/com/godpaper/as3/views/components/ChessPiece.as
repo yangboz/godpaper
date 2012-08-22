@@ -345,7 +345,7 @@ package com.godpaper.as3.views.components
 		//
 		protected function get iPlug():IPlug
 		{
-			return IPlug(ApplicationBase(this.root).pluginUIComponent.provider);
+			return IPlug(FlexGlobals.topLevelApplication.pluginUIComponent.provider);
 		}
 		//
 		override protected function touchHandler(event:TouchEvent):void

@@ -83,6 +83,7 @@ package com.godpaper.as3.consts
 		public static const SCREEN_SPLASH:String = "screen_splash";
 		public static const SCREEN_MAIN_MENU:String = "screen_main_menu";
 		public static const SCREEN_GAME:String = "screen_game";
+		public static const SCREEN_HANDSHAKE:String = "screen_handshake";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

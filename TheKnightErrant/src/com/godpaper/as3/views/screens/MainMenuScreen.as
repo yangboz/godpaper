@@ -188,12 +188,11 @@ package com.godpaper.as3.views.screens
 		//
 		private function multiPlayButton_onRelease(button:Button):void
 		{
-			//P2pService testing.
-			FlexGlobals.conductService.initialization(null,null);
 			//Register the play mode of game.
 			GameConfig.playMode = GameConfig.HUMAN_VS_HUMAN;
 			//Screen swither here.
-			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);
+			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_HANDSHAKE);
+//			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);
 		}
 	}
 	

@@ -21,39 +21,44 @@
  */
 package com.godpaper.as3.views.screens
 {
-	import com.godpaper.as3.configs.TextureConfig;
-	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.core.FlexGlobals;
-	import com.godpaper.as3.utils.LogUtil;
-	
-	import mx.logging.ILogger;
-	
-	import org.josht.starling.foxhole.controls.Label;
-	import org.josht.starling.foxhole.controls.ProgressBar;
-	import org.josht.starling.foxhole.controls.Screen;
-	import org.josht.starling.foxhole.controls.ScrollContainer;
-	import org.josht.starling.foxhole.controls.Scroller;
-	import org.josht.starling.foxhole.layout.VerticalLayout;
-	import org.josht.starling.motion.GTween;
-	
-	import starling.events.Event;
-	import starling.text.TextField;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.configs.TextureConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.model.vos.PostVO;
+	import com.godpaper.as3.model.vos.UserVO;
+	import com.godpaper.as3.utils.LogUtil;
+	
+	import mx.logging.ILogger;
+	
+	import org.josht.starling.foxhole.controls.Button;
+	import org.josht.starling.foxhole.controls.Label;
+	import org.josht.starling.foxhole.controls.PickerList;
+	import org.josht.starling.foxhole.controls.ProgressBar;
+	import org.josht.starling.foxhole.controls.Screen;
+	import org.josht.starling.foxhole.controls.ScrollContainer;
+	import org.josht.starling.foxhole.controls.Scroller;
+	import org.josht.starling.foxhole.data.ListCollection;
+	import org.josht.starling.foxhole.layout.HorizontalLayout;
+	import org.josht.starling.foxhole.layout.VerticalLayout;
+	import org.josht.starling.motion.GTween;
+	
+	import starling.events.Event;
+	import starling.text.TextField;
 	
 	/**
-	 * SplashScene.as class with customzie subroutines.	
+	 * HandshakeScreen.as class.The client of the game connects with the listening others by tree-way handshake firstly. 	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Jul 3, 2012 5:11:09 PM
+	 * Created Aug 22, 2012 1:52:08 PM
 	 */   	 
-	public class SplashScreen extends Screen
+	public class HandshakeScreen extends Screen
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -65,10 +70,18 @@ package com.godpaper.as3.views.screens
 		private var _label:TextField;
 		//
 		private var _container:ScrollContainer;
+		//form grouper
+		private var _form_grouper:ScrollContainer;
+		//form elements
+		private var _label_picker:TextField;
+		private var _picker_list:PickerList;
+		private var _button_invite:Button;
+		private var _picker_list_items:Array = [];
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(SplashScreen);
+		private static const LOG:ILogger = LogUtil.getLogger(HandshakeScreen);
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -86,9 +99,8 @@ package com.godpaper.as3.views.screens
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function SplashScreen()
+		public function HandshakeScreen()
 		{
-			//TODO: implement function
 			super();
 		}     	
 		//--------------------------------------------------------------------------
@@ -96,28 +108,30 @@ package com.godpaper.as3.views.screens
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
+		//
 		override protected function initialize():void
 		{
-			const layout:VerticalLayout = new VerticalLayout();
-			layout.gap = 10;
-			layout.paddingTop = 10;
-			layout.paddingRight = 10;
-			layout.paddingBottom = 10;
-			layout.paddingLeft = 10;
-			layout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
-			layout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
+			const vLayout:VerticalLayout = new VerticalLayout();
+			vLayout.gap = 10;
+			vLayout.paddingTop = 10;
+			vLayout.paddingRight = 10;
+			vLayout.paddingBottom = 10;
+			vLayout.paddingLeft = 10;
+			vLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_CENTER;
+			vLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
 			//
 			this._container = new ScrollContainer();
-			this._container.layout = layout;
+			this._container.layout = vLayout;
 			this._container.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this.addChild(this._container);
 			//
-			this._label = new TextField(100,20,"LOADING...");
+			this._label = new TextField(200,20,"HAND SHAKING...");
 			this._container.addChild(this._label);
 			//
 			this._progress = new ProgressBar();
@@ -126,7 +140,7 @@ package com.godpaper.as3.views.screens
 			this._progress.value = 0;
 			this._container.addChild(this._progress);
 			//
-			this._progressTween = new GTween(this._progress, 5,
+			this._progressTween = new GTween(this._progress, 50,
 				{
 					value: 1
 				},
@@ -145,8 +159,56 @@ package com.godpaper.as3.views.screens
 			this._progressTween.onComplete =  function():void
 			{
 //				FlexGlobals.screenNavigator.showScreen((DefaultConstants.SCREEN_GAME));//Screen swither here.
-				FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);//Screen swither here.
+//				FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);//Screen swither here.
+				//TODO:notify user(try again,keep waitting..).
 			}
+			//Form grouper
+			const hLayout:HorizontalLayout = new HorizontalLayout();
+			hLayout.gap = 5;
+			hLayout.paddingTop = 10;
+			hLayout.paddingRight = 10;
+			hLayout.paddingBottom = 10;
+			hLayout.paddingLeft = 10;
+			hLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_CENTER;
+			hLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
+			//
+			this._form_grouper = new ScrollContainer();
+			this._form_grouper.layout = hLayout;
+			this._form_grouper.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			this._container.addChild(this._form_grouper);
+			//Form elements
+			this._label_picker = new TextField(80,20,"peerIDs:");
+			this._form_grouper.addChild(this._label_picker);
+			//
+			this._picker_list = new PickerList();
+			this._form_grouper.addChild(this._picker_list);
+//			this._picker_list.typicalItem = {text: "Item 1000"};
+//			this._picker_list.labelField = "text";
+			this._picker_list.labelFunction = function trancateLabel(str:String):String
+			{
+				return str.substr(0, 10)+"..."; 
+			}
+			//notice that we're setting typicalItem on the list separately. we
+			//may want to have the list measure at a different width, so it
+			//might need a different typical item than the picker list's button.
+//			this._picker_list.listProperties.typicalItem = {text: "Item 1000"};
+			//notice that we're setting labelField on the item renderers
+			//separately. the default item renderer has a labelField property,
+			//but a custom item renderer may not even have a label, so
+			//PickerList cannot simply pass its labelField down to item
+			//renderers automatically
+//			this._picker_list.listProperties.@itemRendererProperties.labelField = "text";
+			//
+			this._button_invite = new Button();
+			this._button_invite.label = "INVITE";
+			this._form_grouper.addChild(this._button_invite);
+			//Conduct service here.
+			FlexGlobals.conductService.initialization(null,null);	
+			//Signal watcher
+			FlexGlobals.conductService.connectSignal.add(conductConnectHandler);
+			FlexGlobals.conductService.disconnectSignal.add(conductDisconnectHandler);
+			FlexGlobals.conductService.userVoSignal.add(conductUserVoHandler);
+			FlexGlobals.conductService.postVoSignal.add(conductPostVoHandler);
 		}
 		//
 		override protected function draw():void
@@ -160,6 +222,30 @@ package com.godpaper.as3.views.screens
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		//
+		private function conductConnectHandler(peerID:String):void
+		{
+			LOG.info("Conduct connected peerID:{0}",peerID);
+			var item:Object = {text: peerID};
+			_picker_list_items.push(peerID);
+			_picker_list_items.fixed = true;
+			this._picker_list.dataProvider = new ListCollection(_picker_list_items);
+		}
+		//
+		private function conductDisconnectHandler(peerID:String):void
+		{
+			LOG.info("Conduct disconnected peerID:{0}",peerID);
+		}
+		//
+		private function conductUserVoHandler(userVO:UserVO):void
+		{
+			LOG.info("Conduct userVO:{0}",userVO);
+		}
+		//
+		private function conductPostVoHandler(postVO:PostVO):void
+		{
+			LOG.info("Conduct postVO:{0}",postVO);
+		}
 	}
 	
 }
