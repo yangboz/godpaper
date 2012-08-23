@@ -42,4 +42,6 @@
 -(void)setAt:(int)i objValue:(NSObject *)obj;
 //private function init(size:int):void
 -(void)init:(int)size;
+//public function dump():String
+-(NSString *)dump;
 @end

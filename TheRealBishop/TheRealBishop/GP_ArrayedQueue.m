@@ -9,7 +9,12 @@
 #import "GP_ArrayedQueue.h"
 #import "GP_Iterator.h"
 #import "GP_ArrayedQueueIterator.h"
-
+/**
+ * A queue based on an array (circular queue).
+ * This is called a FIFO structure (First In, First Out).
+ * 
+ * @see LinkedQueue
+ */
 @implementation GP_ArrayedQueue
 
 /**
@@ -164,7 +169,7 @@
     }
     [_que insertObject:obj atIndex:(int)((i + _front) & _divisor)];
 }
-#pragma mark Protocol of GP_Iterator
+#pragma mark Protocol of GP_Collection
 /**
  * @inheritDoc
  */
