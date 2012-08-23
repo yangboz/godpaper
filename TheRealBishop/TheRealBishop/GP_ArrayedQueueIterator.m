@@ -21,12 +21,14 @@
 -(NSObject *)data
 {
 //    return _que.getAt(_cursor);
+    return [_que getAt:_cursor];
 }
 
 //public function set data(obj:*):void
 -(void)setData:(NSObject *)data
 {
 //    _que.setAt(_cursor, obj);
+    [_que setAt:_cursor objValue:data];
 }
 
 //public function start():void
@@ -38,7 +40,7 @@
 //public function hasNext():Boolean
 -(BOOL)hasNext
 {
-//    return _cursor < _que.size;
+    return _cursor < _que.size;
 }
 
 //public function next():*
@@ -47,5 +49,9 @@
 //    if (_cursor < _que.size)
 //        return _que.getAt(_cursor++);
 //    return null;
+    if (_cursor < _que.size) {
+        return [_que getAt:(_cursor++)];
+    }
+    return NULL;
 }
 @end
