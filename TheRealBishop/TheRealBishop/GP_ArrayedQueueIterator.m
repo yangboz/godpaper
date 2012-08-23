@@ -52,6 +52,6 @@
     if (_cursor < _que.size) {
         return [_que getAt:(_cursor++)];
     }
-    return NULL;
+    return nil;
 }
 @end

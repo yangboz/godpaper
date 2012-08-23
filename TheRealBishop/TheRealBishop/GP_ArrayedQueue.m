@@ -24,6 +24,7 @@
 -(void)ArrayedQueue:(int)size
 {
 //    init(size);
+    [self init:size];
 }
 
 /**
@@ -41,9 +42,10 @@
  * @return The front item or null if the queue is empty.
  */
 //public function peek():*
--(id *)peek
+-(id)peek
 {
 //    return _que[_front];
+    return [_que objectAtIndex:_front];
 }
 /**
  * Indicates the most recently added item.
@@ -51,9 +53,10 @@
  * @return The last item in the queue or null if the queue is empty.
  */
 //public function back():*
--(id *)back
+-(id)back
 {
 //    return _que[int((_count - 1 + _front) & _divisor)];
+    return [_que objectAtIndex:(int)((_count - 1 + _front) & _divisor)];
 }
 
 /**
@@ -64,7 +67,7 @@
  * @return True if the item fits into the queue, otherwise false.
  */
 //public function enqueue(obj:*):Boolean
--(BOOL)enqueue:(id *)obj
+-(BOOL)enqueue:(NSObject *)obj
 {
 //if (_size != _count)
 //{
@@ -72,6 +75,11 @@
 //    return true;
 //}
 //return false;
+    if (_size != _count) {
+        [_que insertObject:obj atIndex:(int)((_count++ + _front) & _divisor)];
+        return YES;
+    }
+    return NO;
 }
 
 /**
@@ -80,7 +88,7 @@
  * @return The front item or null if the queue is empty.
  */
 //public function dequeue():*
--(id *)dequeue
+-(id)dequeue
 {
 //    if (_count > 0)
 //    {
@@ -90,6 +98,15 @@
 //        return data;
 //    }
 //    return null;
+    if (_count > 0) {
+        id data = [_que objectAtIndex:(int)(_front++)];
+        if (_front == _size) {
+            _front = 0;
+        }
+        _count--;
+        return data;
+    }
+    return nil;
 }
 /**
  * Deletes the last dequeued item to free it for the garbage collector.
@@ -106,6 +123,11 @@
 {
 //    if (!_front) _que[int(_size  - 1)] = null;
 //    else 		 _que[int(_front - 1)] = null;
+    if (!_front) {
+        [_que insertObject:[NSNull null] atIndex:(_size - 1)];
+    }else {
+        [_que insertObject:[NSNull null] atIndex:(_front - 1)];
+    }
 }
 
 /**
@@ -120,6 +142,10 @@
 {
 //    if (i >= _count) return null;
 //    return _que[int((i + _front) & _divisor)];
+    if (i >= _count) {
+        return nil;
+    }
+    return [_que objectAtIndex:(int)((i + _front) & _divisor)];
 }
 
 /**
@@ -133,7 +159,12 @@
 {
 //    if (i >= _count) return;
 //    _que[int((i + _front) & _divisor)] = obj;
+    if (i >= _count) {
+        return;
+    }
+    [_que insertObject:obj atIndex:(int)((i + _front) & _divisor)];
 }
+#pragma mark Protocol of GP_Iterator
 /**
  * @inheritDoc
  */
@@ -144,6 +175,9 @@
 //    _front = _count = 0;
 //    
 //    for (var i:int = 0; i < _size; i++) _que[i] = null;	
+    _que = [NSMutableArray arrayWithCapacity:_size];
+    _front = _count = 0;
+
 }
 
 /**
@@ -153,6 +187,7 @@
 -(id)getIterator
 {
 //    return new ArrayedQueueIterator(this);
+    return [GP_ArrayedQueueIterator alloc];
 }
 
 /**
@@ -183,6 +218,11 @@
 //for (var i:int = 0; i < _count; i++)
 //a[i] = _que[int((i + _front) & _divisor)];
 //return a;
+    NSMutableArray *a = [NSMutableArray arrayWithCapacity:_count];
+    for (int i = 0; i < _count; i++) {
+        [a insertObject:[_que objectAtIndex:((i + _front) & _divisor)] atIndex:i];
+    }
+    return a;
 }
 
 /**
@@ -194,6 +234,9 @@
 -(NSString *)toString;
 {
 //return "[ArrayedQueue, size=" + size + "]";
+    NSString *str = [[NSString alloc] initWithString:@"[ArrayedQueue, size="];
+    str = [str stringByAppendingFormat:@"%i %@",[self size],@"]"];
+    return str;
 }
 /**
  * Prints out all elements (for debug/demo purposes).
@@ -210,6 +253,9 @@
 //s += "\t" + getAt(i) + "\n";
 //
 //return s;
+    NSString *s = [[NSString alloc] initWithString:@"[ArrayedQueue]\n"];
+    //TODO:more string appending.
+    return s;
 }
 
 /**
@@ -237,7 +283,8 @@
     
     _size = size;
     _divisor = size - 1;
-    clear();
+//    clear();
+    [self clear];
 }
 
 @end

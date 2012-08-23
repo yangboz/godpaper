@@ -27,18 +27,19 @@
 //public function get maxSize():int
 @property(nonatomic,readonly)int maxSize;
 //public function peek():*
--(id *)peek;
+-(id)peek;
 //public function back():*
--(id *)back;
+-(id)back;
 //public function enqueue(obj:*):Boolean
--(BOOL)enqueue:(id *)obj;
+-(BOOL)enqueue:(NSObject *)obj;
 //public function dequeue():*
--(id *)dequeue;
+-(id)dequeue;
 //public function dispose():void
 -(void)dispose;
 //public function getAt(i:int):*
 -(NSObject *)getAt:(int)i;
 //public function setAt(i:int, obj:*):void
 -(void)setAt:(int)i objValue:(NSObject *)obj;
-
+//private function init(size:int):void
+-(void)init:(int)size;
 @end
