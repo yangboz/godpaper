@@ -26,7 +26,7 @@ package
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	
+
 	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
@@ -48,7 +48,7 @@ package
 	import com.godpaper.as3.views.scenes.MainScene;
 	import com.godpaper.tic_tac_toe.busniess.factory.ChessFactory_TicTacToe;
 	import com.godpaper.tic_tac_toe.busniess.managers.ChessPiecesManager_TicTacToe;
-	
+
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
@@ -56,10 +56,10 @@ package
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	import flash.system.Capabilities;
-	
+
 	import mx.logging.ILogger;
 	import mx.logging.LogEventLevel;
-	
+
 	import starling.core.Starling;
 
 	/**
@@ -73,11 +73,11 @@ package
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Apr 12, 2012 9:38:56 AM
-	 */   	 
-	[SWF(frameRate="60", width="320", height="480", backgroundColor="0xffffff")]//320×480 for iPhone devices
+	 */
+	[SWF(frameRate="60", width="320", height="480", backgroundColor="0xffffff")] //320×480 for iPhone devices
 //	[SWF(frameRate="60", width="384", height="512", backgroundColor="0xffffff")]//384×512 for iPad devices
 	public class ApplicationBase extends Sprite
-	{		
+	{
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
@@ -86,19 +86,20 @@ package
 		//Plugin stage support.
 		public var pluginStage:MovieClip;
 		//Default mochi dashboard hint.
-		public var _mochiads_game_id:String = "c7278f158e32f9a0";
+		public var _mochiads_game_id:String="c7278f158e32f9a0";
 		//For children dynamic factory config.
-		protected var pcFactory:Class = PieceConfig.factory;
+		protected var pcFactory:Class=PieceConfig.factory;
 		//Views(esp for plugin display)
 		public var pluginUIComponent:PluginUIComponent;
 		//Staring ref.
 		private var mStarling:Starling;
 		//Signals
-		
+
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(ApplicationBase);
+		private static const LOG:ILogger=LogUtil.getLogger(ApplicationBase);
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -106,7 +107,7 @@ package
 		//-------------------------------------------------------------------------- 
 		/**
 		 * Override this for customize plugin provider.
-		 */ 
+		 */
 		public function get pluginProvider():IPlug
 		{
 //			return new MochiPlugin(PluginConfig.gameID,PluginConfig.boardID);
@@ -114,21 +115,24 @@ package
 			return new KongregatePlugin();
 //			return new PlatogoPlugin("1146511093");
 		}
+
 		/**
 		 * Override this for customize chess pieces manager.
-		 */ 
+		 */
 		public function get chessPiecesManager():IChessPieceManager
 		{
 //			return new ChessPieceManagerDefault();
 			return new ChessPiecesManager_TicTacToe();
 		}
+
 		/**
 		 * Override this for customize game state manager.
-		 */ 
+		 */
 		public function get gameStateManager():IGameStateManager
 		{
 			return new GameStateManagerDefault();
 		}
+
 		/**
 		 * Override this for customize game theme.
 		 */
@@ -136,12 +140,13 @@ package
 		{
 			return ThemeConfig.THEME_AEON_DESKTOP;
 		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -149,7 +154,7 @@ package
 		//--------------------------------------------------------------------------
 		/**
 		 * Application bootstrap class.
-		 * 
+		 *
 		 */
 		public function ApplicationBase()
 		{
@@ -157,54 +162,55 @@ package
 			//
 			LOG.debug("preinitializeHandler@Constructor");
 			//
-			stage.scaleMode = StageScaleMode.NO_SCALE;
-			stage.align = StageAlign.TOP_LEFT;
+			stage.scaleMode=StageScaleMode.NO_SCALE;
+			stage.align=StageAlign.TOP_LEFT;
 //			trace(stage.stage3Ds.length);
 			//
-			Starling.multitouchEnabled = true; // useful on mobile devices
-			Starling.handleLostContext = true; // deactivate on mobile devices (to save memory)
+			Starling.multitouchEnabled=true; // useful on mobile devices
+			Starling.handleLostContext=true; // deactivate on mobile devices (to save memory)
 			//
 //			mStarling = new Starling(GameScene, stage,new Rectangle(0,0,768,1004));
-			LOG.debug("stage size:{0},{1}",stage.stageWidth,stage.stageHeight);
+			LOG.debug("stage size:{0},{1}", stage.stageWidth, stage.stageHeight);
 			//With user customized stage's size.
-			var screenWidth:int  = stage.stageWidth;//384
-			var screenHeight:int = stage.stageHeight;//512
+			var screenWidth:int=stage.stageWidth; //384
+			var screenHeight:int=stage.stageHeight; //512
 //			var screenWidth:int  = stage.fullScreenWidth;
 //			var screenHeight:int = stage.fullScreenHeight;
-			var viewPort:Rectangle = new Rectangle(0, 0, screenWidth, screenHeight);
+			var viewPort:Rectangle=new Rectangle(0, 0, screenWidth, screenHeight);
 //			mStarling = new Starling(GameScene, stage,viewPort);
-			mStarling = new Starling(MainScene, stage,viewPort);
-			mStarling.simulateMultitouch = true;
-			mStarling.enableErrorChecking = Capabilities.isDebugger;
+			mStarling=new Starling(MainScene, stage, viewPort);
+			mStarling.simulateMultitouch=true;
+			mStarling.enableErrorChecking=Capabilities.isDebugger;
 			mStarling.start();
 			//Display stats.
-			mStarling.showStats = true;
+			mStarling.showStats=true;
 			//Multi-Resolution Development
 			//@see: http://wiki.starling-framework.org/manual/multi-resolution_development
 //			LOG.debug("Starling contentScaleFactor:{0}",mStarling.contentScaleFactor);
-			var isPad:Boolean = (screenWidth >= 768 || screenWidth >= 1536);
+			var isPad:Boolean=(screenWidth >= 768 || screenWidth >= 1536);
 //			mStarling.stage.stageWidth  = isPad ? 384 : 320;
 //			mStarling.stage.stageHeight = isPad ? 512 : 480;
-			var scaleWidthRate:Number = isPad ? 384/320 :1;
-			var scaleHeightRate:Number = isPad ? 512/480 :1;
-			mStarling.stage.stageWidth  = stage.stageWidth*scaleWidthRate;
-			mStarling.stage.stageHeight = stage.stageHeight*scaleHeightRate;
-			LOG.debug("Starling contentScaleFactor:{0}",mStarling.contentScaleFactor);
+			var scaleWidthRate:Number=isPad ? 384 / 320 : 1;
+			var scaleHeightRate:Number=isPad ? 512 / 480 : 1;
+			mStarling.stage.stageWidth=stage.stageWidth * scaleWidthRate;
+			mStarling.stage.stageHeight=stage.stageHeight * scaleHeightRate;
+			LOG.debug("Starling contentScaleFactor:{0}", mStarling.contentScaleFactor);
 			// loader info.
 			this.loaderInfo.addEventListener(flash.events.Event.COMPLETE, loaderInfoCompleteHandler);
 			// add to stage.
-			this.addEventListener(flash.events.Event.ADDED_TO_STAGE,addToStageHandler);
+			this.addEventListener(flash.events.Event.ADDED_TO_STAGE, addToStageHandler);
 			// this event is dispatched when stage3D is set up
 			mStarling.stage3D.addEventListener(flash.events.Event.CONTEXT3D_CREATE, context3DCreatedHandler);
 //			mStarling.stage3D.addEventListener(starling.events.Event.ROOT_CREATED, rootCreatedHandler);
 			// signals initialization.
-			
+
 			// turn to framework's workflow
 			initializeHandler();
 			// Stats display
 //			var stats:Stats = new Stats();
 //			this.addChild(stats);
-		} 
+		}
+
 		//
 		private function loaderInfoCompleteHandler(event:flash.events.Event):void
 		{
@@ -214,53 +220,59 @@ package
 			//Deative,active event listeners.
 //			this.stage.addEventListener(Event.DEACTIVATE, stageDeactivateHandler, false, 0, true);
 		}
+
 		//
 		private function stageResizeHandler(event:flash.events.Event):void
 		{
 			LOG.debug("stage_resizeHandler");
-			this.mStarling.stage.stageWidth = this.stage.stageWidth;
-			this.mStarling.stage.stageHeight = this.stage.stageHeight;
-			
-			const viewPort:Rectangle = this.mStarling.viewPort;
-			viewPort.width = this.stage.stageWidth;
-			viewPort.height = this.stage.stageHeight;
+			this.mStarling.stage.stageWidth=this.stage.stageWidth;
+			this.mStarling.stage.stageHeight=this.stage.stageHeight;
+
+			const viewPort:Rectangle=this.mStarling.viewPort;
+			viewPort.width=this.stage.stageWidth;
+			viewPort.height=this.stage.stageHeight;
 			try
 			{
-				this.mStarling.viewPort = viewPort;
+				this.mStarling.viewPort=viewPort;
 			}
-			catch(error:Error) {}
+			catch (error:Error)
+			{
+			}
 		}
+
 		//
 		private function addToStageHandler(event:flash.events.Event):void
 		{
 			LOG.debug("initializeHandler@addToStage");
-			this.removeEventListener(flash.events.Event.ADDED_TO_STAGE,addToStageHandler);
+			this.removeEventListener(flash.events.Event.ADDED_TO_STAGE, addToStageHandler);
 			// turn to framework's workflow
 //			applicationCompleteHandler();
 			//Store this reference to FlexGlobals.topLevelApplication
-			FlexGlobals.topLevelApplication = this;
-			FlexGlobals.gameStage = mStarling.stage;
+			FlexGlobals.topLevelApplication=this;
+			FlexGlobals.gameStage=mStarling.stage;
 			// Plugin display
-			this.pluginUIComponent = new PluginUIComponent();
+			this.pluginUIComponent=new PluginUIComponent();
 //			this.pluginUIComponent.provider = this.pluginProvider;With default plugin provider
 			this.addChild(this.pluginUIComponent);
 		}
+
 		//
 		private function context3DCreatedHandler(event:flash.events.Event):void
 		{
 //			LOG.debug("Starling is start:{0}",mStarling.isStarted);
-			var driverIsSoftware:Boolean = Starling.context.driverInfo.toLowerCase().indexOf("software") != -1;
-			LOG.debug("applicationCompleteHandler@onContextCreated,driverInfo(software) is:{0}",driverIsSoftware);
+			var driverIsSoftware:Boolean=Starling.context.driverInfo.toLowerCase().indexOf("software") != -1;
+			LOG.debug("applicationCompleteHandler@onContextCreated,driverInfo(software) is:{0}", driverIsSoftware);
 			// set framerate to 30 in software mode
 			if (driverIsSoftware)
 			{
-				Starling.current.nativeStage.frameRate = 30;			
+				Starling.current.nativeStage.frameRate=30;
 			}
 			//
-			this.removeEventListener(flash.events.Event.CONTEXT3D_CREATE,context3DCreatedHandler);
+			this.removeEventListener(flash.events.Event.CONTEXT3D_CREATE, context3DCreatedHandler);
 			// turn to framework's workflow
 			applicationCompleteHandler();
 		}
+
 //		private function rootCreatedHandler(event:starling.events.Event):void
 //		{
 //			LOG.debug("Starling root created");
@@ -272,12 +284,14 @@ package
 			this.mStarling.stop();
 			this.stage.addEventListener(Event.ACTIVATE, stageDeactivateHandler, false, 0, true);
 		}
+
 		//
 		private function stageActivateHandler(event:Event):void
 		{
 			this.stage.removeEventListener(Event.ACTIVATE, stageActivateHandler);
 			this.mStarling.start();
 		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -285,7 +299,7 @@ package
 		//--------------------------------------------------------------------------
 		/**
 		 * Foot sprint dump,optional for logging the end of turn messages.
-		 */		
+		 */
 		public function dumpFootSprint():void
 		{
 			//
@@ -297,6 +311,7 @@ package
 			//			LOG.info("allPieces rotate90.bitCount:{0}", FlexGlobals.chessPiecesModel.allPieces.bitCount);
 			//			LOG.info("allPieces rotate90.cellCount:{0}", FlexGlobals.chessPiecesModel.allPieces.cellCount);
 		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -305,61 +320,62 @@ package
 		//applicationBase_initializeHandler
 		/**
 		 * All kinds of view components initialization here.
-		 */		
+		 */
 		protected function initializeHandler():void
 		{
 			//config initialization here.
 			//about chess board:
-			BoardConfig.xLines=3;//
-			BoardConfig.yLines=3;//
-			BoardConfig.xOffset=100;//
-			BoardConfig.yOffset=100;//	
+			BoardConfig.xLines=3; //
+			BoardConfig.yLines=3; //
+			BoardConfig.xOffset=100; //
+			BoardConfig.yOffset=100; //	
 //			BoardConfig.width=300;
 //			BoardConfig.height=300;
-			BoardConfig.xScale=1;//
-			BoardConfig.yScale=1;//
-			BoardConfig.xAdjust=50;//
-			BoardConfig.yAdjust=50;//
+			BoardConfig.xScale=1; //
+			BoardConfig.yScale=1; //
+			BoardConfig.xAdjust=50; //
+			BoardConfig.yAdjust=50; //
 			//for connex
-			BoardConfig.hConnex = true;//enable the horizontal connection.
-			BoardConfig.vConnex = true;//enable the vertical connection.
-			BoardConfig.fdConnex = true;//enable the forward connection.
-			BoardConfig.bdConnex = true;//enable the backward connection.
-			BoardConfig.numConnex = 3;//the number of connection.
+			BoardConfig.hConnex=true; //enable the horizontal connection.
+			BoardConfig.vConnex=true; //enable the vertical connection.
+			BoardConfig.fdConnex=true; //enable the forward connection.
+			BoardConfig.bdConnex=true; //enable the backward connection.
+			BoardConfig.numConnex=3; //the number of connection.
 			//Customize starling texture sample:
 //			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 //			BoardConfig.backgroundImage = new Image(texture);
 			//Pieces box config:
-			BoardConfig.piecesBoxRequired = true;//Pieces box used to obtain chess pieces as a container.
-			BoardConfig.backgroundImageRequired = false;//
+			BoardConfig.piecesBoxRequired=true; //Pieces box used to obtain chess pieces as a container.
+			BoardConfig.backgroundImageRequired=false; //
 			//gasket config:
-			GasketConfig.maxPoolSize = 9;//Notices:Object pools full of objects with dangerously stale state are sometimes called object cesspools and regarded as an anti-pattern.
-			GasketConfig.tipsVisible = true;//Gasket label used to debugger.
-			GasketConfig.backgroundAlpha = 0.2;//
-			GasketConfig.width = 30;
-			GasketConfig.height = 30;
+			GasketConfig.maxPoolSize=9; //Notices:Object pools full of objects with dangerously stale state are sometimes called object cesspools and regarded as an anti-pattern.
+			GasketConfig.tipsVisible=true; //Gasket label used to debugger.
+			GasketConfig.backgroundAlpha=0.2; //
+			GasketConfig.width=30;
+			GasketConfig.height=30;
 			//about piece:
-			PieceConfig.factory = ChessFactory_TicTacToe;//your custom chess factory.
-			PieceConfig.maxPoolSizeBlue = 5;//What's the number of blue(computer) chess pieces?
-			PieceConfig.maxPoolSizeRed = 5;//What's the number of red(human) chess pieces?
+			PieceConfig.factory=ChessFactory_TicTacToe; //your custom chess factory.
+			PieceConfig.maxPoolSizeBlue=5; //What's the number of blue(computer) chess pieces?
+			PieceConfig.maxPoolSizeRed=5; //What's the number of red(human) chess pieces?
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
-			PieceConfig.scaleX = 1;
-			PieceConfig.scaleY = 1;
+			PieceConfig.scaleX=1;
+			PieceConfig.scaleY=1;
 			//about plugin:
-			PluginConfig.gameID = "dadc1bb72ac7ed7f";//your custom game related id.
-			PluginConfig.boardID = "51c558cd0315f8e7";//your custom game related board id.
-			this._mochiads_game_id = "dadc1bb72ac7ed7f";//espical for mochi game platform.
+			PluginConfig.gameID="dadc1bb72ac7ed7f"; //your custom game related id.
+			PluginConfig.boardID="51c558cd0315f8e7"; //your custom game related board id.
+			this._mochiads_game_id="dadc1bb72ac7ed7f"; //espical for mochi game platform.
 			//TextureConfig
-			TextureConfig.AssetEmbeds_1x_class = AssetEmbeds_1x;
-			TextureConfig.AssetEmbeds_2x_class = AssetEmbeds_2x;
+			TextureConfig.AssetEmbeds_1x_class=AssetEmbeds_1x;
+			TextureConfig.AssetEmbeds_2x_class=AssetEmbeds_2x;
 			//LogConfig
-			LoggerConfig.filters = ["com.godpaper.tic_tac_toe.busniess.managers.*","com.godpaper.as3.services.*","com.godpaper.as3.views.screens.HandshakeScreen"];
-			LoggerConfig.level = LogEventLevel.DEBUG;
+			LoggerConfig.filters=["com.godpaper.tic_tac_toe.busniess.managers.*", "com.godpaper.as3.services.*", "com.godpaper.as3.views.screens.HandshakeScreen"];
+			LoggerConfig.level=LogEventLevel.DEBUG;
 			//
-			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
-			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);
-			LOG.debug("SigletonFactory(cb) test:{0}",FlexGlobals.chessBoardModel.status.dump());
+			LOG.debug("SigletonFactory(cp) test:{0}", FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
+			LOG.debug("SigletonFactory(cg) test:{0}", FlexGlobals.chessGasketsModel.gaskets);
+			LOG.debug("SigletonFactory(cb) test:{0}", FlexGlobals.chessBoardModel.status.dump());
 		}
+
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
@@ -368,7 +384,7 @@ package
 		//  applicationBase_applicationCompleteHandler
 		/**
 		 * Game application start up here.
-		 */		
+		 */
 		private function applicationCompleteHandler():void
 		{
 			//			//init data struct.@see ChessPieceModel dump info.
@@ -379,13 +395,11 @@ package
 			//number of tollgate tips would be matched with tollgates!
 			//			GameConfig.tollgates = [RandomWalk,ShortSighted,AttackFalse,AttackFalse,MiniMax];
 			//			GameConfig.tollgateTips = ["baby intelligence","fellow intelligence","man intelligence","guru intelligence"];
-			GameConfig.turnFlag = DefaultConstants.FLAG_RED;//Default flag to human(play first).
-			GameConfig.chessPieceManager = this.chessPiecesManager;
-			GameConfig.gameStateManager = this.gameStateManager;
+			GameConfig.turnFlag=DefaultConstants.FLAG_RED; //Default flag to human(play first).
+			GameConfig.chessPieceManager=this.chessPiecesManager;
+			GameConfig.gameStateManager=this.gameStateManager;
 //			GameConfig.gameStateManager.start();//Avoid call start() at this entry point.
-			//P2pService testing.
-//			FlexGlobals.conductService.initialization(null,null);
 		}
 	}
-	
+
 }

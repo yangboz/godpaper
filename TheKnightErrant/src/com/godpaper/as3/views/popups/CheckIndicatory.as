@@ -33,6 +33,8 @@ package com.godpaper.as3.views.popups
 	
 	import org.josht.starling.foxhole.controls.Label;
 	import org.josht.starling.foxhole.controls.Screen;
+	
+	import starling.text.TextField;
 
 	/**
 	 * Callout/popup view component that indicated the computer/human be chencked status.  	
@@ -49,7 +51,7 @@ package com.godpaper.as3.views.popups
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _label:Label;
+		private var _label:TextField;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -88,7 +90,7 @@ package com.godpaper.as3.views.popups
 		override protected function initialize():void
 		{
 			//
-			this._label = new Label();
+			this._label = new TextField();
 			this._label.text = DefaultConstants.INDICATION_CHECK;
 			this.addChild(this._label);
 			//AS3 signal to broad cast the chess check message.
@@ -101,7 +103,6 @@ package com.godpaper.as3.views.popups
 		override protected function draw():void
 		{
 			//
-			this._label.validate();
 			this._label.x = (this.actualWidth - this._label.width) / 2;
 			this._label.y = (this.actualHeight - this._label.height) / 2;
 		}

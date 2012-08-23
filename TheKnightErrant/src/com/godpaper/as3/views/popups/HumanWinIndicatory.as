@@ -36,6 +36,7 @@ package com.godpaper.as3.views.popups
 	import org.josht.starling.foxhole.controls.Screen;
 	import org.josht.starling.foxhole.controls.ScreenHeader;
 	import org.josht.starling.foxhole.controls.ScrollContainer;
+	import org.josht.starling.foxhole.controls.Scroller;
 	import org.josht.starling.foxhole.controls.TextInput;
 	import org.josht.starling.foxhole.layout.HorizontalLayout;
 	import org.josht.starling.foxhole.layout.VerticalLayout;
@@ -44,25 +45,36 @@ package com.godpaper.as3.views.popups
 	
 	
 	/**
-	 * Callout/popup view component that indicated the human win status.  	
+	 * Callout/popup view component that indicated the human win status.</br>  
+	 * Example skelton as follows:</br>	
+	 * -----------------------------------</br>
+	 * ------------You Win!!!-------------</br>
+	 * -----------------------------------</br>
+	 * -----------------------------------</br>
+	 * ------------TextInput--------------</br>
+	 * -----------------------------------</br>
+	 * ------------TextInput--------------</br>
+	 * -----------------------------------</br>
+	 * -----------------------------------</br>
+	 * -------SUBMIT---------NEXT---------</br>
+	 * -----------------------------------</br>
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Jun 20, 2012 4:23:56 PM
 	 */   	 
-	public class HumanWinIndicatory extends Screen
+	public class HumanWinIndicatory extends IndicatoryBase
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _header:ScreenHeader;
 		private var _nameInput:TextInput;
 		private var _scoreInput:TextInput;
 		private var _inputsContainer:ScrollContainer;
-		private var _buttonsContainer:ScrollContainer;
+		private var _buttonsContainer:ScrollContainer;//submit,next button 
 		private var _submitBtn:Button;//submit score button.
 		private var _nextBtn:Button;//next round button.
 		//----------------------------------
@@ -103,38 +115,18 @@ package com.godpaper.as3.views.popups
 		//--------------------------------------------------------------------------
 		override protected function initialize():void
 		{
-			//view initialize.
-			//
-			this._header = new ScreenHeader();
-			this._header.title = DefaultConstants.INDICATION_HUMAN_WIN;
-			this.addChild(this._header);
-			//layouts
-			const hLayout:HorizontalLayout = new HorizontalLayout();
-			hLayout.gap = 0;
-			hLayout.paddingTop = 0;
-			hLayout.paddingRight = 0;
-			hLayout.paddingBottom = 0;
-			hLayout.paddingLeft = 0;
-			hLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_LEFT;
-			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_TOP;
-			const vLayout:VerticalLayout = new VerticalLayout();
-			vLayout.gap = 0;
-			vLayout.paddingTop = 0;
-			vLayout.paddingRight = 0;
-			vLayout.paddingBottom = 0;
-			vLayout.paddingLeft = 0;
-			vLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_LEFT;
-			vLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
-			//containers
+			super.initialize();
+			//_buttonsContainer
 			this._inputsContainer = new ScrollContainer();
-			this._inputsContainer.layout = vLayout;
-			this.addChild(this._inputsContainer);
+			this._inputsContainer.layout = this.vLayout;
+			this._container.addChild(this._inputsContainer);
 			this._buttonsContainer = new ScrollContainer();
-			this._buttonsContainer.layout = hLayout;
-			this.addChild(this._buttonsContainer);
+			this._buttonsContainer.layout = this.hLayout;
+			this._container.addChild(this._buttonsContainer);
 			//text inputs
 			this._nameInput = new TextInput();
 			this._scoreInput = new TextInput();
+			this._scoreInput.text = this.currentScore.toString();
 			this._scoreInput.isEnabled = false;
 			this._inputsContainer.addChild(this._nameInput);
 			this._inputsContainer.addChild(this._scoreInput);
@@ -144,46 +136,27 @@ package com.godpaper.as3.views.popups
 			this._buttonsContainer.addChild(this._submitBtn);
 			this._nextBtn = new Button();
 			this._nextBtn.label = "NEXT";
-//			this._buttonsContainer.addChild(this._nextBtn);
+			this._nextBtn.isEnabled = this.hasNextRound;
+			this._buttonsContainer.addChild(this._nextBtn);
 			//event listener
 			this._submitBtn.onRelease.add(submitButtonOnRelease);
 			this._nextBtn.onRelease.add(nextButtonOnRelease);
 			//Default iPlug trigger.
 			iPlug.saveData({"boardID": null});
 			//				MochiScores.setBoardID(PluginConfig.mochiBoardID);
-			this._header.rightItems = new <DisplayObject>
-				[
-					this._nextBtn
-				];
+//			this._header.rightItems = new <DisplayObject>
+//				[
+//					this._nextBtn
+//				];
+			//
+			this._header.title = DefaultConstants.INDICATION_HUMAN_WIN;
+			this.width = 200;
+			this.height = 200;
 		}
 		//
 		override protected function draw():void
 		{
-			this._header.width = this.actualWidth;
-			this._header.validate();
-			//
-			this._nameInput.validate();
-			this._nameInput.width = 100;
-			this._nameInput.height = 20;
-			this._nameInput.x = (this.actualWidth - this._nameInput.width) / 2;
-			this._nameInput.y = (this.actualHeight - this._nameInput.height) / 2;
-			//
-			this._scoreInput.validate();
-			this._scoreInput.width = 100;
-			this._scoreInput.height = 20;
-			this._scoreInput.x = (this.actualWidth - this._nameInput.width) / 2;
-			this._scoreInput.y = (this.actualHeight - this._nameInput.height) / 2 + 30;
-			//
-			this._submitBtn.width = this._submitBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
-			this._nextBtn.width = this._nextBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
-			//
-			this._inputsContainer.y = this._header.height;
-			this._inputsContainer.width = this.actualWidth;
-			this._inputsContainer.height = this.actualHeight - this._inputsContainer.y;
-//			this._buttonsContainer
-			//
-			this.width = 200;
-			this.height = 100;
+			super.draw();
 		}
 		//
 		protected function get currentScore():int

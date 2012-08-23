@@ -39,6 +39,7 @@ package com.godpaper.as3.views.screens
 	
 	import org.josht.starling.foxhole.controls.Button;
 	import org.josht.starling.foxhole.controls.Label;
+	import org.josht.starling.foxhole.controls.List;
 	import org.josht.starling.foxhole.controls.PickerList;
 	import org.josht.starling.foxhole.controls.ProgressBar;
 	import org.josht.starling.foxhole.controls.Screen;
@@ -84,7 +85,7 @@ package com.godpaper.as3.views.screens
 		private var _response_grouper:ScrollContainer;
 		//response elements
 		private var _lebel_response:TextField;
-		private var _response_list:PickerList;
+		private var _response_list:List;
 		private var _button_response:Button;
 		private var _response_list_items:Array = [];
 		//----------------------------------
@@ -220,12 +221,13 @@ package com.godpaper.as3.views.screens
 			this._lebel_response = new TextField(80,20,"invites:");
 			this._response_grouper.addChild(this._lebel_response);
 			//
-			this._response_list = new PickerList();
+			this._response_list = new List();
 			this._response_grouper.addChild(this._response_list);
-			this._response_list.labelFunction = function trancateLabel(str:String):String
-			{
-				return str.substr(0, 10)+"..."; 
-			}
+//			this._response_list.labelFunction = function trancateLabel(str:String):String
+//			{
+//				return str.substr(0, 10)+"..."; 
+//			}
+//			this._response_list.itemRendererType = ;
 			//
 			this._button_response = new Button();
 			this._button_response.label = "RESPONSE";
@@ -297,6 +299,8 @@ package com.godpaper.as3.views.screens
 			postVO.state = PostVO.STATE_HAND_SHAKE;
 			//
 			FlexGlobals.conductService.netGroupPost(postVO,this._picker_list.selectedItem.toString());
+			//no more invite request,untill none response.
+			this._button_invite.isEnabled = false;
 		}
 		//
 		private function responseButtonReleaseHandler(button:Button):void

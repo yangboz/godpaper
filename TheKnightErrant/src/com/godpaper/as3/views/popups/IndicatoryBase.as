@@ -26,12 +26,6 @@ package com.godpaper.as3.views.popups
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.configs.IndicatorConfig;
-	import com.godpaper.as3.consts.DefaultConstants;
-	
-	import org.josht.starling.foxhole.controls.Button;
-	import org.josht.starling.foxhole.controls.Label;
 	import org.josht.starling.foxhole.controls.Screen;
 	import org.josht.starling.foxhole.controls.ScreenHeader;
 	import org.josht.starling.foxhole.controls.ScrollContainer;
@@ -39,40 +33,30 @@ package com.godpaper.as3.views.popups
 	import org.josht.starling.foxhole.layout.HorizontalLayout;
 	import org.josht.starling.foxhole.layout.VerticalLayout;
 	
-	import starling.display.DisplayObject;
-	import starling.text.TextField;
-
+	
 	/**
-	 * Callout/popup view component that indicated the computer win status.</br>
-	 * Example skelton as follows:</br>
-	 * -----------------------------------</br>
-	 * -----------!!!You lost!!!----------</br>
-	 * -----------------------------------</br>
-	 * ------------Try again?-------------</br>
-	 * -----------------------------------</br>
-	 * -------YES---------------NO--------</br>
-	 * -----------------------------------</br>
+	 * IndicatoryBase.as class.The base class of all indicatory with popup behavior.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Jun 20, 2012 2:56:34 PM
+	 * Created Aug 23, 2012 5:17:27 PM
 	 */   	 
-	public class ComputerWinIndicatory extends IndicatoryBase
+	public class IndicatoryBase extends Screen
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _yesBtn:Button;
-		private var _noBtn:Button;
-		private var _msgLable:TextField;
-		//
-		private var _buttonsContainer:ScrollContainer;//yes,no button.
+		protected var hLayout:HorizontalLayout;
+		protected var vLayout:VerticalLayout;
+		protected var _header:ScreenHeader;
+		protected var _container:ScrollContainer;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -90,8 +74,27 @@ package com.godpaper.as3.views.popups
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ComputerWinIndicatory()
+		public function IndicatoryBase()
 		{
+			super();
+			//layout 
+			hLayout = new HorizontalLayout();
+			hLayout.gap = 10;
+			hLayout.paddingTop = 10;
+			hLayout.paddingRight = 10;
+			hLayout.paddingBottom = 10;
+			hLayout.paddingLeft = 10;
+			hLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_CENTER;
+			hLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
+			//
+			vLayout = new VerticalLayout();
+			vLayout.gap = 10;
+			vLayout.paddingTop = 10;
+			vLayout.paddingRight = 10;
+			vLayout.paddingBottom = 10;
+			vLayout.paddingLeft = 10;
+			vLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_CENTER;
+			vLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -106,62 +109,33 @@ package com.godpaper.as3.views.popups
 		//--------------------------------------------------------------------------
 		override protected function initialize():void
 		{
-			super.initialize();
-			//
-			this._buttonsContainer = new ScrollContainer();
-			this._buttonsContainer.layout = hLayout;
-			this._buttonsContainer.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			this._container.addChild(this._buttonsContainer);
-			//
-			this._msgLable = new TextField(200,20,"Try again?");
-			this._container.addChild(this._msgLable);
-			//buttons 
-			this._yesBtn = new Button();
-			this._yesBtn.label = "YES";
-			this._yesBtn.width = this._yesBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
-			this._buttonsContainer.addChild(this._yesBtn);
-			this._noBtn = new Button();
-			this._noBtn.label = "NO";
-			this._noBtn.width = this._noBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
-			this._buttonsContainer.addChild(this._noBtn);
-			//header items
-//			this._header.leftItems = new <DisplayObject>
-//				[
-//					this._yesBtn
-//				];
-//			this._header.rightItems = new <DisplayObject>
-//				[
-//					this._noBtn
-//				];
-			//event listener
-			this._yesBtn.onRelease.add(yesButtonOnRelease);
-			this._noBtn.onRelease.add(noButtonOnRelease);
-			//
-			this._header.title = DefaultConstants.INDICATION_COMPUTER_WIN;
-			this.width = 200;
-			this.height = 100;	
+			//header title
+			this._header = new ScreenHeader();
+			this._header.title = "???";
+			this.addChild(this._header);
+			//container
+			this._container = new ScrollContainer();
+			this._container.layout = vLayout;//default layout
+			this.addChild(this._container);
+			//Append the customize initialization.
 		}
 		//
 		override protected function draw():void
 		{
-			super.draw();
+			//
+			this._header.width = this.actualWidth;
+			this._header.validate();
+			//			
+			this._container.y = this._header.height;
+			this._container.width = this.actualWidth;
+			this._container.height = this.actualHeight - this._container.y;
+			this._container.validate();
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function yesButtonOnRelease(button:Button):void
-		{
-			//restart game.
-			GameConfig.gameStateManager.restart();
-			//
-			IndicatorConfig.outcome = false;
-		}
-		private function noButtonOnRelease(button:Button):void
-		{
-			IndicatorConfig.outcome = false;
-		}
 	}
 	
 }
