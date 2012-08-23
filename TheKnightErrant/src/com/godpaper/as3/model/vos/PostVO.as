@@ -26,13 +26,14 @@ package com.godpaper.as3.model.vos
 		public var id:String  = new Date().time.toString()+(Math.random()*int.MAX_VALUE).toString();
 		public var destination:String = "";//destination peer id.
 		public var status:String = null;
-		public var state:String = STATE_REG;
+		public var state:String = STATE_REGISTER;
 		public var brevity:String = null;//brevity text.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		public static const STATE_REG:String = "registry";
-		public static const STATE_UPDATE:String = "update";
+		public static const STATE_REGISTER:String = "register-user";
+		public static const STATE_UPDATE:String = "update-brevity";
+		public static const STATE_HAND_SHAKE:String = "hand-shake";//invite send and waiting response.
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

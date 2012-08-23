@@ -1,5 +1,7 @@
 package com.godpaper.as3.model.vos
 {
+	import mx.utils.ObjectUtil;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -24,11 +26,13 @@ package com.godpaper.as3.model.vos
 		public var peerID:String="";//p2p peer id.
 		public var roleIndex:int=-1;//user selected role index.
 		public var roleName:String="";//user inputed role name.
-		public var action:String = "idle";//the role's action.
+		public var action:String = ACTION_IDLE;//the role's action.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		//
+		public static const ACTION_IDLE:String = "idle";
+		public static const ACTION_PLAY:String = "play";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -60,7 +64,7 @@ package com.godpaper.as3.model.vos
 		//--------------------------------------------------------------------------
 		public function toString():String
 		{
-			return this.shortenPeerId;
+			return ObjectUtil.toString(this);
 		}
 		//--------------------------------------------------------------------------
 		//

@@ -33,6 +33,8 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.model.vos.UserVO;
 	import com.godpaper.as3.utils.LogUtil;
 	
+	import flash.events.TouchEvent;
+	
 	import mx.logging.ILogger;
 	
 	import org.josht.starling.foxhole.controls.Button;
@@ -48,6 +50,7 @@ package com.godpaper.as3.views.screens
 	import org.josht.starling.motion.GTween;
 	
 	import starling.events.Event;
+	import starling.events.TouchEvent;
 	import starling.text.TextField;
 	
 	/**
@@ -77,6 +80,13 @@ package com.godpaper.as3.views.screens
 		private var _picker_list:PickerList;
 		private var _button_invite:Button;
 		private var _picker_list_items:Array = [];
+		//response grouper
+		private var _response_grouper:ScrollContainer;
+		//response elements
+		private var _lebel_response:TextField;
+		private var _response_list:PickerList;
+		private var _button_response:Button;
+		private var _response_list_items:Array = [];
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -140,12 +150,12 @@ package com.godpaper.as3.views.screens
 			this._progress.value = 0;
 			this._container.addChild(this._progress);
 			//
-			this._progressTween = new GTween(this._progress, 50,
+			this._progressTween = new GTween(this._progress, 5,
 				{
 					value: 1
 				},
 				{
-					repeatCount: 1
+					repeatCount: 99
 				});
 			//Loading subroutines here.
 			
@@ -158,11 +168,9 @@ package com.godpaper.as3.views.screens
 			//Loading complete handler.
 			this._progressTween.onComplete =  function():void
 			{
-//				FlexGlobals.screenNavigator.showScreen((DefaultConstants.SCREEN_GAME));//Screen swither here.
-//				FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);//Screen swither here.
 				//TODO:notify user(try again,keep waitting..).
 			}
-			//Form grouper
+			//Response grouper
 			const hLayout:HorizontalLayout = new HorizontalLayout();
 			hLayout.gap = 5;
 			hLayout.paddingTop = 10;
@@ -177,7 +185,7 @@ package com.godpaper.as3.views.screens
 			this._form_grouper.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this._container.addChild(this._form_grouper);
 			//Form elements
-			this._label_picker = new TextField(80,20,"peerIDs:");
+			this._label_picker = new TextField(80,20,"neighbors:");
 			this._form_grouper.addChild(this._label_picker);
 			//
 			this._picker_list = new PickerList();
@@ -202,6 +210,28 @@ package com.godpaper.as3.views.screens
 			this._button_invite = new Button();
 			this._button_invite.label = "INVITE";
 			this._form_grouper.addChild(this._button_invite);
+			this._button_invite.onRelease.add(inviteButtonReleaseHandler);
+			//
+			this._response_grouper = new ScrollContainer();
+			this._response_grouper.layout = hLayout;
+			this._response_grouper.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			this._container.addChild(this._response_grouper);
+			//Form elements
+			this._lebel_response = new TextField(80,20,"invites:");
+			this._response_grouper.addChild(this._lebel_response);
+			//
+			this._response_list = new PickerList();
+			this._response_grouper.addChild(this._response_list);
+			this._response_list.labelFunction = function trancateLabel(str:String):String
+			{
+				return str.substr(0, 10)+"..."; 
+			}
+			//
+			this._button_response = new Button();
+			this._button_response.label = "RESPONSE";
+			this._button_response.isEnabled = false;
+			this._response_grouper.addChild(this._button_response);
+			this._button_response.onRelease.add(responseButtonReleaseHandler);
 			//Conduct service here.
 			FlexGlobals.conductService.initialization(null,null);	
 			//Signal watcher
@@ -235,16 +265,43 @@ package com.godpaper.as3.views.screens
 		private function conductDisconnectHandler(peerID:String):void
 		{
 			LOG.info("Conduct disconnected peerID:{0}",peerID);
+			var item:Object = {text: peerID};
+			var index:int = _picker_list_items.indexOf(peerID);
+			_picker_list_items.splice(index,1);
+			_picker_list_items.fixed = true;
+			this._picker_list.dataProvider = new ListCollection(_picker_list_items);
+			//TODO:remove related response list item.
 		}
 		//
 		private function conductUserVoHandler(userVO:UserVO):void
 		{
 			LOG.info("Conduct userVO:{0}",userVO);
+			_response_list_items.push(userVO.shortenPeerId);
+			_response_list_items.fixed = true;
+			_response_list.dataProvider = new ListCollection(_response_list_items);
+			this._button_response.isEnabled = true;
 		}
 		//
 		private function conductPostVoHandler(postVO:PostVO):void
 		{
 			LOG.info("Conduct postVO:{0}",postVO);
+		}
+		//
+		private function inviteButtonReleaseHandler(button:Button):void
+		{
+			var postVO:PostVO = new PostVO();
+			postVO.peerID = FlexGlobals.userModel.hosterPeerId;
+			postVO.roleIndex = FlexGlobals.userModel.hosterRoleIndex;
+			postVO.roleName = FlexGlobals.userModel.hostRoleName;
+			postVO.action = UserVO.ACTION_PLAY;
+			postVO.state = PostVO.STATE_HAND_SHAKE;
+			//
+			FlexGlobals.conductService.netGroupPost(postVO,this._picker_list.selectedItem.toString());
+		}
+		//
+		private function responseButtonReleaseHandler(button:Button):void
+		{
+//			FlexGlobals.screenNavigator.showScreen( DefaultConstants.SCREEN_GAME );//Screen swither here.
 		}
 	}
 	

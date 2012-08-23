@@ -199,36 +199,12 @@ package com.godpaper.as3.services
 					}
 					else//handle  message with role information
 					{
-						LOG.debug("[RECEIVED] from:{0},state:{1},roleIndex:{2},brevity:{3}",truncateString(event.info.message.peerID),event.info.message.state,event.info.message.roleIndex,event.info.message.brevity);
+						LOG.debug("[RECEIVED(Posting.Notify)] from:{0},state:{1},roleIndex:{2},roleName:{3},brevity:{4}",truncateString(event.info.message.peerID),event.info.message.state,event.info.message.roleIndex,event.info.message.roleName,event.info.message.brevity);
 						//state switcher
 						if(event.info.message.state)
 						{
-							if(PostVO.STATE_REG == event.info.message.state)//registerRole
-							{
-								//user vo assemble
-								var userVO:UserVO = new UserVO();
-								userVO.peerID = event.info.message.peerID;
-								userVO.roleIndex = event.info.message.roleIndex;
-								userVO.roleName = event.info.message.roleName;
-								//model cache.
-								FlexGlobals.userModel.registerRole( userVO.peerID,userVO.roleIndex,userVO.roleName);
-								//broadcast signal.
-								this.userVoSignal.dispatch(userVO);
-							}
-							if(PostVO.STATE_UPDATE == event.info.message.state)//updateRole
-							{
-								//user vo assemble
-								var postVO:PostVO = new PostVO();
-								postVO.peerID = event.info.message.peerID;
-								postVO.roleIndex = event.info.message.roleIndex;
-								postVO.roleName = event.info.message.roleName;
-								//
-								postVO.state = event.info.message.state;
-								postVO.brevity = event.info.message.brevity;
-								//model cache.
-								//broadcast signal.
-								this.postVoSignal.dispatch(postVO);
-							}
+							//role message with state handler.
+							this.roleNetMessageHandler(event);
 						}
 					}
 					break;
@@ -250,12 +226,12 @@ package com.godpaper.as3.services
 					break;
 				//neighbour disconnected so remove details from list
 				case "NetGroup.Neighbor.Disconnect":
-					LOG.debug("[Neighbor(left)]:{0}",event.info.peerID);
+					LOG.debug("[NetGroup.Neighbor.Disconnect]:{0}",event.info.peerID);
 					//unregisterRole
 					FlexGlobals.userModel.unregisterRole(event.info.peerID);
 					//refresh the user list.
 					FlexGlobals.userModel.removeUser(event.info.peerID);
-					LOG.debug("[NetGroup.Posting.Notify]:Currently total users(after removeUser):{0}",FlexGlobals.userModel.totalUsers());
+					LOG.debug("[NetGroup.Neighbor.Disconnect]:Currently total users(after removeUser):{0}",FlexGlobals.userModel.totalUsers());
 					//tell entire group about peer disconnecting
 					var disconPost:PostVO = createStatusMessageObject(STATUS_DISCONNECTED);
 					disconPost.peerID = event.info.peerID;
@@ -268,21 +244,24 @@ package com.godpaper.as3.services
 					//final destination reached
 					if (Boolean(event.info.fromLocal))//is destination? so display it
 					{	
-						//handle status message
-						if (event.info.message.status!=null && event.info.message.status==STATUS_CONNECTED)
+						LOG.debug("[RECEIVED(SendTo.Notify)] from:{0},roleIndex:{1},roleName:{2},action:{3},state:{4},brevity:{5}",truncateString(event.info.message.peerID),event.info.message.roleIndex,event.info.message.roleName,event.info.message.action,event.info.message.state,event.info.message.brevity);
+						if( STATUS_CONNECTED == event.info.message.status)//handle status message
 						{
-							//refresh user list
-							FlexGlobals.userModel.addUser(event.info.message.peerID);
-							LOG.debug("[NetGroup.SendTo.Notify]:Currently total users(after addUser):{0}",FlexGlobals.userModel.totalUsers());
-						}
-						else//handle  message with role information
+							if(event.info.message.status)
+							{
+								//refresh user list
+								FlexGlobals.userModel.addUser(event.info.message.peerID);
+								LOG.debug("[NetGroup.SendTo.Notify]:Currently total users(after addUser):{0}",FlexGlobals.userModel.totalUsers());
+							}
+						}else
 						{
-							LOG.debug("[RECEIVED] from:{0},roleIndex:{1}",truncateString(event.info.message.peerID),event.info.message.roleIndex);
+							//role message with state handler.
+							this.roleNetMessageHandler(event);
 						}
 					}	
 					else
 					{
-						LOG.debug("[RECEIVED(SendTo.Notify)] from:{0},status:{1},roleIndex:{2},brevity:{3}",event.info.message.peerID,event.info.message.status,event.info.message.roleIndex,event.info.message.brivity);
+//						LOG.debug("[RECEIVED(SendTo.Notify)] from:{0},roleIndex:{1},roleName:{2},action:{3},state:{4},brevity:{5}",truncateString(event.info.message.peerID),event.info.message.roleIndex,event.info.message.roleName,event.info.message.action,event.info.message.state,event.info.message.brevity);
 						//not destination so re-send
 						netGroup.sendToNearest(event.info.message, event.info.message.destination);
 					}
@@ -315,6 +294,48 @@ package com.godpaper.as3.services
 		private function asyncErrorHandler(event:AsyncErrorEvent):void
 		{
 			LOG.error(event.toString());
+		}
+		//role message with state handler at current net status event flow.
+		private function roleNetMessageHandler(event:NetStatusEvent):void
+		{
+			if(PostVO.STATE_REGISTER == event.info.message.state)//registerRole
+			{
+				//user vo assemble
+				var userVO:UserVO = new UserVO();
+				userVO.peerID = event.info.message.peerID;
+				userVO.roleIndex = event.info.message.roleIndex;
+				userVO.roleName = event.info.message.roleName;
+				//model cache.
+				FlexGlobals.userModel.registerRole( userVO.peerID,userVO.roleIndex,userVO.roleName);
+				//broadcast signal.
+				this.userVoSignal.dispatch(userVO);
+			}
+			if(PostVO.STATE_UPDATE == event.info.message.state)//updateRole
+			{
+				//user vo assemble
+				var postVO:PostVO = new PostVO();
+				postVO.peerID = event.info.message.peerID;
+				postVO.roleIndex = event.info.message.roleIndex;
+				postVO.roleName = event.info.message.roleName;
+				//
+				postVO.state = event.info.message.state;
+				postVO.brevity = event.info.message.brevity;
+				//model cache.
+				//broadcast signal.
+				this.postVoSignal.dispatch(postVO);
+			}
+			if(PostVO.STATE_HAND_SHAKE == event.info.message.state)//role hand-shake
+			{
+				//user vo assemble
+				var userVO2:UserVO = new UserVO();
+				userVO2.peerID = event.info.message.peerID;
+				userVO2.roleIndex = event.info.message.roleIndex;
+				userVO2.roleName = event.info.message.roleName;
+				userVO2.action = UserVO.ACTION_PLAY;
+				//model cache.
+				//broadcast signal.
+				this.userVoSignal.dispatch(userVO2);
+			}
 		}
 	}
 }

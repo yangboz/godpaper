@@ -1,13 +1,13 @@
 package com.godpaper.as3.utils
 {
 	import com.godpaper.as3.configs.LoggerConfig;
-	
+
 	import flash.utils.getQualifiedClassName;
-	
+
 	import mx.logging.ILogger;
 	import mx.logging.Log;
 	import mx.logging.targets.TraceTarget;
-	
+
 	/**
 	 * Use a simple utility method to retrieve the logger
 	 * for a particular class, instead of passing
@@ -37,10 +37,12 @@ package com.godpaper.as3.utils
 	 *
 	 * @author Knight.zhou
 	 */
-	public class LogUtil {
-		
+	public class LogUtil
+	{
+
 		//Variables(should be only one instance!)
-		private static var _traceTarget:TraceTarget = new TraceTarget();
+		private static var _traceTarget:TraceTarget=new TraceTarget();
+
 		/**
 		 * With the utility method approach,
 		 * the class name can be refactored
@@ -51,17 +53,18 @@ package com.godpaper.as3.utils
 		 * @return ILogger
 		 *
 		 */
-		public static function getLogger(c:Class):ILogger {
-			var className:String =getQualifiedClassName(c).replace("::", ".");
+		public static function getLogger(c:Class):ILogger
+		{
+			var className:String=getQualifiedClassName(c).replace("::", ".");
 			//Customize the Log
-			_traceTarget.includeLevel = LoggerConfig.includeLevel;
-			_traceTarget.includeDate = LoggerConfig.includeDate;
-			_traceTarget.includeCategory = LoggerConfig.includeCategory;
-			_traceTarget.includeTime = LoggerConfig.includeTime;
-			_traceTarget.includeMemory = LoggerConfig.includeMemory;
-			_traceTarget.fieldSeparator = LoggerConfig.fieldSeparator;
-			_traceTarget.filters = LoggerConfig.filters;
-			_traceTarget.level = LoggerConfig.level;
+			_traceTarget.includeLevel=LoggerConfig.includeLevel;
+			_traceTarget.includeDate=LoggerConfig.includeDate;
+			_traceTarget.includeCategory=LoggerConfig.includeCategory;
+			_traceTarget.includeTime=LoggerConfig.includeTime;
+			_traceTarget.includeMemory=LoggerConfig.includeMemory;
+			_traceTarget.fieldSeparator=LoggerConfig.fieldSeparator;
+			_traceTarget.filters=LoggerConfig.filters;
+			_traceTarget.level=LoggerConfig.level;
 			Log.addTarget(_traceTarget);
 			//
 			return Log.getLogger(className);
