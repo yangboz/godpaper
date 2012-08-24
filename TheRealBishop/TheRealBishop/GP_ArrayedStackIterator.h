@@ -29,6 +29,6 @@
 //public function hasNext():Boolean
 -(BOOL)hasNext;
 //public function next():*
--(id *)next;
+-(id)next;
 //
 @end

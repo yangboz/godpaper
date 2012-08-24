@@ -45,7 +45,7 @@
 }
 
 //public function next():*
--(id *)next
+-(id)next
 {
 //    if (_cursor >= 0)
 //        return _stack.getAt(_cursor--);
