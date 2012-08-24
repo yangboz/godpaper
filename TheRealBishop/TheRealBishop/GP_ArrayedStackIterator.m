@@ -29,6 +29,7 @@
 -(void)setData:(NSObject *)data
 {
 //    _stack.setAt(_cursor, obj);
+    [_stack setAt:_cursor objValue:data];
 }
 
 //public function start():void
@@ -49,6 +50,10 @@
 //    if (_cursor >= 0)
 //        return _stack.getAt(_cursor--);
 //    return null;
+    if (_cursor >= 0) {
+        return [_stack getAt:(_cursor--)];
+    }
+    return nil;
 }
 
 @end
