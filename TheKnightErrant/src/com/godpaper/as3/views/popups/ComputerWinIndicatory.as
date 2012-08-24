@@ -108,21 +108,22 @@ package com.godpaper.as3.views.popups
 		{
 			super.initialize();
 			//
+			this._msgLable = new TextField(200,20,"Try again?");
+			this._container.addChild(this._msgLable);
+			//
 			this._buttonsContainer = new ScrollContainer();
 			this._buttonsContainer.layout = hLayout;
 			this._buttonsContainer.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			this._buttonsContainer.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this._container.addChild(this._buttonsContainer);
-			//
-			this._msgLable = new TextField(200,20,"Try again?");
-			this._container.addChild(this._msgLable);
 			//buttons 
 			this._yesBtn = new Button();
 			this._yesBtn.label = "YES";
-			this._yesBtn.width = this._yesBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
+//			this._yesBtn.width = this._yesBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
 			this._buttonsContainer.addChild(this._yesBtn);
 			this._noBtn = new Button();
 			this._noBtn.label = "NO";
-			this._noBtn.width = this._noBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
+//			this._noBtn.width = this._noBtn.height = (44 + 88 * Math.random()) * this.dpiScale;
 			this._buttonsContainer.addChild(this._noBtn);
 			//header items
 //			this._header.leftItems = new <DisplayObject>

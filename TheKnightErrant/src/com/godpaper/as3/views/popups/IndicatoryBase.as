@@ -116,6 +116,8 @@ package com.godpaper.as3.views.popups
 			//container
 			this._container = new ScrollContainer();
 			this._container.layout = vLayout;//default layout
+			this._container.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			this._container.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this.addChild(this._container);
 			//Append the customize initialization.
 		}

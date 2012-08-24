@@ -2,6 +2,7 @@ package com.godpaper.as3.configs
 {
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.impl.AbstractChessVO;
+	import com.godpaper.as3.views.components.ChessGasket;
 	import com.godpaper.as3.views.popups.ComputerWinIndicatory;
 	import com.godpaper.as3.views.popups.HumanWinIndicatory;
 	import com.godpaper.as3.views.popups.ThinkIndicatory;
@@ -121,7 +122,9 @@ package com.godpaper.as3.configs
 				if(humanWinIndicatory == null) humanWinIndicatory = new HumanWinIndicatory();
 				//				Callout.show(computerWinIndicatory, getChessBoard(), Callout.DIRECTION_ANY);
 				//				_callout.open(computerWinIndicatory,FlexGlobals.gameScene);
-				PopUpManager.addPopUp(humanWinIndicatory);
+//				PopUpManager.addPopUp(humanWinIndicatory,true,true,customOverLay);
+				PopUpManager.addPopUp(humanWinIndicatory,true,true);
+				PopUpManager.centerPopUp(humanWinIndicatory);
 			}else
 			{
 				//				_callout.close();
@@ -164,6 +167,12 @@ package com.godpaper.as3.configs
 		private static function getChessBoard():DisplayObject
 		{
 			return DisplayObject(FlexGlobals.gameScreen.chessBoard);
+		}
+		
+		//
+		private static function customOverLay():DisplayObject
+		{
+			return new ChessGasket();
 		}
 
 	}
