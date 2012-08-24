@@ -16,6 +16,7 @@
 		A41103D515DBDB9100CCD0DE /* libSparrow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A41103D415DBDB9100CCD0DE /* libSparrow.a */; };
 		A41103D815DBDBEA00CCD0DE /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = A41103D715DBDBEA00CCD0DE /* Game.m */; };
 		A41103DA15DBDF8100CCD0DE /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A41103D915DBDF8100CCD0DE /* MainWindow.xib */; };
+		A46440C515E686D3001D6308 /* GP_ArrayedStackIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A46440C415E686D3001D6308 /* GP_ArrayedStackIterator.m */; };
 		A4EB7F5C15D2AE7A007400CE /* GP_Array2Iterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F5B15D2AE7A007400CE /* GP_Array2Iterator.m */; };
 		A4EB7F5F15D2B459007400CE /* GP_Array3.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F5E15D2B458007400CE /* GP_Array3.m */; };
 		A4EB7F6215D2B47D007400CE /* GP_ArrayedQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F6115D2B47D007400CE /* GP_ArrayedQueue.m */; };
@@ -46,6 +47,7 @@
 		A4EB7FAD15D2B666007400CE /* GP_TreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7FAC15D2B665007400CE /* GP_TreeNode.m */; };
 		A4ED98C915D3DB1F00C450E8 /* GP_Array3Iterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED98C815D3DB1F00C450E8 /* GP_Array3Iterator.m */; };
 		A4ED98CC15D3E73200C450E8 /* GP_Array2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED98CB15D3E73200C450E8 /* GP_Array2Tests.m */; };
+		A4EDA65A15E52C2800CF34C8 /* GP_ArrayedQueueIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDA65915E52C2800CF34C8 /* GP_ArrayedQueueIterator.m */; };
 		A4F0D00C15D154B10034FF28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00B15D154B10034FF28 /* UIKit.framework */; };
 		A4F0D00E15D154B10034FF28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00D15D154B10034FF28 /* Foundation.framework */; };
 		A4F0D01015D154B10034FF28 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00F15D154B10034FF28 /* CoreGraphics.framework */; };
@@ -96,6 +98,8 @@
 		A41103D615DBDBEA00CCD0DE /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		A41103D715DBDBEA00CCD0DE /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		A41103D915DBDF8100CCD0DE /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		A46440C315E686D3001D6308 /* GP_ArrayedStackIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_ArrayedStackIterator.h; sourceTree = "<group>"; };
+		A46440C415E686D3001D6308 /* GP_ArrayedStackIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_ArrayedStackIterator.m; sourceTree = "<group>"; };
 		A4EB7F5A15D2AE7A007400CE /* GP_Array2Iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array2Iterator.h; sourceTree = "<group>"; };
 		A4EB7F5B15D2AE7A007400CE /* GP_Array2Iterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array2Iterator.m; sourceTree = "<group>"; };
 		A4EB7F5D15D2B458007400CE /* GP_Array3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array3.h; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 		A4ED98C815D3DB1F00C450E8 /* GP_Array3Iterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array3Iterator.m; sourceTree = "<group>"; };
 		A4ED98CA15D3E73200C450E8 /* GP_Array2Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array2Tests.h; sourceTree = "<group>"; };
 		A4ED98CB15D3E73200C450E8 /* GP_Array2Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array2Tests.m; sourceTree = "<group>"; };
+		A4EDA65815E52C2800CF34C8 /* GP_ArrayedQueueIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_ArrayedQueueIterator.h; sourceTree = "<group>"; };
+		A4EDA65915E52C2800CF34C8 /* GP_ArrayedQueueIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_ArrayedQueueIterator.m; sourceTree = "<group>"; };
 		A4EDDD3915DD2012009CFD0E /* GP_IType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IType.h; sourceTree = "<group>"; };
 		A4EDDD3A15DD2457009CFD0E /* GP_IPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IPosition.h; sourceTree = "<group>"; };
 		A4EDDD3B15DD330F009CFD0E /* GP_IUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IUID.h; sourceTree = "<group>"; };
@@ -228,6 +234,10 @@
 				A4F0D04115D154EE0034FF28 /* GP_Iterator.h */,
 				A4ED98C715D3DB1F00C450E8 /* GP_Array3Iterator.h */,
 				A4ED98C815D3DB1F00C450E8 /* GP_Array3Iterator.m */,
+				A4EDA65815E52C2800CF34C8 /* GP_ArrayedQueueIterator.h */,
+				A4EDA65915E52C2800CF34C8 /* GP_ArrayedQueueIterator.m */,
+				A46440C315E686D3001D6308 /* GP_ArrayedStackIterator.h */,
+				A46440C415E686D3001D6308 /* GP_ArrayedStackIterator.m */,
 			);
 			name = iterators;
 			sourceTree = "<group>";
@@ -611,6 +621,8 @@
 				A4EB7FAD15D2B666007400CE /* GP_TreeNode.m in Sources */,
 				A4ED98C915D3DB1F00C450E8 /* GP_Array3Iterator.m in Sources */,
 				A41103D815DBDBEA00CCD0DE /* Game.m in Sources */,
+				A4EDA65A15E52C2800CF34C8 /* GP_ArrayedQueueIterator.m in Sources */,
+				A46440C515E686D3001D6308 /* GP_ArrayedStackIterator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
