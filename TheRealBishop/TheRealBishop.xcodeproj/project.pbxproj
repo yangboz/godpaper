@@ -17,6 +17,8 @@
 		A41103D815DBDBEA00CCD0DE /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = A41103D715DBDBEA00CCD0DE /* Game.m */; };
 		A41103DA15DBDF8100CCD0DE /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A41103D915DBDF8100CCD0DE /* MainWindow.xib */; };
 		A46440C515E686D3001D6308 /* GP_ArrayedStackIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A46440C415E686D3001D6308 /* GP_ArrayedStackIterator.m */; };
+		A4EAD27015E86FD20019768C /* GP_FlexGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EAD26F15E86FD20019768C /* GP_FlexGlobals.m */; };
+		A4EAD27415E8DBE00019768C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A4EAD27315E8DBE00019768C /* README.md */; };
 		A4EB7F5C15D2AE7A007400CE /* GP_Array2Iterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F5B15D2AE7A007400CE /* GP_Array2Iterator.m */; };
 		A4EB7F5F15D2B459007400CE /* GP_Array3.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F5E15D2B458007400CE /* GP_Array3.m */; };
 		A4EB7F6215D2B47D007400CE /* GP_ArrayedQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F6115D2B47D007400CE /* GP_ArrayedQueue.m */; };
@@ -100,6 +102,13 @@
 		A41103D915DBDF8100CCD0DE /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		A46440C315E686D3001D6308 /* GP_ArrayedStackIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_ArrayedStackIterator.h; sourceTree = "<group>"; };
 		A46440C415E686D3001D6308 /* GP_ArrayedStackIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_ArrayedStackIterator.m; sourceTree = "<group>"; };
+		A4EAD26E15E86FD10019768C /* GP_FlexGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_FlexGlobals.h; sourceTree = "<group>"; };
+		A4EAD26F15E86FD20019768C /* GP_FlexGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_FlexGlobals.m; sourceTree = "<group>"; };
+		A4EAD27115E870420019768C /* GP_IChessFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IChessFactory.h; sourceTree = "<group>"; };
+		A4EAD27215E8D8420019768C /* GP_ IChessPieceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GP_ IChessPieceManager.h"; sourceTree = "<group>"; };
+		A4EAD27315E8DBE00019768C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		A4EAD27515E8E10D0019768C /* GP_ IGameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GP_ IGameStateManager.h"; sourceTree = "<group>"; };
+		A4EAD27615E8E44A0019768C /* GP_IXray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IXray.h; sourceTree = "<group>"; };
 		A4EB7F5A15D2AE7A007400CE /* GP_Array2Iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array2Iterator.h; sourceTree = "<group>"; };
 		A4EB7F5B15D2AE7A007400CE /* GP_Array2Iterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array2Iterator.m; sourceTree = "<group>"; };
 		A4EB7F5D15D2B458007400CE /* GP_Array3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array3.h; sourceTree = "<group>"; };
@@ -228,6 +237,8 @@
 		A4ED98C515D3DAEE00C450E8 /* iterators */ = {
 			isa = PBXGroup;
 			children = (
+				A4EB7F6F15D2B4ED007400CE /* GP_DListIterator.h */,
+				A4EB7F7015D2B4ED007400CE /* GP_DListIterator.m */,
 				A4EB7F9315D2B5BC007400CE /* GP_NullIterator.h */,
 				A4EB7F5A15D2AE7A007400CE /* GP_Array2Iterator.h */,
 				A4EB7F5B15D2AE7A007400CE /* GP_Array2Iterator.m */,
@@ -236,8 +247,13 @@
 				A4ED98C815D3DB1F00C450E8 /* GP_Array3Iterator.m */,
 				A4EDA65815E52C2800CF34C8 /* GP_ArrayedQueueIterator.h */,
 				A4EDA65915E52C2800CF34C8 /* GP_ArrayedQueueIterator.m */,
+				A4EB7F9415D2B5BC007400CE /* GP_NullIterator.m */,
 				A46440C315E686D3001D6308 /* GP_ArrayedStackIterator.h */,
 				A46440C415E686D3001D6308 /* GP_ArrayedStackIterator.m */,
+				A4EB7FA815D2B658007400CE /* GP_TreeIterator.h */,
+				A4EB7FA915D2B659007400CE /* GP_TreeIterator.m */,
+				A4EB7F9F15D2B620007400CE /* GP_SListIterator.h */,
+				A4EB7FA015D2B621007400CE /* GP_SListIterator.m */,
 			);
 			name = iterators;
 			sourceTree = "<group>";
@@ -289,6 +305,12 @@
 				A4EDDD4015DD45C4009CFD0E /* GP_IDragdropable.h */,
 				A4EDDD4115DD4608009CFD0E /* GP_IChessGasket.h */,
 				A4EDDD4215DD46DD009CFD0E /* GP_IChessVO.h */,
+				A4EAD26E15E86FD10019768C /* GP_FlexGlobals.h */,
+				A4EAD26F15E86FD20019768C /* GP_FlexGlobals.m */,
+				A4EAD27115E870420019768C /* GP_IChessFactory.h */,
+				A4EAD27215E8D8420019768C /* GP_ IChessPieceManager.h */,
+				A4EAD27515E8E10D0019768C /* GP_ IGameStateManager.h */,
+				A4EAD27615E8E44A0019768C /* GP_IXray.h */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -304,6 +326,7 @@
 		A4F0CFFC15D154B10034FF28 = {
 			isa = PBXGroup;
 			children = (
+				A4EAD27315E8DBE00019768C /* README.md */,
 				A41103D915DBDF8100CCD0DE /* MainWindow.xib */,
 				A41103D415DBDB9100CCD0DE /* libSparrow.a */,
 				A41103BB15DBD96B00CCD0DE /* Sparrow.xcodeproj */,
@@ -405,8 +428,6 @@
 				A4EB7F6A15D2B4BF007400CE /* GP_BinaryTreeNode.m */,
 				A4EB7F6C15D2B4D0007400CE /* GP_DLinkedList.h */,
 				A4EB7F6D15D2B4D0007400CE /* GP_DLinkedList.m */,
-				A4EB7F6F15D2B4ED007400CE /* GP_DListIterator.h */,
-				A4EB7F7015D2B4ED007400CE /* GP_DListIterator.m */,
 				A4EB7F7215D2B501007400CE /* GP_Graph.h */,
 				A4EB7F7315D2B501007400CE /* GP_Graph.m */,
 				A4EB7F7515D2B510007400CE /* GP_GraphArc.h */,
@@ -429,21 +450,16 @@
 				A4EB7F8E15D2B598007400CE /* GP_BitVector.m */,
 				A4EB7F9015D2B5AA007400CE /* GP_LinkedStack.h */,
 				A4EB7F9115D2B5AB007400CE /* GP_LinkedStack.m */,
-				A4EB7F9415D2B5BC007400CE /* GP_NullIterator.m */,
 				A4EB7F9615D2B5D9007400CE /* GP_Prioritizable.h */,
 				A4EB7F9715D2B5D9007400CE /* GP_Prioritizable.m */,
 				A4EB7F9915D2B5F6007400CE /* GP_PriorityQueue.h */,
 				A4EB7F9A15D2B5F6007400CE /* GP_PriorityQueue.m */,
 				A4EB7F9C15D2B609007400CE /* GP_SLinkedList.h */,
 				A4EB7F9D15D2B609007400CE /* GP_SLinkedList.m */,
-				A4EB7F9F15D2B620007400CE /* GP_SListIterator.h */,
-				A4EB7FA015D2B621007400CE /* GP_SListIterator.m */,
 				A4EB7FA215D2B639007400CE /* GP_SListNode.h */,
 				A4EB7FA315D2B639007400CE /* GP_SListNode.m */,
 				A4EB7FA515D2B649007400CE /* GP_Set.h */,
 				A4EB7FA615D2B649007400CE /* GP_Set.m */,
-				A4EB7FA815D2B658007400CE /* GP_TreeIterator.h */,
-				A4EB7FA915D2B659007400CE /* GP_TreeIterator.m */,
 				A4EB7FAB15D2B664007400CE /* GP_TreeNode.h */,
 				A4EB7FAC15D2B665007400CE /* GP_TreeNode.m */,
 			);
@@ -554,6 +570,7 @@
 			files = (
 				A4F0D01615D154B10034FF28 /* InfoPlist.strings in Resources */,
 				A41103DA15DBDF8100CCD0DE /* MainWindow.xib in Resources */,
+				A4EAD27415E8DBE00019768C /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +640,7 @@
 				A41103D815DBDBEA00CCD0DE /* Game.m in Sources */,
 				A4EDA65A15E52C2800CF34C8 /* GP_ArrayedQueueIterator.m in Sources */,
 				A46440C515E686D3001D6308 /* GP_ArrayedStackIterator.m in Sources */,
+				A4EAD27015E86FD20019768C /* GP_FlexGlobals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
