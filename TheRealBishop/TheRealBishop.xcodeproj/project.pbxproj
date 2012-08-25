@@ -19,6 +19,7 @@
 		A46440C515E686D3001D6308 /* GP_ArrayedStackIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A46440C415E686D3001D6308 /* GP_ArrayedStackIterator.m */; };
 		A4EAD27015E86FD20019768C /* GP_FlexGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EAD26F15E86FD20019768C /* GP_FlexGlobals.m */; };
 		A4EAD27415E8DBE00019768C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A4EAD27315E8DBE00019768C /* README.md */; };
+		A4EAD27F15E926790019768C /* GP_VisualElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EAD27E15E926790019768C /* GP_VisualElement.m */; };
 		A4EB7F5C15D2AE7A007400CE /* GP_Array2Iterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F5B15D2AE7A007400CE /* GP_Array2Iterator.m */; };
 		A4EB7F5F15D2B459007400CE /* GP_Array3.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F5E15D2B458007400CE /* GP_Array3.m */; };
 		A4EB7F6215D2B47D007400CE /* GP_ArrayedQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EB7F6115D2B47D007400CE /* GP_ArrayedQueue.m */; };
@@ -109,6 +110,8 @@
 		A4EAD27315E8DBE00019768C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		A4EAD27515E8E10D0019768C /* GP_ IGameStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GP_ IGameStateManager.h"; sourceTree = "<group>"; };
 		A4EAD27615E8E44A0019768C /* GP_IXray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IXray.h; sourceTree = "<group>"; };
+		A4EAD27D15E926790019768C /* GP_VisualElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_VisualElement.h; sourceTree = "<group>"; };
+		A4EAD27E15E926790019768C /* GP_VisualElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_VisualElement.m; sourceTree = "<group>"; };
 		A4EB7F5A15D2AE7A007400CE /* GP_Array2Iterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array2Iterator.h; sourceTree = "<group>"; };
 		A4EB7F5B15D2AE7A007400CE /* GP_Array2Iterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_Array2Iterator.m; sourceTree = "<group>"; };
 		A4EB7F5D15D2B458007400CE /* GP_Array3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_Array3.h; sourceTree = "<group>"; };
@@ -234,6 +237,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A4EAD27715E920BB0019768C /* views */ = {
+			isa = PBXGroup;
+			children = (
+				A4EAD27C15E9210A0019768C /* scenes */,
+				A4EAD27B15E921010019768C /* popups */,
+				A4EAD27A15E920F90019768C /* screens */,
+				A4EAD27915E920F20019768C /* plugin */,
+				A4EAD27815E920EA0019768C /* components */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		A4EAD27815E920EA0019768C /* components */ = {
+			isa = PBXGroup;
+			children = (
+				A4EAD27D15E926790019768C /* GP_VisualElement.h */,
+				A4EAD27E15E926790019768C /* GP_VisualElement.m */,
+			);
+			name = components;
+			sourceTree = "<group>";
+		};
+		A4EAD27915E920F20019768C /* plugin */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = plugin;
+			sourceTree = "<group>";
+		};
+		A4EAD27A15E920F90019768C /* screens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = screens;
+			sourceTree = "<group>";
+		};
+		A4EAD27B15E921010019768C /* popups */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = popups;
+			sourceTree = "<group>";
+		};
+		A4EAD27C15E9210A0019768C /* scenes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = scenes;
+			sourceTree = "<group>";
+		};
 		A4ED98C515D3DAEE00C450E8 /* iterators */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +339,7 @@
 		A4EDDD3615DD1F71009CFD0E /* obj-c */ = {
 			isa = PBXGroup;
 			children = (
+				A4EAD27715E920BB0019768C /* views */,
 				A4EDDD3715DD1F82009CFD0E /* core */,
 			);
 			name = "obj-c";
@@ -641,6 +694,7 @@
 				A4EDA65A15E52C2800CF34C8 /* GP_ArrayedQueueIterator.m in Sources */,
 				A46440C515E686D3001D6308 /* GP_ArrayedStackIterator.m in Sources */,
 				A4EAD27015E86FD20019768C /* GP_FlexGlobals.m in Sources */,
+				A4EAD27F15E926790019768C /* GP_VisualElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

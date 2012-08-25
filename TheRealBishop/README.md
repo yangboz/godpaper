@@ -25,6 +25,6 @@ Also based on the great open source project Sparrow framework.
 
 #Known issues:
 1.Obj-c properties at protocol implementation issues;
-
+2.Obj-c dynamic function required;
 #Wish list:
 

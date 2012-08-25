@@ -35,6 +35,9 @@
 //        if (node.right)
 //            BinaryTreeNode.preorder(node.right, process);
 //    }
+    if (node) {
+        
+    }
 }
 
 /**
