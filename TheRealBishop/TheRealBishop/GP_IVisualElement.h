@@ -10,12 +10,6 @@
 #import "GP_IUID.h"
 
 @protocol GP_IVisualElement <GP_IUID>
-{
-    @private
-        NSNumber *x;
-        NSNumber *y;
-        NSString *label;
-}
 //--------------------------------------------------------------------------
 //
 //  Public properties
@@ -23,15 +17,18 @@
 //-------------------------------------------------------------------------- 
 //
 //function set x(value:Number):void;
+-(void)setX:(NSNumber)value;
 //function get x():Number;
+-(NSNumber)x;
 //
 //function set y(value:Number):void;
+-(void)setY:(NSNumber)value;
 //function get y():Number;
+-(void)y;
 //
 //function set label(value:String):void;
+-(void)setLabel:(NSString *)value;
 //function get label():String;
-@property(nonatomic,retain) NSNumber *x;
-@property(nonatomic,retain) NSNumber *y;
-@property(nonatomic,retain) NSString *label;
+-(NSString *)label;
 //
 @end

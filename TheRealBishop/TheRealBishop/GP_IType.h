@@ -12,18 +12,15 @@
  * but also sort some chess pieces' variety.
  */
 @protocol GP_IType <NSObject>
-{
-    @private
-        NSString *type;
-}
 //--------------------------------------------------------------------------
 //
 //  Public properties
 //
 //-------------------------------------------------------------------------- 
 //function set type(value:String):void;
+-(void)setType:(NSString *)value;
 //function get type():String;
-@property(nonatomic,retain) NSString *type;
+-(NSString *)type;
 //--------------------------------------------------------------------------
 //
 //  Public methods

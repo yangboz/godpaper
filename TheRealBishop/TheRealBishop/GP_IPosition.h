@@ -13,12 +13,9 @@
  *
  */
 @protocol GP_IPosition <NSObject>
-{
-    @private
-        CGPoint *position;
-}
 //function set position(value:Point):void;
+-(void)setPosition:(CGPoint *)value;
 //function get position():Point;
-@property(nonatomic,retain)CGPoint *position;
+-(CGPoint *)position;
 //
 @end

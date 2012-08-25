@@ -15,23 +15,20 @@
  * The interface of ChessPiece include all of interface relatived to it.
  */
 @protocol GP_IChessPiece <GP_IVisualElement,GP_IPosition,GP_IType>
-{
-    @private
-        ChessAgent *agent;
-        IChessVO *chessVO;
-        OmenVO *omenVO;
-}
 //
 //function set agent(value:ChessAgent):void;
+-(void)setAgent:(ChessAgent *)value;
 //function get agent():ChessAgent;
-@property(nonatomic,retain) ChessAgent *agent;
+-(ChessAgent *)agent;
 //
 //function set chessVO(value:IChessVO):void;
+-(void)setChessVO:(IChessVO *)value;
 //function get chessVO():IChessVO;
-@property(nonatomic,retain) IChessVO *chessVO;
+-(IChessVO *)chessVO;
 //
 //function set omenVO(value:OmenVO):void;
+-(void)setOmenVO:(OmenVO *)value;
 //function get omenVO():OmenVO;
-@property(nonatomic,retain) OmenVO *omenVO;
+-(OmenVO *)omenVO;
 //
 @end

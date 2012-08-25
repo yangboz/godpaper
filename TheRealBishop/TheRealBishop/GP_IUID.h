@@ -14,10 +14,6 @@
  *  One exception is for messages send by data services.
  */
 @protocol GP_IUID <NSObject>
-{
-    @private
-        NSString *uid;
-}
 //--------------------------------------------------------------------------
 //
 //  Properties
@@ -31,7 +27,8 @@
  *  The unique identifier for this object.
  */
 //function get uid():String;
+-(NSString *)uid;
 //function set uid(value:String):void;
-@property(nonatomic,retain) NSString *uid;
+-(void)setUid:(NSString *)value;
 //
 @end
