@@ -17,14 +17,14 @@
 //-------------------------------------------------------------------------- 
 //
 //function set x(value:Number):void;
--(void)setX:(NSNumber)value;
+-(void)setX:(NSNumber *)value;
 //function get x():Number;
--(NSNumber)x;
+-(NSNumber *)x;
 //
 //function set y(value:Number):void;
--(void)setY:(NSNumber)value;
+-(void)setY:(NSNumber *)value;
 //function get y():Number;
--(void)y;
+-(NSNumber *)y;
 //
 //function set label(value:String):void;
 -(void)setLabel:(NSString *)value;
