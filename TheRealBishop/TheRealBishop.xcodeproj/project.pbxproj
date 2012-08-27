@@ -51,6 +51,9 @@
 		A4ED98C915D3DB1F00C450E8 /* GP_Array3Iterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED98C815D3DB1F00C450E8 /* GP_Array3Iterator.m */; };
 		A4ED98CC15D3E73200C450E8 /* GP_Array2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED98CB15D3E73200C450E8 /* GP_Array2Tests.m */; };
 		A4EDA65A15E52C2800CF34C8 /* GP_ArrayedQueueIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDA65915E52C2800CF34C8 /* GP_ArrayedQueueIterator.m */; };
+		A4EFF8FE15EBC2E4002B22DE /* SHLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EFF8FD15EBC2E4002B22DE /* SHLine.m */; };
+		A4EFF90715EBC8CE002B22DE /* SPBitmapData.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EFF90415EBC8CE002B22DE /* SPBitmapData.m */; };
+		A4EFF90815EBC8CE002B22DE /* UIImageWithBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EFF90615EBC8CE002B22DE /* UIImageWithBuffer.m */; };
 		A4F0D00C15D154B10034FF28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00B15D154B10034FF28 /* UIKit.framework */; };
 		A4F0D00E15D154B10034FF28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00D15D154B10034FF28 /* Foundation.framework */; };
 		A4F0D01015D154B10034FF28 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4F0D00F15D154B10034FF28 /* CoreGraphics.framework */; };
@@ -184,6 +187,12 @@
 		A4EDDD4015DD45C4009CFD0E /* GP_IDragdropable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IDragdropable.h; sourceTree = "<group>"; };
 		A4EDDD4115DD4608009CFD0E /* GP_IChessGasket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IChessGasket.h; sourceTree = "<group>"; };
 		A4EDDD4215DD46DD009CFD0E /* GP_IChessVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IChessVO.h; sourceTree = "<group>"; };
+		A4EFF8FC15EBC2E4002B22DE /* SHLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHLine.h; sourceTree = "<group>"; };
+		A4EFF8FD15EBC2E4002B22DE /* SHLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLine.m; sourceTree = "<group>"; };
+		A4EFF90315EBC8CE002B22DE /* SPBitmapData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPBitmapData.h; sourceTree = "<group>"; };
+		A4EFF90415EBC8CE002B22DE /* SPBitmapData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPBitmapData.m; sourceTree = "<group>"; };
+		A4EFF90515EBC8CE002B22DE /* UIImageWithBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageWithBuffer.h; sourceTree = "<group>"; };
+		A4EFF90615EBC8CE002B22DE /* UIImageWithBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageWithBuffer.m; sourceTree = "<group>"; };
 		A4F0D00715D154B10034FF28 /* TheRealBishop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheRealBishop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4F0D00B15D154B10034FF28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A4F0D00D15D154B10034FF28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -339,6 +348,7 @@
 		A4EDDD3615DD1F71009CFD0E /* obj-c */ = {
 			isa = PBXGroup;
 			children = (
+				A4EFF8FB15EBC2C8002B22DE /* utils */,
 				A4EAD27715E920BB0019768C /* views */,
 				A4EDDD3715DD1F82009CFD0E /* core */,
 			);
@@ -374,6 +384,19 @@
 				A4F0D03A15D154D60034FF28 /* ds */,
 			);
 			name = lookbackon;
+			sourceTree = "<group>";
+		};
+		A4EFF8FB15EBC2C8002B22DE /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				A4EFF90315EBC8CE002B22DE /* SPBitmapData.h */,
+				A4EFF90415EBC8CE002B22DE /* SPBitmapData.m */,
+				A4EFF90515EBC8CE002B22DE /* UIImageWithBuffer.h */,
+				A4EFF90615EBC8CE002B22DE /* UIImageWithBuffer.m */,
+				A4EFF8FC15EBC2E4002B22DE /* SHLine.h */,
+				A4EFF8FD15EBC2E4002B22DE /* SHLine.m */,
+			);
+			name = utils;
 			sourceTree = "<group>";
 		};
 		A4F0CFFC15D154B10034FF28 = {
@@ -695,6 +718,9 @@
 				A46440C515E686D3001D6308 /* GP_ArrayedStackIterator.m in Sources */,
 				A4EAD27015E86FD20019768C /* GP_FlexGlobals.m in Sources */,
 				A4EAD27F15E926790019768C /* GP_VisualElement.m in Sources */,
+				A4EFF8FE15EBC2E4002B22DE /* SHLine.m in Sources */,
+				A4EFF90715EBC8CE002B22DE /* SPBitmapData.m in Sources */,
+				A4EFF90815EBC8CE002B22DE /* UIImageWithBuffer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

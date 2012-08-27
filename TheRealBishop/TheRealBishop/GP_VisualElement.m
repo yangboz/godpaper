@@ -7,6 +7,8 @@
 //
 
 #import "GP_VisualElement.h"
+#import "SPSprite.h"
+#import "SHLine.h"
 /**
  * UIComponent.as class.(FLEX3)
  * VisualElement.as class.(FLEX4)   	
@@ -115,6 +117,7 @@
 -(NSString *)toString
 {
 //return ObjectUtil.toString(this);
+    return [super description];//TODO:customize description;
 }
 //--------------------------------------------------------------------------
 //
@@ -137,8 +140,40 @@
 //			addChild(polygon);
 //Draw a circle shape
 //var shape:Sprite = new Sprite();
+    SPSprite *shape = [SPSprite sprite];
+    //initialize a line with a length of 100 pixels and thickness of 5 pixels
+    SHLine *line = [SHLine lineWithLength:100 andThickness:5];
+    
+    //set the start color to red
+    line.startColor = 0xff0000;
+    
+    //set the end color to blue
+    line.endColor = 0x0000ff;
+    
+    //set the start opacity to 75%
+    line.startAlpha = 0.75f;
+    
+    //set the end opacity to 25%
+    line.endAlpha = 0.25f;
+    
+    //set the end destination to the bottom right corner of the screen
+    line.x2 = 320;
+    line.y2 = 480;
+    
+    //add the line to the stage
+    [shape addChild:line];
+    
+    //initialize another line with the coords (x, y, width, height)
+    SHLine *line2 = [SHLine lineWithCoords:0:480:320:-480];
+    
+    //set the line thickness to 5 pixels
+    line2.thickness = 5;
+    
+    //add line2 to the stage to create a 'cross' pattern
+    [shape addChild:line2];
 //			var shape:Shape = new Shape();
 //shape.graphics.beginFill(bgColor,bgAlpha);
+     
 //shape.graphics.lineStyle(1,borderColor,1);
 //			var radius:Number = Math.min(GasketConfig.width,GasketConfig.height)/2;
 //			shape.graphics.drawCircle(GasketConfig.width/2,GasketConfig.height/2,radius);
@@ -147,6 +182,7 @@
 //But we can draw that shape into a bitmap and then create a texture from that bitmap! 
 //var bmpData:BitmapData = new BitmapData(this.width, this.height, true, 0x0);
 //bmpData.draw(shape);
+
 //
 //var texture:Texture = Texture.fromBitmapData(bmpData);
 //			var image:Image = new Image(texture);
