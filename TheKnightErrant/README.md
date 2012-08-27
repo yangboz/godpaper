@@ -1,4 +1,4 @@
-References:
+#References:
 
 About GODPAPER: www.godpaper.com/godpaper/index.php/Framework
 
@@ -12,7 +12,7 @@ What is AGAL:http://www.adobe.com/devnet/flashplayer/articles/what-is-agal.html
 
 Introduction to AGAL:http://jacksondunstan.com/articles/1661
 
-Credits:
+#Credits:
 
 Data Structure:
 
@@ -34,7 +34,7 @@ AS3 Stage3d("Starling"), http://www.sparrow-framework.org
 
 AS3 Stage3d("Starling") Mobile UI components("Foxhole"), https://github.com/joshtynjala/foxhole-starling
 
-Chess Documents:
+#Chess Documents:
 
 GODPAPER, http://www.godpaper.com
 
@@ -42,7 +42,7 @@ Artificial Intelligence:
 
 Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 
-TODO/Wish List:
+#TODO/Wish List:
 
 1.ZobristKey Model for game status process;(plan)
 
