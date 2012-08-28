@@ -9,6 +9,7 @@
 #import "GP_VisualElement.h"
 #import "SPSprite.h"
 #import "SHLine.h"
+#import "SPRenderTexture.h"
 /**
  * UIComponent.as class.(FLEX3)
  * VisualElement.as class.(FLEX4)   	
@@ -126,7 +127,7 @@
 //--------------------------------------------------------------------------
 //Custom render the texture with the global gasket configuration.
 //protected function getUpStateTexture(bgColor:uint,bgAlpha:Number,borderColor:uint,borderAlpha:Number):Texture
--(SPTexture *)getUpStateTexture:(unsigned int)bgColor numberVal:(NSNumber *)bgAlpha uintVal:(unsigned int)borderColor numberVal:(NSNumber *)borderAlpha
+-(SPRenderTexture *)getUpStateTexture:(unsigned int)bgColor numberVal:(NSNumber *)bgAlpha uintVal:(unsigned int)borderColor numberVal:(NSNumber *)borderAlpha
 {
 //Temp graphic objects tests.
 //@see:http://wiki.starling-framework.org/manual/dynamic_textures
@@ -189,6 +190,8 @@
 //			addChild(image);
 //
 //return texture;
+    SPRenderTexture *texture = [SPRenderTexture textureWithWidth:100.0f height:100.0f fillColor:0xff0000];
+    return texture;
 }
 
 // return a new autoreleased UUID string
