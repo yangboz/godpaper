@@ -173,6 +173,26 @@
 /**
  * @inheritDoc
  */
+//public function contains(obj:*):Boolean
+-(BOOL)contains:(id)obj
+{
+//for (var i:int = 0; i < _count; i++)
+//{
+//    if (_que[int((i + _front) & _divisor)] === obj)
+//        return true;
+//}
+//return false;
+    for (int i = 0; i < _count; i++) {
+        if ([[_que objectAtIndex:((i + _front) & _divisor)] isEqual:obj]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+/**
+ * @inheritDoc
+ */
 //public function clear():void
 -(void)clear
 {

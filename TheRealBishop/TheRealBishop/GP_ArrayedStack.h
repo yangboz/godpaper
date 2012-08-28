@@ -24,15 +24,15 @@
 //public function get maxSize():int
 @property(nonatomic,readonly) int maxSize;
 //public function peek():*
--(id *)peek;
+-(id)peek;
 //public function push(obj:*):Boolean
--(BOOL)push:(id *)obj;
+-(BOOL)push:(id)obj;
 //public function pop():*
--(id *)pop;
+-(id)pop;
 //public function getAt(i:int):*
--(id *)getAt:(int)i;
+-(id)getAt:(int)i;
 //public function setAt(i:int, obj:*):void
--(void)setAt:(int)i objValue:(id *)obj;
+-(void)setAt:(int)i objValue:(id)obj;
 //public function dump():String
 -(NSString *)dump;
 //

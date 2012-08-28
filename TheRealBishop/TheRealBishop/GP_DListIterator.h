@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GP_Iterator.h"
 
-@interface GP_DListIterator : NSObject
+@interface GP_DListIterator : NSObject <GP_Iterator>
+{}
+//
 
+//
 @end
