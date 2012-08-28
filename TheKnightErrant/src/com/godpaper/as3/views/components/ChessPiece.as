@@ -30,25 +30,19 @@ package com.godpaper.as3.views.components
 	import com.godpaper.as3.business.fsm.ChessAgent;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessVO;
-	import com.godpaper.as3.core.IDragdropable;
-	import com.godpaper.as3.core.IPiecesBox;
-	import com.godpaper.as3.core.IPosition;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.AI.FSM.Message;
 	import com.lookbackon.ds.BitBoard;
 	
-	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.media.Sound;
@@ -56,12 +50,7 @@ package com.godpaper.as3.views.components
 	
 	import mx.logging.ILogger;
 	
-	import org.josht.starling.foxhole.controls.Callout;
-	import org.josht.starling.foxhole.controls.Label;
-	
 	import starling.display.DisplayObject;
-	import starling.display.Image;
-	import starling.display.Stage;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;

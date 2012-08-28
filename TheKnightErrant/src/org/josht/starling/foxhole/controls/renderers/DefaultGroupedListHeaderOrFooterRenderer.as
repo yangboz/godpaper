@@ -47,14 +47,6 @@ package org.josht.starling.foxhole.controls.renderers
 		}
 
 		/**
-		 * @private
-		 */
-		protected static function defaultLabelFactory():BitmapFontTextRenderer
-		{
-			return new BitmapFontTextRenderer();
-		}
-
-		/**
 		 * Constructor.
 		 */
 		public function DefaultGroupedListHeaderOrFooterRenderer()
@@ -121,6 +113,27 @@ package org.josht.starling.foxhole.controls.renderers
 		public function set groupIndex(value:int):void
 		{
 			this._groupIndex = value;
+		}
+
+		/**
+		 * @private
+		 */
+		private var _layoutIndex:int = -1;
+
+		/**
+		 * @inheritDoc
+		 */
+		public function get layoutIndex():int
+		{
+			return this._layoutIndex;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set layoutIndex(value:int):void
+		{
+			this._layoutIndex = value;
 		}
 
 		/**
@@ -552,7 +565,7 @@ package org.josht.starling.foxhole.controls.renderers
 		/**
 		 * @private
 		 */
-		protected var _contentLabelFactory:Function = defaultLabelFactory;
+		protected var _contentLabelFactory:Function;
 
 		/**
 		 * A function that generates <code>Label</code> that uses the result
@@ -980,7 +993,8 @@ package org.josht.starling.foxhole.controls.renderers
 			{
 				if(!this.contentLabel)
 				{
-					this.contentLabel = this._contentLabelFactory();
+					const factory:Function = this._contentLabelFactory != null ? this._contentLabelFactory : FoxholeControl.defaultTextRendererFactory;
+					this.contentLabel = factory();
 				}
 				this.contentLabel.text = label;
 			}

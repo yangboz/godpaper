@@ -139,7 +139,7 @@ package com.godpaper.as3.views.screens
 			//
 			this._container = new ScrollContainer();
 			this._container.layout = vLayout;
-			this._container.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+//			this._container.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this.addChild(this._container);
 			//
 			this._label = new TextField(200,20,"HAND SHAKING...");
@@ -183,7 +183,7 @@ package com.godpaper.as3.views.screens
 			//
 			this._form_grouper = new ScrollContainer();
 			this._form_grouper.layout = hLayout;
-			this._form_grouper.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+//			this._form_grouper.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this._container.addChild(this._form_grouper);
 			//Form elements
 			this._label_picker = new TextField(80,20,"neighbors:");
@@ -215,7 +215,7 @@ package com.godpaper.as3.views.screens
 			//
 			this._response_grouper = new ScrollContainer();
 			this._response_grouper.layout = hLayout;
-			this._response_grouper.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+//			this._response_grouper.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this._container.addChild(this._response_grouper);
 			//Form elements
 			this._lebel_response = new TextField(80,20,"invites:");

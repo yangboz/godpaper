@@ -31,6 +31,7 @@ package org.josht.starling.foxhole.controls.renderers
 	import org.josht.starling.foxhole.controls.Button;
 	import org.josht.starling.foxhole.controls.text.BitmapFontTextRenderer;
 	import org.josht.starling.foxhole.core.FoxholeControl;
+	import org.josht.starling.foxhole.core.PropertyProxy;
 
 	import starling.display.DisplayObject;
 	import starling.display.Image;
@@ -42,6 +43,15 @@ package org.josht.starling.foxhole.controls.renderers
 	 */
 	public class BaseDefaultItemRenderer extends Button
 	{
+		/**
+		 * The default value added to the <code>nameList</code> of the accessory
+		 * label.
+		 */
+		public static const DEFAULT_CHILD_NAME_ACCESSORY_LABEL:String = "foxhole-item-renderer-accessory-label";
+
+		/**
+		 * @private
+		 */
 		private static const helperPoint:Point = new Point();
 
 		/**
@@ -58,14 +68,6 @@ package org.josht.starling.foxhole.controls.renderers
 		}
 
 		/**
-		 * @private
-		 */
-		protected static function defaultLabelFactory():BitmapFontTextRenderer
-		{
-			return new BitmapFontTextRenderer();
-		}
-
-		/**
 		 * Constructor.
 		 */
 		public function BaseDefaultItemRenderer()
@@ -74,6 +76,11 @@ package org.josht.starling.foxhole.controls.renderers
 			this.isToggle = true;
 			this.isQuickHitAreaEnabled = false;
 		}
+
+		/**
+		 * The value added to the <code>nameList</code> of the accessory label.
+		 */
+		protected var accessoryLabelName:String = DEFAULT_CHILD_NAME_ACCESSORY_LABEL;
 
 		/**
 		 * @private
@@ -147,7 +154,7 @@ package org.josht.starling.foxhole.controls.renderers
 		 */
 		public function get useStateDelayTimer():Boolean
 		{
-			return _useStateDelayTimer;
+			return this._useStateDelayTimer;
 		}
 
 		/**
@@ -156,6 +163,52 @@ package org.josht.starling.foxhole.controls.renderers
 		public function set useStateDelayTimer(value:Boolean):void
 		{
 			this._useStateDelayTimer = value;
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _itemHasLabel:Boolean = true;
+
+		/**
+		 * If true, the label will come from the renderer's item using the
+		 * appropriate field or function for the label. If false, the label may
+		 * be set externally.
+		 */
+		public function get itemHasLabel():Boolean
+		{
+			return this._itemHasLabel;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set itemHasLabel(value:Boolean):void
+		{
+			this._itemHasLabel = value;
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _itemHasIcon:Boolean = true;
+
+		/**
+		 * If true, the icon will come from the renderer's item using the
+		 * appropriate field or function for the icon. If false, the icon may
+		 * be skinned for each state externally.
+		 */
+		public function get itemHasIcon():Boolean
+		{
+			return this._itemHasIcon;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set itemHasIcon(value:Boolean):void
+		{
+			this._itemHasIcon = value;
 		}
 
 		/**
@@ -807,7 +860,7 @@ package org.josht.starling.foxhole.controls.renderers
 		/**
 		 * @private
 		 */
-		protected var _accessoryLabelFactory:Function = defaultLabelFactory;
+		protected var _accessoryLabelFactory:Function;
 
 		/**
 		 * A function that generates <code>Label</code> that uses the result
@@ -832,6 +885,67 @@ package org.josht.starling.foxhole.controls.renderers
 				return;
 			}
 			this._accessoryLabelFactory = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		private var _accessoryLabelProperties:PropertyProxy;
+
+		/**
+		 * A set of key/value pairs to be passed down to a label accessory.
+		 *
+		 * <p>If the subcomponent has its own subcomponents, their properties
+		 * can be set too, using attribute <code>&#64;</code> notation. For example,
+		 * to set the skin on the thumb of a <code>SimpleScrollBar</code>
+		 * which is in a <code>Scroller</code> which is in a <code>List</code>,
+		 * you can use the following syntax:</p>
+		 * <pre>list.scrollerProperties.&#64;verticalScrollBarProperties.&#64;thumbProperties.defaultSkin = new Image(texture);</pre>
+		 *
+		 * @see #accessoryLabelField
+		 * @see #accessoryLabelFunction
+		 */
+		public function get accessoryLabelProperties():Object
+		{
+			if(!this._accessoryLabelProperties)
+			{
+				this._accessoryLabelProperties = new PropertyProxy(accessoryLabelProperties_onChange);
+			}
+			return this._accessoryLabelProperties;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set accessoryLabelProperties(value:Object):void
+		{
+			if(this._accessoryLabelProperties == value)
+			{
+				return;
+			}
+			if(!value)
+			{
+				value = new PropertyProxy();
+			}
+			if(!(value is PropertyProxy))
+			{
+				const newValue:PropertyProxy = new PropertyProxy();
+				for(var propertyName:String in value)
+				{
+					newValue[propertyName] = value[propertyName];
+				}
+				value = newValue;
+			}
+			if(this._accessoryLabelProperties)
+			{
+				this._accessoryLabelProperties.onChange.remove(accessoryLabelProperties_onChange);
+			}
+			this._accessoryLabelProperties = PropertyProxy(value);
+			if(this._accessoryLabelProperties)
+			{
+				this._accessoryLabelProperties.onChange.add(accessoryLabelProperties_onChange);
+			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
 
@@ -991,9 +1105,14 @@ package org.josht.starling.foxhole.controls.renderers
 		override protected function draw():void
 		{
 			const dataInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_DATA);
+			const stylesInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STYLES);
 			if(dataInvalid)
 			{
 				this.commitData();
+			}
+			if(dataInvalid || stylesInvalid)
+			{
+				this.refreshAccessoryLabelStyles();
 			}
 			super.draw();
 		}
@@ -1100,8 +1219,14 @@ package org.josht.starling.foxhole.controls.renderers
 		{
 			if(this._owner)
 			{
-				this._label = this.itemToLabel(this._data);
-				this.defaultIcon = this.itemToIcon(this._data);
+				if(this._itemHasLabel)
+				{
+					this._label = this.itemToLabel(this._data);
+				}
+				if(this._itemHasIcon)
+				{
+					this.defaultIcon = this.itemToIcon(this._data);
+				}
 				const newAccessory:DisplayObject = this.itemToAccessory(this._data);
 				if(newAccessory != this.accessory)
 				{
@@ -1129,6 +1254,25 @@ package org.josht.starling.foxhole.controls.renderers
 				{
 					this.accessory.removeFromParent();
 					this.accessory = null;
+				}
+			}
+		}
+
+		/**
+		 * @private
+		 */
+		protected function refreshAccessoryLabelStyles():void
+		{
+			if(!this.accessoryLabel)
+			{
+				return;
+			}
+			for(var propertyName:String in this._accessoryLabelProperties)
+			{
+				if(this.accessoryLabel.hasOwnProperty(propertyName))
+				{
+					var propertyValue:Object = this._accessoryLabelProperties[propertyName];
+					this.accessoryLabel[propertyName] = propertyValue;
 				}
 			}
 		}
@@ -1190,7 +1334,9 @@ package org.josht.starling.foxhole.controls.renderers
 			{
 				if(!this.accessoryLabel)
 				{
-					this.accessoryLabel = this._accessoryLabelFactory();
+					const factory:Function = this._accessoryLabelFactory != null ? this._accessoryLabelFactory : FoxholeControl.defaultTextRendererFactory;
+					this.accessoryLabel = factory();
+					this.accessoryLabel.nameList.add(this.accessoryLabelName);
 				}
 				this.accessoryLabel.text = label;
 			}
@@ -1235,6 +1381,14 @@ package org.josht.starling.foxhole.controls.renderers
 			}
 			this._delayedCurrentState = null;
 			this._stateDelayTimer.stop();
+		}
+
+		/**
+		 * @private
+		 */
+		protected function accessoryLabelProperties_onChange(proxy:PropertyProxy, name:String):void
+		{
+			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
 
 		/**

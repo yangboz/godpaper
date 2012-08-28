@@ -34,6 +34,7 @@ package com.godpaper.as3.views.components
 	import com.godpaper.as3.model.pools.RedChessPiecesPool;
 	import com.godpaper.as3.utils.LogUtil;
 	
+	import flash.display.BitmapData;
 	import flash.display.Shape;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -47,6 +48,8 @@ package com.godpaper.as3.views.components
 	import starling.textures.Texture;
 	import starling.utils.Color;
 	import starling.utils.Polygon;
+	
+	import tbd.Jewel;
 	
 	
 	/**

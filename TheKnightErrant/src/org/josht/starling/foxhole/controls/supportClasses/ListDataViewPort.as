@@ -33,6 +33,7 @@ package org.josht.starling.foxhole.controls.supportClasses
 	import org.josht.starling.foxhole.core.PropertyProxy;
 	import org.josht.starling.foxhole.data.ListCollection;
 	import org.josht.starling.foxhole.layout.ILayout;
+	import org.josht.starling.foxhole.layout.IVariableVirtualLayout;
 	import org.josht.starling.foxhole.layout.IVirtualLayout;
 	import org.josht.starling.foxhole.layout.LayoutBoundsResult;
 	import org.josht.starling.foxhole.layout.ViewPortBounds;
@@ -55,6 +56,7 @@ package org.josht.starling.foxhole.controls.supportClasses
 		private static const helperPoint:Point = new Point();
 		private static const helperBounds:ViewPortBounds = new ViewPortBounds();
 		private static const helperResult:LayoutBoundsResult = new LayoutBoundsResult();
+		private static const helperVector:Vector.<int> = new <int>[];
 		
 		public function ListDataViewPort()
 		{
@@ -363,6 +365,7 @@ package org.josht.starling.foxhole.controls.supportClasses
 		}
 
 		private var _ignoreLayoutChanges:Boolean = false;
+		private var _ignoreRendererResizing:Boolean = false;
 
 		private var _layout:ILayout;
 
@@ -496,6 +499,10 @@ package org.josht.starling.foxhole.controls.supportClasses
 
 			if(stylesInvalid || dataInvalid || itemRendererInvalid)
 			{
+				if(this._layout is IVariableVirtualLayout)
+				{
+					IVariableVirtualLayout(this._layout).resetVariableVirtualCache();
+				}
 				this.calculateTypicalValues();
 			}
 
@@ -532,7 +539,9 @@ package org.josht.starling.foxhole.controls.supportClasses
 
 			if(scrollInvalid || dataInvalid || itemRendererInvalid || sizeInvalid)
 			{
+				this._ignoreRendererResizing = true;
 				this._layout.layout(this._layoutItems, helperBounds, helperResult);
+				this._ignoreRendererResizing = false;
 				this.setSizeInternal(helperResult.contentWidth, helperResult.contentHeight, false);
 				this.actualVisibleWidth = helperResult.viewPortWidth;
 				this.actualVisibleHeight = helperResult.viewPortHeight;
@@ -542,9 +551,18 @@ package org.josht.starling.foxhole.controls.supportClasses
 		protected function calculateTypicalValues():void
 		{
 			var typicalItem:Object = this._typicalItem;
-			if(!typicalItem && this._dataProvider && this._dataProvider.length > 0)
+			if(!typicalItem)
 			{
-				typicalItem = this._dataProvider.getItemAt(0);
+				if(this._dataProvider && this._dataProvider.length > 0)
+				{
+					typicalItem = this._dataProvider.getItemAt(0);
+				}
+				else
+				{
+					this._typicalItemWidth = 0;
+					this._typicalItemHeight = 0;
+					return;
+				}
 			}
 
 			const typicalRenderer:IListItemRenderer = this.createRenderer(typicalItem, 0, true);
@@ -606,6 +624,7 @@ package org.josht.starling.foxhole.controls.supportClasses
 				this.freeInactiveRenderers();
 			}
 
+			this._layoutItems.length = 0;
 			this._layoutItems.length = this._dataProvider ? this._dataProvider.length : 0;
 
 			helperBounds.x = helperBounds.y = 0;
@@ -625,8 +644,6 @@ package org.josht.starling.foxhole.controls.supportClasses
 		private function findUnrenderedData():void
 		{
 			const itemCount:int = this._dataProvider ? this._dataProvider.length : 0;
-			var startIndex:int = 0;
-			var endIndex:int = itemCount - 1;
 			const virtualLayout:IVirtualLayout = this._layout as IVirtualLayout;
 			const useVirtualLayout:Boolean = virtualLayout && virtualLayout.useVirtualLayout;
 			if(useVirtualLayout)
@@ -636,33 +653,30 @@ package org.josht.starling.foxhole.controls.supportClasses
 				virtualLayout.typicalItemHeight = this._typicalItemHeight;
 				this._ignoreLayoutChanges = false;
 				virtualLayout.measureViewPort(itemCount, helperBounds, helperPoint);
-				startIndex = virtualLayout.getMinimumItemIndexAtScrollPosition(this._horizontalScrollPosition, this._verticalScrollPosition, helperPoint.x, helperPoint.y, itemCount);
-				endIndex = virtualLayout.getMaximumItemIndexAtScrollPosition(this._horizontalScrollPosition, this._verticalScrollPosition, helperPoint.x, helperPoint.y, itemCount);
+				virtualLayout.getVisibleIndicesAtScrollPosition(this._horizontalScrollPosition, this._verticalScrollPosition, helperPoint.x, helperPoint.y, itemCount, helperVector);
 			}
-			for(var i:int = 0; i < itemCount; i++)
+			const unrenderedItemCount:int = helperVector.length;
+			for(var i:int = 0; i < unrenderedItemCount; i++)
 			{
-				//the end index is included in the visible items
-				if(i < startIndex || i > endIndex)
+				var index:int = helperVector[i];
+				if(index < 0 || index >= itemCount)
 				{
-					this._layoutItems[i] = null;
+					continue;
+				}
+				var item:Object = this._dataProvider.getItemAt(index);
+				var renderer:IListItemRenderer = IListItemRenderer(this._rendererMap[item]);
+				if(renderer)
+				{
+					//the index may have changed if data was added or removed
+					renderer.index = index;
+					this._activeRenderers.push(renderer);
+					this._inactiveRenderers.splice(this._inactiveRenderers.indexOf(renderer), 1);
+					var displayRenderer:DisplayObject = DisplayObject(renderer);
+					this._layoutItems[index] = displayRenderer;
 				}
 				else
 				{
-					var item:Object = this._dataProvider.getItemAt(i);
-					var renderer:IListItemRenderer = IListItemRenderer(this._rendererMap[item]);
-					if(renderer)
-					{
-						//the index may have changed if data was added or removed
-						renderer.index = i;
-						this._activeRenderers.push(renderer);
-						this._inactiveRenderers.splice(this._inactiveRenderers.indexOf(renderer), 1);
-						var displayRenderer:DisplayObject = DisplayObject(renderer);
-						this._layoutItems[i] = displayRenderer;
-					}
-					else
-					{
-						this._unrenderedData.push(item);
-					}
+					this._unrenderedData.push(item);
 				}
 			}
 		}
@@ -714,7 +728,7 @@ package org.josht.starling.foxhole.controls.supportClasses
 					renderer = new this._itemRendererType();
 				}
 				renderer.onChange.add(renderer_onChange);
-				const displayRenderer:DisplayObject = DisplayObject(renderer);
+				const displayRenderer:FoxholeControl = FoxholeControl(renderer);
 				displayRenderer.addEventListener(TouchEvent.TOUCH, renderer_touchHandler);
 				this.addChild(displayRenderer);
 			}
@@ -730,6 +744,7 @@ package org.josht.starling.foxhole.controls.supportClasses
 			{
 				this._rendererMap[item] = renderer;
 				this._activeRenderers.push(renderer);
+				FoxholeControl(renderer).onResize.add(renderer_onResize);
 			}
 			
 			return renderer;
@@ -738,8 +753,9 @@ package org.josht.starling.foxhole.controls.supportClasses
 		private function destroyRenderer(renderer:IListItemRenderer):void
 		{
 			renderer.onChange.remove(renderer_onChange);
-			const displayRenderer:DisplayObject = DisplayObject(renderer);
+			const displayRenderer:FoxholeControl = FoxholeControl(renderer);
 			displayRenderer.removeEventListener(TouchEvent.TOUCH, renderer_touchHandler);
+			displayRenderer.onResize.remove(renderer_onResize);
 			this.removeChild(displayRenderer, true);
 		}
 
@@ -772,6 +788,21 @@ package org.josht.starling.foxhole.controls.supportClasses
 			{
 				return;
 			}
+			this.invalidate(INVALIDATION_FLAG_SCROLL);
+		}
+
+		private function renderer_onResize(renderer:IListItemRenderer):void
+		{
+			if(this._ignoreRendererResizing)
+			{
+				return;
+			}
+			const layout:IVariableVirtualLayout = this._layout as IVariableVirtualLayout;
+			if(!layout || !layout.hasVariableItemDimensions)
+			{
+				return;
+			}
+			layout.resetVariableVirtualCacheAtIndex(renderer.index);
 			this.invalidate(INVALIDATION_FLAG_SCROLL);
 		}
 		

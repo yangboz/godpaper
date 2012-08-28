@@ -113,8 +113,8 @@ package com.godpaper.as3.views.popups
 			//
 			this._buttonsContainer = new ScrollContainer();
 			this._buttonsContainer.layout = hLayout;
-			this._buttonsContainer.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			this._buttonsContainer.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+//			this._buttonsContainer.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+//			this._buttonsContainer.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this._container.addChild(this._buttonsContainer);
 			//buttons 
 			this._yesBtn = new Button();

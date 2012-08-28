@@ -114,7 +114,7 @@ package com.godpaper.as3.views.screens
 			//
 			this._container = new ScrollContainer();
 			this._container.layout = layout;
-			this._container.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+//			this._container.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this.addChild(this._container);
 			//
 			this._label = new TextField(100,20,"LOADING...");

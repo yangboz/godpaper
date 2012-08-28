@@ -40,20 +40,9 @@ package org.josht.starling.foxhole.controls
 	public class ScrollContainer extends FoxholeControl
 	{
 		/**
-		 * The container may scroll, if the view port is larger than the
-		 * container's bounds.
+		 * The default value added to the <code>nameList</code> of the scroller.
 		 */
-		public static const SCROLL_POLICY_AUTO:String = "auto";
-
-		/**
-		 * The container does not scroll at all.
-		 */
-		public static const SCROLL_POLICY_OFF:String = "off";
-
-		/**
-		 * The container always scrolls.
-		 */
-		public static const SCROLL_POLICY_ON:String = "on";
+		public static const DEFAULT_CHILD_NAME_SCROLLER:String = "foxhole-scroll-container-scroller";
 
 		/**
 		 * Constructor.
@@ -66,7 +55,7 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * The value added to the <code>nameList</code> of the scroller.
 		 */
-		protected var defaultScrollerName:String = "foxhole-scrollcontainer-scroller";
+		protected var scrollerName:String = DEFAULT_CHILD_NAME_SCROLLER;
 
 		/**
 		 * @private
@@ -155,33 +144,6 @@ package org.josht.starling.foxhole.controls
 		/**
 		 * @private
 		 */
-		private var _horizontalScrollPolicy:String = SCROLL_POLICY_AUTO;
-
-		/**
-		 * Determines whether the container may scroll horizontally (on the
-		 * x-axis) or not.
-		 */
-		public function get horizontalScrollPolicy():String
-		{
-			return this._horizontalScrollPolicy;
-		}
-
-		/**
-		 * @private
-		 */
-		public function set horizontalScrollPolicy(value:String):void
-		{
-			if(this._horizontalScrollPolicy == value)
-			{
-				return;
-			}
-			this._horizontalScrollPolicy = value;
-			this.invalidate(INVALIDATION_FLAG_SCROLL);
-		}
-
-		/**
-		 * @private
-		 */
 		private var _verticalScrollPosition:Number = 0;
 
 		/**
@@ -224,33 +186,6 @@ package org.josht.starling.foxhole.controls
 		public function get maxVerticalScrollPosition():Number
 		{
 			return this._maxVerticalScrollPosition;
-		}
-
-		/**
-		 * @private
-		 */
-		private var _verticalScrollPolicy:String = SCROLL_POLICY_AUTO;
-
-		/**
-		 * Determines whether the container may scroll vertically (on the
-		 * y-axis) or not.
-		 */
-		public function get verticalScrollPolicy():String
-		{
-			return this._verticalScrollPolicy;
-		}
-
-		/**
-		 * @private
-		 */
-		public function set verticalScrollPolicy(value:String):void
-		{
-			if(this._verticalScrollPolicy == value)
-			{
-				return;
-			}
-			this._verticalScrollPolicy = value;
-			this.invalidate(INVALIDATION_FLAG_SCROLL);
 		}
 
 		/**
@@ -431,7 +366,7 @@ package org.josht.starling.foxhole.controls
 			{
 				this.scroller = new Scroller();
 				this.scroller.viewPort = this.viewPort;
-				this.scroller.nameList.add(this.defaultScrollerName);
+				this.scroller.nameList.add(this.scrollerName);
 				this.scroller.onScroll.add(scroller_onScroll);
 				super.addChildAt(this.scroller, 0);
 			}
@@ -465,8 +400,6 @@ package org.josht.starling.foxhole.controls
 			{
 				this.scroller.verticalScrollPosition = this._verticalScrollPosition;
 				this.scroller.horizontalScrollPosition = this._horizontalScrollPosition;
-				this.scroller.verticalScrollPolicy = this._verticalScrollPolicy;
-				this.scroller.horizontalScrollPolicy = this._horizontalScrollPolicy;
 			}
 
 			if(sizeInvalid)
@@ -556,15 +489,11 @@ package org.josht.starling.foxhole.controls
 		 */
 		protected function scroller_onScroll(scroller:Scroller):void
 		{
-			const oldHorizontalScrollPosition:Number = this._horizontalScrollPosition;
-			const oldVerticalScrollPosition:Number = this._verticalScrollPosition;
 			this._horizontalScrollPosition = this.scroller.horizontalScrollPosition;
 			this._verticalScrollPosition = this.scroller.verticalScrollPosition;
-			if(oldHorizontalScrollPosition != this._horizontalScrollPosition ||
-				oldVerticalScrollPosition != this._verticalScrollPosition)
-			{
-				this._onScroll.dispatch(this);
-			}
+			this._maxHorizontalScrollPosition = this.scroller.maxHorizontalScrollPosition;
+			this._maxVerticalScrollPosition = this.scroller.maxVerticalScrollPosition;
+			this._onScroll.dispatch(this);
 		}
 	}
 }
