@@ -1,1 +1,0 @@
-﻿package tbd{	import ptolemy.geom3D.platonic.Icosahedron;		public class Water extends Jewel	{		protected override function update():void		{			var i:Icosahedron = new Icosahedron(size);			var arr:Array = [0x1E90FFF66, 0xCCCCFF66, 0x6666FF66, 0x9999FF66, 0xFFCCFF66, 0x6633FF66, 0x33CCFF66, 0x6666CC66, 0x6633FF66, 0x6699FF66];			solid(i, arr, 0x33CCFF, size);		}	}}

@@ -45,6 +45,7 @@ package
 	import com.godpaper.as3.plugins.kongregate.KongregatePlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
+	import com.godpaper.as3.views.components.jewels.Jewel;
 	import com.godpaper.as3.views.scenes.MainScene;
 	import com.godpaper.tic_tac_toe.busniess.factory.ChessFactory_TicTacToe;
 	import com.godpaper.tic_tac_toe.busniess.managers.ChessPiecesManager_TicTacToe;
@@ -61,8 +62,6 @@ package
 	import mx.logging.LogEventLevel;
 	
 	import starling.core.Starling;
-	
-	import tbd.Jewel;
 
 	/**
 	 * ApplicationBase.as class constructed with framework's workflow:(this base application actually is a classic "TicTacToc" chess game example);</br>
@@ -376,23 +375,6 @@ package
 			LOG.debug("SigletonFactory(cp) test:{0}", FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}", FlexGlobals.chessGasketsModel.gaskets);
 			LOG.debug("SigletonFactory(cb) test:{0}", FlexGlobals.chessBoardModel.status.dump());
-			//alecmce/ptolemy3D testing.
-			var airChild:Jewel  = Jewel.generate(Jewel.AIR);
-			airChild.x = 100;
-			airChild.y = 100;
-			addChild(airChild);
-			//			var earchChild:Jewel  = Jewel.generate(Jewel.EARTH);
-			//			earchChild.x = 200;
-			//			earchChild.y = 100;
-			//			addChild(earchChild);
-			//			var fireChild:Jewel  = Jewel.generate(Jewel.FIRE);
-			//			fireChild.x = 100;
-			//			fireChild.y = 200;
-			//			addChild(fireChild);
-			//			var waterChild:Jewel  = Jewel.generate(Jewel.WATER);
-			//			waterChild.x = 200;
-			//			waterChild.y = 200;
-			//			addChild(waterChild);
 		}
 
 		//--------------------------------------------------------------------------
@@ -418,6 +400,24 @@ package
 			GameConfig.chessPieceManager=this.chessPiecesManager;
 			GameConfig.gameStateManager=this.gameStateManager;
 //			GameConfig.gameStateManager.start();//Avoid call start() at this entry point.
+			//alecmce/ptolemy3D testing.
+			Jewel.holder = FlexGlobals.topLevelApplication;//Define parent holder refer here.
+			var airChild:Jewel  = Jewel.generate(Jewel.AIR);
+			airChild.x = 100;
+			airChild.y = 100;
+			FlexGlobals.gameStage.addChild(airChild);
+			var earchChild:Jewel  = Jewel.generate(Jewel.EARTH);
+			earchChild.x = 200;
+			earchChild.y = 100;
+			FlexGlobals.gameStage.addChild(earchChild);
+			var fireChild:Jewel  = Jewel.generate(Jewel.FIRE);
+			fireChild.x = 100;
+			fireChild.y = 200;
+			FlexGlobals.gameStage.addChild(fireChild);
+			var waterChild:Jewel  = Jewel.generate(Jewel.WATER);
+			waterChild.x = 200;
+			waterChild.y = 200;
+			FlexGlobals.gameStage.addChild(waterChild);
 		}
 	}
 

@@ -49,9 +49,6 @@ package com.godpaper.as3.views.components
 	import starling.utils.Color;
 	import starling.utils.Polygon;
 	
-	import tbd.Jewel;
-	
-	
 	/**
 	 * A pieces box is defined by a number of piece items that represents slots for movable chess pieces.  	
 	 * @author yangboz
