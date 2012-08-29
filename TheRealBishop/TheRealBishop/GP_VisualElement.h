@@ -29,6 +29,6 @@
 //public function toString():String
 -(NSString *)toString;
 //protected function getUpStateTexture(bgColor:uint,bgAlpha:Number,borderColor:uint,borderAlpha:Number):Texture
--(SPRenderTexture *)getUpStateTexture:(unsigned int)bgColor numberVal:(NSNumber *)bgAlpha uintVal:(unsigned int)borderColor numberVal:(NSNumber *)borderAlpha;
+-(SPRenderTexture *)getUpStateTexture:(unsigned int)bgColor numberVal:(float)bgAlpha uintVal:(unsigned int)borderColor numberVal:(float)borderAlpha;
 //
 @end

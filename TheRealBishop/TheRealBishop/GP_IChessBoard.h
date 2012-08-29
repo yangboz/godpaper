@@ -14,12 +14,12 @@
  * Chess board types(Bitboard,NumberBoard,GraphBoard,ArrayBoard...) 	
  */
 @protocol GP_IChessBoard <GP_IType>
-{
-    @private
-        SPImage *background;
-        NSNumber *yAdjust,*yLines,*yOffset,*yScale;
-        NSNumber *xAdjust,*xLines,*xOffset,*xScale;
-}
+//{
+//@private
+//    SPImage *background;
+//    NSNumber *yAdjust,*yLines,*yOffset,*yScale;
+//    NSNumber *xAdjust,*xLines,*xOffset,*xScale;
+//}
 //
 //--------------------------------------------------------------------------
 //
