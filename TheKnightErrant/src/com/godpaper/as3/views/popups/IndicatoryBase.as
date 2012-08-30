@@ -26,12 +26,20 @@ package com.godpaper.as3.views.popups
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.FlexGlobals;
+	
 	import org.josht.starling.foxhole.controls.Screen;
 	import org.josht.starling.foxhole.controls.ScreenHeader;
 	import org.josht.starling.foxhole.controls.ScrollContainer;
 	import org.josht.starling.foxhole.controls.Scroller;
 	import org.josht.starling.foxhole.layout.HorizontalLayout;
 	import org.josht.starling.foxhole.layout.VerticalLayout;
+	
+	import starling.display.BlendMode;
+	import starling.display.Quad;
+	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	
 	
 	/**
@@ -53,6 +61,7 @@ package com.godpaper.as3.views.popups
 		protected var vLayout:VerticalLayout;
 		protected var _header:ScreenHeader;
 		protected var _container:ScrollContainer;
+		protected var _bgQuad:Quad;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -109,6 +118,12 @@ package com.godpaper.as3.views.popups
 		//--------------------------------------------------------------------------
 		override protected function initialize():void
 		{
+			//background
+			//			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
+			//			var texture:Texture = atlas.getTexture("BLUE");
+			//			texture.repeat = true;
+			//			_background = new Image(texture);
+			//			addChild(_background);
 			//header title
 			this._header = new ScreenHeader();
 			this._header.title = "???";
@@ -124,6 +139,10 @@ package com.godpaper.as3.views.popups
 		//
 		override protected function draw():void
 		{
+//			_bgQuad = new Quad(this.actualWidth,this.actualHeight,0x030303);
+//			_bgQuad.alpha = 0.5;
+//			_bgQuad.blendMode = BlendMode.NONE;
+//			this.addChild(_bgQuad);
 			//
 			this._header.width = this.actualWidth;
 			this._header.validate();

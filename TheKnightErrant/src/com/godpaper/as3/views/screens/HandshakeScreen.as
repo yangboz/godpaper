@@ -300,7 +300,7 @@ package com.godpaper.as3.views.screens
 			//
 			FlexGlobals.conductService.netGroupPost(postVO,this._picker_list.selectedItem.toString());
 			//no more invite request,untill none response.
-			this._button_invite.isEnabled = false;
+//			this._button_invite.isEnabled = false;
 		}
 		//
 		private function responseButtonReleaseHandler(button:Button):void

@@ -45,7 +45,6 @@ package
 	import com.godpaper.as3.plugins.kongregate.KongregatePlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
-	import com.godpaper.as3.views.components.jewels.Jewel;
 	import com.godpaper.as3.views.scenes.MainScene;
 	import com.godpaper.tic_tac_toe.busniess.factory.ChessFactory_TicTacToe;
 	import com.godpaper.tic_tac_toe.busniess.managers.ChessPiecesManager_TicTacToe;
@@ -400,24 +399,6 @@ package
 			GameConfig.chessPieceManager=this.chessPiecesManager;
 			GameConfig.gameStateManager=this.gameStateManager;
 //			GameConfig.gameStateManager.start();//Avoid call start() at this entry point.
-			//alecmce/ptolemy3D testing.
-			Jewel.holder = FlexGlobals.topLevelApplication;//Define parent holder refer here.
-			var airChild:Jewel  = Jewel.generate(Jewel.AIR);
-			airChild.x = 100;
-			airChild.y = 100;
-			FlexGlobals.gameStage.addChild(airChild);
-			var earchChild:Jewel  = Jewel.generate(Jewel.EARTH);
-			earchChild.x = 200;
-			earchChild.y = 100;
-			FlexGlobals.gameStage.addChild(earchChild);
-			var fireChild:Jewel  = Jewel.generate(Jewel.FIRE);
-			fireChild.x = 100;
-			fireChild.y = 200;
-			FlexGlobals.gameStage.addChild(fireChild);
-			var waterChild:Jewel  = Jewel.generate(Jewel.WATER);
-			waterChild.x = 200;
-			waterChild.y = 200;
-			FlexGlobals.gameStage.addChild(waterChild);
 		}
 	}
 

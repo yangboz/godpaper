@@ -92,6 +92,18 @@ package com.godpaper.as3.views.components.jewels
 		{
 			return Jewel.holder.graphics;
 		}
+		//Dynamic adjust the holder's position
+		override public function set x(value:Number):void
+		{
+			super.x = value;
+			Jewel.holder.x = value;
+		}
+		//
+		override public function set y(value:Number):void
+		{
+			super.y = value;
+			Jewel.holder.y = value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

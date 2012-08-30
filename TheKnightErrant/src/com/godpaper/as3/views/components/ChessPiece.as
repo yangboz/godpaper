@@ -40,9 +40,12 @@ package com.godpaper.as3.views.components
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.as3.views.components.jewels.Jewel;
 	import com.lookbackon.AI.FSM.Message;
 	import com.lookbackon.ds.BitBoard;
 	
+	import flash.display.BitmapData;
+	import flash.display.Sprite;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.media.Sound;
@@ -452,6 +455,20 @@ package com.godpaper.as3.views.components
 					break;
 			}
 		}
+//		override protected function addToStageHandler(event:Event):void
+//		{
+//			//Jewel testing.
+//			//Define parent holder refer here.
+//			Jewel.holder = FlexGlobals.topLevelApplication;
+//			var airChild:Jewel  = Jewel.generate(Jewel.AIR);
+//			airChild.x = 100;
+//			airChild.y = 100;
+//			this.addChild(airChild);
+////			var fireChild:Jewel  = Jewel.generate(Jewel.FIRE);
+////			fireChild.x = 200;
+////			fireChild.y = 200;
+////			this.addChild(fireChild);
+//		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods

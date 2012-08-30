@@ -26,11 +26,8 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.views.components.PiecesBox;
-	import com.godpaper.as3.views.plugin.PluginButtonBar;
 	
 	import flash.geom.Rectangle;
-	
-	import starling.display.Image;
 
 	//--------------------------------------------------------------------------
 	//
