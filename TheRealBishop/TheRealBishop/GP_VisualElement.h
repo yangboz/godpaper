@@ -8,6 +8,7 @@
 #import "SPTexture.h"
 #import "SPButton.h"
 #import "GP_IVisualElement.h"
+#import "SPRenderTexture.h"
 
 @interface GP_VisualElement : SPButton <GP_IVisualElement>
 {
@@ -28,6 +29,6 @@
 //public function toString():String
 -(NSString *)toString;
 //protected function getUpStateTexture(bgColor:uint,bgAlpha:Number,borderColor:uint,borderAlpha:Number):Texture
--(SPTexture *)getUpStateTexture:(unsigned int)bgColor numberVal:(NSNumber *)bgAlpha uintVal:(unsigned int)borderColor numberVal:(NSNumber *)borderAlpha;
+-(SPRenderTexture *)getUpStateTexture:(unsigned int)bgColor numberVal:(float)bgAlpha uintVal:(unsigned int)borderColor numberVal:(float)borderAlpha;
 //
 @end

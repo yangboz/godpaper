@@ -17,6 +17,7 @@
 		A41103D815DBDBEA00CCD0DE /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = A41103D715DBDBEA00CCD0DE /* Game.m */; };
 		A41103DA15DBDF8100CCD0DE /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A41103D915DBDF8100CCD0DE /* MainWindow.xib */; };
 		A46440C515E686D3001D6308 /* GP_ArrayedStackIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A46440C415E686D3001D6308 /* GP_ArrayedStackIterator.m */; };
+		A4E981F115EE689500B444B9 /* GP_ChessBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E981F015EE689500B444B9 /* GP_ChessBoard.m */; };
 		A4EAD27015E86FD20019768C /* GP_FlexGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EAD26F15E86FD20019768C /* GP_FlexGlobals.m */; };
 		A4EAD27415E8DBE00019768C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A4EAD27315E8DBE00019768C /* README.md */; };
 		A4EAD27F15E926790019768C /* GP_VisualElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EAD27E15E926790019768C /* GP_VisualElement.m */; };
@@ -106,6 +107,8 @@
 		A41103D915DBDF8100CCD0DE /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		A46440C315E686D3001D6308 /* GP_ArrayedStackIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_ArrayedStackIterator.h; sourceTree = "<group>"; };
 		A46440C415E686D3001D6308 /* GP_ArrayedStackIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_ArrayedStackIterator.m; sourceTree = "<group>"; };
+		A4E981EF15EE689500B444B9 /* GP_ChessBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_ChessBoard.h; sourceTree = "<group>"; };
+		A4E981F015EE689500B444B9 /* GP_ChessBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_ChessBoard.m; sourceTree = "<group>"; };
 		A4EAD26E15E86FD10019768C /* GP_FlexGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_FlexGlobals.h; sourceTree = "<group>"; };
 		A4EAD26F15E86FD20019768C /* GP_FlexGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_FlexGlobals.m; sourceTree = "<group>"; };
 		A4EAD27115E870420019768C /* GP_IChessFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IChessFactory.h; sourceTree = "<group>"; };
@@ -263,6 +266,8 @@
 			children = (
 				A4EAD27D15E926790019768C /* GP_VisualElement.h */,
 				A4EAD27E15E926790019768C /* GP_VisualElement.m */,
+				A4E981EF15EE689500B444B9 /* GP_ChessBoard.h */,
+				A4E981F015EE689500B444B9 /* GP_ChessBoard.m */,
 			);
 			name = components;
 			sourceTree = "<group>";
@@ -721,6 +726,7 @@
 				A4EFF8FE15EBC2E4002B22DE /* SHLine.m in Sources */,
 				A4EFF90715EBC8CE002B22DE /* SPBitmapData.m in Sources */,
 				A4EFF90815EBC8CE002B22DE /* UIImageWithBuffer.m in Sources */,
+				A4E981F115EE689500B444B9 /* GP_ChessBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

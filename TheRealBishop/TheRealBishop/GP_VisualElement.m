@@ -8,7 +8,7 @@
 
 #import "GP_VisualElement.h"
 #import "SPSprite.h"
-#import "SHLine.h"
+#import "SPRenderTexture.h"
 /**
  * UIComponent.as class.(FLEX3)
  * VisualElement.as class.(FLEX4)   	
@@ -100,6 +100,7 @@
     if ([defaultUpState isEqual:NULL])
     {
 //        defaultUpState = this.getUpStateTexture(Color.BLACK,1,Color.BLACK,1);
+        defaultUpState = [self getUpStateTexture:0xffffff numberVal:1.0f uintVal:0xffffff numberVal:1.0f];
 //        defaultUpState = [self getUpStateTexture:255 numberVal:1.0f uintVal:255 numberVal:1];
 //        //				var atlas:TextureAtlas = DefaultEmbededAssets.getTextureAtlas();
 //        //				defaultUpState = atlas.getTexture(DefaultConstants.BLUE_BISHOP);
@@ -107,6 +108,7 @@
 //    //			this.background = new Image(defaultUpState);
 //    //
 //    super(defaultUpState, text, downState);
+    [super initWithUpState:defaultUpState text:labell];
 }     	
 //--------------------------------------------------------------------------
 //
@@ -126,7 +128,7 @@
 //--------------------------------------------------------------------------
 //Custom render the texture with the global gasket configuration.
 //protected function getUpStateTexture(bgColor:uint,bgAlpha:Number,borderColor:uint,borderAlpha:Number):Texture
--(SPTexture *)getUpStateTexture:(unsigned int)bgColor numberVal:(NSNumber *)bgAlpha uintVal:(unsigned int)borderColor numberVal:(NSNumber *)borderAlpha
+-(SPRenderTexture *)getUpStateTexture:(unsigned int)bgColor numberVal:(float)bgAlpha uintVal:(unsigned int)borderColor numberVal:(float)borderAlpha
 {
 //Temp graphic objects tests.
 //@see:http://wiki.starling-framework.org/manual/dynamic_textures
@@ -140,37 +142,7 @@
 //			addChild(polygon);
 //Draw a circle shape
 //var shape:Sprite = new Sprite();
-    SPSprite *shape = [SPSprite sprite];
-    //initialize a line with a length of 100 pixels and thickness of 5 pixels
-    SHLine *line = [SHLine lineWithLength:100 andThickness:5];
-    
-    //set the start color to red
-    line.startColor = 0xff0000;
-    
-    //set the end color to blue
-    line.endColor = 0x0000ff;
-    
-    //set the start opacity to 75%
-    line.startAlpha = 0.75f;
-    
-    //set the end opacity to 25%
-    line.endAlpha = 0.25f;
-    
-    //set the end destination to the bottom right corner of the screen
-    line.x2 = 320;
-    line.y2 = 480;
-    
-    //add the line to the stage
-    [shape addChild:line];
-    
-    //initialize another line with the coords (x, y, width, height)
-    SHLine *line2 = [SHLine lineWithCoords:0:480:320:-480];
-    
-    //set the line thickness to 5 pixels
-    line2.thickness = 5;
-    
-    //add line2 to the stage to create a 'cross' pattern
-    [shape addChild:line2];
+//    SPSprite *shape = [SPSprite sprite];
 //			var shape:Shape = new Shape();
 //shape.graphics.beginFill(bgColor,bgAlpha);
      
@@ -189,6 +161,8 @@
 //			addChild(image);
 //
 //return texture;
+    SPRenderTexture *texture = [SPRenderTexture textureWithWidth:100.0f height:100.0f fillColor:0xff0000];
+    return texture;
 }
 
 // return a new autoreleased UUID string
