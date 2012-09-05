@@ -37,6 +37,7 @@ package com.godpaper.as3.consts
 		public static const BLUE:String="BLUE";
 		public static const BLUE_ROCK:String="BLUE_ROCK";
 		public static const BLUE_STAR:String="BLUE_STAR";
+		public static const BLUE_JEWEL:String="BLUE_JEWEL";
 		//chess pieces(blue) sub type consts
 //		public static const BLUE_ROOK:String="BLUE_ROOK";
 //		public static const BLUE_KNIGHT:String="BLUE_KNIGHT";
@@ -49,6 +50,7 @@ package com.godpaper.as3.consts
 		public static const RED:String="RED";
 		public static const RED_ROCK:String="RED_ROCK";
 		public static const RED_STAR:String="RED_STAR";
+		public static const RED_JEWEL:String="BLUE_JEWEL";
 		//chess pieces(red) sub type consts
 //		public static const RED_ROOK:String="RED_ROOK";
 //		public static const RED_KNIGHT:String="RED_KNIGHT";
@@ -84,6 +86,10 @@ package com.godpaper.as3.consts
 		public static const SCREEN_MAIN_MENU:String = "screen_main_menu";
 		public static const SCREEN_GAME:String = "screen_game";
 		public static const SCREEN_HANDSHAKE:String = "screen_handshake";
+		//Chess board type
+		public static const CHESS_BOARD_TYPE_GRID:String = "ChessBoardType::grid";
+		public static const CHESS_BOARD_TYPE_POINT:String = "ChessBoardType::point";
+		public static const CHESS_BOARD_TYPE_CANVAS:String = "ChessBoardType::canvas";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

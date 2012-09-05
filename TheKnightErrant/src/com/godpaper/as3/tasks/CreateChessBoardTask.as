@@ -28,11 +28,12 @@ package com.godpaper.as3.tasks
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GasketConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IVisualElement;
 	import com.godpaper.as3.model.ChessGasketsModel;
-	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.pools.ChessGasketsPool;
 	
 	import flash.display.DisplayObject;
@@ -103,7 +104,7 @@ package com.godpaper.as3.tasks
 			var implementation:Object = getDefinitionByName(className);
 			var realFactoy:IChessFactory  = new implementation();
 			//render the chess board background(default type:grid).
-			var chessBoard:IChessBoard = realFactoy.createChessBoard("grid");
+			var chessBoard:IChessBoard = realFactoy.createChessBoard(DefaultConstants.CHESS_BOARD_TYPE_GRID);
 			//Add to starling stage(GameScene)
 			FlexGlobals.gameStage.addChild(starling.display.DisplayObject(chessBoard));
 			//

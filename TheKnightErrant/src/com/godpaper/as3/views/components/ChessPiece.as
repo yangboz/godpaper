@@ -53,11 +53,13 @@ package com.godpaper.as3.views.components
 	
 	import mx.logging.ILogger;
 	
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.textures.RenderTexture;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 	
@@ -455,20 +457,44 @@ package com.godpaper.as3.views.components
 					break;
 			}
 		}
-//		override protected function addToStageHandler(event:Event):void
-//		{
-//			//Jewel testing.
-//			//Define parent holder refer here.
-//			Jewel.holder = FlexGlobals.topLevelApplication;
-//			var airChild:Jewel  = Jewel.generate(Jewel.AIR);
-//			airChild.x = 100;
-//			airChild.y = 100;
-//			this.addChild(airChild);
-////			var fireChild:Jewel  = Jewel.generate(Jewel.FIRE);
-////			fireChild.x = 200;
-////			fireChild.y = 200;
-////			this.addChild(fireChild);
-//		}
+		//Append the jewel piece to stage.
+		override protected function addToStageHandler(event:Event):void
+		{
+			super.addToStageHandler(event);
+			//Jewel piece categoried by type.
+			if(this.type==DefaultConstants.RED_JEWEL)
+			{
+				jewel = Jewel.generate(Jewel.FIRE);
+				jewel.size = 50;
+			}
+			if(this.type==DefaultConstants.BLUE_JEWEL)
+			{
+				jewel = Jewel.generate(Jewel.WATER);
+				jewel.size = 25;
+			}
+			if(jewel)
+			{
+				Starling.current.nativeOverlay.addChild(jewel);
+			}
+		}
+		//Jewel related position.
+		private var jewel:Jewel;
+		override public function set x(value:Number):void
+		{
+			super.x = value;
+			if(jewel)
+			{
+				jewel.x = value;
+			}
+		}
+		override public function set y(value:Number):void
+		{
+			super.y = value;
+			if(jewel)
+			{
+				jewel.y = value;
+			}
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods

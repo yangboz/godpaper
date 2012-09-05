@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- Created with TexturePacker http://texturepacker.com -->
 <!-- $TexturePacker:SmartUpdate:2194b1782f0c7b28bcc80a987a7907d1$ -->
 <TextureAtlas imagePath="AtlasTexture_the_3_horses.png">
-    <SubTexture name="BLUE" x="2" y="2" width="39" height="39"/>
-    <SubTexture name="RED" x="43" y="2" width="39" height="39"/>
+	<SubTexture name="BLUE" x="2" y="2" width="39" height="39" />
+	<SubTexture name="RED" x="43" y="2" width="39" height="39" />
 </TextureAtlas>

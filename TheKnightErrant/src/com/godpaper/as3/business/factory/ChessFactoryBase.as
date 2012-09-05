@@ -236,7 +236,7 @@ package com.godpaper.as3.business.factory
 			var chessBoard:IChessBoard;
 			switch(type)
 			{
-				case "grid":
+				case DefaultConstants.CHESS_BOARD_TYPE_GRID:
 					//render the chess board background(default type:grid).
 					if(BoardConfig.backgroundImage)
 					{
@@ -245,6 +245,10 @@ package com.godpaper.as3.business.factory
 					{
 						chessBoard = new ChessBoard( null );
 					}
+					break;
+				case DefaultConstants.CHESS_BOARD_TYPE_POINT:
+					break;
+				case DefaultConstants.CHESS_BOARD_TYPE_CANVAS:
 					break;
 				default:
 					break;

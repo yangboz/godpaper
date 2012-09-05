@@ -8,7 +8,6 @@ package com.godpaper.as3.views.components.jewels
 	import flash.display.Graphics;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
-	import flash.events.Event;
 	import flash.filters.GlowFilter;
 	
 	import ptolemy.geom3D.core.Eye;
@@ -16,17 +15,20 @@ package com.godpaper.as3.views.components.jewels
 	import ptolemy.geom3D.core.Solid;
 	import ptolemy.geom3D.core.SpatialVector;
 	
+	import starling.display.Sprite;
+	import starling.events.Event;
+	
 	
 	/**
-	 * Jewel.as class.For as3 sprite based component.</br>
-	 * Add it to starling overlay stage(flash.display.Sprite).   	
+	 * Jewel__.as class.For starling sprite based component.</br>
+	 * Define the parent holder(flash.display.Sprite) firstly,then add it to starling stage(starling.display.Sprite).   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Aug 29, 2012 3:57:51 PM
 	 */   	 
-	public class Jewel extends Sprite
+	public class Jewel__ extends Sprite
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -49,6 +51,7 @@ package com.godpaper.as3.views.components.jewels
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		public static var holder:flash.display.Sprite;//Define parent holder refer here.
 		//
 		private var _size:int = 40;
 		
@@ -84,6 +87,23 @@ package com.godpaper.as3.views.components.jewels
 			super.visible = b;
 			updateEnterFrameListener();
 		}
+		//
+		public function get graphics():Graphics
+		{
+			return Jewel__.holder.graphics;
+		}
+		//Dynamic adjust the holder's position
+		override public function set x(value:Number):void
+		{
+			super.x = value;
+			Jewel__.holder.x = value;
+		}
+		//
+		override public function set y(value:Number):void
+		{
+			super.y = value;
+			Jewel__.holder.y = value;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -95,10 +115,12 @@ package com.godpaper.as3.views.components.jewels
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function Jewel()
+		public function Jewel__()
 		{
-			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-			addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+//			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
+			//			addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+			addEventListener(starling.events.Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 			
 			invalidate();
 		}     	
@@ -107,9 +129,9 @@ package com.godpaper.as3.views.components.jewels
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		public static function generate(code:String):Jewel
+		public static function generate(code:String):Jewel__
 		{
-			var j:Jewel;
+			var j:Jewel__;
 			switch (code)
 			{
 				case AIR:
@@ -138,11 +160,14 @@ package com.godpaper.as3.views.components.jewels
 		//--------------------------------------------------------------------------
 		protected function invalidate():void
 		{
-			addEventListener(Event.ENTER_FRAME, doUpdate);
+			//			addEventListener(Event.ENTER_FRAME, doUpdate);
+			addEventListener(starling.events.Event.ENTER_FRAME,update);
 		}
-		protected function doUpdate(e:Event):void
+		//		protected function doUpdate(e:Event):void
+		protected function doUpdate(e:starling.events.Event):void
 		{
-			removeEventListener(Event.ENTER_FRAME, doUpdate);
+			//			removeEventListener(Event.ENTER_FRAME, doUpdate);
+			removeEventListener(starling.events.Event.ENTER_FRAME, doUpdate);
 			update();
 		}
 		//
@@ -161,7 +186,7 @@ package com.godpaper.as3.views.components.jewels
 			
 			var n:Number = size * 4 / 5;
 			
-			filters = [new GlowFilter(glow, 1, n, n)];
+			//			filters = [new GlowFilter(glow, 1, n, n)];
 			
 			_eye = new Eye();
 			_eye.width = 0;
@@ -173,7 +198,8 @@ package com.godpaper.as3.views.components.jewels
 			
 			if (stage == null) return;
 			if (playing)
-				addEventListener(Event.ENTER_FRAME, onEnterFrame);
+				//				addEventListener(Event.ENTER_FRAME, onEnterFrame);
+				addEventListener(starling.events.Event.ENTER_FRAME,onEnterFrame);
 			else
 				updateJewel();
 		}
@@ -182,7 +208,8 @@ package com.godpaper.as3.views.components.jewels
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function onAddedToStage(e:Event):void
+		//		private function onAddedToStage(e:Event):void
+		private function onAddedToStage(e:starling.events.Event):void
 		{
 			addListeners();
 		}
@@ -193,24 +220,29 @@ package com.godpaper.as3.views.components.jewels
 			updateJewel();
 			updateEnterFrameListener();
 		}
-		private function onRemovedFromStage(e:Event):void
+		//		private function onRemovedFromStage(e:Event):void
+		private function onRemovedFromStage(e:starling.events.Event):void
 		{
 			removeListeners();
 		}
 		//
 		private function removeListeners():void
 		{
-			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+			//			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+			removeEventListener(starling.events.Event.ENTER_FRAME, onEnterFrame);
 		}
 		//
 		private function updateEnterFrameListener():void
 		{
 			if (_playing && visible && stage != null)
-				addEventListener(Event.ENTER_FRAME, onEnterFrame);
+				//				addEventListener(Event.ENTER_FRAME, onEnterFrame);
+				addEventListener(starling.events.Event.ENTER_FRAME,onEnterFrame);
 			else
-				removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+				//				removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+				removeEventListener(starling.events.Event.ENTER_FRAME, onEnterFrame);
 		}
-		private function onEnterFrame(e:Event):void
+		//		private function onEnterFrame(e:Event):void
+		private function onEnterFrame(e:starling.events.Event):void
 		{
 			updateJewel();
 		}

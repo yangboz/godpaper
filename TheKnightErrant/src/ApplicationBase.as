@@ -369,6 +369,7 @@ package
 			TextureConfig.AssetEmbeds_2x_class=AssetEmbeds_2x;
 			//LogConfig
 			LoggerConfig.filters=["com.godpaper.tic_tac_toe.busniess.managers.*", "com.godpaper.as3.services.*", "com.godpaper.as3.views.screens.HandshakeScreen"];
+//			LoggerConfig.filters=["*"];//Logging all.
 			LoggerConfig.level=LogEventLevel.DEBUG;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}", FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());

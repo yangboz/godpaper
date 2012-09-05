@@ -1,60 +1,81 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="new_actionscript_interface" deleted="false" description="Newly created ActionScript Interface file" enabled="true" id="com.adobe.flexide.as.core.filetemplates.new_actionscript_interface" name="ActionScript Interface">/**&#13;
- *  GODPAPER Confidential,Copyright ${year}. All rights reserved.&#13;
- *&#13;
- *  Permission is hereby granted, free of charge, to any person obtaining&#13;
- *  a copy of this software and associated documentation files (the "Software"),&#13;
- *  to deal in the Software without restriction, including without limitation&#13;
- *  the rights to use, copy, modify, merge, publish, distribute, sub-license,&#13;
- *  and/or sell copies of the Software, and to permit persons to whom the&#13;
- *  Software is furnished to do so, subject to the following conditions:&#13;
- *&#13;
- *  The above copyright notice and this permission notice shall be included&#13;
- *  in all copies or substantial portions of the Software.&#13;
- *&#13;
- *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,&#13;
- *  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,&#13;
- *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL&#13;
- *  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER&#13;
- *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,&#13;
- *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS&#13;
- *  IN THE SOFTWARE.&#13;
- */&#13;
-${package_declaration}&#13;
-{&#13;
-	//--------------------------------------------------------------------------&#13;
-    //&#13;
-    //  Imports&#13;
-    //&#13;
-    //--------------------------------------------------------------------------&#13;
-	${import_declaration}&#13;
-	&#13;
-	 /**&#13;
-   	* ${file_name} class.   	&#13;
-   	* @author ${user}&#13;
-   	* @langVersion 3.0&#13;
-   	* @playerVersion 11.2+&#13;
-   	* @airVersion 3.2+&#13;
-   	* Created ${date} ${time}&#13;
-   	* @history 05/00/12,&#13;
-   	*/&#13;
-	${interface_declaration}&#13;
-	{&#13;
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<templates>
+	<template autoinsert="true" context="new_actionscript_interface"
+		deleted="false" description="Newly created ActionScript Interface file"
+		enabled="true"
+		id="com.adobe.flexide.as.core.filetemplates.new_actionscript_interface"
+		name="ActionScript Interface">/**&#13;
+		* GODPAPER Confidential,Copyright ${year}. All rights reserved.&#13;
+		*&#13;
+		* Permission is hereby granted, free of charge, to any person
+		obtaining&#13;
+		* a copy of this software and associated documentation files (the
+		"Software"),&#13;
+		* to deal in the Software without restriction, including without
+		limitation&#13;
+		* the rights to use, copy, modify, merge, publish, distribute,
+		sub-license,&#13;
+		* and/or sell copies of the Software, and to permit persons to whom
+		the&#13;
+		* Software is furnished to do so, subject to the following
+		conditions:&#13;
+		*&#13;
+		* The above copyright notice and this permission notice shall be
+		included&#13;
+		* in all copies or substantial portions of the Software.&#13;
+		*&#13;
+		* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,&#13;
+		* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+		MERCHANTABILITY,&#13;
+		* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+		SHALL&#13;
+		* THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+		OTHER&#13;
+		* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+		ARISING FROM,&#13;
+		* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+		DEALINGS&#13;
+		* IN THE SOFTWARE.&#13;
+		*/&#13;
+		${package_declaration}&#13;
+		{&#13;
 		//--------------------------------------------------------------------------&#13;
-     	//&#13;
-     	//  Public properties&#13;
-     	//&#13;
-     	//-------------------------------------------------------------------------- &#13;
-     	&#13;
-     	//--------------------------------------------------------------------------&#13;
-     	//&#13;
-     	//  Protected properties&#13;
-     	//&#13;
-     	//-------------------------------------------------------------------------- &#13;
+		//&#13;
+		// Imports&#13;
+		//&#13;
+		//--------------------------------------------------------------------------&#13;
+		${import_declaration}&#13;
+		&#13;
+		/**&#13;
+		* ${file_name} class. &#13;
+		* @author ${user}&#13;
+		* @langVersion 3.0&#13;
+		* @playerVersion 11.2+&#13;
+		* @airVersion 3.2+&#13;
+		* Created ${date} ${time}&#13;
+		* @history 05/00/12,&#13;
+		*/&#13;
+		${interface_declaration}&#13;
+		{&#13;
+		//--------------------------------------------------------------------------&#13;
+		//&#13;
+		// Public properties&#13;
+		//&#13;
+		//--------------------------------------------------------------------------
+		&#13;
 		&#13;
 		//--------------------------------------------------------------------------&#13;
-     	//&#13;
-     	//  Public methods&#13;
-     	//&#13;
-     	//--------------------------------------------------------------------------&#13;
-	}&#13;
-}</template></templates>
+		//&#13;
+		// Protected properties&#13;
+		//&#13;
+		//--------------------------------------------------------------------------
+		&#13;
+		&#13;
+		//--------------------------------------------------------------------------&#13;
+		//&#13;
+		// Public methods&#13;
+		//&#13;
+		//--------------------------------------------------------------------------&#13;
+		}&#13;
+		}</template>
+</templates>
