@@ -288,7 +288,14 @@ package com.godpaper.as3.views.screens
 			_picker_list_items.splice(index,1);
 			_picker_list_items.fixed = true;
 			this._picker_list.dataProvider = new ListCollection(_picker_list_items);
-			//TODO:remove related response list item.
+			//remove related response list item.
+			var leftIndex:int = _response_list_items.indexOf(peerID);
+			if(leftIndex)
+			{
+				_response_list_items.splice(leftIndex,1);
+				_response_list.dataProvider = new ListCollection(_response_list_items);
+				this._button_response.isEnabled = Boolean(_response_list_items.length);
+			}
 		}
 		//
 		private function conductUserVoHandler(userVO:UserVO):void
@@ -301,7 +308,7 @@ package com.godpaper.as3.views.screens
 			}
 //			_response_list_items.fixed = true;
 			_response_list.dataProvider = new ListCollection(_response_list_items);
-			this._button_response.isEnabled = true;
+			this._button_response.isEnabled = Boolean(_response_list_items.length);
 		}
 		//
 		private function conductPostVoHandler(postVO:PostVO):void

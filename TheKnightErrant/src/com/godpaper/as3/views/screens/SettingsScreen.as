@@ -26,6 +26,8 @@ package com.godpaper.as3.views.screens
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.configs.TextureConfig;
+	import com.godpaper.as3.configs.ThemeConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
@@ -66,12 +68,12 @@ package com.godpaper.as3.views.screens
 		//
 		private var _button_back:Button;
 		private var _button_done:Button;
-		//
+		//for language
 		private var _picker_language:PickerList;
 		private var _picker_language_item:Array;
 		private var _form_language:ScrollContainer;
-		//
 		private var _label_language:TextField;
+		//
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -134,7 +136,7 @@ package com.godpaper.as3.views.screens
 			hLayout.paddingLeft = 10;
 			hLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_CENTER;
 			hLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
-			//
+			//language form
 			this._form_language = new ScrollContainer();
 			this._form_language.layout = hLayout;
 			this._form_language.scrollerProperties.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;

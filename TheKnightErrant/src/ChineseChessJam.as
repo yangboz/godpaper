@@ -51,7 +51,7 @@ package
 	 * @airVersion 3.2+
 	 * Created Jul 3, 2012 4:16:34 PM
 	 */   
-	[SWF(frameRate="60", width="500", height="600", backgroundColor="0xffffff")]//320×480 for iPhone devices
+	[SWF(frameRate="60", width="510", height="610", backgroundColor="0xffffff")]//320×480 for iPhone devices
 //		[SWF(frameRate="60", width="600", height="636", backgroundColor="0xffffff")]//384×512 for iPad devices
 	public class ChineseChessJam extends ApplicationBase
 	{		
@@ -109,14 +109,14 @@ package
 			//about chess board:
 			BoardConfig.xLines=9;
 			BoardConfig.yLines=10;
-			BoardConfig.xOffset=50;
-			BoardConfig.yOffset=50;
+			BoardConfig.xOffset=55;
+			BoardConfig.yOffset=55;
 			//			BoardConfig.width=300;
 			//			BoardConfig.height=300;
 			BoardConfig.xScale=1;
 			BoardConfig.yScale=1;
-			BoardConfig.xAdjust=50;
-			BoardConfig.yAdjust=50;
+			BoardConfig.xAdjust=35;
+			BoardConfig.yAdjust=30;
 			BoardConfig.backgroundImageRequired = true;
 //			BoardConfig.xOffset=this.width/10;
 //			BoardConfig.yOffset=this.height/11;
@@ -128,13 +128,13 @@ package
 			//gasket config:
 			GasketConfig.maxPoolSize = 36;
 			GasketConfig.tipsVisible = true;
-			GasketConfig.backgroundAlpha = 0.2;
+			GasketConfig.backgroundAlpha = 0.0;
 			GasketConfig.width = 30;
 			GasketConfig.height = 30;
 			//about piece:
 			PieceConfig.factory = ChessFactory_ChineseChessJam;
-			PieceConfig.maxPoolSizeBlue = 6;
-			PieceConfig.maxPoolSizeRed = 6;
+			PieceConfig.maxPoolSizeBlue = 16;
+			PieceConfig.maxPoolSizeRed = 16;
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
 			PieceConfig.scaleX = 1;
 			PieceConfig.scaleY = 1;
