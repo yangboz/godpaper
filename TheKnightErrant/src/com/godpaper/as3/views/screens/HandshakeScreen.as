@@ -43,6 +43,7 @@ package com.godpaper.as3.views.screens
 	import org.josht.starling.foxhole.controls.PickerList;
 	import org.josht.starling.foxhole.controls.ProgressBar;
 	import org.josht.starling.foxhole.controls.Screen;
+	import org.josht.starling.foxhole.controls.ScreenHeader;
 	import org.josht.starling.foxhole.controls.ScrollContainer;
 	import org.josht.starling.foxhole.controls.Scroller;
 	import org.josht.starling.foxhole.data.ListCollection;
@@ -50,6 +51,7 @@ package com.godpaper.as3.views.screens
 	import org.josht.starling.foxhole.layout.VerticalLayout;
 	import org.josht.starling.motion.GTween;
 	
+	import starling.display.DisplayObject;
 	import starling.events.Event;
 	import starling.events.TouchEvent;
 	import starling.text.TextField;
@@ -69,9 +71,10 @@ package com.godpaper.as3.views.screens
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
+		private var _header:ScreenHeader;
 		private var _progressTween:GTween;//Foxhole extended GTween.
 		private var _progress:ProgressBar;
-		private var _label:TextField;
+//		private var _label:TextField;
 		//
 		private var _container:ScrollContainer;
 		//form grouper
@@ -142,14 +145,14 @@ package com.godpaper.as3.views.screens
 //			this._container.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this.addChild(this._container);
 			//
-			this._label = new TextField(200,20,"HAND SHAKING...");
-			this._container.addChild(this._label);
+//			this._label = new TextField(200,20,"HAND SHAKING...");
+//			this._container.addChild(this._label);
 			//
 			this._progress = new ProgressBar();
 			this._progress.minimum = 0;
 			this._progress.maximum = 1;
 			this._progress.value = 0;
-			this._container.addChild(this._progress);
+//			this._container.addChild(this._progress);
 			//
 			this._progressTween = new GTween(this._progress, 5,
 				{
@@ -159,7 +162,6 @@ package com.godpaper.as3.views.screens
 					repeatCount: 99
 				});
 			//Loading subroutines here.
-			
 			//			CursorManager.setBusyCursor();
 			// sound initialization takes a moment, so we prepare them here
 			if(TextureConfig.fontTextureRequired)
@@ -193,6 +195,7 @@ package com.godpaper.as3.views.screens
 			this._form_grouper.addChild(this._picker_list);
 //			this._picker_list.typicalItem = {text: "Item 1000"};
 //			this._picker_list.labelField = "text";
+			this._picker_list.width = 150;
 			this._picker_list.labelFunction = function trancateLabel(str:String):String
 			{
 				return str.substr(0, 10)+"..."; 
@@ -222,6 +225,8 @@ package com.godpaper.as3.views.screens
 			this._response_grouper.addChild(this._lebel_response);
 			//
 			this._response_list = new List();
+			this._response_list.width = 150;
+			this._response_list.height = 100;
 			this._response_grouper.addChild(this._response_list);
 //			this._response_list.labelFunction = function trancateLabel(str:String):String
 //			{
@@ -234,6 +239,14 @@ package com.godpaper.as3.views.screens
 			this._button_response.isEnabled = false;
 			this._response_grouper.addChild(this._button_response);
 			this._button_response.onRelease.add(responseButtonReleaseHandler);
+			//
+			this._header = new ScreenHeader();
+			this._header.title = "HAND SHAKING...";
+			this.addChild(this._header);
+			this._header.rightItems = new <DisplayObject>
+				[
+					this._progress
+				];
 			//Conduct service here.
 			FlexGlobals.conductService.initialization(null,null);	
 			//Signal watcher
@@ -245,6 +258,9 @@ package com.godpaper.as3.views.screens
 		//
 		override protected function draw():void
 		{
+			this._header.width = this.actualWidth;
+			this._header.validate();
+			//
 			this._container.y = 0;
 			this._container.width = this.actualWidth;
 			this._container.height = this.actualHeight - this._container.y;
@@ -278,8 +294,12 @@ package com.godpaper.as3.views.screens
 		private function conductUserVoHandler(userVO:UserVO):void
 		{
 			LOG.info("Conduct userVO:{0}",userVO);
-			_response_list_items.push(userVO.shortenPeerId);
-			_response_list_items.fixed = true;
+			//@see:https://github.com/joshtynjala/foxhole-starling/wiki/How-to-Use-List
+			if(_response_list_items.indexOf(userVO.shortenPeerId)<0)
+			{
+				_response_list_items.push(userVO.shortenPeerId);
+			}
+//			_response_list_items.fixed = true;
 			_response_list.dataProvider = new ListCollection(_response_list_items);
 			this._button_response.isEnabled = true;
 		}

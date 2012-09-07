@@ -62,13 +62,13 @@ package com.godpaper.as3.views.screens
 		//
 		private var _container:ScrollContainer;
 		private var _header:ScreenHeader;
-		private var _settingsButton:Button;
 		//Menu buttons
 		private var _singlePlayButton:Button;
 		private var _multiPlayButton:Button;
 		private var _creditButton:Button;
 		private var _helpButton:Button;
 		private var _aboutButton:Button;
+		private var _settingsButton:Button;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -175,7 +175,9 @@ package com.godpaper.as3.views.screens
 		//--------------------------------------------------------------------------
 		private function settingsButton_onRelease(button:Button):void
 		{
-			this._onSettings.dispatch(this);
+//			this._onSettings.dispatch(this);
+			//Screen swither here.
+			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_SETTINGS);
 		}
 		//
 		private function singlePlayButton_onRelease(button:Button):void

@@ -86,6 +86,7 @@ package com.godpaper.as3.consts
 		public static const SCREEN_MAIN_MENU:String = "screen_main_menu";
 		public static const SCREEN_GAME:String = "screen_game";
 		public static const SCREEN_HANDSHAKE:String = "screen_handshake";
+		public static const SCREEN_SETTINGS:String = "screen_settings";
 		//Chess board type
 		public static const CHESS_BOARD_TYPE_GRID:String = "ChessBoardType::grid";
 		public static const CHESS_BOARD_TYPE_POINT:String = "ChessBoardType::point";

@@ -51,7 +51,7 @@ package
 	 * @airVersion 3.2+
 	 * Created Jul 13, 2012 3:32:11 PM
 	 */   	 
-	[SWF(frameRate="60", width="500", height="700", backgroundColor="0xffffff")]//320×480 for iPhone devices
+	[SWF(frameRate="60", width="320", height="480", backgroundColor="0xffffff")]//320×480 for iPhone devices
 	//	[SWF(frameRate="60", width="384", height="512", backgroundColor="0xffffff")]//384×512 for iPad devices
 	public class TigerInBeijing extends ApplicationBase
 	{		
@@ -108,10 +108,10 @@ package
 		{
 			//config initialization here.
 			//about chess board:
-			BoardConfig.xLines=7;
+			BoardConfig.xLines=5;
 			BoardConfig.yLines=7;
-			BoardConfig.xOffset=100;
-			BoardConfig.yOffset=100;	
+			BoardConfig.xOffset=50;
+			BoardConfig.yOffset=50;	
 			//			BoardConfig.width=300;
 			//			BoardConfig.height=300;
 			BoardConfig.xScale=1;

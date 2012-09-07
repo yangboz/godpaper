@@ -73,3 +73,5 @@ Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 14.PGN file parse and implementation.(Start)
 
 15.UCI protocol implementation with FEN string.(Plan)
+
+16.Localizing the application.(Start)
