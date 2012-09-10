@@ -1,0 +1,273 @@
+<Schema name="PGN"
+	xmlns="urn:schemas-microsoft-com:xml-data"
+	xmlns:dt="urn:schemas-microsoft-com:datatypes">
+<!--
+*
+*	PGNXML XML Data Schema file
+*	Brad Merrill
+*	Created: Sept 1999
+*	Updated for web release: Sept 2000
+*
+-->
+
+<!--
+	Defines the White and Black player contents
+-->
+
+<!--
+This is the FIDE Elo ratings.
+A value of "-1" is used for an unrated player.
+-->
+<AttributeType name="Elo" dt:type="int"/>
+
+<!--
+This is the USCF (United States Chess Federation) rating.
+A value of "-1" is used for an unrated player.
+Similar attributes can be constructed for other rating agencies.
+-->
+<AttributeType name="USCF" dt:type="int"/>
+
+<!--
+This is the e-mail or network addresses of the player.
+-->
+<AttributeType name="NA" dt:type="string"/>
+
+<AttributeType name="Country"/>
+
+<!--
+This describe the player types.
+The value "human" should be used for a person
+while the value "program" should be used
+for algorithmic (computer) players.
+-->
+<AttributeType name="Type" dt:type="enumeration"
+	dt:values="human program"
+	/>
+
+<!--
+This is the standard abbreviations for FIDE title.
+Used are:
+	NM - National Master
+	FM - Fide Master
+	IM - International Master
+	GM - Grandmaster
+	WM - Women's Master
+	WIM - Women's International Master
+	WGM - Women's Grandmaster
+-->
+<AttributeType name="Title" dt:type="enumeration"
+	dt:values="NM FM IM GM WM WIM WGM"
+	/>
+	
+<ElementType name="White" content="textOnly">
+	<attribute type="Elo"/>
+	<attribute type="USCF"/>
+	<attribute type="NA"/>
+	<attribute type="Country"/>
+	<attribute type="Type"/>
+	<attribute type="Title"/>
+</ElementType>
+<ElementType name="Black" content="textOnly">
+	<attribute type="Elo"/>
+	<attribute type="USCF"/>
+	<attribute type="NA"/>
+	<attribute type="Country"/>
+	<attribute type="Type"/>
+	<attribute type="Title"/>
+</ElementType>
+
+<!--
+	Define game info elements
+-->
+<AttributeType name="Year" dt:type="int"/>
+<AttributeType name="Month" dt:type="int"/>
+<AttributeType name="Day" dt:type="int"/>
+
+<ElementType name="Event" content="textOnly" dt:type="string"/>
+<ElementType name="Site" content="textOnly" dt:type="string"/>
+<ElementType name="Date" content="empty">
+	<attribute type="Year"/>
+	<attribute type="Month"/>
+	<attribute type="Day"/>
+</ElementType>
+
+<ElementType name="EventDate" content="empty">
+	<attribute type="Year"/>
+	<attribute type="Month"/>
+	<attribute type="Day"/>
+</ElementType>
+
+
+<ElementType name="Round" content="textOnly" dt:type="int"/>
+
+<!-- 
+The Result score is the result of the game.
+It is always exactly the same as the game termination marker
+that concludes the associated movetext.
+It is always one of four possible values:
+	"1-0" (White wins),
+	"0-1" (Black wins),
+	"1/2-1/2" (drawn game),
+	 "*" (game still in progress, game abandoned,
+	 	 or result otherwise unknown).
+Note that the digit zero is used in both of the
+first two cases; not the letter "O".
+Note you can't do this as an enumerated attribute since
+the '/' gets processed.
+-->
+<ElementType name="Result" content="textOnly"/>
+
+<ElementType name="ECO" content="textOnly" dt:type="string"/>
+<ElementType name="Termination" content="textOnly" dt:type="string"/>
+<ElementType name="Annotator" content="textOnly" dt:type="string"/>
+<ElementType name="Mode" content="textOnly" dt:type="string"/>
+<ElementType name="PlyCount" content="textOnly" dt:type="int"/>
+<ElementType name="Prologue" content="textOnly" dt:type="string"/>
+<ElementType name="Epilogue" content="textOnly" dt:type="string"/>
+
+<!--
+I decided to skip to SetUp tag,
+since its only really useful for FEN positions
+and the FEN attribute FullmoveNumber will
+tell us what the top move number
+should be.
+-->
+
+<!--
+	define FEN notation - Forsyth notation
+-->
+<AttributeType name="ActiveColor"
+	dt:type="enumeration"
+	dt:values="w b"
+	/>
+<AttributeType name="CastlingAvailability"
+	dt:type="enumeration"
+	dt:values="KQkq KQk KQq KQ Kkq Kq Kk K Qkq Qq Qk Q kq q k"
+	/>
+
+<AttributeType name="EnPassantTargetSquare"
+	dt:type="enumeration"
+	dt:values="a3 b3 c3 d3 e3 f3 g3 h3 a6 b6 c6 d6 e6 f6 g6 h6"
+	/>
+
+<AttributeType name="DrawCount" dt:type="int"/>
+<AttributeType name="MoveCount" dt:type="int"/>
+
+<ElementType name="FEN" content="textOnly">
+	<attribute type="ActiveColor"/>
+	<attribute type="CastlingAvailability"/>
+	<attribute type="EnPassantTargetSquare"/>
+	<attribute type="DrawCount"/>
+	<attribute type="MoveCount"/>
+</ElementType>
+
+
+<ElementType name="info" content="eltOnly" order="many">
+	<element type="Event"/>
+	<element type="Site"/>
+	<element type="Date"/>
+	<element type="Round"/>
+	<element type="White"/>
+	<element type="Black"/>
+	<element type="Result"/>
+	<element type="EventDate"/>
+	<element type="ECO"/>
+	<element type="Termination"/>
+	<element type="Annotator"/>
+	<element type="Mode"/>
+	<element type="PlyCount"/>
+	<element type="Prologue"/>
+	<element type="Epilogue"/>
+	<element type="FEN"/>
+</ElementType>
+
+<AttributeType name="n" dt:type="int"/>
+
+<AttributeType name="state"
+	dt:type="enumeration"
+	dt:values="check checkmate"
+	/>
+
+<AttributeType name="promote"
+	dt:type="enumeration"
+	dt:values="Q R N B q r n b"
+	/>
+
+<AttributeType name="piece"
+	dt:type="enumeration"
+	dt:values="K Q R N B P k q r n b p"
+	/>
+
+<AttributeType name="from"
+	dt:type="enumeration"
+	dt:values="
+a1 b1 c1 d1 e1 f1 g1 h1
+a2 b2 c2 d2 e2 f2 g2 h2
+a3 b3 c3 d3 e3 f3 g3 h3
+a4 b4 c4 d4 e4 f4 g4 h4
+a5 b5 c5 d5 e5 f5 g5 h5
+a6 b6 c6 d6 e6 f6 g6 h6
+a7 b7 c7 d7 e7 f7 g7 h7
+a8 b8 c8 d8 e8 f8 g8 h8
+"/>
+
+<AttributeType name="to"
+	dt:type="enumeration"
+	dt:values="
+a1 b1 c1 d1 e1 f1 g1 h1
+a2 b2 c2 d2 e2 f2 g2 h2
+a3 b3 c3 d3 e3 f3 g3 h3
+a4 b4 c4 d4 e4 f4 g4 h4
+a5 b5 c5 d5 e5 f5 g5 h5
+a6 b6 c6 d6 e6 f6 g6 h6
+a7 b7 c7 d7 e7 f7 g7 h7
+a8 b8 c8 d8 e8 f8 g8 h8
+"/>
+
+
+<!--
+	I wanted to add enumeration to annotation, but it didn't work
+	dt:type="enumeration"
+	dt:values="!! !? ! ? ?! ??"
+
+-->
+<AttributeType name="annotation" dt:type="string"/>
+<AttributeType name="NAG" dt:type="int"/>
+<AttributeType name="display" dt:type="string"/>
+
+<ElementType name="text" content="textOnly"/>
+<ElementType name="end" content="mixed">
+	<element type="text"/>
+</ElementType>
+
+
+<ElementType name="move" content="mixed">
+	<attribute type="n"/>
+	<attribute type="state"/>
+	<attribute type="annotation"/>
+	<attribute type="promote"/>
+	<attribute type="piece"/>
+	<attribute type="from"/>
+	<attribute type="to"/>
+	<attribute type="NAG"/>
+	<attribute type="display"/>
+	<element type="text"/>
+	<element type="move"/>
+	<element type="end"/>
+</ElementType>
+
+<ElementType name="moves" content="eltOnly" order="many">
+	<element type="move"/>
+	<element type="end"/>
+</ElementType>
+
+<ElementType name="game" order="seq" content="eltOnly">
+	<element type="info"/>
+	<element type="moves"/>
+</ElementType>
+
+<ElementType name="PGNGAMES" content="eltOnly">
+	<element type="game"/>
+</ElementType>
+
+</Schema>

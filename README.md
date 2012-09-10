@@ -65,6 +65,7 @@ I of course refer here to the constants of the physical world:
 
 ![Screenshot of "TicTacToe"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/src/assets/screenshots/tic_tac_toe.jpg)
 ![Screenshot of "ChineseChessJam"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/src/assets/screenshots/chinese_chess_jam.jpg)
+![Screenshot of "TwoHitOne"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/src/assets/screenshots/two_hit_one.png)
 
 # Main features
 This wiki is for programmers. More precisely, it�s for programmers who favor the �learn by example� approach.

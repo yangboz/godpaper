@@ -103,7 +103,7 @@ package com.godpaper.two_hit_one.buiness.factory
 					chessPieceLabel=DefaultPiecesConstants.BLUE.label;
 					chessPieceValue=16+int(position.x);
 					chessPieceType=DefaultConstants.BLUE;
-					chessPieceSubType = DefaultConstants.BLUE_ROCK;//BLUE_ROCK,BLUE_STAR
+//					chessPieceSubType = DefaultConstants.BLUE_ROCK;//BLUE_ROCK,BLUE_STAR
 					break;
 				//about red
 				case "(x=0, y=2)":
@@ -115,15 +115,15 @@ package com.godpaper.two_hit_one.buiness.factory
 					chessPieceLabel=DefaultPiecesConstants.RED.label;
 					chessPieceValue=8+int(position.x);
 					chessPieceType=DefaultConstants.RED;
-					chessPieceSubType = DefaultConstants.RED_ROCK;//RED_ROCK,RED_STAR
+//					chessPieceSubType = DefaultConstants.RED_ROCK;//RED_ROCK,RED_STAR
 					break;
 				default:
 					return null;
 					break;
 			}
 			//chess piece's swfloader source.
-			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
-			this.chessPieceSource = atlas.getTexture(chessPieceSubType);
+//			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
+//			this.chessPieceSource = atlas.getTexture(chessPieceSubType);
 			//call super functions.
 			return super.createChessPiece(position,flag);
 		}

@@ -65,8 +65,6 @@ package com.godpaper.two_hit_one.buiness.managers
 		// Variables
 		//
 		//--------------------------------------------------------------------------
-		private var chessPieceModel:ChessPiecesModel = FlexGlobals.chessPiecesModel;
-		private var chessBoardModel:ChessBoardModel = FlexGlobals.chessBoardModel;
 		//----------------------------------
 		// CONSTANTS
 		//----------------------------------

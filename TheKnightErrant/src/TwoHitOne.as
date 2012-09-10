@@ -33,11 +33,12 @@ package
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
+	import com.godpaper.as3.configs.TextureConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.PluginUIComponent;
 	import com.godpaper.as3.plugins.kongregate.KongregatePlugin;
@@ -115,7 +116,14 @@ package
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		/**
+		 * Override this for customize chess pieces manager.
+		 */
+		override public function get chessPiecesManager():IChessPieceManager
+		{
+			//			return new ChessPieceManagerDefault();
+			return new ChessPieceManager_TwoHitOne();
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -135,13 +143,14 @@ package
 			BoardConfig.yScale=1;
 			BoardConfig.xAdjust=50;
 			BoardConfig.yAdjust=50;
+			BoardConfig.backgroundImageRequired = true;
 			//Customize starling texture sample:
 			//			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 			//			BoardConfig.backgroundImage = new Image(texture);
 			//gasket config:
 			GasketConfig.maxPoolSize = 25;
 			GasketConfig.tipsVisible = true;
-			GasketConfig.backgroundAlpha = 0.2;
+			GasketConfig.backgroundAlpha = 0.0;
 			GasketConfig.width = 30;
 			GasketConfig.height = 30;
 			//about piece:
@@ -149,12 +158,15 @@ package
 			PieceConfig.maxPoolSizeBlue = 6;
 			PieceConfig.maxPoolSizeRed = 6;
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
-			PieceConfig.scaleX = 1;
-			PieceConfig.scaleY = 1;
+			PieceConfig.scaleX = 1.2;
+			PieceConfig.scaleY = 1.2;
 			//about plugin:
 			PluginConfig.gameID = "cc2fd3b3196f4281";//your custom game related id.
 			PluginConfig.boardID = "51c558cd0315f8e7";//your custom game related board id.
 			this._mochiads_game_id = "cc2fd3b3196f4281";//espical for mochi game platform.
+			//TextureConfig
+			TextureConfig.AssetEmbeds_1x_class = AssetEmbeds_1x_two_hit_one;
+			TextureConfig.AssetEmbeds_2x_class = AssetEmbeds_2x_two_hit_one;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);
