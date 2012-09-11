@@ -51,6 +51,7 @@
         SPImage *background;
         NSNumber *yAdjust,*yLines,*yOffset,*yScale;
         NSNumber *xAdjust,*xLines,*xOffset,*xScale;
+        NSString *_type;
 
 }
 //--------------------------------------------------------------------------

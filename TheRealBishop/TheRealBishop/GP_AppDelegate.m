@@ -8,26 +8,33 @@
 
 #import "GP_AppDelegate.h"
 #import "Game.h"
+#import "RootViewController.h"
 
 @implementation GP_AppDelegate
 
 @synthesize window = _window;
 @synthesize sparrowView;
-
+@synthesize rootViewController = _rootViewController;
 - (void)dealloc
 {
     [sparrowView release];
     [_window release];
+    [_rootViewController release];
     [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-//    // Override point for customization after application launch.
-//    self.window.backgroundColor = [UIColor whiteColor];
-//    [self.window makeKeyAndVisible];
-//    return YES;
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    // Override point for customization after application launch.
+    self.window.backgroundColor = [UIColor whiteColor];
+    // Override point for customization after application launch.
+    _rootViewController = [[RootViewController alloc] init];
+    self.window.rootViewController = _rootViewController;
+    [self.window makeKeyAndVisible];
+    return YES;
+    
+    //Sparrow related
     SP_CREATE_POOL(pool);
     
     [SPStage setSupportHighResolutions:YES];
@@ -36,10 +43,10 @@
     Game *game = [[Game alloc]init];
     sparrowView.stage = game;
     [game release];
-    
+    //
     [window makeKeyAndVisible];
     [sparrowView start];
-    
+//    
     SP_RELEASE_POOL(pool);
     
     return YES;
@@ -74,6 +81,11 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
     [sparrowView start];
+}
+
+//Implement loadView to create a view hierarchy programmatically, without using a nib.
+- (void)loadView  
+{
 }
 
 @end

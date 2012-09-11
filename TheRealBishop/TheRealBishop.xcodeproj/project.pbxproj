@@ -52,6 +52,7 @@
 		A4ED98C915D3DB1F00C450E8 /* GP_Array3Iterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED98C815D3DB1F00C450E8 /* GP_Array3Iterator.m */; };
 		A4ED98CC15D3E73200C450E8 /* GP_Array2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED98CB15D3E73200C450E8 /* GP_Array2Tests.m */; };
 		A4EDA65A15E52C2800CF34C8 /* GP_ArrayedQueueIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDA65915E52C2800CF34C8 /* GP_ArrayedQueueIterator.m */; };
+		A4EEA48315FF879600B11319 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EEA48215FF879600B11319 /* RootViewController.m */; };
 		A4EFF8FE15EBC2E4002B22DE /* SHLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EFF8FD15EBC2E4002B22DE /* SHLine.m */; };
 		A4EFF90715EBC8CE002B22DE /* SPBitmapData.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EFF90415EBC8CE002B22DE /* SPBitmapData.m */; };
 		A4EFF90815EBC8CE002B22DE /* UIImageWithBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EFF90615EBC8CE002B22DE /* UIImageWithBuffer.m */; };
@@ -190,6 +191,8 @@
 		A4EDDD4015DD45C4009CFD0E /* GP_IDragdropable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IDragdropable.h; sourceTree = "<group>"; };
 		A4EDDD4115DD4608009CFD0E /* GP_IChessGasket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IChessGasket.h; sourceTree = "<group>"; };
 		A4EDDD4215DD46DD009CFD0E /* GP_IChessVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IChessVO.h; sourceTree = "<group>"; };
+		A4EEA48115FF879600B11319 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = ../RootViewController.h; sourceTree = "<group>"; };
+		A4EEA48215FF879600B11319 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = ../RootViewController.m; sourceTree = "<group>"; };
 		A4EFF8FC15EBC2E4002B22DE /* SHLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHLine.h; sourceTree = "<group>"; };
 		A4EFF8FD15EBC2E4002B22DE /* SHLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLine.m; sourceTree = "<group>"; };
 		A4EFF90315EBC8CE002B22DE /* SPBitmapData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPBitmapData.h; sourceTree = "<group>"; };
@@ -450,6 +453,8 @@
 				A4EDDD3415DD1F5C009CFD0E /* com */,
 				A4F0D01215D154B10034FF28 /* Supporting Files */,
 				A41103D615DBDBEA00CCD0DE /* Game.h */,
+				A4EEA48115FF879600B11319 /* RootViewController.h */,
+				A4EEA48215FF879600B11319 /* RootViewController.m */,
 				A4F0D01A15D154B10034FF28 /* GP_AppDelegate.h */,
 				A4F0D01B15D154B10034FF28 /* GP_AppDelegate.m */,
 				A41103D715DBDBEA00CCD0DE /* Game.m */,
@@ -727,6 +732,7 @@
 				A4EFF90715EBC8CE002B22DE /* SPBitmapData.m in Sources */,
 				A4EFF90815EBC8CE002B22DE /* UIImageWithBuffer.m in Sources */,
 				A4E981F115EE689500B444B9 /* GP_ChessBoard.m in Sources */,
+				A4EEA48315FF879600B11319 /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

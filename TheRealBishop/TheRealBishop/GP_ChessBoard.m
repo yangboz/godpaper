@@ -85,4 +85,13 @@
     //return ObjectUtil.toString(this);
     return [super description];//TODO:customize description;
 }
+#pragma mark GP_IType
+-(NSString *)type
+{
+    return _type;
+}
+-(void)setType:(NSString *)value
+{
+    _type = value;
+}
 @end

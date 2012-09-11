@@ -18,7 +18,7 @@
         // in this sample, we add just a simple quad to see 
         // if it works.
         SPQuad *quad = [SPQuad quadWithWidth:self.stage.width height:self.stage.height];
-        quad.color = 0xffffff;
+        quad.color = 0xff0000;
         quad.x = 0;
         quad.y = 0;
         [self addChild:quad];
