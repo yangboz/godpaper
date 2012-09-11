@@ -38,6 +38,8 @@ package com.godpaper.as3.model
 		public var userList:Dictionary;
 		//Hoster role name
 		public var hostRoleName:String;
+		//Locale
+		public var locale:String = "en_US";
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

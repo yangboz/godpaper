@@ -32,7 +32,11 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	
+	import flash.system.Capabilities;
+	
 	import mx.logging.ILogger;
+	import mx.resources.IResourceManager;
+	import mx.resources.ResourceManager;
 	
 	import org.josht.starling.foxhole.controls.Button;
 	import org.josht.starling.foxhole.controls.PickerList;
@@ -46,8 +50,7 @@ package com.godpaper.as3.views.screens
 	
 	import starling.display.DisplayObject;
 	import starling.text.TextField;
-	
-	
+
 	/**
 	 * SettingsScreen.as class.This screen providers language and msic settings.   	
 	 * @author yangboz
@@ -56,7 +59,7 @@ package com.godpaper.as3.views.screens
 	 * @airVersion 3.2+
 	 * Created Sep 7, 2012 2:40:07 PM
 	 */   	 
-	public class SettingsScreen extends Screen
+	public class SettingsScreen extends ScreenBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -73,7 +76,6 @@ package com.godpaper.as3.views.screens
 		private var _picker_language_item:Array;
 		private var _form_language:ScrollContainer;
 		private var _label_language:TextField;
-		//
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -97,7 +99,6 @@ package com.godpaper.as3.views.screens
 		//--------------------------------------------------------------------------
 		public function SettingsScreen()
 		{
-			//TODO: implement function
 			super();
 		}     	
 		//--------------------------------------------------------------------------
@@ -147,10 +148,9 @@ package com.godpaper.as3.views.screens
 			//
 			this._picker_language = new PickerList();
 			this._picker_language_item  = [];
-			this._picker_language_item.push({text: "English"});
-			this._picker_language_item.push({text: "Chinese"});
-			this._picker_language_item.push({text: "Japenese"});
-			this._picker_language_item.push({text: "Korean"});
+			this._picker_language_item.push({text: "English",locale:DefaultConstants.LOCALE_LANG_EN_US});
+			this._picker_language_item.push({text: "Chinese",locale:DefaultConstants.LOCALE_LANG_ZH_CN});
+			this._picker_language_item.push({text: "Korean",locale:DefaultConstants.LOCALE_LANG_KO_KR});
 //			this._picker_language_item.fixed = true;
 //			this._picker_language.typicalItem = {text: "Choose language"};
 			this._picker_language.labelField = "text";
@@ -162,9 +162,11 @@ package com.godpaper.as3.views.screens
 			//PickerList cannot simply pass its labelField down to item
 			//renderers automatically
 			this._picker_language.listProperties.@itemRendererProperties.labelField = "text";
+			this._picker_language.onChange.add(picker_language_onChange);
 			//
 			this._button_done = new Button();
-			this._button_done.label = "Done";
+//			this._button_done.label = "Done";
+			this._button_done.label = this.resourceManager.getString(this.bundleName,"BTN_DONE");
 			this._button_done.onRelease.add(doneButton_onRelease);
 			//
 			this._button_back = new Button();
@@ -209,6 +211,14 @@ package com.godpaper.as3.views.screens
 		{
 			//Screen swither here.
 			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);
+		}
+		//
+		private function picker_language_onChange(picker:PickerList):void
+		{
+			this.resourceManager.localeChain = [this._picker_language.selectedItem.locale];
+			FlexGlobals.userModel.locale = this._picker_language.selectedItem.locale;
+			this.resourceManager.update();
+//			this.dispatchEvent(new ChangeEvent(ChangeEvent.LANG_UPDATE));//TODO:dispatch event to update locale strings.
 		}
 	}
 	

@@ -52,7 +52,7 @@ package com.godpaper.as3.views.screens
 	 * @airVersion 3.2+
 	 * Created Jul 4, 2012 3:26:43 PM
 	 */   	 
-	public class MainMenuScreen extends Screen
+	public class MainMenuScreen extends ScreenBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -101,7 +101,8 @@ package com.godpaper.as3.views.screens
 			this.addChild(this._container);
 			//
 			_singlePlayButton = new Button();
-			_singlePlayButton.label = "Single Play";
+//			_singlePlayButton.label = "Single Play";
+			_singlePlayButton.label = this.resourceManager.getString(this.bundleName,"BTN_SINGLE_PLAY");
 			_singlePlayButton.width =  200 * this.dpiScale;
 			_singlePlayButton.height = 100 * this.dpiScale;
 			_singlePlayButton.onRelease.addOnce(singlePlayButton_onRelease);

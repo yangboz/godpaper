@@ -64,7 +64,7 @@ package com.godpaper.as3.views.screens
 	 * @airVersion 3.2+
 	 * Created Aug 22, 2012 1:52:08 PM
 	 */   	 
-	public class HandshakeScreen extends Screen
+	public class HandshakeScreen extends ScreenBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -95,7 +95,6 @@ package com.godpaper.as3.views.screens
 		//  CONSTANTS
 		//----------------------------------
 		private static const LOG:ILogger = LogUtil.getLogger(HandshakeScreen);
-		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -235,7 +234,8 @@ package com.godpaper.as3.views.screens
 //			this._response_list.itemRendererType = ;
 			//
 			this._button_response = new Button();
-			this._button_response.label = "RESPONSE";
+//			this._button_response.label = "RESPONSE";
+			this._button_response.label = this.resourceManager.getString(this.bundleName,"BTN_RESPONSE");
 			this._button_response.isEnabled = false;
 			this._response_grouper.addChild(this._button_response);
 			this._button_response.onRelease.add(responseButtonReleaseHandler);

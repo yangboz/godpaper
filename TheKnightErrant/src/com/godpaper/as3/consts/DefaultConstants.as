@@ -91,6 +91,12 @@ package com.godpaper.as3.consts
 		public static const CHESS_BOARD_TYPE_GRID:String = "ChessBoardType::grid";
 		public static const CHESS_BOARD_TYPE_POINT:String = "ChessBoardType::point";
 		public static const CHESS_BOARD_TYPE_CANVAS:String = "ChessBoardType::canvas";
+		//Locale languages
+		public static const LOCALE_LANG_ZH_CN:String = "zh_CN";
+		public static const LOCALE_LANG_EN_US:String = "en_US";
+		public static const LOCALE_LANG_KO_KR:String = "ko_KR";
+		//Resource bundles
+		public static const LOCLAE_BUNDLE_SCREEN:String = "screen_resources_";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

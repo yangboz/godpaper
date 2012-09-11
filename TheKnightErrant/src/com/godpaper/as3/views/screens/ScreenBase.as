@@ -21,54 +21,40 @@
  */
 package com.godpaper.as3.views.screens
 {
-	import com.godpaper.as3.configs.TextureConfig;
-	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.core.FlexGlobals;
-	import com.godpaper.as3.utils.LogUtil;
-	
-	import mx.logging.ILogger;
-	
-	import org.josht.starling.foxhole.controls.Label;
-	import org.josht.starling.foxhole.controls.ProgressBar;
-	import org.josht.starling.foxhole.controls.Screen;
-	import org.josht.starling.foxhole.controls.ScrollContainer;
-	import org.josht.starling.foxhole.controls.Scroller;
-	import org.josht.starling.foxhole.layout.VerticalLayout;
-	import org.josht.starling.motion.GTween;
-	
-	import starling.events.Event;
-	import starling.text.TextField;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.FlexGlobals;
+	
+	import mx.resources.IResourceManager;
+	import mx.resources.ResourceManager;
+	
+	import org.josht.starling.foxhole.controls.Screen;
 	
 	/**
-	 * SplashScene.as class with customzie subroutines.	
+	 * ScreenBase.as class. Abstarct the screen with locale resource based implementation.  	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Jul 3, 2012 5:11:09 PM
+	 * Created Sep 11, 2012 2:38:46 PM
 	 */   	 
-	public class SplashScreen extends ScreenBase
+	public class ScreenBase extends Screen
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _progressTween:GTween;//Foxhole extended GTween.
-		private var _progress:ProgressBar;
-		private var _label:TextField;
-		//
-		private var _container:ScrollContainer;
+		//Locale
+		protected var resourceManager:IResourceManager = ResourceManager.getInstance();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(SplashScreen);
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -86,75 +72,27 @@ package com.godpaper.as3.views.screens
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function SplashScreen()
+		public function ScreenBase()
 		{
-			//TODO: implement function
 			super();
+			//Default locale setting.
+			this.resourceManager.localeChain = [FlexGlobals.userModel.locale];
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
+		public function get bundleName():String
+		{
+			return DefaultConstants.LOCLAE_BUNDLE_SCREEN.concat(FlexGlobals.userModel.locale);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function initialize():void
-		{
-			const layout:VerticalLayout = new VerticalLayout();
-			layout.gap = 10;
-			layout.paddingTop = 10;
-			layout.paddingRight = 10;
-			layout.paddingBottom = 10;
-			layout.paddingLeft = 10;
-			layout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
-			layout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
-			//
-			this._container = new ScrollContainer();
-			this._container.layout = layout;
-//			this._container.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			this.addChild(this._container);
-			//
-			this._label = new TextField(100,20,"LOADING...");
-			this._container.addChild(this._label);
-			//
-			this._progress = new ProgressBar();
-			this._progress.minimum = 0;
-			this._progress.maximum = 1;
-			this._progress.value = 0;
-			this._container.addChild(this._progress);
-			//
-			this._progressTween = new GTween(this._progress, 5,
-				{
-					value: 1
-				},
-				{
-					repeatCount: 1
-				});
-			//Loading subroutines here.
-			
-			//			CursorManager.setBusyCursor();
-			// sound initialization takes a moment, so we prepare them here
-			if(TextureConfig.fontTextureRequired)
-			{
-				AssetEmbedsDefault.loadBitmapFonts();
-			}
-			//Loading complete handler.
-			this._progressTween.onComplete =  function():void
-			{
-//				FlexGlobals.screenNavigator.showScreen((DefaultConstants.SCREEN_GAME));//Screen swither here.
-				FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);//Screen swither here.
-			}
-		}
-		//
-		override protected function draw():void
-		{
-			this._container.y = 0;
-			this._container.width = this.actualWidth;
-			this._container.height = this.actualHeight - this._container.y;
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods

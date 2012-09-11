@@ -59,6 +59,9 @@ package
 	
 	import mx.logging.ILogger;
 	import mx.logging.LogEventLevel;
+	import mx.resources.IResourceManager;
+	import mx.resources.ResourceBundle;
+	import mx.resources.ResourceManager;
 	
 	import starling.core.Starling;
 
@@ -74,6 +77,10 @@ package
 	 * @airVersion 3.2+
 	 * Created Apr 12, 2012 9:38:56 AM
 	 */
+	[ResourceBundle("screen_resources_en_US")]
+	[ResourceBundle("screen_resources_zh_CN")]
+	[ResourceBundle("screen_resources_ko_KR")]
+	//
 	[SWF(frameRate="60", width="320", height="480", backgroundColor="0xffffff")] //320×480 for iPhone devices
 //	[SWF(frameRate="60", width="384", height="512", backgroundColor="0xffffff")]//384×512 for iPad devices
 	public class ApplicationBase extends Sprite
@@ -402,6 +409,12 @@ package
 			GameConfig.chessPieceManager=this.chessPiecesManager;
 			GameConfig.gameStateManager=this.gameStateManager;
 //			GameConfig.gameStateManager.start();//Avoid call start() at this entry point.
+			//Localization example
+//			var rm:IResourceManager = ResourceManager.getInstance();
+//			rm.localeChain = ["zh_CN"];
+//			var bundlers:Array  = rm.getBundleNamesForLocale(DefaultConstants.LOCALE_LANG_ZH_CN);
+//			var locale:String = rm.getString(DefaultConstants.LOCLAE_BUNDLE_SCREEN.concat(FlexGlobals.userModel.locale),"BTN_RESPONSE");
+//			trace(locale);
 		}
 	}
 
