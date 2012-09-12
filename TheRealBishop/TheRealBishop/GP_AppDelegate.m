@@ -18,7 +18,7 @@
 - (void)dealloc
 {
     [sparrowView release];
-    [_window release];
+    [window release];
     [_rootViewController release];
     [super dealloc];
 }
@@ -31,8 +31,8 @@
     // Override point for customization after application launch.
     _rootViewController = [[RootViewController alloc] init];
     self.window.rootViewController = _rootViewController;
-    [self.window makeKeyAndVisible];
-    return YES;
+//    [self.window makeKeyAndVisible];
+//    return YES;
     
     //Sparrow related
     SP_CREATE_POOL(pool);
@@ -40,11 +40,13 @@
     [SPStage setSupportHighResolutions:YES];
     [SPAudioEngine start];
     
-    Game *game = [[Game alloc]init];
+    Game *game = [[Game alloc] init];
+    self.sparrowView = [[[SPView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window.rootViewController.view = self.sparrowView;
     sparrowView.stage = game;
     [game release];
     //
-    [window makeKeyAndVisible];
+    [_window makeKeyAndVisible];
     [sparrowView start];
 //    
     SP_RELEASE_POOL(pool);
