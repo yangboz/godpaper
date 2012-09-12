@@ -117,7 +117,8 @@ package com.godpaper.as3.views.screens
 //			this._container.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this.addChild(this._container);
 			//
-			this._label = new TextField(100,20,"LOADING...");
+//			this._label = new TextField(100,20,"LOADING...");
+			this._label = new TextField(100,20,this.resourceManager.getString(this.bundleName,"LABEL_LOADING"));
 			this._container.addChild(this._label);
 			//
 			this._progress = new ProgressBar();

@@ -91,6 +91,7 @@ package com.godpaper.as3.views.screens
 		private var _response_list:List;
 		private var _button_response:Button;
 		private var _response_list_items:Array = [];
+		private var _button_back:Button;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -187,7 +188,8 @@ package com.godpaper.as3.views.screens
 			this._form_grouper.scrollerProperties.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this._container.addChild(this._form_grouper);
 			//Form elements
-			this._label_picker = new TextField(80,20,"neighbors:");
+//			this._label_picker = new TextField(80,20,"neighbors:");
+			this._label_picker = new TextField(80,20,this.resourceManager.getString(this.bundleName,"LABEL_NEIGHBORS"));
 			this._form_grouper.addChild(this._label_picker);
 			//
 			this._picker_list = new PickerList();
@@ -211,7 +213,8 @@ package com.godpaper.as3.views.screens
 //			this._picker_list.listProperties.@itemRendererProperties.labelField = "text";
 			//
 			this._button_invite = new Button();
-			this._button_invite.label = "INVITE";
+//			this._button_invite.label = "INVITE";
+			this._button_invite.label = this.resourceManager.getString(this.bundleName,"BTN_INVITE");
 			this._form_grouper.addChild(this._button_invite);
 			this._button_invite.onRelease.add(inviteButtonReleaseHandler);
 			//
@@ -220,7 +223,8 @@ package com.godpaper.as3.views.screens
 			this._response_grouper.scrollerProperties.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this._container.addChild(this._response_grouper);
 			//Form elements
-			this._lebel_response = new TextField(80,20,"invites:");
+//			this._lebel_response = new TextField(80,20,"invites:");
+			this._lebel_response = new TextField(80,20,this.resourceManager.getString(this.bundleName,"LABEL_INVITES"));
 			this._response_grouper.addChild(this._lebel_response);
 			//
 			this._response_list = new List();
@@ -240,12 +244,22 @@ package com.godpaper.as3.views.screens
 			this._response_grouper.addChild(this._button_response);
 			this._button_response.onRelease.add(responseButtonReleaseHandler);
 			//
+			this._button_back = new Button();
+			//			this._button_back.label = "BACK";
+			this._button_back.label = this.resourceManager.getString(this.bundleName,"BTN_BACK");
+			this._button_back.onRelease.add(backButton_onRelease);
+			//
 			this._header = new ScreenHeader();
-			this._header.title = "HAND SHAKING...";
+//			this._header.title = "HAND SHAKING...";
+			this._header.title = this.resourceManager.getString(this.bundleName,"HEADER_HANDSHAKE");
 			this.addChild(this._header);
 			this._header.rightItems = new <DisplayObject>
 				[
 					this._progress
+				];
+			this._header.leftItems = new <DisplayObject>
+				[
+					this._button_back
 				];
 			//Conduct service here.
 			FlexGlobals.conductService.initialization(null,null);	
@@ -333,6 +347,12 @@ package com.godpaper.as3.views.screens
 		private function responseButtonReleaseHandler(button:Button):void
 		{
 //			FlexGlobals.screenNavigator.showScreen( DefaultConstants.SCREEN_GAME );//Screen swither here.
+		}
+		//
+		private function backButton_onRelease(button:Button):void
+		{
+			//Screen swither here.
+			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);
 		}
 	}
 	
