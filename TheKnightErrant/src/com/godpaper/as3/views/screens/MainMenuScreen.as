@@ -110,7 +110,8 @@ package com.godpaper.as3.views.screens
 //			this.addChild(_singlePlayButton);
 			//
 			_multiPlayButton = new Button();
-			_multiPlayButton.label = "Multi Play";
+//			_multiPlayButton.label = "Multi Play";
+			_multiPlayButton.label = this.resourceManager.getString(this.bundleName,"BTN_MULIT_PLAY");
 			_multiPlayButton.width  = 200 * this.dpiScale;
 			_multiPlayButton.height = 100 * this.dpiScale;
 			_multiPlayButton.onRelease.addOnce(multiPlayButton_onRelease);
@@ -118,11 +119,13 @@ package com.godpaper.as3.views.screens
 //			this.addChild(_multiPlayButton);
 			//
 			this._settingsButton = new Button();
-			this._settingsButton.label = "Settings";
+//			this._settingsButton.label = "Settings";
+			this._settingsButton.label = this.resourceManager.getString(this.bundleName,"BTN_SETTINGS");
 			this._settingsButton.onRelease.add(settingsButton_onRelease);
 			//
 			this._header = new ScreenHeader();
-			this._header.title = "Main Menu";
+//			this._header.title = "Main Menu";
+			this._header.title = this.resourceManager.getString(this.bundleName,"HEADER_MAIN");
 			this.addChild(this._header);
 			this._header.rightItems = new <DisplayObject>
 				[

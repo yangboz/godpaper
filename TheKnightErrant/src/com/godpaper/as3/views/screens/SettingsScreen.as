@@ -143,14 +143,18 @@ package com.godpaper.as3.views.screens
 			this._form_language.scrollerProperties.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this._container.addChild(this._form_language);
 			//Form elements
-			this._label_language = new TextField(80,20,"Languages:");
+//			this._label_language = new TextField(80,20,"Languages:");
+			this._label_language = new TextField(80,20,this.resourceManager.getString(this.bundleName,"LABEL_LANGUAGE"));
 			this._form_language.addChild(this._label_language);
 			//
 			this._picker_language = new PickerList();
 			this._picker_language_item  = [];
-			this._picker_language_item.push({text: "English",locale:DefaultConstants.LOCALE_LANG_EN_US});
-			this._picker_language_item.push({text: "Chinese",locale:DefaultConstants.LOCALE_LANG_ZH_CN});
-			this._picker_language_item.push({text: "Korean",locale:DefaultConstants.LOCALE_LANG_KO_KR});
+			var english:String = this.resourceManager.getString(this.bundleName,"LABEL_ENGLISH");
+			var chinese:String = this.resourceManager.getString(this.bundleName,"LABEL_CHINESE");
+			var korean:String = this.resourceManager.getString(this.bundleName,"LABEL_KOREAN");
+			this._picker_language_item.push({text: english,locale:DefaultConstants.LOCALE_LANG_EN_US});
+			this._picker_language_item.push({text: chinese,locale:DefaultConstants.LOCALE_LANG_ZH_CN});
+			this._picker_language_item.push({text: korean,locale:DefaultConstants.LOCALE_LANG_KO_KR});
 //			this._picker_language_item.fixed = true;
 //			this._picker_language.typicalItem = {text: "Choose language"};
 			this._picker_language.labelField = "text";
@@ -170,11 +174,13 @@ package com.godpaper.as3.views.screens
 			this._button_done.onRelease.add(doneButton_onRelease);
 			//
 			this._button_back = new Button();
-			this._button_back.label = "Back";
+//			this._button_back.label = "BACK";
+			this._button_back.label = this.resourceManager.getString(this.bundleName,"BTN_BACK");
 			this._button_back.onRelease.add(backButton_onRelease);
 			//
 			this._header = new ScreenHeader();
-			this._header.title = "Settings";
+//			this._header.title = "Settings";
+			this._header.title = this.resourceManager.getString(this.bundleName,"HEADER_SETTINGS");
 			this.addChild(this._header);
 			this._header.rightItems = new <DisplayObject>
 				[
