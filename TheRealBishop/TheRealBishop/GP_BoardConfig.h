@@ -18,62 +18,52 @@
  */
 @interface GP_BoardConfig : NSObject
 {
-    //global board config.
-//    public static var xLines:Number=4;
-//    public static var yLines:Number=4;
-    uint _xLines,_yLines;
-    //board scale
-//    public static var xScale:Number=1;
-//    public static var yScale:Number=1;
-    uint xScale,yScale;
-    //board lattic
-//    public static var xOffset:Number=50;
-//    public static var yOffset:Number=50;
-    uint xOffset,yOffset;
-    //board size
-//    public static function get height():Number
-//    {
-//        return (BoardConfig.yLines-1)*BoardConfig.yOffset+BoardConfig.yAdjust*2;
-//    }
-    uint height;
-    //
-//    public static function get width():Number
-//    {
-//        return (BoardConfig.xLines-1)*BoardConfig.xOffset+BoardConfig.xAdjust*2;
-//    }
-    uint width;
-    //board background
-    //		private static var _backGround:Class;
-    //board x,y position adjust
-//    public static var xAdjust:Number=50;
-//    public static var yAdjust:Number=50;
-    uint xAdjust,yAdjust;
-    //connex directions
-//    public static var hConnex:Boolean=false; //horizontally connection flag.
-//    public static var vConnex:Boolean=false; //vertically connection flag.
-//    public static var fdConnex:Boolean=false; //forward diagonally connection flag.
-//    public static var bdConnex:Boolean=false; //backward diagonally connection flag.
-//    public static var numConnex:Number;//the number of connex in each direction.
-    BOOL hConnex,vConnex,fdConnex,bdConnex,numConex;
-    //background image texture.
-    //		var chessBoardBackground:Image = new Image(AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND));
-    //		public static var backgroundImage:Image= null;//The chess board's backgroud texture;
-    //
-//    public static var backgroundImageRequired:Boolean = false;
-//    public static function get backgroundImage():Image
-//    {
-//        if(!backgroundImageRequired) return null;
-//        return new Image(AssetEmbedsDefault.getTexture_cp_bg(DefaultConstants.IMG_BACK_GROUND));
-//    }
-    BOOL backgroundImageRequired;
-    SPImage *backgroundImage;
-    //Pieces box relevant variables.
-//    public static var piecesBoxRequired:Boolean = false;//For partical chess board game with pieces box component view;
-//    public static var piecesBoxBgImage:Image=null;//The chess pieces box 's backgroud texture;
-    BOOL piecesBoxRequired;
-    SPImage *piecesBoxBgImage;
-    //public static var type:String = null;//TODO:type customize.
+    //Empty
 }
-@property(nonatomic,assign)uint xLines;
-
+//global board config.
++(void)setXlines:(uint)value;
++(uint)xlines;
++(void)setYlines:(uint)value;
++(uint)ylines;
+//board scale
++(void)setXScale:(uint)value;
++(uint)xScale;
++(void)setYScale:(uint)value;
++(uint)yScale;
+//board lattic
++(void)setXOffset:(uint)value;
++(uint)xOffset;
+//board size
++(uint)width;
++(uint)height;
+//board background
++(void)setXAdjust:(uint)value;
++(uint)xAdjust;
++(void)setYAdjust:(uint)value;
++(uint)yAdjust;
+//connex directions
++(void)setHConnex:(BOOL)value;//horizontally connection flag.
++(BOOL)hConnex;
++(void)setVConnex:(BOOL)value;//vertically connection flag.
++(BOOL)vConnex;
++(void)setFdConnex:(BOOL)value;//forward diagonally connection flag.
++(BOOL)fdConnex;
++(void)setBdConnex:(BOOL)value;//backward diagonally connection flag.
++(BOOL)bdConnex;
++(void)setNumConnex:(uint)value;//the number of connex in each direction.
++(uint)numConnex;
+//background image texture.
++(void)setBackgroundImageRequired:(BOOL)value;
++(BOOL)backgroundImageRequired;
++(SPImage *)backgroundImage;
+//Pieces box relevant variables.
+//For partical chess board game with pieces box component view;
++(void)setPiecesBoxRequired:(BOOL)value;
++(BOOL)piecesBoxRequired;
+//The chess pieces box 's backgroud texture;
++(void)setPiecesBoxBgImage:(SPImage *)value;
++(SPImage *)piecesBoxBgImage;
+//TODO:type customize.
++(void)setType:(NSString *)value;
++(NSString *)type;
 @end

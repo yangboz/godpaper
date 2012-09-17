@@ -15,6 +15,7 @@
 		A41103D315DBDB7900CCD0DE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A41103D215DBDB7900CCD0DE /* libz.dylib */; };
 		A41103D515DBDB9100CCD0DE /* libSparrow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A41103D415DBDB9100CCD0DE /* libSparrow.a */; };
 		A41103D815DBDBEA00CCD0DE /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = A41103D715DBDBEA00CCD0DE /* Game.m */; };
+		A4114B9B160620260054F668 /* GP_BoardConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A4114B9A160620260054F668 /* GP_BoardConfig.m */; };
 		A46440C515E686D3001D6308 /* GP_ArrayedStackIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A46440C415E686D3001D6308 /* GP_ArrayedStackIterator.m */; };
 		A4E981F115EE689500B444B9 /* GP_ChessBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E981F015EE689500B444B9 /* GP_ChessBoard.m */; };
 		A4EAD27015E86FD20019768C /* GP_FlexGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EAD26F15E86FD20019768C /* GP_FlexGlobals.m */; };
@@ -104,6 +105,8 @@
 		A41103D415DBDB9100CCD0DE /* libSparrow.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSparrow.a; path = "../../../../Documents/GitHub/Sparrow13/sparrow/src/build/Release-iphoneos/libSparrow.a"; sourceTree = "<group>"; };
 		A41103D615DBDBEA00CCD0DE /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		A41103D715DBDBEA00CCD0DE /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		A4114B99160620260054F668 /* GP_BoardConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_BoardConfig.h; sourceTree = "<group>"; };
+		A4114B9A160620260054F668 /* GP_BoardConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_BoardConfig.m; sourceTree = "<group>"; };
 		A46440C315E686D3001D6308 /* GP_ArrayedStackIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_ArrayedStackIterator.h; sourceTree = "<group>"; };
 		A46440C415E686D3001D6308 /* GP_ArrayedStackIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_ArrayedStackIterator.m; sourceTree = "<group>"; };
 		A4E981EF15EE689500B444B9 /* GP_ChessBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_ChessBoard.h; sourceTree = "<group>"; };
@@ -250,6 +253,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A4114B9816061F680054F668 /* configs */ = {
+			isa = PBXGroup;
+			children = (
+				A4114B99160620260054F668 /* GP_BoardConfig.h */,
+				A4114B9A160620260054F668 /* GP_BoardConfig.m */,
+			);
+			name = configs;
+			sourceTree = "<group>";
+		};
 		A4EAD27715E920BB0019768C /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +366,7 @@
 		A4EDDD3615DD1F71009CFD0E /* obj-c */ = {
 			isa = PBXGroup;
 			children = (
+				A4114B9816061F680054F668 /* configs */,
 				A4EFF8FB15EBC2C8002B22DE /* utils */,
 				A4EAD27715E920BB0019768C /* views */,
 				A4EDDD3715DD1F82009CFD0E /* core */,
@@ -729,6 +742,7 @@
 				A4EFF90815EBC8CE002B22DE /* UIImageWithBuffer.m in Sources */,
 				A4E981F115EE689500B444B9 /* GP_ChessBoard.m in Sources */,
 				A4EEA48315FF879600B11319 /* RootViewController.m in Sources */,
+				A4114B9B160620260054F668 /* GP_BoardConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
