@@ -350,6 +350,7 @@ package
 			BoardConfig.fdConnex=true; //enable the forward connection.
 			BoardConfig.bdConnex=true; //enable the backward connection.
 			BoardConfig.numConnex=3; //the number of connection.
+			BoardConfig.type = DefaultConstants.CHESS_BOARD_TYPE_CHECKERING;//the type of chess board.(checkering,intersection,segament,fractal...)
 			//Customize starling texture sample:
 //			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 //			BoardConfig.backgroundImage = new Image(texture);

@@ -88,9 +88,10 @@ package com.godpaper.as3.consts
 		public static const SCREEN_HANDSHAKE:String = "screen_handshake";
 		public static const SCREEN_SETTINGS:String = "screen_settings";
 		//Chess board type
-		public static const CHESS_BOARD_TYPE_GRID:String = "ChessBoardType::grid";
-		public static const CHESS_BOARD_TYPE_POINT:String = "ChessBoardType::point";
-		public static const CHESS_BOARD_TYPE_CANVAS:String = "ChessBoardType::canvas";
+		public static const CHESS_BOARD_TYPE_INTERSECTION:String = "ChessBoardType::intersection";//point of intersection
+		public static const CHESS_BOARD_TYPE_CHECKERING:String = "ChessBoardType::checkering";//mark into squares or draw squares on; draw crossed lines on
+		public static const CHESS_BOARD_TYPE_SEGMENT:String = "ChessBoardType::segament";//section of line
+		public static const CHESS_BOARD_TYPE_FRACTAL:String = "ChessBoardType::fractal";//mathematical fractal
 		//Locale languages
 		public static const LOCALE_LANG_ZH_CN:String = "zh_CN";
 		public static const LOCALE_LANG_EN_US:String = "en_US";

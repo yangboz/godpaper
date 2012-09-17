@@ -70,7 +70,7 @@ package com.godpaper.as3.configs
 		//Pieces box relevant variables.
 		public static var piecesBoxRequired:Boolean = false;//For partical chess board game with pieces box component view;
 		public static var piecesBoxBgImage:Image=null;//The chess pieces box 's backgroud texture;
-		//public static var type:String = null;//TODO:type customize.
+		public static var type:String = DefaultConstants.CHESS_BOARD_TYPE_INTERSECTION;//TODO:type customize.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

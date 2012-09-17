@@ -226,7 +226,8 @@ package com.godpaper.as3.business.factory
 		}
 		/**
 		 * Create the type specialed chess board
-		 * @param type the chess board type(bitBoard,graphBoard,arrayBoard...)
+		 * @param type the chess board type(intersection,checkering,segament,fractal...)
+		 * @param prototype the chess board type(bitBoard,graphBoard,arrayBoard...)
 		 * @return the IChessBoard.
 		 * 
 		 */		
@@ -234,25 +235,35 @@ package com.godpaper.as3.business.factory
 		{
 			//TODO:customzie grid type implementation.
 			var chessBoard:IChessBoard;
-			switch(type)
+//			switch(type)
+//			{
+//				case DefaultConstants.CHESS_BOARD_TYPE_INTERSECTION:
+//					//render the chess board background(default type:grid).
+//					if(BoardConfig.backgroundImage)
+//					{
+//						chessBoard = new ChessBoard(BoardConfig.backgroundImage.texture);
+//					}else
+//					{
+//						chessBoard = new ChessBoard( null );
+//					}
+//					break;
+//				case DefaultConstants.CHESS_BOARD_TYPE_CHECKERING:
+//					break;
+//				case DefaultConstants.CHESS_BOARD_TYPE_SEGMENT:
+//					break;
+//				case DefaultConstants.CHESS_BOARD_TYPE_FRACTAL:
+//					break;
+//				default:
+//					break;
+//			}
+			if(BoardConfig.backgroundImage)
 			{
-				case DefaultConstants.CHESS_BOARD_TYPE_GRID:
-					//render the chess board background(default type:grid).
-					if(BoardConfig.backgroundImage)
-					{
-						chessBoard = new ChessBoard(BoardConfig.backgroundImage.texture);
-					}else
-					{
-						chessBoard = new ChessBoard( null );
-					}
-					break;
-				case DefaultConstants.CHESS_BOARD_TYPE_POINT:
-					break;
-				case DefaultConstants.CHESS_BOARD_TYPE_CANVAS:
-					break;
-				default:
-					break;
+				chessBoard = new ChessBoard(BoardConfig.backgroundImage.texture);
+			}else
+			{
+				chessBoard = new ChessBoard( null );
 			}
+			chessBoard.type = type;
 			return chessBoard;
 		}
 		//--------------------------------------------------------------------------

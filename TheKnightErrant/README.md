@@ -74,6 +74,8 @@ Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 
 15.UCI protocol implementation with FEN string.(Plan)
 
-16.Localizing the application.(Start)
+16.Localizing the application.(Done.More bitmap font required)
 
 17.Fractal board game implementation.(Plan)
+
+18.Chess board type implementation.(Start)
