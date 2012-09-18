@@ -334,10 +334,10 @@ package
 		{
 			//config initialization here.
 			//about chess board:
-			BoardConfig.xLines=3; //
-			BoardConfig.yLines=3; //
-			BoardConfig.xOffset=100; //
-			BoardConfig.yOffset=100; //	
+			BoardConfig.xLines=4; //
+			BoardConfig.yLines=4; //
+			BoardConfig.xOffset=70; //
+			BoardConfig.yOffset=70; //	
 //			BoardConfig.width=300;
 //			BoardConfig.height=300;
 			BoardConfig.xScale=1; //
@@ -360,16 +360,16 @@ package
 			//gasket config:
 			GasketConfig.maxPoolSize=9; //Notices:Object pools full of objects with dangerously stale state are sometimes called object cesspools and regarded as an anti-pattern.
 			GasketConfig.tipsVisible=true; //Gasket label used to debugger.
-			GasketConfig.backgroundAlpha=0.2; //
-			GasketConfig.width=30;
-			GasketConfig.height=30;
+			GasketConfig.backgroundAlpha=0.1; //
+			GasketConfig.width=60;
+			GasketConfig.height=60;
 			//about piece:
 			PieceConfig.factory=ChessFactory_TicTacToe; //your custom chess factory.
 			PieceConfig.maxPoolSizeBlue=5; //What's the number of blue(computer) chess pieces?
 			PieceConfig.maxPoolSizeRed=5; //What's the number of red(human) chess pieces?
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
-			PieceConfig.scaleX=1;
-			PieceConfig.scaleY=1;
+			PieceConfig.scaleX=1.5;
+			PieceConfig.scaleY=1.5;
 			//about plugin:
 			PluginConfig.gameID="dadc1bb72ac7ed7f"; //your custom game related id.
 			PluginConfig.boardID="51c558cd0315f8e7"; //your custom game related board id.

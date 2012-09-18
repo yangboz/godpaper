@@ -7,6 +7,7 @@ package com.godpaper.as3.tasks
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GasketConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessFactory;
 	import com.godpaper.as3.core.IVisualElement;
@@ -79,10 +80,28 @@ package com.godpaper.as3.tasks
 			var className:String = getQualifiedClassName(factory);
 			var implementation:Object = getDefinitionByName(className);
 			var realFactoy:IChessFactory  = new implementation();
-			//create chess gaskets.
-			for(var v:int=0;v<BoardConfig.yLines;v++)
+			//put gaskets by chess board type:
+			var vMax:int;
+			var hMax:int;
+			switch(BoardConfig.type)
 			{
-				for(var h:int=0;h<BoardConfig.xLines;h++)
+				case DefaultConstants.CHESS_BOARD_TYPE_SEGMENT:
+				case DefaultConstants.CHESS_BOARD_TYPE_FRACTAL:
+				case DefaultConstants.CHESS_BOARD_TYPE_INTERSECTION:
+					vMax = BoardConfig.yLines;
+					hMax = BoardConfig.xLines;
+					break;
+				case DefaultConstants.CHESS_BOARD_TYPE_CHECKERING:
+					vMax = BoardConfig.yLines-1;
+					hMax = BoardConfig.xLines-1;
+					break;
+				default:
+					break;
+			}
+			//create chess gaskets.
+			for(var v:int=0;v<vMax;v++)
+			{
+				for(var h:int=0;h<hMax;h++)
 				{
 					//
 					var cGasket:starling.display.DisplayObject = starling.display.DisplayObject(realFactoy.createChessGasket(new Point(h,v)));

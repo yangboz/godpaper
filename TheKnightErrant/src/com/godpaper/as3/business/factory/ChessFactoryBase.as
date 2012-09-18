@@ -174,8 +174,21 @@ package com.godpaper.as3.business.factory
 //			var myChessGasket:ChessGasket=new ChessGasket();
 			var myChessGasket:ChessGasket= ChessGasketsPool.get();
 			myChessGasket.position=position;
-			myChessGasket.x=position.x * BoardConfig.xOffset - myChessGasket.width / 2 + BoardConfig.xAdjust;
-			myChessGasket.y=position.y * BoardConfig.yOffset - myChessGasket.height / 2+ BoardConfig.yAdjust;
+			switch(BoardConfig.type)
+			{
+				case DefaultConstants.CHESS_BOARD_TYPE_SEGMENT:
+				case DefaultConstants.CHESS_BOARD_TYPE_FRACTAL:
+				case DefaultConstants.CHESS_BOARD_TYPE_INTERSECTION:
+					myChessGasket.x=position.x * BoardConfig.xOffset - myChessGasket.width / 2 + BoardConfig.xAdjust;
+					myChessGasket.y=position.y * BoardConfig.yOffset - myChessGasket.height / 2+ BoardConfig.yAdjust;
+					break;
+				case DefaultConstants.CHESS_BOARD_TYPE_CHECKERING:
+					myChessGasket.x=position.x * BoardConfig.xOffset + BoardConfig.xOffset/2 - myChessGasket.width / 2 + BoardConfig.xAdjust;
+					myChessGasket.y=position.y * BoardConfig.yOffset + BoardConfig.yOffset/2- myChessGasket.height / 2 + BoardConfig.yAdjust;
+					break;
+				default:
+					break;
+			}
 			if(GasketConfig.tipsVisible)
 			{
 //				chessGasketTips = position.toString();
