@@ -33,6 +33,8 @@
 //board lattic
 +(void)setXOffset:(uint)value;
 +(uint)xOffset;
++(void)setYOffset:(uint)value;
++(uint)yOffset;
 //board size
 +(uint)width;
 +(uint)height;
