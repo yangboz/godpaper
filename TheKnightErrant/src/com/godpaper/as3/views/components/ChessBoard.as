@@ -250,8 +250,9 @@ package com.godpaper.as3.views.components
 		public function ChessBoard(background:Texture=null)
 		{
 			//Binding to the global configured variables
-			this.xLines = BoardConfig.xLines;
-			this.yLines = BoardConfig.yLines;
+			var typeOfCheckering:Boolean = (BoardConfig.type==DefaultConstants.CHESS_BOARD_TYPE_CHECKERING);
+			this.xLines = typeOfCheckering?(BoardConfig.xLines+1):BoardConfig.xLines;//Chess board type adjust
+			this.yLines = typeOfCheckering?(BoardConfig.yLines+1):BoardConfig.yLines;//Chess board type adjust
 			this.xScale = BoardConfig.xScale;
 			this.yScale = BoardConfig.yScale;
 			this.xOffset = BoardConfig.xOffset;
@@ -350,7 +351,6 @@ package com.godpaper.as3.views.components
 			}
 			shape.graphics.endFill();
 			//But we can draw that shape into a bitmap and then create a texture from that bitmap! 
-
 			var bmpData:BitmapData = new BitmapData(BoardConfig.width, BoardConfig.height, true, 0x0);
 			bmpData.draw(shape);
 			//

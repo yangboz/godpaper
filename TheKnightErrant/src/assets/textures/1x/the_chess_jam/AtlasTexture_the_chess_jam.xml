@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:b3f24d897e03bce6cb913ec130b49168$ -->
+<TextureAtlas imagePath="AtlasTexture_the_chess_jam.png">
+    <SubTexture name="BLUE_BISHOP" x="2" y="2" width="32" height="32"/>
+    <SubTexture name="BLUE_KNIGHT" x="36" y="2" width="32" height="32"/>
+    <SubTexture name="BLUE_MARSHAL" x="70" y="2" width="32" height="32"/>
+    <SubTexture name="BLUE_PAWN" x="2" y="36" width="32" height="32"/>
+    <SubTexture name="BLUE_QUEEN" x="36" y="36" width="32" height="32"/>
+    <SubTexture name="BLUE_ROOK" x="70" y="36" width="32" height="32"/>
+    <SubTexture name="RED_BISHOP" x="2" y="70" width="32" height="32"/>
+    <SubTexture name="RED_KNIGHT" x="36" y="70" width="32" height="32"/>
+    <SubTexture name="RED_MARSHAL" x="70" y="70" width="32" height="32"/>
+    <SubTexture name="RED_PAWN" x="2" y="104" width="32" height="32"/>
+    <SubTexture name="RED_QUEEN" x="36" y="104" width="32" height="32"/>
+    <SubTexture name="RED_ROOK" x="70" y="104" width="32" height="32"/>
+</TextureAtlas>

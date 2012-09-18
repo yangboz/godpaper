@@ -152,7 +152,13 @@ package com.godpaper.as3.business.factory
 			{
 				//simpleChessPiece.enabled = false;
 				//					ChessPiecesModel.getInstance().bluePieces.setBitt(position.y,position.x,true);
-				FlexGlobals.chessPiecesModel[simpleChessPiece.type].setBitt(position.y, position.x, true);
+				if(FlexGlobals.chessPiecesModel[simpleChessPiece.type])
+				{
+					FlexGlobals.chessPiecesModel[simpleChessPiece.type].setBitt(position.y, position.x, true);
+				}else
+				{
+					throw new DefaultErrors(DefaultErrors.UNDEFINED_CHESS_MODEL_VALUE);
+				}
 				//push to blues collection.
 				FlexGlobals.chessPiecesModel.blues.push(simpleChessPiece);
 			}

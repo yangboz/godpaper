@@ -28,8 +28,25 @@ package com.godpaper.as3.configs
 		//
 		//--------------------------------------------------------------------------
 		//global board config.
-		public static var xLines:Number=4;
-		public static var yLines:Number=4;
+		private static var _yLines:Number=4;
+		public static function get yLines():Number
+		{
+			return (BoardConfig.type!=DefaultConstants.CHESS_BOARD_TYPE_CHECKERING)?_yLines:(_yLines-1);
+		}
+		public static function set yLines(value:Number):void
+		{
+			_yLines = value;
+		}
+		//
+		private static var _xLines:Number=4;
+		public static function get xLines():Number
+		{
+			return (BoardConfig.type!=DefaultConstants.CHESS_BOARD_TYPE_CHECKERING)?_xLines:(_xLines-1);
+		}
+		public static function set xLines(value:Number):void
+		{
+			_xLines = value;
+		}
 		//board scale
 		public static var xScale:Number=1;
 		public static var yScale:Number=1;

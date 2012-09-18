@@ -506,13 +506,10 @@ package com.godpaper.as3.views.components
 			var initPoint:Point = dragInitor.position;
 			var chessGasket:ChessGasket = chessGasketModel.gaskets.gett(initPoint.x,initPoint.y) as ChessGasket;
 			var dropTargets:Vector.<ChessGasket> = new  Vector.<ChessGasket>();
-			//Chess board type check.
-			var maxOfXLines:int = (BoardConfig.type!=DefaultConstants.CHESS_BOARD_TYPE_CHECKERING)?BoardConfig.xLines:(BoardConfig.xLines-1);
-			var maxOfYLines:int = (BoardConfig.type!=DefaultConstants.CHESS_BOARD_TYPE_CHECKERING)?BoardConfig.yLines:(BoardConfig.yLines-1);
 			//
-			for(var i:int=0;i<maxOfXLines;i++)
+			for(var i:int=0;i<BoardConfig.xLines;i++)
 			{
-				for(var j:int=0;j<maxOfYLines;j++)
+				for(var j:int=0;j<BoardConfig.yLines;j++)
 				{
 					chessGasket =  chessGasketModel.gaskets.gett(i,j) as ChessGasket;
 					var colliding:Boolean = dragInitor.getBounds(dragInitor.parent).intersects(chessGasket.getBounds(chessGasket.parent));

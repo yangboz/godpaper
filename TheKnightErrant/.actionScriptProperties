@@ -39,15 +39,15 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/SeekFleeTest1.as"/>
     <application path="com/lookbackon/AI/steeringBehavior/tests/Steering.as"/>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/SeekFleeTest1.as"/>
     <application path="The5Elements.as"/>
     <application path="ColorLines.as"/>
-    <application path="The4Seasons.as"/>
     <application path="com/lookbackon/AI/steeringBehavior/tests/Steering2.as"/>
+    <application path="The4Seasons.as"/>
     <application path="ApplicationBase.as"/>
-    <application path="com/lookbackon/AI/steeringBehavior/tests/SeekFleeTest2.as"/>
     <application path="TheSmallChequer.as"/>
+    <application path="com/lookbackon/AI/steeringBehavior/tests/SeekFleeTest2.as"/>
     <application path="com/lookbackon/AI/steeringBehavior/tests/PursueEvadeTest.as"/>
     <application path="com/lookbackon/AI/steeringBehavior/tests/PathTest.as"/>
     <application path="com/lookbackon/AI/steeringBehavior/tests/FlockTest.as"/>
@@ -57,6 +57,7 @@
     <application path="The3Directs.as"/>
     <application path="TwoHitOne.as"/>
     <application path="TigerInBeijing.as"/>
+    <application path="TheChessJam.as"/>
     <application path="com/lookbackon/AI/steeringBehavior/tests/VehicleTest.as"/>
     <application path="com/lookbackon/AI/steeringBehavior/tests/FleeTest.as"/>
     <application path="ChineseChessJam.as"/>

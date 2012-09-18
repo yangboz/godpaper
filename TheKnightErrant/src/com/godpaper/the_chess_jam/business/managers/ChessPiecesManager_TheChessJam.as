@@ -1,110 +1,93 @@
-package com.godpaper.as3.tasks
+/**
+ *  GODPAPER Confidential,Copyright 2012. All rights reserved.
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining
+ *  a copy of this software and associated documentation files (the "Software"),
+ *  to deal in the Software without restriction, including without limitation
+ *  the rights to use, copy, modify, merge, publish, distribute, sub-license,
+ *  and/or sell copies of the Software, and to permit persons to whom the
+ *  Software is furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included
+ *  in all copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ *  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ *  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ *  IN THE SOFTWARE.
+ */
+package com.godpaper.the_chess_jam.business.managers
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.configs.BoardConfig;
-	import com.godpaper.as3.core.FlexGlobals;
-	import com.godpaper.as3.core.IChessFactory;
+	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
 	
-	import flash.geom.Point;
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
 	
-	import starling.display.DisplayObject;
-	
-
 	/**
-	 * CreateChessGasketTask.as class.
+	 * ChessPiecesManager_TheChessJam.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
-	 * @playerVersion 9.0
-	 * Created Nov 30, 2010 11:54:25 AM
+	 * @playerVersion 11.2+
+	 * @airVersion 3.2+
+	 * Created Sep 18, 2012 3:07:17 PM
 	 */   	 
-	public class CreateChessGasketTask extends ChessTaskBase
+	public class ChessPiecesManager_TheChessJam extends ChessPiecesManagerDefault
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CreateChessGasketTask()
+		public function ChessPiecesManager_TheChessJam()
 		{
+			//TODO: implement function
 			super();
-			//Set properties
-			this.label = "CreateChessGasketTask";
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		override protected function performTask():void
-		{
-			var className:String = getQualifiedClassName(factory);
-			var implementation:Object = getDefinitionByName(className);
-			var realFactoy:IChessFactory  = new implementation();
-			//create chess gaskets.
-			for(var v:int=0;v<BoardConfig.yLines;v++)
-			{
-				for(var h:int=0;h<BoardConfig.xLines;h++)
-				{
-					//
-					var cGasket:starling.display.DisplayObject = starling.display.DisplayObject(realFactoy.createChessGasket(new Point(h,v)));
-					if(cGasket)
-					{
-						FlexGlobals.gameStage.addChild( cGasket );
-						//keep this reference to model.
-//						ChessGasketsModel.getInstance().gaskets.sett(h,v,cGasket);
-						FlexGlobals.chessGasketsModel.gaskets.sett(h,v,cGasket);
-					}
-				}
-			}
-//Notice:make sure the plugin uicomponent at the top of game ui.
-			var numChildren:int = FlexGlobals.topLevelApplication.numChildren;
-			FlexGlobals.topLevelApplication.setChildIndex(
-				FlexGlobals.topLevelApplication.pluginUIComponent,
-				numChildren-1
-				);
-			//
-			this.complete();
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 	}
-
+	
 }
-

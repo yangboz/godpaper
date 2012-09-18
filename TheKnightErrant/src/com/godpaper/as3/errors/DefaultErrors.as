@@ -22,6 +22,7 @@ package com.godpaper.as3.errors
 		public static const INITIALIZE_SINGLETON_CLASS:String   = "Singleton class initialized!!!";
 		public static const INVALID_CHESS_VO:String 			= "Invalid chess value object initialized!";
 		public static const INVALID_CHESS_PIECE_INDEX:String 	= "Invalid chess piece index!";
+		public static const UNDEFINED_CHESS_MODEL_VALUE:String 	= "Undefined chess model value!";//TODO:should be dynamic inject variable for chess model.
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor

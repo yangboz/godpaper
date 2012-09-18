@@ -28,7 +28,7 @@ package com.godpaper.as3.model
 		//
 		//--------------------------------------------------------------------------
 		//Singleton instance of ChessPiecesModel;
-		private static var instance:ChessPiecesModel;
+//		private static var instance:ChessPiecesModel;
 		//generation.
 		//obtain reds/blues chess pieces entity.
 		private var _reds:Vector.<ChessPiece>=new Vector.<ChessPiece>();
@@ -47,6 +47,7 @@ package com.godpaper.as3.model
 		private var _redMarshal:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 		private var _redCannon:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 		private var _redPawn:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _redQueen:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 		//blue
 		private var _blue:BitBoard = new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 		private var _blueRook:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
@@ -56,6 +57,7 @@ package com.godpaper.as3.model
 		private var _blueMarshal:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 		private var _blueCannon:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 		private var _bluePawn:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
+		private var _blueQueen:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 		//the current selected chess piece
 		private var _selectedPiece:IChessPiece;
 		//----------------------------------
@@ -366,6 +368,19 @@ package com.godpaper.as3.model
 		}
 		
 		//----------------------------------
+		//  redQueen
+		//----------------------------------
+		public function get RED_QUEEN():BitBoard
+		{
+			return _redQueen;
+		}
+		
+		public function set RED_QUEEN(value:BitBoard):void
+		{
+			_redQueen=value;
+			LOG.info("RED_QUEEN:{0}", value.dump());
+		}
+		//----------------------------------
 		//  blue
 		//----------------------------------
 		public function get BLUE():BitBoard
@@ -477,6 +492,19 @@ package com.godpaper.as3.model
 			LOG.info("BLUE_PAWN:{0}", value.dump());
 		}
 		
+		//----------------------------------
+		//  blueQueen
+		//----------------------------------
+		public function get BLUE_QUEEN():BitBoard
+		{
+			return _blueQueen;
+		}
+		
+		public function set BLUE_QUEEN(value:BitBoard):void
+		{
+			_blueQueen=value;
+			LOG.info("BLUE_QUEEN:{0}", value.dump());
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Methods
