@@ -161,11 +161,11 @@ static NSString *_type;
     return _xAdjust;
 }
 //
-+(void)setXlines:(uint)value
++(void)setXLines:(uint)value
 {
     _xLines = value;
 }
-+(uint)xlines
++(uint)xLines
 {
     return _xLines;
 }
@@ -197,11 +197,11 @@ static NSString *_type;
     return _yAdjust;
 }
 //
-+(void)setYlines:(uint)value
++(void)setYLines:(uint)value
 {
     _yLines = value;
 }
-+(uint)ylines
++(uint)yLines
 {
     return _yLines;
 }

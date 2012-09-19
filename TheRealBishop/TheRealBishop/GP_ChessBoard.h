@@ -49,8 +49,8 @@
     //private static const LOG:ILogger = LogUtil.getLogger(ChessBoard);
     @private
         SPImage *background;
-        NSNumber *yAdjust,*yLines,*yOffset,*yScale;
-        NSNumber *xAdjust,*xLines,*xOffset,*xScale;
+//        uint *yAdjust,*yLines,*yOffset,*yScale;
+//        uint *xAdjust,*xLines,*xOffset,*xScale;
         NSString *_type;
 
 }
@@ -61,5 +61,7 @@
 //--------------------------------------------------------------------------
 //public function ChessBoard(background:Texture=null)
 -(void)ChessBoard:(SPTexture *)background;
-//
+//properties
+
+
 @end

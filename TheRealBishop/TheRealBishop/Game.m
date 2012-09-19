@@ -8,6 +8,7 @@
 
 #import "Game.h"
 #import "SHLine.h"
+#import "GP_ChessBoard.h"
 
 @implementation Game
 
@@ -50,7 +51,10 @@
 
         //add the line to the stage
         [self addChild:line];
-
+        
+        //Chess board test
+        GP_ChessBoard *board = [[GP_ChessBoard alloc] init];
+        [self addChild:board];
     }
     return self;
 }

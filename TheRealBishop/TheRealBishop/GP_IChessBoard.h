@@ -37,60 +37,60 @@
 ////----------------------------------
 //function get yAdjust():Number;
 //function set yAdjust(value:Number):void;
-@property(nonatomic,retain) NSNumber *yAdjust;
+@property(nonatomic,assign) NSNumber *yAdjust;
 ////----------------------------------
 ////  xAdjust(for pixel adjustment at x axis)
 ////----------------------------------
 //function get xAdjust():Number;
 //function set xAdjust(value:Number):void;
-@property(nonatomic,retain) NSNumber *xAdjust;
+@property(nonatomic,assign) uint xAdjust;
 ////----------------------------------
 ////  height(the height of ChessBoard)
 ////----------------------------------
 //function get height():Number;
 //function set height(value:Number):void;
-@property(nonatomic,retain) NSNumber *height;
+@property(nonatomic,assign) uint height;
 ////----------------------------------
 ////  width(the width of ChessBoard)
 ////----------------------------------
 //function get width():Number;
 //function set width(value:Number):void;
-@property(nonatomic,retain) NSNumber *width;
+@property(nonatomic,assign) uint width;
 ////----------------------------------
 ////  yOffset(the lattice of ChessBoard at y axis)
 ////----------------------------------
 //function get yOffset():Number;
 //function set yOffset(value:Number):void;
-@property(nonatomic,retain) NSNumber *yOffset;
+@property(nonatomic,assign) uint yOffset;
 ////----------------------------------
 ////  xOffset(the lattice of ChessBoard at x axis)
 ////----------------------------------
 //function get xOffset():Number;
 //function set xOffset(value:Number):void;
-@property(nonatomic,retain) NSNumber *xOffset;
+@property(nonatomic,assign) uint xOffset;
 ////----------------------------------
 ////  yScale(the scale rate of ChessBoard at y axis)
 ////----------------------------------
 //function get yScale():Number;
 //function set yScale(value:Number):void;
-@property(nonatomic,retain) NSNumber *yScale;
+@property(nonatomic,assign) uint yScale;
 ////----------------------------------
 ////  xScale(the scale rate of ChessBoard at x axis)
 ////----------------------------------
 //function get xScale():Number;
 //function set xScale(value:Number):void;
-@property(nonatomic,retain) NSNumber *xScale;
+@property(nonatomic,assign) uint xScale;
 ////----------------------------------
 ////  yLines(the number of lines displayed on ChessBoard at y axis)
 ////----------------------------------
 //function get yLines():Number;
 //function set yLines(value:Number):void;
-@property(nonatomic,retain) NSNumber *yLines;
+@property(nonatomic,assign) uint yLines;
 ////----------------------------------
 ////  xLines(the number of lines displayed on ChessBoard at x axis)
 ////----------------------------------
 //function get xLines():Number;
 //function set xLines(value:Number):void;
-@property(nonatomic,retain) NSNumber *xLines;
+@property(nonatomic,assign) uint xLines;
 //
 @end

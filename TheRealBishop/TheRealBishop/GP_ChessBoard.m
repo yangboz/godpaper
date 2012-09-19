@@ -7,6 +7,7 @@
 //
 
 #import "GP_ChessBoard.h"
+#import "GP_BoardConfig.h"
 /**
  * A chess board is defined by a number of rows and columns, which may vary for different application levels.   	
  * @author yangboz
@@ -59,7 +60,9 @@
 {
 //    //Binding to the global configured variables
 //    this.xLines = BoardConfig.xLines;
+    self.xLines = [GP_BoardConfig xLines];
 //    this.yLines = BoardConfig.yLines;
+    self.yLines = [GP_BoardConfig yLines];
 //    this.xScale = BoardConfig.xScale;
 //    this.yScale = BoardConfig.yScale;
 //    this.xOffset = BoardConfig.xOffset;
