@@ -56,12 +56,12 @@ package com.godpaper.as3.configs
 		//board size
 		public static function get height():Number
 		{
-			return (BoardConfig.yLines-1)*BoardConfig.yOffset+BoardConfig.yAdjust*2;
+			return _yLines*BoardConfig.yOffset+BoardConfig.yAdjust*2;
 		}
 		//
 		public static function get width():Number
 		{
-			return (BoardConfig.xLines-1)*BoardConfig.xOffset+BoardConfig.xAdjust*2;
+			return _xLines*BoardConfig.xOffset+BoardConfig.xAdjust*2;
 		}
 		//board background
 //		private static var _backGround:Class;

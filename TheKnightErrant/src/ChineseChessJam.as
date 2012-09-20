@@ -136,8 +136,8 @@ package
 			PieceConfig.maxPoolSizeBlue = 16;
 			PieceConfig.maxPoolSizeRed = 16;
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
-			PieceConfig.scaleX = 1;
-			PieceConfig.scaleY = 1;
+			PieceConfig.scaleX = 1.2;
+			PieceConfig.scaleY = 1.2;
 			//about plugin:
 			PluginConfig.gameID = "47de4a85dd3e213a";//your custom game related id.
 			PluginConfig.boardID = "3a460211409897f4";//your custom game related board id.
