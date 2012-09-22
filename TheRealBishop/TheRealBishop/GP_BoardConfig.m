@@ -12,15 +12,15 @@
 //global board config.
 //    public static var xLines:Number=4;
 //    public static var yLines:Number=4;
-static uint _xLines,_yLines;
+static uint _xLines=4,_yLines=4;
 //board scale
 //    public static var xScale:Number=1;
 //    public static var yScale:Number=1;
-static uint _xScale,_yScale;
+static uint _xScale=1,_yScale=1;
 //board lattic
 //    public static var xOffset:Number=50;
 //    public static var yOffset:Number=50;
-static uint _xOffset,_yOffset;
+static uint _xOffset=50,_yOffset=50;
 //board size
 //    public static function get height():Number
 //    {
@@ -38,7 +38,7 @@ static uint _xOffset,_yOffset;
 //board x,y position adjust
 //    public static var xAdjust:Number=50;
 //    public static var yAdjust:Number=50;
-static uint _xAdjust,_yAdjust;
+static uint _xAdjust=50,_yAdjust=50;
 //connex directions
 //    public static var hConnex:Boolean=false; //horizontally connection flag.
 //    public static var vConnex:Boolean=false; //vertically connection flag.

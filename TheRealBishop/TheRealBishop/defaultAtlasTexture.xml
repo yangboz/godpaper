@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:26f5a2df64d1901d45145fb52392c786$ -->
+<TextureAtlas imagePath="defaultAtlasTexture.png">
+    <SubTexture name="BLUE" x="2" y="2" width="35" height="30"/>
+    <SubTexture name="BLUE_ROCK" x="39" y="2" width="50" height="36"/>
+    <SubTexture name="BLUE_STAR" x="91" y="2" width="50" height="41"/>
+    <SubTexture name="ICON_ACCOUNT" x="143" y="2" width="50" height="50"/>
+    <SubTexture name="ICON_COIN" x="195" y="2" width="50" height="50"/>
+    <SubTexture name="ICON_STORE" x="2" y="54" width="50" height="50"/>
+    <SubTexture name="ICON_TOLLGATE_0" x="54" y="54" width="50" height="50"/>
+    <SubTexture name="ICON_TOLLGATE_1" x="106" y="54" width="50" height="50"/>
+    <SubTexture name="ICON_TOLLGATE_2" x="158" y="54" width="50" height="50"/>
+    <SubTexture name="ICON_TOLLGATE_3" x="2" y="106" width="50" height="50"/>
+    <SubTexture name="ICON_TOLLGATE_4" x="54" y="106" width="50" height="50"/>
+    <SubTexture name="RED" x="106" y="106" width="36" height="32"/>
+    <SubTexture name="RED_ROCK" x="144" y="106" width="50" height="36"/>
+    <SubTexture name="RED_STAR" x="196" y="106" width="50" height="41"/>
+    <SubTexture name="en_US" x="2" y="158" width="34" height="18"/>
+    <SubTexture name="ko_KR" x="38" y="158" width="34" height="18"/>
+    <SubTexture name="zh_CN" x="74" y="158" width="34" height="18"/>
+</TextureAtlas>

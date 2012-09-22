@@ -17,6 +17,13 @@
 		A41103D815DBDBEA00CCD0DE /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = A41103D715DBDBEA00CCD0DE /* Game.m */; };
 		A4114B9B160620260054F668 /* GP_BoardConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A4114B9A160620260054F668 /* GP_BoardConfig.m */; };
 		A46440C515E686D3001D6308 /* GP_ArrayedStackIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = A46440C415E686D3001D6308 /* GP_ArrayedStackIterator.m */; };
+		A487EEC9160E107700DC6366 /* defaultAtlasTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A487EEC6160E107700DC6366 /* defaultAtlasTexture.png */; };
+		A487EECA160E107700DC6366 /* defaultAtlasTexture.xml in Resources */ = {isa = PBXBuildFile; fileRef = A487EEC7160E107700DC6366 /* defaultAtlasTexture.xml */; };
+		A487EECB160E107700DC6366 /* DefaultTexture1x.tps in Resources */ = {isa = PBXBuildFile; fileRef = A487EEC8160E107700DC6366 /* DefaultTexture1x.tps */; };
+		A487EED0160E10C700DC6366 /* AtlasTexture_chinese_chess_jam.png in Resources */ = {isa = PBXBuildFile; fileRef = A487EECC160E10C700DC6366 /* AtlasTexture_chinese_chess_jam.png */; };
+		A487EED1160E10C700DC6366 /* AtlasTexture_chinese_chess_jam.xml in Resources */ = {isa = PBXBuildFile; fileRef = A487EECD160E10C700DC6366 /* AtlasTexture_chinese_chess_jam.xml */; };
+		A487EED2160E10C700DC6366 /* background_chinese_chess_jam.png in Resources */ = {isa = PBXBuildFile; fileRef = A487EECE160E10C700DC6366 /* background_chinese_chess_jam.png */; };
+		A487EED3160E10C700DC6366 /* Texture1x_chinese_chess_jam.tps in Resources */ = {isa = PBXBuildFile; fileRef = A487EECF160E10C700DC6366 /* Texture1x_chinese_chess_jam.tps */; };
 		A4E981F115EE689500B444B9 /* GP_ChessBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E981F015EE689500B444B9 /* GP_ChessBoard.m */; };
 		A4EAD27015E86FD20019768C /* GP_FlexGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EAD26F15E86FD20019768C /* GP_FlexGlobals.m */; };
 		A4EAD27415E8DBE00019768C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A4EAD27315E8DBE00019768C /* README.md */; };
@@ -109,8 +116,16 @@
 		A4114B9A160620260054F668 /* GP_BoardConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_BoardConfig.m; sourceTree = "<group>"; };
 		A46440C315E686D3001D6308 /* GP_ArrayedStackIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_ArrayedStackIterator.h; sourceTree = "<group>"; };
 		A46440C415E686D3001D6308 /* GP_ArrayedStackIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_ArrayedStackIterator.m; sourceTree = "<group>"; };
+		A487EEC6160E107700DC6366 /* defaultAtlasTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultAtlasTexture.png; sourceTree = "<group>"; };
+		A487EEC7160E107700DC6366 /* defaultAtlasTexture.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = defaultAtlasTexture.xml; sourceTree = "<group>"; };
+		A487EEC8160E107700DC6366 /* DefaultTexture1x.tps */ = {isa = PBXFileReference; lastKnownFileType = file; path = DefaultTexture1x.tps; sourceTree = "<group>"; };
+		A487EECC160E10C700DC6366 /* AtlasTexture_chinese_chess_jam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AtlasTexture_chinese_chess_jam.png; sourceTree = "<group>"; };
+		A487EECD160E10C700DC6366 /* AtlasTexture_chinese_chess_jam.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AtlasTexture_chinese_chess_jam.xml; sourceTree = "<group>"; };
+		A487EECE160E10C700DC6366 /* background_chinese_chess_jam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_chinese_chess_jam.png; sourceTree = "<group>"; };
+		A487EECF160E10C700DC6366 /* Texture1x_chinese_chess_jam.tps */ = {isa = PBXFileReference; lastKnownFileType = file; path = Texture1x_chinese_chess_jam.tps; sourceTree = "<group>"; };
 		A4E981EF15EE689500B444B9 /* GP_ChessBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_ChessBoard.h; sourceTree = "<group>"; };
 		A4E981F015EE689500B444B9 /* GP_ChessBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_ChessBoard.m; sourceTree = "<group>"; };
+		A4EAB956160D6A3900BDDBFF /* GP_DefaultConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_DefaultConstants.h; sourceTree = "<group>"; };
 		A4EAD26E15E86FD10019768C /* GP_FlexGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_FlexGlobals.h; sourceTree = "<group>"; };
 		A4EAD26F15E86FD20019768C /* GP_FlexGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GP_FlexGlobals.m; sourceTree = "<group>"; };
 		A4EAD27115E870420019768C /* GP_IChessFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GP_IChessFactory.h; sourceTree = "<group>"; };
@@ -262,6 +277,68 @@
 			name = configs;
 			sourceTree = "<group>";
 		};
+		A487EEC0160E101700DC6366 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				A487EEC1160E102100DC6366 /* textures */,
+			);
+			name = assets;
+			sourceTree = "<group>";
+		};
+		A487EEC1160E102100DC6366 /* textures */ = {
+			isa = PBXGroup;
+			children = (
+				A487EEC3160E102D00DC6366 /* 2x */,
+				A487EEC2160E102800DC6366 /* 1x */,
+			);
+			name = textures;
+			sourceTree = "<group>";
+		};
+		A487EEC2160E102800DC6366 /* 1x */ = {
+			isa = PBXGroup;
+			children = (
+				A487EEC6160E107700DC6366 /* defaultAtlasTexture.png */,
+				A487EEC7160E107700DC6366 /* defaultAtlasTexture.xml */,
+				A487EEC8160E107700DC6366 /* DefaultTexture1x.tps */,
+				A487EEC4160E103500DC6366 /* chinese_chess_jam */,
+			);
+			name = 1x;
+			sourceTree = "<group>";
+		};
+		A487EEC3160E102D00DC6366 /* 2x */ = {
+			isa = PBXGroup;
+			children = (
+				A487EEC5160E103E00DC6366 /* chinese_chess_jam */,
+			);
+			name = 2x;
+			sourceTree = "<group>";
+		};
+		A487EEC4160E103500DC6366 /* chinese_chess_jam */ = {
+			isa = PBXGroup;
+			children = (
+				A487EECC160E10C700DC6366 /* AtlasTexture_chinese_chess_jam.png */,
+				A487EECD160E10C700DC6366 /* AtlasTexture_chinese_chess_jam.xml */,
+				A487EECE160E10C700DC6366 /* background_chinese_chess_jam.png */,
+				A487EECF160E10C700DC6366 /* Texture1x_chinese_chess_jam.tps */,
+			);
+			name = chinese_chess_jam;
+			sourceTree = "<group>";
+		};
+		A487EEC5160E103E00DC6366 /* chinese_chess_jam */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = chinese_chess_jam;
+			sourceTree = "<group>";
+		};
+		A4EAB955160D694300BDDBFF /* consts */ = {
+			isa = PBXGroup;
+			children = (
+				A4EAB956160D6A3900BDDBFF /* GP_DefaultConstants.h */,
+			);
+			name = consts;
+			sourceTree = "<group>";
+		};
 		A4EAD27715E920BB0019768C /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +443,7 @@
 		A4EDDD3615DD1F71009CFD0E /* obj-c */ = {
 			isa = PBXGroup;
 			children = (
+				A4EAB955160D694300BDDBFF /* consts */,
 				A4114B9816061F680054F668 /* configs */,
 				A4EFF8FB15EBC2C8002B22DE /* utils */,
 				A4EAD27715E920BB0019768C /* views */,
@@ -460,6 +538,7 @@
 		A4F0D01115D154B10034FF28 /* TheRealBishop */ = {
 			isa = PBXGroup;
 			children = (
+				A487EEC0160E101700DC6366 /* assets */,
 				A4EDDD3415DD1F5C009CFD0E /* com */,
 				A4F0D01215D154B10034FF28 /* Supporting Files */,
 				A41103D615DBDBEA00CCD0DE /* Game.h */,
@@ -666,6 +745,13 @@
 			files = (
 				A4F0D01615D154B10034FF28 /* InfoPlist.strings in Resources */,
 				A4EAD27415E8DBE00019768C /* README.md in Resources */,
+				A487EEC9160E107700DC6366 /* defaultAtlasTexture.png in Resources */,
+				A487EECA160E107700DC6366 /* defaultAtlasTexture.xml in Resources */,
+				A487EECB160E107700DC6366 /* DefaultTexture1x.tps in Resources */,
+				A487EED0160E10C700DC6366 /* AtlasTexture_chinese_chess_jam.png in Resources */,
+				A487EED1160E10C700DC6366 /* AtlasTexture_chinese_chess_jam.xml in Resources */,
+				A487EED2160E10C700DC6366 /* background_chinese_chess_jam.png in Resources */,
+				A487EED3160E10C700DC6366 /* Texture1x_chinese_chess_jam.tps in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

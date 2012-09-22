@@ -8,6 +8,9 @@
 
 #import "GP_ChessBoard.h"
 #import "GP_BoardConfig.h"
+#import "SPQuad.h"
+#import "SHLine.h"
+#import "GP_DefaultConstants.h"
 /**
  * A chess board is defined by a number of rows and columns, which may vary for different application levels.   	
  * @author yangboz
@@ -58,12 +61,19 @@
 //public function ChessBoard(background:Texture=null)
 -(void)ChessBoard:(SPTexture *)background
 {
-//    //Binding to the global configured variables
+    //Binding to the global configured variables
+//    var typeOfCheckering:Boolean = (BoardConfig.type==DefaultConstants.CHESS_BOARD_TYPE_CHECKERING);
+//    BOOL typeOfCheckering = [[GP_BoardConfig type] isEqualToString:CHESS_BOARD_TYPE_CHECKERING];
+//    this.xLines = typeOfCheckering?(BoardConfig.xLines+1):BoardConfig.xLines;//Chess board type adjust
+//    self.xLines = typeOfCheckering?([GP_BoardConfig xLines]+1):[GP_BoardConfig xLines];
+//    this.yLines = typeOfCheckering?(BoardConfig.yLines+1):BoardConfig.yLines;//Chess board type adjust
 //    this.xLines = BoardConfig.xLines;
-    self.xLines = [GP_BoardConfig xLines];
+//    self.xLines = [GP_BoardConfig xLines];
+    self.xLines = 4;
 //    this.yLines = BoardConfig.yLines;
-    self.yLines = [GP_BoardConfig yLines];
-//    this.xScale = BoardConfig.xScale;
+//    self.yLines = [GP_BoardConfig yLines];
+    self.yLines = 4;
+    //    this.xScale = BoardConfig.xScale;
 //    this.yScale = BoardConfig.yScale;
 //    this.xOffset = BoardConfig.xOffset;
 //    this.yOffset = BoardConfig.yOffset;
@@ -76,6 +86,7 @@
 //    super(background);
 //    //
 //    this.touchable = false;
+    self.touchable = NO;
 }
 //--------------------------------------------------------------------------
 //
@@ -96,5 +107,50 @@
 -(void)setType:(NSString *)value
 {
     _type = value;
+}
+//
+-(SPRenderTexture *)getUpStateTexture:(unsigned int)bgColor numberVal:(float)bgAlpha uintVal:(unsigned int)borderColor numberVal:(float)borderAlpha
+{
+    return [super getUpStateTexture:bgColor numberVal:bgAlpha uintVal:borderColor numberVal:borderAlpha];
+    // this is where the code of your game will start. 
+    // in this sample, we add just a simple quad to see 
+    // if it works.
+    SPQuad *quad = [SPQuad quadWithWidth:self.width height:self.height];
+    quad.color = 0x0000ff;
+    quad.x = 0;
+    quad.y = 0;
+    [self addChild:quad];
+
+    //SHLine testing.
+    //initialize a line with a length of 100 pixels and thickness of 5 pixels
+    SHLine *line = [SHLine lineWithLength:100 andThickness:5];
+    
+    //set the start color to red
+    line.startColor = 0xff0000;
+    
+    //set the end color to blue
+    line.endColor = 0x0000ff;
+    
+    //set the start opacity to 75%
+    line.startAlpha = 0.75f;
+    
+    //set the end opacity to 25%
+    line.endAlpha = 0.25f;
+    
+    //set the end destination to the bottom right corner of the screen
+    line.x2 = 320;
+    line.y2 = 480;
+    
+    //initialize another line with the coords (x, y, width, height)
+    SHLine *line2 = [SHLine lineWithCoords:0:480:320:-480];
+    
+    //set the line thickness to 5 pixels
+    line2.thickness = 5;
+    
+    //add the line to the stage
+    [self addChild:line];
+    //
+    SPRenderTexture *texture = [SPRenderTexture textureWithWidth:self.width height:self.height fillColor:0xff0000];
+    return texture;
 }
 @end
