@@ -10,5 +10,11 @@
 #import "Sparrow.h"
 
 @interface Game : SPStage
+{
 
+}
+//Utils
+-(CGFloat) degreesToRadians:(CGFloat) degrees;
+
+-(CGFloat) radiansToDegrees:(CGFloat) radians;
 @end
