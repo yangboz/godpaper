@@ -34,6 +34,8 @@ AS3 Stage3d("Starling"), http://www.sparrow-framework.org
 
 AS3 Stage3d("Starling") Mobile UI components("Foxhole"), https://github.com/joshtynjala/foxhole-starling
 
+AS3 Machine Learning:http://code.google.com/p/as3learning/
+
 #Chess Documents:
 
 GODPAPER, http://www.godpaper.com
