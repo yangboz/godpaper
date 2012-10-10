@@ -19,7 +19,7 @@ package com.godpaper.color_lines.busniess.factory
 	import com.godpaper.as3.utils.MathUtil;
 	import com.godpaper.as3.views.components.ChessPiece;
 	import com.godpaper.color_lines.model.vo.ChessVO_ColorLines;
-	import com.godpaper.color_lines.model.vo.ColorPositionVO;
+	import com.godpaper.as3.model.vos.ColorPositionVO;
 	import com.masterbaboon.AdvancedMath;
 	
 	import flash.display.MovieClip;

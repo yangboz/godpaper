@@ -1,4 +1,25 @@
-package com.godpaper.color_lines.busniess.fsm.states.game
+/**
+ *  GODPAPER Confidential,Copyright 2012. All rights reserved.
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining
+ *  a copy of this software and associated documentation files (the "Software"),
+ *  to deal in the Software without restriction, including without limitation
+ *  the rights to use, copy, modify, merge, publish, distribute, sub-license,
+ *  and/or sell copies of the Software, and to permit persons to whom the
+ *  Software is furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included
+ *  in all copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ *  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ *  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ *  IN THE SOFTWARE.
+ */
+package com.godpaper.barebone.business.fsm.states.game
 {
 	//--------------------------------------------------------------------------
 	//
@@ -14,29 +35,28 @@ package com.godpaper.color_lines.busniess.fsm.states.game
 	import com.godpaper.as3.tasks.CreateChessVoTask;
 	import com.godpaper.as3.utils.MathUtil;
 	import com.godpaper.as3.views.components.ChessPiece;
-	import com.godpaper.color_lines.busniess.factory.ChessFacotryHelper_ColorLines;
-	import com.godpaper.color_lines.busniess.factory.ChessFactory_ColorLines;
-	import com.godpaper.color_lines.busniess.managers.ChessPiecesManager_ColorLines;
-	import com.godpaper.as3.model.vos.ColorPositionVO;
+	import com.godpaper.barebone.business.factory.YourChessFactory;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.masterbaboon.AdvancedMath;
 	
 	import flash.geom.Point;
 	
 	/**
-	 * ColorLinesComputerState.as class.   	
+	 * YourComputerState.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
-	 * @playerVersion 9.0
-	 * Created May 13, 2011 2:38:12 PM
+	 * @playerVersion 11.2+
+	 * @airVersion 3.2+
+	 * Created Oct 10, 2012 1:44:35 PM
 	 */   	 
-	public class ComputerState_ColorLines extends ComputerState
+	public class YourComputerState extends ComputerState
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -58,7 +78,7 @@ package com.godpaper.color_lines.busniess.fsm.states.game
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ComputerState_ColorLines(agent:IAgent, resource:Object, description:String=null)
+		public function YourComputerState(agent:IAgent, resource:Object, description:String=null)
 		{
 			//TODO: implement function
 			super(agent, resource, description);
@@ -78,19 +98,19 @@ package com.godpaper.color_lines.busniess.fsm.states.game
 			conductVO.nextPosition = blue0.position;
 			GameConfig.chessPieceManager.applyMove(conductVO);
 			//reset this number of pieces and colors.
-			ChessFactory_ColorLines.dataProvider = ChessFacotryHelper_ColorLines.randomColorfulPieces();
+//			YourChessFactory.dataProvider = ChessFacotryHelper_ColorLines.randomColorfulPieces();
 			//mark indicators
 			//FIXME: with invalid implmementation.
 			var mark:String = "Next: ";
-			for(var i:int=0;i<ChessFactory_ColorLines.dataProvider.length;i++)
+			for(var i:int=0;i<YourChessFactory.dataProvider.length;i++)
 			{
-				mark = mark.concat(ChessFactory_ColorLines.dataProvider[i].color," , ");
+				mark = mark.concat(YourChessFactory.dataProvider[i].color," , ");
 			}
-//			Application.application.nextColorsLabel.text = mark;
+			//			Application.application.nextColorsLabel.text = mark;
 			//According to the color lines rule,just append 3 pieces on the board.
 			var task:SequenceTask = new SequenceTask();
-			var createChessPieceTask:CreateChessPieceTask = new  CreateChessPieceTask(ChessFactory_ColorLines);
-			var createChessVoTask:CreateChessVoTask = new CreateChessVoTask(ChessFactory_ColorLines);
+			var createChessPieceTask:CreateChessPieceTask = new  CreateChessPieceTask(YourChessFactory);
+			var createChessVoTask:CreateChessVoTask = new CreateChessVoTask(YourChessFactory);
 			task.addChild(createChessPieceTask);
 			task.addChild(createChessVoTask);
 			task.start();

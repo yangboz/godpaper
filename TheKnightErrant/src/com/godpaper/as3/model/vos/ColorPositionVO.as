@@ -1,122 +1,73 @@
-package com.godpaper.as3.utils
+package com.godpaper.as3.model.vos
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import flash.utils.Proxy;
-	import flash.utils.flash_proxy;
-
+	
+	import flash.geom.Point;
+	
+	import mx.utils.ObjectUtil;
+	
+	
 	/**
-	 * ProxyArray.as class with num/obj sum and clear dynamic functions support.
+	 * A common model value object with color and position values.  	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
-	 * Created Jun 10, 2011 10:45:38 AM
-	 * @see http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/utils/Proxy.html
-	 */
-	public dynamic class ProxyArray extends Proxy
-	{
+	 * Created May 20, 2011 10:42:24 AM
+	 */   	 
+	public class ColorPositionVO
+	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _item:Array;
+		public var color:String;
+		public var position:Point;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ProxyArray(source:Array)
-		{
-			_item=source;
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		//
-		override flash_proxy function callProperty(methodName:*, ... args):*
+		public function toString():String
 		{
-			var res:*;
-			switch (methodName.toString())
-			{
-				case "clear":
-					_item=new Array();
-					break;
-				case "numberSum":
-					var numberSum:Number=0;
-					for each (var i:* in _item)
-					{
-						// ignore non-numeric values
-						if (!isNaN(i))
-						{
-							numberSum+=i;
-						}
-					}
-					res=numberSum;
-					break;
-				case "objectSum":
-					var objectSum:Number=0;
-					for each (var j:* in _item)
-					{
-						// ignore null element
-						if (j!=null)
-						{
-							objectSum++;
-						}
-					}
-					res=objectSum;
-					break;
-				default:
-					res=_item[methodName].apply(_item, args);
-					break;
-			}
-			return res;
+			return ObjectUtil.toString(this);
 		}
-
-		//
-		override flash_proxy function getProperty(name:*):*
-		{
-			return _item[name];
-		}
-
-		//
-		override flash_proxy function setProperty(name:*, value:*):void
-		{
-			_item[name]=value;
-		}
-
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 	}
-
+	
 }
