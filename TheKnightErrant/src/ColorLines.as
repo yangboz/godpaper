@@ -47,7 +47,7 @@ package
 	 * @airVersion 3.2+
 	 * Created Jul 26, 2012 3:20:05 PM
 	 */  
-	[SWF(frameRate="60", width="550", height="550", backgroundColor="0xffffff")]//320×480 for iPhone devices
+	[SWF(frameRate="60", width="500", height="550", backgroundColor="0xffffff")]//320×480 for iPhone devices
 	//	[SWF(frameRate="60", width="384", height="512", backgroundColor="0xffffff")]//384×512 for iPad devices
 	public class ColorLines extends ApplicationBase
 	{		
@@ -123,18 +123,19 @@ package
 			BoardConfig.fdConnex = true;//enable the forward connection.
 			BoardConfig.bdConnex = true;//enable the backward connection.
 			BoardConfig.numConnex = 5;//the number of connection.
+			BoardConfig.type = DefaultConstants.CHESS_BOARD_TYPE_CHECKERING;//the type of chess board.(checkering,intersection,segament,fractal...)
 			//Customize starling texture sample:
 			//			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 			//			BoardConfig.backgroundImage = new Image(texture);
 			//Pieces box config:
-			BoardConfig.piecesBoxRequired = true;
+			BoardConfig.piecesBoxRequired = false;
 			//			BoardConfig.piecesBoxBgImage = null;
 			//gasket config:
 			GasketConfig.maxPoolSize = 9;//Notices:Object pools full of objects with dangerously stale state are sometimes called object cesspools and regarded as an anti-pattern.
 			GasketConfig.tipsVisible = true;
 			GasketConfig.backgroundAlpha = 0.2;
-			GasketConfig.width = 30;
-			GasketConfig.height = 30;
+			GasketConfig.width = 50;
+			GasketConfig.height = 50;
 			//about piece:
 			PieceConfig.factory = ChessFactory_ColorLines;//your custom chess factory.
 			PieceConfig.maxPoolSizeBlue = 5;//What's the number of blue(computer) chess pieces?

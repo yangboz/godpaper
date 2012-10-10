@@ -109,7 +109,7 @@ package
 			BoardConfig.xScale=1;
 			BoardConfig.yScale=1;
 			BoardConfig.xAdjust=50;
-			BoardConfig.yAdjust=50;
+			BoardConfig.yAdjust=30;
 			//for connex
 //			BoardConfig.hConnex = true;//enable the horizontal connection.
 //			BoardConfig.vConnex = true;//enable the vertical connection.
