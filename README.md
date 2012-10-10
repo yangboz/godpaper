@@ -64,9 +64,13 @@ I of course refer here to the constants of the physical world:
 # Screen shots
 
 ![Screenshot of "TicTacToe"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/src/assets/screenshots/tic_tac_toe.jpg)
+
 ![Screenshot of "ChineseChessJam"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/src/assets/screenshots/chinese_chess_jam.jpg)
+
 ![Screenshot of "TheChessJam"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/src/assets/screenshots/the_chess_jam.jpg)
+
 ![Screenshot of "TheBejeweledJam"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/src/assets/screenshots/the_bejewel_jam.jpg)
+
 ![Screenshot of "TwoHitOne"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/src/assets/screenshots/two_hit_one.png)
 
 # Main features
