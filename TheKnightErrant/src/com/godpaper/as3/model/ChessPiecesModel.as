@@ -60,6 +60,11 @@ package com.godpaper.as3.model
 		private var _blueQueen:BitBoard=new BitBoard(BoardConfig.xLines, BoardConfig.yLines);
 		//the current selected chess piece
 		private var _selectedPiece:IChessPiece;
+		//sepecial for jewel stylized chess piece
+		public var BLUE_JEWEL:BitBoard = new BitBoard(BoardConfig.xLines, BoardConfig.yLines); 
+		public var RED_JEWEL:BitBoard = new BitBoard(BoardConfig.xLines, BoardConfig.yLines); 
+		public var YELLOW_JEWEL:BitBoard = new BitBoard(BoardConfig.xLines, BoardConfig.yLines); 
+		public var GREEN_JEWEL:BitBoard = new BitBoard(BoardConfig.xLines, BoardConfig.yLines); 
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

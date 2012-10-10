@@ -99,10 +99,10 @@ package com.godpaper.the_bejeweled_jam.business.factory
 				case "(x=2, y=0)":
 				case "(x=1, y=1)":
 				case "(x=2, y=1)":
-					chessPieceLabel=DefaultPiecesConstants.BLUE.label;
+					chessPieceLabel=DefaultPiecesConstants.RED.label;
 					chessPieceValue=16+int(position.x);
-					chessPieceType=DefaultConstants.BLUE;
-//					chessPieceSubType=DefaultConstants.BLUE_JEWEL;
+//					chessPieceType=DefaultConstants.BLUE;
+					chessPieceType=DefaultConstants.BLUE_JEWEL;
 					break;
 				//about red
 				case "(x=1, y=2)":
@@ -111,7 +111,28 @@ package com.godpaper.the_bejeweled_jam.business.factory
 				case "(x=2, y=3)":
 					chessPieceLabel=DefaultPiecesConstants.RED.label;
 					chessPieceValue=8+int(position.x);
-					chessPieceType=DefaultConstants.RED;
+//					chessPieceType=DefaultConstants.RED;
+					chessPieceType=DefaultConstants.RED_JEWEL;
+					break;
+				//about green
+				case "(x=0, y=0)":
+				case "(x=3, y=0)":
+				case "(x=0, y=1)":
+				case "(x=3, y=1)":
+					chessPieceLabel=DefaultPiecesConstants.RED.label;
+					chessPieceValue=16+int(position.x);
+					//					chessPieceType=DefaultConstants.BLUE;
+					chessPieceType=DefaultConstants.GREEN_JEWEL;
+					break;
+				//about yellow
+				case "(x=0, y=2)":
+				case "(x=3, y=2)":
+				case "(x=0, y=3)":
+				case "(x=3, y=3)":
+					chessPieceLabel=DefaultPiecesConstants.RED.label;
+					chessPieceValue=16+int(position.x);
+					//					chessPieceType=DefaultConstants.BLUE;
+					chessPieceType=DefaultConstants.YELLOW_JEWEL;
 					break;
 				default:
 					return null;

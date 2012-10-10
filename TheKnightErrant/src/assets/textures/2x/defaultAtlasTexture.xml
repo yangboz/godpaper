@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:10ae1811c95105b817bedaccfdd18e18$ -->
+<!-- $TexturePacker:SmartUpdate:9f00900aa4928134d5bc23a29e19d565$ -->
 <TextureAtlas imagePath="defaultAtlasTexture.png">
     <SubTexture name="BLUE" x="2" y="2" width="71" height="59"/>
-    <SubTexture name="BLUE_ROCK" x="75" y="2" width="100" height="71"/>
-    <SubTexture name="BLUE_STAR" x="177" y="2" width="100" height="83"/>
-    <SubTexture name="ICON_ACCOUNT" x="279" y="2" width="100" height="101"/>
-    <SubTexture name="ICON_COIN" x="381" y="2" width="100" height="101"/>
+    <SubTexture name="BLUE_JEWEL" x="75" y="2" width="1" height="1"/>
+    <SubTexture name="BLUE_ROCK" x="78" y="2" width="100" height="71"/>
+    <SubTexture name="BLUE_STAR" x="180" y="2" width="100" height="83"/>
+    <SubTexture name="GREEN_JEWEL" x="75" y="2" width="1" height="1"/>
+    <SubTexture name="ICON_ACCOUNT" x="282" y="2" width="100" height="101"/>
+    <SubTexture name="ICON_COIN" x="384" y="2" width="100" height="101"/>
     <SubTexture name="ICON_STORE" x="2" y="105" width="100" height="101"/>
     <SubTexture name="ICON_TOLLGATE_0" x="104" y="105" width="100" height="101"/>
     <SubTexture name="ICON_TOLLGATE_1" x="206" y="105" width="91" height="90"/>
@@ -14,8 +16,10 @@
     <SubTexture name="ICON_TOLLGATE_3" x="382" y="105" width="91" height="91"/>
     <SubTexture name="ICON_TOLLGATE_4" x="2" y="208" width="99" height="98"/>
     <SubTexture name="RED" x="103" y="208" width="72" height="63"/>
+    <SubTexture name="RED_JEWEL" x="75" y="2" width="1" height="1"/>
     <SubTexture name="RED_ROCK" x="177" y="208" width="100" height="71"/>
     <SubTexture name="RED_STAR" x="279" y="208" width="100" height="83"/>
+    <SubTexture name="YELLOW_JEWEL" x="75" y="2" width="1" height="1"/>
     <SubTexture name="en_US" x="381" y="208" width="34" height="18"/>
     <SubTexture name="ko_KR" x="417" y="208" width="34" height="18"/>
     <SubTexture name="zh_CN" x="453" y="208" width="34" height="18"/>

@@ -50,7 +50,10 @@ package com.godpaper.as3.consts
 		public static const RED:String="RED";
 		public static const RED_ROCK:String="RED_ROCK";
 		public static const RED_STAR:String="RED_STAR";
-		public static const RED_JEWEL:String="BLUE_JEWEL";
+		public static const RED_JEWEL:String="RED_JEWEL";
+		//
+		public static const YELLOW_JEWEL:String="YELLOW_JEWEL";
+		public static const GREEN_JEWEL:String="GREEN_JEWEL";
 		//chess pieces(red) sub type consts
 //		public static const RED_ROOK:String="RED_ROOK";
 //		public static const RED_KNIGHT:String="RED_KNIGHT";

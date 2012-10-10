@@ -30,6 +30,7 @@ package com.godpaper.as3.views.components
 	import com.godpaper.as3.business.fsm.ChessAgent;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
@@ -465,12 +466,26 @@ package com.godpaper.as3.views.components
 			if(this.type==DefaultConstants.RED_JEWEL)
 			{
 				jewel = Jewel.generate(Jewel.FIRE);
-				jewel.size = 50;
+//				jewel.size = 50;
+				jewel.size = (GasketConfig.width >= GasketConfig.height) ? GasketConfig.height : GasketConfig.width;
 			}
 			if(this.type==DefaultConstants.BLUE_JEWEL)
 			{
 				jewel = Jewel.generate(Jewel.WATER);
-				jewel.size = 25;
+//				jewel.size = 25;
+				jewel.size = (GasketConfig.width >= GasketConfig.height) ? GasketConfig.height/2 : GasketConfig.width/2;
+			}
+			if(this.type==DefaultConstants.YELLOW_JEWEL)
+			{
+				jewel = Jewel.generate(Jewel.AIR);
+				//				jewel.size = 25;
+				jewel.size = (GasketConfig.width >= GasketConfig.height) ? GasketConfig.height/1.2 : GasketConfig.width/1.2;
+			}
+			if(this.type==DefaultConstants.GREEN_JEWEL)
+			{
+				jewel = Jewel.generate(Jewel.EARTH);
+				//				jewel.size = 25;
+				jewel.size = (GasketConfig.width >= GasketConfig.height) ? GasketConfig.height/1.6 : GasketConfig.width/1.6;
 			}
 			if(jewel)
 			{
@@ -484,7 +499,13 @@ package com.godpaper.as3.views.components
 			super.x = value;
 			if(jewel)
 			{
-				jewel.x = value;
+				if(BoardConfig.type == DefaultConstants.CHESS_BOARD_TYPE_CHECKERING)
+				{
+					jewel.x = value + GasketConfig.width/2;
+				}else
+				{
+					jewel.x = value;
+				}
 			}
 		}
 		override public function set y(value:Number):void
@@ -492,7 +513,13 @@ package com.godpaper.as3.views.components
 			super.y = value;
 			if(jewel)
 			{
-				jewel.y = value;
+				if(BoardConfig.type == DefaultConstants.CHESS_BOARD_TYPE_CHECKERING)
+				{
+					jewel.y = value +  GasketConfig.height/2;
+				}else
+				{
+					jewel.y = value;
+				}
 			}
 		}
 		//--------------------------------------------------------------------------
