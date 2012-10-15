@@ -81,3 +81,5 @@ Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 17.Fractal board game implementation.(Plan)
 
 18.Chess board type implementation.(Start)
+
+19.Player.IO contest implementation.(Start)
