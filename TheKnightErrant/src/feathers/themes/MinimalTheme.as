@@ -1,4 +1,4 @@
-package feathers.skins
+package feathers.themes
 {
 	import feathers.controls.Button;
 	import feathers.controls.Callout;
@@ -49,6 +49,9 @@ package feathers.skins
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 	import starling.textures.TextureSmoothing;
+	import feathers.skins.IFeathersTheme;
+	import feathers.skins.ImageStateValueSelector;
+	import feathers.skins.Scale9ImageStateValueSelector;
 
 	public class MinimalTheme extends DisplayListWatcher implements IFeathersTheme
 	{

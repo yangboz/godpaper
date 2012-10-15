@@ -1,4 +1,4 @@
-package feathers.skins
+package feathers.themes
 {
 	import feathers.controls.Button;
 	import feathers.controls.Callout;
@@ -40,6 +40,7 @@ package feathers.skins
 	import starling.text.BitmapFont;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
+	import feathers.skins.IFeathersTheme;
 
 	public class AeonDesktopTheme extends DisplayListWatcher implements IFeathersTheme
 	{

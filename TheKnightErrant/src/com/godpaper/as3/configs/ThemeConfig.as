@@ -28,9 +28,10 @@ package com.godpaper.as3.configs
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.core.FlexGlobals;
 	
-	import feathers.skins.AeonDesktopTheme;
-	import feathers.skins.AzureTheme;
-	import feathers.skins.MinimalTheme;
+	import feathers.themes.AeonDesktopTheme;
+	import feathers.themes.AzureTheme;
+	import feathers.themes.MinimalTheme;
+	import feathers.themes.MetalWorksMobileTheme;
 
 	import feathers.skins.IFeathersTheme;
 	/**
@@ -57,6 +58,7 @@ package com.godpaper.as3.configs
 		public static var THEME_MINIMAL:Class = MinimalTheme;
 		public static var THEME_AZURE:Class = AzureTheme;
 		public static var THEME_AEON_DESKTOP:Class = AeonDesktopTheme;
+		public static var THEME_METAL_WORK_MOBILE:Class = MetalWorksMobileTheme;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

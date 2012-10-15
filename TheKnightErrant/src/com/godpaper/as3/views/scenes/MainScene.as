@@ -36,9 +36,9 @@ package com.godpaper.as3.views.scenes
 	import feathers.controls.ScreenNavigator;
 	import feathers.controls.ScreenNavigatorItem;
 	import feathers.motion.transitions.ScreenSlidingStackTransitionManager;
-	import feathers.skins.AzureTheme;
+	import feathers.themes.AzureTheme;
 	import feathers.skins.IFeathersTheme;
-	import feathers.skins.MinimalTheme;
+	import feathers.themes.MinimalTheme;
 	
 	import flash.ui.Mouse;
 	

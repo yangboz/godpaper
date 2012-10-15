@@ -1,4 +1,4 @@
-package feathers.skins
+package feathers.themes
 {
 	import feathers.controls.Button;
 	import feathers.controls.Callout;
@@ -46,6 +46,9 @@ package feathers.skins
 	import starling.text.BitmapFont;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
+	import feathers.skins.IFeathersTheme;
+	import feathers.skins.ImageStateValueSelector;
+	import feathers.skins.Scale9ImageStateValueSelector;
 
 	public class AzureTheme extends DisplayListWatcher implements IFeathersTheme
 	{
