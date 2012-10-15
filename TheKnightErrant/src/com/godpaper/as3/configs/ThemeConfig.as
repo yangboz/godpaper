@@ -28,11 +28,11 @@ package com.godpaper.as3.configs
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.core.FlexGlobals;
 	
-	import org.josht.starling.foxhole.themes.AeonDesktopTheme;
-	import org.josht.starling.foxhole.themes.AzureTheme;
-	import org.josht.starling.foxhole.themes.IFoxholeTheme;
-	import org.josht.starling.foxhole.themes.MinimalTheme;
+	import feathers.skins.AeonDesktopTheme;
+	import feathers.skins.AzureTheme;
+	import feathers.skins.MinimalTheme;
 
+	import feathers.skins.IFeathersTheme;
 	/**
 	 * ThemeConfig.as class.Used to customize the whole application's theme.
 	 * @author yangboz
@@ -49,7 +49,7 @@ package com.godpaper.as3.configs
 		//
 		//--------------------------------------------------------------------------
 		//Keep the one instance.
-		private static var _instance:IFoxholeTheme;
+		private static var _instance:IFeathersTheme;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -79,7 +79,7 @@ package com.godpaper.as3.configs
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		public static function getThemeImpl(...args):IFoxholeTheme
+		public static function getThemeImpl(...args):IFeathersTheme
 		{
 			var themeClass:Class = FlexGlobals.topLevelApplication.themeClass;
 			if(_instance==null) _instance = new themeClass(args[0]);//TODO:more arguments assemble.

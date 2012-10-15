@@ -26,15 +26,17 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	
-	import mx.logging.ILogger;
+	import feathers.controls.Label;
+	import feathers.controls.ProgressBar;
+	import feathers.controls.Screen;
+	import feathers.controls.ScrollContainer;
+	import feathers.controls.Scroller;
+	import feathers.layout.VerticalLayout;
 	
-	import org.josht.starling.foxhole.controls.Label;
-	import org.josht.starling.foxhole.controls.ProgressBar;
-	import org.josht.starling.foxhole.controls.Screen;
-	import org.josht.starling.foxhole.controls.ScrollContainer;
-	import org.josht.starling.foxhole.controls.Scroller;
-	import org.josht.starling.foxhole.layout.VerticalLayout;
-	import org.josht.starling.motion.GTween;
+	import mx.logging.ILogger;
+
+	import feathers.motion.GTween;
+
 	
 	import starling.events.Event;
 	import starling.text.TextField;

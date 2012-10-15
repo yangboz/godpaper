@@ -32,7 +32,9 @@ package com.godpaper.as3.core
 	import com.godpaper.as3.views.screens.GameScreen;
 	import com.lookbackon.AI.FSM.Message;
 	
-	import org.josht.starling.foxhole.controls.ScreenNavigator;
+	import feathers.controls.Screen;
+	import feathers.controls.ScreenNavigator;
+	
 	import org.osflash.signals.Signal;
 	
 	import starling.display.Stage;

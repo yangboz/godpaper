@@ -29,10 +29,10 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	
+	import feathers.controls.Screen;
+	
 	import mx.resources.IResourceManager;
 	import mx.resources.ResourceManager;
-	
-	import org.josht.starling.foxhole.controls.Screen;
 	
 	/**
 	 * ScreenBase.as class. Abstarct the screen with locale resource based implementation.  	

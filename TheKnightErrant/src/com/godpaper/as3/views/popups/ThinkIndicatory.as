@@ -28,10 +28,10 @@ package com.godpaper.as3.views.popups
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.consts.DefaultConstants;
 	
-	import org.josht.starling.foxhole.controls.Label;
-	import org.josht.starling.foxhole.controls.ProgressBar;
-	import org.josht.starling.foxhole.controls.Screen;
-	import org.josht.starling.motion.GTween;
+	import feathers.controls.Label;
+	import feathers.controls.ProgressBar;
+	import feathers.controls.Screen;
+	import feathers.motion.GTween;
 	
 	import starling.events.Event;
 	

@@ -7,9 +7,9 @@ package com.godpaper.as3.configs
 	import com.godpaper.as3.views.popups.HumanWinIndicatory;
 	import com.godpaper.as3.views.popups.ThinkIndicatory;
 	
-	import org.josht.starling.foxhole.controls.Callout;
-	import org.josht.starling.foxhole.controls.popups.CalloutPopUpContentManager;
-	import org.josht.starling.foxhole.core.PopUpManager;
+	import feathers.controls.Callout;
+	import feathers.controls.popups.CalloutPopUpContentManager;
+	import feathers.core.PopUpManager;
 	
 	import starling.display.DisplayObject;
 

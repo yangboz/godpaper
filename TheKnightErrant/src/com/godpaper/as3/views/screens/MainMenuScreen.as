@@ -32,12 +32,12 @@ package com.godpaper.as3.views.screens
 	
 	import flash.geom.Rectangle;
 	
-	import org.josht.starling.foxhole.controls.Button;
-	import org.josht.starling.foxhole.controls.Screen;
-	import org.josht.starling.foxhole.controls.ScreenHeader;
-	import org.josht.starling.foxhole.controls.ScrollContainer;
-	import org.josht.starling.foxhole.controls.Scroller;
-	import org.josht.starling.foxhole.layout.VerticalLayout;
+	import feathers.controls.Button;
+	import feathers.controls.Screen;
+	import feathers.controls.Header;
+	import feathers.controls.ScrollContainer;
+	import feathers.controls.Scroller;
+	import feathers.layout.VerticalLayout;
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
 	
@@ -61,7 +61,7 @@ package com.godpaper.as3.views.screens
 		//--------------------------------------------------------------------------
 		//
 		private var _container:ScrollContainer;
-		private var _header:ScreenHeader;
+		private var _header:Header;
 		//Menu buttons
 		private var _singlePlayButton:Button;
 		private var _multiPlayButton:Button;
@@ -123,7 +123,7 @@ package com.godpaper.as3.views.screens
 			this._settingsButton.label = this.resourceManager.getString(this.bundleName,"BTN_SETTINGS");
 			this._settingsButton.onRelease.add(settingsButton_onRelease);
 			//
-			this._header = new ScreenHeader();
+			this._header = new Header();
 //			this._header.title = "Main Menu";
 			this._header.title = this.resourceManager.getString(this.bundleName,"HEADER_MAIN");
 			this.addChild(this._header);

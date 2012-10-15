@@ -26,34 +26,23 @@ package com.godpaper.as3.views.plugin
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.configs.ThemeConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.as3.views.popups.ThinkIndicatory;
+	
+	import feathers.controls.TabBar;
+	import feathers.data.ListCollection;
+	import feathers.skins.IFeathersTheme;
 	
 	import flash.ui.Mouse;
 	
 	import mx.logging.ILogger;
 	
-	import org.josht.starling.foxhole.controls.Button;
-	import org.josht.starling.foxhole.controls.Callout;
-	import org.josht.starling.foxhole.controls.Label;
-	import org.josht.starling.foxhole.controls.TabBar;
-	import org.josht.starling.foxhole.data.ListCollection;
-	import org.josht.starling.foxhole.themes.AeonDesktopTheme;
-	import org.josht.starling.foxhole.themes.AzureTheme;
-	import org.josht.starling.foxhole.themes.IFoxholeTheme;
-	import org.josht.starling.foxhole.themes.MinimalTheme;
-	
 	import starling.display.Image;
-	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.ResizeEvent;
-	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 	import starling.textures.TextureSmoothing;
 	
@@ -73,7 +62,7 @@ package com.godpaper.as3.views.plugin
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var theme:IFoxholeTheme;
+		private var theme:IFeathersTheme;
 		//
 		private var _icon_avatar:Image;
 		private var _icon_store:Image;

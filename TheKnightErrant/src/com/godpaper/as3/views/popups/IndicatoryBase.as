@@ -29,12 +29,12 @@ package com.godpaper.as3.views.popups
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	
-	import org.josht.starling.foxhole.controls.Screen;
-	import org.josht.starling.foxhole.controls.ScreenHeader;
-	import org.josht.starling.foxhole.controls.ScrollContainer;
-	import org.josht.starling.foxhole.controls.Scroller;
-	import org.josht.starling.foxhole.layout.HorizontalLayout;
-	import org.josht.starling.foxhole.layout.VerticalLayout;
+	import feathers.controls.Header;
+	import feathers.controls.Screen;
+	import feathers.controls.ScrollContainer;
+	import feathers.controls.Scroller;
+	import feathers.layout.HorizontalLayout;
+	import feathers.layout.VerticalLayout;
 	
 	import starling.display.BlendMode;
 	import starling.display.Quad;
@@ -59,7 +59,7 @@ package com.godpaper.as3.views.popups
 		//--------------------------------------------------------------------------
 		protected var hLayout:HorizontalLayout;
 		protected var vLayout:VerticalLayout;
-		protected var _header:ScreenHeader;
+		protected var _header:Header;
 		protected var _container:ScrollContainer;
 		protected var _bgQuad:Quad;
 		//----------------------------------
@@ -125,7 +125,7 @@ package com.godpaper.as3.views.popups
 			//			_background = new Image(texture);
 			//			addChild(_background);
 			//header title
-			this._header = new ScreenHeader();
+			this._header = new Header();
 			this._header.title = "???";
 			this.addChild(this._header);
 			//container

@@ -32,22 +32,22 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	
+	import feathers.controls.Button;
+	import feathers.controls.Header;
+	import feathers.controls.PickerList;
+	import feathers.controls.Screen;
+	import feathers.controls.ScrollContainer;
+	import feathers.controls.Scroller;
+	import feathers.data.ListCollection;
+	import feathers.layout.HorizontalLayout;
+	import feathers.layout.VerticalLayout;
+	
 	import flash.system.Capabilities;
 	
 	import mx.logging.ILogger;
 	import mx.resources.IResourceManager;
 	import mx.resources.ResourceManager;
-	
-	import org.josht.starling.foxhole.controls.Button;
-	import org.josht.starling.foxhole.controls.PickerList;
-	import org.josht.starling.foxhole.controls.Screen;
-	import org.josht.starling.foxhole.controls.ScreenHeader;
-	import org.josht.starling.foxhole.controls.ScrollContainer;
-	import org.josht.starling.foxhole.controls.Scroller;
-	import org.josht.starling.foxhole.data.ListCollection;
-	import org.josht.starling.foxhole.layout.HorizontalLayout;
-	import org.josht.starling.foxhole.layout.VerticalLayout;
-	
+
 	import starling.display.DisplayObject;
 	import starling.text.TextField;
 
@@ -66,7 +66,7 @@ package com.godpaper.as3.views.screens
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _header:ScreenHeader;
+		private var _header:Header;
 		private var _container:ScrollContainer;
 		//
 		private var _button_back:Button;
@@ -178,7 +178,7 @@ package com.godpaper.as3.views.screens
 			this._button_back.label = this.resourceManager.getString(this.bundleName,"BTN_BACK");
 			this._button_back.onRelease.add(backButton_onRelease);
 			//
-			this._header = new ScreenHeader();
+			this._header = new Header();
 //			this._header.title = "Settings";
 			this._header.title = this.resourceManager.getString(this.bundleName,"HEADER_SETTINGS");
 			this.addChild(this._header);

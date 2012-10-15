@@ -45,9 +45,10 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
 	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
 	
+	import feathers.controls.Screen;
+	
 	import mx.logging.ILogger;
 	
-	import org.josht.starling.foxhole.controls.Screen;
 	import org.spicefactory.lib.task.SequentialTaskGroup;
 	
 	import starling.display.DisplayObject;

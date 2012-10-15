@@ -33,19 +33,17 @@ package com.godpaper.as3.views.scenes
 	import com.godpaper.as3.views.screens.SplashScreen;
 	import com.gskinner.motion.easing.Cubic;
 	
+	import feathers.controls.ScreenNavigator;
+	import feathers.controls.ScreenNavigatorItem;
+	import feathers.motion.transitions.ScreenSlidingStackTransitionManager;
+	import feathers.skins.AzureTheme;
+	import feathers.skins.IFeathersTheme;
+	import feathers.skins.MinimalTheme;
+	
 	import flash.ui.Mouse;
 	
 	import mx.core.ClassFactory;
 	import mx.logging.ILogger;
-	
-	import org.josht.starling.foxhole.controls.FPSDisplay;
-	import org.josht.starling.foxhole.controls.ScreenNavigator;
-	import org.josht.starling.foxhole.controls.ScreenNavigatorItem;
-	import org.josht.starling.foxhole.themes.AeonDesktopTheme;
-	import org.josht.starling.foxhole.themes.AzureTheme;
-	import org.josht.starling.foxhole.themes.IFoxholeTheme;
-	import org.josht.starling.foxhole.themes.MinimalTheme;
-	import org.josht.starling.foxhole.transitions.ScreenSlidingStackTransitionManager;
 	
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -72,7 +70,7 @@ package com.godpaper.as3.views.scenes
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _theme:IFoxholeTheme;
+		private var _theme:IFeathersTheme;
 		private var _navigator:ScreenNavigator;
 		private var _transitionManager:ScreenSlidingStackTransitionManager;
 //		private var _fps:FPSDisplay;
