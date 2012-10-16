@@ -1,6 +1,10 @@
 package com.godpaper.as3.model.pools
 {
+	import com.godpaper.as3.configs.GasketConfig;
+	import com.godpaper.as3.core.IChessGasket;
 	import com.godpaper.as3.views.components.ChessGasket;
+	
+	import flash.geom.Point;
 
 	//--------------------------------------------------------------------------
 	//
@@ -70,7 +74,7 @@ package com.godpaper.as3.model.pools
 			
 			pool = new Vector.<ChessGasket>(MAX_VALUE); 
 			while( --i > -1 ) 
-				pool[i] = new ChessGasket(null); 
+				pool[i] = getChessGasket(); 
 		} 
 		//
 		public static function get():ChessGasket 
@@ -80,7 +84,7 @@ package com.godpaper.as3.model.pools
 			
 			var i:uint = GROWTH_VALUE; 
 			while( --i > -1 ) 
-				pool.unshift ( new ChessGasket(null) ); 
+				pool.unshift ( getChessGasket() ); 
 			counter = GROWTH_VALUE; 
 			return get(); 
 			
@@ -102,6 +106,11 @@ package com.godpaper.as3.model.pools
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		private static function getChessGasket():ChessGasket
+		{
+			var Impl:Class = GasketConfig.implement;
+			return new Impl(null,"",null);//upState:Texture=null, text:String="", downState:Texture=null
+		}
 	}
 	
 }

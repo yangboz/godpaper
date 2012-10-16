@@ -1,5 +1,7 @@
 package com.godpaper.as3.configs
 {
+	import com.godpaper.as3.views.components.ChessGasket;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -32,6 +34,8 @@ package com.godpaper.as3.configs
 		//toolTips
 		public static var maxPoolSize:uint=100;//Notice:Object pools full of objects with dangerously stale state are sometimes called object cesspools and regarded as an anti-pattern.
 		public static var tipsVisible:Boolean = false;
+		//Customize implement
+		public static var implement:Class = ChessGasket;//Default,customize shoule override the getUpTexture().
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
