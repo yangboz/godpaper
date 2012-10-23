@@ -310,7 +310,7 @@ package com.godpaper.as3.services
 				//broadcast signal.
 				this.userVoSignal.dispatch(userVO);
 			}
-			if(PostVO.STATE_UPDATE == event.info.message.state)//updateRole
+			if(PostVO.STATE_UPDATE == event.info.message.state)//role update with brevity.
 			{
 				//user vo assemble
 				var postVO:PostVO = new PostVO();

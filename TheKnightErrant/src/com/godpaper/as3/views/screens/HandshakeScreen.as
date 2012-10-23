@@ -215,6 +215,7 @@ package com.godpaper.as3.views.screens
 			this._button_invite = new Button();
 //			this._button_invite.label = "INVITE";
 			this._button_invite.label = this.resourceManager.getString(this.bundleName,"BTN_INVITE");
+			this._button_invite.isEnabled = false;
 			this._form_grouper.addChild(this._button_invite);
 			this._button_invite.onRelease.add(inviteButtonReleaseHandler);
 			//
@@ -292,6 +293,8 @@ package com.godpaper.as3.views.screens
 			_picker_list_items.push(peerID);
 			_picker_list_items.fixed = true;
 			this._picker_list.dataProvider = new ListCollection(_picker_list_items);
+			//enable invite button
+			this._button_invite.isEnabled = true;
 		}
 		//
 		private function conductDisconnectHandler(peerID:String):void
@@ -310,6 +313,8 @@ package com.godpaper.as3.views.screens
 				_response_list.dataProvider = new ListCollection(_response_list_items);
 				this._button_response.isEnabled = Boolean(_response_list_items.length);
 			}
+			//disable invite button,if neccessary.
+			this._button_invite.isEnabled = Boolean(_picker_list_items.length);
 		}
 		//
 		private function conductUserVoHandler(userVO:UserVO):void
