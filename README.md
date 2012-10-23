@@ -128,7 +128,7 @@ Hybrid Models
 # Tutorials
 See:<a href="http://blog.lookbackon.com/?p=2469">http://blog.lookbackon.com/?p=2469</a>
 # Downloads
-Link(TheRealKnight for FLEX4):<a href="http://code.google.com/p/godpaper/downloads/list">http://code.google.com/p/godpaper/downloads/list</a>
+Link(TheRealKnight for FLEX4):<a href="https://github.com/yangboz/godpaper/zipball/master">https://github.com/yangboz/godpaper/zipball/master</a>
 # Q & A 
 See:<a href="http://www.lookbackon.com/qa/">http://www.lookbackon.com/qa/</a>
 # More

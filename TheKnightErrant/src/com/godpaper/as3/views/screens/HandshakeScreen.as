@@ -47,12 +47,12 @@ package com.godpaper.as3.views.screens
 	import feathers.layout.VerticalLayout;
 	import feathers.motion.GTween;
 	
+	import flash.events.Event;
 	import flash.events.TouchEvent;
 	
 	import mx.logging.ILogger;
-
+	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.events.TouchEvent;
 	import starling.text.TextField;
 	
@@ -269,6 +269,8 @@ package com.godpaper.as3.views.screens
 			FlexGlobals.conductService.disconnectSignal.add(conductDisconnectHandler);
 			FlexGlobals.conductService.userVoSignal.add(conductUserVoHandler);
 			FlexGlobals.conductService.postVoSignal.add(conductPostVoHandler);
+			//_response_list selector
+//			this._response_list.addEventListener(Event.CHANGE,responseListChangeHandler);//no more work.
 		}
 		//
 		override protected function draw():void
@@ -327,6 +329,7 @@ package com.godpaper.as3.views.screens
 			}
 //			_response_list_items.fixed = true;
 			_response_list.dataProvider = new ListCollection(_response_list_items);
+			//only select one request from the invite list.
 			this._button_response.isEnabled = Boolean(_response_list_items.length);
 		}
 		//
@@ -351,13 +354,24 @@ package com.godpaper.as3.views.screens
 		//
 		private function responseButtonReleaseHandler(button:Button):void
 		{
-//			FlexGlobals.screenNavigator.showScreen( DefaultConstants.SCREEN_GAME );//Screen swither here.
+			var selectedPeerId:String = (this._response_list.selectedItem==null)?String(this._response_list.dataProvider.data[0]):this._response_list.selectedItem.toString();//if none selection,default index is 0.
+			LOG.info("response index:{0},peerid:{1}",this._response_list.selectedIndex,selectedPeerId);
+			//TODO:Screen swither here with data.
+			//			FlexGlobals.screenNavigator.showScreen( DefaultConstants.SCREEN_GAME );//Screen swither here.
 		}
 		//
 		private function backButton_onRelease(button:Button):void
 		{
 			//Screen swither here.
 			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);
+		}
+		//
+		private function responseListChangeHandler(event:Event):void
+		{
+			var list:List = List( event.currentTarget );
+			LOG.info("response index:{0},peerid:{1}",list.selectedIndex,list.selectedItem);
+			//only select one request from the invite list.
+			this._button_response.isEnabled = true;
 		}
 	}
 	
