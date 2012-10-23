@@ -11,7 +11,7 @@ package com.godpaper.as3.core
 	public interface IChessVO
 	{
 		//for initialization.
-		function initialization(rowIndex:int, colIndex:int,flag:int=0,identifier:String=""):void;
+		function initialization(rowIndex:int, colIndex:int,flag:uint=0,identifier:String=""):void;
 		//spaces occupied by red/blue pieces:
 		function set occupies(value:BitBoard):void;
 		function get occupies():BitBoard;

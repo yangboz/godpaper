@@ -112,7 +112,7 @@ package com.godpaper.as3.business.factory
 		 * @return ChessPiece component with implement IChessPiece or NULL.
 		 *
 		 */
-		public function createChessPiece(position:Point, flag:int=0):IChessPiece
+		public function createChessPiece(position:Point, flag:uint=0):IChessPiece
 		{
 			//avoid duplicate usless components.
 			if (this.chessPieceLabel=="")

@@ -51,7 +51,7 @@ package com.godpaper.the_3_horses.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessVO_The3Horses(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0,identifier:String="")
+		public function ChessVO_The3Horses(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=0,identifier:String="")
 		{
 			super(width, height, rowIndex, colIndex, flag,identifier);
 		}     	
@@ -61,7 +61,7 @@ package com.godpaper.the_3_horses.model.vo
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
 			// - - * - * - -
 			// - - - - - - -

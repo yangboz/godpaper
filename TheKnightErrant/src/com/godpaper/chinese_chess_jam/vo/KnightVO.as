@@ -19,14 +19,14 @@ package com.godpaper.chinese_chess_jam.vo
 		/**
 		 * @inheritDoc
 		 */
-		public function KnightVO(width:int, height:int, rowIndex:int, colIndex:int,flag:int=0,identifier:String="")
+		public function KnightVO(width:int, height:int, rowIndex:int, colIndex:int,flag:uint=0,identifier:String="")
 		{
 			super(width, height, rowIndex, colIndex, flag);
 		}
 		/**
 		 * @inheritDoc
 		 */
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
 			// - * - * -
 			// * - - - *

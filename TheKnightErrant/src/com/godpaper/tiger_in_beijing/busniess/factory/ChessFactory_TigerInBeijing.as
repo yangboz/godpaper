@@ -77,7 +77,7 @@ package com.godpaper.tiger_in_beijing.busniess.factory
 //			return super.createChessGasket(position);
 //		}
 		//
-		override public function createChessPiece(position:Point, flag:int=0):IChessPiece
+		override public function createChessPiece(position:Point, flag:uint=0):IChessPiece
 		{
 			//Your chess piece under construction.
 			//custom define properties.

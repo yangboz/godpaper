@@ -53,7 +53,7 @@ package com.godpaper.the_4_seasons.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessVO_The4Seasons(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0,identifier:String="")
+		public function ChessVO_The4Seasons(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=0,identifier:String="")
 		{
 			super(width, height, rowIndex, colIndex, flag,identifier);
 		}     	
@@ -63,7 +63,7 @@ package com.godpaper.the_4_seasons.model.vo
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
 			//Define chess occupy/move/capture even defend bitboard here.
 			//@see http://www.godpaper.com/godpaper/index.php/四季棋

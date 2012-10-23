@@ -49,7 +49,7 @@ package com.godpaper.the_2_tigers.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessVO_The2Tigers(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0, identifier:String="")
+		public function ChessVO_The2Tigers(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=0, identifier:String="")
 		{
 			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag,identifier);
@@ -60,7 +60,7 @@ package com.godpaper.the_2_tigers.model.vo
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
 			//TODO: implement function
 			//Define chess occupy/move/capture even defend bitboard here.

@@ -25,9 +25,9 @@ package com.godpaper.as3.consts
 		//  CONSTANTS
 		//----------------------------------
 		//about chess pieces' flag
-		public static const FLAG_RED:uint=1<<0;
-		public static const FLAG_BLUE:int=1<<1;
-		public static const FLAG_GREEN:int=1<<2;
+		public static const FLAG_RED:uint=0;//1(000)
+		public static const FLAG_BLUE:uint=1<<0;//2(010)
+		public static const FLAG_GREEN:uint=1<<1;//4(100)
 		//
 		public static const COLOR_RED:String="red"; //below;
 		public static const COLOR_BLUE:String="blue"; //above;

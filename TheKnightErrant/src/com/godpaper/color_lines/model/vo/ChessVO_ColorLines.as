@@ -50,7 +50,7 @@ package com.godpaper.color_lines.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessVO_ColorLines(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0)
+		public function ChessVO_ColorLines(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=0)
 		{
 			super(width, height, rowIndex, colIndex, flag);
 		}     	
@@ -60,7 +60,7 @@ package com.godpaper.color_lines.model.vo
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
 			//TODO: implement function
 			//Define chess occupy/move/capture even defend bitboard here.

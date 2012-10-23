@@ -85,7 +85,7 @@ package com.godpaper.color_lines.busniess.factory
 			return super.createChessGasket(position);
 		}
 		//Full scan this board with matched position.
-		override public function createChessPiece(position:Point, flag:int=0):IChessPiece
+		override public function createChessPiece(position:Point, flag:uint=0):IChessPiece
 		{
 //			trace("chessPieceModel.allPieces:",chessPieceModel.allPieces.dump());
 //			trace("current position is:",position);
@@ -180,7 +180,7 @@ package com.godpaper.color_lines.busniess.factory
 		 * @return ChessPiece component with implement IChessPiece
 		 *
 		 */
-		private function customeCreateChessPiece(position:Point, flag:int=0):IChessPiece
+		private function customeCreateChessPiece(position:Point, flag:uint=0):IChessPiece
 		{
 			//view
 			var simpleChessPiece:ChessPiece = new ChessPiece();

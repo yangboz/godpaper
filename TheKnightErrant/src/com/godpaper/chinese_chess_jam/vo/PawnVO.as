@@ -9,7 +9,7 @@ package com.godpaper.chinese_chess_jam.vo
 	import mx.logging.ILogger;
 
 	/**
-	 *
+	 * 
 	 * @author Knight.zhou
 	 *
 	 */	
@@ -19,19 +19,17 @@ package com.godpaper.chinese_chess_jam.vo
 		/**
 		 * @inheritDoc
 		 */
-		public function PawnVO(width:int, height:int, rowIndex:int, colIndex:int,flag:int=0,identifier:String="")
+		public function PawnVO(width:int, height:int, rowIndex:int, colIndex:int,flag:uint=0,identifier:String="")
 		{
-			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag);
 		}
 		/**
 		 * @inheritDoc
 		 */		
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
 			//* -
 			//* -
-			//TODO: implement function
 			//about occupies.
 			//Notice:serveral admental(兵横向移动问题,兵后退问题)
 			//right or left direction.
@@ -81,9 +79,9 @@ package com.godpaper.chinese_chess_jam.vo
 				this.captures = this.moves.and(chessPiecesModel.redPieces);
 			}
 			//
-			LOG.debug("occupies:{0}",this.occupies.dump());
-			LOG.debug("moves:{0}",this.moves.dump());
-			LOG.debug("captures:{0}",this.captures.dump());
+			LOG.debug("[{0},{1}] occupies:{2}",colIndex,rowIndex,this.occupies.dump());
+			LOG.debug("[{0},{1}] moves:{2}",colIndex,rowIndex,this.moves.dump());
+			LOG.debug("[{0},{1}] captures:{2}",colIndex,rowIndex,this.captures.dump());
 		}
 	}
 }

@@ -66,7 +66,7 @@ package com.godpaper.barebone.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function YourChessVO(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0, identifier:String="")
+		public function YourChessVO(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=0, identifier:String="")
 		{
 			super(width, height, rowIndex, colIndex, flag, identifier);
 		}     	
@@ -75,7 +75,7 @@ package com.godpaper.barebone.model.vo
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
 			//TODO: implement function
 		}

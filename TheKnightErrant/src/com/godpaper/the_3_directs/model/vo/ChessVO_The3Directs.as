@@ -48,7 +48,7 @@ package com.godpaper.the_3_directs.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessVO_The3Directs(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0)
+		public function ChessVO_The3Directs(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=0)
 		{
 			super(width, height, rowIndex, colIndex, flag);
 		}     	
@@ -58,7 +58,7 @@ package com.godpaper.the_3_directs.model.vo
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
 			//Define chess occupy/move/capture even defend bitboard here.
 			//@see http://www.godpaper.com/godpaper/index.php/%E5%B0%8F%E7%A0%96%E6%A0%BC%E6%A3%8B

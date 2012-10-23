@@ -38,7 +38,7 @@ package com.godpaper.as3.core
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		function createChessPiece(position:Point, flag:int=0):IChessPiece;
+		function createChessPiece(position:Point, flag:uint=0):IChessPiece;
 
 		function createChessGasket(position:Point):IChessGasket;
 

@@ -7,6 +7,7 @@ package com.godpaper.chinese_chess_jam.business.factory
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
+	import com.godpaper.as3.views.components.ChessPiece;
 	import com.godpaper.chinese_chess_jam.consts.Constants_ChineseChessJam;
 	import com.godpaper.chinese_chess_jam.consts.PiecesConstants_ChineseChessJam;
 	import com.godpaper.chinese_chess_jam.vo.BishopVO;
@@ -16,7 +17,6 @@ package com.godpaper.chinese_chess_jam.business.factory
 	import com.godpaper.chinese_chess_jam.vo.OfficalVO;
 	import com.godpaper.chinese_chess_jam.vo.PawnVO;
 	import com.godpaper.chinese_chess_jam.vo.RookVO;
-	import com.godpaper.as3.views.components.ChessPiece;
 	
 	import flash.geom.Point;
 	
@@ -74,7 +74,7 @@ package com.godpaper.chinese_chess_jam.business.factory
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function createChessPiece(position:Point, flag:int=0):IChessPiece
+		override public function createChessPiece(position:Point, flag:uint=0):IChessPiece
 		{
 			//switch custom define properties.
 			switch (position.toString())

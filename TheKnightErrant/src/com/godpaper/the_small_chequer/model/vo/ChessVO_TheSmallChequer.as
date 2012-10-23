@@ -48,7 +48,7 @@ package com.godpaper.the_small_chequer.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessVO_TheSmallChequer(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0)
+		public function ChessVO_TheSmallChequer(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=0)
 		{
 			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag);
@@ -59,7 +59,7 @@ package com.godpaper.the_small_chequer.model.vo
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
 			//TODO: implement function
 			//Define chess occupy/move/capture even defend bitboard here.

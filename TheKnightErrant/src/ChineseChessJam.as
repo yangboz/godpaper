@@ -150,11 +150,12 @@ package
 //			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);
 //			LOG.debug("SigletonFactory(cb) test:{0}",FlexGlobals.chessBoardModel.status.dump());
 			//LoggerConfig
-			LoggerConfig.filters = ["com.godpaper.chinese_chess_jam.business.*"];
+//			LoggerConfig.filters = ["com.godpaper.chinese_chess_jam.business.*"];
+			LoggerConfig.filters = ["*"];
 			LoggerConfig.level = LogEventLevel.DEBUG;
-			//PGNs
-			var pgnProxy:PGN_Proxy = new PGN_Proxy();
-			pgnProxy.load("assets/PGNs/N01顺炮横车破直车弃马局(UTF8).PGN");//和合二炮(utf8).PGN//N01顺炮横车破直车弃马局(UTF8).PGN
+			//PGNs testing
+//			var pgnProxy:PGN_Proxy = new PGN_Proxy();
+//			pgnProxy.load("assets/PGNs/N01顺炮横车破直车弃马局(UTF8).PGN");//和合二炮(utf8).PGN//N01顺炮横车破直车弃马局(UTF8).PGN
 		}
 		//--------------------------------------------------------------------------
 		//

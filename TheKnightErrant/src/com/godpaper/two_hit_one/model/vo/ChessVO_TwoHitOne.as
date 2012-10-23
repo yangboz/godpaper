@@ -70,7 +70,7 @@ package com.godpaper.two_hit_one.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessVO_TwoHitOne(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0, identifier:String="")
+		public function ChessVO_TwoHitOne(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=0, identifier:String="")
 		{
 			super(width, height, rowIndex, colIndex, flag, identifier);
 		}     	
@@ -80,7 +80,7 @@ package com.godpaper.two_hit_one.model.vo
 		//
 		//--------------------------------------------------------------------------
 		//
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
 			//@see http://www.godpaper.com/godpaper/index.php/%E5%85%AD%E5%AD%90%E6%A3%8B
 			// *

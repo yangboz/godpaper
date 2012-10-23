@@ -44,6 +44,7 @@ package com.godpaper.as3.impl
 	 *
 	 * @see http://chessprogramming.wikispaces.com/X-ray+Attacks
 	 * @see http://chessprogramming.wikispaces.com/Classical+Approach
+	 * @see http://www.nicolabortignon.com/as3-bitwise-operations/
 	 *
 	 * @author Knight.zhou
 	 *
@@ -86,7 +87,7 @@ package com.godpaper.as3.impl
 		 * @param the flag you wanna set(red is 0,blue is 1).
 		 * @param the identifier of ChessVO.
 		 */		
-		public function AbstractChessVO(width:int, height:int, rowIndex:int, colIndex:int,flag:int=0,identifier:String="")
+		public function AbstractChessVO(width:int, height:int, rowIndex:int, colIndex:int,flag:uint=1,identifier:String="")
 		{
 			//call super.
 			super(width, height);
@@ -188,7 +189,7 @@ package com.godpaper.as3.impl
 		 * @param the identifier of ChessVO.
 		 * @see mx.utils.BitFlagUtil#update
 		 */
-		virtual public function initialization( rowIndex:int, colIndex:int,flag:int=0,identifier:String=""):void
+		virtual public function initialization( rowIndex:int, colIndex:int,flag:uint=0,identifier:String=""):void
 		{
 			//TODO: override function.
 			throw new DefaultErrors(DefaultErrors.INITIALIZE_VIRTUAL_FUNCTION);

@@ -48,7 +48,7 @@ package com.godpaper.tic_tac_toe.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessVO_TicTacToe(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0,identifier:String="")
+		public function ChessVO_TicTacToe(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=0,identifier:String="")
 		{
 			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag,identifier);
@@ -59,7 +59,7 @@ package com.godpaper.tic_tac_toe.model.vo
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
 			//Define chess occupy/move/capture even defend bitboard here.
 			//@see http://www.godpaper.com/godpaper/index.php/%E5%B0%8F%E7%A0%96%E6%A0%BC%E6%A3%8B

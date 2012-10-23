@@ -2,13 +2,13 @@ package com.godpaper.chinese_chess_jam.business.managers
 {
 	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
 	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.chinese_chess_jam.consts.PiecesConstants_ChineseChessJam;
 	import com.godpaper.as3.views.components.ChessGasket;
 	import com.godpaper.as3.views.components.ChessPiece;
+	import com.godpaper.chinese_chess_jam.consts.PiecesConstants_ChineseChessJam;
 	
 	import mx.logging.ILogger;
 
@@ -53,11 +53,13 @@ package com.godpaper.chinese_chess_jam.business.managers
 			//TODO:with roll back function support.
 			var cGasket:ChessGasket=chessGaketsModel.gaskets.gett(conductVO.nextPosition.x, conductVO.nextPosition.y) as ChessGasket;
 //			if (cGasket.numElements >= 1)
-			if (cGasket.numChildren >= 1)
+//			if (cGasket.numChildren >= 1)
+			if (cGasket.chessPiece)
 			{
 				//TODO:chess piece eat off.
 //				var removedPiece:ChessPiece=cGasket.getElementAt(0) as ChessPiece;
-				var removedPiece:ChessPiece=cGasket.getChildAt(0) as ChessPiece;
+//				var removedPiece:ChessPiece=cGasket.getChildAt(0) as ChessPiece;
+				var removedPiece:ChessPiece = cGasket.chessPiece as ChessPiece;
 				LOG.info("Eat Off@{0} target:{1}", cGasket.position.toString(), removedPiece.toString());
 				//
 				currentRemovedPieces.push(removedPiece);

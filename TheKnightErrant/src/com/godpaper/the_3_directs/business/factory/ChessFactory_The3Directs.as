@@ -238,7 +238,7 @@ package com.godpaper.the_3_directs.business.factory
 			//
 			return gasketButton;
 		}
-		override public function createChessPiece(position:Point, flag:int=0):IChessPiece
+		override public function createChessPiece(position:Point, flag:uint=0):IChessPiece
 		{
 			//custom define properties.
 			if(flag==DefaultConstants.FLAG_BLUE)//about blue

@@ -50,7 +50,7 @@ package com.godpaper.the_5_elements.model.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ChessVO_The5Elements(width:int, height:int, rowIndex:int, colIndex:int, flag:int=0)
+		public function ChessVO_The5Elements(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=0)
 		{
 			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag);
@@ -62,7 +62,7 @@ package com.godpaper.the_5_elements.model.vo
 		//
 		//--------------------------------------------------------------------------
 		//
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
 			//@see http://www.godpaper.com/godpaper/index.php/手工五行棋
 			//  *

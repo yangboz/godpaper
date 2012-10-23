@@ -63,7 +63,7 @@ package com.godpaper.the_5_elements.business.factory
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function createChessPiece(position:Point, flag:int=0):IChessPiece
+		override public function createChessPiece(position:Point, flag:uint=0):IChessPiece
 		{
 			//switch custom define properties.
 			switch (position.toString())

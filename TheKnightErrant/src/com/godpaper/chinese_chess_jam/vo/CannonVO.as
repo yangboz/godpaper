@@ -36,7 +36,7 @@ package com.godpaper.chinese_chess_jam.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function CannonVO(width:int, height:int, rowIndex:int, colIndex:int,flag:int=0,identifier:String="")
+		public function CannonVO(width:int, height:int, rowIndex:int, colIndex:int,flag:uint=0,identifier:String="")
 		{
 			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag);
@@ -44,7 +44,7 @@ package com.godpaper.chinese_chess_jam.vo
 		/**
 		 * @inheritDoc
 		 */
-		override public function initialization(rowIndex:int, colIndex:int, flag:int=0, identifier:String=""):void
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
 			// s - *
 			// -
