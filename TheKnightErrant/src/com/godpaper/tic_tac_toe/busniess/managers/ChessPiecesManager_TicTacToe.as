@@ -10,6 +10,7 @@ package com.godpaper.tic_tac_toe.busniess.managers
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.consts.DefaultPiecesConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
@@ -114,12 +115,12 @@ package com.godpaper.tic_tac_toe.busniess.managers
 		//
 		private function sameRedFlag(element:*, index:int, arr:Array):Boolean
 		{
-			return (ChessPiece(element).label.indexOf("+")!=-1);
+			return (ChessPiece(element).label.indexOf(DefaultPiecesConstants.RED.label)!=-1);
 		}
 		//
 		private function sameBlueFlag(element:*, index:int, arr:Array):Boolean
 		{
-			return (ChessPiece(element).label.indexOf("-")!=-1);
+			return (ChessPiece(element).label.indexOf(DefaultPiecesConstants.BLUE.label)!=-1);
 		}
 		//
 		private function patternFunc_RRR(values:Array):Array
