@@ -325,12 +325,17 @@ package com.godpaper.as3.views.screens
 			//@see:https://github.com/joshtynjala/foxhole-starling/wiki/How-to-Use-List
 			if(_response_list_items.indexOf(userVO.shortenPeerId)<0)
 			{
-				_response_list_items.push(userVO.shortenPeerId);
+				_response_list_items.push(userVO.peerID);
 			}
 //			_response_list_items.fixed = true;
 			_response_list.dataProvider = new ListCollection(_response_list_items);
 			//only select one request from the invite list.
 			this._button_response.isEnabled = Boolean(_response_list_items.length);
+			//Screen swither here with data.
+			if(userVO.action == UserVO.ACTION_PLAY)
+			{
+				FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);//Screen swither here.
+			}
 		}
 		//
 		private function conductPostVoHandler(postVO:PostVO):void
@@ -344,9 +349,9 @@ package com.godpaper.as3.views.screens
 			postVO.peerID = FlexGlobals.userModel.hosterPeerId;
 			postVO.roleIndex = FlexGlobals.userModel.hosterRoleIndex;
 			postVO.roleName = FlexGlobals.userModel.hostRoleName;
-			postVO.action = UserVO.ACTION_PLAY;
+			postVO.action = UserVO.ACTION_IDLE;
 			postVO.state = PostVO.STATE_HAND_SHAKE;
-			//
+			//Post message to net group
 			FlexGlobals.conductService.netGroupPost(postVO,this._picker_list.selectedItem.toString());
 			//no more invite request,untill none response.
 //			this._button_invite.isEnabled = false;
@@ -356,8 +361,16 @@ package com.godpaper.as3.views.screens
 		{
 			var selectedPeerId:String = (this._response_list.selectedItem==null)?String(this._response_list.dataProvider.data[0]):this._response_list.selectedItem.toString();//if none selection,default index is 0.
 			LOG.info("response index:{0},peerid:{1}",this._response_list.selectedIndex,selectedPeerId);
-			//TODO:Screen swither here with data.
-			//			FlexGlobals.screenNavigator.showScreen( DefaultConstants.SCREEN_GAME );//Screen swither here.
+			//Post message to net group
+			var postVO:PostVO = new PostVO();
+			postVO.peerID = FlexGlobals.userModel.hosterPeerId;
+			postVO.roleIndex = FlexGlobals.userModel.hosterRoleIndex;
+			postVO.roleName = FlexGlobals.userModel.hostRoleName;
+			postVO.action = UserVO.ACTION_PLAY;
+			postVO.state = PostVO.STATE_ENTRY;
+			FlexGlobals.conductService.netGroupPost(postVO,selectedPeerId);
+			//Screen swither here with data.
+			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);//Screen swither here.
 		}
 		//
 		private function backButton_onRelease(button:Button):void

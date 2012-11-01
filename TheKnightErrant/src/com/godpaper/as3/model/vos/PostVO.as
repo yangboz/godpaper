@@ -34,6 +34,7 @@ package com.godpaper.as3.model.vos
 		public static const STATE_REGISTER:String = "register-user";
 		public static const STATE_UPDATE:String = "update-brevity";
 		public static const STATE_HAND_SHAKE:String = "hand-shake";//invite send and waiting response.
+		public static const STATE_ENTRY:String = "entry-gaming";//entry gaming now.
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

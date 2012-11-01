@@ -331,10 +331,22 @@ package com.godpaper.as3.services
 				userVO2.peerID = event.info.message.peerID;
 				userVO2.roleIndex = event.info.message.roleIndex;
 				userVO2.roleName = event.info.message.roleName;
-				userVO2.action = UserVO.ACTION_PLAY;
+				userVO2.action = UserVO.ACTION_IDLE;
 				//model cache.
 				//broadcast signal.
 				this.userVoSignal.dispatch(userVO2);
+			}
+			if(PostVO.STATE_ENTRY == event.info.message.state)//role hand-shake
+			{
+				//user vo assemble
+				var userVO3:UserVO = new UserVO();
+				userVO3.peerID = event.info.message.peerID;
+				userVO3.roleIndex = event.info.message.roleIndex;
+				userVO3.roleName = event.info.message.roleName;
+				userVO3.action = UserVO.ACTION_PLAY;
+				//model cache.
+				//broadcast signal.
+				this.userVoSignal.dispatch(userVO3);
 			}
 		}
 	}
