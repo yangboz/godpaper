@@ -19,6 +19,7 @@ package starling.utils
     /** A utility class containing methods related to the Matrix class. */
     public class MatrixUtil
     {
+        /** Helper object. */
         private static var sRawData:Vector.<Number> = 
             new <Number>[1, 0, 0, 0,  0, 1, 0, 0,  0, 0, 1, 0,  0, 0, 0, 1];
         
@@ -55,24 +56,38 @@ package starling.utils
             return resultPoint;
         }
         
-        /** Appends a skew transformation to a matrix, with angles in radians. */
+        /** Appends a skew transformation to a matrix (angles in radians). The skew matrix
+         *  has the following form: 
+         *  <pre>
+         *  | cos(skewY)  -sin(skewX)  0 |
+         *  | sin(skewY)   cos(skewX)  0 |
+         *  |     0            0       1 |
+         *  </pre> 
+         */
         public static function skew(matrix:Matrix, skewX:Number, skewY:Number):void
         {
-            var a:Number    = matrix.a;
-            var b:Number    = matrix.b;
-            var c:Number    = matrix.c;
-            var d:Number    = matrix.d;
-            var tx:Number   = matrix.tx;
-            var ty:Number   = matrix.ty;
-            var tanX:Number = Math.tan(skewX);
-            var tanY:Number = Math.tan(skewY);
+            var sinX:Number = Math.sin(skewX);
+            var cosX:Number = Math.cos(skewX);
+            var sinY:Number = Math.sin(skewY);
+            var cosY:Number = Math.cos(skewY);
             
-            matrix.a  = a  +  b * tanX;
-            matrix.b  = b  +  a * tanY;
-            matrix.c  = c  +  d * tanX;
-            matrix.d  = d  +  c * tanY;
-            matrix.tx = tx + ty * tanX;
-            matrix.ty = ty + tx * tanY;
+            matrix.setTo(matrix.a  * cosY - matrix.b  * sinX,
+                         matrix.a  * sinY + matrix.b  * cosX,
+                         matrix.c  * cosY - matrix.d  * sinX,
+                         matrix.c  * sinY + matrix.d  * cosX,
+                         matrix.tx * cosY - matrix.ty * sinX,
+                         matrix.tx * sinY + matrix.ty * cosX);
+        }
+        
+        /** Prepends a matrix to 'base' by multiplying it with another matrix. */
+        public static function prependMatrix(base:Matrix, prep:Matrix):void
+        {
+            base.setTo(base.a * prep.a + base.c * prep.b,
+                       base.b * prep.a + base.d * prep.b,
+                       base.a * prep.c + base.c * prep.d,
+                       base.b * prep.c + base.d * prep.d,
+                       base.tx + base.a * prep.tx + base.c * prep.ty,
+                       base.ty + base.b * prep.tx + base.d * prep.ty);
         }
         
         /** Prepends an incremental translation to a Matrix object. */
@@ -90,7 +105,7 @@ package starling.utils
                          matrix.tx, matrix.ty);
         }
         
-        /** Prepends an incremental rotation to a Matrix3D object. */
+        /** Prepends an incremental rotation to a Matrix object (angle in radians). */
         public static function prependRotation(matrix:Matrix, angle:Number):void
         {
             var sin:Number = Math.sin(angle);
@@ -98,6 +113,28 @@ package starling.utils
             
             matrix.setTo(matrix.a * cos + matrix.c * sin,  matrix.b * cos + matrix.d * sin,
                          matrix.c * cos - matrix.a * sin,  matrix.d * cos - matrix.b * sin,
+                         matrix.tx, matrix.ty);
+        }
+        
+        /** Prepends a skew transformation to a Matrix object (angles in radians). The skew matrix
+         *  has the following form: 
+         *  <pre>
+         *  | cos(skewY)  -sin(skewX)  0 |
+         *  | sin(skewY)   cos(skewX)  0 |
+         *  |     0            0       1 |
+         *  </pre> 
+         */
+        public static function prependSkew(matrix:Matrix, skewX:Number, skewY:Number):void
+        {
+            var sinX:Number = Math.sin(skewX);
+            var cosX:Number = Math.cos(skewX);
+            var sinY:Number = Math.sin(skewY);
+            var cosY:Number = Math.cos(skewY);
+            
+            matrix.setTo(matrix.a * cosY + matrix.c * sinY,
+                         matrix.b * cosY + matrix.d * sinY,
+                         matrix.c * cosX - matrix.a * sinX,
+                         matrix.d * cosX - matrix.b * sinX,
                          matrix.tx, matrix.ty);
         }
     }

@@ -62,6 +62,19 @@ package starling.events
         /** Event type for an animated object that requests to be removed from the juggler. */
         public static const REMOVE_FROM_JUGGLER:String = "removeFromJuggler";
         
+        /** An event type to be utilized in custom events. Not used by Starling right now. */
+        public static const CHANGE:String = "change";
+        /** An event type to be utilized in custom events. Not used by Starling right now. */
+        public static const CANCEL:String = "cancel";
+        /** An event type to be utilized in custom events. Not used by Starling right now. */
+        public static const SCROLL:String = "scroll";
+        /** An event type to be utilized in custom events. Not used by Starling right now. */
+        public static const OPEN:String = "open";
+        /** An event type to be utilized in custom events. Not used by Starling right now. */
+        public static const CLOSE:String = "close";
+        /** An event type to be utilized in custom events. Not used by Starling right now. */
+        public static const SELECT:String = "select";
+        
         private static var sEventPool:Vector.<Event> = new <Event>[];
         
         private var mTarget:EventDispatcher;
@@ -123,6 +136,9 @@ package starling.events
         internal function setCurrentTarget(value:EventDispatcher):void { mCurrentTarget = value; } 
         
         /** @private */
+        internal function setData(value:Object):void { mData = value; }
+        
+        /** @private */
         internal function get stopsPropagation():Boolean { return mStopsPropagation; }
         
         /** @private */
@@ -140,6 +156,7 @@ package starling.events
         /** @private */
         starling_internal static function toPool(event:Event):void
         {
+            event.mData = event.mTarget = event.mCurrentTarget = null;
             sEventPool.push(event);
         }
         

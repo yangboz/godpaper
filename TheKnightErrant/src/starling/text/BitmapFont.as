@@ -53,13 +53,6 @@ package starling.text
      */ 
     public class BitmapFont
     {
-        // embed minimal font
-        [Embed(source="/assets/fonts/mini.fnt", mimeType="application/octet-stream")]
-        private static var MiniXml:Class;
-        
-        [Embed(source = "/assets/fonts/mini.png")]
-        private static var MiniTexture:Class;
-        
         /** Use this constant for the <code>fontSize</code> property of the TextField class to 
          *  render the bitmap font in exactly the size it was created. */ 
         public static const NATIVE_SIZE:int = -1;
@@ -67,9 +60,10 @@ package starling.text
         /** The font name of the embedded minimal bitmap font. Use this e.g. for debug output. */
         public static const MINI:String = "mini";
         
-        private static const CHAR_SPACE:int   = 32;
-        private static const CHAR_TAB:int     =  9;
-        private static const CHAR_NEWLINE:int = 10;
+        private static const CHAR_SPACE:int           = 32;
+        private static const CHAR_TAB:int             =  9;
+        private static const CHAR_NEWLINE:int         = 10;
+        private static const CHAR_CARRIAGE_RETURN:int = 13;
         
         private var mTexture:Texture;
         private var mChars:Dictionary;
@@ -87,8 +81,8 @@ package starling.text
             // if no texture is passed in, we create the minimal, embedded font
             if (texture == null && fontXml == null)
             {
-                texture = Texture.fromBitmap(new MiniTexture());
-                fontXml = XML(new MiniXml());
+                texture = MiniBitmapFont.texture;
+                fontXml = MiniBitmapFont.xml;
             }
             
             mName = "unknown";
@@ -259,7 +253,7 @@ package starling.text
                         var charID:int = text.charCodeAt(i);
                         var char:BitmapChar = getChar(charID);
                         
-                        if (charID == CHAR_NEWLINE)
+                        if (charID == CHAR_NEWLINE || charID == CHAR_CARRIAGE_RETURN)
                         {
                             lineFull = true;
                         }
@@ -285,6 +279,13 @@ package starling.text
                             
                             currentX += char.xAdvance;
                             lastCharID = charID;
+                            
+                            if (currentLine.length == 1)
+                            {
+                                // the first character is not meant to have an xOffset
+                                currentX -= char.xOffset;
+                                charLocation.x -= char.xOffset;
+                            }
                             
                             if (charLocation.x + char.width > containerWidth)
                             {

@@ -10,8 +10,10 @@
 
 package starling.events
 {
+    import starling.core.starling_internal;
     import starling.display.DisplayObject;
-    import starling.display.DisplayObjectContainer;
+    
+    use namespace starling_internal;
     
     /** A TouchEvent is triggered either by touch or mouse input.  
      *  
@@ -56,10 +58,13 @@ package starling.events
         /** Event type for touch or mouse input. */
         public static const TOUCH:String = "touch";
         
-        private var mTouches:Vector.<Touch>;
         private var mShiftKey:Boolean;
         private var mCtrlKey:Boolean;
         private var mTimestamp:Number;
+        private var mVisitedObjects:Vector.<EventDispatcher>;
+        
+        /** Helper object. */
+        private static var sTouches:Vector.<Touch> = new <Touch>[];
         
         /** Creates a new TouchEvent instance. */
         public function TouchEvent(type:String, touches:Vector.<Touch>, shiftKey:Boolean=false, 
@@ -67,10 +72,10 @@ package starling.events
         {
             super(type, bubbles, touches);
             
-            mTouches = touches;
             mShiftKey = shiftKey;
             mCtrlKey = ctrlKey;
             mTimestamp = -1.0;
+            mVisitedObjects = new <EventDispatcher>[];
             
             var numTouches:int=touches.length;
             for (var i:int=0; i<numTouches; ++i)
@@ -78,31 +83,38 @@ package starling.events
                     mTimestamp = touches[i].timestamp;
         }
         
-        /** Returns a list of touches that originated over a certain target. */
-        public function getTouches(target:DisplayObject, phase:String=null):Vector.<Touch>
+        /** Returns a list of touches that originated over a certain target. If you pass a
+         *  'result' vector, the touches will be added to this vector instead of creating a new 
+         *  object. */
+        public function getTouches(target:DisplayObject, phase:String=null,
+                                   result:Vector.<Touch>=null):Vector.<Touch>
         {
-            var touchesFound:Vector.<Touch> = new <Touch>[];
-            var numTouches:int = mTouches.length;
+            if (result == null) result = new <Touch>[];
+            var allTouches:Vector.<Touch> = data as Vector.<Touch>;
+            var numTouches:int = allTouches.length;
             
             for (var i:int=0; i<numTouches; ++i)
             {
-                var touch:Touch = mTouches[i];
-                var correctTarget:Boolean = (touch.target == target) ||
-                    ((target is DisplayObjectContainer) && 
-                     (target as DisplayObjectContainer).contains(touch.target));
+                var touch:Touch = allTouches[i];
+                var correctTarget:Boolean = touch.isTouching(target);
                 var correctPhase:Boolean = (phase == null || phase == touch.phase);
                     
                 if (correctTarget && correctPhase)
-                    touchesFound.push(touch);
+                    result.push(touch);
             }
-            return touchesFound;
+            return result;
         }
         
         /** Returns a touch that originated over a certain target. */
         public function getTouch(target:DisplayObject, phase:String=null):Touch
         {
-            var touchesFound:Vector.<Touch> = getTouches(target, phase);
-            if (touchesFound.length > 0) return touchesFound[0];
+            getTouches(target, phase, sTouches);
+            if (sTouches.length) 
+            {
+                var touch:Touch = sTouches[0];
+                sTouches.length = 0;
+                return touch;
+            }
             else return null;
         }
         
@@ -123,11 +135,41 @@ package starling.events
             }
         }
 
+        // custom dispatching
+        
+        /** @private
+         *  Dispatches the event along a custom bubble chain. During the lifetime of the event,
+         *  each object is visited only once. */
+        starling_internal function dispatch(chain:Vector.<EventDispatcher>):void
+        {
+            if (chain && chain.length)
+            {
+                var chainLength:int = bubbles ? chain.length : 1;
+                var previousTarget:EventDispatcher = target;
+                setTarget(chain[0] as EventDispatcher);
+                
+                for (var i:int=0; i<chainLength; ++i)
+                {
+                    var chainElement:EventDispatcher = chain[i] as EventDispatcher;
+                    if (mVisitedObjects.indexOf(chainElement) == -1)
+                    {
+                        var stopPropagation:Boolean = chainElement.invokeEvent(this);
+                        mVisitedObjects.push(chainElement);
+                        if (stopPropagation) break;
+                    }
+                }
+                
+                setTarget(previousTarget);
+            }
+        }
+        
+        // properties
+        
         /** The time the event occurred (in seconds since application launch). */
         public function get timestamp():Number { return mTimestamp; }
         
         /** All touches that are currently available. */
-        public function get touches():Vector.<Touch> { return mTouches.concat(); }
+        public function get touches():Vector.<Touch> { return (data as Vector.<Touch>).concat(); }
         
         /** Indicates if the shift key was pressed when the event occurred. */
         public function get shiftKey():Boolean { return mShiftKey; }

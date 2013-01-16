@@ -10,6 +10,7 @@
 
 package starling.animation
 {
+    import starling.core.starling_internal;
     import starling.events.Event;
     import starling.events.EventDispatcher;
 
@@ -67,6 +68,12 @@ package starling.animation
             }
         }
         
+        /** Determines if an object has been added to the juggler. */
+        public function contains(object:IAnimatable):Boolean
+        {
+            return mObjects.indexOf(object) != -1;
+        }
+        
         /** Removes an object from the juggler. */
         public function remove(object:IAnimatable):void
         {
@@ -74,33 +81,40 @@ package starling.animation
             
             var dispatcher:EventDispatcher = object as EventDispatcher;
             if (dispatcher) dispatcher.removeEventListener(Event.REMOVE_FROM_JUGGLER, onRemove);
-            
-            for (var i:int=mObjects.length-1; i>=0; --i)
-                if (mObjects[i] == object) 
-                    mObjects.splice(i, 1);
+
+            var index:int = mObjects.indexOf(object);
+            if (index != -1) mObjects[index] = null;
         }
         
         /** Removes all tweens with a certain target. */
         public function removeTweens(target:Object):void
         {
             if (target == null) return;
-            var numObjects:int = mObjects.length;
             
-            for (var i:int=numObjects-1; i>=0; --i)
+            for (var i:int=mObjects.length-1; i>=0; --i)
             {
                 var tween:Tween = mObjects[i] as Tween;
                 if (tween && tween.target == target)
-                    mObjects.splice(i, 1);
+                {
+                    tween.removeEventListener(Event.REMOVE_FROM_JUGGLER, onRemove);
+                    mObjects[i] = null;
+                }
             }
         }
         
         /** Removes all objects at once. */
         public function purge():void
         {
+            // the object vector is not purged right away, because if this method is called 
+            // from an 'advanceTime' call, this would make the loop crash. Instead, the
+            // vector is filled with 'null' values. They will be cleaned up on the next call
+            // to 'advanceTime'.
+            
             for (var i:int=mObjects.length-1; i>=0; --i)
             {
-                var dispatcher:EventDispatcher = mObjects.pop() as EventDispatcher;
+                var dispatcher:EventDispatcher = mObjects[i] as EventDispatcher;
                 if (dispatcher) dispatcher.removeEventListener(Event.REMOVE_FROM_JUGGLER, onRemove);
+                mObjects[i] = null;
             }
         }
         
@@ -116,25 +130,96 @@ package starling.animation
             return delayedCall;
         }
         
+        /** Utilizes a tween to animate the target object over a certain time. Internally, this
+         *  method uses a tween instance (taken from an object pool) that is added to the
+         *  juggler right away. This method provides a convenient alternative for creating 
+         *  and adding a tween manually.
+         *  
+         *  <p>Fill 'properties' with key-value pairs that describe both the 
+         *  tween and the animation target. Here is an example:</p>
+         *  
+         *  <pre>
+         *  juggler.tween(object, 2.0, {
+         *      transition: Transitions.EASE_IN_OUT,
+         *      delay: 20, // -> tween.delay = 20
+         *      x: 50      // -> tween.animate("x", 50)
+         *  });
+         *  </pre> 
+         */
+        public function tween(target:Object, time:Number, properties:Object):void
+        {
+            var tween:Tween = Tween.starling_internal::fromPool(target, time);
+            
+            for (var property:String in properties)
+            {
+                var value:Object = properties[property];
+                
+                if (tween.hasOwnProperty(property))
+                    tween[property] = value;
+                else if (target.hasOwnProperty(property))
+                    tween.animate(property, value as Number);
+                else
+                    throw new ArgumentError("Invalid property: " + property);
+            }
+            
+            tween.addEventListener(Event.REMOVE_FROM_JUGGLER, onPooledTweenComplete);
+            add(tween);
+        }
+        
+        private function onPooledTweenComplete(event:Event):void
+        {
+            Tween.starling_internal::toPool(event.target as Tween);
+        }
+        
         /** Advances all objects by a certain time (in seconds). */
         public function advanceTime(time:Number):void
         {   
-            mElapsedTime += time;
-            if (mObjects.length == 0) return;
-            
-            // since 'advanceTime' could modify the juggler (through a callback), we iterate
-            // over a copy of 'mObjects'.
-            
             var numObjects:int = mObjects.length;
-            var objectCopy:Vector.<IAnimatable> = mObjects.concat();
+            var currentIndex:int = 0;
+            var i:int;
             
-            for (var i:int=0; i<numObjects; ++i)
-                objectCopy[i].advanceTime(time);
+            mElapsedTime += time;
+            if (numObjects == 0) return;
+            
+            // there is a high probability that the "advanceTime" function modifies the list 
+            // of animatables. we must not process new objects right now (they will be processed
+            // in the next frame), and we need to clean up any empty slots in the list.
+            
+            for (i=0; i<numObjects; ++i)
+            {
+                var object:IAnimatable = mObjects[i];
+                if (object)
+                {
+                    // shift objects into empty slots along the way
+                    if (currentIndex != i) 
+                    {
+                        mObjects[currentIndex] = object;
+                        mObjects[i] = null;
+                    }
+                    
+                    object.advanceTime(time);
+                    ++currentIndex;
+                }
+            }
+            
+            if (currentIndex != i)
+            {
+                numObjects = mObjects.length; // count might have changed!
+                
+                while (i < numObjects)
+                    mObjects[int(currentIndex++)] = mObjects[int(i++)];
+                
+                mObjects.length = currentIndex;
+            }
         }
         
         private function onRemove(event:Event):void
         {
             remove(event.target as IAnimatable);
+            
+            var tween:Tween = event.target as Tween;
+            if (tween && tween.isComplete)
+                add(tween.nextTween);
         }
         
         /** The total life time of the juggler. */

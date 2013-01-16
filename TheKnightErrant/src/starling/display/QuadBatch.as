@@ -29,6 +29,8 @@ package starling.display
     import starling.core.starling_internal;
     import starling.errors.MissingContextError;
     import starling.events.Event;
+    import starling.filters.FragmentFilter;
+    import starling.filters.FragmentFilterMode;
     import starling.textures.Texture;
     import starling.textures.TextureSmoothing;
     import starling.utils.MatrixUtil;
@@ -363,21 +365,24 @@ package starling.display
         /** @inheritDoc */
         public override function render(support:RenderSupport, parentAlpha:Number):void
         {
-            support.finishQuadBatch();
-            support.raiseDrawCount();
-            renderCustom(support.mvpMatrix, alpha * parentAlpha, support.blendMode);
+            if (mNumQuads)
+            {
+                support.finishQuadBatch();
+                support.raiseDrawCount();
+                renderCustom(support.mvpMatrix, alpha * parentAlpha, support.blendMode);
+            }
         }
         
         // compilation (for flattened sprites)
         
-        /** Analyses a container object that is made up exclusively of quads (or other containers)
-         *  and creates a vector of QuadBatch objects representing the container. This can be
+        /** Analyses an object that is made up exclusively of quads (or other containers)
+         *  and creates a vector of QuadBatch objects representing it. This can be
          *  used to render the container very efficiently. The 'flatten'-method of the Sprite 
          *  class uses this method internally. */
-        public static function compile(container:DisplayObjectContainer, 
+        public static function compile(object:DisplayObject, 
                                        quadBatches:Vector.<QuadBatch>):void
         {
-            compileObject(container, quadBatches, -1, new Matrix());
+            compileObject(object, quadBatches, -1, new Matrix());
         }
         
         private static function compileObject(object:DisplayObject, 
@@ -385,7 +390,8 @@ package starling.display
                                               quadBatchID:int,
                                               transformationMatrix:Matrix,
                                               alpha:Number=1.0,
-                                              blendMode:String=null):int
+                                              blendMode:String=null,
+                                              ignoreCurrentFilter:Boolean=false):int
         {
             var i:int;
             var quadBatch:QuadBatch;
@@ -395,6 +401,7 @@ package starling.display
             var container:DisplayObjectContainer = object as DisplayObjectContainer;
             var quad:Quad = object as Quad;
             var batch:QuadBatch = object as QuadBatch;
+            var filter:FragmentFilter = object.filter;
             
             if (quadBatchID == -1)
             {
@@ -406,7 +413,24 @@ package starling.display
                 else quadBatches[0].reset();
             }
             
-            if (container)
+            if (filter && !ignoreCurrentFilter)
+            {
+                if (filter.mode == FragmentFilterMode.ABOVE)
+                {
+                    quadBatchID = compileObject(object, quadBatches, quadBatchID,
+                                                transformationMatrix, alpha, blendMode, true);
+                }
+                
+                quadBatchID = compileObject(filter.compile(object), quadBatches, quadBatchID,
+                                            transformationMatrix, alpha, blendMode);
+                
+                if (filter.mode == FragmentFilterMode.BELOW)
+                {
+                    quadBatchID = compileObject(object, quadBatches, quadBatchID,
+                        transformationMatrix, alpha, blendMode, true);
+                }
+            }
+            else if (container)
             {
                 var numChildren:int = container.numChildren;
                 var childMatrix:Matrix = new Matrix();
@@ -497,10 +521,7 @@ package starling.display
             var target:Starling = Starling.current;
             if (target.hasProgram(QUAD_PROGRAM_NAME)) return; // already registered
             
-            // create vertex and fragment programs from assembly
-            var vertexProgramAssembler:AGALMiniAssembler = new AGALMiniAssembler();
-            var fragmentProgramAssembler:AGALMiniAssembler = new AGALMiniAssembler();
-            
+            var assembler:AGALMiniAssembler = new AGALMiniAssembler();
             var vertexProgramCode:String;
             var fragmentProgramCode:String;
             
@@ -522,11 +543,9 @@ package starling.display
             fragmentProgramCode =
                 "mov oc, v0       \n";  // output color
             
-            vertexProgramAssembler.assemble(Context3DProgramType.VERTEX, vertexProgramCode);
-            fragmentProgramAssembler.assemble(Context3DProgramType.FRAGMENT, fragmentProgramCode);
-            
             target.registerProgram(QUAD_PROGRAM_NAME,
-                vertexProgramAssembler.agalcode, fragmentProgramAssembler.agalcode);
+                assembler.assemble(Context3DProgramType.VERTEX, vertexProgramCode),
+                assembler.assemble(Context3DProgramType.FRAGMENT, fragmentProgramCode));
             
             // Image:
             // Each combination of tinted/repeat/mipmap/smoothing has its own fragment shader.
@@ -541,8 +560,6 @@ package starling.display
                     "m44 op, va0, vc1 \n" + // 4x4 matrix transform to output clipspace
                     "mov v1, va2      \n";  // pass texture coordinates to fragment program
                     
-                vertexProgramAssembler.assemble(Context3DProgramType.VERTEX, vertexProgramCode);
-                
                 fragmentProgramCode = tinted ?
                     "tex ft1,  v1, fs0 <???> \n" + // sample texture 0
                     "mul  oc, ft1,  v0       \n"   // multiply color with texel color
@@ -583,12 +600,12 @@ package starling.display
                                 else
                                     options.push("linear", mipmap ? "miplinear" : "mipnone");
                                 
-                                fragmentProgramAssembler.assemble(Context3DProgramType.FRAGMENT,
-                                    fragmentProgramCode.replace("???", options.join()));
-                                
                                 target.registerProgram(
                                     getImageProgramName(tinted, mipmap, repeat, format, smoothing),
-                                    vertexProgramAssembler.agalcode, fragmentProgramAssembler.agalcode);
+                                    assembler.assemble(Context3DProgramType.VERTEX, vertexProgramCode),
+                                    assembler.assemble(Context3DProgramType.FRAGMENT,
+                                        fragmentProgramCode.replace("???", options.join()))
+                                );
                             }
                         }
                     }
