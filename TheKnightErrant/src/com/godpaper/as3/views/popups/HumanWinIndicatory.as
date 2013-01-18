@@ -42,6 +42,7 @@ package com.godpaper.as3.views.popups
 	import feathers.layout.VerticalLayout;
 	
 	import starling.display.DisplayObject;
+	import starling.events.Event;
 	
 	
 	/**
@@ -139,8 +140,10 @@ package com.godpaper.as3.views.popups
 			this._nextBtn.isEnabled = this.hasNextRound;
 			this._buttonsContainer.addChild(this._nextBtn);
 			//event listener
-			this._submitBtn.onRelease.add(submitButtonOnRelease);
-			this._nextBtn.onRelease.add(nextButtonOnRelease);
+//			this._submitBtn.onRelease.add(submitButtonOnRelease);
+			this._submitBtn.addEventListener(starling.events.Event.TRIGGERED,submitButtonOnRelease);
+//			this._nextBtn.onRelease.add(nextButtonOnRelease);
+			this._nextBtn.addEventListener(starling.events.Event.TRIGGERED,nextButtonOnRelease);
 			//Default iPlug trigger.
 			iPlug.saveData({"boardID": null});
 			//				MochiScores.setBoardID(PluginConfig.mochiBoardID);

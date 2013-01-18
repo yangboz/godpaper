@@ -1,30 +1,28 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.dragDrop
 {
-	import org.osflash.signals.ISignal;
+	import starling.events.Event;
+
+	/**
+	 * Dispatched when the drag and drop manager begins the drag.
+	 *
+	 * @eventType = feathers.events.DragDropEvent.DRAG_START
+	 */
+	[Event(name="dragStart",type="feathers.events.DragDropEvent")]
+
+	/**
+	 * Dispatched when the drop has been completed or when the drag has been
+	 * cancelled.
+	 *
+	 * @eventType = feathers.events.DragDropEvent.DRAG_COMPLETE
+	 */
+	[Event(name="dragComplete",type="feathers.events.DragDropEvent")]
 
 	/**
 	 * An object that can initiate drag actions with the drag and drop manager.
@@ -33,21 +31,7 @@ package feathers.dragDrop
 	 */
 	public interface IDragSource
 	{
-		/**
-		 * Dispatched when the drag and drop manager begins the drag.
-		 *
-		 * <p>A listener is expected to have the following function signature:</p>
-		 * <pre>function(source:IDragSource, data:DragData):void</pre>
-		 */
-		function get onDragStart():ISignal;
-
-		/**
-		 * Dispatched when the drop has been completed or when the drag has been
-		 * cancelled.
-		 *
-		 * <p>A listener is expected to have the following function signature:</p>
-		 * <pre>function(source:IDragSource, data:DragData, isDropped:Boolean):void</pre>
-		 */
-		function get onDragComplete():ISignal;
+		function dispatchEvent(event:Event):void;
+		function dispatchEventWith(type:String, bubbles:Boolean = false, data:Object = null):void;
 	}
 }

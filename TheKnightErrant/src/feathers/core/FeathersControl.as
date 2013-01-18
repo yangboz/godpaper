@@ -1,63 +1,75 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.core
 {
+	import feathers.controls.text.BitmapFontTextRenderer;
+	import feathers.controls.text.StageTextTextEditor;
+	import feathers.events.FeathersEventType;
+	import feathers.layout.ILayoutData;
+	import feathers.layout.ILayoutDisplayObject;
+
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 
-	import feathers.display.Sprite;
-	import feathers.controls.text.BitmapFontTextRenderer;
-	import org.osflash.signals.ISignal;
-	import org.osflash.signals.Signal;
-
+	import starling.core.RenderSupport;
 	import starling.display.DisplayObject;
+	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.utils.MatrixUtil;
+
+	/**
+	 * Dispatched after initialize() has been called, but before the first time
+	 * that draw() has been called.
+	 *
+	 * @eventType feathers.events.FeathersEventType.INITIALIZE
+	 */
+	[Event(name="initialize",type="starling.events.Event")]
+
+	/**
+	 * Dispatched when the width or height of the control changes.
+	 *
+	 * @eventType feathers.events.FeathersEventType.RESIZE
+	 */
+	[Event(name="resize",type="starling.events.Event")]
 
 	/**
 	 * Base class for all UI controls. Implements invalidation and sets up some
 	 * basic template functions like <code>initialize()</code> and
 	 * <code>draw()</code>.
 	 */
-	public class FeathersControl extends Sprite
+	public class FeathersControl extends Sprite implements IFeathersControl, ILayoutDisplayObject
 	{
 		/**
 		 * @private
 		 */
-		private static const helperMatrix:Matrix = new Matrix();
+		private static const HELPER_MATRIX:Matrix = new Matrix();
 
 		/**
 		 * @private
 		 */
-		private static const helperPoint:Point = new Point();
+		private static const HELPER_POINT:Point = new Point();
 
 		/**
 		 * @private
+		 * Meant to be constant, but the ValidationQueue needs access to
+		 * Starling in its constructor, so it needs to be instantiated after
+		 * Starling is initialized.
 		 */
-		protected static var validationQueue:ValidationQueue;
+		protected static var VALIDATION_QUEUE:ValidationQueue = new ValidationQueue();
+
+		/**
+		 * @private
+		 * Used for clipping.
+		 *
+		 * @see #clipRect
+		 */
+		protected static var currentScissorRect:Rectangle;
 
 		/**
 		 * Flag to indicate that everything is invalid and should be redrawn.
@@ -119,6 +131,11 @@ package feathers.core
 		protected static const INVALIDATION_FLAG_TEXT_RENDERER:String = "textRenderer";
 
 		/**
+		 * @private
+		 */
+		protected static const INVALIDATION_FLAG_TEXT_EDITOR:String = "textEditor";
+
+		/**
 		 * A function used by all UI controls that support text renderers to
 		 * create an ITextRenderer instance. You may replace the default
 		 * function with your own, if you prefer not to use the
@@ -126,10 +143,30 @@ package feathers.core
 		 *
 		 * <p>The function is expected to have the following signature:</p>
 		 * <pre>function():ITextRenderer</pre>
+		 *
+		 * @see http://wiki.starling-framework.org/feathers/text-renderers
+		 * @see feathers.core.ITextRenderer
 		 */
 		public static var defaultTextRendererFactory:Function = function():ITextRenderer
 		{
 			return new BitmapFontTextRenderer();
+		}
+
+		/**
+		 * A function used by all UI controls that support text editor to
+		 * create an <code>ITextEditor</code> instance. You may replace the
+		 * default function with your own, if you prefer not to use the
+		 * <code>StageTextTextEditor</code>.
+		 *
+		 * <p>The function is expected to have the following signature:</p>
+		 * <pre>function():ITextEditor</pre>
+		 *
+		 * @see http://wiki.starling-framework.org/feathers/text-editors
+		 * @see feathers.core.ITextEditor
+		 */
+		public static var defaultTextEditorFactory:Function = function():ITextEditor
+		{
+			return new StageTextTextEditor();
 		}
 
 		/**
@@ -138,7 +175,7 @@ package feathers.core
 		public function FeathersControl()
 		{
 			super();
-			this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
+			this.addEventListener(Event.ADDED_TO_STAGE, initialize_addedToStageHandler);
 		}
 
 		/**
@@ -185,7 +222,7 @@ package feathers.core
 		/**
 		 * @private
 		 */
-		private var _isQuickHitAreaEnabled:Boolean = false;
+		protected var _isQuickHitAreaEnabled:Boolean = false;
 
 		/**
 		 * Similar to mouseChildren on the classic display list. If true,
@@ -212,26 +249,35 @@ package feathers.core
 
 		/**
 		 * @private
-		 * Flag indicating if the <code>initialize()</code> function has been called yet.
 		 */
-		private var _isInitialized:Boolean = false;
+		protected var _isInitialized:Boolean = false;
+
+		/**
+		 * Determines if the component has been initialized yet. The
+		 * <code>initialize()</code> function is called one time only, when the
+		 * Feathers UI control is added to the display list for the first time.
+		 */
+		public function get isInitialized():Boolean
+		{
+			return this._isInitialized;
+		}
 
 		/**
 		 * @private
 		 * A flag that indicates that everything is invalid. If true, no other
 		 * flags will need to be tracked.
 		 */
-		private var _isAllInvalid:Boolean = false;
+		protected var _isAllInvalid:Boolean = false;
 
 		/**
 		 * @private
 		 */
-		private var _invalidationFlags:Object = {};
+		protected var _invalidationFlags:Object = {};
 
 		/**
 		 * @private
 		 */
-		private var _delayedInvalidationFlags:Object = {};
+		protected var _delayedInvalidationFlags:Object = {};
 
 		/**
 		 * @private
@@ -342,7 +388,7 @@ package feathers.core
 		/**
 		 * @private
 		 */
-		private var _minTouchWidth:Number = 0;
+		protected var _minTouchWidth:Number = 0;
 
 		/**
 		 * If using <code>isQuickHitAreaEnabled</code>, and the hit area's
@@ -369,7 +415,7 @@ package feathers.core
 		/**
 		 * @private
 		 */
-		private var _minTouchHeight:Number = 0;
+		protected var _minTouchHeight:Number = 0;
 
 		/**
 		 * If using <code>isQuickHitAreaEnabled</code>, and the hit area's
@@ -529,43 +575,100 @@ package feathers.core
 			this.invalidate(INVALIDATION_FLAG_SIZE);
 		}
 
+		private var _scaledClipRectXY:Point;
+		private var _scissorRect:Rectangle;
+
 		/**
 		 * @private
 		 */
-		protected var _onResize:Signal = new Signal(FeathersControl);
+		protected var _clipRect:Rectangle;
 
 		/**
-		 * Dispatched when the width or height of the control changes.
-		 *
-		 * <p>A listener is expected to have the following function signature:</p>
-		 * <pre>function(target:FeathersControl, oldWidth:Number, oldHeight:Number):void</pre>
+		 * @private
+		 * <strong>THIS PROPERTY MAY BE REMOVED WITHOUT WARNING</strong>. It
+		 * lives outside of the standard beta or deprecated system that Feathers
+		 * uses. After Starling Framework finalizes masking, it may be removed
+		 * or refactored. Use at your own risk.
 		 */
-		public function get onResize():ISignal
+		public function get clipRect():Rectangle
 		{
-			return this._onResize;
+			return this._clipRect;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set clipRect(value:Rectangle):void
+		{
+			this._clipRect = value;
+			if(this._clipRect)
+			{
+				if(!this._scaledClipRectXY)
+				{
+					this._scaledClipRectXY = new Point();
+				}
+				if(!this._scissorRect)
+				{
+					this._scissorRect = new Rectangle();
+				}
+			}
+			else
+			{
+				this._scaledClipRectXY = null;
+				this._scissorRect = null;
+			}
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _layoutData:ILayoutData;
+
+		/**
+		 * @inheritDoc
+		 */
+		public function get layoutData():ILayoutData
+		{
+			return this._layoutData;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set layoutData(value:ILayoutData):void
+		{
+			if(this._layoutData == value)
+			{
+				return;
+			}
+			if(this._layoutData)
+			{
+				this._layoutData.removeEventListener(Event.CHANGE, layoutData_changeHandler);
+			}
+			this._layoutData = value;
+			if(this._layoutData)
+			{
+				this._layoutData.addEventListener(Event.CHANGE, layoutData_changeHandler);
+			}
+			this.dispatchEventWith(FeathersEventType.LAYOUT_DATA_CHANGE);
 		}
 
 		/**
 		 * @private
 		 * Flag to indicate that the control is currently validating.
 		 */
-		private var _isValidating:Boolean = false;
+		protected var _isValidating:Boolean = false;
 
 		/**
 		 * @private
 		 */
-		private var _invalidateCount:int = 0;
+		protected var _invalidateCount:int = 0;
 
 		/**
 		 * @private
 		 */
 		public override function getBounds(targetSpace:DisplayObject, resultRect:Rectangle=null):Rectangle
 		{
-			if(this.scrollRect)
-			{
-				return super.getBounds(targetSpace, resultRect);
-			}
-
 			if(!resultRect)
 			{
 				resultRect = new Rectangle();
@@ -583,31 +686,31 @@ package feathers.core
 			}
 			else
 			{
-				this.getTransformationMatrix(targetSpace, helperMatrix);
+				this.getTransformationMatrix(targetSpace, HELPER_MATRIX);
 
-				MatrixUtil.transformCoords(helperMatrix, 0, 0, helperPoint);
-				minX = minX < helperPoint.x ? minX : helperPoint.x;
-				maxX = maxX > helperPoint.x ? maxX : helperPoint.x;
-				minY = minY < helperPoint.y ? minY : helperPoint.y;
-				maxY = maxY > helperPoint.y ? maxY : helperPoint.y;
+				MatrixUtil.transformCoords(HELPER_MATRIX, 0, 0, HELPER_POINT);
+				minX = minX < HELPER_POINT.x ? minX : HELPER_POINT.x;
+				maxX = maxX > HELPER_POINT.x ? maxX : HELPER_POINT.x;
+				minY = minY < HELPER_POINT.y ? minY : HELPER_POINT.y;
+				maxY = maxY > HELPER_POINT.y ? maxY : HELPER_POINT.y;
 
-				MatrixUtil.transformCoords(helperMatrix, 0, this.actualHeight, helperPoint);
-				minX = minX < helperPoint.x ? minX : helperPoint.x;
-				maxX = maxX > helperPoint.x ? maxX : helperPoint.x;
-				minY = minY < helperPoint.y ? minY : helperPoint.y;
-				maxY = maxY > helperPoint.y ? maxY : helperPoint.y;
+				MatrixUtil.transformCoords(HELPER_MATRIX, 0, this.actualHeight, HELPER_POINT);
+				minX = minX < HELPER_POINT.x ? minX : HELPER_POINT.x;
+				maxX = maxX > HELPER_POINT.x ? maxX : HELPER_POINT.x;
+				minY = minY < HELPER_POINT.y ? minY : HELPER_POINT.y;
+				maxY = maxY > HELPER_POINT.y ? maxY : HELPER_POINT.y;
 
-				MatrixUtil.transformCoords(helperMatrix, this.actualWidth, 0, helperPoint);
-				minX = minX < helperPoint.x ? minX : helperPoint.x;
-				maxX = maxX > helperPoint.x ? maxX : helperPoint.x;
-				minY = minY < helperPoint.y ? minY : helperPoint.y;
-				maxY = maxY > helperPoint.y ? maxY : helperPoint.y;
+				MatrixUtil.transformCoords(HELPER_MATRIX, this.actualWidth, 0, HELPER_POINT);
+				minX = minX < HELPER_POINT.x ? minX : HELPER_POINT.x;
+				maxX = maxX > HELPER_POINT.x ? maxX : HELPER_POINT.x;
+				minY = minY < HELPER_POINT.y ? minY : HELPER_POINT.y;
+				maxY = maxY > HELPER_POINT.y ? maxY : HELPER_POINT.y;
 
-				MatrixUtil.transformCoords(helperMatrix, this.actualWidth, this.actualHeight, helperPoint);
-				minX = minX < helperPoint.x ? minX : helperPoint.x;
-				maxX = maxX > helperPoint.x ? maxX : helperPoint.x;
-				minY = minY < helperPoint.y ? minY : helperPoint.y;
-				maxY = maxY > helperPoint.y ? maxY : helperPoint.y;
+				MatrixUtil.transformCoords(HELPER_MATRIX, this.actualWidth, this.actualHeight, HELPER_POINT);
+				minX = minX < HELPER_POINT.x ? minX : HELPER_POINT.x;
+				maxX = maxX > HELPER_POINT.x ? maxX : HELPER_POINT.x;
+				minY = minY < HELPER_POINT.y ? minY : HELPER_POINT.y;
+				maxY = maxY > HELPER_POINT.y ? maxY : HELPER_POINT.y;
 			}
 
 			resultRect.x = minX;
@@ -621,8 +724,59 @@ package feathers.core
 		/**
 		 * @private
 		 */
+		override public function render(support:RenderSupport, parentAlpha:Number):void
+		{
+			if(this._clipRect)
+			{
+				this.getBounds(this.stage, this._scissorRect);
+
+				this._scissorRect.x += this._clipRect.x;
+				this._scissorRect.y += this._clipRect.y;
+				this._scissorRect.width = this._clipRect.width;
+				this._scissorRect.height = this._clipRect.height;
+
+				const oldRect:Rectangle = currentScissorRect;
+				if(oldRect)
+				{
+					this._scissorRect = this._scissorRect.intersection(oldRect);
+				}
+				//round to nearest pixels because the GPU will force it to
+				//happen, and the check that follows needs it
+				this._scissorRect.x = Math.round(this._scissorRect.x);
+				this._scissorRect.y = Math.round(this._scissorRect.y);
+				this._scissorRect.width = Math.round(this._scissorRect.width);
+				this._scissorRect.height = Math.round(this._scissorRect.height);
+				if(this._scissorRect.isEmpty() ||
+					this._scissorRect.x >= this.stage.stageWidth ||
+					this._scissorRect.y >= this.stage.stageHeight ||
+					(this._scissorRect.x + this._scissorRect.width) <= 0 ||
+					(this._scissorRect.y + this._scissorRect.height) <= 0)
+				{
+					//not in bounds of stage. don't render.
+					return;
+				}
+				support.finishQuadBatch();
+				support.scissorRectangle = this._scissorRect;
+				currentScissorRect = this._scissorRect;
+			}
+			super.render(support, parentAlpha);
+			if(this._clipRect)
+			{
+				support.finishQuadBatch();
+				currentScissorRect = oldRect;
+				support.scissorRectangle = oldRect;
+			}
+		}
+
+		/**
+		 * @private
+		 */
 		override public function hitTest(localPoint:Point, forTouch:Boolean=false):DisplayObject
 		{
+			if(this._clipRect && !this._clipRect.contains(localPoint.x, localPoint.y))
+			{
+				return null;
+			}
 			if(this._isQuickHitAreaEnabled)
 			{
 				if(forTouch && (!this.visible || !this.touchable))
@@ -644,12 +798,6 @@ package feathers.core
 		 */
 		public function invalidate(flag:String = INVALIDATION_FLAG_ALL):void
 		{
-			if(!this.stage)
-			{
-				//we'll invalidate everything once we're added to the stage, so
-				//there's no point in micro-managing it before that.
-				return;
-			}
 			const isAlreadyInvalid:Boolean = this.isInvalid();
 			var isAlreadyDelayedInvalid:Boolean = false;
 			if(this._isValidating)
@@ -682,11 +830,11 @@ package feathers.core
 					this._invalidationFlags[flag] = true;
 				}
 			}
-			if(!validationQueue)
+			if(!this.stage)
 			{
-				//since ValidationQueue references FeathersControl, we can't
-				//instantiate it as a static variable. we do it here instead.
-				validationQueue = new ValidationQueue();
+				//we'll add this component to the queue later, after it has been
+				//added to the stage.
+				return;
 			}
 			if(this._isValidating)
 			{
@@ -695,7 +843,7 @@ package feathers.core
 					return;
 				}
 				this._invalidateCount++;
-				validationQueue.addControl(this, this._invalidateCount >= 10);
+				VALIDATION_QUEUE.addControl(this, this._invalidateCount >= 10);
 				return;
 			}
 			if(isAlreadyInvalid)
@@ -703,7 +851,7 @@ package feathers.core
 				return;
 			}
 			this._invalidateCount = 0;
-			validationQueue.addControl(this, false);
+			VALIDATION_QUEUE.addControl(this, false);
 		}
 
 		/**
@@ -720,7 +868,7 @@ package feathers.core
 			{
 				//we were already validating, and something else told us to
 				//validate. that's bad.
-				validationQueue.addControl(this, true);
+				VALIDATION_QUEUE.addControl(this, true);
 				return;
 			}
 			this._isValidating = true;
@@ -778,15 +926,6 @@ package feathers.core
 		}
 
 		/**
-		 * @private
-		 */
-		override public function dispose():void
-		{
-			this._onResize.removeAll();
-			super.dispose();
-		}
-
-		/**
 		 * Sets the width and height of the control, with the option of
 		 * invalidating or not. Intended to be used for automatic resizing.
 		 */
@@ -839,7 +978,7 @@ package feathers.core
 				{
 					this.invalidate(INVALIDATION_FLAG_SIZE);
 				}
-				this._onResize.dispatch(this, oldWidth, oldHeight);
+				this.dispatchEventWith(FeathersEventType.RESIZE);
 			}
 			return resized;
 		}
@@ -866,7 +1005,7 @@ package feathers.core
 		 * Initialize the control, if it hasn't been initialized yet. Then,
 		 * invalidate.
 		 */
-		private function addedToStageHandler(event:Event):void
+		protected function initialize_addedToStageHandler(event:Event):void
 		{
 			if(event.target != this)
 			{
@@ -875,20 +1014,24 @@ package feathers.core
 			if(!this._isInitialized)
 			{
 				this.initialize();
+				this.invalidate(); //invalidate everything
 				this._isInitialized = true;
+				this.dispatchEventWith(FeathersEventType.INITIALIZE, false);
 			}
-			//clear any flags that may have been set while we didn't have a
-			//stage (or when we had a stage previously).
-			for(var key:String in this._invalidationFlags)
+
+			if(this.isInvalid())
 			{
-				delete this._invalidationFlags[key];
+				this._invalidateCount = 0;
+				VALIDATION_QUEUE.addControl(this, false);
 			}
-			for(key in this._delayedInvalidationFlags)
-			{
-				delete this._delayedInvalidationFlags[key];
-			}
-			this._isAllInvalid = false;
-			this.invalidate(); //invalidate everything
+		}
+
+		/**
+		 * @private
+		 */
+		protected function layoutData_changeHandler(event:Event):void
+		{
+			this.dispatchEventWith(FeathersEventType.LAYOUT_DATA_CHANGE);
 		}
 	}
 }

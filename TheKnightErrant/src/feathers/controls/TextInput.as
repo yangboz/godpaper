@@ -1,84 +1,79 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.controls
 {
-	import flash.display.BitmapData;
-	import flash.display3D.textures.Texture;
-	import flash.events.Event;
-	import flash.events.FocusEvent;
-	import flash.events.KeyboardEvent;
-	import flash.geom.Matrix;
+	import feathers.core.FeathersControl;
+	import feathers.core.ITextEditor;
+	import feathers.core.PropertyProxy;
+	import feathers.events.FeathersEventType;
+
 	import flash.geom.Point;
-	import flash.geom.Rectangle;
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.TextFormat;
-	import flash.text.TextFormatAlign;
-	import flash.text.engine.FontPosture;
-	import flash.text.engine.FontWeight;
-	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
 	import flash.ui.MouseCursor;
-	import flash.utils.getDefinitionByName;
 
-	import feathers.display.ScrollRectManager;
-	import feathers.core.FeathersControl;
-	import feathers.core.PropertyProxy;
-	import feathers.text.StageTextField;
-	import org.osflash.signals.ISignal;
-	import org.osflash.signals.Signal;
-
-	import starling.core.RenderSupport;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.display.Image;
+	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import starling.textures.ConcreteTexture;
-	import starling.textures.Texture;
-	import starling.utils.MatrixUtil;
+
+	/**
+	 * Dispatched when the text input's text value changes.
+	 *
+	 * @eventType starling.events.Event.CHANGE
+	 */
+	[Event(name="change",type="starling.events.Event")]
+
+	/**
+	 * Dispatched when the user presses the Enter key while the text input
+	 * has focus.
+	 *
+	 * @eventType feathers.events.FeathersEventType.ENTER
+	 */
+	[Event(name="enter",type="starling.events.Event")]
+
+	/**
+	 * Dispatched when the text input receives focus.
+	 *
+	 * @eventType feathers.events.FeathersEventType.FOCUS_IN
+	 */
+	[Event(name="focusIn",type="starling.events.Event")]
+
+	/**
+	 * Dispatched when the text input loses focus.
+	 *
+	 * @eventType feathers.events.FeathersEventType.FOCUS_OUT
+	 */
+	[Event(name="focusOut",type="starling.events.Event")]
 
 	/**
 	 * A text entry control that allows users to enter and edit a single line of
-	 * uniformly-formatted text. Uses the native StageText class in AIR, and the
-	 * custom StageTextField class in Flash Player.
+	 * uniformly-formatted text.
 	 *
-	 * @see org.josht.text.StageTextField
+	 * <p>To set things like font properties, the ability to display as
+	 * password, and character restrictions, use the <code>textEditorProperties</code> to pass
+	 * values to the <code>ITextEditor</code> instance.</p>
+	 *
+	 * @see http://wiki.starling-framework.org/feathers/text-input
+	 * @see feathers.core.ITextEditor
 	 */
 	public class TextInput extends FeathersControl
 	{
 		/**
 		 * @private
 		 */
-		private static const helperMatrix:Matrix = new Matrix();
+		private static const HELPER_POINT:Point = new Point();
 
 		/**
 		 * @private
 		 */
-		private static const helperPoint:Point = new Point();
+		private static const HELPER_TOUCHES_VECTOR:Vector.<Touch> = new <Touch>[];
 
 		/**
 		 * @private
@@ -86,41 +81,18 @@ package feathers.controls
 		private static const FONT_SIZE:String = "fontSize";
 
 		/**
-		 * @private
-		 */
-		protected static const INVALIDATION_FLAG_POSITION:String = "position";
-
-		/**
 		 * Constructor.
 		 */
 		public function TextInput()
 		{
 			this.isQuickHitAreaEnabled = true;
-			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, addedToStageHandler);
-			this.addEventListener(starling.events.Event.REMOVED_FROM_STAGE, removedFromStageHandler);
 			this.addEventListener(TouchEvent.TOUCH, touchHandler);
 		}
 
 		/**
-		 * The StageText instance. It's typed Object so that a replacement class
-		 * can be used in browser-based Flash Player.
+		 * The text editor sub-component.
 		 */
-		protected var stageText:Object;
-
-		/**
-		 * @private
-		 */
-		protected var _touchPointID:int = -1;
-
-		/**
-		 * @private
-		 */
-		protected var _measureTextField:TextField;
-
-		/**
-		 * @private
-		 */
-		protected var _stageTextHasFocus:Boolean = false;
+		protected var textEditor:ITextEditor;
 
 		/**
 		 * The currently selected background, based on state.
@@ -130,37 +102,12 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _oldGlobalX:Number = 0;
+		protected var _textEditorHasFocus:Boolean = false;
 
 		/**
 		 * @private
 		 */
-		private var _oldGlobalY:Number = 0;
-
-		/**
-		 * @private
-		 */
-		private var _savedSelectionIndex:int = -1;
-
-		/**
-		 * @private
-		 */
-		override public function set x(value:Number):void
-		{
-			super.x = value;
-			//we need to know when the position changes to change the position
-			//of the StageText instance.
-			this.invalidate(INVALIDATION_FLAG_POSITION);
-		}
-
-		/**
-		 * @private
-		 */
-		override public function set y(value:Number):void
-		{
-			super.y = value;
-			this.invalidate(INVALIDATION_FLAG_POSITION);
-		}
+		protected var _touchPointID:int = -1;
 
 		/**
 		 * @private
@@ -191,20 +138,42 @@ package feathers.controls
 			}
 			this._text = value;
 			this.invalidate(INVALIDATION_FLAG_DATA);
-			this._onChange.dispatch(this);
+			this.dispatchEventWith(Event.CHANGE);
 		}
 
 		/**
 		 * @private
-		 * Stores the snapshot of the StageText to display when the StageText
-		 * isn't visible.
 		 */
-		protected var _textSnapshotBitmapData:BitmapData;
+		protected var _textEditorFactory:Function;
+
+		/**
+		 * A function used to instantiate the text editor. If null,
+		 * <code>FeathersControl.defaultTextEditorFactory</code> is used
+		 * instead.
+		 *
+		 * <p>The factory should have the following function signature:</p>
+		 * <pre>function():ITextEditor</pre>
+		 *
+		 * @see feathers.core.ITextEditor
+		 * @see feathers.core.FeathersControl#defaultTextEditorFactory
+		 */
+		public function get textEditorFactory():Function
+		{
+			return this._textEditorFactory;
+		}
 
 		/**
 		 * @private
 		 */
-		protected var _textSnapshot:Image;
+		public function set textEditorFactory(value:Function):void
+		{
+			if(this._textEditorFactory == value)
+			{
+				return;
+			}
+			this._textEditorFactory = value;
+			this.invalidate(INVALIDATION_FLAG_TEXT_EDITOR);
+		}
 
 		/**
 		 * @private
@@ -221,7 +190,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _backgroundSkin:DisplayObject;
+		protected var _backgroundSkin:DisplayObject;
 
 		/**
 		 * A display object displayed behind the header's content.
@@ -259,7 +228,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _backgroundFocusedSkin:DisplayObject;
+		protected var _backgroundFocusedSkin:DisplayObject;
 
 		/**
 		 * A display object displayed behind the header's content when the
@@ -298,7 +267,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _backgroundDisabledSkin:DisplayObject;
+		protected var _backgroundDisabledSkin:DisplayObject;
 
 		/**
 		 * A background to display when the header is disabled.
@@ -331,6 +300,28 @@ package feathers.controls
 				this.addChildAt(this._backgroundDisabledSkin, 0);
 			}
 			this.invalidate(INVALIDATION_FLAG_SKIN);
+		}
+
+		/**
+		 * Quickly sets all padding properties to the same value. The
+		 * <code>padding</code> getter always returns the value of
+		 * <code>paddingTop</code>, but the other padding values may be
+		 * different.
+		 */
+		public function get padding():Number
+		{
+			return this._paddingTop;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set padding(value:Number):void
+		{
+			this.paddingTop = value;
+			this.paddingRight = value;
+			this.paddingBottom = value;
+			this.paddingLeft = value;
 		}
 
 		/**
@@ -443,9 +434,20 @@ package feathers.controls
 
 		/**
 		 * @private
-		 * Flag indicating that the StageText should get focus.
+		 * Flag indicating that the text editor should get focus after it is
+		 * created.
 		 */
 		protected var _isWaitingToSetFocus:Boolean = false;
+
+		/**
+		 * @private
+		 */
+		protected var _pendingSelectionStartIndex:int = -1;
+
+		/**
+		 * @private
+		 */
+		protected var _pendingSelectionEndIndex:int = -1;
 
 		/**
 		 * @private
@@ -455,38 +457,11 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected var _onChange:Signal = new Signal(TextInput);
-
-		/**
-		 * Dispatched when the text changes.
-		 */
-		public function get onChange():ISignal
-		{
-			return this._onChange;
-		}
-
-		/**
-		 * @private
-		 */
-		protected var _onEnter:Signal = new Signal(TextInput);
-
-		/**
-		 * Dispatched when the user presses the Enter key while the text input
-		 * has focus.
-		 */
-		public function get onEnter():ISignal
-		{
-			return this._onEnter;
-		}
-
-		/**
-		 * @private
-		 */
-		private var _stageTextProperties:PropertyProxy;
+		protected var _textEditorProperties:PropertyProxy;
 
 		/**
 		 * A set of key/value pairs to be passed down to the text input's
-		 * StageText instance.
+		 * <code>ITextEditor</code> instance.
 		 *
 		 * <p>If the subcomponent has its own subcomponents, their properties
 		 * can be set too, using attribute <code>&#64;</code> notation. For example,
@@ -494,22 +469,24 @@ package feathers.controls
 		 * which is in a <code>Scroller</code> which is in a <code>List</code>,
 		 * you can use the following syntax:</p>
 		 * <pre>list.scrollerProperties.&#64;verticalScrollBarProperties.&#64;thumbProperties.defaultSkin = new Image(texture);</pre>
+		 *
+		 * @see feathers.core.ITextEditor
 		 */
-		public function get stageTextProperties():Object
+		public function get textEditorProperties():Object
 		{
-			if(!this._stageTextProperties)
+			if(!this._textEditorProperties)
 			{
-				this._stageTextProperties = new PropertyProxy(stageTextProperties_onChange);
+				this._textEditorProperties = new PropertyProxy(childProperties_onChange);
 			}
-			return this._stageTextProperties;
+			return this._textEditorProperties;
 		}
 
 		/**
 		 * @private
 		 */
-		public function set stageTextProperties(value:Object):void
+		public function set textEditorProperties(value:Object):void
 		{
-			if(this._stageTextProperties == value)
+			if(this._textEditorProperties == value)
 			{
 				return;
 			}
@@ -526,14 +503,14 @@ package feathers.controls
 				}
 				value = newValue;
 			}
-			if(this._stageTextProperties)
+			if(this._textEditorProperties)
 			{
-				this._stageTextProperties.onChange.remove(stageTextProperties_onChange);
+				this._textEditorProperties.removeOnChangeCallback(childProperties_onChange);
 			}
-			this._stageTextProperties = PropertyProxy(value);
-			if(this._stageTextProperties)
+			this._textEditorProperties = PropertyProxy(value);
+			if(this._textEditorProperties)
 			{
-				this._stageTextProperties.onChange.add(stageTextProperties_onChange);
+				this._textEditorProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -543,78 +520,44 @@ package feathers.controls
 		 */
 		public function setFocus():void
 		{
-			this.setFocusInternal(null);
+			if(this.textEditor)
+			{
+				this.textEditor.setFocus();
+			}
+			else
+			{
+				this._isWaitingToSetFocus = true;
+			}
 		}
 
 		/**
-		 * @private
+		 * Sets the range of selected characters. If both values are the same,
+		 * or the end index is <code>-1</code>, the text insertion position is
+		 * changed and nothing is selected.
 		 */
-		override public function dispose():void
+		public function selectRange(startIndex:int, endIndex:int = -1):void
 		{
-			if(this._textSnapshotBitmapData)
+			if(endIndex < 0)
 			{
-				this._textSnapshotBitmapData.dispose();
-				this._textSnapshotBitmapData = null;
+				endIndex = startIndex;
+			}
+			if(startIndex < 0)
+			{
+				throw new RangeError("Expected start index >= 0. Received " + startIndex + ".");
+			}
+			if(endIndex > this._text.length)
+			{
+				throw new RangeError("Expected start index > " + this._text.length + ". Received " + endIndex + ".");
 			}
 
-			this._onChange.removeAll();
-			super.dispose();
-		}
-
-		/**
-		 * @private
-		 */
-		override public function render(support:RenderSupport, alpha:Number):void
-		{
-			helperPoint.x = helperPoint.y = 0;
-			this.getTransformationMatrix(this.stage, helperMatrix);
-			MatrixUtil.transformCoords(helperMatrix, 0, 0, helperPoint);
-			ScrollRectManager.toStageCoordinates(helperPoint, this);
-			if(helperPoint.x != this._oldGlobalX || helperPoint.y != this._oldGlobalY)
+			if(this.textEditor)
 			{
-				this._oldGlobalX = helperPoint.x;
-				this._oldGlobalY = helperPoint.y;
-				const starlingViewPort:Rectangle = Starling.current.viewPort;
-				var stageTextViewPort:Rectangle = this.stageText.viewPort;
-				if(!stageTextViewPort)
-				{
-					stageTextViewPort = new Rectangle();
-				}
-				stageTextViewPort.x = Math.round(starlingViewPort.x + (helperPoint.x + this._paddingLeft * this.scaleX) * Starling.contentScaleFactor);
-				stageTextViewPort.y = Math.round(starlingViewPort.y + (helperPoint.y + this._paddingTop * this.scaleY) * Starling.contentScaleFactor);
-				this.stageText.viewPort = stageTextViewPort;
+				this.textEditor.selectRange(startIndex, endIndex);
 			}
-
-			if(this._textSnapshot)
+			else
 			{
-				this._textSnapshot.x = Math.round(this._paddingLeft + helperMatrix.tx) - helperMatrix.tx;
-				this._textSnapshot.y = Math.round(this._paddingTop + helperMatrix.ty) - helperMatrix.ty;
-			}
-
-			//theoretically, this will ensure that the StageText is set visible
-			//or invisible immediately after the snapshot changes visibility in
-			//the rendered graphics. the OS might take longer to do the change,
-			//though.
-			this.stageText.visible = this._textSnapshot ? !this._textSnapshot.visible : this._stageTextHasFocus;
-			super.render(support, alpha);
-		}
-
-		/**
-		 * @private
-		 */
-		override protected function initialize():void
-		{
-			if(!this._measureTextField)
-			{
-				this._measureTextField = new TextField();
-				this._measureTextField.visible = false;
-				this._measureTextField.mouseEnabled = this._measureTextField.mouseWheelEnabled = false;
-				this._measureTextField.autoSize = TextFieldAutoSize.LEFT;
-				this._measureTextField.multiline = false;
-				this._measureTextField.wordWrap = false;
-				this._measureTextField.embedFonts = false;
-				this._measureTextField.defaultTextFormat = new TextFormat(null, 11, 0x000000, false, false, false);
-				Starling.current.nativeStage.addChild(this._measureTextField);
+				this._pendingSelectionStartIndex = startIndex;
+				this._pendingSelectionEndIndex = endIndex;
 			}
 		}
 
@@ -626,27 +569,28 @@ package feathers.controls
 			const stateInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STATE);
 			const stylesInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STYLES);
 			const dataInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_DATA);
-			const positionInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_POSITION);
 			const skinInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_SKIN);
 			var sizeInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_SIZE);
+			const textEditorInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_TEXT_EDITOR);
 
-			if(stylesInvalid)
+			if(textEditorInvalid)
 			{
-				this.refreshStageTextProperties();
+				this.createTextEditor();
 			}
 
-			if(dataInvalid)
+			if(textEditorInvalid || stylesInvalid)
 			{
-				if(this.stageText.text != this._text)
-				{
-					this.stageText.text = this._text;
-				}
-				this._measureTextField.text = this.stageText.text;
+				this.refreshTextEditorProperties();
 			}
 
-			if(stateInvalid)
+			if(textEditorInvalid || dataInvalid)
 			{
-				this.stageText.editable = this._isEnabled;
+				this.textEditor.text = this._text;
+			}
+
+			if(textEditorInvalid || stateInvalid)
+			{
+				this.textEditor.isEnabled = this._isEnabled;
 				if(!this._isEnabled && Mouse.supportsNativeCursor && this._oldMouseCursor)
 				{
 					Mouse.cursor = this._oldMouseCursor;
@@ -654,33 +598,19 @@ package feathers.controls
 				}
 			}
 
-			if(stateInvalid || skinInvalid)
+			if(textEditorInvalid || stateInvalid || skinInvalid)
 			{
 				this.refreshBackground();
 			}
 
 			sizeInvalid = this.autoSizeIfNeeded() || sizeInvalid;
 
-			if(positionInvalid || sizeInvalid || stylesInvalid || skinInvalid || stateInvalid)
+			if(textEditorInvalid || sizeInvalid || stylesInvalid || skinInvalid || stateInvalid)
 			{
 				this.layout();
 			}
 
-			if(stylesInvalid || dataInvalid || sizeInvalid)
-			{
-				if(!this._stageTextHasFocus)
-				{
-					const hasText:Boolean = this._text.length > 0;
-					if(hasText)
-					{
-						this.refreshSnapshot(sizeInvalid || !this._textSnapshotBitmapData);
-					}
-					if(this._textSnapshot)
-					{
-						this._textSnapshot.visible = hasText;
-					}
-				}
-			}
+			this.doPendingActions();
 		}
 
 		/**
@@ -711,42 +641,65 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function refreshStageTextProperties():void
+		protected function createTextEditor():void
 		{
-			for(var propertyName:String in this._stageTextProperties)
+			if(this.textEditor)
 			{
-				if(this.stageText.hasOwnProperty(propertyName))
+				this.removeChild(DisplayObject(this.textEditor), true);
+				this.textEditor.removeEventListener(Event.CHANGE, textEditor_changeHandler);
+				this.textEditor.removeEventListener(FeathersEventType.ENTER, textEditor_enterHandler);
+				this.textEditor.removeEventListener(FeathersEventType.FOCUS_IN, textEditor_focusInHandler);
+				this.textEditor.removeEventListener(FeathersEventType.FOCUS_OUT, textEditor_focusOutHandler);
+				this.textEditor = null;
+			}
+
+			const factory:Function = this._textEditorFactory != null ? this._textEditorFactory : FeathersControl.defaultTextEditorFactory;
+			this.textEditor = ITextEditor(factory());
+			this.textEditor.addEventListener(Event.CHANGE, textEditor_changeHandler);
+			this.textEditor.addEventListener(FeathersEventType.ENTER, textEditor_enterHandler);
+			this.textEditor.addEventListener(FeathersEventType.FOCUS_IN, textEditor_focusInHandler);
+			this.textEditor.addEventListener(FeathersEventType.FOCUS_OUT, textEditor_focusOutHandler);
+			this.addChild(DisplayObject(this.textEditor));
+		}
+
+		/**
+		 * @private
+		 */
+		protected function doPendingActions():void
+		{
+			if(this._isWaitingToSetFocus)
+			{
+				this._isWaitingToSetFocus = false;
+				this.textEditor.setFocus();
+			}
+			if(this._pendingSelectionStartIndex >= 0)
+			{
+				const startIndex:int = this._pendingSelectionStartIndex;
+				const endIndex:int = this._pendingSelectionEndIndex;
+				this._pendingSelectionStartIndex = -1;
+				this._pendingSelectionEndIndex = -1;
+				this.selectRange(startIndex, endIndex);
+			}
+		}
+
+		/**
+		 * @private
+		 */
+		protected function refreshTextEditorProperties():void
+		{
+			const displayTextEditor:DisplayObject = DisplayObject(this.textEditor);
+			for(var propertyName:String in this._textEditorProperties)
+			{
+				if(displayTextEditor.hasOwnProperty(propertyName))
 				{
-					var propertyValue:Object = this._stageTextProperties[propertyName];
+					var propertyValue:Object = this._textEditorProperties[propertyName];
 					if(propertyName == FONT_SIZE)
 					{
 						propertyValue = (propertyValue as Number) * Starling.contentScaleFactor;
 					}
-					this.stageText[propertyName] = propertyValue;
+					this.textEditor[propertyName] = propertyValue;
 				}
 			}
-
-			this._measureTextField.displayAsPassword = this.stageText.displayAsPassword;
-			this._measureTextField.maxChars = this.stageText.maxChars;
-			this._measureTextField.restrict = this.stageText.restrict;
-			const format:TextFormat = this._measureTextField.defaultTextFormat;
-			format.color = this.stageText.color;
-			format.font = this.stageText.fontFamily;
-			format.italic = this.stageText.fontPosture == FontPosture.ITALIC;
-			format.size = this.stageText.fontSize / Starling.contentScaleFactor;
-			format.bold = this.stageText.fontWeight == FontWeight.BOLD;
-			var alignValue:String = this.stageText.textAlign;
-			if(alignValue == TextFormatAlign.START)
-			{
-				alignValue = TextFormatAlign.LEFT;
-			}
-			else if(alignValue == TextFormatAlign.END)
-			{
-				alignValue = TextFormatAlign.RIGHT;
-			}
-			format.align = alignValue;
-			this._measureTextField.defaultTextFormat = format;
-			this._measureTextField.setTextFormat(format);
 		}
 
 		/**
@@ -755,7 +708,7 @@ package feathers.controls
 		protected function refreshBackground():void
 		{
 			const useDisabledBackground:Boolean = !this._isEnabled && this._backgroundDisabledSkin;
-			const useFocusBackground:Boolean = this._stageTextHasFocus && this._backgroundFocusedSkin;
+			const useFocusBackground:Boolean = this._textEditorHasFocus && this._backgroundFocusedSkin;
 			this.currentBackground = this._backgroundSkin;
 			if(useDisabledBackground)
 			{
@@ -804,99 +757,6 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function refreshSnapshot(needsNewBitmap:Boolean):void
-		{
-			if(needsNewBitmap)
-			{
-				const viewPort:Rectangle = this.stageText.viewPort;
-				if(viewPort.width == 0 || viewPort.height == 0)
-				{
-					return;
-				}
-				if(!this._textSnapshotBitmapData || this._textSnapshotBitmapData.width != viewPort.width || this._textSnapshotBitmapData.height != viewPort.height)
-				{
-					if(this._textSnapshotBitmapData)
-					{
-						this._textSnapshotBitmapData.dispose();
-					}
-					this._textSnapshotBitmapData = new BitmapData(viewPort.width, viewPort.height, true, 0x00ff00ff);
-				}
-			}
-
-			if(!this._textSnapshotBitmapData)
-			{
-				return;
-			}
-			this._textSnapshotBitmapData.fillRect(this._textSnapshotBitmapData.rect, 0x00ff00ff);
-			this.stageText.drawViewPortToBitmapData(this._textSnapshotBitmapData);
-			if(!this._textSnapshot)
-			{
-				this._textSnapshot = new Image(starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor));
-				this.addChild(this._textSnapshot);
-			}
-			else
-			{
-				if(needsNewBitmap)
-				{
-					this._textSnapshot.texture.dispose();
-					this._textSnapshot.texture = starling.textures.Texture.fromBitmapData(this._textSnapshotBitmapData, false, false, Starling.contentScaleFactor);
-					this._textSnapshot.readjustSize();
-				}
-				else
-				{
-					//this is faster, so use it if we haven't resized the
-					//bitmapdata
-					const texture:starling.textures.Texture = this._textSnapshot.texture;
-					if(Starling.handleLostContext && texture is ConcreteTexture)
-					{
-						ConcreteTexture(texture).restoreOnLostContext(this._textSnapshotBitmapData);
-					}
-					flash.display3D.textures.Texture(texture.base).uploadFromBitmapData(this._textSnapshotBitmapData);
-				}
-			}
-
-			this.getTransformationMatrix(this.stage, helperMatrix);
-			this._textSnapshot.x = Math.round(this._paddingLeft + helperMatrix.tx) - helperMatrix.tx;
-			this._textSnapshot.y = Math.round(this._paddingTop + helperMatrix.ty) - helperMatrix.ty;
-		}
-
-		/**
-		 * @private
-		 */
-		protected function setFocusInternal(touch:Touch):void
-		{
-			if(this.stageText)
-			{
-				if(touch)
-				{
-					touch.getLocation(this, helperPoint);
-					helperPoint.x -= this._paddingLeft;
-					helperPoint.y -= this._paddingTop;
-					if(helperPoint.x < 0)
-					{
-						this._savedSelectionIndex = 0;
-					}
-					else
-					{
-						this._savedSelectionIndex = this._measureTextField.getCharIndexAtPoint(helperPoint.x, helperPoint.y);
-						const bounds:Rectangle = this._measureTextField.getCharBoundaries(this._savedSelectionIndex);
-						if(bounds && (bounds.x + bounds.width - helperPoint.x) < (helperPoint.x - bounds.x))
-						{
-							this._savedSelectionIndex++;
-						}
-					}
-				}
-				this.stageText.assignFocus();
-			}
-			else
-			{
-				this._isWaitingToSetFocus = true;
-			}
-		}
-
-		/**
-		 * @private
-		 */
 		protected function layout():void
 		{
 			if(this.currentBackground)
@@ -907,101 +767,18 @@ package feathers.controls
 				this.currentBackground.height = this.actualHeight;
 			}
 
-			this.refreshViewPort();
+			this.textEditor.x = this._paddingLeft;
+			this.textEditor.y = this._paddingTop;
+			this.textEditor.width = this.actualWidth - this._paddingLeft - this._paddingRight;
+			this.textEditor.height = this.actualHeight - this._paddingTop - this._paddingBottom;
 		}
 
 		/**
 		 * @private
 		 */
-		protected function refreshViewPort():void
-		{
-			const starlingViewPort:Rectangle = Starling.current.viewPort;
-			var stageTextViewPort:Rectangle = this.stageText.viewPort;
-			if(!stageTextViewPort)
-			{
-				stageTextViewPort = new Rectangle();
-			}
-			if(!this.stageText.stage)
-			{
-				this.stageText.stage = Starling.current.nativeStage;
-			}
-
-			helperPoint.x = helperPoint.y = 0;
-			this.getTransformationMatrix(this.stage, helperMatrix);
-			MatrixUtil.transformCoords(helperMatrix, 0, 0, helperPoint);
-			ScrollRectManager.toStageCoordinates(helperPoint, this);
-			this._oldGlobalX = helperPoint.x;
-			this._oldGlobalY = helperPoint.y;
-			stageTextViewPort.x = Math.round(starlingViewPort.x + (helperPoint.x + this._paddingLeft * this.scaleX) * Starling.contentScaleFactor);
-			stageTextViewPort.y = Math.round(starlingViewPort.y + (helperPoint.y + this._paddingTop * this.scaleY) * Starling.contentScaleFactor);
-			stageTextViewPort.width = Math.round(Math.max(1, (this.actualWidth - this._paddingLeft - this._paddingRight) * Starling.contentScaleFactor * this.scaleX));
-			//we're ignoring padding bottom here to keep the descent from being cut off
-			stageTextViewPort.height = Math.round(Math.max(1, (this.actualHeight - this._paddingTop) * Starling.contentScaleFactor * this.scaleY));
-			if(isNaN(stageTextViewPort.width) || isNaN(stageTextViewPort.height))
-			{
-				stageTextViewPort.width = 1;
-				stageTextViewPort.height = 1;
-			}
-			this.stageText.viewPort = stageTextViewPort;
-		}
-
-		/**
-		 * @private
-		 */
-		protected function stageTextProperties_onChange(proxy:PropertyProxy, name:Object):void
+		protected function childProperties_onChange(proxy:PropertyProxy, name:Object):void
 		{
 			this.invalidate(INVALIDATION_FLAG_STYLES);
-		}
-
-		/**
-		 * @private
-		 */
-		protected function addedToStageHandler(event:starling.events.Event):void
-		{
-			if(this._measureTextField && !this._measureTextField.parent)
-			{
-				Starling.current.nativeStage.addChild(this._measureTextField);
-			}
-
-			var StageTextType:Class;
-			var initOptions:Object;
-			try
-			{
-				StageTextType = Class(getDefinitionByName("flash.text.StageText"));
-				const StageTextInitOptionsType:Class = Class(getDefinitionByName("flash.text.StageTextInitOptions"));
-				initOptions = new StageTextInitOptionsType(false);
-			}
-			catch(error:Error)
-			{
-				StageTextType = StageTextField;
-				initOptions = { multiline: false };
-			}
-			this.stageText = new StageTextType(initOptions);
-			this.stageText.visible = false;
-			this.stageText.addEventListener(Event.CHANGE, stageText_changeHandler);
-			this.stageText.addEventListener(KeyboardEvent.KEY_DOWN, stageText_keyDownHandler);
-			this.stageText.addEventListener(FocusEvent.FOCUS_IN, stageText_focusInHandler);
-			this.stageText.addEventListener(FocusEvent.FOCUS_OUT, stageText_focusOutHandler);
-			this.stageText.addEventListener(Event.COMPLETE, stageText_completeHandler);
-		}
-
-		/**
-		 * @private
-		 */
-		protected function removedFromStageHandler(event:starling.events.Event):void
-		{
-			Starling.current.nativeStage.removeChild(this._measureTextField);
-
-			this._touchPointID = -1;
-
-			this.stageText.removeEventListener(Event.CHANGE, stageText_changeHandler);
-			this.stageText.removeEventListener(KeyboardEvent.KEY_DOWN, stageText_keyDownHandler);
-			this.stageText.removeEventListener(FocusEvent.FOCUS_IN, stageText_focusInHandler);
-			this.stageText.removeEventListener(FocusEvent.FOCUS_OUT, stageText_focusOutHandler);
-			this.stageText.removeEventListener(Event.COMPLETE, stageText_completeHandler);
-			this.stageText.stage = null;
-			this.stageText.dispose();
-			this.stageText = null;
 		}
 
 		/**
@@ -1011,10 +788,11 @@ package feathers.controls
 		{
 			if(!this._isEnabled)
 			{
+				this._touchPointID = -1;
 				return;
 			}
 
-			const touches:Vector.<Touch> = event.getTouches(this);
+			const touches:Vector.<Touch> = event.getTouches(this, null, HELPER_TOUCHES_VECTOR);
 			if(touches.length == 0)
 			{
 				//end hover
@@ -1025,6 +803,7 @@ package feathers.controls
 				}
 				return;
 			}
+
 			if(this._touchPointID >= 0)
 			{
 				var touch:Touch;
@@ -1038,126 +817,80 @@ package feathers.controls
 				}
 				if(!touch)
 				{
-					//end hover
-					if(Mouse.supportsNativeCursor && this._oldMouseCursor)
-					{
-						Mouse.cursor = this._oldMouseCursor;
-						this._oldMouseCursor = null;
-					}
+					HELPER_TOUCHES_VECTOR.length = 0;
 					return;
 				}
 				if(touch.phase == TouchPhase.ENDED)
 				{
 					this._touchPointID = -1;
-					touch.getLocation(this, helperPoint);
-					ScrollRectManager.adjustTouchLocation(helperPoint, this);
-					var isInBounds:Boolean = this.hitTest(helperPoint, true) != null;
-					if(!this._stageTextHasFocus && isInBounds)
+					touch.getLocation(this, HELPER_POINT);
+					var isInBounds:Boolean = this.hitTest(HELPER_POINT, true) != null;
+					if(!this._textEditorHasFocus && isInBounds)
 					{
-						this.setFocusInternal(touch);
+						HELPER_POINT.x -= this._paddingLeft;
+						HELPER_POINT.y -= this._paddingTop;
+						this.textEditor.setFocus(HELPER_POINT);
 					}
-					return;
 				}
 			}
 			else
 			{
 				for each(touch in touches)
 				{
-					if(touch.phase == TouchPhase.HOVER)
+					if(touch.phase == TouchPhase.BEGAN)
+					{
+						this._touchPointID = touch.id;
+						break;
+					}
+					else if(touch.phase == TouchPhase.HOVER)
 					{
 						if(Mouse.supportsNativeCursor && !this._oldMouseCursor)
 						{
 							this._oldMouseCursor = Mouse.cursor;
 							Mouse.cursor = MouseCursor.IBEAM;
 						}
-						return;
-					}
-					else if(touch.phase == TouchPhase.BEGAN)
-					{
-						this._touchPointID = touch.id;
-						return;
+						break;
 					}
 				}
 			}
+			HELPER_TOUCHES_VECTOR.length = 0;
 		}
 
 		/**
 		 * @private
 		 */
-		protected function stageText_changeHandler(event:Event):void
+		protected function textEditor_changeHandler(event:Event):void
 		{
-			this.text = this.stageText.text;
+			this.text = this.textEditor.text;
 		}
 
 		/**
 		 * @private
 		 */
-		protected function stageText_completeHandler(event:Event):void
+		protected function textEditor_enterHandler(event:Event):void
 		{
-			this.stageText.removeEventListener(Event.COMPLETE, stageText_completeHandler);
-			this.invalidate();
-
-			if(this._isWaitingToSetFocus && this._text)
-			{
-				this.validate();
-				this.setFocus();
-			}
+			this.dispatchEventWith(FeathersEventType.ENTER);
 		}
 
 		/**
 		 * @private
 		 */
-		protected function stageText_focusInHandler(event:FocusEvent):void
+		protected function textEditor_focusInHandler(event:Event):void
 		{
-			this._stageTextHasFocus = true;
-			if(this._textSnapshot)
-			{
-				this._textSnapshot.visible = false;
-			}
-			if(this._savedSelectionIndex < 0)
-			{
-				//we can't detect what character was tapped, so put the cursor at
-				//the end of the text
-				this._savedSelectionIndex = this.stageText.text.length;
-			}
-			this.stageText.selectRange(this._savedSelectionIndex, this._savedSelectionIndex);
-			this._savedSelectionIndex = -1;
-			this.invalidate(INVALIDATION_FLAG_SKIN);
+			this._textEditorHasFocus = true;
+			this._touchPointID = -1;
+			this.invalidate(INVALIDATION_FLAG_STATE);
+			this.dispatchEventWith(FeathersEventType.FOCUS_IN);
 		}
 
 		/**
 		 * @private
 		 */
-		protected function stageText_focusOutHandler(event:FocusEvent):void
+		protected function textEditor_focusOutHandler(event:Event):void
 		{
-			this._stageTextHasFocus = false;
-			//since StageText doesn't expose its scroll position, we need to
-			//set the selection back to the beginning to scroll there. it's a
-			//hack, but so is everything about StageText.
-			//in other news, why won't 0,0 work here?
-			this.stageText.selectRange(1, 1);
-
-			this.invalidate(INVALIDATION_FLAG_DATA);
-			this.invalidate(INVALIDATION_FLAG_SKIN);
-		}
-
-		/**
-		 * @private
-		 */
-		protected function stageText_keyDownHandler(event:KeyboardEvent):void
-		{
-			if(event.keyCode == Keyboard.ENTER)
-			{
-				this._onEnter.dispatch(this);
-			}
-			else if(event.keyCode == Keyboard.BACK)
-			{
-				//even a listener on the stage won't detect the back key press that
-				//will close the application if the StageText has focus, so we
-				//always need to prevent it here
-				event.preventDefault();
-				Starling.current.nativeStage.focus = Starling.current.nativeStage;
-			}
+			this._textEditorHasFocus = false;
+			this.invalidate(INVALIDATION_FLAG_STATE);
+			this.dispatchEventWith(FeathersEventType.FOCUS_OUT);
 		}
 	}
 }

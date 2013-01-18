@@ -1,35 +1,19 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.dragDrop
 {
+	import feathers.core.PopUpManager;
+	import feathers.events.DragDropEvent;
+
 	import flash.errors.IllegalOperationError;
 	import flash.events.KeyboardEvent;
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
-
-	import feathers.core.PopUpManager;
 
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
@@ -55,6 +39,11 @@ package feathers.dragDrop
 		/**
 		 * @private
 		 */
+		private static const HELPER_TOUCHES_VECTOR:Vector.<Touch> = new <Touch>[];
+
+		/**
+		 * @private
+		 */
 		protected static var _touchPointID:int = -1;
 
 		/**
@@ -70,9 +59,16 @@ package feathers.dragDrop
 
 		/**
 		 * @private
-		 * The source of the current drag.
 		 */
-		protected static var dragSource:IDragSource;
+		protected static var _dragSource:IDragSource;
+
+		/**
+		 * The <code>IDragSource</code> that started the current drag.
+		 */
+		public static function get dragSource():IDragSource
+		{
+			return _dragSource;
+		}
 
 		/**
 		 * @private
@@ -159,7 +155,7 @@ package feathers.dragDrop
 			{
 				throw new ArgumentError("Drag data cannot be null.");
 			}
-			dragSource = source;
+			_dragSource = source;
 			_dragData = data;
 			_touchPointID = touch.id;
 			avatar = dragAvatar;
@@ -176,7 +172,7 @@ package feathers.dragDrop
 			}
 			Starling.current.stage.addEventListener(TouchEvent.TOUCH, stage_touchHandler);
 			Starling.current.nativeStage.addEventListener(KeyboardEvent.KEY_DOWN, nativeStage_keyDownHandler, false, 0, true);
-			dragSource.onDragStart.dispatch(dragSource, data);
+			_dragSource.dispatchEvent(new DragDropEvent(DragDropEvent.DRAG_START, data, false));
 
 			updateDropTarget(HELPER_POINT);
 		}
@@ -218,13 +214,13 @@ package feathers.dragDrop
 			}
 			if(dropTarget)
 			{
-				dropTarget.onDragExit.dispatch(dropTarget, _dragData, dropTargetLocalX, dropTargetLocalY);
+				dropTarget.dispatchEvent(new DragDropEvent(DragDropEvent.DRAG_EXIT, _dragData, false, dropTargetLocalX, dropTargetLocalY));
 				dropTarget = null;
 			}
-			const source:IDragSource = dragSource;
+			const source:IDragSource = _dragSource;
 			const data:DragData = _dragData;
 			cleanup();
-			source.onDragComplete.dispatch(source, data, isDropped);
+			source.dispatchEvent(new DragDropEvent(DragDropEvent.DRAG_COMPLETE, _dragData, isDropped));
 		}
 
 		/**
@@ -244,7 +240,7 @@ package feathers.dragDrop
 			}
 			Starling.current.stage.removeEventListener(TouchEvent.TOUCH, stage_touchHandler);
 			Starling.current.nativeStage.removeEventListener(KeyboardEvent.KEY_DOWN, nativeStage_keyDownHandler);
-			dragSource = null;
+			_dragSource = null;
 			_dragData = null;
 		}
 
@@ -264,10 +260,10 @@ package feathers.dragDrop
 			}
 			if(target != dropTarget)
 			{
-				if(dropTarget && isAccepted)
+				if(dropTarget)
 				{
 					//notice that we can reuse the previously saved location
-					dropTarget.onDragExit.dispatch(dropTarget, _dragData, dropTargetLocalX, dropTargetLocalY);
+					dropTarget.dispatchEvent(new DragDropEvent(DragDropEvent.DRAG_EXIT, _dragData, false, dropTargetLocalX, dropTargetLocalY));
 				}
 				dropTarget = IDropTarget(target);
 				isAccepted = false;
@@ -275,14 +271,14 @@ package feathers.dragDrop
 				{
 					dropTargetLocalX = location.x;
 					dropTargetLocalY = location.y;
-					dropTarget.onDragEnter.dispatch(dropTarget, _dragData, dropTargetLocalX, dropTargetLocalY);
+					dropTarget.dispatchEvent(new DragDropEvent(DragDropEvent.DRAG_ENTER, _dragData, false, dropTargetLocalX, dropTargetLocalY));
 				}
 			}
 			else if(dropTarget)
 			{
 				dropTargetLocalX = location.x;
 				dropTargetLocalY = location.y;
-				dropTarget.onDragMove.dispatch(dropTarget, _dragData, dropTargetLocalX, dropTargetLocalY)
+				dropTarget.dispatchEvent(new DragDropEvent(DragDropEvent.DRAG_MOVE, _dragData, false, dropTargetLocalX, dropTargetLocalY));
 			}
 		}
 
@@ -304,9 +300,10 @@ package feathers.dragDrop
 		protected static function stage_touchHandler(event:TouchEvent):void
 		{
 			const stage:Stage = Starling.current.stage;
-			const touches:Vector.<Touch> = event.getTouches(stage);
+			const touches:Vector.<Touch> = event.getTouches(stage, null, HELPER_TOUCHES_VECTOR);
 			if(touches.length == 0 || _touchPointID < 0)
 			{
+				HELPER_TOUCHES_VECTOR.length = 0;
 				return;
 			}
 			var touch:Touch;
@@ -320,6 +317,7 @@ package feathers.dragDrop
 			}
 			if(!touch)
 			{
+				HELPER_TOUCHES_VECTOR.length = 0;
 				return;
 			}
 			if(touch.phase == TouchPhase.MOVED)
@@ -338,13 +336,13 @@ package feathers.dragDrop
 				var isDropped:Boolean = false;
 				if(dropTarget && isAccepted)
 				{
-					dropTarget.onDragDrop.dispatch(dropTarget, _dragData, dropTargetLocalX, dropTargetLocalY);
+					dropTarget.dispatchEvent(new DragDropEvent(DragDropEvent.DRAG_DROP, _dragData, true, dropTargetLocalX, dropTargetLocalY));
 					isDropped = true;
 				}
 				dropTarget = null;
 				completeDrag(isDropped);
-				return;
 			}
+			HELPER_TOUCHES_VECTOR.length = 0;
 		}
 	}
 }

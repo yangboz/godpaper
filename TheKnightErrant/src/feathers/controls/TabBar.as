@@ -1,39 +1,33 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.controls
 {
 	import feathers.core.FeathersControl;
 	import feathers.core.PropertyProxy;
 	import feathers.core.ToggleGroup;
 	import feathers.data.ListCollection;
-	import org.osflash.signals.ISignal;
-	import org.osflash.signals.Signal;
+	import feathers.events.CollectionEventType;
+
+	import starling.events.Event;
+
+	/**
+	 * Dispatched when the selected tab changes.
+	 *
+	 * @eventType starling.events.Event.CHANGE
+	 */
+	[Event(name="change",type="starling.events.Event")]
 
 	[DefaultProperty("dataProvider")]
 	/**
-	 * A line of tabs, where one may be selected at a time.
+	 * A line of tabs (vertical or horizontal), where one may be selected at a
+	 * time.
+	 *
+	 * @see http://wiki.starling-framework.org/feathers/tab-bar
 	 */
 	public class TabBar extends FeathersControl
 	{
@@ -41,6 +35,11 @@ package feathers.controls
 		 * @private
 		 */
 		protected static const INVALIDATION_FLAG_TAB_FACTORY:String = "tabFactory";
+
+		/**
+		 * @private
+		 */
+		protected static const NOT_PENDING_INDEX:int = -2;
 
 		/**
 		 * @private
@@ -105,7 +104,7 @@ package feathers.controls
 		protected var lastTabName:String = DEFAULT_CHILD_NAME_TAB;
 
 		/**
-		 * @private
+		 * The toggle group.
 		 */
 		protected var toggleGroup:ToggleGroup;
 
@@ -142,7 +141,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _dataProvider:ListCollection;
+		protected var _dataProvider:ListCollection;
 
 		/**
 		 * The collection of data to be displayed with tabs.
@@ -165,12 +164,20 @@ package feathers.controls
 			}
 			if(this._dataProvider)
 			{
-				this._dataProvider.onChange.remove(dataProvider_onChange);
+				this._dataProvider.removeEventListener(CollectionEventType.ADD_ITEM, dataProvider_addItemHandler);
+				this._dataProvider.removeEventListener(CollectionEventType.REMOVE_ITEM, dataProvider_removeItemHandler);
+				this._dataProvider.removeEventListener(CollectionEventType.REPLACE_ITEM, dataProvider_replaceItemHandler);
+				this._dataProvider.removeEventListener(CollectionEventType.UPDATE_ITEM, dataProvider_updateItemHandler);
+				this._dataProvider.removeEventListener(CollectionEventType.RESET, dataProvider_resetHandler);
 			}
 			this._dataProvider = value;
 			if(this._dataProvider)
 			{
-				this._dataProvider.onChange.add(dataProvider_onChange);
+				this._dataProvider.addEventListener(CollectionEventType.ADD_ITEM, dataProvider_addItemHandler);
+				this._dataProvider.addEventListener(CollectionEventType.REMOVE_ITEM, dataProvider_removeItemHandler);
+				this._dataProvider.addEventListener(CollectionEventType.REPLACE_ITEM, dataProvider_replaceItemHandler);
+				this._dataProvider.addEventListener(CollectionEventType.UPDATE_ITEM, dataProvider_updateItemHandler);
+				this._dataProvider.addEventListener(CollectionEventType.RESET, dataProvider_resetHandler);
 			}
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}
@@ -180,12 +187,16 @@ package feathers.controls
 		 */
 		protected var _direction:String = DIRECTION_HORIZONTAL;
 
+		[Inspectable(type="String",enumeration="horizontal,vertical")]
 		/**
 		 * The tab bar layout is either vertical or horizontal.
+		 *
+		 * @see #DIRECTION_HORIZONTAL
+		 * @see #DIRECTION_VERTICAL
 		 */
 		public function get direction():String
 		{
-			return _direction;
+			return this._direction;
 		}
 
 		/**
@@ -211,7 +222,7 @@ package feathers.controls
 		 */
 		public function get gap():Number
 		{
-			return _gap;
+			return this._gap;
 		}
 
 		/**
@@ -230,7 +241,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _tabFactory:Function = defaultTabFactory;
+		protected var _tabFactory:Function = defaultTabFactory;
 
 		/**
 		 * Creates a new tab.
@@ -239,6 +250,7 @@ package feathers.controls
 		 *
 		 * <pre>function():Button</pre>
 		 *
+		 * @see feathers.controls.Button
 		 * @see #firstTabFactory
 		 * @see #lastTabFactory
 		 */
@@ -263,7 +275,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _firstTabFactory:Function;
+		protected var _firstTabFactory:Function;
 
 		/**
 		 * Creates a new first tab. If the firstTabFactory is null, then the
@@ -273,6 +285,7 @@ package feathers.controls
 		 *
 		 * <pre>function():Button</pre>
 		 *
+		 * @see feathers.controls.Button
 		 * @see #tabFactory
 		 * @see #lastTabFactory
 		 */
@@ -297,7 +310,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _lastTabFactory:Function;
+		protected var _lastTabFactory:Function;
 
 		/**
 		 * Creates a new last tab. If the lastTabFactory is null, then the
@@ -307,6 +320,7 @@ package feathers.controls
 		 *
 		 * <pre>function():Button</pre>
 		 *
+		 * @see feathers.controls.Button
 		 * @see #tabFactory
 		 * @see #firstTabFactory
 		 */
@@ -331,7 +345,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _tabInitializer:Function = defaultTabInitializer;
+		protected var _tabInitializer:Function = defaultTabInitializer;
 
 		/**
 		 * Modifies a tab, perhaps by changing its label and icons, based on the
@@ -340,6 +354,9 @@ package feathers.controls
 		 * <code>label</code> and/or any of the <code>Button</code> icon fields
 		 * (<code>defaultIcon</code>, <code>upIcon</code>, etc.) are present in
 		 * the item.
+		 *
+		 * <p>This function is expected to have the following signature:</p>
+		 * <pre>function( tab:Button, item:Object ):void</pre>
 		 */
 		public function get tabInitializer():Function
 		{
@@ -362,7 +379,12 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _pendingSelectedIndex:int = -1;
+		protected var _ignoreSelectionChanges:Boolean = false;
+
+		/**
+		 * @private
+		 */
+		protected var _pendingSelectedIndex:int = NOT_PENDING_INDEX;
 
 		/**
 		 * The index of the currently selected tab. Returns -1 if no tab is
@@ -370,9 +392,13 @@ package feathers.controls
 		 */
 		public function get selectedIndex():int
 		{
-			if(this._pendingSelectedIndex >= 0 || !this.toggleGroup)
+			if(this._pendingSelectedIndex != NOT_PENDING_INDEX)
 			{
 				return this._pendingSelectedIndex;
+			}
+			if(!this.toggleGroup)
+			{
+				return -1;
 			}
 			return this.toggleGroup.selectedIndex;
 		}
@@ -382,6 +408,11 @@ package feathers.controls
 		 */
 		public function set selectedIndex(value:int):void
 		{
+			if(this._pendingSelectedIndex == value ||
+				(this._pendingSelectedIndex == NOT_PENDING_INDEX && this.toggleGroup && this.toggleGroup.selectedIndex == value))
+			{
+				return;
+			}
 			this._pendingSelectedIndex = value;
 			this.invalidate(INVALIDATION_FLAG_SELECTED);
 		}
@@ -516,27 +547,14 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected var _onChange:Signal = new Signal(TabBar);
-
-		/**
-		 * Dispatched when the selected tab changes.
-		 */
-		public function get onChange():ISignal
-		{
-			return this._onChange;
-		}
-
-		/**
-		 * @private
-		 */
-		private var _tabProperties:PropertyProxy;
+		protected var _tabProperties:PropertyProxy;
 
 		/**
 		 * A set of key/value pairs to be passed down to all of the tab bar's
 		 * tabs. These values are shared by each tabs, so values that cannot be
 		 * shared (such as display objects that need to be added to the display
 		 * list) should be passed to tabs in another way (such as with an
-		 * <code>AddedWatcher</code>).
+		 * <code>DisplayListWatcher</code>).
 		 *
 		 * <p>If the subcomponent has its own subcomponents, their properties
 		 * can be set too, using attribute <code>&#64;</code> notation. For example,
@@ -545,13 +563,14 @@ package feathers.controls
 		 * you can use the following syntax:</p>
 		 * <pre>list.scrollerProperties.&#64;verticalScrollBarProperties.&#64;thumbProperties.defaultSkin = new Image(texture);</pre>
 		 *
-		 * @see AddedWatcher
+		 * @see feathers.controls.Button
+		 * @see feathers.core.DisplayListWatcher
 		 */
 		public function get tabProperties():Object
 		{
 			if(!this._tabProperties)
 			{
-				this._tabProperties = new PropertyProxy(tabProperties_onChange);
+				this._tabProperties = new PropertyProxy(childProperties_onChange);
 			}
 			return this._tabProperties;
 		}
@@ -580,23 +599,14 @@ package feathers.controls
 			}
 			if(this._tabProperties)
 			{
-				this._tabProperties.onChange.remove(tabProperties_onChange);
+				this._tabProperties.removeOnChangeCallback(childProperties_onChange);
 			}
 			this._tabProperties = PropertyProxy(value);
 			if(this._tabProperties)
 			{
-				this._tabProperties.onChange.add(tabProperties_onChange);
+				this._tabProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
-		}
-
-		/**
-		 * @private
-		 */
-		override public function dispose():void
-		{
-			this._onChange.removeAll();
-			super.dispose();
 		}
 
 		/**
@@ -606,7 +616,7 @@ package feathers.controls
 		{
 			this.toggleGroup = new ToggleGroup();
 			this.toggleGroup.isSelectionRequired = true;
-			this.toggleGroup.onChange.add(toggleGroup_onChange);
+			this.toggleGroup.addEventListener(Event.CHANGE, toggleGroup_changeHandler);
 		}
 
 		/**
@@ -654,18 +664,14 @@ package feathers.controls
 		 */
 		protected function commitSelection():void
 		{
-			if(this._pendingSelectedIndex < 0 || !this.toggleGroup)
+			if(this._pendingSelectedIndex == NOT_PENDING_INDEX || !this.toggleGroup)
 			{
 				return;
 			}
-			if(this.toggleGroup.selectedIndex == this._pendingSelectedIndex)
-			{
-				this._pendingSelectedIndex = -1;
-				return;
-			}
+
 			this.toggleGroup.selectedIndex = this._pendingSelectedIndex;
-			this._pendingSelectedIndex = -1;
-			this._onChange.dispatch(this);
+			this._pendingSelectedIndex = NOT_PENDING_INDEX;
+			this.dispatchEventWith(Event.CHANGE);
 		}
 
 		/**
@@ -751,6 +757,9 @@ package feathers.controls
 		 */
 		protected function refreshTabs(isFactoryInvalid:Boolean):void
 		{
+			this._ignoreSelectionChanges = true;
+			var oldSelectedIndex:int = this.toggleGroup.selectedIndex;
+			this.toggleGroup.removeAllItems();
 			var temp:Vector.<Button> = this.inactiveTabs;
 			this.inactiveTabs = this.activeTabs;
 			this.activeTabs = temp;
@@ -794,9 +803,22 @@ package feathers.controls
 				{
 					tab = this.createTab(item);
 				}
+				this.toggleGroup.addItem(tab);
 				this.activeTabs.push(tab);
 			}
+
 			this.clearInactiveTabs();
+			if(oldSelectedIndex >= 0)
+			{
+				const newSelectedIndex:int = Math.min(this.activeTabs.length - 1, oldSelectedIndex);
+				this._ignoreSelectionChanges = newSelectedIndex == oldSelectedIndex;
+				this.toggleGroup.selectedIndex = newSelectedIndex;
+			}
+			else
+			{
+				this.dispatchEventWith(Event.CHANGE);
+			}
+			this._ignoreSelectionChanges = false;
 		}
 
 		/**
@@ -837,17 +859,20 @@ package feathers.controls
 			else
 			{
 				const factory:Function = this._firstTabFactory != null ? this._firstTabFactory : this._tabFactory;
-				tab = factory();
+				tab = Button(factory());
 				if(this._customFirstTabName)
 				{
 					tab.nameList.add(this._customFirstTabName);
+				}
+				else if(this._customTabName)
+				{
+					tab.nameList.add(this._customTabName);
 				}
 				else
 				{
 					tab.nameList.add(this.firstTabName);
 				}
 				tab.isToggle = true;
-				this.toggleGroup.addItem(tab);
 				this.addChild(tab);
 			}
 			this._tabInitializer(tab, item);
@@ -867,17 +892,20 @@ package feathers.controls
 			else
 			{
 				const factory:Function = this._lastTabFactory != null ? this._lastTabFactory : this._tabFactory;
-				tab = factory();
+				tab = Button(factory());
 				if(this._customLastTabName)
 				{
 					tab.nameList.add(this._customLastTabName);
+				}
+				else if(this._customTabName)
+				{
+					tab.nameList.add(this._customTabName);
 				}
 				else
 				{
 					tab.nameList.add(this.lastTabName);
 				}
 				tab.isToggle = true;
-				this.toggleGroup.addItem(tab);
 				this.addChild(tab);
 			}
 			this._tabInitializer(tab, item);
@@ -901,7 +929,6 @@ package feathers.controls
 					tab.nameList.add(this.tabName);
 				}
 				tab.isToggle = true;
-				this.toggleGroup.addItem(tab);
 				this.addChild(tab);
 			}
 			else
@@ -1000,7 +1027,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function tabProperties_onChange(proxy:PropertyProxy, name:Object):void
+		protected function childProperties_onChange(proxy:PropertyProxy, name:String):void
 		{
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -1008,19 +1035,70 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function toggleGroup_onChange(toggleGroup:ToggleGroup):void
+		protected function toggleGroup_changeHandler(event:Event):void
 		{
-			if(this._pendingSelectedIndex >= 0)
+			if(this._ignoreSelectionChanges || this._pendingSelectedIndex != NOT_PENDING_INDEX)
 			{
 				return;
 			}
-			this._onChange.dispatch(this);
+			this.dispatchEventWith(Event.CHANGE);
 		}
 
 		/**
 		 * @private
 		 */
-		protected function dataProvider_onChange(data:ListCollection):void
+		protected function dataProvider_addItemHandler(event:Event, index:int):void
+		{
+			if(this.toggleGroup && this.toggleGroup.selectedIndex >= index)
+			{
+				//let's keep the same item selected
+				this._pendingSelectedIndex = this.toggleGroup.selectedIndex + 1;
+				this.invalidate(INVALIDATION_FLAG_SELECTED);
+			}
+			this.invalidate(INVALIDATION_FLAG_DATA);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function dataProvider_removeItemHandler(event:Event, index:int):void
+		{
+			if(this.toggleGroup && this.toggleGroup.selectedIndex > index)
+			{
+				//let's keep the same item selected
+				this._pendingSelectedIndex = this.toggleGroup.selectedIndex - 1;
+				this.invalidate(INVALIDATION_FLAG_SELECTED);
+			}
+			this.invalidate(INVALIDATION_FLAG_DATA);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function dataProvider_resetHandler(event:Event):void
+		{
+			if(this.toggleGroup && this._dataProvider.length > 0)
+			{
+				//the data provider has changed drastically. we should reset the
+				//selection to the first item.
+				this._pendingSelectedIndex = 0;
+				this.invalidate(INVALIDATION_FLAG_SELECTED);
+			}
+			this.invalidate(INVALIDATION_FLAG_DATA);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function dataProvider_replaceItemHandler(event:Event, index:int):void
+		{
+			this.invalidate(INVALIDATION_FLAG_DATA);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function dataProvider_updateItemHandler(event:Event, index:int):void
 		{
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}

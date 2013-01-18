@@ -47,8 +47,9 @@ package com.godpaper.as3.views.screens
 	import mx.logging.ILogger;
 	import mx.resources.IResourceManager;
 	import mx.resources.ResourceManager;
-
+	
 	import starling.display.DisplayObject;
+	import starling.events.Event;
 	import starling.text.TextField;
 
 	/**
@@ -166,17 +167,20 @@ package com.godpaper.as3.views.screens
 			//PickerList cannot simply pass its labelField down to item
 			//renderers automatically
 			this._picker_language.listProperties.@itemRendererProperties.labelField = "text";
-			this._picker_language.onChange.add(picker_language_onChange);
+//			this._picker_language.onChange.add(picker_language_onChange);
+			this._picker_language.addEventListener(starling.events.Event.CHANGE,picker_language_onChange);
 			//
 			this._button_done = new Button();
 //			this._button_done.label = "Done";
 			this._button_done.label = this.resourceManager.getString(this.bundleName,"BTN_DONE");
-			this._button_done.onRelease.add(doneButton_onRelease);
+//			this._button_done.onRelease.add(doneButton_onRelease);
+			this._button_done.addEventListener(starling.events.Event.TRIGGERED,doneButton_onRelease);
 			//
 			this._button_back = new Button();
 //			this._button_back.label = "BACK";
 			this._button_back.label = this.resourceManager.getString(this.bundleName,"BTN_BACK");
-			this._button_back.onRelease.add(backButton_onRelease);
+//			this._button_back.onRelease.add(backButton_onRelease);
+			this._button_back.addEventListener(starling.events.Event.TRIGGERED,backButton_onRelease);
 			//
 			this._header = new Header();
 //			this._header.title = "Settings";

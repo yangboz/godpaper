@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2012 Josh Tynjala
+Copyright 2012-2013 Joshua Tynjala
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -25,8 +25,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 package feathers.core
 {
 	import flash.utils.Dictionary;
-	import flash.utils.describeType;
-	import flash.utils.getDefinitionByName;
 
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -46,6 +44,8 @@ package feathers.core
 	{
 		/**
 		 * Constructor.
+		 *
+		 * @param root		The root display object to watch (not necessarily Starling's root object)
 		 */
 		public function DisplayListWatcher(root:DisplayObjectContainer)
 		{
@@ -57,7 +57,7 @@ package feathers.core
 		 * The minimum base class required before the AddedWatcher will check
 		 * to see if a particular display object has any initializers.
 		 */
-		public var requiredBaseClass:Class = FeathersControl;
+		public var requiredBaseClass:Class = IFeathersControl;
 
 		/**
 		 * Determines if only the object added should be processed or if its
@@ -66,14 +66,84 @@ package feathers.core
 		public var processRecursively:Boolean = true;
 
 		/**
+		 * @private
+		 * Tracks the objects that have been initialized. Uses weak keys so that
+		 * the tracked objects can be garbage collected.
+		 */
+		protected var initializedObjects:Dictionary = new Dictionary(true);
+
+		/**
+		 * @private
+		 */
+		protected var _initializeOnce:Boolean = true;
+
+		/**
+		 * Determines if objects added to the display list are initialized only
+		 * once or every time that they are re-added.
+		 */
+		public function get initializeOnce():Boolean
+		{
+			return this._initializeOnce;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set initializeOnce(value:Boolean):void
+		{
+			if(this._initializeOnce == value)
+			{
+				return;
+			}
+			this._initializeOnce = value;
+			if(value)
+			{
+				this.initializedObjects = new Dictionary(true);
+			}
+			else
+			{
+				this.initializedObjects = null
+			}
+		}
+
+		/**
 		 * The root of the display list that is watched for added children.
 		 */
 		protected var root:DisplayObjectContainer;
 
-		private var _initializerNoNameTypeMap:Dictionary = new Dictionary(true);
-		private var _initializerNameTypeMap:Dictionary = new Dictionary(true);
-		private var _initializerSuperTypeMap:Dictionary = new Dictionary(true);
-		private var _initializerSuperTypes:Vector.<Class> = new <Class>[];
+		/**
+		 * @private
+		 */
+		protected var _initializerNoNameTypeMap:Dictionary = new Dictionary(true);
+
+		/**
+		 * @private
+		 */
+		protected var _initializerNameTypeMap:Dictionary = new Dictionary(true);
+
+		/**
+		 * @private
+		 */
+		protected var _initializerSuperTypeMap:Dictionary = new Dictionary(true);
+
+		/**
+		 * @private
+		 */
+		protected var _initializerSuperTypes:Vector.<Class> = new <Class>[];
+
+		/**
+		 * Stops listening to the root and cleans up anything else that needs to
+		 * be disposed. If a <code>DisplayListWatcher</code> is extended for a
+		 * theme, it should also dispose textures and other assets.
+		 */
+		public function dispose():void
+		{
+			if(this.root)
+			{
+				this.root.removeEventListener(Event.ADDED, addedHandler);
+				this.root = null;
+			}
+		}
 		
 		/**
 		 * Sets the initializer for a specific class.
@@ -181,7 +251,7 @@ package feathers.core
 					this.applyAllStylesForTypeFromMaps(target, type, this._initializerSuperTypeMap);
 				}
 			}
-			type = Object(target).constructor;
+			type = Class(Object(target).constructor);
 			this.applyAllStylesForTypeFromMaps(target, type, this._initializerNoNameTypeMap, this._initializerNameTypeMap);
 		}
 
@@ -196,9 +266,9 @@ package feathers.core
 				const nameTable:Object = nameMap[type];
 				if(nameTable)
 				{
-					if(target is FeathersControl)
+					if(target is IFeathersControl)
 					{
-						const uiControl:FeathersControl = FeathersControl(target);
+						const uiControl:IFeathersControl = IFeathersControl(target);
 						for(var name:String in nameTable)
 						{
 							if(uiControl.nameList.contains(name))
@@ -230,7 +300,12 @@ package feathers.core
 			const targetAsRequiredBaseClass:DisplayObject = DisplayObject(target as requiredBaseClass);
 			if(targetAsRequiredBaseClass)
 			{
-				this.processAllInitializers(target);
+				const isInitialized:Boolean = this._initializeOnce && this.initializedObjects[targetAsRequiredBaseClass];
+				if(!isInitialized)
+				{
+					this.initializedObjects[targetAsRequiredBaseClass] = true;
+					this.processAllInitializers(target);
+				}
 			}
 
 			if(this.processRecursively)

@@ -1,37 +1,19 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.controls.renderers
 {
 	import feathers.controls.GroupedList;
+	import feathers.controls.ImageLoader;
 	import feathers.core.FeathersControl;
 	import feathers.core.ITextRenderer;
 	import feathers.core.PropertyProxy;
 
 	import starling.display.DisplayObject;
-	import starling.display.Image;
-	import starling.textures.Texture;
 
 	/**
 	 * The default renderer used for headers and footers in a GroupedList
@@ -78,9 +60,9 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		protected static function defaultImageFactory(texture:Texture):Image
+		protected static function defaultImageLoaderFactory():ImageLoader
 		{
-			return new Image(texture);
+			return new ImageLoader();
 		}
 
 		/**
@@ -98,7 +80,7 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		protected var contentImage:Image;
+		protected var contentImage:ImageLoader;
 
 		/**
 		 * @private
@@ -113,7 +95,7 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		private var _data:Object;
+		protected var _data:Object;
 
 		/**
 		 * @inheritDoc
@@ -139,7 +121,7 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		private var _groupIndex:int = -1;
+		protected var _groupIndex:int = -1;
 
 		/**
 		 * @inheritDoc
@@ -160,7 +142,7 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		private var _layoutIndex:int = -1;
+		protected var _layoutIndex:int = -1;
 
 		/**
 		 * @inheritDoc
@@ -261,27 +243,27 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		private var _contentField:String = "content";
+		protected var _contentField:String = "content";
 
 		/**
 		 * The field in the item that contains a display object to be positioned
-		 * in the content position of the renderer. If you wish to display an
-		 * <code>Image</code> in the content position, it's better for
-		 * performance to use <code>contentTextureField</code> instead.
+		 * in the content position of the renderer. If you wish to display a
+		 * texture in the content position, it's better for performance to use
+		 * <code>contentSourceField</code> instead.
 		 *
 		 * <p>All of the content fields and functions, ordered by priority:</p>
 		 * <ol>
-		 *     <li><code>contentTextureFunction</code></li>
-		 *     <li><code>contentTextureField</code></li>
+		 *     <li><code>contentSourceFunction</code></li>
+		 *     <li><code>contentSourceField</code></li>
 		 *     <li><code>contentLabelFunction</code></li>
 		 *     <li><code>contentLabelField</code></li>
 		 *     <li><code>contentFunction</code></li>
 		 *     <li><code>contentField</code></li>
 		 * </ol>
 		 *
-		 * @see #contentTextureField
+		 * @see #contentSourceField
 		 * @see #contentFunction
-		 * @see #contentTextureFunction
+		 * @see #contentSourceFunction
 		 * @see #contentLabelField
 		 * @see #contentLabelFunction
 		 */
@@ -306,21 +288,21 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		private var _contentFunction:Function;
+		protected var _contentFunction:Function;
 
 		/**
 		 * A function that returns a display object to be positioned in the
-		 * content position of the renderer. If you wish to display an
-		 * <code>Image</code> in the content position, it's better for
-		 * performance to use <code>contentTextureFunction</code> instead.
+		 * content position of the renderer. If you wish to display a texture in
+		 * the content position, it's better for performance to use
+		 * <code>contentSourceFunction</code> instead.
 		 *
 		 * <p>The function is expected to have the following signature:</p>
 		 * <pre>function( item:Object ):DisplayObject</pre>
 		 *
 		 * <p>All of the content fields and functions, ordered by priority:</p>
 		 * <ol>
-		 *     <li><code>contentTextureFunction</code></li>
-		 *     <li><code>contentTextureField</code></li>
+		 *     <li><code>contentSourceFunction</code></li>
+		 *     <li><code>contentSourceField</code></li>
 		 *     <li><code>contentLabelFunction</code></li>
 		 *     <li><code>contentLabelField</code></li>
 		 *     <li><code>contentFunction</code></li>
@@ -328,8 +310,8 @@ package feathers.controls.renderers
 		 * </ol>
 		 *
 		 * @see #contentField
-		 * @see #contentTextureField
-		 * @see #contentTextureFunction
+		 * @see #contentSourceField
+		 * @see #contentSourceFunction
 		 * @see #contentLabelField
 		 * @see #contentLabelFunction
 		 */
@@ -354,116 +336,121 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		private var _contentTextureField:String = "texture";
+		protected var _contentSourceField:String = "texture";
 
 		/**
-		 * The field in the item that contains a texture to be displayed in a
-		 * renderer-managed <code>Image</code> in the content position of the
-		 * renderer. The renderer will automatically reuse an internal
-		 * <code>Image</code> and swap the texture when the renderer's data
-		 * changes. This <code>Image</code> may be customized by
-		 * changing the <code>contentImageFactory</code>.
+		 * The field in the data that contains a <code>starling.textures.Texture</code>
+		 * or a URL that points to a bitmap to be used as the renderer's
+		 * content. The renderer will automatically manage and reuse an internal
+		 * <code>ImageLoader</code> sub-component and this value will be passed
+		 * to the <code>source</code> property. The <code>ImageLoader</code> may
+		 * be customized by changing the <code>contentLoaderFactory</code>.
 		 *
-		 * <p>Using an content texture will result in better performance than
-		 * passing in an <code>Image</code> through a <code>contentField</code>
-		 * or <code>contentFunction</code> because the renderer can avoid
-		 * costly display list manipulation.</p>
+		 * <p>Using an content source will result in better performance than
+		 * passing in an <code>ImageLoader</code> or <code>Image</code> through
+		 * <code>contentField</code> or <code>contentFunction</code> because the
+		 * renderer can avoid costly display list manipulation.</p>
 		 *
 		 * <p>All of the content fields and functions, ordered by priority:</p>
 		 * <ol>
-		 *     <li><code>contentTextureFunction</code></li>
-		 *     <li><code>contentTextureField</code></li>
+		 *     <li><code>contentSourceFunction</code></li>
+		 *     <li><code>contentSourceeField</code></li>
 		 *     <li><code>contentLabelFunction</code></li>
 		 *     <li><code>contentLabelField</code></li>
 		 *     <li><code>contentFunction</code></li>
 		 *     <li><code>contentField</code></li>
 		 * </ol>
 		 *
-		 * @see #contentImageFactory
-		 * @see #contentTextureFunction
+		 * @see feathers.controls.ImageLoader#source
+		 * @see #contentLoaderFactory
+		 * @see #contentSourceFunction
 		 * @see #contentField
 		 * @see #contentFunction
 		 * @see #contentLabelField
 		 * @see #contentLabelFunction
 		 */
-		public function get contentTextureField():String
+		public function get contentSourceField():String
 		{
-			return this._contentTextureField;
+			return this._contentSourceField;
 		}
 
 		/**
 		 * @private
 		 */
-		public function set contentTextureField(value:String):void
+		public function set contentSourceField(value:String):void
 		{
-			if(this._contentTextureField == value)
+			if(this._contentSourceField == value)
 			{
 				return;
 			}
-			this._contentTextureField = value;
+			this._contentSourceField = value;
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}
 
 		/**
 		 * @private
 		 */
-		private var _contentTextureFunction:Function;
+		protected var _contentSourceFunction:Function;
 
 		/**
-		 * A function that returns a texture to be displayed in a
-		 * renderer-managed <code>Image</code> in the content position of the
-		 * renderer. The renderer will automatically reuse an internal
-		 * <code>Image</code> and swap the texture when the renderer's data
-		 * changes. This <code>Image</code> may be customized by
-		 * changing the <code>contentImageFactory</code>.
+		 * A function used to generate a <code>starling.textures.Texture</code>
+		 * or a URL that points to a bitmap to be used as the renderer's
+		 * content. The renderer will automatically manage and reuse an internal
+		 * <code>ImageLoader</code> sub-component and this value will be passed
+		 * to the <code>source</code> property. The <code>ImageLoader</code> may
+		 * be customized by changing the <code>contentLoaderFactory</code>.
 		 *
-		 * <p>Using an content texture will result in better performance than
-		 * passing in an <code>Image</code> through a <code>contentField</code>
-		 * or <code>contentFunction</code> because the renderer can avoid
-		 * costly display list manipulation.</p>
+		 * <p>Using an content source will result in better performance than
+		 * passing in an <code>ImageLoader</code> or <code>Image</code> through
+		 * <code>contentField</code> or <code>contentFunction</code> because the
+		 * renderer can avoid costly display list manipulation.</p>
 		 *
 		 * <p>The function is expected to have the following signature:</p>
-		 * <pre>function( item:Object ):Texture</pre>
+		 * <pre>function( item:Object ):Object</pre>
+		 *
+		 * <p>The return value is a valid value for the <code>source</code>
+		 * property of an <code>ImageLoader</code> component.</p>
 		 *
 		 * <p>All of the content fields and functions, ordered by priority:</p>
 		 * <ol>
-		 *     <li><code>contentTextureFunction</code></li>
-		 *     <li><code>contentTextureField</code></li>
+		 *     <li><code>contentSourceFunction</code></li>
+		 *     <li><code>contentSourceField</code></li>
 		 *     <li><code>contentLabelFunction</code></li>
 		 *     <li><code>contentLabelField</code></li>
 		 *     <li><code>contentFunction</code></li>
 		 *     <li><code>contentField</code></li>
 		 * </ol>
 		 *
-		 * @see #contentImageFactory
-		 * @see #contentTextureField
+		 * @see feathers.controls.ImageLoader#source
+		 * @see #contentLoaderFactory
+		 * @see #contentSourceField
 		 * @see #contentField
 		 * @see #contentFunction
 		 * @see #contentLabelField
 		 * @see #contentLabelFunction
 		 */
-		public function get contentTextureFunction():Function
+		public function get contentSourceFunction():Function
 		{
-			return this._contentTextureFunction;
+			return this._contentSourceFunction;
 		}
 
 		/**
 		 * @private
 		 */
-		public function set contentTextureFunction(value:Function):void
+		public function set contentSourceFunction(value:Function):void
 		{
-			if(this.contentTextureFunction == value)
+			if(this.contentSourceFunction == value)
 			{
 				return;
 			}
-			this._contentTextureFunction = value;
+			this._contentSourceFunction = value;
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}
 
 		/**
 		 * @private
 		 */
-		private var _contentLabelField:String = "label";
+		protected var _contentLabelField:String = "label";
 
 		/**
 		 * The field in the item that contains a string to be displayed in a
@@ -492,8 +479,8 @@ package feathers.controls.renderers
 		 * @see #contentLabelFunction
 		 * @see #contentField
 		 * @see #contentFunction
-		 * @see #contentTextureField
-		 * @see #contentTextureFunction
+		 * @see #contentSourceField
+		 * @see #contentSourceFunction
 		 */
 		public function get contentLabelField():String
 		{
@@ -516,7 +503,7 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		private var _contentLabelFunction:Function;
+		protected var _contentLabelFunction:Function;
 
 		/**
 		 * A function that returns a string to be displayed in a
@@ -548,8 +535,8 @@ package feathers.controls.renderers
 		 * @see #contentLabelField
 		 * @see #contentField
 		 * @see #contentFunction
-		 * @see #contentTextureField
-		 * @see #contentTextureFunction
+		 * @see #contentSourceField
+		 * @see #contentSourceFunction
 		 */
 		public function get contentLabelFunction():Function
 		{
@@ -585,16 +572,16 @@ package feathers.controls.renderers
 		 */
 		protected function itemToContent(item:Object):DisplayObject
 		{
-			if(this._contentTextureFunction != null)
+			if(this._contentSourceFunction != null)
 			{
-				var texture:Texture = this._contentTextureFunction(item) as Texture;
-				this.refreshContentTexture(texture);
+				var source:Object = this._contentSourceFunction(item);
+				this.refreshContentSource(source);
 				return this.contentImage;
 			}
-			else if(this._contentTextureField != null && item && item.hasOwnProperty(this._contentTextureField))
+			else if(this._contentSourceField != null && item && item.hasOwnProperty(this._contentSourceField))
 			{
-				texture = item[this._contentTextureField] as Texture;
-				this.refreshContentTexture(texture);
+				source = item[this._contentSourceField];
+				this.refreshContentSource(source);
 				return this.contentImage;
 			}
 			else if(this._contentLabelFunction != null)
@@ -629,32 +616,34 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		protected var _contentImageFactory:Function = defaultImageFactory;
+		protected var _contentLoaderFactory:Function = defaultImageLoaderFactory;
 
 		/**
-		 * A function that generates an <code>Image</code> that uses the result
-		 * of <code>contentTextureField</code> or <code>contentTextureFunction</code>.
-		 * Useful for transforming the <code>Image</code> in some way. For
-		 * example, you might want to scale it for current DPI.
+		 * A function that generates an <code>ImageLoader</code> that uses the result
+		 * of <code>contentSourceField</code> or <code>contentSourceFunction</code>.
+		 * Useful for transforming the <code>ImageLoader</code> in some way. For
+		 * example, you might want to scale it for current DPI or apply pixel
+		 * snapping.
 		 *
-		 * @see #contentTextureField;
-		 * @see #contentTextureFunction;
+		 * @see feathers.controls.ImageLoader
+		 * @see #contentSourceField
+		 * @see #contentSourceFunction
 		 */
-		public function get contentImageFactory():Function
+		public function get contentLoaderFactory():Function
 		{
-			return this._contentImageFactory;
+			return this._contentLoaderFactory;
 		}
 
 		/**
 		 * @private
 		 */
-		public function set contentImageFactory(value:Function):void
+		public function set contentLoaderFactory(value:Function):void
 		{
-			if(this._contentImageFactory == value)
+			if(this._contentLoaderFactory == value)
 			{
 				return;
 			}
-			this._contentImageFactory = value;
+			this._contentLoaderFactory = value;
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
 
@@ -664,12 +653,14 @@ package feathers.controls.renderers
 		protected var _contentLabelFactory:Function;
 
 		/**
-		 * A function that generates <code>Label</code> that uses the result
+		 * A function that generates an <code>ITextRenderer</code> that uses the result
 		 * of <code>contentLabelField</code> or <code>contentLabelFunction</code>.
-		 * Useful for skinning the <code>Label</code>.
+		 * Can be used to set properties on the <code>ITextRenderer</code>.
 		 *
-		 * @see #contentLabelField;
-		 * @see #contentLabelFunction;
+		 * @see feathers.core.ITextRenderer
+		 * @see feathers.core.FeathersControl#defaultTextRendererFactory
+		 * @see #contentLabelField
+		 * @see #contentLabelFunction
 		 */
 		public function get contentLabelFactory():Function
 		{
@@ -692,7 +683,7 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		private var _contentLabelProperties:PropertyProxy;
+		protected var _contentLabelProperties:PropertyProxy;
 
 		/**
 		 * A set of key/value pairs to be passed down to a content label.
@@ -704,6 +695,7 @@ package feathers.controls.renderers
 		 * you can use the following syntax:</p>
 		 * <pre>list.scrollerProperties.&#64;verticalScrollBarProperties.&#64;thumbProperties.defaultSkin = new Image(texture);</pre>
 		 *
+		 * @see feathers.core.ITextRenderer
 		 * @see #contentLabelField
 		 * @see #contentLabelFunction
 		 */
@@ -740,12 +732,12 @@ package feathers.controls.renderers
 			}
 			if(this._contentLabelProperties)
 			{
-				this._contentLabelProperties.onChange.remove(contentLabelProperties_onChange);
+				this._contentLabelProperties.removeOnChangeCallback(contentLabelProperties_onChange);
 			}
 			this._contentLabelProperties = PropertyProxy(value);
 			if(this._contentLabelProperties)
 			{
-				this._contentLabelProperties.onChange.add(contentLabelProperties_onChange);
+				this._contentLabelProperties.addOnChangeCallback(contentLabelProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -768,7 +760,7 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		private var _backgroundSkin:DisplayObject;
+		protected var _backgroundSkin:DisplayObject;
 
 		/**
 		 * A background to behind the component's content.
@@ -804,7 +796,7 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		private var _backgroundDisabledSkin:DisplayObject;
+		protected var _backgroundDisabledSkin:DisplayObject;
 
 		/**
 		 * A background to display when the component is disabled.
@@ -835,6 +827,28 @@ package feathers.controls.renderers
 				this.addChildAt(this._backgroundDisabledSkin, 0);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * Quickly sets all padding properties to the same value. The
+		 * <code>padding</code> getter always returns the value of
+		 * <code>paddingTop</code>, but the other padding values may be
+		 * different.
+		 */
+		public function get padding():Number
+		{
+			return this._paddingTop;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set padding(value:Number):void
+		{
+			this.paddingTop = value;
+			this.paddingRight = value;
+			this.paddingBottom = value;
+			this.paddingLeft = value;
 		}
 
 		/**
@@ -1121,25 +1135,13 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		protected function refreshContentTexture(texture:Texture):void
+		protected function refreshContentSource(source:Object):void
 		{
-			if(texture)
+			if(!this.contentImage)
 			{
-				if(!this.contentImage)
-				{
-					this.contentImage = this._contentImageFactory(texture);
-				}
-				else
-				{
-					this.contentImage.texture = texture;
-					this.contentImage.readjustSize();
-				}
+				this.contentImage = this._contentLoaderFactory();
 			}
-			else if(this.contentImage)
-			{
-				this.contentImage.removeFromParent(true);
-				this.contentImage = null;
-			}
+			this.contentImage.source = source;
 		}
 
 		/**
@@ -1152,7 +1154,7 @@ package feathers.controls.renderers
 				if(!this.contentLabel)
 				{
 					const factory:Function = this._contentLabelFactory != null ? this._contentLabelFactory : FeathersControl.defaultTextRendererFactory;
-					this.contentLabel = factory();
+					this.contentLabel = ITextRenderer(factory());
 					FeathersControl(this.contentLabel).nameList.add(this.contentLabelName);
 				}
 				this.contentLabel.text = label;

@@ -1,38 +1,23 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.controls
 {
 	import feathers.core.FeathersControl;
 	import feathers.core.PropertyProxy;
 	import feathers.data.ListCollection;
 
-	import org.osflash.signals.ISignal;
+	import starling.events.Event;
 
 	[DefaultProperty("dataProvider")]
 	/**
 	 * A set of related buttons with layout, customized using a data provider.
+	 *
+	 * @see http://wiki.starling-framework.org/feathers/button-group
 	 */
 	public class ButtonGroup extends FeathersControl
 	{
@@ -65,9 +50,8 @@ package feathers.controls
 		 */
 		private static const DEFAULT_BUTTON_EVENTS:Vector.<String> = new <String>
 		[
-			"onPress",
-			"onRelease",
-			"onChange",
+			Event.TRIGGERED,
+			Event.CHANGE,
 		];
 
 		/**
@@ -148,7 +132,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _dataProvider:ListCollection;
+		protected var _dataProvider:ListCollection;
 
 		/**
 		 * The collection of data to be displayed with buttons.
@@ -171,12 +155,12 @@ package feathers.controls
 			}
 			if(this._dataProvider)
 			{
-				this._dataProvider.onChange.remove(dataProvider_onChange);
+				this._dataProvider.removeEventListener(Event.CHANGE, dataProvider_changeHandler);
 			}
 			this._dataProvider = value;
 			if(this._dataProvider)
 			{
-				this._dataProvider.onChange.add(dataProvider_onChange);
+				this._dataProvider.addEventListener(Event.CHANGE, dataProvider_changeHandler);
 			}
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}
@@ -186,6 +170,7 @@ package feathers.controls
 		 */
 		protected var _direction:String = DIRECTION_VERTICAL;
 
+		[Inspectable(type="String",enumeration="horizontal,vertical")]
 		/**
 		 * The button group layout is either vertical or horizontal.
 		 */
@@ -296,7 +281,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _buttonFactory:Function = defaultButtonFactory;
+		protected var _buttonFactory:Function = defaultButtonFactory;
 
 		/**
 		 * Creates a new button.
@@ -305,6 +290,7 @@ package feathers.controls
 		 *
 		 * <pre>function():Button</pre>
 		 *
+		 * @see feathers.controls.Button
 		 * @see #firstButtonFactory
 		 * @see #lastButtonFactory
 		 */
@@ -329,7 +315,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _firstButtonFactory:Function;
+		protected var _firstButtonFactory:Function;
 
 		/**
 		 * Creates a new first button. If the firstButtonFactory is null, then the
@@ -339,6 +325,7 @@ package feathers.controls
 		 *
 		 * <pre>function():Button</pre>
 		 *
+		 * @see feathers.controls.Button
 		 * @see #buttonFactory
 		 * @see #lastButtonFactory
 		 */
@@ -363,7 +350,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _lastButtonFactory:Function;
+		protected var _lastButtonFactory:Function;
 
 		/**
 		 * Creates a new last button. If the lastButtonFactory is null, then the
@@ -373,6 +360,7 @@ package feathers.controls
 		 *
 		 * <pre>function():Button</pre>
 		 *
+		 * @see feathers.controls.Button
 		 * @see #buttonFactory
 		 * @see #firstButtonFactory
 		 */
@@ -397,7 +385,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _buttonInitializer:Function = defaultButtonInitializer;
+		protected var _buttonInitializer:Function = defaultButtonInitializer;
 
 		/**
 		 * Modifies a button, perhaps by changing its label and icons, based on the
@@ -533,7 +521,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _buttonProperties:PropertyProxy;
+		protected var _buttonProperties:PropertyProxy;
 
 		/**
 		 * A set of key/value pairs to be passed down to all of the button
@@ -549,13 +537,14 @@ package feathers.controls
 		 * you can use the following syntax:</p>
 		 * <pre>list.scrollerProperties.&#64;verticalScrollBarProperties.&#64;thumbProperties.defaultSkin = new Image(texture);</pre>
 		 *
-		 * @see AddedWatcher
+		 * @see feathers.controls.Button
+		 * @see feathers.core.DisplayListWatcher
 		 */
 		public function get buttonProperties():Object
 		{
 			if(!this._buttonProperties)
 			{
-				this._buttonProperties = new PropertyProxy(buttonProperties_onChange);
+				this._buttonProperties = new PropertyProxy(childProperties_onChange);
 			}
 			return this._buttonProperties;
 		}
@@ -584,12 +573,12 @@ package feathers.controls
 			}
 			if(this._buttonProperties)
 			{
-				this._buttonProperties.onChange.remove(buttonProperties_onChange);
+				this._buttonProperties.removeOnChangeCallback(childProperties_onChange);
 			}
 			this._buttonProperties = PropertyProxy(value);
 			if(this._buttonProperties)
 			{
-				this._buttonProperties.onChange.add(buttonProperties_onChange);
+				this._buttonProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -702,7 +691,7 @@ package feathers.controls
 				{
 					if(item.hasOwnProperty(field))
 					{
-						ISignal(button[field]).add(item[field]);
+						button.addEventListener(field, item[field] as Function);
 					}
 				}
 			}
@@ -804,7 +793,7 @@ package feathers.controls
 			else
 			{
 				const factory:Function = this._firstButtonFactory != null ? this._firstButtonFactory : this._buttonFactory;
-				button = factory();
+				button = Button(factory());
 				if(this._customFirstButtonName)
 				{
 					button.nameList.add(this._customFirstButtonName);
@@ -832,7 +821,7 @@ package feathers.controls
 			else
 			{
 				const factory:Function = this._lastButtonFactory != null ? this._lastButtonFactory : this._buttonFactory;
-				button = factory();
+				button = Button(factory());
 				if(this._customLastButtonName)
 				{
 					button.nameList.add(this._customLastButtonName);
@@ -878,7 +867,7 @@ package feathers.controls
 		 */
 		protected function destroyButton(button:Button):void
 		{
-			this.removeChild(button);
+			this.removeChild(button, true);
 		}
 
 		/**
@@ -1006,7 +995,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function buttonProperties_onChange(proxy:PropertyProxy, name:Object):void
+		protected function childProperties_onChange(proxy:PropertyProxy, name:String):void
 		{
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -1014,7 +1003,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function dataProvider_onChange(data:ListCollection):void
+		protected function dataProvider_changeHandler(event:Event):void
 		{
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}

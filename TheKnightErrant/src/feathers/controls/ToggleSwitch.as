@@ -1,50 +1,41 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.controls
 {
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
-	import flash.system.Capabilities;
-	
 	import feathers.core.FeathersControl;
 	import feathers.core.ITextRenderer;
 	import feathers.core.IToggle;
 	import feathers.core.PropertyProxy;
-	import feathers.motion.GTween;
 	import feathers.system.DeviceCapabilities;
-	
-	import org.osflash.signals.ISignal;
-	import org.osflash.signals.Signal;
-	
+
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
+
+	import starling.animation.Transitions;
+	import starling.animation.Tween;
+	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 
 	/**
-	 * Similar to a light switch. May be selected or not, like a check box.
+	 * @inheritDoc
+	 */
+	[Event(name="change",type="starling.events.Event")]
+
+	/**
+	 * Similar to a light switch with on and off states. Generally considered an
+	 * alternative to a check box.
+	 *
+	 * @see http://wiki.starling-framework.org/feathers/toggle-switch
+	 * @see Check
 	 */
 	public class ToggleSwitch extends FeathersControl implements IToggle
 	{
@@ -52,6 +43,11 @@ package feathers.controls
 		 * @private
 		 */
 		private static const HELPER_POINT:Point = new Point();
+
+		/**
+		 * @private
+		 */
+		private static const HELPER_TOUCHES_VECTOR:Vector.<Touch> = new <Touch>[];
 
 		/**
 		 * @private
@@ -81,19 +77,22 @@ package feathers.controls
 		public static const TRACK_LAYOUT_MODE_SINGLE:String = "single";
 
 		/**
-		 * The switch's on and off track skins will by resized by changing
-		 * their width and height values. Consider using a special display
-		 * object such as a Scale9Image, Scale3Image or a TiledImage if the
-		 * skins should be resizable.
+		 * The toggle switch has two tracks, stretching to fill each side of the
+		 * scroll bar with the thumb in the middle. The tracks will be resized
+		 * as the thumb moves. This layout mode is designed for toggle switches
+		 * where the two sides of the track may be colored differently to better
+		 * differentiate between the on state and the off state.
+		 *
+		 * <p>Since the width and height of the tracks will change, consider
+		 * sing a special display object such as a <code>Scale9Image</code>,
+		 * <code>Scale3Image</code> or a <code>TiledImage</code> that is
+		 * designed to be resized dynamically.</p>
+		 *
+		 * @see feathers.display.Scale9Image
+		 * @see feathers.display.Scale3Image
+		 * @see feathers.display.TiledImage
 		 */
-		public static const TRACK_LAYOUT_MODE_STRETCH:String = "stretch";
-
-		/**
-		 * The switch's on and off track skins will be resized and cropped
-		 * using a scrollRect to ensure that the skins maintain a static
-		 * appearance without altering the aspect ratio.
-		 */
-		public static const TRACK_LAYOUT_MODE_SCROLL:String = "scroll";
+		public static const TRACK_LAYOUT_MODE_ON_OFF:String = "onOff";
 
 		/**
 		 * The default value added to the <code>nameList</code> of the off label.
@@ -156,27 +155,27 @@ package feathers.controls
 		protected var thumbName:String = DEFAULT_CHILD_NAME_THUMB;
 
 		/**
-		 * @private
+		 * The thumb sub-component.
 		 */
 		protected var thumb:Button;
 
 		/**
-		 * @private
+		 * The "on" text renderer sub-component.
 		 */
 		protected var onTextRenderer:ITextRenderer;
 
 		/**
-		 * @private
+		 * The "off" text renderer sub-component.
 		 */
 		protected var offTextRenderer:ITextRenderer;
 
 		/**
-		 * @private
+		 * The "on" track sub-component.
 		 */
 		protected var onTrack:Button;
 
 		/**
-		 * @private
+		 * The "off" track sub-component.
 		 */
 		protected var offTrack:Button;
 
@@ -264,7 +263,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _showThumb:Boolean = true;
+		protected var _showThumb:Boolean = true;
 
 		/**
 		 * Determines if the thumb should be displayed. This stops interaction
@@ -291,10 +290,15 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _trackLayoutMode:String = TRACK_LAYOUT_MODE_SINGLE;
+		protected var _trackLayoutMode:String = TRACK_LAYOUT_MODE_SINGLE;
 
+		[Inspectable(type="String",enumeration="single,onOff")]
 		/**
 		 * Determines how the on and off track skins are positioned and sized.
+		 *
+		 * @default TRACK_LAYOUT_MODE_SINGLE
+		 * @see #TRACK_LAYOUT_MODE_SINGLE
+		 * @see #TRACK_LAYOUT_MODE_ON_OFF
 		 */
 		public function get trackLayoutMode():String
 		{
@@ -325,6 +329,7 @@ package feathers.controls
 		 * takes priority. For the OFF label, <code>offLabelProperties</code>
 		 * takes priority.
 		 *
+		 * @see feathers.core.ITextRenderer
 		 * @see #onLabelProperties
 		 * @see #offLabelProperties
 		 * @see #disabledLabelProperties
@@ -333,7 +338,7 @@ package feathers.controls
 		{
 			if(!this._defaultLabelProperties)
 			{
-				this._defaultLabelProperties = new PropertyProxy(labelProperties_onChange);
+				this._defaultLabelProperties = new PropertyProxy(childProperties_onChange);
 			}
 			return this._defaultLabelProperties;
 		}
@@ -349,12 +354,12 @@ package feathers.controls
 			}
 			if(this._defaultLabelProperties)
 			{
-				this._defaultLabelProperties.onChange.remove(labelProperties_onChange);
+				this._defaultLabelProperties.removeOnChangeCallback(childProperties_onChange);
 			}
 			this._defaultLabelProperties = PropertyProxy(value);
 			if(this._defaultLabelProperties)
 			{
-				this._defaultLabelProperties.onChange.add(labelProperties_onChange);
+				this._defaultLabelProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -367,12 +372,14 @@ package feathers.controls
 		/**
 		 * The key/value pairs to pass to the labels, if the toggle switch is
 		 * disabled.
+		 *
+		 * @see feathers.core.ITextRenderer
 		 */
 		public function get disabledLabelProperties():Object
 		{
 			if(!this._disabledLabelProperties)
 			{
-				this._disabledLabelProperties = new PropertyProxy(labelProperties_onChange);
+				this._disabledLabelProperties = new PropertyProxy(childProperties_onChange);
 			}
 			return this._disabledLabelProperties;
 		}
@@ -388,12 +395,12 @@ package feathers.controls
 			}
 			if(this._disabledLabelProperties)
 			{
-				this._disabledLabelProperties.onChange.remove(labelProperties_onChange);
+				this._disabledLabelProperties.removeOnChangeCallback(childProperties_onChange);
 			}
 			this._disabledLabelProperties = PropertyProxy(value);
 			if(this._disabledLabelProperties)
 			{
-				this._disabledLabelProperties.onChange.add(labelProperties_onChange);
+				this._disabledLabelProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -406,12 +413,14 @@ package feathers.controls
 		/**
 		 * The key/value pairs passed to the ON label. If <code>null</code>,
 		 * then <code>defaultLabelProperties</code> will be used instead.
+		 *
+		 * @see feathers.core.ITextRenderer
 		 */
 		public function get onLabelProperties():Object
 		{
 			if(!this._onLabelProperties)
 			{
-				this._onLabelProperties = new PropertyProxy(labelProperties_onChange);
+				this._onLabelProperties = new PropertyProxy(childProperties_onChange);
 			}
 			return this._onLabelProperties;
 		}
@@ -427,12 +436,12 @@ package feathers.controls
 			}
 			if(this._onLabelProperties)
 			{
-				this._onLabelProperties.onChange.remove(labelProperties_onChange);
+				this._onLabelProperties.removeOnChangeCallback(childProperties_onChange);
 			}
 			this._onLabelProperties = PropertyProxy(value);
 			if(this._onLabelProperties)
 			{
-				this._onLabelProperties.onChange.add(labelProperties_onChange);
+				this._onLabelProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -445,12 +454,14 @@ package feathers.controls
 		/**
 		 * The key/value pairs passed to the OFF label. If <code>null</code>,
 		 * then <code>defaultLabelProperties</code> will be used instead.
+		 *
+		 * @see feathers.core.ITextRenderer
 		 */
 		public function get offLabelProperties():Object
 		{
 			if(!this._offLabelProperties)
 			{
-				this._offLabelProperties = new PropertyProxy(labelProperties_onChange);
+				this._offLabelProperties = new PropertyProxy(childProperties_onChange);
 			}
 			return this._offLabelProperties;
 		}
@@ -466,12 +477,12 @@ package feathers.controls
 			}
 			if(this._offLabelProperties)
 			{
-				this._offLabelProperties.onChange.remove(labelProperties_onChange);
+				this._offLabelProperties.removeOnChangeCallback(childProperties_onChange);
 			}
 			this._offLabelProperties = PropertyProxy(value);
 			if(this._offLabelProperties)
 			{
-				this._offLabelProperties.onChange.add(labelProperties_onChange);
+				this._offLabelProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -479,8 +490,9 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _labelAlign:String = LABEL_ALIGN_BASELINE;
+		protected var _labelAlign:String = LABEL_ALIGN_BASELINE;
 
+		[Inspectable(type="String",enumeration="baseline,middle")]
 		/**
 		 * The vertical alignment of the label.
 		 */
@@ -514,6 +526,7 @@ package feathers.controls
 		 * <pre>function():ITextRenderer</pre>
 		 *
 		 * @see feathers.core.ITextRenderer
+		 * @see feathers.core.FeathersControl#defaultTextRendererFactory
 		 */
 		public function get labelFactory():Function
 		{
@@ -556,7 +569,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _isSelected:Boolean = false;
+		protected var _isSelected:Boolean = false;
 
 		/**
 		 * Indicates if the toggle switch is selected (ON) or not (OFF).
@@ -581,14 +594,57 @@ package feathers.controls
 			this.invalidate(INVALIDATION_FLAG_SELECTED);
 			if(this._isSelected != oldSelected)
 			{
-				this._onChange.dispatch(this);
+				this.dispatchEventWith(Event.CHANGE);
 			}
 		}
 
 		/**
 		 * @private
 		 */
-		private var _onText:String = "ON";
+		protected var _toggleDuration:Number = 0.15;
+
+		/**
+		 * The duration, in seconds, of the animation when the toggle switch
+		 * is toggled and animates the position of the thumb.
+		 */
+		public function get toggleDuration():Number
+		{
+			return this._toggleDuration;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set toggleDuration(value:Number):void
+		{
+			this._toggleDuration = value;
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _toggleEase:Object = Transitions.EASE_OUT;
+
+		/**
+		 * The easing function used for toggle animations.
+		 */
+		public function get toggleEase():Object
+		{
+			return this._toggleEase;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set toggleEase(value:Object):void
+		{
+			this._toggleEase = value;
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _onText:String = "ON";
 
 		/**
 		 * The text to display in the ON label.
@@ -603,9 +659,8 @@ package feathers.controls
 		 */
 		public function set onText(value:String):void
 		{
-			if(!value)
+			if(value === null)
 			{
-				//don't allow null or undefined
 				value = "";
 			}
 			if(this._onText == value)
@@ -619,7 +674,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _offText:String = "OFF";
+		protected var _offText:String = "OFF";
 
 		/**
 		 * The text to display in the OFF label.
@@ -634,9 +689,8 @@ package feathers.controls
 		 */
 		public function set offText(value:String):void
 		{
-			if(!value)
+			if(value === null)
 			{
-				//don't allow null or undefined
 				value = "";
 			}
 			if(this._offText == value)
@@ -647,31 +701,40 @@ package feathers.controls
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
 
-		private var _selectionChangeTween:GTween;
-
-		private var _ignoreTapHandler:Boolean = false;
-		private var _touchPointID:int = -1;
-		private var _thumbStartX:Number;
-		private var _touchStartX:Number;
-		private var _isSelectionChangedByUser:Boolean = false;
+		/**
+		 * @private
+		 */
+		protected var _toggleTween:Tween;
 
 		/**
 		 * @private
 		 */
-		protected var _onChange:Signal = new Signal(ToggleSwitch);
-
-		/**
-		 * Dispatched when the selection changes.
-		 */
-		public function get onChange():ISignal
-		{
-			return this._onChange;
-		}
+		protected var _ignoreTapHandler:Boolean = false;
 
 		/**
 		 * @private
 		 */
-		private var _onTrackProperties:PropertyProxy;
+		protected var _touchPointID:int = -1;
+
+		/**
+		 * @private
+		 */
+		protected var _thumbStartX:Number;
+
+		/**
+		 * @private
+		 */
+		protected var _touchStartX:Number;
+
+		/**
+		 * @private
+		 */
+		protected var _isSelectionChangedByUser:Boolean = false;
+
+		/**
+		 * @private
+		 */
+		protected var _onTrackProperties:PropertyProxy;
 
 		/**
 		 * A set of key/value pairs to be passed down to the toggle switch's on
@@ -691,7 +754,7 @@ package feathers.controls
 		{
 			if(!this._onTrackProperties)
 			{
-				this._onTrackProperties = new PropertyProxy(onTrackProperties_onChange);
+				this._onTrackProperties = new PropertyProxy(childProperties_onChange);
 			}
 			return this._onTrackProperties;
 		}
@@ -720,12 +783,12 @@ package feathers.controls
 			}
 			if(this._onTrackProperties)
 			{
-				this._onTrackProperties.onChange.remove(onTrackProperties_onChange);
+				this._onTrackProperties.removeOnChangeCallback(childProperties_onChange);
 			}
 			this._onTrackProperties = PropertyProxy(value);
 			if(this._onTrackProperties)
 			{
-				this._onTrackProperties.onChange.add(onTrackProperties_onChange);
+				this._onTrackProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -733,7 +796,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _offTrackProperties:PropertyProxy;
+		protected var _offTrackProperties:PropertyProxy;
 
 		/**
 		 * A set of key/value pairs to be passed down to the toggle switch's off
@@ -753,7 +816,7 @@ package feathers.controls
 		{
 			if(!this._offTrackProperties)
 			{
-				this._offTrackProperties = new PropertyProxy(offTrackProperties_onChange);
+				this._offTrackProperties = new PropertyProxy(childProperties_onChange);
 			}
 			return this._offTrackProperties;
 		}
@@ -782,12 +845,12 @@ package feathers.controls
 			}
 			if(this._offTrackProperties)
 			{
-				this._offTrackProperties.onChange.remove(offTrackProperties_onChange);
+				this._offTrackProperties.removeOnChangeCallback(childProperties_onChange);
 			}
 			this._offTrackProperties = PropertyProxy(value);
 			if(this._offTrackProperties)
 			{
-				this._offTrackProperties.onChange.add(offTrackProperties_onChange);
+				this._offTrackProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -795,7 +858,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _thumbProperties:PropertyProxy;
+		protected var _thumbProperties:PropertyProxy;
 
 		/**
 		 * A set of key/value pairs to be passed down to the toggle switch's
@@ -815,7 +878,7 @@ package feathers.controls
 		{
 			if(!this._thumbProperties)
 			{
-				this._thumbProperties = new PropertyProxy(thumbProperties_onChange);
+				this._thumbProperties = new PropertyProxy(childProperties_onChange);
 			}
 			return this._thumbProperties;
 		}
@@ -844,23 +907,14 @@ package feathers.controls
 			}
 			if(this._thumbProperties)
 			{
-				this._thumbProperties.onChange.remove(thumbProperties_onChange);
+				this._thumbProperties.removeOnChangeCallback(childProperties_onChange);
 			}
 			this._thumbProperties = PropertyProxy(value);
 			if(this._thumbProperties)
 			{
-				this._thumbProperties.onChange.add(thumbProperties_onChange);
+				this._thumbProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
-		}
-
-		/**
-		 * @inheritDoc
-		 */
-		override public function dispose():void
-		{
-			this._onChange.removeAll();
-			super.dispose();
 		}
 
 		/**
@@ -872,7 +926,6 @@ package feathers.controls
 			{
 				this.onTrack = new Button();
 				this.onTrack.nameList.add(this.onTrackName);
-				this.onTrack.scrollRect = new Rectangle();
 				this.onTrack.label = "";
 				this.onTrack.keepDownStateOnRollOut = true;
 				this.addChild(this.onTrack);
@@ -1000,28 +1053,32 @@ package feathers.controls
 		{
 			if(this.offTextRenderer)
 			{
-				this.removeChild(FeathersControl(this.offTextRenderer), true);
+				this.removeChild(DisplayObject(this.offTextRenderer), true);
 				this.offTextRenderer = null;
 			}
 			if(this.onTextRenderer)
 			{
-				this.removeChild(FeathersControl(this.onTextRenderer), true);
+				this.removeChild(DisplayObject(this.onTextRenderer), true);
 				this.onTextRenderer = null;
 			}
 
 			const index:int = this.getChildIndex(this.thumb);
 			const factory:Function = this._labelFactory != null ? this._labelFactory : FeathersControl.defaultTextRendererFactory;
-			this.offTextRenderer = factory();
-			var uiTextRenderer:FeathersControl = FeathersControl(this.offTextRenderer);
-			uiTextRenderer.nameList.add(this.offLabelName);
-			uiTextRenderer.scrollRect = new Rectangle();
-			this.addChildAt(uiTextRenderer, index);
+			this.offTextRenderer = ITextRenderer(factory());
+			this.offTextRenderer.nameList.add(this.offLabelName);
+			if(this.offTextRenderer is FeathersControl)
+			{
+				FeathersControl(this.offTextRenderer).clipRect = new Rectangle();
+			}
+			this.addChildAt(DisplayObject(this.offTextRenderer), index);
 
-			this.onTextRenderer = factory();
-			uiTextRenderer = FeathersControl(this.onTextRenderer);
-			uiTextRenderer.nameList.add(this.onLabelName);
-			uiTextRenderer.scrollRect = new Rectangle();
-			this.addChildAt(uiTextRenderer, index);
+			this.onTextRenderer = ITextRenderer(factory());
+			this.onTextRenderer.nameList.add(this.onLabelName);
+			if(this.onTextRenderer is FeathersControl)
+			{
+				FeathersControl(this.onTextRenderer).clipRect = new Rectangle();
+			}
+			this.addChildAt(DisplayObject(this.onTextRenderer), index);
 		}
 
 		/**
@@ -1036,22 +1093,19 @@ package feathers.controls
 			}
 
 			//stop the tween, no matter what
-			if(this._selectionChangeTween)
+			if(this._toggleTween)
 			{
-				this._selectionChangeTween.paused = true;
-				this._selectionChangeTween = null;
+				Starling.juggler.remove(this._toggleTween);
+				this._toggleTween = null;
 			}
 
 			if(this._isSelectionChangedByUser)
 			{
-				this._selectionChangeTween = new GTween(this.thumb, 0.15,
-				{
-					x: xPosition
-				},
-				{
-					onChange: selectionTween_onChange,
-					onComplete: selectionTween_onComplete
-				});
+				this._toggleTween = new Tween(this.thumb, this._toggleDuration, this._toggleEase);
+				this._toggleTween.animate("x", xPosition);
+				this._toggleTween.onUpdate = selectionTween_onUpdate;
+				this._toggleTween.onComplete = selectionTween_onComplete;
+				Starling.juggler.add(this._toggleTween);
 			}
 			else
 			{
@@ -1071,11 +1125,10 @@ package feathers.controls
 		 */
 		protected function refreshOnLabelStyles():void
 		{
-			const uiOnLabelRenderer:FeathersControl = FeathersControl(this.onTextRenderer);
 			//no need to style the label field if there's no text to display
 			if(!this._showLabels || !this._showThumb)
 			{
-				uiOnLabelRenderer.visible = false;
+				this.onTextRenderer.visible = false;
 				return;
 			}
 
@@ -1096,17 +1149,18 @@ package feathers.controls
 			this.onTextRenderer.text = this._onText;
 			if(properties)
 			{
+				const displayRenderer:DisplayObject = DisplayObject(this.onTextRenderer);
 				for(var propertyName:String in properties)
 				{
-					if(uiOnLabelRenderer.hasOwnProperty(propertyName))
+					if(displayRenderer.hasOwnProperty(propertyName))
 					{
 						var propertyValue:Object = properties[propertyName];
-						uiOnLabelRenderer[propertyName] = propertyValue;
+						displayRenderer[propertyName] = propertyValue;
 					}
 				}
 			}
-			uiOnLabelRenderer.validate();
-			uiOnLabelRenderer.visible = true;
+			this.onTextRenderer.validate();
+			this.onTextRenderer.visible = true;
 		}
 
 		/**
@@ -1114,11 +1168,10 @@ package feathers.controls
 		 */
 		protected function refreshOffLabelStyles():void
 		{
-			const uiOffLabelRenderer:FeathersControl = FeathersControl(this.offTextRenderer);
 			//no need to style the label field if there's no text to display
 			if(!this._showLabels || !this._showThumb)
 			{
-				uiOffLabelRenderer.visible = false;
+				this.offTextRenderer.visible = false;
 				return;
 			}
 
@@ -1139,17 +1192,18 @@ package feathers.controls
 			this.offTextRenderer.text = this._offText;
 			if(properties)
 			{
+				const displayRenderer:DisplayObject = DisplayObject(this.offTextRenderer);
 				for(var propertyName:String in properties)
 				{
-					if(uiOffLabelRenderer.hasOwnProperty(propertyName))
+					if(displayRenderer.hasOwnProperty(propertyName))
 					{
 						var propertyValue:Object = properties[propertyName];
-						uiOffLabelRenderer[propertyName] = propertyValue;
+						displayRenderer[propertyName] = propertyValue;
 					}
 				}
 			}
-			uiOffLabelRenderer.validate();
-			uiOffLabelRenderer.visible = true;
+			this.offTextRenderer.validate();
+			this.offTextRenderer.visible = true;
 		}
 
 		/**
@@ -1197,12 +1251,10 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private function drawLabels():void
+		protected function drawLabels():void
 		{
-			const uiOnLabelRenderer:FeathersControl = FeathersControl(this.onTextRenderer);
-			const uiOffLabelRenderer:FeathersControl = FeathersControl(this.offTextRenderer);
 			const maxLabelWidth:Number = Math.max(0, this.actualWidth - this.thumb.width - this._paddingLeft - this._paddingRight);
-			var totalLabelHeight:Number = Math.max(uiOnLabelRenderer.height, uiOffLabelRenderer.height);
+			var totalLabelHeight:Number = Math.max(this.onTextRenderer.height, this.offTextRenderer.height);
 			var labelHeight:Number;
 			if(this._labelAlign == LABEL_ALIGN_MIDDLE)
 			{
@@ -1213,21 +1265,25 @@ package feathers.controls
 				labelHeight = Math.max(this.onTextRenderer.baseline, this.offTextRenderer.baseline);
 			}
 
-			var onScrollRect:Rectangle = uiOnLabelRenderer.scrollRect;
-			onScrollRect.width = maxLabelWidth;
-			onScrollRect.height = totalLabelHeight;
-			uiOnLabelRenderer.scrollRect = onScrollRect;
+			if(this.onTextRenderer is FeathersControl)
+			{
+				var clipRect:Rectangle = FeathersControl(this.onTextRenderer).clipRect;
+				clipRect.width = maxLabelWidth;
+				clipRect.height = totalLabelHeight;
+				FeathersControl(this.onTextRenderer).clipRect = clipRect;
+			}
 
-			uiOnLabelRenderer.x = this._paddingLeft;
-			uiOnLabelRenderer.y = (this.actualHeight - labelHeight) / 2;
+			this.onTextRenderer.y = (this.actualHeight - labelHeight) / 2;
 
-			var offScrollRect:Rectangle = uiOffLabelRenderer.scrollRect;
-			offScrollRect.width = maxLabelWidth;
-			offScrollRect.height = totalLabelHeight;
-			uiOffLabelRenderer.scrollRect = offScrollRect;
+			if(this.offTextRenderer is FeathersControl)
+			{
+				clipRect = FeathersControl(this.offTextRenderer).clipRect;
+				clipRect.width = maxLabelWidth;
+				clipRect.height = totalLabelHeight;
+				FeathersControl(this.offTextRenderer).clipRect = clipRect;
+			}
 
-			uiOffLabelRenderer.x = this.actualWidth - this._paddingRight - maxLabelWidth;
-			uiOffLabelRenderer.y = (this.actualHeight - labelHeight) / 2;
+			this.offTextRenderer.y = (this.actualHeight - labelHeight) / 2;
 		}
 
 		/**
@@ -1238,23 +1294,29 @@ package feathers.controls
 			const maxLabelWidth:Number = Math.max(0, this.actualWidth - this.thumb.width - this._paddingLeft - this._paddingRight);
 			const thumbOffset:Number = this.thumb.x - this._paddingLeft;
 
-			const uiOnLabelRenderer:FeathersControl = FeathersControl(this.onTextRenderer);
-			const uiOffLabelRenderer:FeathersControl = FeathersControl(this.offTextRenderer);
-			var currentScrollRect:Rectangle = uiOnLabelRenderer.scrollRect;
-			currentScrollRect.x = maxLabelWidth - thumbOffset - (maxLabelWidth - uiOnLabelRenderer.width) / 2;
-			uiOnLabelRenderer.scrollRect = currentScrollRect;
-
-			currentScrollRect = uiOffLabelRenderer.scrollRect;
-			currentScrollRect.x = -thumbOffset - (maxLabelWidth - uiOffLabelRenderer.width) / 2;
-			uiOffLabelRenderer.scrollRect = currentScrollRect;
-
-			if(this._trackLayoutMode == TRACK_LAYOUT_MODE_SCROLL)
+			var onScrollOffset:Number = maxLabelWidth - thumbOffset - (maxLabelWidth - this.onTextRenderer.width) / 2;
+			if(this.onTextRenderer is FeathersControl)
 			{
-				this.layoutTrackWithScrollRect();
+				const displayOnLabelRenderer:FeathersControl = FeathersControl(this.onTextRenderer);
+				var currentClipRect:Rectangle = displayOnLabelRenderer.clipRect;
+				currentClipRect.x = onScrollOffset
+				displayOnLabelRenderer.clipRect = currentClipRect;
 			}
-			else if(this._trackLayoutMode == TRACK_LAYOUT_MODE_STRETCH)
+			this.onTextRenderer.x = this._paddingLeft - onScrollOffset;
+
+			var offScrollOffset:Number = -thumbOffset - (maxLabelWidth - this.offTextRenderer.width) / 2;
+			if(this.offTextRenderer is FeathersControl)
 			{
-				this.layoutTrackWithStretch();
+				const displayOffLabelRenderer:FeathersControl = FeathersControl(this.offTextRenderer);
+				currentClipRect = displayOffLabelRenderer.clipRect;
+				currentClipRect.x = offScrollOffset
+				displayOffLabelRenderer.clipRect = currentClipRect;
+			}
+			this.offTextRenderer.x = this.actualWidth - this._paddingRight - maxLabelWidth - offScrollOffset;
+
+			if(this._trackLayoutMode == TRACK_LAYOUT_MODE_ON_OFF)
+			{
+				this.layoutTrackWithOnOff();
 			}
 			else
 			{
@@ -1265,17 +1327,8 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function layoutTrackWithStretch():void
+		protected function layoutTrackWithOnOff():void
 		{
-			if(this.onTrack.scrollRect)
-			{
-				this.onTrack.scrollRect = null;
-			}
-			if(this.offTrack.scrollRect)
-			{
-				this.offTrack.scrollRect = null;
-			}
-
 			this.onTrack.x = 0;
 			this.onTrack.y = 0;
 			this.onTrack.width = this.thumb.x + this.thumb.width / 2;
@@ -1290,54 +1343,8 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function layoutTrackWithScrollRect():void
-		{
-			//we want to scale the skins to match the height of the slider,
-			//but we also want to keep the original aspect ratio.
-			const onTrackScaledWidth:Number = this.onTrackSkinOriginalWidth * this.actualHeight / this.onTrackSkinOriginalHeight;
-			const offTrackScaledWidth:Number = this.offTrackSkinOriginalWidth * this.actualHeight / this.offTrackSkinOriginalHeight;
-			this.onTrack.width = onTrackScaledWidth;
-			this.onTrack.height = this.actualHeight;
-			this.offTrack.width = offTrackScaledWidth;
-			this.offTrack.height = this.actualHeight;
-
-			var middleOfThumb:Number = this.thumb.x + this.thumb.width / 2;
-			this.onTrack.x = 0;
-			this.onTrack.y = 0;
-			var currentScrollRect:Rectangle = this.onTrack.scrollRect;
-			if(!currentScrollRect)
-			{
-				currentScrollRect = new Rectangle();
-			}
-			currentScrollRect.x = 0;
-			currentScrollRect.y = 0;
-			currentScrollRect.width = Math.min(onTrackScaledWidth, middleOfThumb);
-			currentScrollRect.height = this.actualHeight;
-			this.onTrack.scrollRect = currentScrollRect;
-
-			this.offTrack.x = Math.max(this.actualWidth - offTrackScaledWidth, middleOfThumb);
-			this.offTrack.y = 0;
-			currentScrollRect = this.offTrack.scrollRect;
-			if(!currentScrollRect)
-			{
-				currentScrollRect = new Rectangle();
-			}
-			currentScrollRect.width = Math.min(offTrackScaledWidth, this.actualWidth - middleOfThumb);
-			currentScrollRect.height = this.actualHeight;
-			currentScrollRect.x = Math.max(0, offTrackScaledWidth - currentScrollRect.width);
-			currentScrollRect.y = 0;
-			this.offTrack.scrollRect = currentScrollRect;
-		}
-
-		/**
-		 * @private
-		 */
 		protected function layoutTrackWithSingle():void
 		{
-			if(this.onTrack.scrollRect)
-			{
-				this.onTrack.scrollRect = null;
-			}
 			this.onTrack.x = 0;
 			this.onTrack.y = 0;
 			this.onTrack.width = this.actualWidth;
@@ -1349,7 +1356,7 @@ package feathers.controls
 		 */
 		protected function createOrDestroyOffTrackIfNeeded():void
 		{
-			if(this._trackLayoutMode == TRACK_LAYOUT_MODE_SCROLL || this._trackLayoutMode == TRACK_LAYOUT_MODE_STRETCH)
+			if(this._trackLayoutMode == TRACK_LAYOUT_MODE_ON_OFF)
 			{
 				if(!this.offTrack)
 				{
@@ -1370,31 +1377,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function onTrackProperties_onChange(proxy:PropertyProxy, name:Object):void
-		{
-			this.invalidate(INVALIDATION_FLAG_STYLES);
-		}
-
-		/**
-		 * @private
-		 */
-		protected function offTrackProperties_onChange(proxy:PropertyProxy, name:Object):void
-		{
-			this.invalidate(INVALIDATION_FLAG_STYLES);
-		}
-
-		/**
-		 * @private
-		 */
-		protected function thumbProperties_onChange(proxy:PropertyProxy, name:Object):void
-		{
-			this.invalidate(INVALIDATION_FLAG_STYLES);
-		}
-
-		/**
-		 * @private
-		 */
-		protected function labelProperties_onChange(proxy:PropertyProxy, name:Object):void
+		protected function childProperties_onChange(proxy:PropertyProxy, name:Object):void
 		{
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -1410,7 +1393,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private function touchHandler(event:TouchEvent):void
+		protected function touchHandler(event:TouchEvent):void
 		{
 			if(this._ignoreTapHandler)
 			{
@@ -1419,10 +1402,11 @@ package feathers.controls
 			}
 			if(!this._isEnabled)
 			{
+				this._touchPointID = -1;
 				return;
 			}
 
-			const touches:Vector.<Touch> = event.getTouches(this);
+			const touches:Vector.<Touch> = event.getTouches(this, null, HELPER_TOUCHES_VECTOR);
 			if(touches.length == 0)
 			{
 				return;
@@ -1439,6 +1423,7 @@ package feathers.controls
 			}
 			if(!touch || touch.phase != TouchPhase.ENDED)
 			{
+				HELPER_TOUCHES_VECTOR.length = 0;
 				return;
 			}
 
@@ -1449,18 +1434,19 @@ package feathers.controls
 				this.isSelected = !this._isSelected;
 				this._isSelectionChangedByUser = true;
 			}
+			HELPER_TOUCHES_VECTOR.length = 0;
 		}
 
 		/**
 		 * @private
 		 */
-		private function thumb_touchHandler(event:TouchEvent):void
+		protected function thumb_touchHandler(event:TouchEvent):void
 		{
 			if(!this._isEnabled)
 			{
 				return;
 			}
-			const touches:Vector.<Touch> = event.getTouches(this.thumb);
+			const touches:Vector.<Touch> = event.getTouches(this.thumb, null, HELPER_TOUCHES_VECTOR);
 			if(touches.length == 0)
 			{
 				return;
@@ -1478,6 +1464,7 @@ package feathers.controls
 				}
 				if(!touch)
 				{
+					HELPER_TOUCHES_VECTOR.length = 0;
 					return;
 				}
 				touch.getLocation(this, HELPER_POINT);
@@ -1488,7 +1475,6 @@ package feathers.controls
 					const xPosition:Number = Math.min(Math.max(this._paddingLeft, this._thumbStartX + xOffset), this._paddingLeft + trackScrollableWidth);
 					this.thumb.x = xPosition;
 					this.layout();
-					return;
 				}
 				else if(touch.phase == TouchPhase.ENDED)
 				{
@@ -1500,7 +1486,6 @@ package feathers.controls
 						this._isSelectionChangedByUser = true;
 						this._ignoreTapHandler = true;
 					}
-					return;
 				}
 			}
 			else
@@ -1513,16 +1498,17 @@ package feathers.controls
 						this._touchPointID = touch.id;
 						this._thumbStartX = this.thumb.x;
 						this._touchStartX = HELPER_POINT.x;
-						return;
+						break;
 					}
 				}
 			}
+			HELPER_TOUCHES_VECTOR.length = 0;
 		}
 
 		/**
 		 * @private
 		 */
-		private function selectionTween_onChange(tween:GTween):void
+		protected function selectionTween_onUpdate():void
 		{
 			this.layout();
 		}
@@ -1530,9 +1516,9 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private function selectionTween_onComplete(tween:GTween):void
+		protected function selectionTween_onComplete():void
 		{
-			this._selectionChangeTween = null;
+			this._toggleTween = null;
 		}
 	}
 }

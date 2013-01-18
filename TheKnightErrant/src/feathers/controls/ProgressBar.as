@@ -1,27 +1,10 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.controls
 {
 	import feathers.core.FeathersControl;
@@ -31,6 +14,8 @@ package feathers.controls
 
 	/**
 	 * Displays the progress of a task over time. Non-interactive.
+	 *
+	 * @see http://wiki.starling-framework.org/feathers/progress-bar
 	 */
 	public class ProgressBar extends FeathersControl
 	{
@@ -54,8 +39,9 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _direction:String = DIRECTION_HORIZONTAL;
+		protected var _direction:String = DIRECTION_HORIZONTAL;
 
+		[Inspectable(type="String",enumeration="horizontal,vertical")]
 		/**
 		 * Determines the direction that the progress bar fills. When this value
 		 * changes, the progress bar's width and height values do not change
@@ -82,7 +68,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _value:Number = 0;
+		protected var _value:Number = 0;
 
 		/**
 		 * The value of the progress bar, between the minimum and maximum.
@@ -109,7 +95,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _minimum:Number = 0;
+		protected var _minimum:Number = 0;
 
 		/**
 		 * The progress bar's value will not go lower than the minimum.
@@ -135,7 +121,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _maximum:Number = 1;
+		protected var _maximum:Number = 1;
 
 		/**
 		 * The progress bar's value will not go higher than the maximum.
@@ -176,7 +162,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _backgroundSkin:DisplayObject;
+		protected var _backgroundSkin:DisplayObject;
 
 		/**
 		 * The primary background to display.
@@ -213,7 +199,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _backgroundDisabledSkin:DisplayObject;
+		protected var _backgroundDisabledSkin:DisplayObject;
 
 		/**
 		 * A background to display when the progress bar is disabled.
@@ -265,7 +251,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _fillSkin:DisplayObject;
+		protected var _fillSkin:DisplayObject;
 
 		/**
 		 * The primary fill to display.
@@ -315,7 +301,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _fillDisabledSkin:DisplayObject;
+		protected var _fillDisabledSkin:DisplayObject;
 
 		/**
 		 * A fill to display when the progress bar is disabled.
@@ -347,6 +333,28 @@ package feathers.controls
 				this.addChild(this._fillDisabledSkin);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * Quickly sets all padding properties to the same value. The
+		 * <code>padding</code> getter always returns the value of
+		 * <code>paddingTop</code>, but the other padding values may be
+		 * different.
+		 */
+		public function get padding():Number
+		{
+			return this._paddingTop;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set padding(value:Number):void
+		{
+			this.paddingTop = value;
+			this.paddingRight = value;
+			this.paddingBottom = value;
+			this.paddingLeft = value;
 		}
 
 		/**

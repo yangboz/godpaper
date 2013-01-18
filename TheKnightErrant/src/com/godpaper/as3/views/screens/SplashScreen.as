@@ -34,10 +34,9 @@ package com.godpaper.as3.views.screens
 	import feathers.layout.VerticalLayout;
 	
 	import mx.logging.ILogger;
-
-	import feathers.motion.GTween;
-
 	
+	import starling.animation.Tween;
+	import starling.core.Starling;
 	import starling.events.Event;
 	import starling.text.TextField;
 
@@ -62,7 +61,8 @@ package com.godpaper.as3.views.screens
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _progressTween:GTween;//Foxhole extended GTween.
+//		private var _progressTween:GTween;//Foxhole extended GTween.
+		private var _progressTween:Tween;
 		private var _progress:ProgressBar;
 		private var _label:TextField;
 		//
@@ -129,13 +129,18 @@ package com.godpaper.as3.views.screens
 			this._progress.value = 0;
 			this._container.addChild(this._progress);
 			//
-			this._progressTween = new GTween(this._progress, 5,
-				{
-					value: 1
-				},
-				{
-					repeatCount: 1
-				});
+//			this._progressTween = new GTween(this._progress, 5,
+			this._progressTween = new Tween(this._progress, 5
+//				,	
+//				{
+//					value: 1
+//				}
+//				,
+//				{
+//					repeatCount: 1
+//				}
+			);
+			starling.core.Starling.juggler.add(this._progressTween);
 			//Loading subroutines here.
 			
 			//			CursorManager.setBusyCursor();

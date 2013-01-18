@@ -362,7 +362,7 @@ package feathers.themes
 
 		protected function sliderInitializer(slider:Slider):void
 		{
-			slider.trackLayoutMode = Slider.TRACK_LAYOUT_MODE_STRETCH;
+//			slider.trackLayoutMode = Slider.TRACK_LAYOUT_MODE_STRETCH;
 			if(slider.direction == Slider.DIRECTION_VERTICAL)
 			{
 				var sliderMinimumTrackDefaultSkin:Scale3Image = new Scale3Image(VSLIDER_MINIMUM_TRACK_UP_SKIN_TEXTURES, this._scale);
@@ -576,9 +576,9 @@ package feathers.themes
 			input.minTouchWidth = input.minTouchHeight = 66 * this._scale;
 			input.paddingTop = input.paddingBottom = 14 * this._scale;
 			input.paddingLeft = input.paddingRight = 16 * this._scale;
-			input.stageTextProperties.fontFamily = "Helvetica";
-			input.stageTextProperties.fontSize = 30 * this._scale;
-			input.stageTextProperties.color = 0xffffff;
+//			input.stageTextProperties.fontFamily = "Helvetica";
+//			input.stageTextProperties.fontSize = 30 * this._scale;
+//			input.stageTextProperties.color = 0xffffff;
 
 			const backgroundSkin:Scale9Image = new Scale9Image(INSET_BACKGROUND_SKIN_TEXTURES, this._scale);
 			backgroundSkin.width = 264 * this._scale;

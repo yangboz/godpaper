@@ -40,6 +40,7 @@ package com.godpaper.as3.views.popups
 	import feathers.layout.VerticalLayout;
 	
 	import starling.display.DisplayObject;
+	import starling.events.Event;
 	import starling.text.TextField;
 
 	/**
@@ -135,8 +136,10 @@ package com.godpaper.as3.views.popups
 //					this._noBtn
 //				];
 			//event listener
-			this._yesBtn.onRelease.add(yesButtonOnRelease);
-			this._noBtn.onRelease.add(noButtonOnRelease);
+//			this._yesBtn.onRelease.add(yesButtonOnRelease);
+			this._yesBtn.addEventListener(starling.events.Event.TRIGGERED,yesButtonOnRelease);
+//			this._noBtn.onRelease.add(noButtonOnRelease);
+			this._noBtn.addEventListener(starling.events.Event.TRIGGERED,noButtonOnRelease);
 			//
 			this._header.title = DefaultConstants.INDICATION_COMPUTER_WIN;
 			this.width = 200;

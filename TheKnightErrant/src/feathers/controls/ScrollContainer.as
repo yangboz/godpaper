@@ -1,42 +1,50 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.controls
 {
 	import feathers.controls.supportClasses.LayoutViewPort;
 	import feathers.core.FeathersControl;
+	import feathers.core.IFeathersControl;
 	import feathers.core.PropertyProxy;
+	import feathers.events.FeathersEventType;
 	import feathers.layout.ILayout;
 	import feathers.layout.IVirtualLayout;
-	import org.osflash.signals.ISignal;
-	import org.osflash.signals.Signal;
 
 	import starling.display.DisplayObject;
+	import starling.events.Event;
+
+	/**
+	 * Dispatched when the container is scrolled.
+	 *
+	 * @eventType starling.events.Event.SCROLL
+	 */
+	[Event(name="change",type="starling.events.Event")]
+
+	/**
+	 * Dispatched when the container is scrolled.
+	 *
+	 * @eventType starling.events.Event.SCROLL
+	 */
+	[Event(name="scroll",type="starling.events.Event")]
+
+	/**
+	 * Dispatched when the container finishes scrolling in either direction after
+	 * being thrown.
+	 *
+	 * @eventType feathers.events.FeathersEventType.SCROLL_COMPLETE
+	 */
+	[Event(name="scrollComplete",type="starling.events.Event")]
 
 	[DefaultProperty("mxmlContent")]
 	/**
-	 * A layout container that supports scrolling.
+	 * A generic container that supports layout and scrolling.
+	 *
+	 * @see http://wiki.starling-framework.org/feathers/scroll-container
 	 */
 	public class ScrollContainer extends FeathersControl
 	{
@@ -91,6 +99,11 @@ package feathers.controls
 		/**
 		 * @private
 		 */
+		protected var _ignoreScrollerResizing:Boolean;
+
+		/**
+		 * @private
+		 */
 		protected var _layout:ILayout;
 
 		/**
@@ -112,7 +125,137 @@ package feathers.controls
 				return;
 			}
 			this._layout = value;
-			this.invalidate(INVALIDATION_FLAG_DATA);
+			this.invalidate(INVALIDATION_FLAG_LAYOUT);
+		}
+
+		/**
+		 * Quickly sets all padding properties to the same value. The
+		 * <code>padding</code> getter always returns the value of
+		 * <code>paddingTop</code>, but the other padding values may be
+		 * different.
+		 */
+		public function get padding():Number
+		{
+			return this._paddingTop;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set padding(value:Number):void
+		{
+			this.paddingTop = value;
+			this.paddingRight = value;
+			this.paddingBottom = value;
+			this.paddingLeft = value;
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _paddingTop:Number = 0;
+
+		/**
+		 * The minimum space, in pixels, between the panel's top edge and the
+		 * panel's content.
+		 */
+		public function get paddingTop():Number
+		{
+			return this._paddingTop;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set paddingTop(value:Number):void
+		{
+			if(this._paddingTop == value)
+			{
+				return;
+			}
+			this._paddingTop = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _paddingRight:Number = 0;
+
+		/**
+		 * The minimum space, in pixels, between the panel's right edge and
+		 * the panel's content.
+		 */
+		public function get paddingRight():Number
+		{
+			return this._paddingRight;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set paddingRight(value:Number):void
+		{
+			if(this._paddingRight == value)
+			{
+				return;
+			}
+			this._paddingRight = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _paddingBottom:Number = 0;
+
+		/**
+		 * The minimum space, in pixels, between the panel's bottom edge and
+		 * the panel's content.
+		 */
+		public function get paddingBottom():Number
+		{
+			return this._paddingBottom;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set paddingBottom(value:Number):void
+		{
+			if(this._paddingBottom == value)
+			{
+				return;
+			}
+			this._paddingBottom = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _paddingLeft:Number = 0;
+
+		/**
+		 * The minimum space, in pixels, between the panel's left edge and the
+		 * panel's content.
+		 */
+		public function get paddingLeft():Number
+		{
+			return this._paddingLeft;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set paddingLeft(value:Number):void
+		{
+			if(this._paddingLeft == value)
+			{
+				return;
+			}
+			this._paddingLeft = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
 
 		/**
@@ -140,7 +283,7 @@ package feathers.controls
 			}
 			this._horizontalScrollPosition = value;
 			this.invalidate(INVALIDATION_FLAG_SCROLL);
-			this._onScroll.dispatch(this);
+			this.dispatchEventWith(Event.SCROLL);
 		}
 
 		/**
@@ -160,6 +303,20 @@ package feathers.controls
 		public function get maxHorizontalScrollPosition():Number
 		{
 			return this._maxHorizontalScrollPosition;
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _horizontalPageIndex:int = 0;
+
+		/**
+		 * The index of the horizontal page, if snapping is enabled. If snapping
+		 * is disabled, the index will always be <code>0</code>.
+		 */
+		public function get horizontalPageIndex():int
+		{
+			return this._horizontalPageIndex;
 		}
 
 		/**
@@ -187,7 +344,7 @@ package feathers.controls
 			}
 			this._verticalScrollPosition = value;
 			this.invalidate(INVALIDATION_FLAG_SCROLL);
-			this._onScroll.dispatch(this);
+			this.dispatchEventWith(Event.SCROLL);
 		}
 
 		/**
@@ -212,9 +369,30 @@ package feathers.controls
 		/**
 		 * @private
 		 */
+		protected var _verticalPageIndex:int = 0;
+
+		/**
+		 * The index of the vertical page, if snapping is enabled. If snapping
+		 * is disabled, the index will always be <code>0</code>.
+		 *
+		 * @default 0
+		 */
+		public function get verticalPageIndex():int
+		{
+			return this._verticalPageIndex;
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _mxmlContentIsReady:Boolean = false;
+
+		/**
+		 * @private
+		 */
 		protected var _mxmlContent:Array;
 
-		[ArrayElementType("feathers.core.FeathersControl")]
+		[ArrayElementType("feathers.core.IFeathersControl")]
 		/**
 		 * @private
 		 */
@@ -232,16 +410,27 @@ package feathers.controls
 			{
 				return;
 			}
-			if(this._mxmlContent)
+			if(this._mxmlContent && this._mxmlContentIsReady)
 			{
-				for each(var child:FeathersControl in this._mxmlContent)
+				for each(var child:IFeathersControl in this._mxmlContent)
 				{
-					this.removeChild(child);
+					this.removeChild(DisplayObject(child), true);
 				}
 			}
 			this._mxmlContent = value;
+			this._mxmlContentIsReady = false;
 			this.invalidate(INVALIDATION_FLAG_MXML_CONTENT);
 		}
+
+		/**
+		 * @private
+		 */
+		protected var _originalBackgroundWidth:Number = NaN;
+
+		/**
+		 * @private
+		 */
+		protected var _originalBackgroundHeight:Number = NaN;
 
 		/**
 		 * @private
@@ -273,13 +462,13 @@ package feathers.controls
 
 			if(this._backgroundSkin && this._backgroundSkin != this._backgroundDisabledSkin)
 			{
-				this.removeChild(this._backgroundSkin);
+				this.$removeChild(this._backgroundSkin);
 			}
 			this._backgroundSkin = value;
 			if(this._backgroundSkin && this._backgroundSkin.parent != this)
 			{
 				this._backgroundSkin.visible = false;
-				super.addChildAt(this._backgroundSkin, 0);
+				this.$addChildAt(this._backgroundSkin, 0);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -309,13 +498,13 @@ package feathers.controls
 
 			if(this._backgroundDisabledSkin && this._backgroundDisabledSkin != this._backgroundSkin)
 			{
-				this.removeChild(this._backgroundDisabledSkin);
+				this.$removeChild(this._backgroundDisabledSkin);
 			}
 			this._backgroundDisabledSkin = value;
 			if(this._backgroundDisabledSkin && this._backgroundDisabledSkin.parent != this)
 			{
 				this._backgroundDisabledSkin.visible = false;
-				super.addChildAt(this._backgroundDisabledSkin, 0);
+				this.$addChildAt(this._backgroundDisabledSkin, 0);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -343,7 +532,7 @@ package feathers.controls
 		{
 			if(!this._scrollerProperties)
 			{
-				this._scrollerProperties = new PropertyProxy(scrollerProperties_onChange);
+				this._scrollerProperties = new PropertyProxy(childProperties_onChange);
 			}
 			return this._scrollerProperties;
 		}
@@ -372,27 +561,14 @@ package feathers.controls
 			}
 			if(this._scrollerProperties)
 			{
-				this._scrollerProperties.onChange.remove(scrollerProperties_onChange);
+				this._scrollerProperties.removeOnChangeCallback(childProperties_onChange);
 			}
 			this._scrollerProperties = PropertyProxy(value);
 			if(this._scrollerProperties)
 			{
-				this._scrollerProperties.onChange.add(scrollerProperties_onChange);
+				this._scrollerProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
-		}
-
-		/**
-		 * @private
-		 */
-		protected var _onScroll:Signal = new Signal(ScrollContainer);
-
-		/**
-		 * Dispatched when the container scrolls.
-		 */
-		public function get onScroll():ISignal
-		{
-			return this._onScroll;
 		}
 
 		/**
@@ -573,15 +749,6 @@ package feathers.controls
 		}
 
 		/**
-		 * @private
-		 */
-		override public function dispose():void
-		{
-			this._onScroll.removeAll();
-			super.dispose();
-		}
-
-		/**
 		 * If the user is dragging the scroll, calling stopScrolling() will
 		 * cause the container to ignore the drag. The children of the container
 		 * will still receive touches, so it's useful to call this if the
@@ -625,11 +792,13 @@ package feathers.controls
 				this.scroller = new Scroller();
 				this.scroller.viewPort = this.viewPort;
 				this.scroller.nameList.add(this.scrollerName);
-				this.scroller.onScroll.add(scroller_onScroll);
-				//addChild() calls addChildAt(), so this is a workaround to
-				//bypass our overridden addChildAt()
-				super.addChildAt(this.scroller, super.numChildren);
+				this.scroller.addEventListener(Event.SCROLL, scroller_scrollHandler);
+				this.scroller.addEventListener(FeathersEventType.SCROLL_COMPLETE, scroller_scrollCompleteHandler);
+				this.scroller.addEventListener(FeathersEventType.RESIZE, scroller_resizeHandler);
+				this.$addChildAt(this.scroller, this.$numChildren);
 			}
+
+			this.refreshMXMLContent();
 		}
 
 		/**
@@ -638,10 +807,10 @@ package feathers.controls
 		override protected function draw():void
 		{
 			var sizeInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_SIZE);
-			const dataInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_DATA);
 			const scrollInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_SCROLL);
 			const stylesInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STYLES);
 			const stateInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STATE);
+			const layoutInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_LAYOUT);
 			const mxmlContentInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_MXML_CONTENT);
 
 			if(mxmlContentInvalid)
@@ -649,7 +818,7 @@ package feathers.controls
 				this.refreshMXMLContent();
 			}
 
-			if(dataInvalid)
+			if(layoutInvalid)
 			{
 				if(this._layout is IVirtualLayout)
 				{
@@ -675,43 +844,19 @@ package feathers.controls
 
 			if(scrollInvalid)
 			{
-				this.scroller.verticalScrollPosition = this._verticalScrollPosition;
-				this.scroller.horizontalScrollPosition = this._horizontalScrollPosition;
+				this.refreshScrollPosition();
 			}
 
 			if(sizeInvalid)
 			{
-				if(isNaN(this.explicitWidth))
-				{
-					this.scroller.width = NaN;
-				}
-				else
-				{
-					this.scroller.width = Math.max(0, this.explicitWidth);
-				}
-				if(isNaN(this.explicitHeight))
-				{
-					this.scroller.height = NaN;
-				}
-				else
-				{
-					this.scroller.height = Math.max(0, this.explicitHeight);
-				}
-				this.scroller.minWidth = Math.max(0,  this._minWidth);
-				this.scroller.maxWidth = Math.max(0, this._maxWidth);
-				this.scroller.minHeight = Math.max(0, this._minHeight);
-				this.scroller.maxHeight = Math.max(0, this._maxHeight);
+				this.refreshScrollerBounds();
 			}
 
 			sizeInvalid = this.autoSizeIfNeeded() || sizeInvalid;
 
 			if(sizeInvalid || stylesInvalid || stateInvalid)
 			{
-				if(this.currentBackgroundSkin)
-				{
-					this.currentBackgroundSkin.width = this.actualWidth;
-					this.currentBackgroundSkin.height = this.actualHeight;
-				}
+				this.layoutChildren();
 			}
 
 			this.scroller.validate();
@@ -719,6 +864,8 @@ package feathers.controls
 			this._maxVerticalScrollPosition = this.scroller.maxVerticalScrollPosition;
 			this._horizontalScrollPosition = this.scroller.horizontalScrollPosition;
 			this._verticalScrollPosition = this.scroller.verticalScrollPosition;
+			this._horizontalPageIndex = this.scroller.horizontalPageIndex;
+			this._verticalPageIndex = this.scroller.verticalPageIndex;
 
 			this.scroll();
 		}
@@ -735,16 +882,27 @@ package feathers.controls
 				return false;
 			}
 
+			const oldIgnore:Boolean = this._ignoreScrollerResizing;
+			this._ignoreScrollerResizing = true;
 			this.scroller.validate();
+			this._ignoreScrollerResizing = oldIgnore;
 			var newWidth:Number = this.explicitWidth;
 			var newHeight:Number = this.explicitHeight;
 			if(needsWidth)
 			{
-				newWidth = this.scroller.width;
+				newWidth = this.scroller.width + this._paddingLeft + this._paddingRight;
+				if(!isNaN(this._originalBackgroundWidth))
+				{
+					newWidth = Math.max(newWidth, this._originalBackgroundWidth);
+				}
 			}
 			if(needsHeight)
 			{
-				newHeight = this.scroller.height;
+				newHeight = this.scroller.height + this._paddingTop + this._paddingBottom;
+				if(!isNaN(this._originalBackgroundHeight))
+				{
+					newHeight = Math.max(newHeight, this._originalBackgroundHeight);
+				}
 			}
 			return this.setSizeInternal(newWidth, newHeight, false);
 		}
@@ -770,6 +928,15 @@ package feathers.controls
 			if(this.currentBackgroundSkin)
 			{
 				this.currentBackgroundSkin.visible = true;
+				
+				if(isNaN(this._originalBackgroundWidth))
+				{
+					this._originalBackgroundWidth = this.currentBackgroundSkin.width;
+				}
+				if(isNaN(this._originalBackgroundHeight))
+				{
+					this._originalBackgroundHeight = this.currentBackgroundSkin.height;
+				}
 			}
 		}
 
@@ -791,18 +958,72 @@ package feathers.controls
 		/**
 		 * @private
 		 */
+		protected function refreshScrollPosition():void
+		{
+			this.scroller.verticalScrollPosition = this._verticalScrollPosition;
+			this.scroller.horizontalScrollPosition = this._horizontalScrollPosition;
+		}
+
+		/**
+		 * @private
+		 */
+		protected function refreshScrollerBounds():void
+		{
+			const scrollerWidthOffset:Number = this._paddingLeft + this._paddingRight;
+			const scrollerHeightOffset:Number = this._paddingTop + this._paddingBottom;
+			if(isNaN(this.explicitWidth))
+			{
+				this.scroller.width = NaN;
+			}
+			else
+			{
+				this.scroller.width = Math.max(0, this.explicitWidth - scrollerWidthOffset);
+			}
+			if(isNaN(this.explicitHeight))
+			{
+				this.scroller.height = NaN;
+			}
+			else
+			{
+				this.scroller.height = Math.max(0, this.explicitHeight - scrollerHeightOffset);
+			}
+			this.scroller.minWidth = Math.max(0,  this._minWidth - scrollerWidthOffset);
+			this.scroller.maxWidth = Math.max(0, this._maxWidth - scrollerWidthOffset);
+			this.scroller.minHeight = Math.max(0, this._minHeight - scrollerHeightOffset);
+			this.scroller.maxHeight = Math.max(0, this._maxHeight - scrollerHeightOffset);
+		}
+
+		/**
+		 * @private
+		 */
 		protected function refreshMXMLContent():void
 		{
-			if(!this._mxmlContent)
+			if(!this._mxmlContent || this._mxmlContentIsReady)
 			{
 				return;
 			}
 			const childCount:int = this._mxmlContent.length;
 			for(var i:int = 0; i < childCount; i++)
 			{
-				var child:FeathersControl = FeathersControl(this._mxmlContent[i]);
+				var child:DisplayObject = DisplayObject(this._mxmlContent[i]);
 				this.addChild(child);
 			}
+			this._mxmlContentIsReady = true;
+		}
+
+		/**
+		 * @private
+		 */
+		protected function layoutChildren():void
+		{
+			if(this.currentBackgroundSkin)
+			{
+				this.currentBackgroundSkin.width = this.actualWidth;
+				this.currentBackgroundSkin.height = this.actualHeight;
+			}
+
+			this.scroller.x = this._paddingLeft;
+			this.scroller.y = this._paddingTop;
 		}
 
 		/**
@@ -821,7 +1042,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function scrollerProperties_onChange(proxy:PropertyProxy, name:Object):void
+		protected function childProperties_onChange(proxy:PropertyProxy, name:String):void
 		{
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -829,13 +1050,36 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function scroller_onScroll(scroller:Scroller):void
+		protected function scroller_scrollCompleteHandler(event:Event):void
+		{
+			this.dispatchEventWith(FeathersEventType.SCROLL_COMPLETE);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function scroller_scrollHandler(event:Event):void
 		{
 			this._horizontalScrollPosition = this.scroller.horizontalScrollPosition;
 			this._verticalScrollPosition = this.scroller.verticalScrollPosition;
 			this._maxHorizontalScrollPosition = this.scroller.maxHorizontalScrollPosition;
 			this._maxVerticalScrollPosition = this.scroller.maxVerticalScrollPosition;
-			this._onScroll.dispatch(this);
+			this._horizontalPageIndex = this.scroller.horizontalPageIndex;
+			this._verticalPageIndex = this.scroller.verticalPageIndex;
+			this.invalidate(INVALIDATION_FLAG_SCROLL);
+			this.dispatchEventWith(Event.SCROLL);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function scroller_resizeHandler(event:Event):void
+		{
+			if(this._ignoreScrollerResizing)
+			{
+				return;
+			}
+			this.invalidate(INVALIDATION_FLAG_SIZE);
 		}
 	}
 }

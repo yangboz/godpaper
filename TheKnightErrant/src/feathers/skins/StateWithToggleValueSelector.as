@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+ Copyright 2012-2013 Joshua Tynjala
 
  Permission is hereby granted, free of charge, to any person
  obtaining a copy of this software and associated documentation
@@ -24,9 +24,9 @@
 */
 package feathers.skins
 {
-	import flash.utils.Dictionary;
-
 	import feathers.core.IToggle;
+
+	import flash.utils.Dictionary;
 
 	/**
 	 * Maps a component's states to values, perhaps for one of the component's

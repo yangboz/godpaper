@@ -172,7 +172,8 @@ package com.godpaper.as3.views.plugin
 				]
 			);
 			this.validate();
-			this.onChange.add(tabBarChangeHandler);
+//			this.onChange.add(tabBarChangeHandler);
+			this.addEventListener(starling.events.Event.CHANGE,tabBarChangeHandler);
 			//
 			this.relayout(this.stage.stageWidth, this.stage.stageHeight);
 			//

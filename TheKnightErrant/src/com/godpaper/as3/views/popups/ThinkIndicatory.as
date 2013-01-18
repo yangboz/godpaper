@@ -31,8 +31,9 @@ package com.godpaper.as3.views.popups
 	import feathers.controls.Label;
 	import feathers.controls.ProgressBar;
 	import feathers.controls.Screen;
-	import feathers.motion.GTween;
+//	import feathers.motion.GTween;
 	
+	import starling.animation.Tween;
 	import starling.events.Event;
 	
 	
@@ -51,7 +52,8 @@ package com.godpaper.as3.views.popups
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _progressTween:GTween;//Foxhole extended GTween.
+//		private var _progressTween:GTween;//Foxhole extended GTween.
+		private var _progressTween:Tween;
 		private var _progress:ProgressBar;
 		private var _label:Label;
 		//----------------------------------
@@ -96,13 +98,16 @@ package com.godpaper.as3.views.popups
 			this._progress.value = 0;
 			this.addChild(this._progress);
 			//
-			this._progressTween = new GTween(this._progress, 5,
+//			this._progressTween = new GTween(this._progress, 5,
+			this._progressTween = new Tween(this._progress, 5,		
 				{
 					value: 1
-				},
-				{
-					repeatCount: int.MAX_VALUE
-				});
+				}
+//				,
+//				{
+//					repeatCount: int.MAX_VALUE
+//				}
+			);
 			//
 			this._label = new Label();
 			this._label.text = DefaultConstants.INDICATION_THINK;

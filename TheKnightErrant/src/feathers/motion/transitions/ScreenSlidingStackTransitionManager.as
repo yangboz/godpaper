@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2012 Josh Tynjala
+Copyright 2012-2013 Joshua Tynjala
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -24,18 +24,34 @@ OTHER DEALINGS IN THE SOFTWARE.
 */
 package feathers.motion.transitions
 {
-	import com.gskinner.motion.easing.Sine;
-
+	import feathers.controls.IScreen;
 	import feathers.controls.ScreenNavigator;
-	import feathers.motion.GTween;
 
+	import flash.utils.getQualifiedClassName;
+
+	import starling.animation.Transitions;
+	import starling.animation.Tween;
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 
 	/**
 	 * A transition for <code>ScreenNavigator</code> that slides out the old
 	 * screen and slides in the new screen at the same time. The slide starts
-	 * from the right or left, depending on if the manager determines if the
+	 * from the right or left, depending on if the manager determines that the
 	 * transition is a push or a pop.
+	 *
+	 * <p>Whether a screen change is supposed to be a push or a pop is
+	 * determined automatically. The manager generates an identifier from the
+	 * fully-qualified class name of the screen, and if present, the
+	 * <code>screenID</code> defined by <code>IScreen</code> instances. If the
+	 * generated identifier is present on the stack, a screen change is
+	 * considered a pop. If the token is not present, it's a push. Screen IDs
+	 * should be tailored to this behavior to avoid false positives.</p>
+	 *
+	 * <p>If your navigation structure requires explicit pushing and popping, a
+	 * custom transition manager is probably better.</p>
+	 *
+	 * @see feathers.controls.ScreenNavigator
 	 */
 	public class ScreenSlidingStackTransitionManager
 	{
@@ -48,18 +64,38 @@ package feathers.motion.transitions
 			{
 				throw new ArgumentError("ScreenNavigator cannot be null.");
 			}
-			this._navigator = navigator;
+			this.navigator = navigator;
 			if(quickStack)
 			{
 				this._stack.push(quickStack);
 			}
-			this._navigator.transition = this.onTransition;
+			this.navigator.transition = this.onTransition;
 		}
-		
-		private var _navigator:ScreenNavigator;
-		private var _stack:Vector.<Class> = new <Class>[];
-		private var _activeTransition:GTween;
-		private var _savedCompleteHandler:Function;
+
+		/**
+		 * The <code>ScreenNavigator</code> being managed.
+		 */
+		protected var navigator:ScreenNavigator;
+
+		/**
+		 * @private
+		 */
+		protected var _stack:Vector.<String> = new <String>[];
+
+		/**
+		 * @private
+		 */
+		protected var _activeTransition:Tween;
+
+		/**
+		 * @private
+		 */
+		protected var _savedOtherTarget:DisplayObject;
+
+		/**
+		 * @private
+		 */
+		protected var _savedCompleteHandler:Function;
 		
 		/**
 		 * The duration of the transition, in seconds.
@@ -74,9 +110,15 @@ package feathers.motion.transitions
 		public var delay:Number = 0.1;
 		
 		/**
-		 * The GTween easing function to use.
+		 * The easing function to use.
 		 */
-		public var ease:Function = Sine.easeOut;
+		public var ease:Object = Transitions.EASE_OUT;
+
+		/**
+		 * Determines if the next transition should be skipped. After the
+		 * transition, this value returns to <code>false</code>.
+		 */
+		public var skipNextTransition:Boolean = false;
 		
 		/**
 		 * Removes all saved classes from the stack that are used to determine
@@ -87,14 +129,24 @@ package feathers.motion.transitions
 		{
 			this._stack.length = 0;
 		}
-		
+
 		/**
-		 * @private
+		 * The function passed to the <code>transition</code> property of the
+		 * <code>ScreenNavigator</code>.
 		 */
-		private function onTransition(oldScreen:DisplayObject, newScreen:DisplayObject, onComplete:Function):void
+		protected function onTransition(oldScreen:DisplayObject, newScreen:DisplayObject, onComplete:Function):void
 		{
-			if(!oldScreen || !newScreen)
+			if(this._activeTransition)
 			{
+				this._savedOtherTarget = null;
+				Starling.juggler.remove(this._activeTransition);
+				this._activeTransition = null;
+			}
+
+			if(!oldScreen || !newScreen || this.skipNextTransition)
+			{
+				this.skipNextTransition = false;
+				this._savedCompleteHandler = null;
 				if(newScreen)
 				{
 					newScreen.x = 0;
@@ -103,75 +155,81 @@ package feathers.motion.transitions
 				{
 					oldScreen.x = 0;
 				}
-				onComplete();
+				if(onComplete != null)
+				{
+					onComplete();
+				}
 				return;
 			}
 			
-			if(this._activeTransition)
-			{
-				this._activeTransition.paused = true;
-				this._activeTransition = null;
-			}
-			
 			this._savedCompleteHandler = onComplete;
-			
-			var NewScreenType:Class = Object(newScreen).constructor;
-			var stackIndex:int = this._stack.indexOf(NewScreenType);
-			var activeTransition_onChange:Function;
+
+			var newScreenClassAndID:String = getQualifiedClassName(newScreen);
+			if(newScreen is IScreen)
+			{
+				newScreenClassAndID += "~" + IScreen(newScreen).screenID;
+			}
+			var stackIndex:int = this._stack.indexOf(newScreenClassAndID);
+			var activeTransition_onUpdate:Function;
 			if(stackIndex < 0)
 			{
-				var OldScreenType:Class = Object(oldScreen).constructor;
-				this._stack.push(OldScreenType);
+				var oldScreenClassAndID:String = getQualifiedClassName(oldScreen);
+				if(oldScreen is IScreen)
+				{
+					oldScreenClassAndID += "~" + IScreen(oldScreen).screenID;
+				}
+				this._stack.push(oldScreenClassAndID);
 				oldScreen.x = 0;
-				newScreen.x = this._navigator.width;
-				activeTransition_onChange = this.activeTransitionPush_onChange;
+				newScreen.x = this.navigator.width;
+				activeTransition_onUpdate = this.activeTransitionPush_onUpdate;
 			}
 			else
 			{
 				this._stack.length = stackIndex;
 				oldScreen.x = 0;
-				newScreen.x = -this._navigator.width;
-				activeTransition_onChange = this.activeTransitionPop_onChange;
+				newScreen.x = -this.navigator.width;
+				activeTransition_onUpdate = this.activeTransitionPop_onUpdate;
 			}
-			this._activeTransition = new GTween(newScreen, this.duration,
-			{
-				x: 0
-			},
-			{
-				data: oldScreen,
-				delay: this.delay,
-				ease: this.ease,
-				onChange: activeTransition_onChange,
-				onComplete: activeTransition_onComplete
-			});
+			this._savedOtherTarget = oldScreen;
+			this._activeTransition = new Tween(newScreen, this.duration, this.ease);
+			this._activeTransition.animate("x", 0);
+			this._activeTransition.delay = this.delay;
+			this._activeTransition.onUpdate = activeTransition_onUpdate;
+			this._activeTransition.onComplete = activeTransition_onComplete;
+			Starling.juggler.add(this._activeTransition);
 		}
 		
 		/**
 		 * @private
 		 */
-		private function activeTransitionPush_onChange(tween:GTween):void
+		protected function activeTransitionPush_onUpdate():void
 		{
-			var newScreen:DisplayObject = DisplayObject(tween.target);
-			var oldScreen:DisplayObject = DisplayObject(tween.data);
-			oldScreen.x = newScreen.x - this._navigator.width;
+			if(this._savedOtherTarget)
+			{
+				const newScreen:DisplayObject = DisplayObject(this._activeTransition.target);
+				this._savedOtherTarget.x = newScreen.x - this.navigator.width;
+			}
 		}
 		
 		/**
 		 * @private
 		 */
-		private function activeTransitionPop_onChange(tween:GTween):void
+		protected function activeTransitionPop_onUpdate():void
 		{
-			var newScreen:DisplayObject = DisplayObject(tween.target);
-			var oldScreen:DisplayObject = DisplayObject(tween.data);
-			oldScreen.x = newScreen.x + this._navigator.width;
+			if(this._savedOtherTarget)
+			{
+				const newScreen:DisplayObject = DisplayObject(this._activeTransition.target);
+				this._savedOtherTarget.x = newScreen.x + this.navigator.width;
+			}
 		}
 		
 		/**
 		 * @private
 		 */
-		private function activeTransition_onComplete(tween:GTween):void
+		protected function activeTransition_onComplete():void
 		{
 			this._activeTransition = null;
+			this._savedOtherTarget = null;
 			if(this._savedCompleteHandler != null)
 			{
 				this._savedCompleteHandler();

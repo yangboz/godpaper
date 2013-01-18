@@ -45,14 +45,16 @@ package com.godpaper.as3.views.screens
 	import feathers.data.ListCollection;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.VerticalLayout;
-	import feathers.motion.GTween;
+//	import feathers.motion.GTween;
 	
-	import flash.events.Event;
+//	import flash.events.Event;
 	import flash.events.TouchEvent;
 	
 	import mx.logging.ILogger;
 	
+	import starling.animation.Tween;
 	import starling.display.DisplayObject;
+	import starling.events.Event;
 	import starling.events.TouchEvent;
 	import starling.text.TextField;
 	
@@ -72,7 +74,8 @@ package com.godpaper.as3.views.screens
 		//
 		//--------------------------------------------------------------------------
 		private var _header:Header;
-		private var _progressTween:GTween;//Foxhole extended GTween.
+//		private var _progressTween:GTween;//Foxhole extended GTween.
+		private var _progressTween:Tween;
 		private var _progress:ProgressBar;
 //		private var _label:TextField;
 		//
@@ -154,13 +157,16 @@ package com.godpaper.as3.views.screens
 			this._progress.value = 0;
 //			this._container.addChild(this._progress);
 			//
-			this._progressTween = new GTween(this._progress, 5,
-				{
-					value: 1
-				},
-				{
-					repeatCount: 99
-				});
+//			this._progressTween = new GTween(this._progress, 5,
+			this._progressTween = new Tween(this._progress, 5	
+//				{
+//					value: 1
+//				}
+//				,
+//				{
+//					repeatCount: 99
+//				}
+			);
 			//Loading subroutines here.
 			//			CursorManager.setBusyCursor();
 			// sound initialization takes a moment, so we prepare them here
@@ -217,7 +223,8 @@ package com.godpaper.as3.views.screens
 			this._button_invite.label = this.resourceManager.getString(this.bundleName,"BTN_INVITE");
 			this._button_invite.isEnabled = false;
 			this._form_grouper.addChild(this._button_invite);
-			this._button_invite.onRelease.add(inviteButtonReleaseHandler);
+//			this._button_invite.onRelease.add(inviteButtonReleaseHandler);
+			this._button_invite.addEventListener(starling.events.Event.TRIGGERED,inviteButtonReleaseHandler);
 			//
 			this._response_grouper = new ScrollContainer();
 			this._response_grouper.layout = hLayout;
@@ -243,12 +250,14 @@ package com.godpaper.as3.views.screens
 			this._button_response.label = this.resourceManager.getString(this.bundleName,"BTN_RESPONSE");
 			this._button_response.isEnabled = false;
 			this._response_grouper.addChild(this._button_response);
-			this._button_response.onRelease.add(responseButtonReleaseHandler);
+//			this._button_response.onRelease.add(responseButtonReleaseHandler);
+			this._button_response.addEventListener(starling.events.Event.TRIGGERED,responseButtonReleaseHandler);
 			//
 			this._button_back = new Button();
 			//			this._button_back.label = "BACK";
 			this._button_back.label = this.resourceManager.getString(this.bundleName,"BTN_BACK");
-			this._button_back.onRelease.add(backButton_onRelease);
+//			this._button_back.onRelease.add(backButton_onRelease);
+			this._button_back.addEventListener(starling.events.Event.TRIGGERED,backButton_onRelease);
 			//
 			this._header = new Header();
 //			this._header.title = "HAND SHAKING...";

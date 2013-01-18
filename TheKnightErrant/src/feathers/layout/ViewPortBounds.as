@@ -1,27 +1,10 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.layout
 {
 	/**
@@ -30,17 +13,50 @@ package feathers.layout
 	 */
 	public class ViewPortBounds
 	{
-		public function ViewPortBounds()
-		{
-		}
-
+		/**
+		 * The x position of the view port, in pixels.
+		 */
 		public var x:Number = 0;
+
+		/**
+		 * The y position of the view port, in pixels.
+		 */
 		public var y:Number = 0;
+
+		/**
+		 * The explicit width of the view port, in pixels. If <code>NaN</code>,
+		 * there is no explicit width value.
+		 */
 		public var explicitWidth:Number = NaN;
+
+		/**
+		 * The explicit height of the view port, in pixels. If <code>NaN</code>,
+		 * there is no explicit height value.
+		 */
 		public var explicitHeight:Number = NaN;
+
+		/**
+		 * The minimum width of the view port, in pixels. Should be 0 or
+		 * a positive number less than infinity.
+		 */
 		public var minWidth:Number = 0;
+
+		/**
+		 * The minimum width of the view port, in pixels. Should be 0 or
+		 * a positive number less than infinity.
+		 */
 		public var minHeight:Number = 0;
+
+		/**
+		 * The maximum width of the view port, in pixels. Should be 0 or
+		 * a positive number, including infinity.
+		 */
 		public var maxWidth:Number = Number.POSITIVE_INFINITY;
+
+		/**
+		 * The maximum height of the view port, in pixels. Should be 0 or
+		 * a positive number, including infinity.
+		 */
 		public var maxHeight:Number = Number.POSITIVE_INFINITY;
 	}
 }

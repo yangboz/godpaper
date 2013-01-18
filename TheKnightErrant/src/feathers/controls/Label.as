@@ -1,27 +1,10 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.controls
 {
 	import feathers.core.FeathersControl;
@@ -30,11 +13,18 @@ package feathers.controls
 
 	import flash.geom.Point;
 
+	import starling.display.DisplayObject;
+
 	/**
 	 * Displays text.
+	 *
+	 * @see http://wiki.starling-framework.org/feathers/label
 	 */
 	public class Label extends FeathersControl
 	{
+		/**
+		 * @private
+		 */
 		private static const HELPER_POINT:Point = new Point();
 
 		/**
@@ -46,14 +36,14 @@ package feathers.controls
 		}
 
 		/**
-		 * @private
+		 * The text renderer.
 		 */
 		protected var textRenderer:ITextRenderer;
 
 		/**
 		 * @private
 		 */
-		protected var _text:String = "";
+		protected var _text:String = null;
 
 		/**
 		 * The text displayed by the label.
@@ -68,17 +58,25 @@ package feathers.controls
 		 */
 		public function set text(value:String):void
 		{
-			if(!value)
-			{
-				//don't allow null or undefined
-				value = "";
-			}
 			if(this._text == value)
 			{
 				return;
 			}
 			this._text = value;
 			this.invalidate(INVALIDATION_FLAG_DATA);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _baseline:Number = 0;
+
+		/**
+		 * The baseline value of the text.
+		 */
+		public function get baseline():Number
+		{
+			return this._baseline;
 		}
 
 		/**
@@ -118,7 +116,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _textRendererProperties:PropertyProxy;
+		protected var _textRendererProperties:PropertyProxy;
 
 		/**
 		 * A set of key/value pairs to be passed down to the text renderer.
@@ -129,6 +127,8 @@ package feathers.controls
 		 * which is in a <code>Scroller</code> which is in a <code>List</code>,
 		 * you can use the following syntax:</p>
 		 * <pre>list.scrollerProperties.&#64;verticalScrollBarProperties.&#64;thumbProperties.defaultSkin = new Image(texture);</pre>
+		 *
+		 * @see feathers.core.ITextRenderer
 		 */
 		public function get textRendererProperties():Object
 		{
@@ -154,12 +154,12 @@ package feathers.controls
 			}
 			if(this._textRendererProperties)
 			{
-				this._textRendererProperties.onChange.remove(textRendererProperties_onChange);
+				this._textRendererProperties.removeOnChangeCallback(textRendererProperties_onChange);
 			}
 			this._textRendererProperties = PropertyProxy(value);
 			if(this._textRendererProperties)
 			{
-				this._textRendererProperties.onChange.add(textRendererProperties_onChange);
+				this._textRendererProperties.addOnChangeCallback(textRendererProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -214,7 +214,9 @@ package feathers.controls
 			{
 				return false;
 			}
-			FeathersControl(this.textRenderer).maxWidth = Number.POSITIVE_INFINITY;
+			this.textRenderer.minWidth = this._minWidth;
+			this.textRenderer.maxWidth = this._maxWidth;
+			this.textRenderer.width = this.explicitWidth;
 			this.textRenderer.measureText(HELPER_POINT);
 			var newWidth:Number = this.explicitWidth;
 			if(needsWidth)
@@ -252,14 +254,13 @@ package feathers.controls
 		{
 			if(this.textRenderer)
 			{
-				this.removeChild(FeathersControl(this.textRenderer), true);
+				this.removeChild(DisplayObject(this.textRenderer), true);
 				this.textRenderer = null;
 			}
 
 			const factory:Function = this._textRendererFactory != null ? this._textRendererFactory : FeathersControl.defaultTextRendererFactory;
-			this.textRenderer = factory();
-			const uiLabelRenderer:FeathersControl = FeathersControl(this.textRenderer);
-			this.addChild(uiLabelRenderer);
+			this.textRenderer = ITextRenderer(factory());
+			this.addChild(DisplayObject(this.textRenderer));
 		}
 
 		/**
@@ -267,7 +268,7 @@ package feathers.controls
 		 */
 		protected function refreshEnabled():void
 		{
-			FeathersControl(this.textRenderer).isEnabled = this._isEnabled;
+			this.textRenderer.isEnabled = this._isEnabled;
 		}
 
 		/**
@@ -276,7 +277,7 @@ package feathers.controls
 		protected function refreshTextRendererData():void
 		{
 			this.textRenderer.text = this._text;
-			FeathersControl(this.textRenderer).visible = this._text.length > 0;
+			this.textRenderer.visible = this._text && this._text.length > 0;
 		}
 
 		/**
@@ -284,13 +285,13 @@ package feathers.controls
 		 */
 		protected function refreshTextRendererStyles():void
 		{
-			const uiTextRenderer:FeathersControl = FeathersControl(this.textRenderer);
+			const displayTextRenderer:DisplayObject = DisplayObject(this.textRenderer);
 			for(var propertyName:String in this._textRendererProperties)
 			{
-				if(uiTextRenderer.hasOwnProperty(propertyName))
+				if(displayTextRenderer.hasOwnProperty(propertyName))
 				{
 					var propertyValue:Object = this._textRendererProperties[propertyName];
-					uiTextRenderer[propertyName] = propertyValue;
+					displayTextRenderer[propertyName] = propertyValue;
 				}
 			}
 		}
@@ -300,7 +301,9 @@ package feathers.controls
 		 */
 		protected function layout():void
 		{
-			FeathersControl(this.textRenderer).maxWidth = this.actualWidth;
+			this.textRenderer.width = this.actualWidth;
+			this.textRenderer.validate();
+			this._baseline = this.textRenderer.baseline;
 		}
 
 		/**

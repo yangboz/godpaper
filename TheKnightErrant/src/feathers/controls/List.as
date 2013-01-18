@@ -1,42 +1,68 @@
 /*
-Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
-Permission is hereby granted, free of charge, to any person
-obtaining a copy of this software and associated documentation
-files (the "Software"), to deal in the Software without
-restriction, including without limitation the rights to use,
-copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following
-conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
-	import flash.geom.Point;
-
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.controls.supportClasses.ListDataViewPort;
 	import feathers.core.FeathersControl;
 	import feathers.core.PropertyProxy;
 	import feathers.data.ListCollection;
+	import feathers.events.CollectionEventType;
+	import feathers.events.FeathersEventType;
 	import feathers.layout.ILayout;
 	import feathers.layout.VerticalLayout;
-	import org.osflash.signals.ISignal;
-	import org.osflash.signals.Signal;
+
+	import flash.geom.Point;
 
 	import starling.display.DisplayObject;
+	import starling.events.Event;
+
+	/**
+	 * Dispatched when the selected item changes.
+	 *
+	 * @eventType starling.events.Event.CHANGE
+	 */
+	[Event(name="change",type="starling.events.Event")]
+
+	/**
+	 * Dispatched when the list is scrolled.
+	 *
+	 * @eventType starling.events.Event.SCROLL
+	 */
+	[Event(name="scroll",type="starling.events.Event")]
+
+	/**
+	 * Dispatched when the list finishes scrolling in either direction after
+	 * being thrown.
+	 *
+	 * @eventType feathers.events.FeathersEventType.SCROLL_COMPLETE
+	 */
+	[Event(name="scrollComplete",type="starling.events.Event")]
+
+	/**
+	 * Dispatched when an item renderer is added to the list. When the layout is
+	 * virtualized, item renderers may not exist for every item in the data
+	 * provider. This event can be used to track which items currently have
+	 * renderers.
+	 *
+	 * @eventType feathers.events.FeathersEventType.RENDERER_ADD
+	 */
+	[Event(name="rendererAdd",type="starling.events.Event")]
+
+	/**
+	 * Dispatched when an item renderer is removed from the list. When the layout is
+	 * virtualized, item renderers may not exist for every item in the data
+	 * provider. This event can be used to track which items currently have
+	 * renderers.
+	 *
+	 * @eventType feathers.events.FeathersEventType.RENDERER_REMOVE
+	 */
+	[Event(name="rendererRemove",type="starling.events.Event")]
 
 	[DefaultProperty("dataProvider")]
 	/**
@@ -49,6 +75,7 @@ package feathers.controls
 	 * renderer for every single item. This allows for optimal performance with
 	 * very large data providers.</p>
 	 *
+	 * @see http://wiki.starling-framework.org/feathers/list
 	 * @see GroupedList
 	 */
 	public class List extends FeathersControl
@@ -56,7 +83,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private static const helperPoint:Point = new Point();
+		private static const HELPER_POINT:Point = new Point();
 
 		/**
 		 * The default value added to the <code>nameList</code> of the scroller.
@@ -77,8 +104,7 @@ package feathers.controls
 		protected var scrollerName:String = DEFAULT_CHILD_NAME_SCROLLER;
 
 		/**
-		 * @private
-		 * The Scroller instance.
+		 * The list's scroller sub-component.
 		 */
 		protected var scroller:Scroller;
 
@@ -111,7 +137,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _layout:ILayout;
+		protected var _layout:ILayout;
 
 		/**
 		 * The layout algorithm used to position and, optionally, size the
@@ -164,7 +190,7 @@ package feathers.controls
 			}
 			this._horizontalScrollPosition = value;
 			this.invalidate(INVALIDATION_FLAG_SCROLL);
-			this._onScroll.dispatch(this);
+			this.dispatchEventWith(Event.SCROLL);
 		}
 
 		/**
@@ -228,23 +254,7 @@ package feathers.controls
 			}
 			this._verticalScrollPosition = value;
 			this.invalidate(INVALIDATION_FLAG_SCROLL);
-			this._onScroll.dispatch(this);
-		}
-
-		/**
-		 * @private
-		 */
-		protected var _verticalPageIndex:int = 0;
-
-		/**
-		 * The index of the vertical page, if snapping is enabled. If snapping
-		 * is disabled, the index will always be <code>0</code>.
-		 * 
-		 * @default 0
-		 */
-		public function get verticalPageIndex():int
-		{
-			return this._verticalPageIndex;
+			this.dispatchEventWith(Event.SCROLL);
 		}
 		
 		/**
@@ -266,6 +276,22 @@ package feathers.controls
 		public function get maxVerticalScrollPosition():Number
 		{
 			return this._maxVerticalScrollPosition;
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _verticalPageIndex:int = 0;
+
+		/**
+		 * The index of the vertical page, if snapping is enabled. If snapping
+		 * is disabled, the index will always be <code>0</code>.
+		 *
+		 * @default 0
+		 */
+		public function get verticalPageIndex():int
+		{
+			return this._verticalPageIndex;
 		}
 		
 		/**
@@ -292,12 +318,12 @@ package feathers.controls
 			}
 			if(this._dataProvider)
 			{
-				this._dataProvider.onReset.remove(dataProvider_onReset);
+				this._dataProvider.removeEventListener(CollectionEventType.RESET, dataProvider_resetHandler);
 			}
 			this._dataProvider = value;
 			if(this._dataProvider)
 			{
-				this._dataProvider.onReset.add(dataProvider_onReset);
+				this._dataProvider.addEventListener(CollectionEventType.RESET, dataProvider_resetHandler);
 			}
 
 			//reset the scroll position because this is a drastic change and
@@ -311,7 +337,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _isSelectable:Boolean = true;
+		protected var _isSelectable:Boolean = true;
 		
 		/**
 		 * Determines if an item in the list may be selected.
@@ -343,7 +369,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _selectedIndex:int = -1;
+		protected var _selectedIndex:int = -1;
 		
 		/**
 		 * The index of the currently selected item. Returns -1 if no item is
@@ -365,7 +391,7 @@ package feathers.controls
 			}
 			this._selectedIndex = value;
 			this.invalidate(INVALIDATION_FLAG_SELECTED);
-			this._onChange.dispatch(this);
+			this.dispatchEventWith(Event.CHANGE);
 		}
 		
 		/**
@@ -392,33 +418,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected var _onChange:Signal = new Signal(List);
-		
-		/**
-		 * Dispatched when the selected item changes.
-		 */
-		public function get onChange():ISignal
-		{
-			return this._onChange;
-		}
-		
-		/**
-		 * @private
-		 */
-		protected var _onScroll:Signal = new Signal(List);
-		
-		/**
-		 * Dispatched when the list is scrolled.
-		 */
-		public function get onScroll():ISignal
-		{
-			return this._onScroll;
-		}
-		
-		/**
-		 * @private
-		 */
-		private var _scrollerProperties:PropertyProxy;
+		protected var _scrollerProperties:PropertyProxy;
 		
 		/**
 		 * A set of key/value pairs to be passed down to the list's scroller
@@ -438,7 +438,7 @@ package feathers.controls
 		{
 			if(!this._scrollerProperties)
 			{
-				this._scrollerProperties = new PropertyProxy(scrollerProperties_onChange);
+				this._scrollerProperties = new PropertyProxy(childProperties_onChange);
 			}
 			return this._scrollerProperties;
 		}
@@ -458,12 +458,12 @@ package feathers.controls
 			}
 			if(this._scrollerProperties)
 			{
-				this._scrollerProperties.onChange.remove(scrollerProperties_onChange);
+				this._scrollerProperties.removeOnChangeCallback(childProperties_onChange);
 			}
 			this._scrollerProperties = PropertyProxy(value);
 			if(this._scrollerProperties)
 			{
-				this._scrollerProperties.onChange.add(scrollerProperties_onChange);
+				this._scrollerProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -471,7 +471,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _itemRendererProperties:PropertyProxy;
+		protected var _itemRendererProperties:PropertyProxy;
 
 		/**
 		 * A set of key/value pairs to be passed down to all of the list's item
@@ -487,15 +487,14 @@ package feathers.controls
 		 * you can use the following syntax:</p>
 		 * <pre>list.scrollerProperties.&#64;verticalScrollBarProperties.&#64;thumbProperties.defaultSkin = new Image(texture);</pre>
 		 *
+		 * @see feathers.controls.renderers.IListItemRenderer
 		 * @see #itemRendererFactory
-		 * 
-		 * @default <code>new PropertyProxy(itemRendererProperties_onChange)</code>
 		 */
 		public function get itemRendererProperties():Object
 		{
 			if(!this._itemRendererProperties)
 			{
-				this._itemRendererProperties = new PropertyProxy(itemRendererProperties_onChange);
+				this._itemRendererProperties = new PropertyProxy(childProperties_onChange);
 			}
 			return this._itemRendererProperties;
 		}
@@ -524,15 +523,25 @@ package feathers.controls
 			}
 			if(this._itemRendererProperties)
 			{
-				this._itemRendererProperties.onChange.remove(itemRendererProperties_onChange);
+				this._itemRendererProperties.removeOnChangeCallback(childProperties_onChange);
 			}
 			this._itemRendererProperties = PropertyProxy(value);
 			if(this._itemRendererProperties)
 			{
-				this._itemRendererProperties.onChange.add(itemRendererProperties_onChange);
+				this._itemRendererProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
+
+		/**
+		 * @private
+		 */
+		protected var _originalBackgroundWidth:Number = NaN;
+
+		/**
+		 * @private
+		 */
+		protected var _originalBackgroundHeight:Number = NaN;
 
 		/**
 		 * @private
@@ -542,7 +551,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _backgroundSkin:DisplayObject;
+		protected var _backgroundSkin:DisplayObject;
 		
 		/**
 		 * A display object displayed behind the item renderers.
@@ -580,7 +589,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _backgroundDisabledSkin:DisplayObject;
+		protected var _backgroundDisabledSkin:DisplayObject;
 		
 		/**
 		 * A background to display when the list is disabled.
@@ -613,6 +622,28 @@ package feathers.controls
 				this.addChildAt(this._backgroundDisabledSkin, 0);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * Quickly sets all padding properties to the same value. The
+		 * <code>padding</code> getter always returns the value of
+		 * <code>paddingTop</code>, but the other padding values may be
+		 * different.
+		 */
+		public function get padding():Number
+		{
+			return this._paddingTop;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set padding(value:Number):void
+		{
+			this.paddingTop = value;
+			this.paddingRight = value;
+			this.paddingBottom = value;
+			this.paddingLeft = value;
 		}
 
 		/**
@@ -726,11 +757,12 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _itemRendererType:Class = DefaultListItemRenderer;
+		protected var _itemRendererType:Class = DefaultListItemRenderer;
 		
 		/**
 		 * The class used to instantiate item renderers.
 		 *
+		 * @see feathers.controls.renderer.IListItemRenderer
 		 * @see #itemRendererFactory
 		 */
 		public function get itemRendererType():Class
@@ -755,7 +787,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _itemRendererFactory:Function;
+		protected var _itemRendererFactory:Function;
 		
 		/**
 		 * A function called that is expected to return a new item renderer. Has
@@ -767,7 +799,8 @@ package feathers.controls
 		 * <p>The function is expected to have the following signature:</p>
 		 *
 		 * <pre>function():IListItemRenderer</pre>
-		 * 
+		 *
+		 * @see feathers.controls.renderers.IListItemRenderer
 		 * @see #itemRendererType
 		 */
 		public function get itemRendererFactory():Function
@@ -792,7 +825,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private var _typicalItem:Object = null;
+		protected var _typicalItem:Object = null;
 		
 		/**
 		 * Used to auto-size the list. If the list's width or height is NaN, the
@@ -887,16 +920,6 @@ package feathers.controls
 		}
 		
 		/**
-		 * @private
-		 */
-		override public function dispose():void
-		{
-			this._onChange.removeAll();
-			this._onScroll.removeAll();
-			super.dispose();
-		}
-		
-		/**
 		 * If the user is scrolling with touch or if the scrolling is animated,
 		 * calling stopScrolling() will cause the scroller to ignore the drag
 		 * and stop animations. The children of the list will still receive
@@ -917,13 +940,16 @@ package feathers.controls
 		 */
 		override protected function initialize():void
 		{
+			const hasLayout:Boolean = this._layout != null;
+
 			if(!this.scroller)
 			{
 				this.scroller = new Scroller();
 				this.scroller.nameList.add(this.scrollerName);
-				this.scroller.verticalScrollPolicy = Scroller.SCROLL_POLICY_AUTO;
 				this.scroller.horizontalScrollPolicy = Scroller.SCROLL_POLICY_AUTO;
-				this.scroller.onScroll.add(scroller_onScroll);
+				this.scroller.verticalScrollPolicy = hasLayout ? Scroller.SCROLL_POLICY_AUTO : Scroller.SCROLL_POLICY_ON;
+				this.scroller.addEventListener(Event.SCROLL, scroller_scrollHandler);
+				this.scroller.addEventListener(FeathersEventType.SCROLL_COMPLETE, scroller_scrollCompleteHandler);
 				this.addChild(this.scroller);
 			}
 			
@@ -931,11 +957,11 @@ package feathers.controls
 			{
 				this.dataViewPort = new ListDataViewPort();
 				this.dataViewPort.owner = this;
-				this.dataViewPort.onChange.add(dataViewPort_onChange);
+				this.dataViewPort.addEventListener(Event.CHANGE, dataViewPort_changeHandler);
 				this.scroller.viewPort = this.dataViewPort;
 			}
 
-			if(!this._layout)
+			if(!hasLayout)
 			{
 				const layout:VerticalLayout = new VerticalLayout();
 				layout.useVirtualLayout = true;
@@ -945,7 +971,6 @@ package feathers.controls
 				layout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 				layout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
 				this._layout = layout;
-				this.scroller.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			}
 		}
 		
@@ -1049,10 +1074,18 @@ package feathers.controls
 			if(needsWidth)
 			{
 				newWidth = this.scroller.width + this._paddingLeft + this._paddingRight;
+				if(!isNaN(this._originalBackgroundWidth))
+				{
+					newWidth = Math.max(newWidth, this._originalBackgroundWidth);
+				}
 			}
 			if(needsHeight)
 			{
 				newHeight = this.scroller.height + this._paddingTop + this._paddingBottom;
+				if(!isNaN(this._originalBackgroundHeight))
+				{
+					newHeight = Math.max(newHeight, this._originalBackgroundHeight);
+				}
 			}
 
 			return this.setSizeInternal(newWidth, newHeight, false);
@@ -1094,6 +1127,15 @@ package feathers.controls
 			if(this.currentBackgroundSkin)
 			{
 				this.currentBackgroundSkin.visible = true;
+
+				if(isNaN(this._originalBackgroundWidth))
+				{
+					this._originalBackgroundWidth = this.currentBackgroundSkin.width;
+				}
+				if(isNaN(this._originalBackgroundHeight))
+				{
+					this._originalBackgroundHeight = this.currentBackgroundSkin.height;
+				}
 			}
 		}
 
@@ -1113,28 +1155,27 @@ package feathers.controls
 				const item:Object = this._dataProvider.getItemAt(this._scrollToIndex);
 				if(item is Object)
 				{
-					this.dataViewPort.getScrollPositionForIndex(this._scrollToIndex, helperPoint);
+					this.dataViewPort.getScrollPositionForIndex(this._scrollToIndex, HELPER_POINT);
 
 					if(this._scrollToIndexDuration > 0)
 					{
-						this.scroller.throwTo(Math.max(0, Math.min(helperPoint.x, this._maxHorizontalScrollPosition)),
-							Math.max(0, Math.min(helperPoint.y, this._maxVerticalScrollPosition)), this._scrollToIndexDuration);
+						this.scroller.throwTo(Math.max(0, Math.min(HELPER_POINT.x, this._maxHorizontalScrollPosition)),
+							Math.max(0, Math.min(HELPER_POINT.y, this._maxVerticalScrollPosition)), this._scrollToIndexDuration);
 					}
 					else
 					{
-						this.horizontalScrollPosition = Math.max(0, Math.min(helperPoint.x, this._maxHorizontalScrollPosition));
-						this.verticalScrollPosition = Math.max(0, Math.min(helperPoint.y, this._maxVerticalScrollPosition));
+						this.horizontalScrollPosition = Math.max(0, Math.min(HELPER_POINT.x, this._maxHorizontalScrollPosition));
+						this.verticalScrollPosition = Math.max(0, Math.min(HELPER_POINT.y, this._maxVerticalScrollPosition));
 					}
 				}
 				this._scrollToIndex = -1;
 			}
 		}
 
-
 		/**
 		 * @private
 		 */
-		protected function scrollerProperties_onChange(proxy:PropertyProxy, name:Object):void
+		protected function childProperties_onChange(proxy:PropertyProxy, name:String):void
 		{
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -1142,15 +1183,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function itemRendererProperties_onChange(proxy:PropertyProxy, name:Object):void
-		{
-			this.invalidate(INVALIDATION_FLAG_STYLES);
-		}
-
-		/**
-		 * @private
-		 */
-		protected function dataProvider_onReset(collection:ListCollection):void
+		protected function dataProvider_resetHandler(event:Event):void
 		{
 			this.horizontalScrollPosition = 0;
 			this.verticalScrollPosition = 0;
@@ -1159,7 +1192,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function scroller_onScroll(scroller:Scroller):void
+		protected function scroller_scrollHandler(event:Event):void
 		{
 			this._maxHorizontalScrollPosition = this.scroller.maxHorizontalScrollPosition;
 			this._maxVerticalScrollPosition = this.scroller.maxVerticalScrollPosition;
@@ -1168,13 +1201,21 @@ package feathers.controls
 			this._horizontalScrollPosition = this.scroller.horizontalScrollPosition;
 			this._verticalScrollPosition = this.scroller.verticalScrollPosition;
 			this.invalidate(INVALIDATION_FLAG_SCROLL);
-			this._onScroll.dispatch(this);
+			this.dispatchEventWith(Event.SCROLL);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function scroller_scrollCompleteHandler(event:Event):void
+		{
+			this.dispatchEventWith(FeathersEventType.SCROLL_COMPLETE);
 		}
 		
 		/**
 		 * @private
 		 */
-		protected function dataViewPort_onChange(dataViewPort:ListDataViewPort):void
+		protected function dataViewPort_changeHandler(event:Event):void
 		{
 			this.selectedIndex = this.dataViewPort.selectedIndex;
 		}

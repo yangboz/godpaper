@@ -1,36 +1,21 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.controls.supportClasses
 {
 	import feathers.core.FeathersControl;
-	import feathers.display.ScrollRectManager;
 
 	import flash.display.Sprite;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.text.AntiAliasType;
+	import flash.text.GridFitType;
+	import flash.text.StyleSheet;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
@@ -43,10 +28,10 @@ package feathers.controls.supportClasses
 	/**
 	 * @private
 	 */
-	public class TextFieldViewPort extends FeathersControl implements IViewPort
+	public final class TextFieldViewPort extends FeathersControl implements IViewPort
 	{
-		private static const helperMatrix:Matrix = new Matrix();
-		private static const helperPoint:Point = new Point();
+		private static const HELPER_MATRIX:Matrix = new Matrix();
+		private static const HELPER_POINT:Point = new Point();
 
 		public function TextFieldViewPort()
 		{
@@ -91,10 +76,38 @@ package feathers.controls.supportClasses
 		/**
 		 * @private
 		 */
-		protected var _textFormat:TextFormat;
+		private var _isHTML:Boolean = false;
+
+		/**
+		 * Determines if the TextField should display the text as HTML or not.
+		 */
+		public function get isHTML():Boolean
+		{
+			return this._isHTML;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isHTML(value:Boolean):void
+		{
+			if(this._isHTML == value)
+			{
+				return;
+			}
+			this._isHTML = value;
+			this.invalidate(INVALIDATION_FLAG_DATA);
+		}
+
+		/**
+		 * @private
+		 */
+		private var _textFormat:TextFormat;
 
 		/**
 		 * The font and styles used to draw the text.
+		 *
+		 * @see flash.text.TextFormat
 		 */
 		public function get textFormat():TextFormat
 		{
@@ -117,10 +130,40 @@ package feathers.controls.supportClasses
 		/**
 		 * @private
 		 */
+		protected var _styleSheet:StyleSheet;
+
+		/**
+		 * The <code>StyleSheet</code> object to pass to the TextField.
+		 *
+		 * @see flash.text.StyleSheet
+		 */
+		public function get styleSheet():StyleSheet
+		{
+			return this._styleSheet;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set styleSheet(value:StyleSheet):void
+		{
+			if(this._styleSheet == value)
+			{
+				return;
+			}
+			this._styleSheet = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
 		private var _embedFonts:Boolean = false;
 
 		/**
 		 * Determines if the TextField should use an embedded font or not.
+		 *
+		 * @see flash.text.TextField#embedFonts
 		 */
 		public function get embedFonts():Boolean
 		{
@@ -143,26 +186,280 @@ package feathers.controls.supportClasses
 		/**
 		 * @private
 		 */
-		private var _isHTML:Boolean = false;
+		private var _antiAliasType:String = AntiAliasType.ADVANCED;
 
 		/**
-		 * Determines if the TextField should display the text as HTML or not.
+		 * Same as the TextField property with the same name.
+		 *
+		 * @see flash.text.TextField#antiAliasType
 		 */
-		public function get isHTML():Boolean
+		public function get antiAliasType():String
 		{
-			return this._isHTML;
+			return this._antiAliasType;
 		}
 
 		/**
 		 * @private
 		 */
-		public function set isHTML(value:Boolean):void
+		public function set antiAliasType(value:String):void
 		{
-			if(this._isHTML == value)
+			if(this._antiAliasType == value)
 			{
 				return;
 			}
-			this._isHTML = value;
+			this._antiAliasType = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		private var _background:Boolean = false;
+
+		/**
+		 * Same as the TextField property with the same name.
+		 *
+		 * @see flash.text.TextField#background
+		 */
+		public function get background():Boolean
+		{
+			return this._background;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set background(value:Boolean):void
+		{
+			if(this._background == value)
+			{
+				return;
+			}
+			this._background = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		private var _backgroundColor:uint = 0xffffff;
+
+		/**
+		 * Same as the TextField property with the same name.
+		 *
+		 * @see flash.text.TextField#backgroundColor
+		 */
+		public function get backgroundColor():uint
+		{
+			return this._backgroundColor;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set backgroundColor(value:uint):void
+		{
+			if(this._backgroundColor == value)
+			{
+				return;
+			}
+			this._backgroundColor = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		private var _border:Boolean = false;
+
+		/**
+		 * Same as the TextField property with the same name.
+		 *
+		 * @see flash.text.TextField#border
+		 */
+		public function get border():Boolean
+		{
+			return this._border;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set border(value:Boolean):void
+		{
+			if(this._border == value)
+			{
+				return;
+			}
+			this._border = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		private var _borderColor:uint = 0x000000;
+
+		/**
+		 * Same as the TextField property with the same name.
+		 *
+		 * @see flash.text.TextField#borderColor
+		 */
+		public function get borderColor():uint
+		{
+			return this._borderColor;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set borderColor(value:uint):void
+		{
+			if(this._borderColor == value)
+			{
+				return;
+			}
+			this._borderColor = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		private var _condenseWhite:Boolean = false;
+
+		/**
+		 * Same as the TextField property with the same name.
+		 *
+		 * @see flash.text.TextField#condenseWhite
+		 */
+		public function get condenseWhite():Boolean
+		{
+			return this._condenseWhite;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set condenseWhite(value:Boolean):void
+		{
+			if(this._condenseWhite == value)
+			{
+				return;
+			}
+			this._condenseWhite = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		private var _displayAsPassword:Boolean = false;
+
+		/**
+		 * Same as the TextField property with the same name.
+		 *
+		 * @see flash.text.TextField#displayAsPassword
+		 */
+		public function get displayAsPassword():Boolean
+		{
+			return this._displayAsPassword;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set displayAsPassword(value:Boolean):void
+		{
+			if(this._displayAsPassword == value)
+			{
+				return;
+			}
+			this._displayAsPassword = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		private var _gridFitType:String = GridFitType.PIXEL;
+
+		/**
+		 * Same as the TextField property with the same name.
+		 *
+		 * @see flash.text.TextField#gridFitType
+		 */
+		public function get gridFitType():String
+		{
+			return this._gridFitType;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set gridFitType(value:String):void
+		{
+			if(this._gridFitType == value)
+			{
+				return;
+			}
+			this._gridFitType = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		private var _sharpness:Number = 0;
+
+		/**
+		 * Same as the TextField property with the same name.
+		 *
+		 * @see flash.text.TextField#sharpness
+		 */
+		public function get sharpness():Number
+		{
+			return this._sharpness;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set sharpness(value:Number):void
+		{
+			if(this._sharpness == value)
+			{
+				return;
+			}
+			this._sharpness = value;
+			this.invalidate(INVALIDATION_FLAG_DATA);
+		}
+
+		/**
+		 * @private
+		 */
+		private var _thickness:Number = 0;
+
+		/**
+		 * Same as the TextField property with the same name.
+		 *
+		 * @see flash.text.TextField#thickness
+		 */
+		public function get thickness():Number
+		{
+			return this._thickness;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set thickness(value:Number):void
+		{
+			if(this._thickness == value)
+			{
+				return;
+			}
+			this._thickness = value;
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}
 
@@ -208,7 +505,7 @@ package feathers.controls.supportClasses
 			this.invalidate(INVALIDATION_FLAG_SIZE);
 		}
 
-		protected var _visibleWidth:Number = NaN;
+		private var _visibleWidth:Number = NaN;
 
 		public function get visibleWidth():Number
 		{
@@ -267,7 +564,7 @@ package feathers.controls.supportClasses
 			this.invalidate(INVALIDATION_FLAG_SIZE);
 		}
 
-		protected var _visibleHeight:Number = NaN;
+		private var _visibleHeight:Number = NaN;
 
 		public function get visibleHeight():Number
 		{
@@ -284,14 +581,16 @@ package feathers.controls.supportClasses
 			this.invalidate(INVALIDATION_FLAG_SIZE);
 		}
 
+		private var _scrollStep:Number;
+
 		public function get horizontalScrollStep():Number
 		{
-			return this._visibleWidth / 10;
+			return this._scrollStep;
 		}
 
 		public function get verticalScrollStep():Number
 		{
-			return this._visibleHeight / 10;
+			return this._scrollStep;
 		}
 
 		private var _horizontalScrollPosition:Number = 0;
@@ -328,7 +627,7 @@ package feathers.controls.supportClasses
 			this.invalidate(INVALIDATION_FLAG_SCROLL);
 		}
 
-		protected var _paddingTop:Number = 0;
+		private var _paddingTop:Number = 0;
 
 		public function get paddingTop():Number
 		{
@@ -345,7 +644,7 @@ package feathers.controls.supportClasses
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
 
-		protected var _paddingRight:Number = 0;
+		private var _paddingRight:Number = 0;
 
 		public function get paddingRight():Number
 		{
@@ -362,7 +661,7 @@ package feathers.controls.supportClasses
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
 
-		protected var _paddingBottom:Number = 0;
+		private var _paddingBottom:Number = 0;
 
 		public function get paddingBottom():Number
 		{
@@ -379,7 +678,7 @@ package feathers.controls.supportClasses
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
 
-		protected var _paddingLeft:Number = 0;
+		private var _paddingLeft:Number = 0;
 
 		public function get paddingLeft():Number
 		{
@@ -396,24 +695,28 @@ package feathers.controls.supportClasses
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
 
-		override public function render(support:RenderSupport, alpha:Number):void
+		override public function render(support:RenderSupport, parentAlpha:Number):void
 		{
 			const starlingViewPort:Rectangle = Starling.current.viewPort;
-			helperPoint.x = helperPoint.y = 0;
-			this.parent.parent.getTransformationMatrix(this.stage, helperMatrix);
-			MatrixUtil.transformCoords(helperMatrix, 0, 0, helperPoint);
-			ScrollRectManager.toStageCoordinates(helperPoint, this.parent.parent);
-			this._textFieldContainer.x = starlingViewPort.x + helperPoint.x * Starling.contentScaleFactor;
-			this._textFieldContainer.y = starlingViewPort.y + helperPoint.y * Starling.contentScaleFactor;
-			this._textFieldContainer.scaleX = this._textFieldContainer.scaleY =  Starling.contentScaleFactor;
-			super.render(support, alpha);
+			HELPER_POINT.x = HELPER_POINT.y = 0;
+			this.parent.parent.getTransformationMatrix(this.stage, HELPER_MATRIX);
+			MatrixUtil.transformCoords(HELPER_MATRIX, 0, 0, HELPER_POINT);
+			this._textFieldContainer.x = starlingViewPort.x + HELPER_POINT.x * Starling.contentScaleFactor;
+			this._textFieldContainer.y = starlingViewPort.y + HELPER_POINT.y * Starling.contentScaleFactor;
+			this._textFieldContainer.scaleX = HELPER_MATRIX.a * Starling.contentScaleFactor;
+			this._textFieldContainer.scaleY = HELPER_MATRIX.d * Starling.contentScaleFactor;
+			this._textFieldContainer.visible = true;
+			this._textFieldContainer.alpha = parentAlpha * this.alpha;
+			super.render(support, parentAlpha);
 		}
 
 		override protected function initialize():void
 		{
 			this._textFieldContainer = new Sprite();
 			this._textFieldContainer.mouseChildren = this._textFieldContainer.mouseEnabled = false;
+			this._textFieldContainer.visible = false;
 			this._textField = new TextField();
+			this._textField.autoSize = TextFieldAutoSize.LEFT;
 			this._textField.selectable = this._textFieldContainer.mouseEnabled =
 				this._textField.mouseWheelEnabled = false;
 			this._textField.wordWrap = true;
@@ -430,18 +733,28 @@ package feathers.controls.supportClasses
 
 			if(stylesInvalid)
 			{
-				if(this._textFormat)
-				{
-					this._textField.defaultTextFormat = this._textFormat;
-					this._textField.setTextFormat(this._textFormat);
-				}
+				this._textField.antiAliasType = this._antiAliasType;
+				this._textField.background = this._background;
+				this._textField.backgroundColor = this._backgroundColor;
+				this._textField.border = this._border;
+				this._textField.borderColor = this._borderColor;
+				this._textField.condenseWhite = this._condenseWhite;
+				this._textField.displayAsPassword = this._displayAsPassword;
 				this._textField.embedFonts = this._embedFonts;
+				this._textField.gridFitType = this._gridFitType;
+				this._textField.sharpness = this._sharpness;
+				this._textField.thickness = this._thickness;
 				this._textField.x = this._paddingLeft;
 				this._textField.y = this._paddingTop;
 			}
 
-			if(dataInvalid)
+			if(dataInvalid || stylesInvalid)
 			{
+				if(this._textFormat)
+				{
+					this._textField.defaultTextFormat = this._textFormat;
+				}
+				this._textField.styleSheet = this._styleSheet;
 				if(this._isHTML)
 				{
 					this._textField.htmlText = this._text;
@@ -450,17 +763,14 @@ package feathers.controls.supportClasses
 				{
 					this._textField.text = this._text;
 				}
+				this._scrollStep = this._textField.getLineMetrics(0).height * Starling.contentScaleFactor;
 			}
 
 			const calculatedVisibleWidth:Number = !isNaN(this._visibleWidth) ? this._visibleWidth : Math.max(this._minVisibleWidth, Math.min(this._maxVisibleWidth, this.stage.stageWidth));
-			const calculatedTextFieldWidth:Number = calculatedVisibleWidth - this._paddingLeft - this._paddingRight;
-			this._textField.width = calculatedTextFieldWidth;
-			this._textField.autoSize = TextFieldAutoSize.LEFT;
+			this._textField.width = calculatedVisibleWidth - this._paddingLeft - this._paddingRight;
 			const totalContentHeight:Number = this._textField.height + this._paddingTop + this._paddingBottom;
-			this._textField.autoSize = TextFieldAutoSize.NONE;
 			const calculatedVisibleHeight:Number = !isNaN(this._visibleHeight) ? this._visibleHeight : Math.max(this._minVisibleHeight, Math.min(this._maxVisibleHeight, totalContentHeight));
-			this._textField.height = totalContentHeight - this._paddingTop - this._paddingBottom;
-			sizeInvalid = this.setSizeInternal(calculatedVisibleWidth, totalContentHeight, false);
+			sizeInvalid = this.setSizeInternal(calculatedVisibleWidth, totalContentHeight, false) || sizeInvalid;
 
 			if(sizeInvalid || scrollInvalid)
 			{

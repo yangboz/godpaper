@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2012 Josh Tynjala
+Copyright 2012-2013 Joshua Tynjala
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -24,12 +24,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 */
 package feathers.core
 {
-	import org.osflash.signals.ISignal;
+	/**
+	 * Dispatched when the selection changes.
+	 *
+	 * @eventType starling.events.Event.CHANGE
+	 */
+	[Event(name="change",type="starling.events.Event")]
 
 	/**
 	 * An interface for something that may be selected.
 	 */
-	public interface IToggle
+	public interface IToggle extends IFeathersControl
 	{
 		/**
 		 * Indicates if the IToggle is selected or not.
@@ -40,10 +45,5 @@ package feathers.core
 		 * @private
 		 */
 		function set isSelected(value:Boolean):void;
-		
-		/**
-		 * Dispatched when the selection changes.
-		 */
-		function get onChange():ISignal;
 	}
 }

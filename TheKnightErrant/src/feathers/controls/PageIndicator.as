@@ -1,31 +1,14 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.controls
 {
 	import feathers.core.FeathersControl;
-	import feathers.display.ScrollRectManager;
+	import feathers.core.IFeathersControl;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.ILayout;
 	import feathers.layout.IVirtualLayout;
@@ -35,18 +18,25 @@ package feathers.controls
 
 	import flash.geom.Point;
 
-	import org.osflash.signals.ISignal;
-	import org.osflash.signals.Signal;
-
 	import starling.display.DisplayObject;
 	import starling.display.Quad;
+	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 
 	/**
+	 * Dispatched when the selected item changes.
+	 *
+	 * @eventType starling.events.Event.CHANGE
+	 */
+	[Event(name="change",type="starling.events.Event")]
+
+	/**
 	 * Displays a selected index, usually corresponding to a page index in
 	 * another UI control, using a highlighted symbol.
+	 *
+	 * @see http://wiki.starling-framework.org/feathers/page-indicator
 	 */
 	public class PageIndicator extends FeathersControl
 	{
@@ -64,6 +54,11 @@ package feathers.controls
 		 * @private
 		 */
 		private static const HELPER_POINT:Point = new Point();
+
+		/**
+		 * @private
+		 */
+		private static const HELPER_TOUCHES_VECTOR:Vector.<Touch> = new <Touch>[];
 
 		/**
 		 * The page indicator's symbols will be positioned vertically, from top
@@ -208,7 +203,7 @@ package feathers.controls
 			}
 			this._selectedIndex = value;
 			this.invalidate(INVALIDATION_FLAG_SELECTED);
-			this._onChange.dispatch(this);
+			this.dispatchEventWith(Event.CHANGE);
 		}
 
 		/**
@@ -221,6 +216,7 @@ package feathers.controls
 		 */
 		protected var _direction:String = DIRECTION_HORIZONTAL;
 
+		[Inspectable(type="String",enumeration="horizontal,vertical")]
 		/**
 		 * The symbols may be positioned vertically or horizontally.
 		 */
@@ -247,6 +243,7 @@ package feathers.controls
 		 */
 		protected var _horizontalAlign:String = HORIZONTAL_ALIGN_CENTER;
 
+		[Inspectable(type="String",enumeration="horizontal,vertical")]
 		/**
 		 * The alignment of the symbols on the horizontal axis.
 		 */
@@ -273,6 +270,7 @@ package feathers.controls
 		 */
 		protected var _verticalAlign:String = VERTICAL_ALIGN_MIDDLE;
 
+		[Inspectable(type="String",enumeration="top,middle,bottom")]
 		/**
 		 * The alignment of the symbols on the vertical axis.
 		 */
@@ -318,6 +316,28 @@ package feathers.controls
 			}
 			this._gap = value;
 			this.invalidate(INVALIDATION_FLAG_LAYOUT);
+		}
+
+		/**
+		 * Quickly sets all padding properties to the same value. The
+		 * <code>padding</code> getter always returns the value of
+		 * <code>paddingTop</code>, but the other padding values may be
+		 * different.
+		 */
+		public function get padding():Number
+		{
+			return this._paddingTop;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set padding(value:Number):void
+		{
+			this.paddingTop = value;
+			this.paddingRight = value;
+			this.paddingBottom = value;
+			this.paddingLeft = value;
 		}
 
 		/**
@@ -438,6 +458,8 @@ package feathers.controls
 		 *
 		 * <p>This function should have the following signature:</p>
 		 * <pre>function():DisplayObject</pre>
+		 *
+		 * @see starling.display.DisplayObject
 		 */
 		public function get normalSymbolFactory():Function
 		{
@@ -467,6 +489,8 @@ package feathers.controls
 		 *
 		 * <p>This function should have the following signature:</p>
 		 * <pre>function():DisplayObject</pre>
+		 *
+		 * @see starling.display.DisplayObject
 		 */
 		public function get selectedSymbolFactory():Function
 		{
@@ -484,28 +508,6 @@ package feathers.controls
 			}
 			this._selectedSymbolFactory = value;
 			this.invalidate(INVALIDATION_FLAG_STYLES);
-		}
-
-		/**
-		 * @private
-		 */
-		protected var _onChange:Signal = new Signal(PageIndicator);
-
-		/**
-		 * Dispatched when the selected item changes.
-		 */
-		public function get onChange():ISignal
-		{
-			return this._onChange;
-		}
-
-		/**
-		 * @private
-		 */
-		override public function dispose():void
-		{
-			this._onChange.removeAll();
-			super.dispose();
 		}
 
 		/**
@@ -559,6 +561,10 @@ package feathers.controls
 						this.addChild(this.selectedSymbol);
 					}
 					this.symbols.push(this.selectedSymbol);
+					if(this.selectedSymbol is IFeathersControl)
+					{
+						IFeathersControl(this.selectedSymbol).validate();
+					}
 				}
 				else
 				{
@@ -573,6 +579,10 @@ package feathers.controls
 					}
 					this.unselectedSymbols.push(symbol);
 					this.symbols.push(symbol);
+					if(symbol is IFeathersControl)
+					{
+						IFeathersControl(symbol).validate();
+					}
 				}
 			}
 
@@ -642,10 +652,11 @@ package feathers.controls
 		{
 			if(!this._isEnabled)
 			{
+				this.touchPointID = -1;
 				return;
 			}
 
-			const touches:Vector.<Touch> = event.getTouches(this);
+			const touches:Vector.<Touch> = event.getTouches(this, null, HELPER_TOUCHES_VECTOR);
 			if(touches.length == 0)
 			{
 				//end of hover
@@ -666,6 +677,7 @@ package feathers.controls
 				if(!touch)
 				{
 					//end of hover
+					HELPER_TOUCHES_VECTOR.length = 0;
 					return;
 				}
 
@@ -673,7 +685,6 @@ package feathers.controls
 				{
 					this.touchPointID = -1;
 					touch.getLocation(this, HELPER_POINT);
-					ScrollRectManager.adjustTouchLocation(HELPER_POINT, this);
 					const isInBounds:Boolean = this.hitTest(HELPER_POINT, true) != null;
 					if(isInBounds)
 					{
@@ -709,10 +720,11 @@ package feathers.controls
 					if(touch.phase == TouchPhase.BEGAN)
 					{
 						this.touchPointID = touch.id;
-						return;
+						break;
 					}
 				}
 			}
+			HELPER_TOUCHES_VECTOR.length = 0;
 		}
 
 	}

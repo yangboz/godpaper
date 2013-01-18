@@ -30,18 +30,20 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	
-	import flash.geom.Rectangle;
-	
 	import feathers.controls.Button;
-	import feathers.controls.Screen;
 	import feathers.controls.Header;
+	import feathers.controls.Screen;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.Scroller;
 	import feathers.layout.VerticalLayout;
+	
+	import flash.geom.Rectangle;
+	
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
 	
 	import starling.display.DisplayObject;
+	import starling.events.Event;
 	
 	
 	/**
@@ -105,7 +107,8 @@ package com.godpaper.as3.views.screens
 			_singlePlayButton.label = this.resourceManager.getString(this.bundleName,"BTN_SINGLE_PLAY");
 			_singlePlayButton.width =  200 * this.dpiScale;
 			_singlePlayButton.height = 100 * this.dpiScale;
-			_singlePlayButton.onRelease.addOnce(singlePlayButton_onRelease);
+//			_singlePlayButton.onRelease.addOnce(singlePlayButton_onRelease);
+			_singlePlayButton.addEventListener(starling.events.Event.TRIGGERED,singlePlayButton_onRelease);
 			this._container.addChild(_singlePlayButton);
 //			this.addChild(_singlePlayButton);
 			//
@@ -114,14 +117,16 @@ package com.godpaper.as3.views.screens
 			_multiPlayButton.label = this.resourceManager.getString(this.bundleName,"BTN_MULIT_PLAY");
 			_multiPlayButton.width  = 200 * this.dpiScale;
 			_multiPlayButton.height = 100 * this.dpiScale;
-			_multiPlayButton.onRelease.addOnce(multiPlayButton_onRelease);
+//			_multiPlayButton.onRelease.addOnce(multiPlayButton_onRelease);
+			_multiPlayButton.addEventListener(starling.events.Event.TRIGGERED,multiPlayButton_onRelease);
 			this._container.addChild(_multiPlayButton);
 //			this.addChild(_multiPlayButton);
 			//
 			this._settingsButton = new Button();
 //			this._settingsButton.label = "Settings";
 			this._settingsButton.label = this.resourceManager.getString(this.bundleName,"BTN_SETTINGS");
-			this._settingsButton.onRelease.add(settingsButton_onRelease);
+//			this._settingsButton.onRelease.add(settingsButton_onRelease);
+			this._settingsButton.addEventListener(starling.events.Event.TRIGGERED,settingsButton_onRelease);
 			//
 			this._header = new Header();
 //			this._header.title = "Main Menu";

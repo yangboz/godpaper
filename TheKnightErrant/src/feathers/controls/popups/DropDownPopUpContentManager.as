@@ -1,51 +1,39 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.controls.popups
 {
+	import feathers.core.IFeathersControl;
+	import feathers.core.PopUpManager;
+	import feathers.events.FeathersEventType;
+
 	import flash.errors.IllegalOperationError;
 	import flash.events.KeyboardEvent;
 	import flash.geom.Rectangle;
 	import flash.ui.Keyboard;
 
-	import feathers.display.ScrollRectManager;
-	import feathers.core.FeathersControl;
-	import feathers.core.PopUpManager;
-	import org.osflash.signals.ISignal;
-	import org.osflash.signals.Signal;
-
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
+	import starling.events.Event;
+	import starling.events.EventDispatcher;
 	import starling.events.ResizeEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 
 	/**
+	 * @inheritDoc
+	 */
+	[Event(name="close",type="starling.events.Event")]
+
+	/**
 	 * Displays pop-up content as a desktop-style drop-down.
 	 */
-	public class DropDownPopUpContentManager implements IPopUpContentManager
+	public class DropDownPopUpContentManager extends EventDispatcher implements IPopUpContentManager
 	{
 		/**
 		 * Constructor.
@@ -65,40 +53,21 @@ package feathers.controls.popups
 		protected var source:DisplayObject;
 
 		/**
-		 * @private
-		 */
-		protected var _touchPointID:int = -1;
-
-		/**
-		 * @private
-		 */
-		private var _onClose:Signal = new Signal(DropDownPopUpContentManager);
-
-		/**
-		 * @inheritDoc
-		 */
-		public function get onClose():ISignal
-		{
-			return this._onClose;
-		}
-
-		/**
 		 * @inheritDoc
 		 */
 		public function open(content:DisplayObject, source:DisplayObject):void
 		{
 			if(this.content)
 			{
-				throw new IllegalOperationError("Pop-up content is already defined.")
+				throw new IllegalOperationError("Pop-up content is already defined.");
 			}
 
 			this.content = content;
 			this.source = source;
 			PopUpManager.addPopUp(this.content, false, false);
-			if(this.content is FeathersControl)
+			if(this.content is IFeathersControl)
 			{
-				const uiContent:FeathersControl = FeathersControl(this.content);
-				FeathersControl(this.content).onResize.add(content_resizeHandler);
+				this.content.addEventListener(FeathersEventType.RESIZE, content_resizeHandler);
 			}
 			this.layout();
 			Starling.current.stage.addEventListener(TouchEvent.TOUCH, stage_touchHandler);
@@ -118,14 +87,14 @@ package feathers.controls.popups
 			Starling.current.stage.removeEventListener(TouchEvent.TOUCH, stage_touchHandler);
 			Starling.current.stage.removeEventListener(ResizeEvent.RESIZE, stage_resizeHandler);
 			Starling.current.nativeStage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
-			if(this.content is FeathersControl)
+			if(this.content is IFeathersControl)
 			{
-				FeathersControl(this.content).onResize.remove(content_resizeHandler);
+				this.content.removeEventListener(FeathersEventType.RESIZE, content_resizeHandler);
 			}
 			PopUpManager.removePopUp(this.content);
 			this.content = null;
 			this.source = null;
-			this._onClose.dispatch(this);
+			this.dispatchEventWith(Event.CLOSE);
 		}
 
 		/**
@@ -134,7 +103,6 @@ package feathers.controls.popups
 		public function dispose():void
 		{
 			this.close();
-			this._onClose.removeAll();
 		}
 
 		/**
@@ -142,15 +110,15 @@ package feathers.controls.popups
 		 */
 		protected function layout():void
 		{
-			const globalOrigin:Rectangle = ScrollRectManager.getBounds(this.source, Starling.current.stage);
+			const globalOrigin:Rectangle = this.source.getBounds(Starling.current.stage);
 
-			if(this.source is FeathersControl)
+			if(this.source is IFeathersControl)
 			{
-				FeathersControl(this.source).validate();
+				IFeathersControl(this.source).validate();
 			}
-			if(this.content is FeathersControl)
+			if(this.content is IFeathersControl)
 			{
-				const uiContent:FeathersControl = FeathersControl(this.content);
+				const uiContent:IFeathersControl = IFeathersControl(this.content);
 				uiContent.minWidth = Math.max(uiContent.minWidth, this.source.width);
 				uiContent.validate();
 			}
@@ -210,7 +178,7 @@ package feathers.controls.popups
 		/**
 		 * @private
 		 */
-		protected function content_resizeHandler(content:FeathersControl, oldWidth:Number, oldHeight:Number):void
+		protected function content_resizeHandler(event:Event):void
 		{
 			this.layout();
 		}
@@ -244,7 +212,7 @@ package feathers.controls.popups
 		 */
 		protected function stage_touchHandler(event:TouchEvent):void
 		{
-			if(event.interactsWith(this.content))
+			if(event.interactsWith(this.content) || !PopUpManager.isTopLevelPopUp(this.content))
 			{
 				return;
 			}

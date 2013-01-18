@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2012 Josh Tynjala
+Copyright 2012-2013 Joshua Tynjala
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -26,6 +26,8 @@ package feathers.controls.renderers
 {
 	import feathers.controls.List;
 
+	import starling.events.Event;
+
 	/**
 	 * The default item renderer for List control. Supports up to three optional
 	 * sub-views, including a label to display text, an icon to display an
@@ -47,7 +49,7 @@ package feathers.controls.renderers
 		/**
 		 * @private
 		 */
-		private var _index:int = -1;
+		protected var _index:int = -1;
 		
 		/**
 		 * @inheritDoc
@@ -82,26 +84,13 @@ package feathers.controls.renderers
 			{
 				return;
 			}
-			if(this._owner)
-			{
-				List(this._owner).onScroll.remove(owner_onScroll);
-			}
 			this._owner = value;
 			if(this._owner)
 			{
 				const list:List = List(this._owner);
 				this.isToggle = list.isSelectable;
-				list.onScroll.add(owner_onScroll);
 			}
 			this.invalidate(INVALIDATION_FLAG_DATA);
-		}
-		
-		/**
-		 * @private
-		 */
-		protected function owner_onScroll(list:List):void
-		{
-			this.handleOwnerScroll();
 		}
 	}
 }

@@ -451,9 +451,9 @@ package feathers.themes
 			input.minWidth = input.minHeight = 22;
 			input.paddingTop = input.paddingBottom = 2;
  			input.paddingRight = input.paddingLeft = 4;
-			input.stageTextProperties.fontFamily = "Arial";
-			input.stageTextProperties.fontSize = 11;
-			input.stageTextProperties.color = PRIMARY_TEXT_COLOR;
+//			input.stageTextProperties.fontFamily = "Arial";
+//			input.stageTextProperties.fontSize = 11;
+//			input.stageTextProperties.color = PRIMARY_TEXT_COLOR;
 
 			input.backgroundSkin = new Scale9Image(TEXT_INPUT_BACKGROUND_SKIN_TEXTURES);
 			input.backgroundDisabledSkin = new Scale9Image(TEXT_INPUT_BACKGROUND_DISABLED_SKIN_TEXTURES);

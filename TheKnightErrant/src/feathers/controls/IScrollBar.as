@@ -1,6 +1,13 @@
 package feathers.controls
 {
-	import org.osflash.signals.ISignal;
+	import feathers.core.IFeathersControl;
+
+	/**
+	 * Dispatched when the scroll bar's value changes.
+	 *
+	 * @eventType starling.events.Event.CHANGE
+	 */
+	[Event(name="change",type="starling.events.Event")]
 
 	/**
 	 * Minimum requirements for a scroll bar to be usable with a <code>Scroller</code>
@@ -8,7 +15,7 @@ package feathers.controls
 	 *
 	 * @see Scroller
 	 */
-	public interface IScrollBar
+	public interface IScrollBar extends IFeathersControl
 	{
 		/**
 		 * The minimum value of the scroll bar.
@@ -61,10 +68,5 @@ package feathers.controls
 		 * @private
 		 */
 		function set page(value:Number):void;
-
-		/**
-		 * Dispatched when the scroll bar's value changes.
-		 */
-		function get onChange():ISignal;
 	}
 }

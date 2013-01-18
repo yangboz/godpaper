@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2012 Josh Tynjala
+Copyright 2012-2013 Joshua Tynjala
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -26,10 +26,15 @@ package feathers.core
 {
 	import flash.errors.IllegalOperationError;
 
-	import org.osflash.signals.ISignal;
-	import org.osflash.signals.Signal;
-
+	import starling.events.Event;
 	import starling.events.EventDispatcher;
+
+	/**
+	 * Dispatched when the selection changes.
+	 *
+	 * @eventType starling.events.Event.CHANGE
+	 */
+	[Event(name="change",type="starling.events.Event")]
 
 	/**
 	 * Controls the selection of two or more IToggle instances where only one
@@ -45,16 +50,41 @@ package feathers.core
 		public function ToggleGroup()
 		{
 		}
-		
-		private var _ignoreChanges:Boolean = false;
-		
-		private var _isSelectionRequired:Boolean = true;
-		
+
+		/**
+		 * @private
+		 */
+		protected var _items:Vector.<IToggle> = new Vector.<IToggle>;
+
+		/**
+		 * @private
+		 */
+		protected var _ignoreChanges:Boolean = false;
+
+		/**
+		 * @private
+		 */
+		protected var _isSelectionRequired:Boolean = true;
+
+		/**
+		 * Determines if the user can deselect the currently selected item or
+		 * not. The selection may always be cleared programmatically by setting
+		 * the selected index to <code>-1</code> or the selected item to
+		 * <code>null</code>.
+		 *
+		 * <p>If <code>isSelectionRequired</code> is set to <code>true</code>
+		 * and the toggle group has items that were added previously, and there
+		 * is no currently selected item, the item at index <code>0</code> will
+		 * be selected automatically.</p>
+		 */
 		public function get isSelectionRequired():Boolean
 		{
 			return this._isSelectionRequired;
 		}
-		
+
+		/**
+		 * @private
+		 */
 		public function set isSelectionRequired(value:Boolean):void
 		{
 			if(this._isSelectionRequired == value)
@@ -67,28 +97,6 @@ package feathers.core
 				this.selectedIndex = 0;
 			}
 		}
-		
-		private var _isEnabled:Boolean = true;
-		
-		public function get isEnabled():Boolean
-		{
-			return this._isEnabled;
-		}
-		
-		public function set isEnabled(value:Boolean):void
-		{
-			if(this._isEnabled == value)
-			{
-				return;
-			}
-			this._isEnabled = value;
-			if(!this._isEnabled)
-			{
-				this.selectedItem = null;
-			}
-		}
-		
-		private var _items:Vector.<IToggle> = new Vector.<IToggle>;
 		
 		/**
 		 * The currently selected toggle.
@@ -113,7 +121,7 @@ package feathers.core
 		/**
 		 * @private
 		 */
-		private var _selectedIndex:int = -1;
+		protected var _selectedIndex:int = -1;
 		
 		/**
 		 * The index of the currently selected toggle.
@@ -129,11 +137,10 @@ package feathers.core
 		public function set selectedIndex(value:int):void
 		{
 			const itemCount:int = this._items.length;
-			if(this._isSelectionRequired && ((value < 0 && itemCount > 0) || value >= itemCount))
+			if(value < -1 || value >= itemCount)
 			{
 				throw new RangeError("Index " + value + " is out of range " + itemCount + " for ToggleGroup.");
 			}
-			value = this._isEnabled ? value : -1;
 			const hasChanged:Boolean = this._selectedIndex != value;
 			this._selectedIndex = value;
 
@@ -151,26 +158,14 @@ package feathers.core
 				//early because this setter could be called if an item is
 				//unselected. if selection is required, we need to reselect the
 				//item (happens below in the item's onChange listener).
-				this._onChange.dispatch(this);
+				this.dispatchEventWith(Event.CHANGE);
 			}
 		}
 		
 		/**
-		 * @private
-		 */
-		protected var _onChange:Signal = new Signal(ToggleGroup);
-		
-		/**
-		 * Dispatched when the selection changes.
-		 */
-		public function get onChange():ISignal
-		{
-			return this._onChange;
-		}
-		
-		/**
-		 * Adds a toggle to the group. If it is the first one, it is
-		 * automatically selected.
+		 * Adds a toggle to the group. If it is the first item added to the
+		 * group, and <code>isSelectionRequired</code> is <code>true</code>, it
+		 * will be selected automatically.
 		 */
 		public function addItem(item:IToggle):void
 		{
@@ -193,7 +188,7 @@ package feathers.core
 			{
 				item.isSelected = false;
 			}
-			item.onChange.add(item_onChange);
+			item.addEventListener(Event.CHANGE, item_changeHandler);
 
 			if(item is IGroupedToggle)
 			{
@@ -202,7 +197,10 @@ package feathers.core
 		}
 		
 		/**
-		 * Removes a toggle from the group.
+		 * Removes a toggle from the group. If the item being removed is
+		 * selected and <code>isSelectionRequired</code> is <code>true</code>,
+		 * the final item will be selected. If <code>isSelectionRequired</code>
+		 * is <code>false</code> instead, no item will be selected.
 		 */
 		public function removeItem(item:IToggle):void
 		{
@@ -212,7 +210,7 @@ package feathers.core
 				return;
 			}
 			this._items.splice(index, 1);
-			item.onChange.remove(item_onChange);
+			item.removeEventListener(Event.CHANGE, item_changeHandler);
 			if(item is IGroupedToggle)
 			{
 				IGroupedToggle(item).toggleGroup = null;
@@ -231,6 +229,24 @@ package feathers.core
 		}
 
 		/**
+		 * Removes all toggles from the group. No item will be selected.
+		 */
+		public function removeAllItems():void
+		{
+			const itemCount:int = this._items.length;
+			for(var i:int = 0; i < itemCount; i++)
+			{
+				var item:IToggle = this._items.shift();
+				item.removeEventListener(Event.CHANGE, item_changeHandler);
+				if(item is IGroupedToggle)
+				{
+					IGroupedToggle(item).toggleGroup = null;
+				}
+			}
+			this.selectedIndex = -1;
+		}
+
+		/**
 		 * Determines if the group includes the specified item.
 		 */
 		public function hasItem(item:IToggle):Boolean
@@ -242,16 +258,18 @@ package feathers.core
 		/**
 		 * @private
 		 */
-		private function item_onChange(item:IToggle):void
+		protected function item_changeHandler(event:Event):void
 		{
 			if(this._ignoreChanges)
 			{
 				return;
 			}
-			
+
+			const item:IToggle = IToggle(event.currentTarget);
 			const index:int = this._items.indexOf(item);
 			if(item.isSelected || (this._isSelectionRequired && this._selectedIndex == index))
 			{
+				//don't let it deselect the item
 				this.selectedIndex = index;
 			}
 			else if(!item.isSelected)

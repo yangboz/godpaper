@@ -607,8 +607,8 @@ package feathers.themes
 			renderer.minWidth = renderer.minHeight = 88 * this.scale;
 			renderer.minTouchWidth = renderer.minTouchHeight = 88 * this.scale;
 
-			renderer.accessoryImageFactory = this.imageFactory;
-			renderer.iconImageFactory = this.imageFactory;
+//			renderer.accessoryImageFactory = this.imageFactory;
+//			renderer.iconImageFactory = this.imageFactory;
 		}
 
 		protected function pickerListItemRendererInitializer(renderer:BaseDefaultItemRenderer):void
@@ -796,7 +796,7 @@ package feathers.themes
 
 		protected function sliderInitializer(slider:Slider):void
 		{
-			slider.trackLayoutMode = Slider.TRACK_LAYOUT_MODE_STRETCH;
+//			slider.trackLayoutMode = Slider.TRACK_LAYOUT_MODE_STRETCH;
 
 			if(slider.direction == Slider.DIRECTION_VERTICAL)
 			{
@@ -839,9 +839,9 @@ package feathers.themes
 			input.minTouchWidth = input.minTouchHeight = 88 * this.scale;
 			input.paddingTop = input.paddingBottom = 12 * this.scale;
 			input.paddingLeft = input.paddingRight = 16 * this.scale;
-			input.stageTextProperties.fontFamily = "Helvetica";
-			input.stageTextProperties.fontSize = 30 * this.scale;
-			input.stageTextProperties.color = LIGHT_TEXT_COLOR;
+//			input.stageTextProperties.fontFamily = "Helvetica";
+//			input.stageTextProperties.fontSize = 30 * this.scale;
+//			input.stageTextProperties.color = LIGHT_TEXT_COLOR;
 		}
 
 		protected function pageIndicatorInitializer(pageIndicator:PageIndicator):void

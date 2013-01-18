@@ -1,37 +1,36 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Copyright 2012-2013 Joshua Tynjala
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
 
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+*/
 package feathers.controls
 {
 	import feathers.core.FeathersControl;
-	import feathers.core.FeathersControl;
+	import feathers.core.IFeathersControl;
 	import feathers.core.ITextRenderer;
 	import feathers.core.PropertyProxy;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.LayoutBoundsResult;
 	import feathers.layout.ViewPortBounds;
-	import feathers.text.BitmapFontTextFormat;
 
 	import flash.geom.Point;
 
@@ -44,6 +43,8 @@ package feathers.controls
 	 * additional actions. The title is displayed in the center by default,
 	 * but it may be aligned to the left or right if there are no items on the
 	 * desired side.
+	 *
+	 * @see http://wiki.starling-framework.org/feathers/header
 	 */
 	public class Header extends FeathersControl
 	{
@@ -106,17 +107,17 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		private static const helperBounds:ViewPortBounds = new ViewPortBounds();
+		private static const HELPER_BOUNDS:ViewPortBounds = new ViewPortBounds();
 
 		/**
 		 * @private
 		 */
-		private static const helperResult:LayoutBoundsResult = new LayoutBoundsResult();
+		private static const HELPER_LAYOUT_RESULT:LayoutBoundsResult = new LayoutBoundsResult();
 
 		/**
 		 * @private
 		 */
-		private static const helperPoint:Point = new Point();
+		private static const HELPER_POINT:Point = new Point();
 
 		/**
 		 * Constructor.
@@ -155,7 +156,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected var _title:String;
+		protected var _title:String = "";
 
 		/**
 		 * The text displayed for the header's title.
@@ -170,6 +171,10 @@ package feathers.controls
 		 */
 		public function set title(value:String):void
 		{
+			if(value === null)
+			{
+				value = "";
+			}
 			if(this._title == value)
 			{
 				return;
@@ -190,6 +195,7 @@ package feathers.controls
 		 * <pre>function():ITextRenderer</pre>
 		 *
 		 * @see feathers.core.ITextRenderer
+		 * @see feathers.core.FeathersControl#defaultTextRendererFactory
 		 */
 		public function get titleFactory():Function
 		{
@@ -240,9 +246,9 @@ package feathers.controls
 			{
 				for each(var item:DisplayObject in this._leftItems)
 				{
-					if(item is FeathersControl)
+					if(item is IFeathersControl)
 					{
-						FeathersControl(item).nameList.remove(this.itemName);
+						IFeathersControl(item).nameList.remove(this.itemName);
 					}
 					item.removeFromParent();
 				}
@@ -277,15 +283,37 @@ package feathers.controls
 			{
 				for each(var item:DisplayObject in this._rightItems)
 				{
-					if(item is FeathersControl)
+					if(item is IFeathersControl)
 					{
-						FeathersControl(item).nameList.remove(this.itemName);
+						IFeathersControl(item).nameList.remove(this.itemName);
 					}
 					item.removeFromParent();
 				}
 			}
 			this._rightItems = value;
 			this.invalidate(INVALIDATION_FLAG_RIGHT_CONTENT);
+		}
+
+		/**
+		 * Quickly sets all padding properties to the same value. The
+		 * <code>padding</code> getter always returns the value of
+		 * <code>paddingTop</code>, but the other padding values may be
+		 * different.
+		 */
+		public function get padding():Number
+		{
+			return this._paddingTop;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set padding(value:Number):void
+		{
+			this.paddingTop = value;
+			this.paddingRight = value;
+			this.paddingBottom = value;
+			this.paddingLeft = value;
 		}
 
 		/**
@@ -427,6 +455,7 @@ package feathers.controls
 		 */
 		protected var _verticalAlign:String = VERTICAL_ALIGN_MIDDLE;
 
+		[Inspectable(type="String",enumeration="top,middle,bottom")]
 		/**
 		 * The alignment of the items vertically, on the y-axis.
 		 */
@@ -547,6 +576,8 @@ package feathers.controls
 		 * which is in a <code>Scroller</code> which is in a <code>List</code>,
 		 * you can use the following syntax:</p>
 		 * <pre>list.scrollerProperties.&#64;verticalScrollBarProperties.&#64;thumbProperties.defaultSkin = new Image(texture);</pre>
+		 *
+		 * @see feathers.core.ITextRenderer
 		 */
 		public function get titleProperties():Object
 		{
@@ -572,12 +603,12 @@ package feathers.controls
 			}
 			if(this._titleProperties)
 			{
-				this._titleProperties.onChange.remove(titleProperties_onChange);
+				this._titleProperties.removeOnChangeCallback(titleProperties_onChange);
 			}
 			this._titleProperties = PropertyProxy(value);
 			if(this._titleProperties)
 			{
-				this._titleProperties.onChange.add(titleProperties_onChange);
+				this._titleProperties.addOnChangeCallback(titleProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
@@ -587,10 +618,16 @@ package feathers.controls
 		 */
 		protected var _titleAlign:String = TITLE_ALIGN_CENTER;
 
+		[Inspectable(type="String",enumeration="center,preferLeft,preferRight")]
 		/**
 		 * The preferred position of the title. If leftItems and/or rightItems
 		 * is defined, the title may be forced to the center even if the
 		 * preferred position is on the left or right.
+		 *
+		 * @default TITLE_ALIGN_CENTER
+		 * @see #TITLE_ALIGN_CENTER
+		 * @see #TITLE_ALIGN_PREFER_LEFT
+		 * @see #TITLE_ALIGN_PREFER_RIGHT
 		 */
 		public function get titleAlign():String
 		{
@@ -657,7 +694,7 @@ package feathers.controls
 				{
 					for each(var item:DisplayObject in this._leftItems)
 					{
-						if(item is FeathersControl)
+						if(item is IFeathersControl)
 						{
 							FeathersControl(item).nameList.add(this.itemName);
 						}
@@ -672,7 +709,7 @@ package feathers.controls
 				{
 					for each(item in this._rightItems)
 					{
-						FeathersControl(item).nameList.add(this.itemName);
+						IFeathersControl(item).nameList.add(this.itemName);
 						this.addChild(item);
 					}
 				}
@@ -732,15 +769,16 @@ package feathers.controls
 				}
 			}
 
+			var totalItemWidth:Number = 0;
 			for each(var item:DisplayObject in this._leftItems)
 			{
-				if(item is FeathersControl)
+				if(item is IFeathersControl)
 				{
-					FeathersControl(item).validate();
+					IFeathersControl(item).validate();
 				}
 				if(needsWidth && !isNaN(item.width))
 				{
-					newWidth += item.width + this._gap;
+					totalItemWidth += item.width + this._gap;
 				}
 				if(needsHeight && !isNaN(item.height))
 				{
@@ -749,28 +787,33 @@ package feathers.controls
 			}
 			for each(item in this._rightItems)
 			{
-				if(item is FeathersControl)
+				if(item is IFeathersControl)
 				{
-					FeathersControl(item).validate();
+					IFeathersControl(item).validate();
 				}
 				if(needsWidth && !isNaN(item.width))
 				{
-					newWidth += item.width + this._gap;
+					totalItemWidth += item.width + this._gap;
 				}
 				if(needsHeight && !isNaN(item.height))
 				{
 					newHeight = Math.max(newHeight, item.height);
 				}
 			}
+			newWidth += totalItemWidth;
 
-			this._titleRenderer.measureText(helperPoint);
-			if(needsWidth)
+			const maxTitleWidth:Number = (needsWidth ? this._maxWidth : this.explicitWidth) - totalItemWidth - this._paddingLeft - this._paddingRight;
+			this._titleRenderer.maxWidth = maxTitleWidth;
+			this._titleRenderer.measureText(HELPER_POINT);
+			const measuredTitleWidth:Number = HELPER_POINT.x;
+			const measuredTitleHeight:Number = HELPER_POINT.x;
+			if(needsWidth && !isNaN(measuredTitleWidth))
 			{
-				newWidth += helperPoint.x;
+				newWidth += HELPER_POINT.x;
 			}
-			if(needsHeight)
+			if(needsHeight && !isNaN(measuredTitleHeight))
 			{
-				newHeight = Math.max(newHeight, helperPoint.y);
+				newHeight = Math.max(newHeight, HELPER_POINT.y);
 			}
 			if(needsHeight)
 			{
@@ -795,16 +838,16 @@ package feathers.controls
 		{
 			if(this._titleRenderer)
 			{
-				this.removeChild(FeathersControl(this._titleRenderer), true);
+				this.removeChild(DisplayObject(this._titleRenderer), true);
 				this._titleRenderer = null;
 			}
 
 			const factory:Function = this._titleFactory != null ? this._titleFactory : FeathersControl.defaultTextRendererFactory;
-			this._titleRenderer = factory();
-			const uiTitleRenderer:FeathersControl = FeathersControl(this._titleRenderer);
+			this._titleRenderer = ITextRenderer(factory());
+			const uiTitleRenderer:IFeathersControl = IFeathersControl(this._titleRenderer);
 			uiTitleRenderer.nameList.add(this.titleName);
 			uiTitleRenderer.touchable = false;
-			this.addChild(uiTitleRenderer);
+			this.addChild(DisplayObject(uiTitleRenderer));
 		}
 
 		/**
@@ -823,13 +866,13 @@ package feathers.controls
 		 */
 		protected function refreshTitleStyles():void
 		{
-			const uiTitleRenderer:FeathersControl = FeathersControl(this._titleRenderer);
+			const displayTitleRenderer:DisplayObject = DisplayObject(this._titleRenderer);
 			for(var propertyName:String in this._titleProperties)
 			{
-				if(uiTitleRenderer.hasOwnProperty(propertyName))
+				if(displayTitleRenderer.hasOwnProperty(propertyName))
 				{
 					var propertyValue:Object = this._titleProperties[propertyName];
-					uiTitleRenderer[propertyName] = propertyValue;
+					displayTitleRenderer[propertyName] = propertyValue;
 				}
 			}
 		}
@@ -870,19 +913,23 @@ package feathers.controls
 		{
 			for each(var item:DisplayObject in this._leftItems)
 			{
-				if(item is FeathersControl)
+				if(item is IFeathersControl)
 				{
-					FeathersControl(item).validate();
+					IFeathersControl(item).validate();
 				}
 			}
-			helperBounds.x = helperBounds.y = 0;
-			helperBounds.explicitWidth = this.actualWidth;
-			helperBounds.explicitHeight = this.actualHeight;
+			HELPER_BOUNDS.x = HELPER_BOUNDS.y = 0;
+			HELPER_BOUNDS.explicitWidth = this.actualWidth;
+			HELPER_BOUNDS.explicitHeight = this.actualHeight;
 			this._layout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_LEFT;
 			this._layout.paddingRight = 0;
 			this._layout.paddingLeft = this._paddingLeft;
-			this._layout.layout(this._leftItems, helperBounds, helperResult);
-			this.leftItemsWidth = helperResult.contentWidth;
+			this._layout.layout(this._leftItems, HELPER_BOUNDS, HELPER_LAYOUT_RESULT);
+			this.leftItemsWidth = HELPER_LAYOUT_RESULT.contentWidth;
+			if(isNaN(this.leftItemsWidth))
+			{
+				this.leftItemsWidth = 0;
+			}
 
 		}
 
@@ -893,19 +940,23 @@ package feathers.controls
 		{
 			for each(var item:DisplayObject in this._rightItems)
 			{
-				if(item is FeathersControl)
+				if(item is IFeathersControl)
 				{
-					FeathersControl(item).validate();
+					IFeathersControl(item).validate();
 				}
 			}
-			helperBounds.x = helperBounds.y = 0;
-			helperBounds.explicitWidth = this.actualWidth;
-			helperBounds.explicitHeight = this.actualHeight;
+			HELPER_BOUNDS.x = HELPER_BOUNDS.y = 0;
+			HELPER_BOUNDS.explicitWidth = this.actualWidth;
+			HELPER_BOUNDS.explicitHeight = this.actualHeight;
 			this._layout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_RIGHT;
 			this._layout.paddingRight = this._paddingRight;
 			this._layout.paddingLeft = 0;
-			this._layout.layout(this._rightItems, helperBounds, helperResult);
-			this.rightItemsWidth = helperResult.contentWidth;
+			this._layout.layout(this._rightItems, HELPER_BOUNDS, HELPER_LAYOUT_RESULT);
+			this.rightItemsWidth = HELPER_LAYOUT_RESULT.contentWidth;
+			if(isNaN(this.rightItemsWidth))
+			{
+				this.rightItemsWidth = 0;
+			}
 		}
 
 		/**
@@ -913,44 +964,43 @@ package feathers.controls
 		 */
 		protected function layoutTitle():void
 		{
-			if(!this._title)
+			if(this._title.length == 0)
 			{
 				return;
 			}
-			const uiTitleRenderer:FeathersControl = FeathersControl(this._titleRenderer);
 			const leftOffset:Number = (this._leftItems && this._leftItems.length > 0) ? (this.leftItemsWidth + this._gap) : 0;
 			const rightOffset:Number = (this._rightItems && this._rightItems.length > 0) ? (this.rightItemsWidth + this._gap) : 0;
 			if(this._titleAlign == TITLE_ALIGN_PREFER_LEFT && (!this._leftItems || this._leftItems.length == 0))
 			{
-				uiTitleRenderer.maxWidth = this.actualWidth - this._paddingLeft - this._paddingRight - rightOffset;
-				uiTitleRenderer.validate();
-				uiTitleRenderer.x = this._paddingLeft;
+				this._titleRenderer.maxWidth = this.actualWidth - this._paddingLeft - this._paddingRight - rightOffset;
+				this._titleRenderer.validate();
+				this._titleRenderer.x = this._paddingLeft;
 			}
 			else if(this._titleAlign == TITLE_ALIGN_PREFER_RIGHT && (!this._rightItems || this._rightItems.length == 0))
 			{
-				uiTitleRenderer.maxWidth = this.actualWidth - this._paddingLeft - this._paddingRight - leftOffset;
-				uiTitleRenderer.validate();
-				uiTitleRenderer.x = this.actualWidth - this._paddingRight - uiTitleRenderer.width;
+				this._titleRenderer.maxWidth = this.actualWidth - this._paddingLeft - this._paddingRight - leftOffset;
+				this._titleRenderer.validate();
+				this._titleRenderer.x = this.actualWidth - this._paddingRight - this._titleRenderer.width;
 			}
 			else
 			{
 				const sharedOffset:Number = Math.max(leftOffset, rightOffset);
 				const availableWidth:Number = this.actualWidth - this._paddingLeft - this._paddingRight - 2 * sharedOffset;
-				uiTitleRenderer.maxWidth = availableWidth;
-				uiTitleRenderer.validate();
-				uiTitleRenderer.x = this._paddingLeft + sharedOffset + (availableWidth - uiTitleRenderer.width) / 2;
+				this._titleRenderer.maxWidth = availableWidth;
+				this._titleRenderer.validate();
+				this._titleRenderer.x = this._paddingLeft + sharedOffset + (availableWidth - this._titleRenderer.width) / 2;
 			}
 			if(this._verticalAlign == VERTICAL_ALIGN_TOP)
 			{
-				uiTitleRenderer.y = this._paddingTop;
+				this._titleRenderer.y = this._paddingTop;
 			}
 			else if(this._verticalAlign == VERTICAL_ALIGN_BOTTOM)
 			{
-				uiTitleRenderer.y = this.actualHeight - this._paddingBottom - uiTitleRenderer.height;
+				this._titleRenderer.y = this.actualHeight - this._paddingBottom - this._titleRenderer.height;
 			}
 			else
 			{
-				uiTitleRenderer.y = (this.actualHeight - uiTitleRenderer.height) / 2;
+				this._titleRenderer.y = this._paddingTop + (this.actualHeight - this._paddingTop - this._paddingBottom - this._titleRenderer.height) / 2;
 			}
 		}
 

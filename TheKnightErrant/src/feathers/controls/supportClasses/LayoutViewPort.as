@@ -1,49 +1,35 @@
 /*
- Copyright (c) 2012 Josh Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.controls.supportClasses
 {
-	import flash.geom.Point;
-
 	import feathers.core.FeathersControl;
+	import feathers.core.IFeathersControl;
+	import feathers.events.FeathersEventType;
 	import feathers.layout.ILayout;
 	import feathers.layout.IVirtualLayout;
 	import feathers.layout.LayoutBoundsResult;
 	import feathers.layout.ViewPortBounds;
 
+	import flash.geom.Point;
+
 	import starling.display.DisplayObject;
 	import starling.events.Event;
+	import starling.events.EventDispatcher;
 
 	/**
 	 * @private
 	 * Used internally by ScrollContainer. Not meant to be used on its own.
 	 */
-	public class LayoutViewPort extends FeathersControl implements IViewPort
+	public final class LayoutViewPort extends FeathersControl implements IViewPort
 	{
-		private static const helperPoint:Point = new Point();
-		private static const helperBounds:ViewPortBounds = new ViewPortBounds();
-		private static const helperResult:LayoutBoundsResult = new LayoutBoundsResult();
+		private static const HELPER_POINT:Point = new Point();
+		private static const HELPER_BOUNDS:ViewPortBounds = new ViewPortBounds();
+		private static const HELPER_LAYOUT_RESULT:LayoutBoundsResult = new LayoutBoundsResult();
 
 		public function LayoutViewPort()
 		{
@@ -93,7 +79,7 @@ package feathers.controls.supportClasses
 			this.invalidate(INVALIDATION_FLAG_SIZE);
 		}
 
-		protected var _visibleWidth:Number = NaN;
+		private var _visibleWidth:Number = NaN;
 
 		public function get visibleWidth():Number
 		{
@@ -152,7 +138,7 @@ package feathers.controls.supportClasses
 			this.invalidate(INVALIDATION_FLAG_SIZE);
 		}
 
-		protected var _visibleHeight:Number = NaN;
+		private var _visibleHeight:Number = NaN;
 
 		public function get visibleHeight():Number
 		{
@@ -171,12 +157,12 @@ package feathers.controls.supportClasses
 
 		public function get horizontalScrollStep():Number
 		{
-			return this._visibleWidth / 10;
+			return Math.min(this.actualWidth, this.actualHeight) / 10;
 		}
 
 		public function get verticalScrollStep():Number
 		{
-			return this._visibleHeight / 10;
+			return Math.min(this.actualWidth, this.actualHeight) / 10;
 		}
 
 		private var _horizontalScrollPosition:Number = 0;
@@ -205,7 +191,7 @@ package feathers.controls.supportClasses
 
 		private var _ignoreChildResizing:Boolean = false;
 
-		protected var items:Vector.<DisplayObject> = new <DisplayObject>[];
+		private var items:Vector.<DisplayObject> = new <DisplayObject>[];
 
 		private var _layout:ILayout;
 
@@ -222,7 +208,7 @@ package feathers.controls.supportClasses
 			}
 			if(this._layout)
 			{
-				this._layout.onLayoutChange.remove(layout_onLayoutChange);
+				EventDispatcher(this._layout).removeEventListener(Event.CHANGE, layout_changeHandler);
 			}
 			this._layout = value;
 			if(this._layout)
@@ -231,7 +217,7 @@ package feathers.controls.supportClasses
 				{
 					IVirtualLayout(this._layout).useVirtualLayout = false;
 				}
-				this._layout.onLayoutChange.add(layout_onLayoutChange);
+				EventDispatcher(this._layout).addEventListener(Event.CHANGE, layout_changeHandler);
 				//if we don't have a layout, nothing will need to be redrawn
 				this.invalidate(INVALIDATION_FLAG_DATA);
 			}
@@ -239,9 +225,9 @@ package feathers.controls.supportClasses
 
 		override public function addChildAt(child:DisplayObject, index:int):DisplayObject
 		{
-			if(child is FeathersControl)
+			if(child is IFeathersControl)
 			{
-				FeathersControl(child).onResize.add(child_onResize);
+				child.addEventListener(FeathersEventType.RESIZE, child_resizeHandler);
 			}
 			return super.addChildAt(child, index);
 		}
@@ -249,9 +235,9 @@ package feathers.controls.supportClasses
 		override public function removeChildAt(index:int, dispose:Boolean = false):DisplayObject
 		{
 			const child:DisplayObject = super.removeChildAt(index, dispose);
-			if(child is FeathersControl)
+			if(child is IFeathersControl)
 			{
-				FeathersControl(child).onResize.remove(child_onResize);
+				child.removeEventListener(FeathersEventType.RESIZE, child_resizeHandler);
 			}
 			return child;
 		}
@@ -260,7 +246,7 @@ package feathers.controls.supportClasses
 		{
 			if(this._layout)
 			{
-				this._layout.onLayoutChange.remove(layout_onLayoutChange);
+				EventDispatcher(this._layout).removeEventListener(Event.CHANGE, layout_changeHandler);
 			}
 			super.dispose();
 		}
@@ -275,49 +261,49 @@ package feathers.controls.supportClasses
 				const itemCount:int = this.items.length;
 				for(var i:int = 0; i < itemCount; i++)
 				{
-					var control:FeathersControl = this.items[i] as FeathersControl;
+					var control:IFeathersControl = this.items[i] as IFeathersControl;
 					if(control)
 					{
 						control.validate();
 					}
 				}
 
-				helperBounds.x = helperBounds.y = 0;
-				helperBounds.explicitWidth = this._visibleWidth;
-				helperBounds.explicitHeight = this._visibleHeight;
-				helperBounds.minWidth = this._minVisibleWidth;
-				helperBounds.minHeight = this._minVisibleHeight;
-				helperBounds.maxWidth = this._maxVisibleWidth;
-				helperBounds.maxHeight = this._maxVisibleHeight;
+				HELPER_BOUNDS.x = HELPER_BOUNDS.y = 0;
+				HELPER_BOUNDS.explicitWidth = this._visibleWidth;
+				HELPER_BOUNDS.explicitHeight = this._visibleHeight;
+				HELPER_BOUNDS.minWidth = this._minVisibleWidth;
+				HELPER_BOUNDS.minHeight = this._minVisibleHeight;
+				HELPER_BOUNDS.maxWidth = this._maxVisibleWidth;
+				HELPER_BOUNDS.maxHeight = this._maxVisibleHeight;
 				if(this._layout)
 				{
 					this._ignoreChildResizing = true;
-					this._layout.layout(this.items, helperBounds, helperResult);
+					this._layout.layout(this.items, HELPER_BOUNDS, HELPER_LAYOUT_RESULT);
 					this._ignoreChildResizing = false;
-					this.setSizeInternal(helperResult.contentWidth, helperResult.contentHeight, false);
+					this.setSizeInternal(HELPER_LAYOUT_RESULT.contentWidth, HELPER_LAYOUT_RESULT.contentHeight, false);
 				}
 				else
 				{
-					var maxX:Number = isNaN(helperBounds.explicitWidth) ? 0 : helperBounds.explicitWidth;
-					var maxY:Number = isNaN(helperBounds.explicitHeight) ? 0 : helperBounds.explicitHeight;
+					var maxX:Number = isNaN(HELPER_BOUNDS.explicitWidth) ? 0 : HELPER_BOUNDS.explicitWidth;
+					var maxY:Number = isNaN(HELPER_BOUNDS.explicitHeight) ? 0 : HELPER_BOUNDS.explicitHeight;
 					for each(var item:DisplayObject in this.items)
 					{
 						maxX = Math.max(maxX, item.x + item.width);
 						maxY = Math.max(maxY, item.y + item.height);
 					}
-					helperPoint.x = Math.max(Math.min(maxX, this._maxVisibleWidth), this._minVisibleWidth);
-					helperPoint.y = Math.max(Math.min(maxY, this._maxVisibleHeight), this._minVisibleHeight);
-					this.setSizeInternal(helperPoint.x, helperPoint.y, false);
+					HELPER_POINT.x = Math.max(Math.min(maxX, this._maxVisibleWidth), this._minVisibleWidth);
+					HELPER_POINT.y = Math.max(Math.min(maxY, this._maxVisibleHeight), this._minVisibleHeight);
+					this.setSizeInternal(HELPER_POINT.x, HELPER_POINT.y, false);
 				}
 			}
 		}
 
-		protected function layout_onLayoutChange(layout:ILayout):void
+		private function layout_changeHandler(event:Event):void
 		{
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}
 
-		protected function child_onResize(child:FeathersControl, oldWidth:Number, oldHeight:Number):void
+		private function child_resizeHandler(event:Event):void
 		{
 			if(this._ignoreChildResizing)
 			{
@@ -326,7 +312,7 @@ package feathers.controls.supportClasses
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}
 
-		protected function addedHandler(event:Event):void
+		private function addedHandler(event:Event):void
 		{
 			const item:DisplayObject = DisplayObject(event.target);
 			if(item.parent != this)
@@ -338,7 +324,7 @@ package feathers.controls.supportClasses
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}
 
-		protected function removedHandler(event:Event):void
+		private function removedHandler(event:Event):void
 		{
 			const item:DisplayObject = DisplayObject(event.target);
 			if(item.parent != this)

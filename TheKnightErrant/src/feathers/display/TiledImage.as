@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2012 Josh Tynjala
+Copyright 2012-2013 Joshua Tynjala
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -30,8 +30,9 @@ package feathers.display
 
 	import starling.core.RenderSupport;
 	import starling.display.DisplayObject;
-	import starling.display.Sprite;
+//	import starling.display.Image;
 	import starling.display.QuadBatch;
+	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.textures.Texture;
 	import starling.textures.TextureSmoothing;
@@ -40,10 +41,10 @@ package feathers.display
 	/**
 	 * Tiles a texture to fill the specified bounds.
 	 */
-	public class TiledImage extends starling.display.Sprite
+	public class TiledImage extends Sprite
 	{
-		private static var helperPoint:Point = new Point();
-		private static var helperMatrix:Matrix = new Matrix();
+		private static const HELPER_POINT:Point = new Point();
+		private static const HELPER_MATRIX:Matrix = new Matrix();
 		
 		/**
 		 * Constructor.
@@ -274,31 +275,31 @@ package feathers.display
 			}
 			else
 			{
-				this.getTransformationMatrix(targetSpace, helperMatrix);
+				this.getTransformationMatrix(targetSpace, HELPER_MATRIX);
 
-				MatrixUtil.transformCoords(helperMatrix, this._hitArea.x, this._hitArea.y, helperPoint);
-				minX = minX < helperPoint.x ? minX : helperPoint.x;
-				maxX = maxX > helperPoint.x ? maxX : helperPoint.x;
-				minY = minY < helperPoint.y ? minY : helperPoint.y;
-				maxY = maxY > helperPoint.y ? maxY : helperPoint.y;
+				MatrixUtil.transformCoords(HELPER_MATRIX, this._hitArea.x, this._hitArea.y, HELPER_POINT);
+				minX = minX < HELPER_POINT.x ? minX : HELPER_POINT.x;
+				maxX = maxX > HELPER_POINT.x ? maxX : HELPER_POINT.x;
+				minY = minY < HELPER_POINT.y ? minY : HELPER_POINT.y;
+				maxY = maxY > HELPER_POINT.y ? maxY : HELPER_POINT.y;
 
-				MatrixUtil.transformCoords(helperMatrix, this._hitArea.x, this._hitArea.y + this._hitArea.height, helperPoint);
-				minX = minX < helperPoint.x ? minX : helperPoint.x;
-				maxX = maxX > helperPoint.x ? maxX : helperPoint.x;
-				minY = minY < helperPoint.y ? minY : helperPoint.y;
-				maxY = maxY > helperPoint.y ? maxY : helperPoint.y;
+				MatrixUtil.transformCoords(HELPER_MATRIX, this._hitArea.x, this._hitArea.y + this._hitArea.height, HELPER_POINT);
+				minX = minX < HELPER_POINT.x ? minX : HELPER_POINT.x;
+				maxX = maxX > HELPER_POINT.x ? maxX : HELPER_POINT.x;
+				minY = minY < HELPER_POINT.y ? minY : HELPER_POINT.y;
+				maxY = maxY > HELPER_POINT.y ? maxY : HELPER_POINT.y;
 
-				MatrixUtil.transformCoords(helperMatrix, this._hitArea.x + this._hitArea.width, this._hitArea.y, helperPoint);
-				minX = minX < helperPoint.x ? minX : helperPoint.x;
-				maxX = maxX > helperPoint.x ? maxX : helperPoint.x;
-				minY = minY < helperPoint.y ? minY : helperPoint.y;
-				maxY = maxY > helperPoint.y ? maxY : helperPoint.y;
+				MatrixUtil.transformCoords(HELPER_MATRIX, this._hitArea.x + this._hitArea.width, this._hitArea.y, HELPER_POINT);
+				minX = minX < HELPER_POINT.x ? minX : HELPER_POINT.x;
+				maxX = maxX > HELPER_POINT.x ? maxX : HELPER_POINT.x;
+				minY = minY < HELPER_POINT.y ? minY : HELPER_POINT.y;
+				maxY = maxY > HELPER_POINT.y ? maxY : HELPER_POINT.y;
 
-				MatrixUtil.transformCoords(helperMatrix, this._hitArea.x + this._hitArea.width, this._hitArea.y + this._hitArea.height, helperPoint);
-				minX = minX < helperPoint.x ? minX : helperPoint.x;
-				maxX = maxX > helperPoint.x ? maxX : helperPoint.x;
-				minY = minY < helperPoint.y ? minY : helperPoint.y;
-				maxY = maxY > helperPoint.y ? maxY : helperPoint.y;
+				MatrixUtil.transformCoords(HELPER_MATRIX, this._hitArea.x + this._hitArea.width, this._hitArea.y + this._hitArea.height, HELPER_POINT);
+				minX = minX < HELPER_POINT.x ? minX : HELPER_POINT.x;
+				maxX = maxX > HELPER_POINT.x ? maxX : HELPER_POINT.x;
+				minY = minY < HELPER_POINT.y ? minY : HELPER_POINT.y;
+				maxY = maxY > HELPER_POINT.y ? maxY : HELPER_POINT.y;
 			}
 			
 			resultRect.x = minX;
@@ -383,15 +384,15 @@ package feathers.display
 
 					var xCoord:Number = imageWidth / scaledTextureWidth;
 					var yCoord:Number = imageHeight / scaledTextureHeight;
-					helperPoint.x = xCoord;
-					helperPoint.y = 0;
-					this._image.setTexCoords(1, helperPoint);
+					HELPER_POINT.x = xCoord;
+					HELPER_POINT.y = 0;
+					this._image.setTexCoords(1, HELPER_POINT);
 
-					helperPoint.y = yCoord;
-					this._image.setTexCoords(3, helperPoint);
+					HELPER_POINT.y = yCoord;
+					this._image.setTexCoords(3, HELPER_POINT);
 
-					helperPoint.x = 0;
-					this._image.setTexCoords(2, helperPoint);
+					HELPER_POINT.x = 0;
+					this._image.setTexCoords(2, HELPER_POINT);
 
 					this._batch.addImage(this._image);
 
