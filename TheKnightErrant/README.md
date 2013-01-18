@@ -83,3 +83,5 @@ Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 18.Chess board type implementation.(Start)
 
 19.Player.IO contest implementation.(Start)
+
+20.FlexMojo/Maven features.(Plan)
