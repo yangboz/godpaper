@@ -35,6 +35,7 @@ package com.godpaper.as3.views.screens
 	
 	import mx.logging.ILogger;
 	
+	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.events.Event;
@@ -130,17 +131,9 @@ package com.godpaper.as3.views.screens
 			this._container.addChild(this._progress);
 			//
 //			this._progressTween = new GTween(this._progress, 5,
-			this._progressTween = new Tween(this._progress, 5
-//				,	
-//				{
-//					value: 1
-//				}
-//				,
-//				{
-//					repeatCount: 1
-//				}
-			);
-			starling.core.Starling.juggler.add(this._progressTween);
+			this._progressTween = new Tween(this._progress, 5,Transitions.EASE_IN);
+			this._progressTween.animate("value",100);
+			Starling.juggler.add(this._progressTween); 
 			//Loading subroutines here.
 			
 			//			CursorManager.setBusyCursor();
@@ -150,11 +143,13 @@ package com.godpaper.as3.views.screens
 				AssetEmbedsDefault.loadBitmapFonts();
 			}
 			//Loading complete handler.
-			this._progressTween.onComplete =  function():void
+//			starling.core.Starling.juggler.delayCall(
+			this._progressTween.onComplete =  
+			function():void
 			{
 //				FlexGlobals.screenNavigator.showScreen((DefaultConstants.SCREEN_GAME));//Screen swither here.
 				FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);//Screen swither here.
-			}
+			};
 		}
 		//
 		override protected function draw():void
