@@ -1,0 +1,14 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>GODPAPER</groupId>
+  <artifactId>TheKnightErrant</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>TheKnightErrant</name>
+  <description>A chess-board-game framework(by as3/objective-c language) implementation based-on Starling/Sparrow.</description>
+  <url>http://www.godpaper.com</url>
+  <organization>
+  	<name>GODPAPER</name>
+  	<url>http://www.godpaper.com</url>
+  </organization>
+</project>
