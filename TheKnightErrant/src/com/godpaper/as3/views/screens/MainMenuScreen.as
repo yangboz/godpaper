@@ -182,14 +182,14 @@ package com.godpaper.as3.views.screens
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function settingsButton_onRelease(button:Button):void
+		private function settingsButton_onRelease(event:Event):void
 		{
 //			this._onSettings.dispatch(this);
 			//Screen swither here.
 			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_SETTINGS);
 		}
 		//
-		private function singlePlayButton_onRelease(button:Button):void
+		private function singlePlayButton_onRelease(event:Event):void
 		{
 			//Register the play mode of game.
 			GameConfig.playMode = GameConfig.HUMAN_VS_COMPUTER;
@@ -197,7 +197,7 @@ package com.godpaper.as3.views.screens
 			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);
 		}
 		//
-		private function multiPlayButton_onRelease(button:Button):void
+		private function multiPlayButton_onRelease(event:Event):void
 		{
 			//Register the play mode of game.
 			GameConfig.playMode = GameConfig.HUMAN_VS_HUMAN;

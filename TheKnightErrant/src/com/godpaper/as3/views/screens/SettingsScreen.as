@@ -210,14 +210,14 @@ package com.godpaper.as3.views.screens
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function doneButton_onRelease(button:Button):void
+		private function doneButton_onRelease(event:Event):void
 		{
 			//TODO:update settings.
 			
 			//Screen swither here.
 			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);
 		}
-		private function backButton_onRelease(button:Button):void
+		private function backButton_onRelease(event:Event):void
 		{
 			//Screen swither here.
 			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);
