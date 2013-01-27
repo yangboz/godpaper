@@ -84,4 +84,6 @@ Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 
 19.Player.IO contest implementation.(Start)
 
-20.FlexMojo/Maven features.(Plan)
+20.FlexMojo/Maven features.(Pendding,pom.xml added)
+
+21.FullScreen features.(Plan)
