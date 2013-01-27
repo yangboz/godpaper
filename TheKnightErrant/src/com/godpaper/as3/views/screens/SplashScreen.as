@@ -220,8 +220,8 @@ package com.godpaper.as3.views.screens
 			mParticleSystem = mParticleSystems.shift();
 			mParticleSystems.push(mParticleSystem);
 			
-			mParticleSystem.emitterX = 320;
-			mParticleSystem.emitterY = 240;
+			mParticleSystem.emitterX = this.stage.stageWidth/2;
+			mParticleSystem.emitterY = this.stage.stageHeight;
 			mParticleSystem.start();
 			
 			addChild(mParticleSystem);

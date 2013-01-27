@@ -223,7 +223,7 @@ package com.godpaper.as3.views.screens
 			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);
 		}
 		//
-		private function picker_language_onChange(picker:PickerList):void
+		private function picker_language_onChange(event:Event):void
 		{
 			this.resourceManager.localeChain = [this._picker_language.selectedItem.locale];
 			FlexGlobals.userModel.locale = this._picker_language.selectedItem.locale;

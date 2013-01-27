@@ -31,8 +31,9 @@ package com.godpaper.as3.views.popups
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.lookbackon.AI.FSM.Message;
 	
-	import org.josht.starling.foxhole.controls.Label;
-	import org.josht.starling.foxhole.controls.Screen;
+	import feathers.controls.Label;
+	import feathers.controls.ProgressBar;
+	import feathers.controls.Screen;
 	
 	import starling.text.TextField;
 

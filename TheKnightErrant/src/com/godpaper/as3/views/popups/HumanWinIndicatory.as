@@ -212,7 +212,7 @@ package com.godpaper.as3.views.popups
 		{
 			//
 			GameConfig.gameStateManager.restart();
-			//increase intelligence level.
+			//increase artificial intelligence level.
 			GameConfig.gameStateManager.level++;
 			//AS3 signal to broad cast the chess check message.
 			FlexGlobals.levelUpSignal.dispatch(GameConfig.gameStateManager.level);
