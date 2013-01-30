@@ -65,12 +65,14 @@ package com.godpaper.chinese_chess_jam.business.managers
 				currentRemovedPieces.push(removedPiece);
 				//Checkmate condition
 //				if (ChessPiece(cGasket.getElementAt(0)).label == PiecesConstants_ChineseChessJam.BLUE_MARSHAL.label)
-				if (ChessPiece(cGasket.getChildAt(0)).label == PiecesConstants_ChineseChessJam.BLUE_MARSHAL.label)	
+//				if (ChessPiece(cGasket.getChildAt(0)).label == PiecesConstants_ChineseChessJam.BLUE_MARSHAL.label)	
+				if (removedPiece.label == PiecesConstants_ChineseChessJam.BLUE_MARSHAL.label)	
 				{
 					GameConfig.gameStateManager.humanWin();
 				}
 //				if (ChessPiece(cGasket.getElementAt(0)).label == PiecesConstants_ChineseChessJam.RED_MARSHAL.label)
-				if (ChessPiece(cGasket.getChildAt(0)).label == PiecesConstants_ChineseChessJam.RED_MARSHAL.label)	
+//				if (ChessPiece(cGasket.getChildAt(0)).label == PiecesConstants_ChineseChessJam.RED_MARSHAL.label)
+				if (removedPiece.label == PiecesConstants_ChineseChessJam.RED_MARSHAL.label)	
 				{
 					GameConfig.gameStateManager.computerWin();
 				}
