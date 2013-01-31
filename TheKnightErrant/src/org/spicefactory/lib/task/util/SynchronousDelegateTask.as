@@ -16,7 +16,7 @@
  
 package org.spicefactory.lib.task.util {
 import org.spicefactory.lib.task.Task;
-import org.spicefactory.lib.util.Delegate;
+import org.spicefactory.lib.task.util.Delegate;
 
 /**
  * Task implementation that wraps a synchronous Command. Useful if you need to add some kind

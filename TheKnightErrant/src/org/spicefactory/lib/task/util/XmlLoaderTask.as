@@ -1,21 +1,24 @@
 package org.spicefactory.lib.task.util {
+	import com.godpaper.as3.utils.LogUtil;
+	
 	import flash.events.ErrorEvent;
-import flash.events.Event;
-import flash.events.IOErrorEvent;
-import flash.events.SecurityErrorEvent;
-import flash.net.URLLoader;
-import flash.net.URLLoaderDataFormat;
-import flash.net.URLRequest;
-
-import org.spicefactory.lib.logging.LogContext;
-import org.spicefactory.lib.logging.Logger;
-import org.spicefactory.lib.task.ResultTask;
-import org.spicefactory.lib.task.enum.TaskState;
+	import flash.events.Event;
+	import flash.events.IOErrorEvent;
+	import flash.events.SecurityErrorEvent;
+	import flash.net.URLLoader;
+	import flash.net.URLLoaderDataFormat;
+	import flash.net.URLRequest;
+	
+	import mx.logging.ILogger;
+	
+	import org.spicefactory.lib.task.ResultTask;
+	import org.spicefactory.lib.task.enum.TaskState;
 
 public class XmlLoaderTask extends ResultTask {
 	
 	
-	private static const _log:Logger = LogContext.getLogger("org.spicefactory.parsley.loader.XmlLoaderTask");
+//	private static const _log:Logger = LogContext.getLogger("org.spicefactory.parsley.loader.XmlLoaderTask");
+	private static const _log:ILogger = LogUtil.getLogger(XmlLoaderTask);
 	
 	private var _filename:String;
 	private var _loader:URLLoader;
