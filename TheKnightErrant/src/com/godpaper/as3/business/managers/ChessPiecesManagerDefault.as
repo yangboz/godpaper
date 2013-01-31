@@ -355,6 +355,8 @@ package com.godpaper.as3.business.managers
 				var cGasket:ChessGasket= chessGaketsModel.gaskets.gett(piecee.position.x,piecee.position.y) as ChessGasket;
 				//cGasket.removeElementAt(0);
 				cGasket.chessPiece=null;
+				//Remove the chess pieces from game stage
+				FlexGlobals.gameStage.removeChild(piecee);
 			}
 			//finally trigger make move.
 			this.makeMove(conductVO);
