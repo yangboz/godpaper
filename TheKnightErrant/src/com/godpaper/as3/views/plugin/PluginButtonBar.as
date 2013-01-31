@@ -192,8 +192,10 @@ package com.godpaper.as3.views.plugin
 			this.y = h - this.height;
 		}
 		//
-		private function tabBarChangeHandler(tabBar:TabBar):void
+//		private function tabBarChangeHandler(tabBar:TabBar):void
+		private function tabBarChangeHandler(event:starling.events.Event):void
 		{
+			var tabBar:TabBar = event.target as TabBar;
 //			LOG.debug("change action:{0}",tabBar.selectedItem.action);
 			switch (tabBar.selectedItem.action)
 			{

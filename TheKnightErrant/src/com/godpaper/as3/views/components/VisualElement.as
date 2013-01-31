@@ -126,8 +126,6 @@ package com.godpaper.as3.views.components
 		//--------------------------------------------------------------------------
 		public function VisualElement(upState:Texture=null, label:String="", downState:Texture=null)
 		{
-			//uid creation.
-			this.uid = UIDUtil.createUID();
 			//Initialize the uid
 			this.uid = UIDUtil.createUID();
 			this.label = label;
