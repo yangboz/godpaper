@@ -1,5 +1,5 @@
 /**
- *  GODPAPER Confidential,Copyright 2012. All rights reserved.
+ *  GODPAPER Confidential,Copyright 2013. All rights reserved.
  *
  *  Permission is hereby granted, free of charge, to any person obtaining
  *  a copy of this software and associated documentation files (the "Software"),
@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.as3.plugins.platogo
+package com.godpaper.as3.plugins.playerIO
 {
 	//--------------------------------------------------------------------------
 	//
@@ -28,16 +28,16 @@ package com.godpaper.as3.plugins.platogo
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.plugins.IPlugData;
 	
-	import mx.utils.ObjectUtil;
+	
 	/**
-	 * PlatogoModel.as class.   	
+	 * PlayerIoModel.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Jun 25, 2012 1:58:32 PM
+	 * Created Jan 31, 2013 8:05:31 PM
 	 */   	 
-	public class PlatogoModel implements IPlugData
+	public class PlayerIoModel implements IPlugData
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -68,7 +68,7 @@ package com.godpaper.as3.plugins.platogo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PlatogoModel()
+		public function PlayerIoModel()
 		{
 			//TODO: implement function
 		}
@@ -113,7 +113,8 @@ package com.godpaper.as3.plugins.platogo
 		
 		public function toString():String
 		{
-			return ObjectUtil.toString(this);
+			//TODO: implement function
+			return null;
 		}     	
 		//--------------------------------------------------------------------------
 		//

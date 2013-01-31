@@ -43,6 +43,7 @@ package
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.PluginUIComponent;
 	import com.godpaper.as3.plugins.kongregate.KongregatePlugin;
+	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
 	import com.godpaper.as3.views.scenes.MainScene;
@@ -119,8 +120,9 @@ package
 		{
 //			return new MochiPlugin(PluginConfig.gameID,PluginConfig.boardID);
 //			return new NonobaPlugin();
-			return new KongregatePlugin();
+//			return new KongregatePlugin();
 //			return new PlatogoPlugin("1146511093");
+			return new PlayerIoPlugin("chinesechessjam-msf2zuz0suaip7yhtzpaa");
 		}
 
 		/**

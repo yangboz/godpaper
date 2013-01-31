@@ -45,7 +45,9 @@ package com.godpaper.as3.plugins.kongregate
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		//
+		private var _gameID:String="";
+		private var _boardID:String="";
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -74,24 +76,22 @@ package com.godpaper.as3.plugins.kongregate
 		
 		public function set gameID(value:String):void
 		{
-			//TODO: implement function
+			_gameID = value;
 		}
 		
 		public function get gameID():String
 		{
-			//TODO: implement function
-			return null;
+			return _gameID;
 		}
 		
 		public function set boardID(value:String):void
 		{
-			//TODO: implement function
+			_boardID = value;
 		}
 		
 		public function get boardID():String
 		{
-			//TODO: implement function
-			return null;
+			return _boardID;
 		}
 		
 		public function get hasCaptureIndicator():Boolean
