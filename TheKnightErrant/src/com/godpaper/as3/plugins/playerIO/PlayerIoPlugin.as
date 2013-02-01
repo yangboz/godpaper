@@ -32,6 +32,7 @@ package com.godpaper.as3.plugins.playerIO
 	import com.godpaper.as3.utils.LogUtil;
 	
 	import mx.logging.ILogger;
+	import mx.utils.UIDUtil;
 	
 	import playerio.Client;
 	import playerio.Connection;
@@ -92,12 +93,17 @@ package com.godpaper.as3.plugins.playerIO
 		
 		public function initialization():void
 		{
+			//User peerID initialization
+			var peerID:String = UIDUtil.createUID();
+			FlexGlobals.userModel.addUser(peerID);
+			FlexGlobals.userModel.registerRole(peerID,0,"GuestUser");//TODO:the username should comes from user input.
+			var username:String = FlexGlobals.userModel.getUserRoleName(peerID);
 			//
 			PlayerIO.connect(
 				FlexGlobals.topLevelApplication.stage,								//Referance to stage
 				data.gameID,			//Game id (Get your own at playerio.com)
 				"public",							//Connection id, default is public
-				"GuestUser",						//Username
+				username,						//Username
 				"",									//User auth. Can be left blank if authentication is disabled on connection
 				null,								//Current PartnerPay partner.
 				handleConnect,						//Function executed on successful connect
