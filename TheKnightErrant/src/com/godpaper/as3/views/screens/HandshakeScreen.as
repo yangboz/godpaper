@@ -382,7 +382,7 @@ package com.godpaper.as3.views.screens
 			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);//Screen swither here.
 		}
 		//
-		private function backButton_onRelease(button:Button):void
+		private function backButton_onRelease(event:Event):void
 		{
 			//Screen swither here.
 			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);

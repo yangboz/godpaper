@@ -50,6 +50,10 @@ package
 	import com.godpaper.tic_tac_toe.busniess.factory.ChessFactory_TicTacToe;
 	import com.godpaper.tic_tac_toe.busniess.managers.ChessPiecesManager_TicTacToe;
 	
+	import feathers.controls.popups.CalloutPopUpContentManager;
+	import feathers.controls.popups.VerticalCenteredPopUpContentManager;
+	import feathers.system.DeviceCapabilities;
+	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
@@ -200,6 +204,7 @@ package
 			//@see: http://wiki.starling-framework.org/manual/multi-resolution_development
 //			LOG.debug("Starling contentScaleFactor:{0}",mStarling.contentScaleFactor);
 			var isPad:Boolean=(screenWidth >= 768 || screenWidth >= 1536);
+//			var isPad:Boolean = DeviceCapabilities.isTablet(Starling.current.nativeStage);
 //			mStarling.stage.stageWidth  = isPad ? 384 : 320;
 //			mStarling.stage.stageHeight = isPad ? 512 : 480;
 			var scaleWidthRate:Number=isPad ? 384 / 320 : 1;
@@ -216,11 +221,23 @@ package
 //			mStarling.stage3D.addEventListener(starling.events.Event.ROOT_CREATED, rootCreatedHandler);
 			// signals initialization.
 
-			// turn to framework's workflow
+			// Turn to framework's workflow
 			initializeHandler();
 			// Stats display
 //			var stats:Stats = new Stats();
 //			this.addChild(stats);
+			// Popup manager initialization
+			if(!FlexGlobals.popupContentManager)
+			{
+				if(DeviceCapabilities.isTablet(Starling.current.nativeStage))
+				{
+					FlexGlobals.popupContentManager = new CalloutPopUpContentManager();
+				}
+				else
+				{
+					FlexGlobals.popupContentManager = new VerticalCenteredPopUpContentManager();
+				}
+			}
 		}
 
 		//

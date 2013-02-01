@@ -34,6 +34,7 @@ package com.godpaper.as3.core
 	
 	import feathers.controls.Screen;
 	import feathers.controls.ScreenNavigator;
+	import feathers.controls.popups.IPopUpContentManager;
 	
 	import org.osflash.signals.Signal;
 	
@@ -78,6 +79,8 @@ package com.godpaper.as3.core
 		public static var gameStage:Stage;//The stage of game.
 		public static var bluePiecesBox:PiecesBox;//The pieces box(blue).
 		public static var redPiecesBox:PiecesBox;//The pieces box(red).
+		////pop-up views manager
+		public static var popupContentManager:IPopUpContentManager;
 		//Models.
 		public static var chessPiecesModel:ChessPiecesModel = SingletonFactory.produce(ChessPiecesModel);
 		public static var chessGasketsModel:ChessGasketsModel = SingletonFactory.produce(ChessGasketsModel);
