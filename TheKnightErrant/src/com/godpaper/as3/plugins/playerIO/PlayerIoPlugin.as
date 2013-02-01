@@ -46,6 +46,8 @@ package com.godpaper.as3.plugins.playerIO
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Jan 31, 2013 8:06:03 PM
+	 * @see http://playerio.com/documentation/gettingstarted/flashcombopackage
+	 * @see http://playerio.com/documentation/reference/actionscript3
 	 */   	 
 	public class PlayerIoPlugin implements IPlug
 	{		
