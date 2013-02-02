@@ -1,7 +1,6 @@
 package com.lookbackon.ds.aStar
 {
 	import com.lookbackon.ds.AStarNodeBoard;
-	import com.lookbackon.ds.BitBoard;
 	
 	import org.generalrelativity.thread.process.AbstractProcess;
 

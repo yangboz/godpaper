@@ -46,6 +46,7 @@ package
 	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
+	import com.godpaper.as3.views.popups.HumanWinIndicatory;
 	import com.godpaper.as3.views.scenes.MainScene;
 	import com.godpaper.tic_tac_toe.busniess.factory.ChessFactory_TicTacToe;
 	import com.godpaper.tic_tac_toe.busniess.managers.ChessPiecesManager_TicTacToe;
@@ -283,6 +284,8 @@ package
 			this.pluginUIComponent=new PluginUIComponent();
 //			this.pluginUIComponent.provider = this.pluginProvider;With default plugin provider
 			this.addChild(this.pluginUIComponent);
+			//
+//			FlexGlobals.popupContentManager.open(new HumanWinIndicatory(),mStarling.stage);
 		}
 
 		//
