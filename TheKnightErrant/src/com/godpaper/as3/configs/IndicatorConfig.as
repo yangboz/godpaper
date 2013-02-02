@@ -125,6 +125,7 @@ package com.godpaper.as3.configs
 //				PopUpManager.addPopUp(humanWinIndicatory,true,true,customOverLay);
 				PopUpManager.addPopUp(humanWinIndicatory,true,true);
 				PopUpManager.centerPopUp(humanWinIndicatory);
+//				FlexGlobals.popupContentManager.open(humanWinIndicatory,FlexGlobals.gameStage);
 			}else
 			{
 				//				_callout.close();

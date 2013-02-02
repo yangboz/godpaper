@@ -1,6 +1,5 @@
 package com.lookbackon.AI.ANN
 {
-	import mx.collections.ArrayCollection;
 
 	public class NeuralNetWork
 	{
@@ -26,12 +25,12 @@ package com.lookbackon.AI.ANN
 		/// An INPUT represented as double [,] inputDataArray = new Double [,]
 		/// {{0.20, 0.80}, {0.80, 0.4}} would represent 2 training instances
 		/// for an INPUT LAYER with 2 NEURONS or CELLS
-		public var input_data:ArrayCollection;
+		public var input_data:Array;
 		/// A two dimensional array of output data from a training sample
 		/// An OUTPUT represented as double [,] outputDataArray = new Double [,]
 		/// {{0}, {1}} would represent 2 training instances
 		/// for an OUTPUT LAYER with 1 NEURON or CELL
-		public var output_data:ArrayCollection;
+		public var output_data:Array;
 		/// A collection of neurons representing the input layer
 		private var inputNeurons:Neurons;
 		/// A collection of neurons representing the hidden layer
@@ -64,7 +63,7 @@ package com.lookbackon.AI.ANN
 		//----------------------------------
 		//  initialize(native)
 		//----------------------------------
-		public function initialize(inputData:ArrayCollection,outputData:ArrayCollection,hidden_layer_count:int):void
+		public function initialize(inputData:Array,outputData:Array,hidden_layer_count:int):void
 		{
 			this.input_data = inputData;
 			input_count = (this.input_data.length+1);//
@@ -120,17 +119,17 @@ package com.lookbackon.AI.ANN
 			trace("input_data.length:",input_data.length);
 			for(var i:int=0;i<inputNeurons.length;i++)
 			{
-				ci = inputNeurons.gett(i);
-				ci.input = this.input_data.getItemAt(sampleNumer)[i];
+				ci = inputNeurons.getItemAt(i);
+				ci.input = this.input_data[sampleNumer][i];
 			}
 			//feedforward from input to hidden Neurons
 			for(var h:int=0;h<hiddenNeurons.length;h++)
 			{
 				total = 0.0;
-				ch = hiddenNeurons[h];
+				ch = hiddenNeurons.getItemAt(h);
 				for(var j:int=0;j<inputNeurons.length;j++)
 				{
-					ci = inputNeurons[j];
+					ci = inputNeurons.getItemAt(j);
 					total += ci.output*ci.weight[j];
 				}
 				ch.input = total+ch.bias;
@@ -141,10 +140,10 @@ package com.lookbackon.AI.ANN
 				total = 0.0;
 				co = outputNeurons.getItemAt(o) as Neuron;
 				//feed the expected training result to the output Neurons layer
-				co.outputTraning = this.output_data.getItemAt(sampleNumer)[o];
+				co.outputTraning = this.output_data[sampleNumer][o];
 				for(var k:int=0;k<hiddenNeurons.length;k++)
 				{
-					ch = hiddenNeurons[k];
+					ch = hiddenNeurons.getItemAt(k);
 					total += ch.output*co.weight[k];
 				}
 				co.input = total+co.bias;
@@ -167,17 +166,17 @@ package com.lookbackon.AI.ANN
 			//calculate error rate for Output layer
 			for(var o:int;o<outputNeurons.length;o++)
 			{
-				co = outputNeurons[o];
+				co = outputNeurons.getItemAt(o);
 				co.error = co.logisticFunctionDerivative(co.output)*(co.outputTraning-co.output);
 			}
 			//error from output to hidden layer
 			for(var h:int=0;h<hiddenNeurons.length;h++)
 			{
 				total = 0.0;
-				ch = hiddenNeurons[h];
+				ch = hiddenNeurons.getItemAt(h);
 				for(var ho:int;ho<outputNeurons.length;ho++)
 				{
-					co = outputNeurons[ho];
+					co = outputNeurons.getItemAt(ho);
 					total += co.error*co.weight[ho];
 				}
 				ch.error = ch.logisticFunction(co.output)*total;
@@ -186,10 +185,10 @@ package com.lookbackon.AI.ANN
 			//from output Neurons to hidden Neurons
 			for(var oo:int=0;oo<outputNeurons.length;oo++)
 			{
-				co = outputNeurons[oo];
+				co = outputNeurons.getItemAt(oo);
 				for(var hh:int=0;hh<hiddenNeurons.length;hh++)
 				{
-					ch = hiddenNeurons[hh];
+					ch = hiddenNeurons.getItemAt(hh);
 					co.weight[hh] += this.learning_rate*co.error*co.output;
 				}
 				co.bias += this.learning_rate*co.error;
@@ -198,10 +197,10 @@ package com.lookbackon.AI.ANN
 			//from hidden Neurons to input Neurons
 			for(var hhh:int=0;hhh<hiddenNeurons.length;hhh++)
 			{
-				ch = hiddenNeurons[hhh];
+				ch = hiddenNeurons.getItemAt(hhh);
 				for(var i:int=0;i<inputNeurons.length;i++)
 				{
-					ci = inputNeurons[i];
+					ci = inputNeurons.getItemAt(i);
 					ch.weight[i] += this.learning_rate*ch.error*ci.output;
 				}
 				ch.bias += this.learning_rate*ch.error;
