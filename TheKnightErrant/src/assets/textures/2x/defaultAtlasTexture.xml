@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:9f00900aa4928134d5bc23a29e19d565$ -->
+<!-- $TexturePacker:SmartUpdate:e8b088ab174c3337cf569e3ce139ed3f$ -->
 <TextureAtlas imagePath="defaultAtlasTexture.png">
     <SubTexture name="BLUE" x="2" y="2" width="71" height="59"/>
     <SubTexture name="BLUE_JEWEL" x="75" y="2" width="1" height="1"/>
@@ -19,8 +19,11 @@
     <SubTexture name="RED_JEWEL" x="75" y="2" width="1" height="1"/>
     <SubTexture name="RED_ROCK" x="177" y="208" width="100" height="71"/>
     <SubTexture name="RED_STAR" x="279" y="208" width="100" height="83"/>
+    <SubTexture name="TABLE" x="381" y="208" width="89" height="66"/>
     <SubTexture name="YELLOW_JEWEL" x="75" y="2" width="1" height="1"/>
-    <SubTexture name="en_US" x="381" y="208" width="34" height="18"/>
-    <SubTexture name="ko_KR" x="417" y="208" width="34" height="18"/>
-    <SubTexture name="zh_CN" x="453" y="208" width="34" height="18"/>
+    <SubTexture name="en_US" x="472" y="208" width="34" height="18"/>
+    <SubTexture name="ko_KR" x="2" y="308" width="34" height="18"/>
+    <SubTexture name="normal-page-symbol" x="38" y="308" width="12" height="12"/>
+    <SubTexture name="selected-page-symbol" x="52" y="308" width="12" height="12"/>
+    <SubTexture name="zh_CN" x="66" y="308" width="34" height="18"/>
 </TextureAtlas>
