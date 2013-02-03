@@ -90,6 +90,7 @@ package com.godpaper.as3.consts
 		public static const SCREEN_GAME:String = "screen_game";
 		public static const SCREEN_HANDSHAKE:String = "screen_handshake";
 		public static const SCREEN_SETTINGS:String = "screen_settings";
+		public static const SCREEN_LOBBY:String = "screen_lobby";
 		//Chess board type
 		public static const CHESS_BOARD_TYPE_INTERSECTION:String = "ChessBoardType::intersection";//point of intersection
 		public static const CHESS_BOARD_TYPE_CHECKERING:String = "ChessBoardType::checkering";//mark into squares or draw squares on; draw crossed lines on

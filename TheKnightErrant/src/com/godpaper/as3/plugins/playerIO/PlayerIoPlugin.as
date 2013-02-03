@@ -165,7 +165,7 @@ package com.godpaper.as3.plugins.playerIO
 		//--------------------------------------------------------------------------
 	
 		private function handleConnect(client:Client):void{
-			trace("Sucessfully connected to player.io");
+			LOG.info("Sucessfully connected to player.io");
 			
 			//Set developmentsever (Comment out to connect to your server online)
 //			client.multiplayer.developmentServer = "localhost:8184";
@@ -184,7 +184,7 @@ package com.godpaper.as3.plugins.playerIO
 		
 		
 		private function handleJoin(connection:Connection):void{
-			trace("Sucessfully connected to the multiplayer server");
+			LOG.info("Sucessfully connected to the multiplayer server");
 //TODO:			gotoAndStop(2);
 			
 			//Add disconnect listener
@@ -192,34 +192,34 @@ package com.godpaper.as3.plugins.playerIO
 			
 			//Add listener for messages of the type "hello"
 			connection.addMessageHandler("hello", function(m:Message):void{
-				trace("Recived a message with the type hello from the server");			 
+				LOG.info("Recived a message with the type hello from the server");			 
 			})
 			
 			//Add message listener for users joining the room
 			connection.addMessageHandler("UserJoined", function(m:Message, userid:uint):void{
-				trace("Player with the userid", userid, "just joined the room");
+				LOG.info("Player with the userid", userid, "just joined the room");
 			})
 			
 			//Add message listener for users leaving the room
 			connection.addMessageHandler("UserLeft", function(m:Message, userid:uint):void{
-				trace("Player with the userid", userid, "just left the room");
+				LOG.info("Player with the userid", userid, "just left the room");
 			})
 			
 			//Listen to all messages using a private function
-			connection.addMessageHandler("*", handleMessages)
+			connection.addMessageHandler("*", handleMessages);
 			
 		}
 		
 		private function handleMessages(m:Message):void{
-			trace("Recived the message", m)
+			LOG.info("Recived the message", m);
 		}
 		
 		private function handleDisconnect():void{
-			trace("Disconnected from server")
+			LOG.info("Disconnected from server");
 		}
 		
 		private function handleError(error:PlayerIOError):void{
-			trace("got",error)
+			LOG.info("Connection error:{0}",String(error.message));
 //TODO:			gotoAndStop(3);
 			
 		}

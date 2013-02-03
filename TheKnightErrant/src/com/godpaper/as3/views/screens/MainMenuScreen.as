@@ -201,8 +201,17 @@ package com.godpaper.as3.views.screens
 		{
 			//Register the play mode of game.
 			GameConfig.playMode = GameConfig.HUMAN_VS_HUMAN;
+			var isUDPsupport:Boolean = false;//TODO:should dynamic check the UDP based p2p functionality.
 			//Screen swither here.
-			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_HANDSHAKE);
+			if(isUDPsupport)
+			{
+				FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_HANDSHAKE);
+			}else//Using public sever mechanism.
+			{
+				FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_LOBBY);
+				//Plugin initialization here.
+				FlexGlobals.topLevelApplication.pluginProvider.initialization();
+			}
 //			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);
 		}
 	}

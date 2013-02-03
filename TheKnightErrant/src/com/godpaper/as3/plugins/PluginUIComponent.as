@@ -132,7 +132,7 @@ package com.godpaper.as3.plugins
 //			var implementation:Object=getDefinitionByName(className);
 //			var _curentPlugin:* = new implementation();
 			//plugin template functions defined here.
-			provider.initialization();
+//			provider.initialization();//Trigger has moved to Mulitiplay game button.
 			//
 			FlexGlobals.topLevelApplication.pluginStage.removeEventListener(Event.ADDED_TO_STAGE,pluginStageClipOnStage);
 		}

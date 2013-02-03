@@ -28,6 +28,7 @@ package com.godpaper.as3.views.scenes
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.screens.GameScreen;
 	import com.godpaper.as3.views.screens.HandshakeScreen;
+	import com.godpaper.as3.views.screens.LobbyScreen;
 	import com.godpaper.as3.views.screens.MainMenuScreen;
 	import com.godpaper.as3.views.screens.SettingsScreen;
 	import com.godpaper.as3.views.screens.SplashScreen;
@@ -36,8 +37,8 @@ package com.godpaper.as3.views.scenes
 	import feathers.controls.ScreenNavigator;
 	import feathers.controls.ScreenNavigatorItem;
 	import feathers.motion.transitions.ScreenSlidingStackTransitionManager;
-	import feathers.themes.AzureTheme;
 	import feathers.skins.IFeathersTheme;
+	import feathers.themes.AzureTheme;
 	import feathers.themes.MinimalTheme;
 	
 	import flash.ui.Mouse;
@@ -131,6 +132,7 @@ package com.godpaper.as3.views.scenes
 			this._navigator.addScreen(DefaultConstants.SCREEN_HANDSHAKE, new ScreenNavigatorItem(HandshakeScreen));
 			this._navigator.addScreen(DefaultConstants.SCREEN_GAME, new ScreenNavigatorItem(GameScreen));
 			this._navigator.addScreen(DefaultConstants.SCREEN_SETTINGS, new ScreenNavigatorItem(SettingsScreen));
+			this._navigator.addScreen(DefaultConstants.SCREEN_LOBBY, new ScreenNavigatorItem(LobbyScreen));
 			
 			//Store the navigator ref to FlexGlobals.
 			FlexGlobals.screenNavigator = this._navigator;
