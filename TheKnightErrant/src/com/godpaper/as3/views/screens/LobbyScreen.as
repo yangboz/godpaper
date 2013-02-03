@@ -288,8 +288,6 @@ package com.godpaper.as3.views.screens
 			this.anewGameIndicatory = new AnewGameIndicatory();
 			PopUpManager.addPopUp(anewGameIndicatory,true,true);
 			PopUpManager.centerPopUp(anewGameIndicatory);
-			//TODO:Signal_registed for removing pop-up
-//			FlexGlobals.userModel.signal_registed.addOnce(onRegisted);
 		}
 		private function backButton_onRelease(event:Event):void
 		{

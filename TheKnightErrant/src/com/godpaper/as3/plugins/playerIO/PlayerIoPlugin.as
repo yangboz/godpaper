@@ -58,6 +58,8 @@ package com.godpaper.as3.plugins.playerIO
 		//
 		//--------------------------------------------------------------------------
 		private var _model:PlayerIoModel;
+		//
+		private var client:Client;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -149,7 +151,17 @@ package com.godpaper.as3.plugins.playerIO
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		public function createJoinRoom(name:String):void
+		{
+			this.client.multiplayer.createJoinRoom(
+				null,								//Room id, null for auto generted
+				"ApplicationBase",							//RoomType to create, bounce is a simple bounce server
+				true,								//Hide room from userlist
+				{name:name},						//Room Join data, data is returned to lobby list. Variabels can be modifed on the server
+				handleJoin,							//Create handler
+				handleError					//Error handler	
+			);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -167,17 +179,17 @@ package com.godpaper.as3.plugins.playerIO
 			
 			//Set developmentsever (Comment out to connect to your server online)
 //			client.multiplayer.developmentServer = "localhost:8184";
-			
+			this.client = client;
 			//Create pr join the room test
-			client.multiplayer.createJoinRoom(
-				"test",								//Room id. If set to null a random roomid is used
-				"MyCode",							//The game type started on the server
-				true,								//Should the room be visible in the lobby?
-				{},									//Room data. This data is returned to lobby list. Variabels can be modifed on the server
-				{},									//User join data
-				handleJoin,							//Function executed on successful joining of the room
-				handleError							//Function executed if we got a join error
-			);
+//			client.multiplayer.createJoinRoom(
+//				"test",								//Room id. If set to null a random roomid is used
+//				"MyCode",							//The game type started on the server
+//				true,								//Should the room be visible in the lobby?
+//				{},									//Room data. This data is returned to lobby list. Variabels can be modifed on the server
+//				{},									//User join data
+//				handleJoin,							//Function executed on successful joining of the room
+//				handleError							//Function executed if we got a join error
+//			);
 		}
 		
 		
@@ -195,21 +207,29 @@ package com.godpaper.as3.plugins.playerIO
 			
 			//Add message listener for users joining the room
 			connection.addMessageHandler("UserJoined", function(m:Message, userid:uint):void{
-				LOG.info("Player with the userid", userid, "just joined the room");
+				LOG.info("Player with the userid {0}", userid, ",just joined the room");
+				//
+				FlexGlobals.userModel.addUser(userid.toString());
 			})
 			
 			//Add message listener for users leaving the room
 			connection.addMessageHandler("UserLeft", function(m:Message, userid:uint):void{
-				LOG.info("Player with the userid", userid, "just left the room");
+				LOG.info("Player with the userid {0}", userid, ",just left the room");
+				//
+				FlexGlobals.userModel.removeUser(userid.toString());
 			})
 			
 			//Listen to all messages using a private function
 			connection.addMessageHandler("*", handleMessages);
 			
+			//Listen to player joining.
+			connection.addMessageHandler("join", function(m:Message, p1name:String, p2name:String):void{
+				LOG.info("Player joined in as {0} and {1}", p1name,p2name);
+			})
 		}
 		
 		private function handleMessages(m:Message):void{
-			LOG.info("Recived the message", m);
+			LOG.info("Recived the message {0}", m);
 		}
 		
 		private function handleDisconnect():void{

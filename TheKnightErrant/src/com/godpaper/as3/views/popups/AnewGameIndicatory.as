@@ -23,6 +23,7 @@ package com.godpaper.as3.views.popups
 {
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	
 	import feathers.controls.Button;
 	import feathers.controls.ScrollContainer;
@@ -116,6 +117,8 @@ package com.godpaper.as3.views.popups
 			//text inputs
 			this._nameInput = new TextInput();
 			this._nameInput.height = 25;
+			this._nameInput.width = 125;
+			this._nameInput.text = "Amazing chess board game!";
 			this._inputsContainer.addChild(this._nameInput);
 			//buttons 
 			this._cancelBtn = new Button();
@@ -152,7 +155,13 @@ package com.godpaper.as3.views.popups
 		//
 		private function createButtonOnRelease(event:Event):void
 		{
-			//TODO:set up a new game here.
+			//Set up a new game room here.
+			var playerIoPlugin:PlayerIoPlugin = (FlexGlobals.topLevelApplication.pluginProvider as PlayerIoPlugin);
+			if( playerIoPlugin )
+			{
+				playerIoPlugin.createJoinRoom(this._nameInput.text);
+			}
+			
 		}
 	}
 	
