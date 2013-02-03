@@ -41,7 +41,8 @@ package com.godpaper.as3.views.popups
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 	
-	
+	import mx.resources.IResourceManager;
+	import mx.resources.ResourceManager;
 	/**
 	 * IndicatoryBase.as class.The base class of all indicatory with popup behavior.   	
 	 * @author yangboz
@@ -62,6 +63,8 @@ package com.godpaper.as3.views.popups
 		protected var _header:Header;
 		protected var _container:ScrollContainer;
 		protected var _bgQuad:Quad;
+		//Locale
+		protected var resourceManager:IResourceManager = ResourceManager.getInstance();
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

@@ -94,16 +94,14 @@ package com.godpaper.as3.plugins.playerIO
 		public function initialization():void
 		{
 			//User peerID initialization
-			var peerID:String = UIDUtil.createUID();
-			FlexGlobals.userModel.addUser(peerID);
-//			FlexGlobals.userModel.registerRole(peerID,0,"GuestUser");//TODO:the username should comes from user input.
+			var peerID:String = FlexGlobals.userModel.hosterPeerId;//Default get hoster peerID.
 			var username:String = FlexGlobals.userModel.getUserRoleName(peerID);
 			//
 			PlayerIO.connect(
 				FlexGlobals.topLevelApplication.stage,								//Referance to stage
 				data.gameID,			//Game id (Get your own at playerio.com)
-				peerID,							//Connection id, default is public
-				"GuestUser",						//Username
+				"public",							//Connection id, default is public
+				username,						//Username
 				"",									//User auth. Can be left blank if authentication is disabled on connection
 				null,								//Current PartnerPay partner.
 				handleConnect,						//Function executed on successful connect

@@ -209,8 +209,6 @@ package com.godpaper.as3.views.screens
 			}else//Using public sever mechanism.
 			{
 				FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_LOBBY);
-				//Plugin initialization here.
-				FlexGlobals.topLevelApplication.pluginProvider.initialization();
 			}
 //			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);
 		}

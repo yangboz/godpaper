@@ -1,5 +1,5 @@
 /**
- *  GODPAPER Confidential,Copyright 2012. All rights reserved.
+ *  GODPAPER Confidential,Copyright 2013. All rights reserved.
  *
  *  Permission is hereby granted, free of charge, to any person obtaining
  *  a copy of this software and associated documentation files (the "Software"),
@@ -21,51 +21,42 @@
  */
 package com.godpaper.as3.views.popups
 {
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.FlexGlobals;
+	
+	import feathers.controls.Button;
+	import feathers.controls.ScrollContainer;
+	import feathers.controls.TextInput;
+	
+	import mx.utils.UIDUtil;
+	
+	import starling.events.Event;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.configs.IndicatorConfig;
-	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.core.FlexGlobals;
-	import com.godpaper.as3.plugins.IPlug;
-	
-	import feathers.controls.Button;
-	import feathers.controls.Header;
-	import feathers.controls.Screen;
-	import feathers.controls.ScrollContainer;
-	import feathers.controls.Scroller;
-	import feathers.controls.TextInput;
-	import feathers.layout.HorizontalLayout;
-	import feathers.layout.VerticalLayout;
-	
-	import starling.display.DisplayObject;
-	import starling.events.Event;
-	
 	
 	/**
-	 * Callout/popup view component that indicated the human win status.</br>  
+	 * EnterUpIndicatory.as class.To register player's name before enter up to lobby screen.</br>
 	 * Example skelton as follows:</br>	
 	 * -----------------------------------</br>
-	 * ------------You Win!!!-------------</br>
+	 * --------What's your name?----------</br>
 	 * -----------------------------------</br>
 	 * -----------------------------------</br>
 	 * ------------TextInput--------------</br>
 	 * -----------------------------------</br>
-	 * ------------TextInput--------------</br>
 	 * -----------------------------------</br>
-	 * -----------------------------------</br>
-	 * -------SUBMIT---------NEXT---------</br>
+	 * ------------Join Game--------------</br>
 	 * -----------------------------------</br>
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Jun 20, 2012 4:23:56 PM
+	 * Created Feb 3, 2013 3:31:00 PM
 	 */   	 
-	public class HumanWinIndicatory extends IndicatoryBase
+	public class EnterUpIndicatory extends IndicatoryBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -73,11 +64,9 @@ package com.godpaper.as3.views.popups
 		//
 		//--------------------------------------------------------------------------
 		private var _nameInput:TextInput;
-		private var _scoreInput:TextInput;
 		private var _inputsContainer:ScrollContainer;
 		private var _buttonsContainer:ScrollContainer;//submit,next button 
-		private var _submitBtn:Button;//submit score button.
-		private var _nextBtn:Button;//next round button.
+		private var _joinBtn:Button;//join gamebutton.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -99,7 +88,7 @@ package com.godpaper.as3.views.popups
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function HumanWinIndicatory()
+		public function EnterUpIndicatory()
 		{
 			super();
 		}     	
@@ -127,34 +116,16 @@ package com.godpaper.as3.views.popups
 			//text inputs
 			this._nameInput = new TextInput();
 			this._nameInput.height = 25;
-			this._scoreInput = new TextInput();
-			this._scoreInput.height = 25;
-			this._scoreInput.text = this.currentScore.toString();
-			this._scoreInput.isEnabled = false;
 			this._inputsContainer.addChild(this._nameInput);
-			this._inputsContainer.addChild(this._scoreInput);
 			//buttons 
-			this._submitBtn = new Button();
-			this._submitBtn.label = "SUBMIT";
-			this._buttonsContainer.addChild(this._submitBtn);
-			this._nextBtn = new Button();
-			this._nextBtn.label = "NEXT";
-			this._nextBtn.isEnabled = this.hasNextRound;
-			this._buttonsContainer.addChild(this._nextBtn);
+			this._joinBtn = new Button();
+			this._joinBtn.label = "JOIN GAME";
+			this._buttonsContainer.addChild(this._joinBtn);
 			//event listener
-//			this._submitBtn.onRelease.add(submitButtonOnRelease);
-			this._submitBtn.addEventListener(starling.events.Event.TRIGGERED,submitButtonOnRelease);
-//			this._nextBtn.onRelease.add(nextButtonOnRelease);
-			this._nextBtn.addEventListener(starling.events.Event.TRIGGERED,nextButtonOnRelease);
-			//Default iPlug trigger.
-			iPlug.saveData({"boardID": null});
-			//				MochiScores.setBoardID(PluginConfig.mochiBoardID);
-//			this._header.rightItems = new <DisplayObject>
-//				[
-//					this._nextBtn
-//				];
+			//			this._submitBtn.onRelease.add(submitButtonOnRelease);
+			this._joinBtn.addEventListener(starling.events.Event.TRIGGERED,joinButtonOnRelease);
 			//
-			this._header.title = DefaultConstants.INDICATION_HUMAN_WIN;
+			this._header.title = DefaultConstants.INDICATION_NAME_PROMPT;
 			this.width = 200;
 			this.height = 200;
 		}
@@ -163,61 +134,22 @@ package com.godpaper.as3.views.popups
 		{
 			super.draw();
 		}
-		//
-		protected function get currentScore():int
-		{
-			return (GameConfig.tollgates[GameConfig.gameStateManager.level].score);
-		}
 		
-		//
-		protected function get hasNextRound():Boolean
-		{
-			return GameConfig.gameStateManager.level < GameConfig.tollgates.length-1;
-		}
-		
-		//
-		protected function get iPlug():IPlug
-		{
-			return IPlug(FlexGlobals.topLevelApplication.pluginUIComponent.provider);
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 		//
-		private function submitButtonOnRelease(event:Event):void
+		private function joinButtonOnRelease(event:Event):void
 		{
-			//
-			iPlug.submitData(Number(_scoreInput.text));
-			//				mochiModel.score.addValue(Number(scoreTextInput.text));
-			//
-			iPlug.showLeaderboard(
-				{
-					score: Number(_scoreInput.text),
-					name: _nameInput.text
-				}
-			);
-			//				MochiScores.showLeaderboard(
-			//					{   res: FlexGlobals.topLevelApplication.width.toString().concat(
-			//						"x",FlexGlobals.topLevelApplication.height), 
-			//						clip: FlexGlobals.topLevelApplication._mochiClip, 
-			//						score: mochiModel.score.value,
-			//						name: nameTextInput.text
-			//					}
-			//					);
-			//
-			GameConfig.gameStateManager.restart();
-		}
-		//
-		private function nextButtonOnRelease(event:Event):void
-		{
-			//
-			GameConfig.gameStateManager.restart();
-			//increase artificial intelligence level.
-			GameConfig.gameStateManager.level++;
-			//AS3 signal to broad cast the chess check message.
-			FlexGlobals.levelUpSignal.dispatch(GameConfig.gameStateManager.level);
+			//Register player role name
+			var peerID:String = UIDUtil.createUID();
+			FlexGlobals.userModel.addUser(peerID);
+			FlexGlobals.userModel.hosterPeerId = peerID;//Default role is hoster.
+			FlexGlobals.userModel.registerRole(peerID,0,this._nameInput.text);
+			//Enter up to game server by plugin initialization.
+			FlexGlobals.topLevelApplication.pluginProvider.initialization();
 		}
 	}
 	
