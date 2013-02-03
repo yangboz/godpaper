@@ -25,12 +25,14 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.as3.views.popups.LoadingIndicatory;
 	
 	import feathers.controls.Label;
 	import feathers.controls.ProgressBar;
 	import feathers.controls.Screen;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.Scroller;
+	import feathers.core.PopUpManager;
 	import feathers.layout.VerticalLayout;
 	
 	import flash.ui.Keyboard;
@@ -176,7 +178,6 @@ package com.godpaper.as3.views.screens
 //				FlexGlobals.screenNavigator.showScreen((DefaultConstants.SCREEN_GAME));//Screen swither here.
 				FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);//Screen swither here.
 			};
-			
 		}
 		//
 		override protected function draw():void

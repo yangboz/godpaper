@@ -51,7 +51,7 @@ package com.godpaper.as3.configs
 		public static var includeMemory:Boolean = true;
 		public static var fieldSeparator:String = "->";
 //		public static var filters:Array = ["com.lookbackon.AI.searching.RandomWalk"];
-		public static var filters:Array = [];
+		public static var filters:Array = ["*"];
 		public static var level:int = LogEventLevel.INFO;
 		//----------------------------------
 		//  CONSTANTS

@@ -132,7 +132,6 @@ package com.godpaper.as3.views.screens
 			
 			this._list.width = this.stage.stageWidth;
 			this._list.height = this._pageIndicator.y;
-			this._list.y = this._header.height;
 			this._list.validate();
 			
 			this._pageIndicator.pageCount = Math.ceil(this._list.maxHorizontalScrollPosition / this._list.width) + 1;

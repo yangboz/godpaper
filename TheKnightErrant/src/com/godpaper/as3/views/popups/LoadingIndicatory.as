@@ -1,5 +1,5 @@
 /**
- *  GODPAPER Confidential,Copyright 2012. All rights reserved.
+ *  GODPAPER Confidential,Copyright 2013. All rights reserved.
  *
  *  Permission is hereby granted, free of charge, to any person obtaining
  *  a copy of this software and associated documentation files (the "Software"),
@@ -21,63 +21,55 @@
  */
 package com.godpaper.as3.views.popups
 {
+	import feathers.controls.ProgressBar;
+	import feathers.controls.ScrollContainer;
+	import feathers.layout.VerticalLayout;
+	
+	import starling.animation.Transitions;
+	import starling.animation.Tween;
+	import starling.core.Starling;
+	import starling.events.Event;
+	import starling.text.TextField;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.consts.DefaultConstants;
-	import com.godpaper.as3.core.FlexGlobals;
-	
-	import feathers.controls.Header;
-	import feathers.controls.Screen;
-	import feathers.controls.ScrollContainer;
-	import feathers.controls.Scroller;
-	import feathers.layout.HorizontalLayout;
-	import feathers.layout.VerticalLayout;
-	
-	import starling.display.BlendMode;
-	import starling.display.Quad;
-	import starling.textures.Texture;
-	import starling.textures.TextureAtlas;
-	
-	import mx.resources.IResourceManager;
-	import mx.resources.ResourceManager;
+	//event metdata declare
+	/** Dispatched when a new progress bar loading complete. */
+	[Event(type="starling.events.Event",name="loading_complete")]
 	/**
-	 * IndicatoryBase.as class.The base class of all indicatory with popup behavior.   	
+	 * LoadingIndicatory.as class.Pop-up view triggered by progressing signal.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Aug 23, 2012 5:17:27 PM
+	 * Created Feb 3, 2013 9:37:53 PM
 	 */   	 
-	public class IndicatoryBase extends Screen
+	public class LoadingIndicatory extends IndicatoryBase
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		protected var hLayout:HorizontalLayout;
-		protected var vLayout:VerticalLayout;
-		protected var _header:Header;
-		protected var _container:ScrollContainer;
-		protected var _bgQuad:Quad;
-		//Locale
-		protected var resourceManager:IResourceManager = ResourceManager.getInstance();
+		//		private var _progressTween:GTween;//Foxhole extended GTween.
+		private var _progressTween:Tween;
+		private var _progress:ProgressBar;
+		private var _label:TextField;
+		//
+		private var _label_value:String;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		public static const LOADING_COMPLETE:String = "loading_complete";
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		public function get bundleName():String
-		{
-			return DefaultConstants.LOCLAE_BUNDLE_SCREEN.concat(FlexGlobals.userModel.locale);
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -89,27 +81,17 @@ package com.godpaper.as3.views.popups
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function IndicatoryBase()
+		public function LoadingIndicatory(label:String="")
 		{
 			super();
-			//layout 
-			hLayout = new HorizontalLayout();
-			hLayout.gap = 10;
-			hLayout.paddingTop = 10;
-			hLayout.paddingRight = 10;
-			hLayout.paddingBottom = 10;
-			hLayout.paddingLeft = 10;
-			hLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_CENTER;
-			hLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
 			//
-			vLayout = new VerticalLayout();
-			vLayout.gap = 10;
-			vLayout.paddingTop = 10;
-			vLayout.paddingRight = 10;
-			vLayout.paddingBottom = 10;
-			vLayout.paddingLeft = 10;
-			vLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_CENTER;
-			vLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
+			if(!label)
+			{
+				this._label_value = this.resourceManager.getString(this.bundleName,"LABEL_LOADING");
+			}else
+			{
+				this._label_value = label;
+			}
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -124,39 +106,49 @@ package com.godpaper.as3.views.popups
 		//--------------------------------------------------------------------------
 		override protected function initialize():void
 		{
-			//background
-			//			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
-			//			var texture:Texture = atlas.getTexture("BLUE");
-			//			texture.repeat = true;
-			//			_background = new Image(texture);
-			//			addChild(_background);
-			//header title
-			this._header = new Header();
-			this._header.title = "???";
-			this.addChild(this._header);
-			//container
+			const layout:VerticalLayout = new VerticalLayout();
+			layout.gap = 10;
+			layout.paddingTop = 10;
+			layout.paddingRight = 10;
+			layout.paddingBottom = 10;
+			layout.paddingLeft = 10;
+			layout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			layout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
+			//
 			this._container = new ScrollContainer();
-			this._container.layout = vLayout;//default layout
-			this._container.scrollerProperties.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			this._container.scrollerProperties.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			this._container.layout = layout;
+			//			this._container.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this.addChild(this._container);
-			//Append the customize initialization.
+			//
+			this._label = new TextField(100,20,this._label_value);
+//			this._label = new TextField(100,20,this.resourceManager.getString(this.bundleName,"LABEL_LOADING"));
+			this._container.addChild(this._label);
+			//
+			this._progress = new ProgressBar();
+			this._progress.minimum = 0;
+			this._progress.maximum = 1;
+			this._progress.value = 0;
+			this._container.addChild(this._progress);
+			//
+			//			this._progressTween = new GTween(this._progress, 5,
+			this._progressTween = new Tween(this._progress, 5,Transitions.EASE_IN);
+			this._progressTween.animate("value",100);
+			Starling.juggler.add(this._progressTween); 
+			//Loading subroutines here.
+			//Loading complete handler.
+			//			starling.core.Starling.juggler.delayCall(
+			this._progressTween.onComplete =  
+				function():void
+				{
+					dispatchEvent(new Event(LOADING_COMPLETE,false,null));//Dispatch it.
+				};
 		}
 		//
 		override protected function draw():void
 		{
-//			_bgQuad = new Quad(this.actualWidth,this.actualHeight,0x030303);
-//			_bgQuad.alpha = 0.5;
-//			_bgQuad.blendMode = BlendMode.NONE;
-//			this.addChild(_bgQuad);
-			//
-			this._header.width = this.actualWidth;
-			this._header.validate();
-			//			
-			this._container.y = this._header.height;
+			this._container.y = 0;
 			this._container.width = this.actualWidth;
 			this._container.height = this.actualHeight - this._container.y;
-			this._container.validate();
 		}
 		//--------------------------------------------------------------------------
 		//
