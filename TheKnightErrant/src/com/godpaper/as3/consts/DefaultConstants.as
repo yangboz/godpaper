@@ -79,7 +79,8 @@ package com.godpaper.as3.consts
 		public static const INDICATION_CHECK:String="Eschequier";
 		public static const INDICATION_COMPUTER_WIN:String="You Lose!";
 		public static const INDICATION_HUMAN_WIN:String="You Won!";
-		public static const INDICATION_NAME_PROMPT:String="What's your name?";
+		public static const INDICATION_NAME_PROMPT_PLAYER:String="What's your name?";
+		public static const INDICATION_NAME_PROMPT_GAME:String="Create new game";
 		//P2P connnections(Server,DevKey)
 		//Stratus:rtmfp://stratus.adobe.com/99ead580edaf280c060675f9-f614dd07a932
 		//Cirrus:rtmfp://p2p.rtmfp.net/40a1c5b634bc4f531ad7757f-2e3cf422214e/

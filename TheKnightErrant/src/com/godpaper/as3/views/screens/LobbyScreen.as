@@ -28,6 +28,7 @@ package com.godpaper.as3.views.screens
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.views.popups.AnewGameIndicatory;
 	import com.godpaper.as3.views.popups.EnterUpIndicatory;
 	
 	import feathers.controls.Button;
@@ -76,6 +77,7 @@ package com.godpaper.as3.views.screens
 		private var _button_create:Button;
 		//
 		private var enterUpIndicatory:EnterUpIndicatory;
+		private var anewGameIndicatory:AnewGameIndicatory;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -130,6 +132,7 @@ package com.godpaper.as3.views.screens
 			
 			this._list.width = this.stage.stageWidth;
 			this._list.height = this._pageIndicator.y;
+			this._list.y = this._header.height;
 			this._list.validate();
 			
 			this._pageIndicator.pageCount = Math.ceil(this._list.maxHorizontalScrollPosition / this._list.width) + 1;
@@ -206,7 +209,7 @@ package com.godpaper.as3.views.screens
 			//Header view.
 			//
 			this._button_create = new Button();
-						this._button_create.label = "Create new game";//TODO:localization here.
+						this._button_create.label = "ANEW GAME";//TODO:localization here.
 //			this._button_done.label = this.resourceManager.getString(this.bundleName,"BTN_DONE");
 			//			this._button_done.onRelease.add(doneButton_onRelease);
 			this._button_create.addEventListener(starling.events.Event.TRIGGERED,createButton_onRelease);
@@ -219,6 +222,10 @@ package com.godpaper.as3.views.screens
 			//
 			this._header = new Header();
 			this._header.title = "Welcome to game lobby!";//TODO:localization here.
+			if(FlexGlobals.userModel.hosterPeerId)
+			{
+				this._header.title = FlexGlobals.userModel.getUserRoleName(FlexGlobals.userModel.hosterPeerId) +", Welcome to game lobby!";
+			}
 //			this._header.title = this.resourceManager.getString(this.bundleName,"HEADER_SETTINGS");
 			this.addChild(this._header);
 			this._header.rightItems = new <DisplayObject>
@@ -231,12 +238,15 @@ package com.godpaper.as3.views.screens
 				];
 			//
 			this.layout();
-			//Enterup overlay.
-			this.enterUpIndicatory = new EnterUpIndicatory();
-			PopUpManager.addPopUp(enterUpIndicatory,true,true);
-			PopUpManager.centerPopUp(enterUpIndicatory);
-			//Signal_registed for removing pop-up
-			FlexGlobals.userModel.signal_registed.addOnce(onRegisted);
+			//Enterup overlay is neccessary.
+			if(!FlexGlobals.userModel.hosterPeerId)
+			{
+				this.enterUpIndicatory = new EnterUpIndicatory();
+				PopUpManager.addPopUp(enterUpIndicatory,true,true);
+				PopUpManager.centerPopUp(enterUpIndicatory);
+				//Signal_registed for removing pop-up
+				FlexGlobals.userModel.signal_registed.addOnce(onRegisted);
+			}
 		}
 		//
 		protected function tileListItemRendererFactory():IListItemRenderer
@@ -276,7 +286,11 @@ package com.godpaper.as3.views.screens
 		//--------------------------------------------------------------------------
 		private function createButton_onRelease(event:Event):void
 		{
-			//TODO:pop up the create new game indicatory.
+			this.anewGameIndicatory = new AnewGameIndicatory();
+			PopUpManager.addPopUp(anewGameIndicatory,true,true);
+			PopUpManager.centerPopUp(anewGameIndicatory);
+			//TODO:Signal_registed for removing pop-up
+//			FlexGlobals.userModel.signal_registed.addOnce(onRegisted);
 		}
 		private function backButton_onRelease(event:Event):void
 		{

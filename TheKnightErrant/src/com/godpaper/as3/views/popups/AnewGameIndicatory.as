@@ -27,8 +27,7 @@ package com.godpaper.as3.views.popups
 	import feathers.controls.Button;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.TextInput;
-	
-	import mx.utils.UIDUtil;
+	import feathers.core.PopUpManager;
 	
 	import starling.events.Event;
 
@@ -39,24 +38,24 @@ package com.godpaper.as3.views.popups
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * EnterUpIndicatory.as class.To register player's name before enter up to lobby screen.</br>
+	 * AnewGameIndicatory.as class.Create a new game by hoster.</br>
 	 * Example skelton as follows:</br>	
 	 * -----------------------------------</br>
-	 * --------What's your name?----------</br>
+	 * ----------Create new game----------</br>
 	 * -----------------------------------</br>
 	 * -----------------------------------</br>
 	 * ------------TextInput--------------</br>
 	 * -----------------------------------</br>
 	 * -----------------------------------</br>
-	 * ------------Join Game--------------</br>
+	 * -------CANCEL---------CREATE-------</br>
 	 * -----------------------------------</br>
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Feb 3, 2013 3:31:00 PM
+	 * Created Feb 3, 2013 5:11:32 PM
 	 */   	 
-	public class EnterUpIndicatory extends IndicatoryBase
+	public class AnewGameIndicatory extends IndicatoryBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -66,7 +65,8 @@ package com.godpaper.as3.views.popups
 		private var _nameInput:TextInput;
 		private var _inputsContainer:ScrollContainer;
 		private var _buttonsContainer:ScrollContainer;//submit,next button 
-		private var _joinBtn:Button;//join gamebutton.
+		private var _cancelBtn:Button;//camcel creating game button.
+		private var _createBtn:Button;//create a new game button.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -88,7 +88,7 @@ package com.godpaper.as3.views.popups
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function EnterUpIndicatory()
+		public function AnewGameIndicatory()
 		{
 			super();
 		}     	
@@ -118,14 +118,19 @@ package com.godpaper.as3.views.popups
 			this._nameInput.height = 25;
 			this._inputsContainer.addChild(this._nameInput);
 			//buttons 
-			this._joinBtn = new Button();
-			this._joinBtn.label = "Join Game";
-			this._buttonsContainer.addChild(this._joinBtn);
+			this._cancelBtn = new Button();
+			this._cancelBtn.label = "Cancel";
+			this._buttonsContainer.addChild(this._cancelBtn);
+			this._createBtn = new Button();
+			this._createBtn.label = "Create";
+			this._buttonsContainer.addChild(this._createBtn);
 			//event listener
 			//			this._submitBtn.onRelease.add(submitButtonOnRelease);
-			this._joinBtn.addEventListener(starling.events.Event.TRIGGERED,joinButtonOnRelease);
+			this._cancelBtn.addEventListener(starling.events.Event.TRIGGERED,cancelButtonOnRelease);
+			//			this._nextBtn.onRelease.add(nextButtonOnRelease);
+			this._createBtn.addEventListener(starling.events.Event.TRIGGERED,createButtonOnRelease);
 			//
-			this._header.title = DefaultConstants.INDICATION_NAME_PROMPT_PLAYER;
+			this._header.title = DefaultConstants.INDICATION_NAME_PROMPT_GAME;
 			this.width = 200;
 			this.height = 200;
 		}
@@ -134,22 +139,20 @@ package com.godpaper.as3.views.popups
 		{
 			super.draw();
 		}
-		
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
 		//
-		private function joinButtonOnRelease(event:Event):void
+		private function cancelButtonOnRelease(event:Event):void
 		{
-			//Register player role name
-			var peerID:String = UIDUtil.createUID();
-			FlexGlobals.userModel.addUser(peerID);
-			FlexGlobals.userModel.hosterPeerId = peerID;//Default role is hoster.
-			FlexGlobals.userModel.registerRole(peerID,0,this._nameInput.text);
-			//Enter up to game server by plugin initialization.
-			FlexGlobals.topLevelApplication.pluginProvider.initialization();
+			PopUpManager.removePopUp(this);
+		}
+		//
+		private function createButtonOnRelease(event:Event):void
+		{
+			//TODO:set up a new game here.
 		}
 	}
 	
