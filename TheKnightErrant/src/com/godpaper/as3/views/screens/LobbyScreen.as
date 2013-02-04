@@ -28,8 +28,10 @@ package com.godpaper.as3.views.screens
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	import com.godpaper.as3.views.popups.AnewGameIndicatory;
 	import com.godpaper.as3.views.popups.EnterUpIndicatory;
+	import com.godpaper.as3.views.popups.ThinkIndicatory;
 	
 	import feathers.controls.Button;
 	import feathers.controls.Header;
@@ -75,9 +77,14 @@ package com.godpaper.as3.views.screens
 		//
 		private var _button_back:Button;
 		private var _button_create:Button;
+		private var _button_refresh:Button;
 		//
 		private var enterUpIndicatory:EnterUpIndicatory;
 		private var anewGameIndicatory:AnewGameIndicatory;
+		//Data provider
+		private var collection:ListCollection = new ListCollection([]);
+		//Indicatory
+		private var connectingIndicatory:ThinkIndicatory;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -87,7 +94,12 @@ package com.godpaper.as3.views.screens
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		public function get playerIoPlugin():PlayerIoPlugin
+		{
+			//Refresh game room with tables.
+			var playerIoPlugin:PlayerIoPlugin = (FlexGlobals.topLevelApplication.pluginProvider as PlayerIoPlugin);
+			return playerIoPlugin;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -104,6 +116,8 @@ package com.godpaper.as3.views.screens
 			super();
 			//
 			this._iconAtlas = AssetEmbedsDefault.getTextureAtlas();
+			//
+			this.connectingIndicatory = new ThinkIndicatory("Connecting...");
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -143,7 +157,7 @@ package com.godpaper.as3.views.screens
 			
 			const collection:ListCollection = new ListCollection(
 				[
-					{ label: "Facebook", texture: this._iconAtlas.getTexture("TABLE") }
+//					{ label: "Facebook", texture: this._iconAtlas.getTexture("TABLE") }
 //					{ label: "Twitter", texture: this._iconAtlas.getTexture("TABLE") },
 //					{ label: "Google", texture: this._iconAtlas.getTexture("TABLE") },
 //					{ label: "YouTube", texture: this._iconAtlas.getTexture("TABLE") },
@@ -219,6 +233,12 @@ package com.godpaper.as3.views.screens
 			//			this._button_back.onRelease.add(backButton_onRelease);
 			this._button_back.addEventListener(starling.events.Event.TRIGGERED,backButton_onRelease);
 			//
+			this._button_refresh = new Button();
+			this._button_refresh.label = "REFRESH";
+//			this._button_refresh.label = this.resourceManager.getString(this.bundleName,"BTN_BACK");
+			//			this._button_back.onRelease.add(backButton_onRelease);
+			this._button_refresh.addEventListener(starling.events.Event.TRIGGERED,refreshButton_onRelease);
+			//
 			this._header = new Header();
 			this._header.title = "Welcome to game lobby!";//TODO:localization here.
 			if(FlexGlobals.userModel.hosterPeerId)
@@ -229,6 +249,7 @@ package com.godpaper.as3.views.screens
 			this.addChild(this._header);
 			this._header.rightItems = new <DisplayObject>
 				[
+					this._button_refresh,
 					this._button_create
 				];	
 			this._header.leftItems = new <DisplayObject>
@@ -244,7 +265,7 @@ package com.godpaper.as3.views.screens
 				PopUpManager.addPopUp(enterUpIndicatory,true,true);
 				PopUpManager.centerPopUp(enterUpIndicatory);
 				//Signal_registed for removing pop-up
-				FlexGlobals.userModel.signal_registed.addOnce(onRegisted);
+				FlexGlobals.userModel.signal_player_registed.addOnce(onPlayerRegisted);
 			}
 		}
 		//
@@ -295,9 +316,45 @@ package com.godpaper.as3.views.screens
 			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);
 		}
 		//
-		private function onRegisted(peerID:String):void
+		private function refreshButton_onRelease(event:Event):void
+		{
+			if( this.playerIoPlugin )
+			{
+				playerIoPlugin.refreshRoomList();
+				//Signal addOnce
+				playerIoPlugin.signal_room_refreshed.addOnce(onRoomsRefreshed);
+			}
+		}
+		//Signal handlers here.
+		//
+		private function onPlayerRegisted(peerID:String):void
 		{
 			PopUpManager.removePopUp(this.enterUpIndicatory);
+			//Pop-up connnecting overlay
+			PopUpManager.addPopUp(this.connectingIndicatory);
+			PopUpManager.centerPopUp(this.connectingIndicatory);
+			//Signal addOnce
+			if( this.playerIoPlugin )
+			{
+				//Signal addOnce
+				playerIoPlugin.signal_hoster_joined.addOnce(onHosterJoined);
+			}
+		}
+		//
+		private function onRoomsRefreshed(rooms:Array):void
+		{
+//			{ label: "Orkut", texture: this._iconAtlas.getTexture("TABLE") },
+			for each(var room:Object in rooms)
+			{
+				
+			}
+//			this.collection.data = 
+		}
+		//
+		private function onHosterJoined(hoster:String):void
+		{
+			//Remove pop-up connnecting overlay
+			PopUpManager.removePopUp(this.connectingIndicatory);
 		}
 	}
 	

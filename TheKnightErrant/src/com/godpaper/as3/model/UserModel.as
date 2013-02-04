@@ -43,7 +43,7 @@ package com.godpaper.as3.model
 		//Locale
 		public var locale:String = "en_US";
 		//Signals
-		public var signal_registed:Signal;
+		public var signal_player_registed:Signal;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -69,7 +69,7 @@ package com.godpaper.as3.model
 //			this.sharedObject = SharedObject.getLocal(HongKongVR.SPECIFIER_NAME);
 			this.userList = new Dictionary();
 			//
-			this.signal_registed  = new Signal(String);
+			this.signal_player_registed  = new Signal(String);
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -107,7 +107,7 @@ package com.godpaper.as3.model
 				//flush the shared object
 				trace("[Registed] userVO#roleName:",userList[peerId].roleName,",#roleIndex:",userList[peerId].roleIndex,",peerID:",peerId);
 				//dispatch external events.
-				this.signal_registed.dispatch(peerId);
+				this.signal_player_registed.dispatch(peerId);
 			}
 		}
 		//

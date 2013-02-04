@@ -118,16 +118,17 @@ package
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		//			return new MochiPlugin(PluginConfig.gameID,PluginConfig.boardID);
+		//			return new NonobaPlugin();
+		//			return new KongregatePlugin();
+		//			return new PlatogoPlugin("1146511093");
+		private var _pluginProvider:IPlug = new PlayerIoPlugin("chinesechessjam-msf2zuz0suaip7yhtzpaa","TicTacToe");
 		/**
 		 * Override this for customize plugin provider.
 		 */
 		public function get pluginProvider():IPlug
 		{
-//			return new MochiPlugin(PluginConfig.gameID,PluginConfig.boardID);
-//			return new NonobaPlugin();
-//			return new KongregatePlugin();
-//			return new PlatogoPlugin("1146511093");
-			return new PlayerIoPlugin("chinesechessjam-msf2zuz0suaip7yhtzpaa");
+			return _pluginProvider;
 		}
 
 		/**

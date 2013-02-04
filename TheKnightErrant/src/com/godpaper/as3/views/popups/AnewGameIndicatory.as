@@ -118,7 +118,7 @@ package com.godpaper.as3.views.popups
 			this._nameInput = new TextInput();
 			this._nameInput.height = 25;
 			this._nameInput.width = 125;
-			this._nameInput.text = "Amazing chess board game!";
+			this._nameInput.text = "Amazing chess game!";
 			this._inputsContainer.addChild(this._nameInput);
 			//buttons 
 			this._cancelBtn = new Button();

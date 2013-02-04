@@ -34,6 +34,8 @@ package com.godpaper.as3.plugins.playerIO
 	import mx.logging.ILogger;
 	import mx.utils.UIDUtil;
 	
+	import org.osflash.signals.Signal;
+	
 	import playerio.Client;
 	import playerio.Connection;
 	import playerio.Message;
@@ -59,7 +61,10 @@ package com.godpaper.as3.plugins.playerIO
 		//--------------------------------------------------------------------------
 		private var _model:PlayerIoModel;
 		//
-		private var client:Client;
+		private var _client:Client;
+		//Singals for external handlers.
+		public var signal_room_refreshed:Signal;
+		public var signal_hoster_joined:Signal;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -86,6 +91,9 @@ package com.godpaper.as3.plugins.playerIO
 			_model = new PlayerIoModel();
 			_model.gameID = gameID;
 			_model.boardID = boardID;
+			//
+			this.signal_room_refreshed = new Signal(Array);
+			this.signal_hoster_joined = new Signal(String);
 		}
 		
 		public function get data():IPlugData
@@ -153,14 +161,29 @@ package com.godpaper.as3.plugins.playerIO
 		//--------------------------------------------------------------------------
 		public function createJoinRoom(name:String):void
 		{
-			this.client.multiplayer.createJoinRoom(
+			this._client.multiplayer.createJoinRoom(
 				null,								//Room id, null for auto generted
-				"ApplicationBase",							//RoomType to create, bounce is a simple bounce server
+				this._model.boardID,							//RoomType to create, bounce is a simple bounce server
 				true,								//Hide room from userlist
 				{name:name},						//Room Join data, data is returned to lobby list. Variabels can be modifed on the server
 				handleJoin,							//Create handler
 				handleError					//Error handler	
 			);
+		}
+		//
+		public function refreshRoomList():void
+		{
+			this._client.multiplayer.listRooms(this._model.boardID, {}, 50, 0, function(rooms:Array):void{
+				//Trace out returned rooms
+//				for( var a:int=0;a<rooms.length;a++){
+//					roomContainer.addChild(new RoomEntry(rooms[a], joinRoom))	
+//				}
+				//Just dispatch the table array signal.
+				signal_room_refreshed.dispatch(rooms);
+//				base.reset();
+			}, function(e:PlayerIOError):void{
+				LOG.error("Unable to list rooms {0}", e);
+			})
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -179,7 +202,7 @@ package com.godpaper.as3.plugins.playerIO
 			
 			//Set developmentsever (Comment out to connect to your server online)
 //			client.multiplayer.developmentServer = "localhost:8184";
-			this.client = client;
+			this._client = client;//Keep client reference for the next step.
 			//Create pr join the room test
 //			client.multiplayer.createJoinRoom(
 //				"test",								//Room id. If set to null a random roomid is used
@@ -210,6 +233,8 @@ package com.godpaper.as3.plugins.playerIO
 				LOG.info("Player with the userid {0}", userid, ",just joined the room");
 				//
 				FlexGlobals.userModel.addUser(userid.toString());
+				//Broad cast signal
+			    signal_hoster_joined.dispatch(userid.toString());
 			})
 			
 			//Add message listener for users leaving the room

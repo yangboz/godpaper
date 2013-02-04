@@ -26,16 +26,12 @@ package com.godpaper.as3.views.popups
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.godpaper.as3.consts.DefaultConstants;
-	
 	import feathers.controls.Label;
 	import feathers.controls.ProgressBar;
-	import feathers.controls.Screen;
 	
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
-	import starling.events.Event;
 	
 	
 	/**
@@ -46,7 +42,7 @@ package com.godpaper.as3.views.popups
 	 * @airVersion 3.2+
 	 * Created Jun 20, 2012 1:41:57 PM
 	 */   	 
-	public class ThinkIndicatory extends Screen
+	public class ThinkIndicatory extends IndicatoryBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -57,6 +53,8 @@ package com.godpaper.as3.views.popups
 		private var _progressTween:Tween;
 		private var _progress:ProgressBar;
 		private var _label:Label;
+		//
+		private var _label_value:String;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -78,8 +76,17 @@ package com.godpaper.as3.views.popups
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ThinkIndicatory()
+		public function ThinkIndicatory(label:String="")
 		{
+			super();
+			//
+			if(!label)
+			{
+				this._label_value = this.resourceManager.getString(this.bundleName,"LABEL_LOADING");
+			}else
+			{
+				this._label_value = label;
+			}
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -93,6 +100,7 @@ package com.godpaper.as3.views.popups
 		//--------------------------------------------------------------------------
 		override protected function initialize():void
 		{
+			//
 			this._progress = new ProgressBar();
 			this._progress.minimum = 0;
 			this._progress.maximum = 1;
@@ -100,12 +108,13 @@ package com.godpaper.as3.views.popups
 			this.addChild(this._progress);
 			//
 //			this._progressTween = new GTween(this._progress, 5,
-			this._progressTween = new Tween(this._progress, 5,Transitions.EASE_IN);
+			this._progressTween = new Tween(this._progress, 2,Transitions.EASE_IN);
 			this._progressTween.animate("value",100);
+			this._progressTween.repeatCount = 0;
 			Starling.juggler.add(this._progressTween); 
 			//
 			this._label = new Label();
-			this._label.text = DefaultConstants.INDICATION_THINK;
+			this._label.text = this._label_value;
 			this.addChild(this._label);
 		}
 		
@@ -117,7 +126,7 @@ package com.godpaper.as3.views.popups
 			//
 			this._label.validate();
 			this._label.x = (this.actualWidth - this._label.width) / 2;
-			this._label.y = (this.actualHeight - this._label.height) / 2;
+			this._label.y = (this.actualHeight - this._label.height) / 2 - this._progress.height*3;//more gap.
 		}
 		//--------------------------------------------------------------------------
 		//

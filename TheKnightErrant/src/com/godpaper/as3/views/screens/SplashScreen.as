@@ -25,7 +25,6 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.as3.views.popups.LoadingIndicatory;
 	
 	import feathers.controls.Label;
 	import feathers.controls.ProgressBar;
