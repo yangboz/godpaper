@@ -90,6 +90,7 @@ package com.godpaper.as3.views.screens
 		private var collection:ListCollection = new ListCollection([]);
 		//Indicatory
 		private var connectingIndicatory:ThinkIndicatory;
+		private var creatingIndicatory:ThinkIndicatory;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -123,6 +124,7 @@ package com.godpaper.as3.views.screens
 			this._iconAtlas = AssetEmbedsDefault.getTextureAtlas();
 			//
 			this.connectingIndicatory = new ThinkIndicatory("Connecting...");
+			this.creatingIndicatory = new ThinkIndicatory("Creating...");
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -248,7 +250,7 @@ package com.godpaper.as3.views.screens
 			this._header.title = "Welcome to game lobby!";//TODO:localization here.
 			if(FlexGlobals.userModel.hosterPeerId)
 			{
-				this._header.title = FlexGlobals.userModel.getUserRoleName(FlexGlobals.userModel.hosterPeerId) +", Welcome to game lobby!";
+				this._header.title = FlexGlobals.userModel.getUserRoleName(FlexGlobals.userModel.hosterPeerId) +", Welcome!";
 			}
 //			this._header.title = this.resourceManager.getString(this.bundleName,"HEADER_SETTINGS");
 			this.addChild(this._header);
@@ -311,9 +313,18 @@ package com.godpaper.as3.views.screens
 		//--------------------------------------------------------------------------
 		private function createButton_onRelease(event:Event):void
 		{
+			//Pop up the creating game indicatory.
 			this.anewGameIndicatory = new AnewGameIndicatory();
+			this.anewGameIndicatory.signal_create_game.addOnce(onGameCreating);
+			//
 			PopUpManager.addPopUp(anewGameIndicatory,true,true);
 			PopUpManager.centerPopUp(anewGameIndicatory);
+			//Signal handler.
+			if( this.playerIoPlugin )
+			{
+				//Signal addOnce
+				playerIoPlugin.signal_user_joined.addOnce(onUserJoined);
+			}
 		}
 		private function backButton_onRelease(event:Event):void
 		{
@@ -366,6 +377,7 @@ package com.godpaper.as3.views.screens
 				var label:String = room.data.name +","+room.onlineUsers.toString() + " players";
 				roomArrary.push( { label: label, texture: this._iconAtlas.getTexture("TABLE") } );
 			}
+			//update table list view
 			this.updateTableList(roomArrary);
 		}
 		//
@@ -379,6 +391,31 @@ package com.godpaper.as3.views.screens
 				playerIoPlugin.refreshRoomList();
 				//Signal addOnce
 				playerIoPlugin.signal_room_refreshed.addOnce(onRoomsRefreshed);
+			}
+		}
+		//
+		private function onUserJoined():void
+		{
+			//Remove the creating pop up
+			PopUpManager.removePopUp(this.creatingIndicatory);
+			//Refresh the room list.
+			if( this.playerIoPlugin )
+			{
+				playerIoPlugin.refreshRoomList();
+				//Signal addOnce
+				playerIoPlugin.signal_room_refreshed.addOnce(onRoomsRefreshed);
+			}
+		}
+		//
+		private function onGameCreating():void
+		{
+			//Wait the game create latency.
+			PopUpManager.addPopUp(creatingIndicatory,true,true);
+//			PopUpManager.centerPopUp(creatingIndicatory);
+			//Signal listen on playerIO plugin
+			if( this.playerIoPlugin )
+			{
+				//TODO:
 			}
 		}
 		//

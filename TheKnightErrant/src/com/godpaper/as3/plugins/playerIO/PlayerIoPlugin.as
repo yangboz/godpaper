@@ -65,6 +65,7 @@ package com.godpaper.as3.plugins.playerIO
 		//Singals for external handlers.
 		public var signal_room_refreshed:Signal;
 		public var signal_hoster_joined:Signal;
+		public var signal_user_joined:Signal;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -94,6 +95,7 @@ package com.godpaper.as3.plugins.playerIO
 			//
 			this.signal_room_refreshed = new Signal(Array);
 			this.signal_hoster_joined = new Signal(String);
+			this.signal_user_joined = new Signal();
 		}
 		
 		public function get data():IPlugData
@@ -159,6 +161,18 @@ package com.godpaper.as3.plugins.playerIO
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
+		public function createRoom(name:String):void
+		{
+			this._client.multiplayer.createRoom(
+				null,								//Room id, null for auto generted
+				this._model.boardID,							//RoomType to create, bounce is a simple bounce server
+				true,								//Hide room from userlist
+				{name:name},						//Room Join data, data is returned to lobby list. Variabels can be modifed on the server
+				joinRoom,						//Auto join room as hoster.	
+				handleError					//Error handler	
+			);
+		}
+		//
 		public function createJoinRoom(name:String):void
 		{
 			this._client.multiplayer.createJoinRoom(
@@ -184,6 +198,16 @@ package com.godpaper.as3.plugins.playerIO
 			}, function(e:PlayerIOError):void{
 				LOG.error("Unable to list rooms {0}", e);
 			})
+		}
+		//
+		public function joinRoom(id:String):void
+		{
+			this._client.multiplayer.joinRoom(
+				id,									//Room id
+				{},									//User join data.
+				handleJoin,							//Join handler
+				handleError					//Error handler	
+			)
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -221,7 +245,8 @@ package com.godpaper.as3.plugins.playerIO
 		private function handleJoin(connection:Connection):void{
 			LOG.info("Sucessfully connected to the multiplayer server");
 //TODO:			gotoAndStop(2);
-			
+			//Broad cast signal
+			signal_user_joined.dispatch();
 			//Add disconnect listener
 			connection.addDisconnectHandler(handleDisconnect);
 			
@@ -235,8 +260,6 @@ package com.godpaper.as3.plugins.playerIO
 				LOG.info("Player with the userid {0}", userid, ",just joined the room");
 				//
 				FlexGlobals.userModel.addUser(userid.toString());
-				//Broad cast signal
-				
 			})
 			
 			//Add message listener for users leaving the room
@@ -264,6 +287,7 @@ package com.godpaper.as3.plugins.playerIO
 		}
 		
 		private function handleError(error:PlayerIOError):void{
+//		private function handleError(error:*):void{	
 			LOG.info("Connection error:{0}",String(error.message));
 //TODO:			gotoAndStop(3);
 			

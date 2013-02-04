@@ -32,6 +32,8 @@ package com.godpaper.as3.views.popups
 	import feathers.controls.TextInput;
 	import feathers.core.PopUpManager;
 	
+	import org.osflash.signals.Signal;
+	
 	import starling.display.DisplayObject;
 	import starling.events.Event;
 
@@ -71,6 +73,8 @@ package com.godpaper.as3.views.popups
 		private var _buttonsContainer:ScrollContainer;//submit,next button 
 		private var _cancelBtn:Button;//camcel creating game button.
 		private var _createBtn:Button;//create a new game button.
+		//Public signals
+		public var signal_create_game:Signal;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -95,6 +99,8 @@ package com.godpaper.as3.views.popups
 		public function AnewGameIndicatory()
 		{
 			super();
+			//
+			this.signal_create_game = new Signal();
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -121,7 +127,7 @@ package com.godpaper.as3.views.popups
 			this._nameInput = new TextInput();
 			this._nameInput.height = 25;
 			this._nameInput.width = 125;
-			this._nameInput.text = "Amazing chess game!";
+//			this._nameInput.text = "Amazing chess game!";
 			this._inputsContainer.addChild(this._nameInput);
 			//buttons 
 			this._cancelBtn = new Button();
@@ -169,9 +175,12 @@ package com.godpaper.as3.views.popups
 			var playerIoPlugin:PlayerIoPlugin = (FlexGlobals.topLevelApplication.pluginProvider as PlayerIoPlugin);
 			if( playerIoPlugin )
 			{
-				playerIoPlugin.createJoinRoom(this._nameInput.text);
+				playerIoPlugin.createRoom(this._nameInput.text);
 			}
-			
+			//Remove the pop-up.
+			PopUpManager.removePopUp(this);
+			//Broad cast the creating game room signal.
+			this.signal_create_game.dispatch();
 		}
 	}
 	
