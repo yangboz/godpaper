@@ -201,7 +201,8 @@ package
 			mStarling.enableErrorChecking=Capabilities.isDebugger;
 			mStarling.start();
 			//Display stats.
-			mStarling.showStats=true;
+//			mStarling.showStats=true;
+			mStarling.showStatsAt("left","bottom");
 			//Multi-Resolution Development
 			//@see: http://wiki.starling-framework.org/manual/multi-resolution_development
 //			LOG.debug("Starling contentScaleFactor:{0}",mStarling.contentScaleFactor);

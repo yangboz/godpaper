@@ -282,6 +282,8 @@ package com.godpaper.as3.views.screens
 			renderer.labelField = "label";
 			renderer.iconSourceField = "texture";
 			renderer.iconPosition = Button.ICON_POSITION_TOP;
+//			renderer.accessoryField = "accessory";
+//			renderer.accessoryLabelField = "accessory";
 //			renderer.defaultLabelProperties.textFormat = new BitmapFontTextFormat(this._font, NaN, 0x000000);
 			return renderer;
 		}
@@ -376,6 +378,7 @@ package com.godpaper.as3.views.screens
 				LOG.debug(room.toString());
 				var label:String = room.data.name +","+room.onlineUsers.toString() + " players";
 				roomArrary.push( { label: label, texture: this._iconAtlas.getTexture("TABLE") } );
+//				roomArrary.push( { label: label, texture: this._iconAtlas.getTexture("TABLE"), accessory:">" } );
 			}
 			//update table list view
 			this.updateTableList(roomArrary);
