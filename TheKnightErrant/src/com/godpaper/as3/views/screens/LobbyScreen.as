@@ -35,7 +35,9 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.views.popups.ThinkIndicatory;
 	
 	import feathers.controls.Button;
+	import feathers.controls.Callout;
 	import feathers.controls.Header;
+	import feathers.controls.Label;
 	import feathers.controls.List;
 	import feathers.controls.PageIndicator;
 	import feathers.controls.Screen;
@@ -83,6 +85,7 @@ package com.godpaper.as3.views.screens
 		private var _button_back:Button;
 		private var _button_create:Button;
 		private var _button_refresh:Button;
+		private var _button_join:Button;
 		//
 		private var enterUpIndicatory:EnterUpIndicatory;
 		private var anewGameIndicatory:AnewGameIndicatory;
@@ -246,6 +249,12 @@ package com.godpaper.as3.views.screens
 			//			this._button_back.onRelease.add(backButton_onRelease);
 			this._button_refresh.addEventListener(starling.events.Event.TRIGGERED,refreshButton_onRelease);
 			//
+			this._button_join = new Button();
+			this._button_join.label = "JOIN";
+			//			this._button_refresh.label = this.resourceManager.getString(this.bundleName,"BTN_BACK");
+			//			this._button_back.onRelease.add(backButton_onRelease);
+			this._button_join.addEventListener(starling.events.Event.TRIGGERED,joinButton_onRelease);
+			//
 			this._header = new Header();
 			this._header.title = "Welcome to game lobby!";//TODO:localization here.
 			if(FlexGlobals.userModel.hosterPeerId)
@@ -256,12 +265,13 @@ package com.godpaper.as3.views.screens
 			this.addChild(this._header);
 			this._header.rightItems = new <DisplayObject>
 				[
-					this._button_refresh,
+					this._button_join,
 					this._button_create
 				];	
 			this._header.leftItems = new <DisplayObject>
 				[
-					this._button_back
+					this._button_back,
+					this._button_refresh
 				];
 			//
 			this.layout();
@@ -343,6 +353,26 @@ package com.godpaper.as3.views.screens
 				playerIoPlugin.signal_room_refreshed.addOnce(onRoomsRefreshed);
 			}
 		}
+		//
+		private function joinButton_onRelease(event:Event):void
+		{
+			
+			if(!this._list.selectedItem)
+			{
+				const content:Label = new Label();
+				content.text = "Please select a game!";
+				Callout.show(DisplayObject(content), this._button_join, Callout.DIRECTION_DOWN);
+				return;
+			}
+			var roomID:String = this._list.selectedItem.roomID;
+			if( this.playerIoPlugin )
+			{
+				//join selected game
+				playerIoPlugin.joinRoom(roomID);
+				//Signal handler.
+				playerIoPlugin.signal_user_joined.addOnce(onUserJoined);
+			}
+		}
 		//Signal handlers here.
 		//
 		private function onPlayerRegisted(peerID:String):void
@@ -377,7 +407,7 @@ package com.godpaper.as3.views.screens
 			{
 				LOG.debug(room.toString());
 				var label:String = room.data.name +","+room.onlineUsers.toString() + " players";
-				roomArrary.push( { label: label, texture: this._iconAtlas.getTexture("TABLE") } );
+				roomArrary.push( { label: label, texture: this._iconAtlas.getTexture("TABLE"), roomID:room.id } );
 //				roomArrary.push( { label: label, texture: this._iconAtlas.getTexture("TABLE"), accessory:">" } );
 			}
 			//update table list view
@@ -400,13 +430,18 @@ package com.godpaper.as3.views.screens
 		private function onUserJoined():void
 		{
 			//Remove the creating pop up
-			PopUpManager.removePopUp(this.creatingIndicatory);
+			if(PopUpManager.isPopUp(this.creatingIndicatory))
+			{
+				PopUpManager.removePopUp(this.creatingIndicatory);
+			}
 			//Refresh the room list.
 			if( this.playerIoPlugin )
 			{
-				playerIoPlugin.refreshRoomList();
-				//Signal addOnce
-				playerIoPlugin.signal_room_refreshed.addOnce(onRoomsRefreshed);
+//				playerIoPlugin.refreshRoomList();
+//				//Signal addOnce
+//				playerIoPlugin.signal_room_refreshed.addOnce(onRoomsRefreshed);
+				//Go to the game scene
+				FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);
 			}
 		}
 		//
@@ -418,7 +453,7 @@ package com.godpaper.as3.views.screens
 			//Signal listen on playerIO plugin
 			if( this.playerIoPlugin )
 			{
-				//TODO:
+				playerIoPlugin.signal_user_joined.addOnce(onUserJoined);
 			}
 		}
 		//
