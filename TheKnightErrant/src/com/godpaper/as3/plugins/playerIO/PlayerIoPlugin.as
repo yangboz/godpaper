@@ -213,6 +213,8 @@ package com.godpaper.as3.plugins.playerIO
 //				handleJoin,							//Function executed on successful joining of the room
 //				handleError							//Function executed if we got a join error
 //			);
+			//Broad cast signal
+			signal_hoster_joined.dispatch(client.connectUserId);
 		}
 		
 		
@@ -234,7 +236,7 @@ package com.godpaper.as3.plugins.playerIO
 				//
 				FlexGlobals.userModel.addUser(userid.toString());
 				//Broad cast signal
-			    signal_hoster_joined.dispatch(userid.toString());
+				
 			})
 			
 			//Add message listener for users leaving the room

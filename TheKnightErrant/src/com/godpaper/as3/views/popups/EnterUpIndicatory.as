@@ -25,11 +25,14 @@ package com.godpaper.as3.views.popups
 	import com.godpaper.as3.core.FlexGlobals;
 	
 	import feathers.controls.Button;
+	import feathers.controls.Callout;
+	import feathers.controls.Label;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.TextInput;
 	
 	import mx.utils.UIDUtil;
 	
+	import starling.display.DisplayObject;
 	import starling.events.Event;
 
 	//--------------------------------------------------------------------------
@@ -143,6 +146,13 @@ package com.godpaper.as3.views.popups
 		//
 		private function joinButtonOnRelease(event:Event):void
 		{
+			if(this._nameInput.text.length<=0)//name text input validate.
+			{
+				const content:Label = new Label();
+				content.text = "Please input your name!";
+				Callout.show(DisplayObject(content), this._nameInput, Callout.DIRECTION_LEFT);
+				return;
+			}
 			//Register player role name
 			var peerID:String = UIDUtil.createUID();
 			FlexGlobals.userModel.addUser(peerID);

@@ -29,6 +29,7 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
+	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.popups.AnewGameIndicatory;
 	import com.godpaper.as3.views.popups.EnterUpIndicatory;
 	import com.godpaper.as3.views.popups.ThinkIndicatory;
@@ -44,6 +45,10 @@ package com.godpaper.as3.views.screens
 	import feathers.data.ListCollection;
 	import feathers.layout.TiledRowsLayout;
 	import feathers.text.BitmapFontTextFormat;
+	
+	import mx.logging.ILogger;
+	
+	import playerio.RoomInfo;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Image;
@@ -88,7 +93,7 @@ package com.godpaper.as3.views.screens
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:ILogger = LogUtil.getLogger(LobbyScreen);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -344,17 +349,45 @@ package com.godpaper.as3.views.screens
 		private function onRoomsRefreshed(rooms:Array):void
 		{
 //			{ label: "Orkut", texture: this._iconAtlas.getTexture("TABLE") },
-			for each(var room:Object in rooms)
+//			[playerio.RoomInfo]
+//			id:				dWfBs_ef50uuqH97J0M4Pw
+//			roomType:		TicTacToe
+//			onlineUsers:	2
+//			initData:		Id						Value
+//			-------------------------------------------
+//				name					My Amazing game!
+//					
+//			serverType is deprecated, please use roomType.
+//			initData is deprecated, please use data.
+			var roomArrary:Array = [];	
+			for each(var room:RoomInfo in rooms)
 			{
-				
+				LOG.debug(room.toString());
+				var label:String = room.data.name +","+room.onlineUsers.toString() + " players";
+				roomArrary.push( { label: label, texture: this._iconAtlas.getTexture("TABLE") } );
 			}
-//			this.collection.data = 
+			this.updateTableList(roomArrary);
 		}
 		//
 		private function onHosterJoined(hoster:String):void
 		{
 			//Remove pop-up connnecting overlay
 			PopUpManager.removePopUp(this.connectingIndicatory);
+			//Auto refresh the table list at lobby.
+			if( this.playerIoPlugin )
+			{
+				playerIoPlugin.refreshRoomList();
+				//Signal addOnce
+				playerIoPlugin.signal_room_refreshed.addOnce(onRoomsRefreshed);
+			}
+		}
+		//
+		private function updateTableList(rooms:Array):void
+		{
+			this.collection.data = rooms;//Refresh the tabel tile-list.
+			//relayout for view update.
+			this._list.dataProvider = this.collection;
+			this.layout();
 		}
 	}
 	
