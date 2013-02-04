@@ -26,10 +26,13 @@ package com.godpaper.as3.views.popups
 	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	
 	import feathers.controls.Button;
+	import feathers.controls.Callout;
+	import feathers.controls.Label;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.TextInput;
 	import feathers.core.PopUpManager;
 	
+	import starling.display.DisplayObject;
 	import starling.events.Event;
 
 	//--------------------------------------------------------------------------
@@ -155,6 +158,13 @@ package com.godpaper.as3.views.popups
 		//
 		private function createButtonOnRelease(event:Event):void
 		{
+			if(this._nameInput.text.length<=0)//name text input validate.
+			{
+				const content:Label = new Label();
+				content.text = "Please input game name!";
+				Callout.show(DisplayObject(content), this._nameInput, Callout.DIRECTION_LEFT);
+				return;
+			}
 			//Set up a new game room here.
 			var playerIoPlugin:PlayerIoPlugin = (FlexGlobals.topLevelApplication.pluginProvider as PlayerIoPlugin);
 			if( playerIoPlugin )
