@@ -91,7 +91,8 @@ package com.godpaper.as3.tasks
 					//
 					if(iChessPiece!=null)
 					{
-						FlexGlobals.gameStage.addChild(cpDisplayObject);
+//						FlexGlobals.gameStage.addChild(cpDisplayObject);
+						FlexGlobals.gameScreen.addChild(cpDisplayObject);
 //						trace("index:",vv*CcjConstants.BOARD_V_LINES+hh);
 //						var ecGasket:ChessGasket = ChessGasketsModel.getInstance().gaskets.gett(hh,vv) as ChessGasket;
 						var ecGasket:ChessGasket = FlexGlobals.chessGasketsModel.gaskets.gett(hh,vv) as ChessGasket;

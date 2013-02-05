@@ -110,7 +110,10 @@ package com.godpaper.as3.views.plugin
 		{
 			//
 			this.removeEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
-			this.stage.removeEventListener(ResizeEvent.RESIZE, stageResizeHandler);
+			if(this.stage)
+			{
+				this.stage.removeEventListener(ResizeEvent.RESIZE, stageResizeHandler);
+			}
 			super.dispose();
 		}
 		//Signal message handler

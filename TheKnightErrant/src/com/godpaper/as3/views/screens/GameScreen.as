@@ -31,6 +31,7 @@ package com.godpaper.as3.views.screens
 	import com.adobe.cairngorm.task.TaskEvent;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessBoard;
 	import com.godpaper.as3.tasks.CreateChessBoardTask;
@@ -45,6 +46,8 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
 	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
 	
+	import feathers.controls.Button;
+	import feathers.controls.Header;
 	import feathers.controls.Screen;
 	
 	import mx.logging.ILogger;
@@ -62,7 +65,7 @@ package com.godpaper.as3.views.screens
 	 * @airVersion 3.2+
 	 * Created Apr 16, 2012 11:01:37 AM
 	 */   	 
-	public class GameScreen extends Screen
+	public class GameScreen extends ScreenBase
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -78,6 +81,10 @@ package com.godpaper.as3.views.screens
 		private var _numCircles:int = 10;
 		//
 		public var chessBoard:ChessBoard;
+		//Header view
+		private var _header:Header;
+		//
+		private var _button_back:Button;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -149,6 +156,25 @@ package com.godpaper.as3.views.screens
 			this.startUpSequenceTask.addEventListener(TaskEvent.TASK_COMPLETE,startUpTaskCompleteHandler);
 			//task start
 			this.startUpSequenceTask.start();
+			//Header view here.
+			//
+			this._button_back = new Button();
+			//			this._button_back.label = "BACK";
+			this._button_back.label = this.resourceManager.getString(this.bundleName,"BTN_BACK");
+			//			this._button_back.onRelease.add(backButton_onRelease);
+			this._button_back.addEventListener(starling.events.Event.TRIGGERED,backButton_onRelease);
+			//
+			this._header = new Header();
+			this._header.title = "";
+//			this._header.title = this.resourceManager.getString(this.bundleName,"HEADER_SETTINGS");
+			this.addChild(this._header);
+			this._header.rightItems = new <DisplayObject>
+				[
+				];	
+			this._header.leftItems = new <DisplayObject>
+				[
+					this._button_back
+				];
 		}
 		//
 		override protected function draw():void
@@ -165,6 +191,12 @@ package com.godpaper.as3.views.screens
 			this.startUpSequenceTask.removeEventListener(TaskEvent.TASK_COMPLETE,startUpTaskCompleteHandler);
 			//
 			GameConfig.gameStateManager.start();
+		}
+		//
+		private function backButton_onRelease(event:Event):void
+		{
+			//Screen swither here.
+			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);
 		}
 	}
 	

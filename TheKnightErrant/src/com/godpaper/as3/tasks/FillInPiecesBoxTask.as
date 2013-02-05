@@ -88,7 +88,8 @@ package com.godpaper.as3.tasks
 				{
 //					(PieceConfig.bluePiecesBox as PiecesBox).addElement( iChessPiece );
 //					(PieceConfig.bluePiecesBox as PiecesBox).addChild( DisplayObject(iChessPiece) );//view ref
-					FlexGlobals.gameStage.addChild(DisplayObject(iChessPiece));//view ref
+//					FlexGlobals.gameStage.addChild(DisplayObject(iChessPiece));//view ref
+					FlexGlobals.gameScreen.addChild(DisplayObject(iChessPiece));//view ref
 					PieceConfig.bluePiecesBox.chessPieces.push(iChessPiece as ChessPiece);//model ref
 					//
 					iChessPiece.x = getRandomX((PieceConfig.bluePiecesBox as PiecesBox));
@@ -107,7 +108,8 @@ package com.godpaper.as3.tasks
 				{
 //					(PieceConfig.redPiecesBox as PiecesBox).addElement( jChessPiece );
 //					(PieceConfig.redPiecesBox as PiecesBox).addChild( DisplayObject(jChessPiece) );//view ref
-					FlexGlobals.gameStage.addChild(DisplayObject(jChessPiece));//view ref
+//					FlexGlobals.gameStage.addChild(DisplayObject(jChessPiece));//view ref
+					FlexGlobals.gameScreen.addChild(DisplayObject(jChessPiece));//view ref
 					PieceConfig.redPiecesBox.chessPieces.push(jChessPiece as ChessPiece);//model ref
 					//
 					jChessPiece.x = getRandomX((PieceConfig.redPiecesBox as PiecesBox));

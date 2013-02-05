@@ -106,7 +106,8 @@ package com.godpaper.as3.tasks
 			//render the chess board background(default type:grid).
 			var chessBoard:IChessBoard = realFactoy.createChessBoard(BoardConfig.type);
 			//Add to starling stage(GameScene)
-			FlexGlobals.gameStage.addChild(starling.display.DisplayObject(chessBoard));
+//			FlexGlobals.gameStage.addChild(starling.display.DisplayObject(chessBoard));
+			FlexGlobals.gameScreen.addChild(starling.display.DisplayObject(chessBoard));
 			//
 			this.complete();
 		}

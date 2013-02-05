@@ -92,7 +92,8 @@ package com.godpaper.as3.tasks
 			//Plugin button bar view init
 			var pluginButtonBar:PluginButtonBar = new PluginButtonBar();
 			pluginButtonBar.height = PluginConfig.buttonBarHeight;
-			FlexGlobals.gameStage.addChild(pluginButtonBar);
+//			FlexGlobals.gameStage.addChild(pluginButtonBar);
+			FlexGlobals.gameScreen.addChild(pluginButtonBar);
 			//
 			this.complete();
 		}

@@ -83,7 +83,8 @@ package com.godpaper.as3.tasks
 					var cGasket:starling.display.DisplayObject = starling.display.DisplayObject(realFactoy.createChessGasket(new Point(h,v)));
 					if(cGasket)
 					{
-						FlexGlobals.gameStage.addChild( cGasket );
+//						FlexGlobals.gameStage.addChild( cGasket );
+						FlexGlobals.gameScreen.addChild( cGasket );
 						//keep this reference to model.
 //						ChessGasketsModel.getInstance().gaskets.sett(h,v,cGasket);
 						FlexGlobals.chessGasketsModel.gaskets.sett(h,v,cGasket);
