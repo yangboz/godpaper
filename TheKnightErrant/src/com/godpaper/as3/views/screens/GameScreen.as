@@ -34,6 +34,7 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessBoard;
+	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	import com.godpaper.as3.tasks.CreateChessBoardTask;
 	import com.godpaper.as3.tasks.CreateChessGasketTask;
 	import com.godpaper.as3.tasks.CreateChessPieceTask;
@@ -94,7 +95,12 @@ package com.godpaper.as3.views.screens
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		public function get playerIoPlugin():PlayerIoPlugin
+		{
+			//Refresh game room with tables.
+			var playerIoPlugin:PlayerIoPlugin = (FlexGlobals.topLevelApplication.pluginProvider as PlayerIoPlugin);
+			return playerIoPlugin;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -165,7 +171,7 @@ package com.godpaper.as3.views.screens
 			this._button_back.addEventListener(starling.events.Event.TRIGGERED,backButton_onRelease);
 			//
 			this._header = new Header();
-			this._header.title = "";
+			this._header.title = playerIoPlugin.roomID;
 //			this._header.title = this.resourceManager.getString(this.bundleName,"HEADER_SETTINGS");
 			this.addChild(this._header);
 			this._header.rightItems = new <DisplayObject>

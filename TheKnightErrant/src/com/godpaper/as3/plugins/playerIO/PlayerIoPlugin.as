@@ -66,6 +66,8 @@ package com.godpaper.as3.plugins.playerIO
 		public var signal_room_refreshed:Signal;
 		public var signal_hoster_joined:Signal;
 		public var signal_user_joined:Signal;
+		//
+		public var roomID:String;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -208,6 +210,8 @@ package com.godpaper.as3.plugins.playerIO
 				handleJoin,							//Join handler
 				handleError					//Error handler	
 			)
+			//Keep room id reference.
+			this.roomID = id;
 		}
 		//--------------------------------------------------------------------------
 		//
