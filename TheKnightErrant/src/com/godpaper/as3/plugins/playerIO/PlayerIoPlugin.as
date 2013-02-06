@@ -163,7 +163,8 @@ package com.godpaper.as3.plugins.playerIO
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		public function createRoom(name:String):void
+		//Default as hoster/player1,roleIndx=0,
+		public function createRoom(name:String,peerID:String,roleIndex:int=0):void
 		{
 			this._client.multiplayer.createRoom(
 				null,								//Room id, null for auto generted
@@ -201,8 +202,8 @@ package com.godpaper.as3.plugins.playerIO
 				LOG.error("Unable to list rooms {0}", e);
 			})
 		}
-		//
-		public function joinRoom(id:String):void
+		//roomID,peerID,roleIndex
+		public function joinRoom(id:String,peerID:String,roleIndex:int):void
 		{
 			this._client.multiplayer.joinRoom(
 				id,									//Room id
@@ -212,6 +213,8 @@ package com.godpaper.as3.plugins.playerIO
 			)
 			//Keep room id reference.
 			this.roomID = id;
+			//Register role name,//Default as hoster/player1
+			FlexGlobals.userModel.registerRole(peerID,roleIndex,FlexGlobals.userModel.ROLE_NAME_LIST[roleIndex]);
 		}
 		//--------------------------------------------------------------------------
 		//

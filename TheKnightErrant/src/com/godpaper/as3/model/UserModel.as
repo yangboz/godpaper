@@ -33,7 +33,7 @@ package com.godpaper.as3.model
 		//Shared object
 //		private var sharedObject:SharedObject;
 		//
-		public var hosterRoleIndex:int;
+		public var hosterRoleIndex:int=0;
 		//
 		public var hosterPeerId:String;
 		//Users.
@@ -47,7 +47,7 @@ package com.godpaper.as3.model
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		public var ROLE_NAME_LIST:Vector.<String> = new Vector.<String>("Player1" ,"Player2" ,"Spectator");
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

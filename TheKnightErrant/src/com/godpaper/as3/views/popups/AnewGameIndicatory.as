@@ -175,7 +175,7 @@ package com.godpaper.as3.views.popups
 			var playerIoPlugin:PlayerIoPlugin = (FlexGlobals.topLevelApplication.pluginProvider as PlayerIoPlugin);
 			if( playerIoPlugin )
 			{
-				playerIoPlugin.createRoom(this._nameInput.text);
+				playerIoPlugin.createRoom(this._nameInput.text,FlexGlobals.userModel.hosterPeerId,FlexGlobals.userModel.hosterRoleIndex);
 			}
 			//Remove the pop-up.
 			PopUpManager.removePopUp(this);

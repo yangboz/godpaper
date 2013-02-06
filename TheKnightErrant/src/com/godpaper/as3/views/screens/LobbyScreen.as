@@ -368,7 +368,7 @@ package com.godpaper.as3.views.screens
 			if( this.playerIoPlugin )
 			{
 				//join selected game
-				playerIoPlugin.joinRoom(roomID);
+				playerIoPlugin.joinRoom(roomID,FlexGlobals.userModel.hosterPeerId,FlexGlobals.userModel.hosterRoleIndex);
 				//Signal handler.
 				playerIoPlugin.signal_user_joined.addOnce(onUserJoined);
 			}

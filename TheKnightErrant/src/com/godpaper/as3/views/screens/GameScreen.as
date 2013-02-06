@@ -178,12 +178,14 @@ package com.godpaper.as3.views.screens
 			this._tabBar.isEnabled = false;
 			this._tabBar.dataProvider = new ListCollection(
 				[
-					{ label: "Player1" },
-					{ label: "Player2" },
-					{ label: "Spectator" },
+					{ label: FlexGlobals.userModel.ROLE_NAME_LIST[0] },
+					{ label: FlexGlobals.userModel.ROLE_NAME_LIST[1] },
+					{ label: FlexGlobals.userModel.ROLE_NAME_LIST[2] },
 				]);
 //			this._tabBar.addEventListener(Event.CHANGE, tabBar_changeHandler);
 //			this._tabBar.layoutData = new AnchorLayoutData(NaN, 0, 0, 0);
+			//which tab bar item should selected?
+			this._tabBar.selectedIndex = FlexGlobals.userModel.hosterRoleIndex;
 			this.addChild(this._tabBar);
 			//
 			this._header = new Header();
