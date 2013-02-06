@@ -50,6 +50,9 @@ package com.godpaper.as3.views.screens
 	import feathers.controls.Button;
 	import feathers.controls.Header;
 	import feathers.controls.Screen;
+	import feathers.controls.TabBar;
+	import feathers.data.ListCollection;
+	import feathers.layout.AnchorLayoutData;
 	
 	import mx.logging.ILogger;
 	
@@ -86,6 +89,7 @@ package com.godpaper.as3.views.screens
 		private var _header:Header;
 		//
 		private var _button_back:Button;
+		private var _tabBar:TabBar;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -170,12 +174,25 @@ package com.godpaper.as3.views.screens
 			//			this._button_back.onRelease.add(backButton_onRelease);
 			this._button_back.addEventListener(starling.events.Event.TRIGGERED,backButton_onRelease);
 			//
+			this._tabBar = new TabBar();
+			this._tabBar.isEnabled = false;
+			this._tabBar.dataProvider = new ListCollection(
+				[
+					{ label: "Player1" },
+					{ label: "Player2" },
+					{ label: "Spectator" },
+				]);
+//			this._tabBar.addEventListener(Event.CHANGE, tabBar_changeHandler);
+//			this._tabBar.layoutData = new AnchorLayoutData(NaN, 0, 0, 0);
+			this.addChild(this._tabBar);
+			//
 			this._header = new Header();
 			this._header.title = playerIoPlugin.roomID;
 //			this._header.title = this.resourceManager.getString(this.bundleName,"HEADER_SETTINGS");
 			this.addChild(this._header);
 			this._header.rightItems = new <DisplayObject>
 				[
+					this._tabBar
 				];	
 			this._header.leftItems = new <DisplayObject>
 				[
@@ -185,7 +202,8 @@ package com.godpaper.as3.views.screens
 		//
 		override protected function draw():void
 		{
-			
+			this._header.width = this.actualWidth;
+			this._header.validate();
 		}
 		//--------------------------------------------------------------------------
 		//
