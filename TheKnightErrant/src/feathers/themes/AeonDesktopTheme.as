@@ -45,13 +45,13 @@ package feathers.themes
 	public class AeonDesktopTheme extends DisplayListWatcher implements IFeathersTheme
 	{
 		
-		[Embed(source="/../assets/images/aeon.png")]
+		[Embed(source="../../assets/images/aeon.png")]
 		protected static const ATLAS_IMAGE:Class;
 
-		[Embed(source="/../assets/images/aeon.xml",mimeType="application/octet-stream")]
+		[Embed(source="../../assets/images/aeon.xml",mimeType="application/octet-stream")]
 		protected static const ATLAS_XML:Class;
 
-		[Embed(source="/../assets/images/aeon/arial.fnt",mimeType="application/octet-stream")]
+		[Embed(source="../../assets/images/aeon/arial.fnt",mimeType="application/octet-stream")]
 		protected static const FONT_XML:Class;
 
 		protected static const ATLAS:TextureAtlas = new TextureAtlas(Texture.fromBitmap(new ATLAS_IMAGE(), false), XML(new ATLAS_XML()));

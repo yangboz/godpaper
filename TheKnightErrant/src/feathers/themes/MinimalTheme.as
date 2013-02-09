@@ -55,10 +55,10 @@ package feathers.themes
 
 	public class MinimalTheme extends DisplayListWatcher implements IFeathersTheme
 	{
-		[Embed(source="/../assets/images/minimal.png")]
+		[Embed(source="../../assets/images/minimal.png")]
 		protected static const ATLAS_IMAGE:Class;
 
-		[Embed(source="/../assets/images/minimal.xml",mimeType="application/octet-stream")]
+		[Embed(source="../../assets/images/minimal.xml",mimeType="application/octet-stream")]
 		protected static const ATLAS_XML:Class;
 
 		protected static const ATLAS:TextureAtlas = new TextureAtlas(Texture.fromBitmap(new ATLAS_IMAGE(), false), XML(new ATLAS_XML()));
@@ -115,7 +115,7 @@ package feathers.themes
 		protected static const RADIO_ICON_TEXTURE:Texture = ATLAS.getTexture("radio-icon");
 		protected static const RADIO_SELECTED_ICON_TEXTURE:Texture = ATLAS.getTexture("radio-selected-icon");
 
-		[Embed(source="/../assets/fonts/pf_ronda_seven.fnt",mimeType="application/octet-stream")]
+		[Embed(source="../../assets/fonts/pf_ronda_seven.fnt",mimeType="application/octet-stream")]
 		protected static const ATLAS_FONT_XML:Class;
 
 		protected static const BITMAP_FONT:BitmapFont = new BitmapFont(ATLAS.getTexture("pf_ronda_seven_0"), XML(new ATLAS_FONT_XML()));
