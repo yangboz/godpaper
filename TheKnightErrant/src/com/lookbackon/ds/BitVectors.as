@@ -38,11 +38,11 @@ package com.lookbackon.ds
 	 * @see http://blog.generalrelativity.org/actionscript-30/avm2-memory-considerations-and-bit-vectors/
 	 * 
 	 */	
-	public class BitVector
+	public class BitVectors
 	{
 		private var vector:Vector.<uint>;
 		
-		public function BitVector( source:Vector.<uint> = null, numBits:uint = 128 )
+		public function BitVectors( source:Vector.<uint> = null, numBits:uint = 128 )
 		{
 			if( source != null ) vector = source;
 			else vector = new Vector.<uint>( numBits >>> 5, true );
@@ -59,7 +59,7 @@ package com.lookbackon.ds
 			return ( vector[ ( bit - 1 ) >>> 5 ] >> ( bit & 31 ) ) & 1;
 		}
 		
-		public function OR( bitVector:BitVector ) : BitVector
+		public function OR( bitVector:BitVectors ) : BitVectors
 		{
 			
 			var result:Vector.<uint>;
@@ -83,11 +83,11 @@ package com.lookbackon.ds
 				result[ n ] |= min[ n ];
 			}
 			
-			return new BitVector( result );
+			return new BitVectors( result );
 			
 		}
 		
-		public function AND( bitVector:BitVector ) : BitVector
+		public function AND( bitVector:BitVectors ) : BitVectors
 		{
 			
 			var result:Vector.<uint>;
@@ -110,7 +110,7 @@ package com.lookbackon.ds
 				result[ n ] &= min[ n ];
 			}
 			
-			return new BitVector( result );
+			return new BitVectors( result );
 			
 		}
 		
@@ -178,7 +178,7 @@ package com.lookbackon.ds
 		
 	}
 }
-import com.lookbackon.ds.BitVector;
+import com.lookbackon.ds.BitVectors;
 
 import flash.display.Stage;
 import flash.events.KeyboardEvent;
@@ -187,7 +187,7 @@ internal class Key
 {
 	private static var instance:Key;
 	
-	private var map:BitVector;
+	private var map:BitVectors;
 	
 	public function Key( singletonEnforcer:SingletonEnforcer )
 	{
@@ -201,7 +201,7 @@ internal class Key
 	public function set stage( value:Stage ) : void
 	{
 		
-		map = new BitVector( null, 256 );
+		map = new BitVectors( null, 256 );
 		
 		value.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
 		value.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
