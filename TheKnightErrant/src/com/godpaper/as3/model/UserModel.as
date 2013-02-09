@@ -47,7 +47,8 @@ package com.godpaper.as3.model
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		public var ROLE_NAME_LIST:Vector.<String> = new Vector.<String>("Player1" ,"Player2" ,"Spectator");
+//		public var ROLE_NAME_LIST:Vector.<String> = new Vector.<String>("Player1" ,"Player2" ,"Spectator");
+		public var ROLE_NAME_LIST:Array = ["Player1" ,"Player2" ,"Spectator"];
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
