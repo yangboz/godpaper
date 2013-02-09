@@ -28,7 +28,6 @@ package com.godpaper.as3.core
 	import com.godpaper.as3.services.ConductService;
 	import com.godpaper.as3.utils.SingletonFactory;
 	import com.godpaper.as3.views.components.PiecesBox;
-	import com.godpaper.as3.views.plugin.PluginButtonBar;
 	import com.godpaper.as3.views.screens.GameScreen;
 	import com.lookbackon.AI.FSM.Message;
 	

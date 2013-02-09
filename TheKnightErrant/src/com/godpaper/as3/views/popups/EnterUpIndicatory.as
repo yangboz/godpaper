@@ -156,8 +156,8 @@ package com.godpaper.as3.views.popups
 			//Register player role name
 			var peerID:String = UIDUtil.createUID();
 			FlexGlobals.userModel.addUser(peerID);
-			FlexGlobals.userModel.hosterPeerId = peerID;//Default role is hoster.
-			FlexGlobals.userModel.registerRole(peerID,0,this._nameInput.text);
+			FlexGlobals.userModel.hostRoleName = this._nameInput.text;
+			FlexGlobals.userModel.registerRole(peerID,1,FlexGlobals.userModel.ROLE_NAME_LIST[1]);
 			//Enter up to game server by plugin initialization.
 			FlexGlobals.topLevelApplication.pluginProvider.initialization();
 		}

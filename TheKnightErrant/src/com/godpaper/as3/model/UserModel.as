@@ -131,6 +131,7 @@ package com.godpaper.as3.model
 			}
 			return keys.toString();
 		}
+		//
 		public function updateRole(peerId:String,x:Number,y:Number,z:Number,rX:Number,rY:Number,rZ:Number,oX:Number,oY:Number,oZ:Number,action:String,video:int):void
 		{
 			if(!userList[peerId])

@@ -365,6 +365,11 @@ package com.godpaper.as3.views.screens
 				return;
 			}
 			var roomID:String = this._list.selectedItem.roomID;
+			var numOfPlayers:int = this._list.selectedItem.players;
+			if(numOfPlayers>=2)
+			{
+				FlexGlobals.userModel.hosterRoleIndex = 2;//Spectator
+			}
 			if( this.playerIoPlugin )
 			{
 				//join selected game
@@ -407,7 +412,7 @@ package com.godpaper.as3.views.screens
 			{
 				LOG.debug(room.toString());
 				var label:String = room.data.name +","+room.onlineUsers.toString() + " players";
-				roomArrary.push( { label: label, texture: this._iconAtlas.getTexture("TABLE"), roomID:room.id } );
+				roomArrary.push( { label: label, texture: this._iconAtlas.getTexture("TABLE"), roomID:room.id, players:room.onlineUsers } );
 //				roomArrary.push( { label: label, texture: this._iconAtlas.getTexture("TABLE"), accessory:">" } );
 			}
 			//update table list view

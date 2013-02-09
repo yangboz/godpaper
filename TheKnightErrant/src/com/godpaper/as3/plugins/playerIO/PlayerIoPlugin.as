@@ -109,7 +109,7 @@ package com.godpaper.as3.plugins.playerIO
 		{
 			//User peerID initialization
 			var peerID:String = FlexGlobals.userModel.hosterPeerId;//Default get hoster peerID.
-			var username:String = FlexGlobals.userModel.getUserRoleName(peerID);
+			var username:String = FlexGlobals.userModel.hostRoleName;
 			//
 			PlayerIO.connect(
 				FlexGlobals.topLevelApplication.stage,								//Referance to stage
@@ -214,6 +214,8 @@ package com.godpaper.as3.plugins.playerIO
 			//Keep room id reference.
 			this.roomID = id;
 			//Register role name,//Default as hoster/player1
+			FlexGlobals.userModel.hosterPeerId = peerID;//Default role is hoster.
+			FlexGlobals.userModel.hosterRoleIndex = roleIndex;
 			FlexGlobals.userModel.registerRole(peerID,roleIndex,FlexGlobals.userModel.ROLE_NAME_LIST[roleIndex]);
 		}
 		//--------------------------------------------------------------------------
