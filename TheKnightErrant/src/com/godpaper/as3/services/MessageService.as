@@ -1,5 +1,5 @@
 /**
- *  GODPAPER Confidential,Copyright 2012. All rights reserved.
+ *  GODPAPER Confidential,Copyright 2013. All rights reserved.
  *
  *  Permission is hereby granted, free of charge, to any person obtaining
  *  a copy of this software and associated documentation files (the "Software"),
@@ -19,27 +19,13 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.as3.core
+package com.godpaper.as3.services
 {
-	import com.godpaper.as3.model.ChessBoardModel;
-	import com.godpaper.as3.model.ChessGasketsModel;
-	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.model.UserModel;
-	import com.godpaper.as3.services.ConductService;
-	import com.godpaper.as3.services.IConductService;
-	import com.godpaper.as3.services.MessageService;
-	import com.godpaper.as3.utils.SingletonFactory;
-	import com.godpaper.as3.views.components.PiecesBox;
-	import com.godpaper.as3.views.screens.GameScreen;
-	import com.lookbackon.AI.FSM.Message;
+	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.plugins.IPlug;
+	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	
-	import feathers.controls.Screen;
-	import feathers.controls.ScreenNavigator;
-	import feathers.controls.popups.IPopUpContentManager;
-	
-	import org.osflash.signals.Signal;
-	
-	import starling.display.Stage;
+	import playerio.Message;
 
 	//--------------------------------------------------------------------------
 	//
@@ -48,15 +34,15 @@ package com.godpaper.as3.core
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * A marshalling class which list the global variables and referecnes without access limitation.
-	 * Just like the "FlexGloabls.as" which located at FLEX4 framework.
+	 * MessageService.as class.   	
+	 * @see: http://playerio.com/documentation/multiplayer/messages
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 19, 2012 10:41:05 AM
+	 * Created Feb 9, 2013 5:08:06 PM
 	 */   	 
-	public class FlexGlobals
+	public class MessageService implements IConductService
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -73,28 +59,12 @@ package com.godpaper.as3.core
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//Views.
-		public static var topLevelApplication:ApplicationBase;
-//		public static var gameScene:GameScene;//The scene of game.
-		public static var gameScreen:GameScreen;//The screen of game.
-		public static var gameStage:Stage;//The stage of game.
-		public static var bluePiecesBox:PiecesBox;//The pieces box(blue).
-		public static var redPiecesBox:PiecesBox;//The pieces box(red).
-		////pop-up views manager
-		public static var popupContentManager:IPopUpContentManager;
-		//Models.
-		public static var chessPiecesModel:ChessPiecesModel = SingletonFactory.produce(ChessPiecesModel);
-		public static var chessGasketsModel:ChessGasketsModel = SingletonFactory.produce(ChessGasketsModel);
-		public static var chessBoardModel:ChessBoardModel = SingletonFactory.produce(ChessBoardModel);
-		public static var userModel:UserModel = SingletonFactory.produce(UserModel);
-		//Signals.
-		public static var levelUpSignal:Signal = new Signal(int);//user level up signal.
-		public static var checkSignal:Signal = new Signal(Message);//chess check signal.
-		//Screen navigator
-		public static var screenNavigator:ScreenNavigator;
-		//Services
-//		public static var conductService:ConductService = SingletonFactory.produce(ConductService);
-		public static var conductService:IConductService = SingletonFactory.produce(MessageService);
+		public function get playerIoPlugin():PlayerIoPlugin
+		{
+			//Refresh game room with tables.
+			var playerIoPlugin:PlayerIoPlugin = (FlexGlobals.topLevelApplication.pluginProvider as PlayerIoPlugin);
+			return playerIoPlugin;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -106,7 +76,29 @@ package com.godpaper.as3.core
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		   	
+		public function MessageService()
+		{
+		}
+		
+		public function get connected():Boolean
+		{
+			return true;
+		}
+		
+		public function initialization(server:String, devKey:String):void
+		{
+			//TODO: implement function
+		}
+		
+		public function transforBrevity(value:String):String
+		{
+			//Create a message and send
+			var message:Message = playerIoPlugin.connection.createMessage("move", value);
+			playerIoPlugin.connection.sendMessage(message);
+			//
+			return null;
+		}     	
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -124,6 +116,7 @@ package com.godpaper.as3.core
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		
 	}
 	
 }

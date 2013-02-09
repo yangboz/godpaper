@@ -68,6 +68,7 @@ package com.godpaper.as3.plugins.playerIO
 		public var signal_user_joined:Signal;
 		//
 		public var roomID:String;
+		public var connection:Connection;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -254,6 +255,7 @@ package com.godpaper.as3.plugins.playerIO
 		private function handleJoin(connection:Connection):void{
 			LOG.info("Sucessfully connected to the multiplayer server");
 //TODO:			gotoAndStop(2);
+			this.connection = connection;//Keef ref.
 			//Broad cast signal
 			signal_user_joined.dispatch();
 			//Add disconnect listener

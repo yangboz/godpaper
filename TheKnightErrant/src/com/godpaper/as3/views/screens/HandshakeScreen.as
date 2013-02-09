@@ -58,6 +58,7 @@ package com.godpaper.as3.views.screens
 	import starling.events.TouchEvent;
 	import starling.text.TextField;
 	
+	import com.godpaper.as3.services.ConductService;
 	/**
 	 * HandshakeScreen.as class.The client of the game connects with the listening others by tree-way handshake firstly. 	
 	 * @author yangboz
@@ -110,7 +111,14 @@ package com.godpaper.as3.views.screens
 		//  Protected properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		protected function get conductService():ConductService
+		{
+			if(FlexGlobals.conductService is ConductService)
+			{
+				return FlexGlobals.conductService as ConductService;
+			}
+			return null;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Constructor
@@ -274,10 +282,10 @@ package com.godpaper.as3.views.screens
 			//Conduct service here.
 			FlexGlobals.conductService.initialization(null,null);	
 			//Signal watcher
-			FlexGlobals.conductService.connectSignal.add(conductConnectHandler);
-			FlexGlobals.conductService.disconnectSignal.add(conductDisconnectHandler);
-			FlexGlobals.conductService.userVoSignal.add(conductUserVoHandler);
-			FlexGlobals.conductService.postVoSignal.add(conductPostVoHandler);
+			this.conductService.connectSignal.add(conductConnectHandler);
+			this.conductService.disconnectSignal.add(conductDisconnectHandler);
+			this.conductService.userVoSignal.add(conductUserVoHandler);
+			this.conductService.postVoSignal.add(conductPostVoHandler);
 			//_response_list selector
 //			this._response_list.addEventListener(Event.CHANGE,responseListChangeHandler);//no more work.
 		}
@@ -361,7 +369,7 @@ package com.godpaper.as3.views.screens
 			postVO.action = UserVO.ACTION_IDLE;
 			postVO.state = PostVO.STATE_HAND_SHAKE;
 			//Post message to net group
-			FlexGlobals.conductService.netGroupPost(postVO,this._picker_list.selectedItem.toString());
+			this.conductService.netGroupPost(postVO,this._picker_list.selectedItem.toString());
 			//no more invite request,untill none response.
 //			this._button_invite.isEnabled = false;
 		}
@@ -377,7 +385,7 @@ package com.godpaper.as3.views.screens
 			postVO.roleName = FlexGlobals.userModel.hostRoleName;
 			postVO.action = UserVO.ACTION_PLAY;
 			postVO.state = PostVO.STATE_ENTRY;
-			FlexGlobals.conductService.netGroupPost(postVO,selectedPeerId);
+			this.conductService.netGroupPost(postVO,selectedPeerId);
 			//Screen swither here with data.
 			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);//Screen swither here.
 		}
