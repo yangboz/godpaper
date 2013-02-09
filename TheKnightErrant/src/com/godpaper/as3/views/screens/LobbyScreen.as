@@ -366,6 +366,11 @@ package com.godpaper.as3.views.screens
 			}
 			var roomID:String = this._list.selectedItem.roomID;
 			var numOfPlayers:int = this._list.selectedItem.players;
+			//Default Player1
+			if(numOfPlayers>=1)
+			{
+				FlexGlobals.userModel.hosterRoleIndex = 1;//Player2
+			}
 			if(numOfPlayers>=2)
 			{
 				FlexGlobals.userModel.hosterRoleIndex = 2;//Spectator

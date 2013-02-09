@@ -122,7 +122,7 @@ package com.godpaper.as3.views.popups
 			this._inputsContainer.addChild(this._nameInput);
 			//buttons 
 			this._joinBtn = new Button();
-			this._joinBtn.label = "Join Game";
+			this._joinBtn.label = "Enter Lobby";
 			this._buttonsContainer.addChild(this._joinBtn);
 			//event listener
 			//			this._submitBtn.onRelease.add(submitButtonOnRelease);

@@ -203,7 +203,7 @@ package com.godpaper.as3.plugins.playerIO
 			})
 		}
 		//roomID,peerID,roleIndex
-		public function joinRoom(id:String,peerID:String,roleIndex:int):void
+		public function joinRoom(id:String,peerID:String="",roleIndex:int=0):void
 		{
 			this._client.multiplayer.joinRoom(
 				id,									//Room id
