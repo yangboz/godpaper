@@ -33,16 +33,22 @@ package com.godpaper.as3.views.popups
 	import feathers.controls.Screen;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.Scroller;
+	import feathers.display.Image;
+	import feathers.display.TiledImage;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.VerticalLayout;
+	import feathers.textures.Scale9Textures;
+	
+	import flash.geom.Rectangle;
+	
+	import mx.resources.IResourceManager;
+	import mx.resources.ResourceManager;
 	
 	import starling.display.BlendMode;
 	import starling.display.Quad;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
-	
-	import mx.resources.IResourceManager;
-	import mx.resources.ResourceManager;
+
 	/**
 	 * IndicatoryBase.as class.The base class of all indicatory with popup behavior.   	
 	 * @author yangboz
@@ -52,6 +58,7 @@ package com.godpaper.as3.views.popups
 	 * Created Aug 23, 2012 5:17:27 PM
 	 */   	 
 	public class IndicatoryBase extends Screen
+//	public class IndicatoryBase extends PanelScreen
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -65,10 +72,13 @@ package com.godpaper.as3.views.popups
 		protected var _bgQuad:Quad;
 		//Locale
 		protected var resourceManager:IResourceManager = ResourceManager.getInstance();
+		//background skin
+		protected var _image:Image;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		[Embed(source="../../../../../assets/images/list-item-selected.png")]//color of gray.
+		private static const BACK_GROUND_TEXTURE:Class;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -124,12 +134,9 @@ package com.godpaper.as3.views.popups
 		//--------------------------------------------------------------------------
 		override protected function initialize():void
 		{
-			//background
-			//			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
-			//			var texture:Texture = atlas.getTexture("BLUE");
-			//			texture.repeat = true;
-			//			_background = new Image(texture);
-			//			addChild(_background);
+			//backgroundSkin
+			this._image = new Image(Texture.fromBitmap(new BACK_GROUND_TEXTURE(), false));
+			this.addChild(this._image);
 			//header title
 			this._header = new Header();
 			this._header.title = "???";
@@ -157,6 +164,10 @@ package com.godpaper.as3.views.popups
 			this._container.width = this.actualWidth;
 			this._container.height = this.actualHeight - this._container.y;
 			this._container.validate();
+			//
+			this._image.width = this.actualWidth;
+			this._image.height = this.actualHeight;
+
 		}
 		//--------------------------------------------------------------------------
 		//
