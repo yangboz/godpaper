@@ -2,10 +2,6 @@ package com.lookbackon.AI.steeringBehavior
 {
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
-	
-	import starling.display.Image;
-//	import starling.display.Sprite;
-	import starling.textures.Texture;
 
 	/**
 	 * Starling graphic draw based on Image class. 
