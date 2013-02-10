@@ -11,10 +11,10 @@ package com.godpaper.as3.business.managers
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.errors.DefaultErrors;
+	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesMemento;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.PositionVO;
 	import com.godpaper.as3.model.vos.ZobristKeyVO;
@@ -228,8 +228,12 @@ package com.godpaper.as3.business.managers
 			//conduct service transform
 			if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
 			{
-				var brevity:String = conductVO.brevity;//conduct brevity
-				FlexGlobals.conductService.transforBrevity( brevity );
+				LOG.info("GameConfig.turnFlag: {0}",GameConfig.turnFlag);
+				if(GameConfig.turnFlag==DefaultConstants.FLAG_RED)
+				{
+					var brevity:String = conductVO.brevity;//conduct brevity
+					FlexGlobals.conductService.transforBrevity( brevity );
+				}
 			}
 		}
 

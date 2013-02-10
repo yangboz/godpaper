@@ -148,7 +148,7 @@ package com.godpaper.as3.business.factory
 				//push to reds collection.
 				FlexGlobals.chessPiecesModel.reds.push(simpleChessPiece);
 			}
-			else //blue
+			else //blue or green
 			{
 				//simpleChessPiece.enabled = false;
 				//					ChessPiecesModel.getInstance().bluePieces.setBitt(position.y,position.x,true);

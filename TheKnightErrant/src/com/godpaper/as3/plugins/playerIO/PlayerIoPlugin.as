@@ -299,7 +299,16 @@ package com.godpaper.as3.plugins.playerIO
 				//place the piece comes from other player's action broadcasting.
 				var conductVO:ConductVO = new ConductVO();
 				conductVO.nextPosition = new Point(x,y);
-				conductVO.target = PieceConfig.redPiecesBox.chessPieces.pop();
+				//
+				if(!turn)
+				{
+					conductVO.target = PieceConfig.redPiecesBox.chessPieces.pop();
+					GameConfig.gameStateManager.isAnotherHumanTurnNow();
+				}else
+				{
+					conductVO.target = PieceConfig.bluePiecesBox.chessPieces.pop();
+					GameConfig.gameStateManager.isHumanTurnNow();
+				}
 				GameConfig.chessPieceManager.makeMove(conductVO);
 			})
 
