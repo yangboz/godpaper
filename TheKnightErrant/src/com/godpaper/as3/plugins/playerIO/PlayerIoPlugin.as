@@ -26,10 +26,15 @@ package com.godpaper.as3.plugins.playerIO
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.IPlugData;
 	import com.godpaper.as3.utils.LogUtil;
+	
+	import flash.geom.Point;
 	
 	import mx.logging.ILogger;
 	import mx.utils.UIDUtil;
@@ -291,6 +296,11 @@ package com.godpaper.as3.plugins.playerIO
 			//Listen to and handle messages of the type "move"
 			connection.addMessageHandler("place", function(m:Message, y:int, x:int, state:String, turn:int):void{
 				LOG.info("Player: State {0},Moved to {1},{2},Turn to {3}", state,x,y,turn);
+				//place the piece comes from other player's action broadcasting.
+				var conductVO:ConductVO = new ConductVO();
+				conductVO.nextPosition = new Point(x,y);
+				conductVO.target = PieceConfig.redPiecesBox.chessPieces.pop();
+				GameConfig.chessPieceManager.makeMove(conductVO);
 			})
 
 		}
