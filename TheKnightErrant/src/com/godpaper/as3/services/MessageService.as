@@ -93,7 +93,10 @@ package com.godpaper.as3.services
 		public function transforBrevity(value:String):String
 		{
 			//Create a message and send
-			var message:Message = playerIoPlugin.connection.createMessage("move", value);
+//			var message:Message = playerIoPlugin.connection.createMessage("click", value);//"+-1-111"
+			var xPosition:int = int(value.charAt(5));
+			var yPosition:int = int(value.charAt(6));
+			var message:Message = playerIoPlugin.connection.createMessage("click", xPosition,yPosition);
 			playerIoPlugin.connection.sendMessage(message);
 			//
 			return null;

@@ -120,6 +120,8 @@ package com.godpaper.as3.views.popups
 			this._nameInput = new TextInput();
 			this._nameInput.height = 25;
 			this._inputsContainer.addChild(this._nameInput);
+			//Default name 
+			this._nameInput.text = UIDUtil.createUID().substr(0,8);
 			//buttons 
 			this._joinBtn = new Button();
 			this._joinBtn.label = "Enter Lobby";

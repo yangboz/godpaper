@@ -32,6 +32,8 @@ package com.godpaper.as3.views.popups
 	import feathers.controls.TextInput;
 	import feathers.core.PopUpManager;
 	
+	import mx.utils.UIDUtil;
+	
 	import org.osflash.signals.Signal;
 	
 	import starling.display.DisplayObject;
@@ -127,7 +129,7 @@ package com.godpaper.as3.views.popups
 			this._nameInput = new TextInput();
 			this._nameInput.height = 25;
 			this._nameInput.width = 125;
-//			this._nameInput.text = "Amazing chess game!";
+			this._nameInput.text = "Amazing Game-".concat(UIDUtil.createUID().substr(0,4));
 			this._inputsContainer.addChild(this._nameInput);
 			//buttons 
 			this._cancelBtn = new Button();

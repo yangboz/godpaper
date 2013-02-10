@@ -287,6 +287,12 @@ package com.godpaper.as3.plugins.playerIO
 			connection.addMessageHandler("join", function(m:Message, p1name:String, p2name:String):void{
 				LOG.info("Player joined in as {0} and {1}", p1name,p2name);
 			})
+				
+			//Listen to and handle messages of the type "move"
+			connection.addMessageHandler("place", function(m:Message):void{
+				LOG.info("Player:{0}, From {1}{2},Moved to {3},{4}", m.getInt(0), m.getInt(1),m.getInt(2), m.getInt(3),m.getInt(4));
+			})
+
 		}
 		
 		private function handleMessages(m:Message):void{
