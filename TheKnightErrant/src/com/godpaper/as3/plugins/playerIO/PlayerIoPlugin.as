@@ -289,8 +289,8 @@ package com.godpaper.as3.plugins.playerIO
 			})
 				
 			//Listen to and handle messages of the type "move"
-			connection.addMessageHandler("place", function(m:Message):void{
-				LOG.info("Player:{0}, From {1}{2},Moved to {3},{4}", m.getInt(0), m.getInt(1),m.getInt(2), m.getInt(3),m.getInt(4));
+			connection.addMessageHandler("place", function(m:Message, y:int, x:int, state:String, turn:int):void{
+				LOG.info("Player: State {0},Moved to {1},{2},Turn to {3}", state,x,y,turn);
 			})
 
 		}

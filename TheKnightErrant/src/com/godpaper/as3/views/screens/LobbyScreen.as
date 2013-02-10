@@ -168,31 +168,6 @@ package com.godpaper.as3.views.screens
 			const collection:ListCollection = new ListCollection(
 				[
 //					{ label: "Facebook", texture: this._iconAtlas.getTexture("TABLE") }
-//					{ label: "Twitter", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Google", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "YouTube", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "StumbleUpon", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Yahoo", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Tumblr", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Blogger", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Reddit", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Flickr", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Yelp", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Vimeo", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "LinkedIn", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Delicious", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "FriendFeed", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "MySpace", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Digg", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "DeviantArt", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Picasa", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "LiveJournal", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Slashdot", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Bebo", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Viddler", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Newsvine", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Posterous", texture: this._iconAtlas.getTexture("TABLE") },
-//					{ label: "Orkut", texture: this._iconAtlas.getTexture("TABLE") },
 				]);
 			
 			const listLayout:TiledRowsLayout = new TiledRowsLayout();
@@ -209,8 +184,9 @@ package com.godpaper.as3.views.screens
 //			this._list.horizontalScrollPolicy = List.SCROLL_POLICY_ON;
 			this._list.itemRendererFactory = tileListItemRendererFactory;
 			this._list.addEventListener(Event.SCROLL, list_scrollHandler);
+			this._list.addEventListener(Event.CHANGE, list_changeHandler);
 			this.addChild(this._list);
-			
+			//
 			const normalSymbolTexture:Texture = this._iconAtlas.getTexture("normal-page-symbol");
 			const selectedSymbolTexture:Texture = this._iconAtlas.getTexture("selected-page-symbol");
 			this._pageIndicator = new PageIndicator();
@@ -416,7 +392,8 @@ package com.godpaper.as3.views.screens
 			for each(var room:RoomInfo in rooms)
 			{
 				LOG.debug(room.toString());
-				var label:String = room.data.name +","+room.onlineUsers.toString() + " players";
+//				var label:String = room.data.name +","+room.onlineUsers.toString() + " players";
+				var label:String = room.data.name;
 				roomArrary.push( { label: label, texture: this._iconAtlas.getTexture("TABLE"), roomID:room.id, players:room.onlineUsers } );
 //				roomArrary.push( { label: label, texture: this._iconAtlas.getTexture("TABLE"), accessory:">" } );
 			}
@@ -473,6 +450,13 @@ package com.godpaper.as3.views.screens
 			//relayout for view update.
 			this._list.dataProvider = this.collection;
 			this.layout();
+		}
+		//Call out the table detail information.
+		private function list_changeHandler(event:Event):void
+		{
+			const content:Label = new Label();
+			content.text = "OnlineUsers: ".concat(this._list.selectedItem.players);
+			Callout.show(DisplayObject(content), this._button_join, Callout.DIRECTION_DOWN);
 		}
 	}
 	
