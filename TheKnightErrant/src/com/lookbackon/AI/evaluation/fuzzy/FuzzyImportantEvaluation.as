@@ -11,7 +11,8 @@ package com.lookbackon.AI.evaluation.fuzzy
 	import com.godpaper.as3.consts.DefaultPiecesConstants;
 	
 	/**
-	 * FuzzyImportantEvaluation.as class.   	
+	 * FuzzyImportantEvaluation.as class.   
+	 * @see: https://www.box.com/s/g24knm8b4kqpftf66i40	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
