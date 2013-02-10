@@ -1,26 +1,9 @@
 /*
- Copyright 2012-2013 Joshua Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls.text
 {
@@ -226,11 +209,6 @@ package feathers.controls.text
 		 * @private
 		 */
 		protected var _oldGlobalY:Number = 0;
-
-		/**
-		 * @private
-		 */
-		protected var _savedSelectionIndex:int = -1;
 
 		/**
 		 * @private
@@ -695,21 +673,22 @@ package feathers.controls.text
 				{
 					if(position.x < 0)
 					{
-						this._savedSelectionIndex = 0;
+						this._pendingSelectionStartIndex = this._pendingSelectionEndIndex = 0;
 					}
 					else
 					{
-						this._savedSelectionIndex = this._measureTextField.getCharIndexAtPoint(position.x, position.y);
-						const bounds:Rectangle = this._measureTextField.getCharBoundaries(this._savedSelectionIndex);
+						this._pendingSelectionStartIndex = this._measureTextField.getCharIndexAtPoint(position.x, position.y);
+						const bounds:Rectangle = this._measureTextField.getCharBoundaries(this._pendingSelectionStartIndex);
 						if(bounds && (bounds.x + bounds.width - position.x) < (position.x - bounds.x))
 						{
-							this._savedSelectionIndex++;
+							this._pendingSelectionStartIndex++;
 						}
+						this._pendingSelectionEndIndex = this._pendingSelectionStartIndex;
 					}
 				}
 				else
 				{
-					this._savedSelectionIndex = -1;
+					this._pendingSelectionStartIndex = this._pendingSelectionEndIndex = -1;
 				}
 				this.stageText.assignFocus();
 			}
@@ -722,10 +701,25 @@ package feathers.controls.text
 		/**
 		 * @inheritDoc
 		 */
+		public function clearFocus():void
+		{
+			if(!this._stageTextHasFocus)
+			{
+				return;
+			}
+			Starling.current.nativeStage.focus = Starling.current.nativeStage;
+			this.dispatchEventWith(FeathersEventType.FOCUS_OUT);
+		}
+
+		/**
+		 * @inheritDoc
+		 */
 		public function selectRange(startIndex:int, endIndex:int):void
 		{
 			if(this._stageTextIsComplete && this.stageText)
 			{
+				this._pendingSelectionStartIndex = -1;
+				this._pendingSelectionEndIndex = -1;
 				this.stageText.selectRange(startIndex, endIndex);
 			}
 			else
@@ -756,6 +750,11 @@ package feathers.controls.text
 			{
 				if(this.stageText.text != this._text)
 				{
+					if(this._pendingSelectionStartIndex < 0)
+					{
+						this._pendingSelectionStartIndex = this.stageText.selectionActiveIndex;
+						this._pendingSelectionEndIndex = this.stageText.selectionAnchorIndex;
+					}
 					this.stageText.text = this._text;
 				}
 				this._measureTextField.text = this.stageText.text;
@@ -798,11 +797,11 @@ package feathers.controls.text
 			this.stageText.autoCapitalize = this._autoCapitalize;
 			this.stageText.autoCorrect = this._autoCorrect;
 			this.stageText.color = this._color;
-			this.stageText.displayAsPassword = this._displayAsPassword
+			this.stageText.displayAsPassword = this._displayAsPassword;
 			this.stageText.editable = this._editable;
 			this.stageText.fontFamily = this._fontFamily;
 			this.stageText.fontPosture = this._fontPosture;
-			this.stageText.fontSize = this._fontSize;
+			this.stageText.fontSize = this._fontSize * Starling.contentScaleFactor;
 			this.stageText.fontWeight = this._fontWeight;
 			this.stageText.locale = this._locale;
 			this.stageText.maxChars = this._maxChars;
@@ -819,7 +818,7 @@ package feathers.controls.text
 			format.color = this._color;
 			format.font = this._fontFamily;
 			format.italic = this._fontPosture == FontPosture.ITALIC;
-			format.size = this._fontSize / Starling.contentScaleFactor;
+			format.size = this._fontSize;
 			format.bold = this._fontWeight == FontWeight.BOLD;
 			var alignValue:String = this._textAlign;
 			if(alignValue == TextFormatAlign.START)
@@ -848,7 +847,7 @@ package feathers.controls.text
 			if(this._pendingSelectionStartIndex >= 0)
 			{
 				const startIndex:int = this._pendingSelectionStartIndex;
-				const endIndex:int = this._pendingSelectionEndIndex;
+				const endIndex:int = (this._pendingSelectionEndIndex < 0) ? this._pendingSelectionStartIndex : this._pendingSelectionEndIndex;
 				this._pendingSelectionStartIndex = -1;
 				this._pendingSelectionEndIndex = -1;
 				this.selectRange(startIndex, endIndex);
@@ -1049,12 +1048,6 @@ package feathers.controls.text
 			{
 				this.textSnapshot.visible = false;
 			}
-			if(this._savedSelectionIndex >= 0)
-			{
-				const selectionIndex:int = this._savedSelectionIndex;
-				this._savedSelectionIndex = -1;
-				this.selectRange(selectionIndex, selectionIndex)
-			}
 			this.invalidate(INVALIDATION_FLAG_SKIN);
 			this.dispatchEventWith(FeathersEventType.FOCUS_IN);
 		}
@@ -1081,6 +1074,7 @@ package feathers.controls.text
 		 */
 		protected function stageText_keyDownHandler(event:KeyboardEvent):void
 		{
+			trace("key down");
 			if(event.keyCode == Keyboard.ENTER)
 			{
 				this.dispatchEventWith(FeathersEventType.ENTER);

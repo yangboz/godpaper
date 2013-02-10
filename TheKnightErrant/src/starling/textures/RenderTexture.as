@@ -98,7 +98,6 @@ package starling.textures
         public override function dispose():void
         {
             mSupport.dispose();
-            mActiveTexture.dispose();
             
             if (isPersistent) 
             {

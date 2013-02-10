@@ -354,6 +354,9 @@ package feathers.controls
 		{
 			if(this.loader)
 			{
+				this.loader.contentLoaderInfo.removeEventListener(flash.events.Event.COMPLETE, loader_completeHandler);
+				this.loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, loader_errorHandler);
+				this.loader.contentLoaderInfo.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, loader_errorHandler);
 				try
 				{
 					this.loader.close();
@@ -414,6 +417,11 @@ package feathers.controls
 				if(this._textureFrame)
 				{
 					newWidth = this._textureFrame.width * this._textureScale;
+					if(!needsHeight)
+					{
+						const heightScale:Number = this.explicitHeight / (this._textureFrame.height * this._textureScale);
+						newWidth *= heightScale;
+					}
 				}
 				else
 				{
@@ -427,6 +435,11 @@ package feathers.controls
 				if(this._textureFrame)
 				{
 					newHeight = this._textureFrame.height * this._textureScale;
+					if(!needsWidth)
+					{
+						const widthScale:Number = this.explicitWidth / (this._textureFrame.width * this._textureScale);
+						newHeight *= widthScale;
+					}
 				}
 				else
 				{
@@ -529,7 +542,7 @@ package feathers.controls
 				HELPER_RECTANGLE2.y = 0;
 				HELPER_RECTANGLE2.width = this.actualWidth;
 				HELPER_RECTANGLE2.height = this.actualHeight;
-				RectangleUtil.fit(HELPER_RECTANGLE, HELPER_RECTANGLE2, ScaleMode.SHOW_ALL, true, HELPER_RECTANGLE);
+				RectangleUtil.fit(HELPER_RECTANGLE, HELPER_RECTANGLE2, ScaleMode.SHOW_ALL, false, HELPER_RECTANGLE);
 				this.image.x = HELPER_RECTANGLE.x;
 				this.image.y = HELPER_RECTANGLE.y;
 				this.image.width = HELPER_RECTANGLE.width;

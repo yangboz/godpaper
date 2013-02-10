@@ -1,13 +1,16 @@
 /*
- Feathers
- Copyright (c) 2012 Josh Tynjala. All Rights Reserved.
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- This program is free software. You can redistribute and/or modify it in
- accordance with the terms of the accompanying license agreement.
- */
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
+*/
 package feathers.layout
 {
+	import feathers.core.IFeathersControl;
 	import feathers.layout.ILayoutData;
+
+	import flash.display.DisplayObjectContainer;
 
 	import flash.errors.IllegalOperationError;
 	import flash.geom.Point;
@@ -73,6 +76,7 @@ package feathers.layout
 			const needsHeight:Boolean = isNaN(explicitHeight);
 			if(needsWidth || needsHeight)
 			{
+				this.validateItems(items, true);
 				this.measureViewPort(items, viewPortWidth, viewPortHeight, HELPER_POINT);
 				if(needsWidth)
 				{
@@ -82,6 +86,10 @@ package feathers.layout
 				{
 					viewPortHeight = Math.min(maxHeight, Math.max(minHeight, HELPER_POINT.y));
 				}
+			}
+			else
+			{
+				this.validateItems(items, false);
 			}
 
 			this.layoutWithBounds(items, boundsX, boundsY, viewPortWidth, viewPortHeight);
@@ -173,7 +181,12 @@ package feathers.layout
 				var layoutData:AnchorLayoutData;
 				if(item is ILayoutDisplayObject)
 				{
-					layoutData = ILayoutDisplayObject(item).layoutData as AnchorLayoutData;
+					var layoutItem:ILayoutDisplayObject = ILayoutDisplayObject(item);
+					if(!layoutItem.includeInLayout)
+					{
+						continue;
+					}
+					layoutData = layoutItem.layoutData as AnchorLayoutData;
 				}
 
 				var isReadyForLayout:Boolean = !layoutData || this.isReadyForLayout(layoutData, i, items, unpositionedItems);
@@ -223,28 +236,10 @@ package feathers.layout
 		 */
 		protected function measureItemHorizontally(item:ILayoutDisplayObject, layoutData:AnchorLayoutData):Number
 		{
-			var right:Number = layoutData.right;
-			var left:Number = layoutData.left;
-			var rightAnchorDisplayObject:DisplayObject = layoutData.rightAnchorDisplayObject;
-			var leftAnchorDisplayObject:DisplayObject = layoutData.leftAnchorDisplayObject;
-			var hasRightPosition:Boolean = !isNaN(right);
-			var hasLeftPosition:Boolean = !isNaN(left);
-
-			left += (hasLeftPosition && leftAnchorDisplayObject) ? this.getLeftOffset(leftAnchorDisplayObject) : 0;
-			right += (hasRightPosition && rightAnchorDisplayObject) ? this.getRightOffset(rightAnchorDisplayObject) : 0;
-			if(hasLeftPosition)
-			{
-				if(hasRightPosition)
-				{
-					return left + right + item.width;
-				}
-				return left + item.width;
-			}
-			else if(hasRightPosition)
-			{
-				return right + item.width;
-			}
-			return item.width;
+			const displayItem:DisplayObject = DisplayObject(item);
+			const left:Number = this.getLeftOffset(displayItem);
+			const right:Number = this.getRightOffset(displayItem);
+			return item.width + left + right;
 		}
 
 		/**
@@ -252,28 +247,10 @@ package feathers.layout
 		 */
 		protected function measureItemVertically(item:ILayoutDisplayObject, layoutData:AnchorLayoutData):Number
 		{
-			var top:Number = layoutData.top;
-			var bottom:Number = layoutData.bottom;
-			var topAnchorDisplayObject:DisplayObject = layoutData.topAnchorDisplayObject;
-			var bottomAnchorDisplayObject:DisplayObject = layoutData.bottomAnchorDisplayObject;
-			var hasTopPosition:Boolean = !isNaN(top);
-			var hasBottomPosition:Boolean = !isNaN(bottom);
-
-			top += (hasTopPosition && topAnchorDisplayObject) ? this.getTopOffset(topAnchorDisplayObject) : 0;
-			bottom += (hasBottomPosition && bottomAnchorDisplayObject) ? this.getBottomOffset(bottomAnchorDisplayObject) : 0;
-			if(hasTopPosition)
-			{
-				if(hasBottomPosition)
-				{
-					return top + bottom + item.height;
-				}
-				return top + item.height;
-			}
-			else if(hasBottomPosition)
-			{
-				return bottom + item.height;
-			}
-			return item.height;
+			const displayItem:DisplayObject = DisplayObject(item);
+			const top:Number = this.getTopOffset(displayItem);
+			const bottom:Number = this.getBottomOffset(displayItem);
+			return item.height + top + bottom;
 		}
 
 		/**
@@ -283,21 +260,53 @@ package feathers.layout
 		{
 			if(item is ILayoutDisplayObject)
 			{
-				var layoutItem:ILayoutDisplayObject = ILayoutDisplayObject(item);
-				var layoutData:AnchorLayoutData = layoutItem.layoutData as AnchorLayoutData;
+				const layoutItem:ILayoutDisplayObject = ILayoutDisplayObject(item);
+				const layoutData:AnchorLayoutData = layoutItem.layoutData as AnchorLayoutData;
 				if(layoutData)
 				{
 					var top:Number = layoutData.top;
-					var hasTopPosition:Boolean = !isNaN(top);
-					var topAnchorDisplayObject:DisplayObject = layoutData.topAnchorDisplayObject;
+					const hasTopPosition:Boolean = !isNaN(top);
 					if(hasTopPosition)
 					{
-						top += (hasTopPosition && topAnchorDisplayObject) ? this.getTopOffset(topAnchorDisplayObject) : 0;
-						return top + item.height;
+						const topAnchorDisplayObject:DisplayObject = layoutData.topAnchorDisplayObject;
+						if(topAnchorDisplayObject)
+						{
+							top += topAnchorDisplayObject.height + this.getTopOffset(topAnchorDisplayObject);
+						}
+						else
+						{
+							return top;
+						}
 					}
+					else
+					{
+						top = 0;
+					}
+					const bottom:Number = layoutData.bottom;
+					const hasBottomPosition:Boolean = !isNaN(bottom);
+					if(hasBottomPosition)
+					{
+						const bottomAnchorDisplayObject:DisplayObject = layoutData.bottomAnchorDisplayObject;
+						if(bottomAnchorDisplayObject)
+						{
+							top = Math.max(top, -bottomAnchorDisplayObject.height - bottom + this.getTopOffset(bottomAnchorDisplayObject));
+						}
+					}
+					const verticalCenter:Number = layoutData.verticalCenter;
+					const hasVerticalCenterPosition:Boolean = !isNaN(verticalCenter);
+					if(hasVerticalCenterPosition)
+					{
+						const verticalCenterAnchorDisplayObject:DisplayObject = layoutData.verticalCenterAnchorDisplayObject;
+						if(verticalCenterAnchorDisplayObject)
+						{
+							const verticalOffset:Number = verticalCenter - (item.height - verticalCenterAnchorDisplayObject.height) / 2;
+							top = Math.max(top, verticalOffset + this.getTopOffset(verticalCenterAnchorDisplayObject));
+						}
+					}
+					return top;
 				}
 			}
-			return item.y + item.height;
+			return 0;
 		}
 
 		/**
@@ -307,21 +316,53 @@ package feathers.layout
 		{
 			if(item is ILayoutDisplayObject)
 			{
-				var layoutItem:ILayoutDisplayObject = ILayoutDisplayObject(item);
-				var layoutData:AnchorLayoutData = layoutItem.layoutData as AnchorLayoutData;
+				const layoutItem:ILayoutDisplayObject = ILayoutDisplayObject(item);
+				const layoutData:AnchorLayoutData = layoutItem.layoutData as AnchorLayoutData;
 				if(layoutData)
 				{
 					var right:Number = layoutData.right;
-					var hasRightPosition:Boolean = !isNaN(right);
-					var rightAnchorDisplayObject:DisplayObject = layoutData.rightAnchorDisplayObject;
+					const hasRightPosition:Boolean = !isNaN(right);
 					if(hasRightPosition)
 					{
-						right += (hasRightPosition && rightAnchorDisplayObject) ? this.getRightOffset(rightAnchorDisplayObject) : 0;
-						return right + item.width;
+						const rightAnchorDisplayObject:DisplayObject = layoutData.rightAnchorDisplayObject;
+						if(rightAnchorDisplayObject)
+						{
+							right += rightAnchorDisplayObject.width + this.getRightOffset(rightAnchorDisplayObject);
+						}
+						else
+						{
+							return right;
+						}
 					}
+					else
+					{
+						right = 0;
+					}
+					const left:Number = layoutData.left;
+					const hasLeftPosition:Boolean = !isNaN(left);
+					if(hasLeftPosition)
+					{
+						const leftAnchorDisplayObject:DisplayObject = layoutData.leftAnchorDisplayObject;
+						if(leftAnchorDisplayObject)
+						{
+							right = Math.max(right, -leftAnchorDisplayObject.width - left + this.getRightOffset(leftAnchorDisplayObject));
+						}
+					}
+					const horizontalCenter:Number = layoutData.horizontalCenter;
+					const hasHorizontalCenterPosition:Boolean = !isNaN(horizontalCenter);
+					if(hasHorizontalCenterPosition)
+					{
+						const horizontalCenterAnchorDisplayObject:DisplayObject = layoutData.horizontalCenterAnchorDisplayObject;
+						if(horizontalCenterAnchorDisplayObject)
+						{
+							const horizontalOffset:Number = -horizontalCenter - (item.width - horizontalCenterAnchorDisplayObject.width) / 2;
+							right = Math.max(right, horizontalOffset + this.getRightOffset(horizontalCenterAnchorDisplayObject));
+						}
+					}
+					return right;
 				}
 			}
-			return item.width;
+			return 0;
 		}
 
 		/**
@@ -331,21 +372,53 @@ package feathers.layout
 		{
 			if(item is ILayoutDisplayObject)
 			{
-				var layoutItem:ILayoutDisplayObject = ILayoutDisplayObject(item);
-				var layoutData:AnchorLayoutData = layoutItem.layoutData as AnchorLayoutData;
+				const layoutItem:ILayoutDisplayObject = ILayoutDisplayObject(item);
+				const layoutData:AnchorLayoutData = layoutItem.layoutData as AnchorLayoutData;
 				if(layoutData)
 				{
 					var bottom:Number = layoutData.bottom;
-					var hasBottomPosition:Boolean = !isNaN(bottom);
-					var bottomAnchorDisplayObject:DisplayObject = layoutData.bottomAnchorDisplayObject;
+					const hasBottomPosition:Boolean = !isNaN(bottom);
 					if(hasBottomPosition)
 					{
-						bottom += (hasBottomPosition && bottomAnchorDisplayObject) ? this.getBottomOffset(bottomAnchorDisplayObject) : 0;
-						return bottom + item.height;
+						const bottomAnchorDisplayObject:DisplayObject = layoutData.bottomAnchorDisplayObject;
+						if(bottomAnchorDisplayObject)
+						{
+							bottom += bottomAnchorDisplayObject.height + this.getBottomOffset(bottomAnchorDisplayObject);
+						}
+						else
+						{
+							return bottom;
+						}
 					}
+					else
+					{
+						bottom = 0;
+					}
+					const top:Number = layoutData.top;
+					const hasTopPosition:Boolean = !isNaN(top);
+					if(hasTopPosition)
+					{
+						const topAnchorDisplayObject:DisplayObject = layoutData.topAnchorDisplayObject;
+						if(topAnchorDisplayObject)
+						{
+							bottom = Math.max(bottom, -topAnchorDisplayObject.height - top + this.getBottomOffset(topAnchorDisplayObject));
+						}
+					}
+					const verticalCenter:Number = layoutData.verticalCenter;
+					const hasVerticalCenterPosition:Boolean = !isNaN(verticalCenter);
+					if(hasVerticalCenterPosition)
+					{
+						const verticalCenterAnchorDisplayObject:DisplayObject = layoutData.verticalCenterAnchorDisplayObject;
+						if(verticalCenterAnchorDisplayObject)
+						{
+							const verticalOffset:Number = -verticalCenter - (item.height - verticalCenterAnchorDisplayObject.height) / 2;
+							bottom = Math.max(bottom, verticalOffset + this.getBottomOffset(verticalCenterAnchorDisplayObject));
+						}
+					}
+					return bottom;
 				}
 			}
-			return item.height;
+			return 0;
 		}
 
 		/**
@@ -355,21 +428,53 @@ package feathers.layout
 		{
 			if(item is ILayoutDisplayObject)
 			{
-				var layoutItem:ILayoutDisplayObject = ILayoutDisplayObject(item);
-				var layoutData:AnchorLayoutData = layoutItem.layoutData as AnchorLayoutData;
+				const layoutItem:ILayoutDisplayObject = ILayoutDisplayObject(item);
+				const layoutData:AnchorLayoutData = layoutItem.layoutData as AnchorLayoutData;
 				if(layoutData)
 				{
 					var left:Number = layoutData.left;
-					var hasLeftPosition:Boolean = !isNaN(left);
-					var leftAnchorDisplayObject:DisplayObject = layoutData.leftAnchorDisplayObject;
+					const hasLeftPosition:Boolean = !isNaN(left);
 					if(hasLeftPosition)
 					{
-						left += (hasLeftPosition && leftAnchorDisplayObject) ? this.getLeftOffset(leftAnchorDisplayObject) : 0;
-						return left + item.width;
+						const leftAnchorDisplayObject:DisplayObject = layoutData.leftAnchorDisplayObject;
+						if(leftAnchorDisplayObject)
+						{
+							left += leftAnchorDisplayObject.width + this.getLeftOffset(leftAnchorDisplayObject);
+						}
+						else
+						{
+							return left;
+						}
 					}
+					else
+					{
+						left = 0;
+					}
+					const right:Number = layoutData.right;
+					const hasRightPosition:Boolean = !isNaN(right);
+					if(hasRightPosition)
+					{
+						const rightAnchorDisplayObject:DisplayObject = layoutData.rightAnchorDisplayObject;
+						if(rightAnchorDisplayObject)
+						{
+							left = Math.max(left, -rightAnchorDisplayObject.width - right + this.getLeftOffset(rightAnchorDisplayObject));
+						}
+					}
+					const horizontalCenter:Number = layoutData.horizontalCenter;
+					const hasHorizontalCenterPosition:Boolean = !isNaN(horizontalCenter);
+					if(hasHorizontalCenterPosition)
+					{
+						const horizontalCenterAnchorDisplayObject:DisplayObject = layoutData.horizontalCenterAnchorDisplayObject;
+						if(horizontalCenterAnchorDisplayObject)
+						{
+							const horizontalOffset:Number = horizontalCenter - (item.width - horizontalCenterAnchorDisplayObject.width) / 2;
+							left = Math.max(left, horizontalOffset + this.getLeftOffset(horizontalCenterAnchorDisplayObject));
+						}
+					}
+					return left;
 				}
 			}
-			return item.x + item.width;
+			return 0;
 		}
 
 		/**
@@ -418,7 +523,7 @@ package feathers.layout
 			for(var i:int = 0; i < itemCount; i++)
 			{
 				var item:ILayoutDisplayObject = items[i] as ILayoutDisplayObject;
-				if(!item)
+				if(!item || !item.includeInLayout)
 				{
 					continue;
 				}
@@ -445,11 +550,11 @@ package feathers.layout
 		 */
 		protected function positionHorizontally(item:ILayoutDisplayObject, layoutData:AnchorLayoutData, boundsX:Number, boundsY:Number, viewPortWidth:Number, viewPortHeight:Number):void
 		{
-			var left:Number = layoutData.left;
-			var hasLeftPosition:Boolean = !isNaN(left);
+			const left:Number = layoutData.left;
+			const hasLeftPosition:Boolean = !isNaN(left);
 			if(hasLeftPosition)
 			{
-				var leftAnchorDisplayObject:DisplayObject = layoutData.leftAnchorDisplayObject;
+				const leftAnchorDisplayObject:DisplayObject = layoutData.leftAnchorDisplayObject;
 				if(leftAnchorDisplayObject)
 				{
 					item.x = leftAnchorDisplayObject.x + leftAnchorDisplayObject.width + left;
@@ -459,11 +564,13 @@ package feathers.layout
 					item.x = boundsX + left;
 				}
 			}
-			var right:Number = layoutData.right;
-			var hasRightPosition:Boolean = !isNaN(right);
+			const horizontalCenter:Number = layoutData.horizontalCenter;
+			const hasHorizontalCenterPosition:Boolean = !isNaN(horizontalCenter);
+			const right:Number = layoutData.right;
+			const hasRightPosition:Boolean = !isNaN(right);
 			if(hasRightPosition)
 			{
-				var rightAnchorDisplayObject:DisplayObject = layoutData.rightAnchorDisplayObject;
+				const rightAnchorDisplayObject:DisplayObject = layoutData.rightAnchorDisplayObject;
 				if(hasLeftPosition)
 				{
 					var leftRightWidth:Number = viewPortWidth;
@@ -477,6 +584,30 @@ package feathers.layout
 					}
 					item.width = leftRightWidth - right - left;
 				}
+				else if(hasHorizontalCenterPosition)
+				{
+					var horizontalCenterAnchorDisplayObject:DisplayObject = layoutData.horizontalCenterAnchorDisplayObject;
+					var xPositionOfCenter:Number;
+					if(horizontalCenterAnchorDisplayObject)
+					{
+						xPositionOfCenter = horizontalCenterAnchorDisplayObject.x + (horizontalCenterAnchorDisplayObject.width / 2) + horizontalCenter;
+					}
+					else
+					{
+						xPositionOfCenter = (viewPortWidth / 2) + horizontalCenter;
+					}
+					var xPositionOfRight:Number;
+					if(rightAnchorDisplayObject)
+					{
+						xPositionOfRight = rightAnchorDisplayObject.x - right;
+					}
+					else
+					{
+						xPositionOfRight = viewPortWidth - right;
+					}
+					item.width = 2 * (xPositionOfRight - xPositionOfCenter);
+					item.x = viewPortWidth - right - item.width;
+				}
 				else
 				{
 					if(rightAnchorDisplayObject)
@@ -489,6 +620,27 @@ package feathers.layout
 					}
 				}
 			}
+			else if(hasHorizontalCenterPosition)
+			{
+				horizontalCenterAnchorDisplayObject = layoutData.horizontalCenterAnchorDisplayObject;
+				if(horizontalCenterAnchorDisplayObject)
+				{
+					xPositionOfCenter = horizontalCenterAnchorDisplayObject.x + (horizontalCenterAnchorDisplayObject.width / 2) + horizontalCenter;
+				}
+				else
+				{
+					xPositionOfCenter = (viewPortWidth / 2) + horizontalCenter;
+				}
+
+				if(hasLeftPosition)
+				{
+					item.width = 2 * (xPositionOfCenter - item.x);
+				}
+				else
+				{
+					item.x = xPositionOfCenter - (item.width / 2);
+				}
+			}
 		}
 
 		/**
@@ -496,25 +648,27 @@ package feathers.layout
 		 */
 		protected function positionVertically(item:ILayoutDisplayObject, layoutData:AnchorLayoutData, boundsX:Number, boundsY:Number, viewPortWidth:Number, viewPortHeight:Number):void
 		{
-			var top:Number = layoutData.top;
-			var hasTopPosition:Boolean = !isNaN(top);
+			const top:Number = layoutData.top;
+			const hasTopPosition:Boolean = !isNaN(top);
 			if(hasTopPosition)
 			{
-				var topAnchorDisplayObject:DisplayObject = layoutData.topAnchorDisplayObject;
+				const topAnchorDisplayObject:DisplayObject = layoutData.topAnchorDisplayObject;
 				if(topAnchorDisplayObject)
 				{
-					item.y = topAnchorDisplayObject.x + topAnchorDisplayObject.height + top;
+					item.y = topAnchorDisplayObject.y + topAnchorDisplayObject.height + top;
 				}
 				else
 				{
 					item.y = boundsY + top;
 				}
 			}
-			var bottom:Number = layoutData.bottom;
-			var hasBottomPosition:Boolean = !isNaN(bottom);
+			const verticalCenter:Number = layoutData.verticalCenter;
+			const hasVerticalCenterPosition:Boolean = !isNaN(verticalCenter);
+			const bottom:Number = layoutData.bottom;
+			const hasBottomPosition:Boolean = !isNaN(bottom);
 			if(hasBottomPosition)
 			{
-				var bottomAnchorDisplayObject:DisplayObject = layoutData.bottomAnchorDisplayObject;
+				const bottomAnchorDisplayObject:DisplayObject = layoutData.bottomAnchorDisplayObject;
 				if(hasTopPosition)
 				{
 					var topBottomHeight:Number = viewPortHeight;
@@ -528,16 +682,61 @@ package feathers.layout
 					}
 					item.height = topBottomHeight - bottom - top;
 				}
+				else if(hasVerticalCenterPosition)
+				{
+					var verticalCenterAnchorDisplayObject:DisplayObject = layoutData.verticalCenterAnchorDisplayObject;
+					var yPositionOfCenter:Number;
+					if(verticalCenterAnchorDisplayObject)
+					{
+						yPositionOfCenter = verticalCenterAnchorDisplayObject.y + (verticalCenterAnchorDisplayObject.height / 2) + verticalCenter;
+					}
+					else
+					{
+						yPositionOfCenter = (viewPortHeight / 2) + verticalCenter;
+					}
+					var yPositionOfBottom:Number;
+					if(bottomAnchorDisplayObject)
+					{
+						yPositionOfBottom = bottomAnchorDisplayObject.y - bottom;
+					}
+					else
+					{
+						yPositionOfBottom = viewPortHeight - bottom;
+					}
+					item.height = 2 * (yPositionOfBottom - yPositionOfCenter);
+					item.y = viewPortHeight - bottom - item.height;
+				}
 				else
 				{
 					if(bottomAnchorDisplayObject)
 					{
-						item.y = bottomAnchorDisplayObject.x - item.height - bottom;
+						item.y = bottomAnchorDisplayObject.y - item.height - bottom;
 					}
 					else
 					{
 						item.y = boundsY + viewPortHeight - bottom - item.height;
 					}
+				}
+			}
+			else if(hasVerticalCenterPosition)
+			{
+				verticalCenterAnchorDisplayObject = layoutData.verticalCenterAnchorDisplayObject;
+				if(verticalCenterAnchorDisplayObject)
+				{
+					yPositionOfCenter = verticalCenterAnchorDisplayObject.y + (verticalCenterAnchorDisplayObject.height / 2) + verticalCenter;
+				}
+				else
+				{
+					yPositionOfCenter = (viewPortHeight / 2) + verticalCenter;
+				}
+
+				if(hasTopPosition)
+				{
+					item.height = 2 * (yPositionOfCenter - item.y);
+				}
+				else
+				{
+					item.y = yPositionOfCenter - (item.height / 2);
 				}
 			}
 		}
@@ -569,6 +768,88 @@ package feathers.layout
 				return false
 			}
 			return true;
+		}
+
+		/**
+		 * @private
+		 */
+		protected function isReferenced(item:DisplayObject, items:Vector.<DisplayObject>):Boolean
+		{
+			const itemCount:int = items.length;
+			for(var i:int = 0; i < itemCount; i++)
+			{
+				var otherItem:ILayoutDisplayObject = items[i] as ILayoutDisplayObject;
+				if(!item || otherItem == item)
+				{
+					continue;
+				}
+				var layoutData:AnchorLayoutData = otherItem.layoutData as AnchorLayoutData;
+				if(!layoutData)
+				{
+					continue;
+				}
+				if(layoutData.leftAnchorDisplayObject == item || layoutData.horizontalCenterAnchorDisplayObject == item ||
+					layoutData.rightAnchorDisplayObject == item || layoutData.topAnchorDisplayObject == item ||
+					layoutData.verticalCenterAnchorDisplayObject == item || layoutData.bottomAnchorDisplayObject == item)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		/**
+		 * @private
+		 */
+		protected function validateItems(items:Vector.<DisplayObject>, force:Boolean):void
+		{
+			const itemCount:int = items.length;
+			for(var i:int = 0; i < itemCount; i++)
+			{
+				var control:IFeathersControl = items[i] as IFeathersControl;
+				if(control)
+				{
+					if(force)
+					{
+						control.validate();
+						continue;
+					}
+					if(control is ILayoutDisplayObject)
+					{
+						var layoutControl:ILayoutDisplayObject = ILayoutDisplayObject(control);
+						if(!layoutControl.includeInLayout)
+						{
+							continue;
+						}
+						var layoutData:AnchorLayoutData = layoutControl.layoutData as AnchorLayoutData;
+						if(layoutData)
+						{
+							var hasLeftPosition:Boolean = !isNaN(layoutData.left);
+							var hasRightPosition:Boolean = !isNaN(layoutData.right);
+							var hasHorizontalCenterPosition:Boolean = !isNaN(layoutData.horizontalCenter);
+							if((hasRightPosition && !hasLeftPosition && !hasHorizontalCenterPosition) ||
+								hasHorizontalCenterPosition)
+							{
+								control.validate();
+								continue;
+							}
+							var hasTopPosition:Boolean = !isNaN(layoutData.top);
+							var hasBottomPosition:Boolean = !isNaN(layoutData.bottom);
+							var hasVerticalCenterPosition:Boolean = !isNaN(layoutData.verticalCenter);
+							if((hasBottomPosition && !hasTopPosition && !hasVerticalCenterPosition) ||
+								hasVerticalCenterPosition)
+							{
+								control.validate();
+								continue;
+							}
+						}
+					}
+					if(this.isReferenced(DisplayObject(control), items))
+					{
+						control.validate();
+					}
+				}
+			}
 		}
 	}
 }

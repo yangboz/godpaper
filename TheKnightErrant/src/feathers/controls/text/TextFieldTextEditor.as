@@ -1,26 +1,9 @@
 /*
- Copyright 2012-2013 Joshua Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
-
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls.text
 {
@@ -31,6 +14,7 @@ package feathers.controls.text
 	import flash.display.BitmapData;
 	import flash.display3D.textures.Texture;
 	import flash.events.FocusEvent;
+	import flash.events.KeyboardEvent;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -38,6 +22,7 @@ package feathers.controls.text
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
+	import flash.ui.Keyboard;
 
 	import starling.core.RenderSupport;
 	import starling.core.Starling;
@@ -505,6 +490,19 @@ package feathers.controls.text
 		/**
 		 * @inheritDoc
 		 */
+		public function clearFocus():void
+		{
+			if(!this._textFieldHasFocus)
+			{
+				return;
+			}
+			Starling.current.nativeStage.focus = Starling.current.nativeStage;
+			this.dispatchEventWith(FeathersEventType.FOCUS_OUT);
+		}
+
+		/**
+		 * @inheritDoc
+		 */
 		public function selectRange(startIndex:int, endIndex:int):void
 		{
 			if(this.textField)
@@ -530,6 +528,7 @@ package feathers.controls.text
 			this.textField.addEventListener(flash.events.Event.CHANGE, textField_changeHandler);
 			this.textField.addEventListener(FocusEvent.FOCUS_IN, textField_focusInHandler);
 			this.textField.addEventListener(FocusEvent.FOCUS_OUT, textField_focusOutHandler);
+			this.textField.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, textField_keyDownHandler);
 		}
 
 		/**
@@ -792,6 +791,17 @@ package feathers.controls.text
 			this.invalidate(INVALIDATION_FLAG_DATA);
 			this.invalidate(INVALIDATION_FLAG_SKIN);
 			this.dispatchEventWith(FeathersEventType.FOCUS_OUT);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function textField_keyDownHandler(event:flash.events.KeyboardEvent):void
+		{
+			if(event.keyCode == Keyboard.TAB)
+			{
+				event.preventDefault();
+			}
 		}
 	}
 }

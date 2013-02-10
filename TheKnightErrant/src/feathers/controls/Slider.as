@@ -1,30 +1,14 @@
 /*
-Copyright 2012-2013 Joshua Tynjala
+Feathers
+Copyright 2012-2013 Joshua Tynjala. All Rights Reserved.
 
-Permission is hereby granted, free of charge, to any person
-obtaining a copy of this software and associated documentation
-files (the "Software"), to deal in the Software without
-restriction, including without limitation the rights to use,
-copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following
-conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+This program is free software. You can redistribute and/or modify it in
+accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
 	import feathers.core.FeathersControl;
+	import feathers.core.IFocusDisplayObject;
 	import feathers.core.PropertyProxy;
 	import feathers.events.FeathersEventType;
 	import feathers.utils.math.clamp;
@@ -32,10 +16,12 @@ package feathers.controls
 
 	import flash.events.TimerEvent;
 	import flash.geom.Point;
+	import flash.ui.Keyboard;
 	import flash.utils.Timer;
 
 	import starling.display.DisplayObject;
 	import starling.events.Event;
+	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -68,7 +54,7 @@ package feathers.controls
 	 *
 	 * @see http://wiki.starling-framework.org/feathers/slider
 	 */
-	public class Slider extends FeathersControl implements IScrollBar
+	public class Slider extends FeathersControl implements IScrollBar, IFocusDisplayObject
 	{
 		/**
 		 * @private
@@ -79,6 +65,21 @@ package feathers.controls
 		 * @private
 		 */
 		private static const HELPER_TOUCHES_VECTOR:Vector.<Touch> = new <Touch>[];
+
+		/**
+		 * @private
+		 */
+		protected static const INVALIDATION_FLAG_THUMB_FACTORY:String = "thumbFactory";
+
+		/**
+		 * @private
+		 */
+		protected static const INVALIDATION_FLAG_MINIMUM_TRACK_FACTORY:String = "minimumTrackFactory";
+
+		/**
+		 * @private
+		 */
+		protected static const INVALIDATION_FLAG_MAXIMUM_TRACK_FACTORY:String = "maximumTrackFactory";
 
 		/**
 		 * The slider's thumb may be dragged horizontally (on the x-axis).
@@ -117,6 +118,20 @@ package feathers.controls
 		public static const TRACK_LAYOUT_MODE_MIN_MAX:String = "minMax";
 
 		/**
+		 * The slider's track dimensions fill the full width and height of the
+		 * slider.
+		 */
+		public static const TRACK_SCALE_MODE_EXACT_FIT:String = "exactFit";
+
+		/**
+		 * If the slider's direction is horizontal, the width of the track will
+		 * fill the full width of the slider, and if the slider's direction is
+		 * vertical, the height of the track will fill the full height of the
+		 * slider. The other edge will not be scaled.
+		 */
+		public static const TRACK_SCALE_MODE_DIRECTIONAL:String = "directional";
+
+		/**
 		 * The default value added to the <code>nameList</code> of the minimum
 		 * track.
 		 */
@@ -132,6 +147,30 @@ package feathers.controls
 		 * The default value added to the <code>nameList</code> of the thumb.
 		 */
 		public static const DEFAULT_CHILD_NAME_THUMB:String = "feathers-slider-thumb";
+
+		/**
+		 * @private
+		 */
+		protected static function defaultThumbFactory():Button
+		{
+			return new Button();
+		}
+
+		/**
+		 * @private
+		 */
+		protected static function defaultMinimumTrackFactory():Button
+		{
+			return new Button();
+		}
+
+		/**
+		 * @private
+		 */
+		protected static function defaultMaximumTrackFactory():Button
+		{
+			return new Button();
+		}
 		
 		/**
 		 * Constructor.
@@ -139,7 +178,9 @@ package feathers.controls
 		public function Slider()
 		{
 			super();
-			this.addEventListener(Event.REMOVED_FROM_STAGE, removedFromStageHandler);
+			this.addEventListener(FeathersEventType.FOCUS_IN, slider_focusInHandler);
+			this.addEventListener(FeathersEventType.FOCUS_OUT, slider_focusOutHandler);
+			this.addEventListener(Event.REMOVED_FROM_STAGE, slider_removedFromStageHandler);
 		}
 
 		/**
@@ -378,8 +419,8 @@ package feathers.controls
 		protected var isDragging:Boolean = false;
 		
 		/**
-		 * Determines if the slider dispatches the onChange signal every time
-		 * the thumb moves, or only once it stops moving.
+		 * Determines if the slider dispatches the <code>Event.CHANGE</code>
+		 * event every time the thumb moves, or only once it stops moving.
 		 */
 		public var liveDragging:Boolean = true;
 		
@@ -501,6 +542,40 @@ package feathers.controls
 		/**
 		 * @private
 		 */
+		protected var _trackScaleMode:String = TRACK_SCALE_MODE_DIRECTIONAL;
+
+		[Inspectable(type="String",enumeration="exactFit,directional")]
+		/**
+		 * Determines how the minimum and maximum track skins are positioned and
+		 * sized.
+		 *
+		 * @default TRACK_SCALE_MODE_DIRECTIONAL
+		 *
+		 * @see #TRACK_SCALE_MODE_DIRECTIONAL
+		 * @see #TRACK_SCALE_MODE_EXACT_FIT
+		 * @see #trackLayoutMode
+		 */
+		public function get trackScaleMode():String
+		{
+			return this._trackScaleMode;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set trackScaleMode(value:String):void
+		{
+			if(this._trackScaleMode == value)
+			{
+				return;
+			}
+			this._trackScaleMode = value;
+			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
 		protected var currentRepeatAction:Function;
 
 		/**
@@ -534,6 +609,72 @@ package feathers.controls
 			}
 			this._repeatDelay = value;
 			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _minimumTrackFactory:Function;
+
+		/**
+		 * A function used to generate the slider's minimum track sub-component.
+		 * This can be used to change properties on the minimum track when it is first
+		 * created. For instance, if you are skinning Feathers components
+		 * without a theme, you might use <code>minimumTrackFactory</code> to set
+		 * skins and other styles on the minimum track.
+		 *
+		 * <p>The function should have the following signature:</p>
+		 * <pre>function():Button</pre>
+		 *
+		 * @see #minimumTrackProperties
+		 */
+		public function get minimumTrackFactory():Function
+		{
+			return this._minimumTrackFactory;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set minimumTrackFactory(value:Function):void
+		{
+			if(this._minimumTrackFactory == value)
+			{
+				return;
+			}
+			this._minimumTrackFactory = value;
+			this.invalidate(INVALIDATION_FLAG_MINIMUM_TRACK_FACTORY);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _customMinimumTrackName:String;
+
+		/**
+		 * A name to add to the slider's minimum track sub-component. Typically
+		 * used by a theme to provide different skins to different sliders.
+		 *
+		 * @see feathers.core.FeathersControl#nameList
+		 * @see #minimumTrackFactory
+		 * @see #minimumTrackProperties
+		 */
+		public function get customMinimumTrackName():String
+		{
+			return this._customMinimumTrackName;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set customMinimumTrackName(value:String):void
+		{
+			if(this._customMinimumTrackName == value)
+			{
+				return;
+			}
+			this._customMinimumTrackName = value;
+			this.invalidate(INVALIDATION_FLAG_MINIMUM_TRACK_FACTORY);
 		}
 
 		/**
@@ -597,6 +738,72 @@ package feathers.controls
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
 		}
+
+		/**
+		 * @private
+		 */
+		protected var _maximumTrackFactory:Function;
+
+		/**
+		 * A function used to generate the slider's maximum track sub-component.
+		 * This can be used to change properties on the maximum track when it is first
+		 * created. For instance, if you are skinning Feathers components
+		 * without a theme, you might use <code>maximumTrackFactory</code> to set
+		 * skins and other styles on the maximum track.
+		 *
+		 * <p>The function should have the following signature:</p>
+		 * <pre>function():Button</pre>
+		 *
+		 * @see #maximumTrackProperties
+		 */
+		public function get maximumTrackFactory():Function
+		{
+			return this._maximumTrackFactory;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set maximumTrackFactory(value:Function):void
+		{
+			if(this._maximumTrackFactory == value)
+			{
+				return;
+			}
+			this._maximumTrackFactory = value;
+			this.invalidate(INVALIDATION_FLAG_MAXIMUM_TRACK_FACTORY);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _customMaximumTrackName:String;
+
+		/**
+		 * A name to add to the slider's maximum track sub-component. Typically
+		 * used by a theme to provide different skins to different sliders.
+		 *
+		 * @see feathers.core.FeathersControl#nameList
+		 * @see #maximumTrackFactory
+		 * @see #maximumTrackProperties
+		 */
+		public function get customMaximumTrackName():String
+		{
+			return this._customMaximumTrackName;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set customMaximumTrackName(value:String):void
+		{
+			if(this._customMaximumTrackName == value)
+			{
+				return;
+			}
+			this._customMaximumTrackName = value;
+			this.invalidate(INVALIDATION_FLAG_MAXIMUM_TRACK_FACTORY);
+		}
 		
 		/**
 		 * @private
@@ -658,6 +865,72 @@ package feathers.controls
 				this._maximumTrackProperties.addOnChangeCallback(maximumTrackProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _thumbFactory:Function;
+
+		/**
+		 * A function used to generate the slider's thumb sub-component.
+		 * This can be used to change properties on the thumb when it is first
+		 * created. For instance, if you are skinning Feathers components
+		 * without a theme, you might use <code>thumbFactory</code> to set
+		 * skins and text styles on the thumb.
+		 *
+		 * <p>The function should have the following signature:</p>
+		 * <pre>function():Button</pre>
+		 *
+		 * @see #thumbProperties
+		 */
+		public function get thumbFactory():Function
+		{
+			return this._thumbFactory;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set thumbFactory(value:Function):void
+		{
+			if(this._thumbFactory == value)
+			{
+				return;
+			}
+			this._thumbFactory = value;
+			this.invalidate(INVALIDATION_FLAG_THUMB_FACTORY);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _customThumbName:String;
+
+		/**
+		 * A name to add to the slider's thumb sub-component. Typically
+		 * used by a theme to provide different skins to different sliders.
+		 *
+		 * @see feathers.core.FeathersControl#nameList
+		 * @see #thumbFactory
+		 * @see #thumbProperties
+		 */
+		public function get customThumbName():String
+		{
+			return this._customThumbName;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set customThumbName(value:String):void
+		{
+			if(this._customThumbName == value)
+			{
+				return;
+			}
+			this._customThumbName = value;
+			this.invalidate(INVALIDATION_FLAG_THUMB_FACTORY);
 		}
 		
 		/**
@@ -755,61 +1028,59 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		override protected function initialize():void
-		{
-			if(!this.minimumTrack)
-			{
-				this.minimumTrack = new Button();
-				this.minimumTrack.nameList.add(this.minimumTrackName);
-				this.minimumTrack.label = "";
-				this.minimumTrack.keepDownStateOnRollOut = true;
-				this.minimumTrack.addEventListener(TouchEvent.TOUCH, track_touchHandler);
-				this.addChild(this.minimumTrack);
-			}
-			
-			if(!this.thumb)
-			{
-				this.thumb = new Button();
-				this.thumb.nameList.add(this.thumbName);
-				this.thumb.label = "";
-				this.thumb.keepDownStateOnRollOut = true;
-				this.thumb.addEventListener(TouchEvent.TOUCH, thumb_touchHandler);
-				this.addChild(this.thumb);
-			}
-		}
-		
-		/**
-		 * @private
-		 */
 		override protected function draw():void
 		{
 			const dataInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_DATA);
 			const stylesInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STYLES);
 			var sizeInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_SIZE);
 			const stateInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STATE);
+			const thumbFactoryInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_THUMB_FACTORY);
+			const minimumTrackFactoryInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_MINIMUM_TRACK_FACTORY);
+			const maximumTrackFactoryInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_MAXIMUM_TRACK_FACTORY);
 
-			this.createOrDestroyMaximumTrackIfNeeded();
+			if(thumbFactoryInvalid)
+			{
+				this.createThumb();
+			}
 
-			if(stylesInvalid)
+			if(minimumTrackFactoryInvalid)
+			{
+				this.createMinimumTrack();
+			}
+
+			this.createOrDestroyMaximumTrackIfNeeded(maximumTrackFactoryInvalid);
+
+			if(thumbFactoryInvalid || stylesInvalid)
 			{
 				this.refreshThumbStyles();
+			}
+
+			if(minimumTrackFactoryInvalid || maximumTrackFactoryInvalid || stylesInvalid)
+			{
 				this.refreshTrackStyles();
 			}
 			
-			if(stateInvalid)
+			if(thumbFactoryInvalid || stateInvalid)
 			{
-				this.thumb.isEnabled = this.minimumTrack.isEnabled = this._isEnabled;
-				if(this.maximumTrack)
-				{
-					this.maximumTrack.isEnabled = this._isEnabled;
-				}
+				this.thumb.isEnabled = this._isEnabled;
+			}
+
+			if(minimumTrackFactoryInvalid || stateInvalid)
+			{
+				this.minimumTrack.isEnabled = this._isEnabled;
+			}
+
+			if((maximumTrackFactoryInvalid || stateInvalid) && this.maximumTrack)
+			{
+				this.maximumTrack.isEnabled = this._isEnabled;
 			}
 
 			sizeInvalid = this.autoSizeIfNeeded() || sizeInvalid;
 
-			if(dataInvalid || stylesInvalid || sizeInvalid)
+			if(thumbFactoryInvalid || minimumTrackFactoryInvalid || maximumTrackFactoryInvalid ||
+				dataInvalid || stylesInvalid || sizeInvalid)
 			{
-				this.layout();
+				this.layoutChildren();
 			}
 		}
 
@@ -867,6 +1138,7 @@ package feathers.controls
 						newWidth = this.minimumTrackOriginalWidth;
 					}
 				}
+				newWidth = Math.max(newWidth, this.thumb.width);
 			}
 			if(needsHeight)
 			{
@@ -892,8 +1164,80 @@ package feathers.controls
 						newHeight = this.minimumTrackOriginalHeight;
 					}
 				}
+				newHeight = Math.max(newHeight, this.thumb.height);
 			}
 			return this.setSizeInternal(newWidth, newHeight, false);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function createThumb():void
+		{
+			if(this.thumb)
+			{
+				this.thumb.removeFromParent(true);
+				this.thumb = null;
+			}
+
+			const factory:Function = this._thumbFactory != null ? this._thumbFactory : defaultThumbFactory;
+			const thumbName:String = this._customThumbName != null ? this._customThumbName : this.thumbName;
+			this.thumb = Button(factory());
+			this.thumb.nameList.add(thumbName);
+			this.thumb.keepDownStateOnRollOut = true;
+			this.thumb.addEventListener(TouchEvent.TOUCH, thumb_touchHandler);
+			this.addChild(this.thumb);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function createMinimumTrack():void
+		{
+			if(this.minimumTrack)
+			{
+				this.minimumTrack.removeFromParent(true);
+				this.minimumTrack = null;
+			}
+
+			const factory:Function = this._minimumTrackFactory != null ? this._minimumTrackFactory : defaultMinimumTrackFactory;
+			const minimumTrackName:String = this._customMinimumTrackName != null ? this._customMinimumTrackName : this.minimumTrackName;
+			this.minimumTrack = Button(factory());
+			this.minimumTrack.nameList.add(minimumTrackName);
+			this.minimumTrack.keepDownStateOnRollOut = true;
+			this.minimumTrack.addEventListener(TouchEvent.TOUCH, track_touchHandler);
+			this.addChildAt(this.minimumTrack, 0);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function createOrDestroyMaximumTrackIfNeeded(maximumTrackFactoryInvalid:Boolean):void
+		{
+			if(this._trackLayoutMode == TRACK_LAYOUT_MODE_MIN_MAX)
+			{
+				if(!maximumTrackFactoryInvalid)
+				{
+					return;
+				}
+				if(this.maximumTrack)
+				{
+					this.maximumTrack.removeFromParent(true);
+					this.maximumTrack = null;
+				}
+				const factory:Function = this._maximumTrackFactory != null ? this._maximumTrackFactory : defaultMaximumTrackFactory;
+				const maximumTrackName:String = this._customMaximumTrackName != null ? this._customMaximumTrackName : this.maximumTrackName;
+				this.maximumTrack = Button(factory());
+				this.maximumTrack.nameList.add(maximumTrackName);
+				this.maximumTrack.keepDownStateOnRollOut = true;
+				this.maximumTrack.addEventListener(TouchEvent.TOUCH, track_touchHandler);
+				this.addChildAt(this.maximumTrack, 1);
+			}
+			else if(this.maximumTrack) //single
+			{
+				this.maximumTrack.removeFromParent(true);
+				this.maximumTrack = null;
+			}
 		}
 		
 		/**
@@ -941,7 +1285,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function layout():void
+		protected function layoutChildren():void
 		{
 			this.layoutThumb();
 
@@ -984,27 +1328,51 @@ package feathers.controls
 		{
 			if(this._direction == DIRECTION_VERTICAL)
 			{
-				this.maximumTrack.x = 0;
 				this.maximumTrack.y = 0;
-				this.maximumTrack.width = this.actualWidth;
 				this.maximumTrack.height = this.thumb.y + this.thumb.height / 2;
-
-				this.minimumTrack.x = 0;
 				this.minimumTrack.y = this.maximumTrack.height;
-				this.minimumTrack.width = this.actualWidth;
 				this.minimumTrack.height = this.actualHeight - this.minimumTrack.y;
+
+				if(this._trackScaleMode == TRACK_SCALE_MODE_DIRECTIONAL)
+				{
+					this.maximumTrack.width = NaN;
+					this.maximumTrack.validate();
+					this.maximumTrack.x = (this.actualWidth - this.maximumTrack.width) / 2;
+					this.minimumTrack.width = NaN;
+					this.minimumTrack.validate();
+					this.minimumTrack.x = (this.actualWidth - this.minimumTrack.width) / 2;
+				}
+				else //exact fit
+				{
+					this.maximumTrack.x = 0;
+					this.maximumTrack.width = this.actualWidth;
+					this.minimumTrack.x = 0;
+					this.minimumTrack.width = this.actualWidth;
+				}
 			}
 			else //horizontal
 			{
 				this.minimumTrack.x = 0;
-				this.minimumTrack.y = 0;
 				this.minimumTrack.width = this.thumb.x + this.thumb.width / 2;
-				this.minimumTrack.height = this.actualHeight;
-
 				this.maximumTrack.x = this.minimumTrack.width;
-				this.maximumTrack.y = 0;
 				this.maximumTrack.width = this.actualWidth - this.maximumTrack.x;
-				this.maximumTrack.height = this.actualHeight;
+
+				if(this._trackScaleMode == TRACK_SCALE_MODE_DIRECTIONAL)
+				{
+					this.minimumTrack.height = NaN;
+					this.minimumTrack.validate();
+					this.minimumTrack.y = (this.actualHeight - this.minimumTrack.height) / 2;
+					this.maximumTrack.height = NaN;
+					this.maximumTrack.validate();
+					this.maximumTrack.y = (this.actualHeight - this.maximumTrack.height) / 2;
+				}
+				else //exact fit
+				{
+					this.minimumTrack.y = 0;
+					this.minimumTrack.height = this.actualHeight;
+					this.maximumTrack.y = 0;
+					this.maximumTrack.height = this.actualHeight;
+				}
 			}
 		}
 
@@ -1013,33 +1381,31 @@ package feathers.controls
 		 */
 		protected function layoutTrackWithSingle():void
 		{
-			this.minimumTrack.x = 0;
-			this.minimumTrack.y = 0;
-			this.minimumTrack.width = this.actualWidth;
-			this.minimumTrack.height = this.actualHeight;
-		}
-
-		/**
-		 * @private
-		 */
-		protected function createOrDestroyMaximumTrackIfNeeded():void
-		{
-			if(this._trackLayoutMode == TRACK_LAYOUT_MODE_MIN_MAX)
+			if(this._trackScaleMode == TRACK_SCALE_MODE_DIRECTIONAL)
 			{
-				if(!this.maximumTrack)
+				if(this._direction == DIRECTION_VERTICAL)
 				{
-					this.maximumTrack = new Button();
-					this.maximumTrack.nameList.add(this.maximumTrackName);
-					this.maximumTrack.label = "";
-					this.maximumTrack.keepDownStateOnRollOut = true;
-					this.maximumTrack.addEventListener(TouchEvent.TOUCH, track_touchHandler);
-					this.addChildAt(this.maximumTrack, 1);
+					this.minimumTrack.y = 0;
+					this.minimumTrack.width = NaN;
+					this.minimumTrack.height = this.actualHeight;
+					this.minimumTrack.validate();
+					this.minimumTrack.x = (this.actualWidth - this.minimumTrack.width) / 2;
+				}
+				else //horizontal
+				{
+					this.minimumTrack.x = 0;
+					this.minimumTrack.width = this.actualWidth;
+					this.minimumTrack.height = NaN;
+					this.minimumTrack.validate();
+					this.minimumTrack.y = (this.actualHeight - this.minimumTrack.height) / 2;
 				}
 			}
-			else if(this.maximumTrack) //single
+			else //exact fit
 			{
-				this.maximumTrack.removeFromParent(true);
-				this.maximumTrack = null;
+				this.minimumTrack.x = 0;
+				this.minimumTrack.y = 0;
+				this.minimumTrack.width = this.actualWidth;
+				this.minimumTrack.height = this.actualHeight;
 			}
 		}
 
@@ -1142,7 +1508,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function removedFromStageHandler(event:Event):void
+		protected function slider_removedFromStageHandler(event:Event):void
 		{
 			this._touchPointID = -1;
 			const wasDragging:Boolean = this.isDragging;
@@ -1151,6 +1517,22 @@ package feathers.controls
 			{
 				this.dispatchEventWith(Event.CHANGE);
 			}
+		}
+
+		/**
+		 * @private
+		 */
+		protected function slider_focusInHandler(event:Event):void
+		{
+			this.stage.addEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function slider_focusOutHandler(event:Event):void
+		{
+			this.stage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
 		}
 		
 		/**
@@ -1305,6 +1687,74 @@ package feathers.controls
 				}
 			}
 			HELPER_TOUCHES_VECTOR.length = 0;
+		}
+
+		/**
+		 * @private
+		 */
+		protected function stage_keyDownHandler(event:KeyboardEvent):void
+		{
+			if(event.keyCode == Keyboard.HOME)
+			{
+				this.value = this._minimum;
+				return;
+			}
+			if(event.keyCode == Keyboard.END)
+			{
+				this.value = this._maximum;
+				return;
+			}
+			const page:Number = isNaN(this._page) ? this._step : this._page;
+			if(this._direction == Slider.DIRECTION_VERTICAL)
+			{
+				if(event.keyCode == Keyboard.UP)
+				{
+					if(event.shiftKey)
+					{
+						this.value += page;
+					}
+					else
+					{
+						this.value += this._step;
+					}
+				}
+				else if(event.keyCode == Keyboard.DOWN)
+				{
+					if(event.shiftKey)
+					{
+						this.value -= page;
+					}
+					else
+					{
+						this.value -= this._step;
+					}
+				}
+			}
+			else
+			{
+				if(event.keyCode == Keyboard.LEFT)
+				{
+					if(event.shiftKey)
+					{
+						this.value -= page;
+					}
+					else
+					{
+						this.value -= this._step;
+					}
+				}
+				else if(event.keyCode == Keyboard.RIGHT)
+				{
+					if(event.shiftKey)
+					{
+						this.value += page;
+					}
+					else
+					{
+						this.value += this._step;
+					}
+				}
+			}
 		}
 
 		/**

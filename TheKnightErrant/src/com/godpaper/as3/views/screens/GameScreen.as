@@ -45,12 +45,14 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.components.ChessBoard;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
+	import com.godpaper.as3.views.popups.ExitComfirmIndicatory;
 	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
 	
 	import feathers.controls.Button;
 	import feathers.controls.Header;
 	import feathers.controls.Screen;
 	import feathers.controls.TabBar;
+	import feathers.core.PopUpManager;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayoutData;
 	
@@ -221,8 +223,13 @@ package com.godpaper.as3.views.screens
 		//
 		private function backButton_onRelease(event:Event):void
 		{
+			//Pop up an quit game prompt at first,if neccessary.
+			var exitConfirmIndicatory:ExitComfirmIndicatory = new ExitComfirmIndicatory();
+			//
+			PopUpManager.addPopUp(exitConfirmIndicatory,true,true);
+			PopUpManager.centerPopUp(exitConfirmIndicatory);
 			//Screen swither here.
-			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);
+//			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);
 		}
 	}
 	

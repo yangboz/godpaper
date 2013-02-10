@@ -68,6 +68,11 @@ package feathers.controls
 		private static const HELPER_TOUCHES_VECTOR:Vector.<Touch> = new <Touch>[];
 
 		/**
+		 * @private
+		 */
+		protected static const INVALIDATION_FLAG_THUMB_FACTORY:String = "thumbFactory";
+
+		/**
 		 * The scroll bar's thumb may be dragged horizontally (on the x-axis).
 		 */
 		public static const DIRECTION_HORIZONTAL:String = "horizontal";
@@ -81,6 +86,14 @@ package feathers.controls
 		 * The default value added to the <code>nameList</code> of the thumb.
 		 */
 		public static const DEFAULT_CHILD_NAME_THUMB:String = "feathers-simple-scroll-bar-thumb";
+
+		/**
+		 * @private
+		 */
+		protected static function defaultThumbFactory():Button
+		{
+			return new Button();
+		}
 
 		/**
 		 * Constructor.
@@ -454,10 +467,76 @@ package feathers.controls
 		protected var isDragging:Boolean = false;
 
 		/**
-		 * Determines if the scroll bar dispatches the <code>onChange</code>
-		 * signal every time the thumb moves, or only once it stops moving.
+		 * Determines if the scroll bar dispatches the <code>Event.CHANGE</code>
+		 * event every time the thumb moves, or only once it stops moving.
 		 */
 		public var liveDragging:Boolean = true;
+
+		/**
+		 * @private
+		 */
+		protected var _thumbFactory:Function;
+
+		/**
+		 * A function used to generate the scroll bar's thumb sub-component.
+		 * This can be used to change properties on the thumb when it is first
+		 * created. For instance, if you are skinning Feathers components
+		 * without a theme, you might use <code>thumbFactory</code> to set
+		 * skins and text styles on the thumb.
+		 *
+		 * <p>The function should have the following signature:</p>
+		 * <pre>function():Button</pre>
+		 *
+		 * @see #thumbProperties
+		 */
+		public function get thumbFactory():Function
+		{
+			return this._thumbFactory;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set thumbFactory(value:Function):void
+		{
+			if(this._thumbFactory == value)
+			{
+				return;
+			}
+			this._thumbFactory = value;
+			this.invalidate(INVALIDATION_FLAG_THUMB_FACTORY);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _customThumbName:String;
+
+		/**
+		 * A name to add to the scroll bar's thumb sub-component. Typically
+		 * used by a theme to provide different skins to different scroll bars.
+		 *
+		 * @see feathers.core.FeathersControl#nameList
+		 * @see #thumbFactory
+		 * @see #thumbProperties
+		 */
+		public function get customThumbName():String
+		{
+			return this._customThumbName;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set customThumbName(value:String):void
+		{
+			if(this._customThumbName == value)
+			{
+				return;
+			}
+			this._customThumbName = value;
+			this.invalidate(INVALIDATION_FLAG_THUMB_FACTORY);
+		}
 
 		/**
 		 * @private
@@ -563,16 +642,6 @@ package feathers.controls
 				this.track.addEventListener(TouchEvent.TOUCH, track_touchHandler);
 				this.addChild(this.track);
 			}
-
-			if(!this.thumb)
-			{
-				this.thumb = new Button();
-				this.thumb.nameList.add(this.thumbName);
-				this.thumb.label = "";
-				this.thumb.keepDownStateOnRollOut = true;
-				this.thumb.addEventListener(TouchEvent.TOUCH, thumb_touchHandler);
-				this.addChild(this.thumb);
-			}
 		}
 
 		/**
@@ -584,20 +653,26 @@ package feathers.controls
 			const stylesInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STYLES);
 			var sizeInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_SIZE);
 			const stateInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STATE);
+			const thumbFactoryInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_THUMB_FACTORY);
 
-			if(stylesInvalid)
+			if(thumbFactoryInvalid)
+			{
+				this.createThumb();
+			}
+
+			if(thumbFactoryInvalid || stylesInvalid)
 			{
 				this.refreshThumbStyles();
 			}
 
-			if(stateInvalid)
+			if(thumbFactoryInvalid || stateInvalid)
 			{
 				this.thumb.isEnabled = this._isEnabled;
 			}
 
 			sizeInvalid = this.autoSizeIfNeeded() || sizeInvalid;
 
-			if(dataInvalid || stylesInvalid || sizeInvalid)
+			if(thumbFactoryInvalid || dataInvalid || stylesInvalid || sizeInvalid)
 			{
 				this.layout();
 			}
@@ -671,6 +746,26 @@ package feathers.controls
 		/**
 		 * @private
 		 */
+		protected function createThumb():void
+		{
+			if(this.thumb)
+			{
+				this.thumb.removeFromParent(true);
+				this.thumb = null;
+			}
+
+			const factory:Function = this._thumbFactory != null ? this._thumbFactory : defaultThumbFactory;
+			const thumbName:String = this._customThumbName != null ? this._customThumbName : this.thumbName;
+			this.thumb = Button(factory());
+			this.thumb.nameList.add(thumbName);
+			this.thumb.keepDownStateOnRollOut = true;
+			this.thumb.addEventListener(TouchEvent.TOUCH, thumb_touchHandler);
+			this.addChild(this.thumb);
+		}
+
+		/**
+		 * @private
+		 */
 		protected function refreshThumbStyles():void
 		{
 			for(var propertyName:String in this._thumbProperties)
@@ -720,7 +815,7 @@ package feathers.controls
 				const heightOffset:Number = Math.min(thumbHeight, contentHeight - thumbHeight) * valueOffset / (range * thumbHeight / contentHeight);
 				this.thumb.width = this.thumbOriginalWidth;
 				this.thumb.height = Math.max(thumbMinHeight, -heightOffset + thumbHeight);
-				this.thumb.x = (this.actualWidth - this.thumb.width) / 2;
+				this.thumb.x = this._paddingLeft + (this.actualWidth - this._paddingLeft - this._paddingRight - this.thumb.width) / 2;
 				const trackScrollableHeight:Number = contentHeight - this.thumb.height;
 				this.thumb.y = this._paddingTop + Math.max(0, Math.min(trackScrollableHeight, trackScrollableHeight * (this._value - this._minimum) / range));
 			}
@@ -733,7 +828,7 @@ package feathers.controls
 				this.thumb.height = this.thumbOriginalHeight;
 				const trackScrollableWidth:Number = contentWidth - this.thumb.width;
 				this.thumb.x = this._paddingLeft + Math.max(0, Math.min(trackScrollableWidth, trackScrollableWidth * (this._value - this._minimum) / range));
-				this.thumb.y = (this.actualHeight - this.thumb.height) / 2;
+				this.thumb.y = this._paddingTop + (this.actualHeight - this._paddingTop - this._paddingBottom - this.thumb.height) / 2;
 			}
 		}
 
@@ -769,7 +864,7 @@ package feathers.controls
 			if(this._touchValue < this._value)
 			{
 				var newValue:Number = Math.max(this._touchValue, this._value - this._page);
-				if(this._step != 0)
+				if(this._step != 0 && newValue != this._maximum && newValue != this._minimum)
 				{
 					newValue = roundToNearest(newValue, this._step);
 				}
@@ -778,7 +873,7 @@ package feathers.controls
 			else if(this._touchValue > this._value)
 			{
 				newValue = Math.min(this._touchValue, this._value + this._page);
-				if(this._step != 0)
+				if(this._step != 0 && newValue != this._maximum && newValue != this._minimum)
 				{
 					newValue = roundToNearest(newValue, this._step);
 				}
@@ -922,7 +1017,7 @@ package feathers.controls
 				{
 					touch.getLocation(this, HELPER_POINT);
 					var newValue:Number = this.locationToValue(HELPER_POINT);
-					if(this._step != 0)
+					if(this._step != 0 && newValue != this._maximum && newValue != this._minimum)
 					{
 						newValue = roundToNearest(newValue, this._step);
 					}

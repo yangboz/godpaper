@@ -8,19 +8,23 @@ accordance with the terms of the accompanying license agreement.
 package feathers.controls
 {
 	import feathers.core.FeathersControl;
+	import feathers.core.IFocusDisplayObject;
 	import feathers.core.ITextRenderer;
 	import feathers.core.IToggle;
 	import feathers.core.PropertyProxy;
+	import feathers.events.FeathersEventType;
 	import feathers.system.DeviceCapabilities;
 
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.ui.Keyboard;
 
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Event;
+	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -37,7 +41,7 @@ package feathers.controls
 	 * @see http://wiki.starling-framework.org/feathers/toggle-switch
 	 * @see Check
 	 */
-	public class ToggleSwitch extends FeathersControl implements IToggle
+	public class ToggleSwitch extends FeathersControl implements IToggle, IFocusDisplayObject
 	{
 		/**
 		 * @private
@@ -57,6 +61,21 @@ package feathers.controls
 		private static const MINIMUM_DRAG_DISTANCE:Number = 0.04;
 
 		/**
+		 * @private
+		 */
+		protected static const INVALIDATION_FLAG_THUMB_FACTORY:String = "thumbFactory";
+
+		/**
+		 * @private
+		 */
+		protected static const INVALIDATION_FLAG_ON_TRACK_FACTORY:String = "onTrackFactory";
+
+		/**
+		 * @private
+		 */
+		protected static const INVALIDATION_FLAG_OFF_TRACK_FACTORY:String = "offTrackFactory";
+
+		/**
 		 * The ON and OFF labels will be aligned to the middle vertically,
 		 * based on the full character height of the font.
 		 */
@@ -71,7 +90,7 @@ package feathers.controls
 		/**
 		 * The toggle switch has only one track skin, stretching to fill the
 		 * full length of switch. In this layout mode, the on track is
-		 * displayed and fills the entire length of the slider. The off
+		 * displayed and fills the entire length of the toggle switch. The off
 		 * track will not exist.
 		 */
 		public static const TRACK_LAYOUT_MODE_SINGLE:String = "single";
@@ -120,13 +139,39 @@ package feathers.controls
 		public static const DEFAULT_CHILD_NAME_THUMB:String = "feathers-toggle-switch-thumb";
 
 		/**
+		 * @private
+		 */
+		protected static function defaultThumbFactory():Button
+		{
+			return new Button();
+		}
+
+		/**
+		 * @private
+		 */
+		protected static function defaultOnTrackFactory():Button
+		{
+			return new Button();
+		}
+
+		/**
+		 * @private
+		 */
+		protected static function defaultOffTrackFactory():Button
+		{
+			return new Button();
+		}
+
+		/**
 		 * Constructor.
 		 */
 		public function ToggleSwitch()
 		{
 			super();
-			this.addEventListener(TouchEvent.TOUCH, touchHandler);
-			this.addEventListener(Event.REMOVED_FROM_STAGE, removedFromStageHandler);
+			this.addEventListener(TouchEvent.TOUCH, toggleSwitch_touchHandler);
+			this.addEventListener(FeathersEventType.FOCUS_IN, toggleSwitch_focusInHandler);
+			this.addEventListener(FeathersEventType.FOCUS_OUT, toggleSwitch_focusOutHandler);
+			this.addEventListener(Event.REMOVED_FROM_STAGE, toggleSwitch_removedFromStageHandler);
 		}
 
 		/**
@@ -586,7 +631,7 @@ package feathers.controls
 		{
 			//normally, we'd check to see if selected actually changed or not
 			//but the animation is triggered by the draw cycle, so we always
-			//need to invalidate. notice that the signal isn't dispatched
+			//need to invalidate. notice that the event isn't dispatched
 			//unless the value changes.
 			const oldSelected:Boolean = this._isSelected;
 			this._isSelected = value;
@@ -734,6 +779,72 @@ package feathers.controls
 		/**
 		 * @private
 		 */
+		protected var _onTrackFactory:Function;
+
+		/**
+		 * A function used to generate the toggle switch's on track sub-component.
+		 * This can be used to change properties on the on track when it is first
+		 * created. For instance, if you are skinning Feathers components
+		 * without a theme, you might use <code>onTrackFactory</code> to set
+		 * skins and other styles on the on track.
+		 *
+		 * <p>The function should have the following signature:</p>
+		 * <pre>function():Button</pre>
+		 *
+		 * @see #onTrackProperties
+		 */
+		public function get onTrackFactory():Function
+		{
+			return this._onTrackFactory;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set onTrackFactory(value:Function):void
+		{
+			if(this._onTrackFactory == value)
+			{
+				return;
+			}
+			this._onTrackFactory = value;
+			this.invalidate(INVALIDATION_FLAG_ON_TRACK_FACTORY);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _customOnTrackName:String;
+
+		/**
+		 * A name to add to the toggle switch's on track sub-component. Typically
+		 * used by a theme to provide different skins to different toggle switches.
+		 *
+		 * @see feathers.core.FeathersControl#nameList
+		 * @see #onTrackFactory
+		 * @see #onTrackProperties
+		 */
+		public function get customOnTrackName():String
+		{
+			return this._customOnTrackName;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set customOnTrackName(value:String):void
+		{
+			if(this._customOnTrackName == value)
+			{
+				return;
+			}
+			this._customOnTrackName = value;
+			this.invalidate(INVALIDATION_FLAG_ON_TRACK_FACTORY);
+		}
+
+		/**
+		 * @private
+		 */
 		protected var _onTrackProperties:PropertyProxy;
 
 		/**
@@ -791,6 +902,72 @@ package feathers.controls
 				this._onTrackProperties.addOnChangeCallback(childProperties_onChange);
 			}
 			this.invalidate(INVALIDATION_FLAG_STYLES);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _offTrackFactory:Function;
+
+		/**
+		 * A function used to generate the toggle switch's off track sub-component.
+		 * This can be used to change properties on the off track when it is first
+		 * created. For instance, if you are skinning Feathers components
+		 * without a theme, you might use <code>offTrackFactory</code> to set
+		 * skins and other styles on the off track.
+		 *
+		 * <p>The function should have the following signature:</p>
+		 * <pre>function():Button</pre>
+		 *
+		 * @see #offTrackProperties
+		 */
+		public function get offTrackFactory():Function
+		{
+			return this._offTrackFactory;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set offTrackFactory(value:Function):void
+		{
+			if(this._offTrackFactory == value)
+			{
+				return;
+			}
+			this._offTrackFactory = value;
+			this.invalidate(INVALIDATION_FLAG_OFF_TRACK_FACTORY);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _customOffTrackName:String;
+
+		/**
+		 * A name to add to the toggle switch's off track sub-component. Typically
+		 * used by a theme to provide different skins to different toggle switches.
+		 *
+		 * @see feathers.core.FeathersControl#nameList
+		 * @see #offTrackFactory
+		 * @see #offTrackProperties
+		 */
+		public function get customOffTrackName():String
+		{
+			return this._customOffTrackName;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set customOffTrackName(value:String):void
+		{
+			if(this._customOffTrackName == value)
+			{
+				return;
+			}
+			this._customOffTrackName = value;
+			this.invalidate(INVALIDATION_FLAG_OFF_TRACK_FACTORY);
 		}
 
 		/**
@@ -858,6 +1035,72 @@ package feathers.controls
 		/**
 		 * @private
 		 */
+		protected var _thumbFactory:Function;
+
+		/**
+		 * A function used to generate the toggle switch's thumb sub-component.
+		 * This can be used to change properties on the thumb when it is first
+		 * created. For instance, if you are skinning Feathers components
+		 * without a theme, you might use <code>thumbFactory</code> to set
+		 * skins and text styles on the thumb.
+		 *
+		 * <p>The function should have the following signature:</p>
+		 * <pre>function():Button</pre>
+		 *
+		 * @see #thumbProperties
+		 */
+		public function get thumbFactory():Function
+		{
+			return this._thumbFactory;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set thumbFactory(value:Function):void
+		{
+			if(this._thumbFactory == value)
+			{
+				return;
+			}
+			this._thumbFactory = value;
+			this.invalidate(INVALIDATION_FLAG_THUMB_FACTORY);
+		}
+
+		/**
+		 * @private
+		 */
+		protected var _customThumbName:String;
+
+		/**
+		 * A name to add to the toggle switch's thumb sub-component. Typically
+		 * used by a theme to provide different skins to different toggle switches.
+		 *
+		 * @see feathers.core.FeathersControl#nameList
+		 * @see #thumbFactory
+		 * @see #thumbProperties
+		 */
+		public function get customThumbName():String
+		{
+			return this._customThumbName;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set customThumbName(value:String):void
+		{
+			if(this._customThumbName == value)
+			{
+				return;
+			}
+			this._customThumbName = value;
+			this.invalidate(INVALIDATION_FLAG_THUMB_FACTORY);
+		}
+
+		/**
+		 * @private
+		 */
 		protected var _thumbProperties:PropertyProxy;
 
 		/**
@@ -920,31 +1163,6 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		override protected function initialize():void
-		{
-			if(!this.onTrack)
-			{
-				this.onTrack = new Button();
-				this.onTrack.nameList.add(this.onTrackName);
-				this.onTrack.label = "";
-				this.onTrack.keepDownStateOnRollOut = true;
-				this.addChild(this.onTrack);
-			}
-
-			if(!this.thumb)
-			{
-				this.thumb = new Button();
-				this.thumb.nameList.add(this.thumbName);
-				this.thumb.label = "";
-				this.thumb.keepDownStateOnRollOut = true;
-				this.thumb.addEventListener(TouchEvent.TOUCH, thumb_touchHandler);
-				this.addChild(this.thumb);
-			}
-		}
-
-		/**
-		 * @private
-		 */
 		override protected function draw():void
 		{
 			const selectionInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_SELECTED);
@@ -952,13 +1170,26 @@ package feathers.controls
 			var sizeInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_SIZE);
 			const stateInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_STATE);
 			const textRendererInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_TEXT_RENDERER);
+			const thumbFactoryInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_THUMB_FACTORY);
+			const onTrackFactoryInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_ON_TRACK_FACTORY);
+			const offTrackFactoryInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_OFF_TRACK_FACTORY);
+
+			if(thumbFactoryInvalid)
+			{
+				this.createThumb();
+			}
+
+			if(onTrackFactoryInvalid)
+			{
+				this.createOnTrack();
+			}
+
+			this.createOrDestroyOffTrackIfNeeded(offTrackFactoryInvalid);
 
 			if(textRendererInvalid)
 			{
 				this.createLabels();
 			}
-
-			this.createOrDestroyOffTrackIfNeeded();
 
 			if(stylesInvalid)
 			{
@@ -1044,6 +1275,75 @@ package feathers.controls
 				}
 			}
 			return this.setSizeInternal(newWidth, newHeight, false);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function createThumb():void
+		{
+			if(this.thumb)
+			{
+				this.thumb.removeFromParent(true);
+				this.thumb = null;
+			}
+
+			const factory:Function = this._thumbFactory != null ? this._thumbFactory : defaultThumbFactory;
+			const thumbName:String = this._customThumbName != null ? this._customThumbName : this.thumbName;
+			this.thumb = Button(factory());
+			this.thumb.nameList.add(thumbName);
+			this.thumb.keepDownStateOnRollOut = true;
+			this.thumb.addEventListener(TouchEvent.TOUCH, thumb_touchHandler);
+			this.addChild(this.thumb);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function createOnTrack():void
+		{
+			if(this.onTrack)
+			{
+				this.onTrack.removeFromParent(true);
+				this.onTrack = null;
+			}
+
+			const factory:Function = this._onTrackFactory != null ? this._onTrackFactory : defaultOnTrackFactory;
+			const onTrackName:String = this._customOnTrackName != null ? this._customOnTrackName : this.onTrackName;
+			this.onTrack = Button(factory());
+			this.onTrack.nameList.add(onTrackName);
+			this.onTrack.keepDownStateOnRollOut = true;
+			this.addChildAt(this.onTrack, 0);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function createOrDestroyOffTrackIfNeeded(offTrackFactoryInvalid:Boolean):void
+		{
+			if(this._trackLayoutMode == TRACK_LAYOUT_MODE_ON_OFF)
+			{
+				if(!offTrackFactoryInvalid)
+				{
+					return;
+				}
+				if(this.offTrack)
+				{
+					this.offTrack.removeFromParent(true);
+					this.offTrack = null;
+				}
+				const factory:Function = this._offTrackFactory != null ? this._offTrackFactory : defaultOffTrackFactory;
+				const offTrackName:String = this._customOffTrackName != null ? this._customOffTrackName : this.offTrackName;
+				this.offTrack = Button(factory());
+				this.offTrack.nameList.add(offTrackName);
+				this.offTrack.keepDownStateOnRollOut = true;
+				this.addChildAt(this.offTrack, 1);
+			}
+			else if(this.offTrack) //single
+			{
+				this.offTrack.removeFromParent(true);
+				this.offTrack = null;
+			}
 		}
 
 		/**
@@ -1354,29 +1654,6 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function createOrDestroyOffTrackIfNeeded():void
-		{
-			if(this._trackLayoutMode == TRACK_LAYOUT_MODE_ON_OFF)
-			{
-				if(!this.offTrack)
-				{
-					this.offTrack = new Button();
-					this.offTrack.nameList.add(this.offTrackName);
-					this.offTrack.label = "";
-					this.offTrack.keepDownStateOnRollOut = true;
-					this.addChildAt(this.offTrack, 1);
-				}
-			}
-			else if(this.offTrack) //single
-			{
-				this.offTrack.removeFromParent(true);
-				this.offTrack = null;
-			}
-		}
-
-		/**
-		 * @private
-		 */
 		protected function childProperties_onChange(proxy:PropertyProxy, name:Object):void
 		{
 			this.invalidate(INVALIDATION_FLAG_STYLES);
@@ -1385,7 +1662,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function removedFromStageHandler(event:Event):void
+		protected function toggleSwitch_removedFromStageHandler(event:Event):void
 		{
 			this._touchPointID = -1;
 		}
@@ -1393,7 +1670,25 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function touchHandler(event:TouchEvent):void
+		protected function toggleSwitch_focusInHandler(event:Event):void
+		{
+			this.stage.addEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
+			this.stage.addEventListener(KeyboardEvent.KEY_UP, stage_keyUpHandler);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function toggleSwitch_focusOutHandler(event:Event):void
+		{
+			this.stage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
+			this.stage.removeEventListener(KeyboardEvent.KEY_UP, stage_keyUpHandler);
+		}
+
+		/**
+		 * @private
+		 */
+		protected function toggleSwitch_touchHandler(event:TouchEvent):void
 		{
 			if(this._ignoreTapHandler)
 			{
@@ -1503,6 +1798,35 @@ package feathers.controls
 				}
 			}
 			HELPER_TOUCHES_VECTOR.length = 0;
+		}
+
+		/**
+		 * @private
+		 */
+		protected function stage_keyDownHandler(event:KeyboardEvent):void
+		{
+			if(event.keyCode == Keyboard.ESCAPE)
+			{
+				this._touchPointID = -1;
+			}
+			if(this._touchPointID >= 0 || event.keyCode != Keyboard.SPACE)
+			{
+				return;
+			}
+			this._touchPointID = int.MAX_VALUE;
+		}
+
+		/**
+		 * @private
+		 */
+		protected function stage_keyUpHandler(event:KeyboardEvent):void
+		{
+			if(this._touchPointID != int.MAX_VALUE || event.keyCode != Keyboard.SPACE)
+			{
+				return;
+			}
+			this._touchPointID = -1;
+			this.isSelected = !this._isSelected;
 		}
 
 		/**
