@@ -228,8 +228,6 @@ package com.godpaper.as3.views.screens
 			//
 			PopUpManager.addPopUp(exitConfirmIndicatory,true,true);
 			PopUpManager.centerPopUp(exitConfirmIndicatory);
-			//Screen swither here.
-//			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);
 		}
 	}
 	

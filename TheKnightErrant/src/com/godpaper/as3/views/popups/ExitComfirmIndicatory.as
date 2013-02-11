@@ -26,21 +26,23 @@ package com.godpaper.as3.views.popups
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import feathers.controls.Button;
-	import feathers.controls.ButtonGroup;
-	import feathers.controls.Header;
-	import feathers.controls.PanelScreen;
-	import feathers.data.ListCollection;
-	import feathers.events.FeathersEventType;
-	import feathers.layout.AnchorLayout;
-	import feathers.layout.AnchorLayoutData;
-	import feathers.system.DeviceCapabilities;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	
-	import starling.core.Starling;
+	import feathers.controls.Button;
+	import feathers.controls.Callout;
+	import feathers.controls.Label;
+	import feathers.controls.ScrollContainer;
+	import feathers.controls.TextInput;
+	import feathers.core.PopUpManager;
+	
+	import mx.utils.UIDUtil;
+	
+	import org.osflash.signals.Signal;
+	
 	import starling.display.DisplayObject;
 	import starling.events.Event;
-	
-	[Event(name="complete",type="starling.events.Event")]
 	
 	
 	/**
@@ -51,15 +53,19 @@ package com.godpaper.as3.views.popups
 	 * @airVersion 3.2+
 	 * Created Feb 10, 2013 11:51:52 PM
 	 */   	 
-	public class ExitComfirmIndicatory extends PanelScreen
+//	public class ExitComfirmIndicatory extends PanelScreen
+	public class ExitComfirmIndicatory extends IndicatoryBase	
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var _backButton:Button;
-		private var _buttonGroup:ButtonGroup;
+		private var _buttonsContainer:ScrollContainer;//submit,next button 
+		private var _cancelBtn:Button;//camcel exiting game button.
+		private var _exitBtn:Button;//confirm exit game button.
+		//Public signals
+		public var signal_exit_game:Signal;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -84,9 +90,9 @@ package com.godpaper.as3.views.popups
 		public function ExitComfirmIndicatory()
 		{
 			super();
-			this.addEventListener(FeathersEventType.INITIALIZE, initializeHandler);
+			//
+			this.signal_exit_game = new Signal();
 		}     	
-		
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -98,70 +104,54 @@ package com.godpaper.as3.views.popups
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		protected function initializeHandler(event:Event):void
+		override protected function initialize():void
 		{
-			this.layout = new AnchorLayout();
-			
-			this._buttonGroup = new ButtonGroup();
-			this._buttonGroup.dataProvider = new ListCollection(
-				[
-					{ label: "Quit", triggered: button_triggeredHandler },
-					{ label: "Cancel", triggered: button_triggeredHandler },
-				]);
-			const buttonGroupLayoutData:AnchorLayoutData = new AnchorLayoutData();
-			buttonGroupLayoutData.horizontalCenter = 0;
-			buttonGroupLayoutData.verticalCenter = 0;
-			this._buttonGroup.layoutData = buttonGroupLayoutData;
-			this.addChild(this._buttonGroup);
-			
-			this.headerProperties.title = "Quit confirm?";
-			
-			if(!DeviceCapabilities.isTablet(Starling.current.nativeStage))
-			{
-				this._backButton = new Button();
-				this._backButton.label = "Back";
-				this._backButton.addEventListener(Event.TRIGGERED, backButton_triggeredHandler);
-				
-				this.headerProperties.leftItems = new <DisplayObject>
-					[
-						this._backButton
-					];
-			}
-			
-			// handles the back hardware key on android
-			this.backButtonHandler = this.onBackButton;
+			super.initialize();
+			//_buttonsContainer
+			this._buttonsContainer = new ScrollContainer();
+			this._buttonsContainer.layout = this.hLayout;
+			this._container.addChild(this._buttonsContainer);
+			//buttons 
+			this._cancelBtn = new Button();
+			this._cancelBtn.label = "Cancel";
+			this._buttonsContainer.addChild(this._cancelBtn);
+			this._exitBtn = new Button();
+			this._exitBtn.label = "Exit";
+			this._buttonsContainer.addChild(this._exitBtn);
+			//event listener
+			//			this._submitBtn.onRelease.add(submitButtonOnRelease);
+			this._cancelBtn.addEventListener(starling.events.Event.TRIGGERED,cancelButtonOnRelease);
+			//			this._nextBtn.onRelease.add(nextButtonOnRelease);
+			this._exitBtn.addEventListener(starling.events.Event.TRIGGERED,exitButtonOnRelease);
+			//
+			this._header.title = "Confirm exit?";
+			this.width = 200;
+			this.height = 100;
 		}
 		//
 		override protected function draw():void
 		{
-			this.header.width = this.actualWidth;
-			this.header.validate();
-			//			
-			this._buttonGroup.y = this.header.height;
-			this._buttonGroup.width = this.actualWidth;
-			this._buttonGroup.height = this.actualHeight - this._buttonGroup.y;
-			this._buttonGroup.validate();
+			super.draw();
 		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function onBackButton():void
+		//
+		private function cancelButtonOnRelease(event:Event):void
 		{
-			this.dispatchEventWith(Event.COMPLETE);
+			PopUpManager.removePopUp(this);
 		}
-		
-		private function backButton_triggeredHandler(event:Event):void
+		//
+		private function exitButtonOnRelease(event:Event):void
 		{
-			this.onBackButton();
-		}
-		
-		private function button_triggeredHandler(event:Event):void
-		{
-			const button:Button = Button(event.currentTarget);
-			trace(button.label + " triggered.");
-			//TODO:cancel,quit force handlers.
+			//Remove the pop-up.
+			PopUpManager.removePopUp(this);
+			//Screen swither here.
+			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);
+			//Signal broad casting
+			this.signal_exit_game.dispatch();
 		}
 	}
 	
