@@ -265,7 +265,13 @@ package com.godpaper.as3.plugins.playerIO
 			signal_user_joined.dispatch();
 			//Add disconnect listener
 			connection.addDisconnectHandler(handleDisconnect);
-			
+			//Add listener for messages of the type "init"
+			connection.addMessageHandler("init", function(m:Message, iAm:int, name:String):void{
+				LOG.info("Connection init,I am {0}, name is {1}",iAm,name);		
+				FlexGlobals.userModel.hosterRoleIndex = iAm;
+				FlexGlobals.userModel.hostRoleName = name;
+			})
+				
 			//Add listener for messages of the type "hello"
 			connection.addMessageHandler("hello", function(m:Message):void{
 				LOG.info("Recived a message with the type hello from the server");			 
@@ -300,7 +306,7 @@ package com.godpaper.as3.plugins.playerIO
 				var conductVO:ConductVO = new ConductVO();
 				conductVO.nextPosition = new Point(x,y);
 				//
-				if(!turn)
+				if(FlexGlobals.userModel.hosterRoleIndex != turn)
 				{
 					conductVO.target = PieceConfig.redPiecesBox.chessPieces.pop();
 					GameConfig.gameStateManager.isAnotherHumanTurnNow();
