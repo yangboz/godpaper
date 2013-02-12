@@ -317,7 +317,10 @@ package com.godpaper.as3.plugins.playerIO
 				}
 				GameConfig.chessPieceManager.makeMove(conductVO);
 			})
-
+			//
+			connection.addMessageHandler("spectator", function(m:Message, p1name:String, p2name:String):void{
+				FlexGlobals.userModel.hosterRoleIndex = -1;//TODO:sepectator flow here.
+			})
 		}
 		
 		private function handleMessages(m:Message):void{

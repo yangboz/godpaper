@@ -229,6 +229,7 @@ package com.godpaper.as3.business.managers
 			if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
 			{
 				LOG.info("GameConfig.turnFlag: {0}",GameConfig.turnFlag);
+//				FlexGlobals.userModel.hosterRoleIndex
 				if(GameConfig.turnFlag==DefaultConstants.FLAG_RED)
 				{
 					var brevity:String = conductVO.brevity;//conduct brevity
