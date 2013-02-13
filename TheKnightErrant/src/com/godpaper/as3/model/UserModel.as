@@ -44,6 +44,9 @@ package com.godpaper.as3.model
 		public var locale:String = "en_US";
 		//Signals
 		public var signal_player_registed:Signal;
+		//Misc
+		public var state:String = "cross";//"cross","circle"
+		public var moves:Array = [];//Temp store chess piece moves
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

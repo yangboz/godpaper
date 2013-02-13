@@ -94,6 +94,7 @@ package com.godpaper.as3.views.screens
 		//Indicatory
 		private var connectingIndicatory:ThinkIndicatory;
 		private var creatingIndicatory:ThinkIndicatory;
+		private var joinIndicator:ThinkIndicatory;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -357,6 +358,10 @@ package com.godpaper.as3.views.screens
 				playerIoPlugin.joinRoom(roomID,FlexGlobals.userModel.hosterPeerId,FlexGlobals.userModel.hosterRoleIndex);
 				//Signal handler.
 				playerIoPlugin.signal_user_joined.addOnce(onUserJoined);
+				//Joinning indicator pop up 
+				this.joinIndicator = new ThinkIndicatory("Joining...");
+				PopUpManager.addPopUp(joinIndicator);
+				PopUpManager.centerPopUp(joinIndicator);
 			}
 		}
 		//Signal handlers here.
@@ -420,6 +425,10 @@ package com.godpaper.as3.views.screens
 			if(PopUpManager.isPopUp(this.creatingIndicatory))
 			{
 				PopUpManager.removePopUp(this.creatingIndicatory);
+			}
+			if(PopUpManager.isPopUp(this.joinIndicator))
+			{
+				PopUpManager.removePopUp(this.joinIndicator);
 			}
 			//Refresh the room list.
 			if( this.playerIoPlugin )

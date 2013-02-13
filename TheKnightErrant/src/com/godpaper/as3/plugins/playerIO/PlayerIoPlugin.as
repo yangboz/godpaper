@@ -304,7 +304,7 @@ package com.godpaper.as3.plugins.playerIO
 			})
 				
 			//Listen to and handle messages of the type "move"
-			connection.addMessageHandler("place", function(m:Message, y:int, x:int, state:String, turn:int):void{
+			connection.addMessageHandler("place", function(m:Message, x:int, y:int, state:String, turn:int):void{
 				LOG.info("Player: State {0},Moved to {1},{2},Turn to {3}", state,x,y,turn);
 				//place the piece comes from other player's action broadcasting.
 				var conductVO:ConductVO = new ConductVO();
@@ -313,17 +313,23 @@ package com.godpaper.as3.plugins.playerIO
 				if(FlexGlobals.userModel.hosterRoleIndex != turn)
 //				if(state=="circle")//"cross","circle"
 				{
-					if(GameConfig.gameStateManager.isRedSide)
+					if(GameConfig.gameStateManager.isRedSide)//Default flag RED,Notice: the flag already has turnned
 					{
 						conductVO.target = PieceConfig.bluePiecesBox.chessPieces.pop();
 					}else
 					{
 						conductVO.target = PieceConfig.redPiecesBox.chessPieces.pop();
 					}
+					//Save stage to user model.
+					FlexGlobals.userModel.state = state;
+					FlexGlobals.userModel.moves.push(conductVO.brevity);
+					//Make chess piece move.
 					GameConfig.chessPieceManager.makeMove(conductVO);
+					//The opponent player can move piece again.
+					IndicatorConfig.waiting = false;
 				}else
 				{
-					IndicatorConfig.waiting = false;
+					IndicatorConfig.waiting = true;//Waiting for the player can move piece again.
 				}
 			})
 			//

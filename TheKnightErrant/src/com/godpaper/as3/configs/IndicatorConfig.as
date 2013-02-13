@@ -71,7 +71,10 @@ package com.godpaper.as3.configs
 				if(waitingIndicatory == null) waitingIndicatory = new ThinkIndicatory("Waiting...");
 				//				Callout.show(computerWinIndicatory, getChessBoard(), Callout.DIRECTION_ANY);
 				//				_callout.open(computerWinIndicatory,FlexGlobals.gameScene);
-				PopUpManager.addPopUp(waitingIndicatory);
+				if(!PopUpManager.isPopUp(waitingIndicatory))//Avoid duplication.
+				{
+					PopUpManager.addPopUp(waitingIndicatory);
+				}
 			}else
 			{
 				//				_callout.close();
@@ -124,7 +127,10 @@ package com.godpaper.as3.configs
 				if(thinkIndicatory == null) thinkIndicatory = new ThinkIndicatory();
 //				Callout.show(thinkIndicatory, getChessBoard(), Callout.DIRECTION_DOWN);
 //				_callout.open(thinkIndicatory,FlexGlobals.gameScene);
-				PopUpManager.addPopUp(thinkIndicatory);
+				if(!PopUpManager.isPopUp(thinkIndicatory))//Avoid duplication.
+				{
+					PopUpManager.addPopUp(thinkIndicatory);
+				}
 			}else
 			{
 //				_callout.close();

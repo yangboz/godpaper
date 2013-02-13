@@ -25,7 +25,6 @@ package com.godpaper.as3.business.managers
 	import com.godpaper.as3.tasks.UpdatePiecesPositionTask;
 	import com.godpaper.as3.tasks.UpdateZobristKeysTask;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.as3.views.components.ChessBoard;
 	import com.godpaper.as3.views.components.ChessGasket;
 	import com.godpaper.as3.views.components.ChessPiece;
 	import com.lookbackon.ds.BitBoard;
@@ -212,7 +211,19 @@ package com.godpaper.as3.business.managers
 			LOG.info("End makeMove:{0}", conductVO.brevity);
 			//clean up firstly.
 			currentRemovedPieces.length = 0;
-			//FlexGlobals.userModel.hosterRoleIndex
+			//conduct service transform
+			LOG.info("GameConfig.gameStateManager.isGreenSide:{0},host role index: {1}",GameConfig.gameStateManager.isGreenSide,FlexGlobals.userModel.hosterRoleIndex);
+			LOG.info("GameConfig.gameStateManager.isGreenSide && host role index: {0}",(GameConfig.gameStateManager.isGreenSide && FlexGlobals.userModel.hosterRoleIndex));
+			//
+			if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
+			{
+				if(FlexGlobals.userModel.moves.indexOf(conductVO.brevity)==-1)//Default index 0
+				{
+					//Default flag RED,Notice: the flag already has turnned
+					FlexGlobals.conductService.transforBrevity(conductVO.brevity);
+					FlexGlobals.userModel.moves.push(conductVO.brevity);//Moves insert.
+				}
+			}
 			//relatived side handlers.
 			if(GameConfig.gameStateManager.isBlueSide)
 			{
@@ -221,22 +232,10 @@ package com.godpaper.as3.business.managers
 			if(GameConfig.gameStateManager.isRedSide)
 			{
 				this.redSideHandler();	
-				//conduct service transform
-				if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
-				{
-					//FlexGlobals.userModel.hosterRoleIndex
-					FlexGlobals.conductService.transforBrevity( conductVO.brevity );
-				}
 			}
 			if(GameConfig.gameStateManager.isGreenSide)
 			{
 				this.greenSideHandler();	
-				//conduct service transform
-				if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
-				{
-					//FlexGlobals.userModel.hosterRoleIndex
-					FlexGlobals.conductService.transforBrevity( conductVO.brevity );
-				}
 			}
 		}
 

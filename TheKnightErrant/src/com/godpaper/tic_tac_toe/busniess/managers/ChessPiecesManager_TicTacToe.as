@@ -61,7 +61,6 @@ package com.godpaper.tic_tac_toe.busniess.managers
 		//--------------------------------------------------------------------------
 		public function ChessPiecesManager_TicTacToe()
 		{
-			//TODO: implement function
 			super();
 		}     	
 

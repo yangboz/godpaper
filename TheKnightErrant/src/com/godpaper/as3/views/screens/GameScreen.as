@@ -206,10 +206,10 @@ package com.godpaper.as3.views.screens
 			//Waiting indicatory as default under multiplay mode
 			if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
 			{
-				if(!FlexGlobals.userModel.hosterRoleIndex)//Only hoster shoulde be waiting.
-				{	
+//				if(!FlexGlobals.userModel.hosterRoleIndex)//Hoster shoulde be waiting.
+//				{	
 					IndicatorConfig.waiting = true;
-				}
+//				}
 				if(this.playerIoPlugin)
 				{
 					this.playerIoPlugin.signal_user_joined.addOnce(onOpponentJoined);
@@ -245,7 +245,10 @@ package com.godpaper.as3.views.screens
 		//
 		private function onOpponentJoined():void
 		{
-			IndicatorConfig.waiting = false;
+			if(!FlexGlobals.userModel.hosterRoleIndex)//Hoster can move chess piece now.
+			{	
+				IndicatorConfig.waiting = false;
+			}
 		}
 	}
 	
