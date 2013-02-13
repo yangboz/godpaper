@@ -99,7 +99,8 @@ package
 		//Plugin stage support.
 		public var pluginStage:MovieClip;
 		//Default mochi dashboard hint.
-		public var _mochiads_game_id:String="c7278f158e32f9a0";
+//		public var _mochiads_game_id:String="c7278f158e32f9a0";
+		public var _mochiads_game_id:String = "cbee52026094f585";
 		//For children dynamic factory config.
 		protected var pcFactory:Class=PieceConfig.factory;
 		//Views(esp for plugin display)
@@ -122,7 +123,7 @@ package
 		//			return new NonobaPlugin();
 		//			return new KongregatePlugin();
 		//			return new PlatogoPlugin("1146511093");
-		private var _pluginProvider:IPlug = new PlayerIoPlugin("chinesechessjam-msf2zuz0suaip7yhtzpaa","TicTacToe");
+		private var _pluginProvider:IPlug = new PlayerIoPlugin("tictactoe-dvrgkawregfyanwdnhtpa","TicTacToe");
 		/**
 		 * Override this for customize plugin provider.
 		 */
