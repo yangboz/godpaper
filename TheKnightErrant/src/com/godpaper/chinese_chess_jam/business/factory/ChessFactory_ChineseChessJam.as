@@ -82,35 +82,41 @@ package com.godpaper.chinese_chess_jam.business.factory
 				//about blue
 				case "(x=0, y=0)":
 				case "(x=8, y=0)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.BLUE_ROOK.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.BLUE_ROOK.value;
 					chessPieceType=Constants_ChineseChessJam.BLUE_ROOK;
 					break;
 				case "(x=1, y=0)":
 				case "(x=7, y=0)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.BLUE_KNIGHT.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.BLUE_KNIGHT.value;
 					chessPieceType=Constants_ChineseChessJam.BLUE_KNIGHT;
 					break;
 				case "(x=2, y=0)":
 				case "(x=6, y=0)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.BLUE_BISHOP.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.BLUE_BISHOP.value;
 					chessPieceType=Constants_ChineseChessJam.BLUE_BISHOP;
 					break;
 				case "(x=3, y=0)":
 				case "(x=5, y=0)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.BLUE_OFFICAL.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.BLUE_OFFICAL.value;
 					chessPieceType=Constants_ChineseChessJam.BLUE_OFFICAL;
 					break;
 				case "(x=4, y=0)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.BLUE_MARSHAL.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.BLUE_MARSHAL.value;
 					chessPieceType=Constants_ChineseChessJam.BLUE_MARSHAL;
 					break;
 				case "(x=1, y=2)":
 				case "(x=7, y=2)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.BLUE_CANNON.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.BLUE_CANNON.value;
 					chessPieceType=Constants_ChineseChessJam.BLUE_CANNON;
@@ -120,6 +126,7 @@ package com.godpaper.chinese_chess_jam.business.factory
 				case "(x=4, y=3)":
 				case "(x=6, y=3)":
 				case "(x=8, y=3)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.BLUE_PAWN.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.BLUE_PAWN.value;
 					chessPieceType=Constants_ChineseChessJam.BLUE_PAWN;
@@ -127,35 +134,41 @@ package com.godpaper.chinese_chess_jam.business.factory
 				//about red
 				case "(x=0, y=9)":
 				case "(x=8, y=9)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.RED_ROOK.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.RED_ROOK.value;
 					chessPieceType=Constants_ChineseChessJam.RED_ROOK;
 					break;
 				case "(x=1, y=9)":
 				case "(x=7, y=9)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.RED_KNIGHT.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.RED_KNIGHT.value;
 					chessPieceType=Constants_ChineseChessJam.RED_KNIGHT;
 					break;
 				case "(x=2, y=9)":
 				case "(x=6, y=9)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.RED_BISHOP.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.RED_BISHOP.value;
 					chessPieceType=Constants_ChineseChessJam.RED_BISHOP;
 					break;
 				case "(x=3, y=9)":
 				case "(x=5, y=9)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.RED_OFFICAL.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.RED_OFFICAL.value;
 					chessPieceType=Constants_ChineseChessJam.RED_OFFICAL;
 					break;
 				case "(x=4, y=9)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.RED_MARSHAL.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.RED_MARSHAL.value;
 					chessPieceType=Constants_ChineseChessJam.RED_MARSHAL;
 					break;
 				case "(x=1, y=7)":
 				case "(x=7, y=7)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.RED_CANNON.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.RED_CANNON.value;
 					chessPieceType=Constants_ChineseChessJam.RED_CANNON;
@@ -165,6 +178,7 @@ package com.godpaper.chinese_chess_jam.business.factory
 				case "(x=4, y=6)":
 				case "(x=6, y=6)":
 				case "(x=8, y=6)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_ChineseChessJam.RED_PAWN.label;
 					chessPieceValue=PiecesConstants_ChineseChessJam.RED_PAWN.value;
 					chessPieceType=Constants_ChineseChessJam.RED_PAWN;
