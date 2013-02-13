@@ -1,5 +1,5 @@
 /**
- *  GODPAPER Confidential,Copyright 2012. All rights reserved.
+ *  GODPAPER Confidential,Copyright 2013. All rights reserved.
  *
  *  Permission is hereby granted, free of charge, to any person obtaining
  *  a copy of this software and associated documentation files (the "Software"),
@@ -42,7 +42,7 @@ package
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Aug 7, 2012 10:07:49 AM
+	 * Created Feb 13, 2013 10:33:20 AM
 	 */   	 
 	public class FlexUnitApplication extends Sprite
 	{		
