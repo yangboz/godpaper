@@ -31,6 +31,7 @@ package com.godpaper.as3.views.screens
 	import com.adobe.cairngorm.task.TaskEvent;
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessBoard;
@@ -202,6 +203,15 @@ package com.godpaper.as3.views.screens
 				[
 					this._button_back
 				];
+			//Waiting indicatory as default under multiplay mode
+			if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
+			{
+				IndicatorConfig.waiting = true;
+				if(this.playerIoPlugin)
+				{
+					this.playerIoPlugin.signal_user_joined.addOnce(onOpponentJoined);
+				}
+			}
 		}
 		//
 		override protected function draw():void
@@ -228,6 +238,11 @@ package com.godpaper.as3.views.screens
 			//
 			PopUpManager.addPopUp(exitConfirmIndicatory,true,true);
 			PopUpManager.centerPopUp(exitConfirmIndicatory);
+		}
+		//
+		private function onOpponentJoined():void
+		{
+			IndicatorConfig.waiting = false;
 		}
 	}
 	

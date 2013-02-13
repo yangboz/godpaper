@@ -68,9 +68,11 @@ package com.godpaper.as3.business.fsm.states.game
 		{
 			//hold turn flag
 			GameConfig.turnFlag = DefaultConstants.FLAG_GREEN;
-			//TODO:logicly decide read out transition on this stage.(Opponent/Network transform wating).
+			//Logicly decide read out transition on this stage.(Opponent/Network transform wating).
 			IndicatorConfig.readOut=false;
 			//about view
+			//Simplify loading mask,to wait the apponent's action.
+			IndicatorConfig.waiting=true;
 			
 			//about data
 		}

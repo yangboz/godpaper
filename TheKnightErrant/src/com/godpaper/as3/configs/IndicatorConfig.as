@@ -42,6 +42,8 @@ package com.godpaper.as3.configs
 		public static var airportUtility:Boolean=false;
 		//about popup the computer win title window
 		private static var _outcome:Boolean=false;
+		//about popup the waiting apponent title window
+		private static var _waiting:Boolean=false;
 		//call out(popup manager).
 		private static var _callout:CalloutPopUpContentManager = new CalloutPopUpContentManager();
 		//----------------------------------
@@ -53,7 +55,34 @@ package com.godpaper.as3.configs
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
+		//
+		private static var waitingIndicatory:ThinkIndicatory;
+		public static function get waiting():Boolean
+		{
+			return _waiting;
+		}
 
+		public static function set waiting(value:Boolean):void
+		{
+			_waiting = value;
+			//Call out view(progress bar).
+			if(value)
+			{
+				if(waitingIndicatory == null) waitingIndicatory = new ThinkIndicatory("Waiting...");
+				//				Callout.show(computerWinIndicatory, getChessBoard(), Callout.DIRECTION_ANY);
+				//				_callout.open(computerWinIndicatory,FlexGlobals.gameScene);
+				PopUpManager.addPopUp(waitingIndicatory);
+			}else
+			{
+				//				_callout.close();
+				if(waitingIndicatory)
+				{
+					PopUpManager.removePopUp(waitingIndicatory);
+					waitingIndicatory = null;
+				}
+			}
+		}
+		//
 		public static function get outcome():Boolean
 		{
 			return _outcome;

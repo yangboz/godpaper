@@ -262,8 +262,6 @@ package com.godpaper.as3.plugins.playerIO
 			LOG.info("Sucessfully connected to the multiplayer server");
 //TODO:			gotoAndStop(2);
 			this.connection = connection;//Keef ref.
-			//Broad cast signal
-			signal_user_joined.dispatch();
 			//Add disconnect listener
 			connection.addDisconnectHandler(handleDisconnect);
 			//Add listener for messages of the type "init"
@@ -273,6 +271,8 @@ package com.godpaper.as3.plugins.playerIO
 				FlexGlobals.userModel.hostRoleName = name;
 				//Game turn flag init.(0,1,2...)
 				GameConfig.turnFlag = !iAm?DefaultConstants.FLAG_RED:DefaultConstants.FLAG_GREEN;
+				//Broad cast signal
+				signal_user_joined.dispatch();
 			})
 				
 			//Add listener for messages of the type "hello"
@@ -280,26 +280,26 @@ package com.godpaper.as3.plugins.playerIO
 				LOG.info("Recived a message with the type hello from the server");			 
 			})
 			
-			//Add message listener for users joining the room
-			connection.addMessageHandler("UserJoined", function(m:Message, userid:uint):void{
-				LOG.info("Player with the userid {0}", userid, ",just joined the room");
-				//
-				FlexGlobals.userModel.addUser(userid.toString());
-			})
-			
 			//Add message listener for users leaving the room
-			connection.addMessageHandler("UserLeft", function(m:Message, userid:uint):void{
-				LOG.info("Player with the userid {0}", userid, ",just left the room");
-				//
-				FlexGlobals.userModel.removeUser(userid.toString());
+//			connection.addMessageHandler("UserLeft", function(m:Message, userid:uint):void{
+			connection.addMessageHandler("left", function(m:Message, p1name:String, p2name:String):void{	
+				LOG.info("Player with the userid {0},{1}", p1name,p2name, ",just left the room");
+				//User list delete
+				FlexGlobals.userModel.removeUser(p1name);
+				FlexGlobals.userModel.removeUser(p2name);
 			})
 			
 			//Listen to all messages using a private function
 			connection.addMessageHandler("*", handleMessages);
 			
-			//Listen to player joining.
+			//Add message listener for users joining the room
 			connection.addMessageHandler("join", function(m:Message, p1name:String, p2name:String):void{
 				LOG.info("Player joined in as {0} and {1}", p1name,p2name);
+				//User list insert.
+				FlexGlobals.userModel.addUser(p1name);
+				FlexGlobals.userModel.addUser(p2name);
+				//Broad cast signal
+				signal_user_joined.dispatch();
 			})
 				
 			//Listen to and handle messages of the type "move"
