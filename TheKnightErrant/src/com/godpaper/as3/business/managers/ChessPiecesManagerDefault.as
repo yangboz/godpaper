@@ -226,8 +226,6 @@ package com.godpaper.as3.business.managers
 				{
 					//FlexGlobals.userModel.hosterRoleIndex
 					FlexGlobals.conductService.transforBrevity( conductVO.brevity );
-					//Disable the game stage.
-					FlexGlobals.gameScreen.isEnabled = false;
 				}
 			}
 			if(GameConfig.gameStateManager.isGreenSide)
@@ -238,8 +236,6 @@ package com.godpaper.as3.business.managers
 				{
 					//FlexGlobals.userModel.hosterRoleIndex
 					FlexGlobals.conductService.transforBrevity( conductVO.brevity );
-					//Disable the game stage.
-					FlexGlobals.gameScreen.isEnabled = false;
 				}
 			}
 		}
