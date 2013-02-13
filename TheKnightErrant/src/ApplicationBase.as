@@ -394,8 +394,8 @@ package
 			PieceConfig.maxPoolSizeBlue=5; //What's the number of blue(computer) chess pieces?
 			PieceConfig.maxPoolSizeRed=5; //What's the number of red(human) chess pieces?
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
-			PieceConfig.scaleX=1.5;
-			PieceConfig.scaleY=1.5;
+			PieceConfig.scaleX=1;
+			PieceConfig.scaleY=1;
 			//about plugin:
 			PluginConfig.gameID="dadc1bb72ac7ed7f"; //your custom game related id.
 			PluginConfig.boardID="51c558cd0315f8e7"; //your custom game related board id.
