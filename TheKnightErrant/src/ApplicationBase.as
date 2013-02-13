@@ -403,7 +403,12 @@ package
 			TextureConfig.AssetEmbeds_1x_class=AssetEmbeds_1x;
 			TextureConfig.AssetEmbeds_2x_class=AssetEmbeds_2x;
 			//LogConfig
-			LoggerConfig.filters=["com.godpaper.tic_tac_toe.busniess.managers.*", "com.godpaper.as3.services.*", "com.godpaper.as3.plugins.*"];
+			LoggerConfig.filters=[
+				"com.godpaper.tic_tac_toe.busniess.managers.*", 
+				"com.godpaper.as3.services.*", 
+				"com.godpaper.as3.plugins.*",
+				"com.godpaper.as3.business.managers.*"
+			];
 //			LoggerConfig.filters=["*"];//Logging all.
 			LoggerConfig.level=LogEventLevel.DEBUG;
 			//

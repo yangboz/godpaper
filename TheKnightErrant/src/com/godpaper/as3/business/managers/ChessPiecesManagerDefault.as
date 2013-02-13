@@ -212,6 +212,7 @@ package com.godpaper.as3.business.managers
 			LOG.info("End makeMove:{0}", conductVO.brevity);
 			//clean up firstly.
 			currentRemovedPieces.length = 0;
+			//FlexGlobals.userModel.hosterRoleIndex
 			//relatived side handlers.
 			if(GameConfig.gameStateManager.isBlueSide)
 			{
@@ -220,20 +221,25 @@ package com.godpaper.as3.business.managers
 			if(GameConfig.gameStateManager.isRedSide)
 			{
 				this.redSideHandler();	
+				//conduct service transform
+				if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
+				{
+					//FlexGlobals.userModel.hosterRoleIndex
+					FlexGlobals.conductService.transforBrevity( conductVO.brevity );
+					//Disable the game stage.
+					FlexGlobals.gameScreen.isEnabled = false;
+				}
 			}
 			if(GameConfig.gameStateManager.isGreenSide)
 			{
 				this.greenSideHandler();	
-			}
-			//conduct service transform
-			if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
-			{
-				LOG.info("GameConfig.turnFlag: {0}",GameConfig.turnFlag);
-//				FlexGlobals.userModel.hosterRoleIndex
-				if(GameConfig.turnFlag==DefaultConstants.FLAG_RED)
+				//conduct service transform
+				if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
 				{
-					var brevity:String = conductVO.brevity;//conduct brevity
-					FlexGlobals.conductService.transforBrevity( brevity );
+					//FlexGlobals.userModel.hosterRoleIndex
+					FlexGlobals.conductService.transforBrevity( conductVO.brevity );
+					//Disable the game stage.
+					FlexGlobals.gameScreen.isEnabled = false;
 				}
 			}
 		}

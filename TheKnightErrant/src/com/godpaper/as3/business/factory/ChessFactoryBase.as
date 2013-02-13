@@ -2,6 +2,7 @@ package com.godpaper.as3.business.factory
 {
 	
 	import com.godpaper.as3.configs.BoardConfig;
+	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
@@ -131,14 +132,20 @@ package com.godpaper.as3.business.factory
 			//Set properties
 			simpleChessPiece.label=this.chessPieceLabel;
 			simpleChessPiece.name=this.chessPieceName;
-			simpleChessPiece.type=chessPieceType;
+			simpleChessPiece.type=this.chessPieceType;
 			//Set texture atlas
 //			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
 			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas_cp();
 			simpleChessPiece.upState = atlas.getTexture(chessPieceSubType?chessPieceSubType:chessPieceType);
 			simpleChessPiece.downState = atlas.getTexture(chessPieceSubType?chessPieceSubType:chessPieceType);
 			//set flag to identify.
-			simpleChessPiece.flag=DefaultConstants.FLAG_BLUE;
+			if(GameConfig.playMode == GameConfig.HUMAN_VS_HUMAN)
+			{
+				simpleChessPiece.flag=DefaultConstants.FLAG_GREEN; 
+			}else
+			{
+				simpleChessPiece.flag=DefaultConstants.FLAG_BLUE;
+			}
 			//set model value with flag identifier.
 			if (this.chessPieceType.indexOf(DefaultConstants.RED)!=-1)//red
 			{

@@ -177,7 +177,15 @@ package com.godpaper.as3.views.components
 //				this.addEventListener(MouseEvent.CLICK,mouseClickHandler);
 			}
 			//Touch bool connection.
-			this.touchable = (value != DefaultConstants.FLAG_BLUE);
+//			this.touchable = (value != DefaultConstants.FLAG_BLUE);
+			//Set enable/disable under multi player mode.
+			if(!FlexGlobals.userModel.hosterRoleIndex)//Default index 0
+			{
+				this.touchable = (value==DefaultConstants.FLAG_RED);//Default flag RED
+			}else
+			{
+				this.touchable = (value==DefaultConstants.FLAG_GREEN);//Another human flag is GREEN
+			}
 		}
 		//----------------------------------
 		//  omenVO

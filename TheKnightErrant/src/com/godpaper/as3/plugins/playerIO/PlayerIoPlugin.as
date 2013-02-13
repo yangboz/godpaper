@@ -28,6 +28,7 @@ package com.godpaper.as3.plugins.playerIO
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.PieceConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.plugins.IPlug;
@@ -270,6 +271,8 @@ package com.godpaper.as3.plugins.playerIO
 				LOG.info("Connection init,I am {0}, name is {1}",iAm,name);		
 				FlexGlobals.userModel.hosterRoleIndex = iAm;
 				FlexGlobals.userModel.hostRoleName = name;
+				//Game turn flag init.(0,1,2...)
+				GameConfig.turnFlag = !iAm?DefaultConstants.FLAG_RED:DefaultConstants.FLAG_GREEN;
 			})
 				
 			//Add listener for messages of the type "hello"
@@ -306,7 +309,9 @@ package com.godpaper.as3.plugins.playerIO
 				var conductVO:ConductVO = new ConductVO();
 				conductVO.nextPosition = new Point(x,y);
 				//
-				if(FlexGlobals.userModel.hosterRoleIndex != turn)
+//				if(FlexGlobals.userModel.hosterRoleIndex != turn)
+//				if(state=="circle")
+				if(GameConfig.gameStateManager.isRedSide)
 				{
 					conductVO.target = PieceConfig.redPiecesBox.chessPieces.pop();
 					GameConfig.gameStateManager.isAnotherHumanTurnNow();

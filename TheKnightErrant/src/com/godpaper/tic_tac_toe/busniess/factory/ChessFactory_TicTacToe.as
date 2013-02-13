@@ -79,18 +79,18 @@ package com.godpaper.tic_tac_toe.busniess.factory
 		override public function createChessPiece(position:Point, flag:uint=0):IChessPiece
 		{
 			//switch custom define properties.
-			if(flag==DefaultConstants.FLAG_BLUE)
-			{
-				chessPieceName = chessPieceLabel = DefaultPiecesConstants.BLUE.label;
-				chessPieceValue=16+int(position.x);
-				chessPieceType=DefaultConstants.BLUE;
-				chessPieceSubType = DefaultConstants.BLUE;//BLUE_ROCK,BLUE_STAR
-			}else
+			if(flag==DefaultConstants.FLAG_RED)
 			{
 				chessPieceName = chessPieceLabel = DefaultPiecesConstants.RED.label;
 				chessPieceValue=8+int(position.x);
 				chessPieceType=DefaultConstants.RED;
 				chessPieceSubType = DefaultConstants.RED;//RED_ROCK,RED_STAR
+			}else
+			{
+				chessPieceName = chessPieceLabel = DefaultPiecesConstants.BLUE.label;
+				chessPieceValue=16+int(position.x);
+				chessPieceType=DefaultConstants.BLUE;
+				chessPieceSubType = DefaultConstants.BLUE;//BLUE_ROCK,BLUE_STAR
 			}
 			//chess piece's swfloader source.
 //			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
