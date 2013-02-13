@@ -407,7 +407,8 @@ package
 				"com.godpaper.tic_tac_toe.busniess.managers.*", 
 				"com.godpaper.as3.services.*", 
 				"com.godpaper.as3.plugins.*",
-				"com.godpaper.as3.business.managers.*"
+				"com.godpaper.as3.business.managers.*",
+				"com.godpaper.as3.views.components.ChessPiece"
 			];
 //			LoggerConfig.filters=["*"];//Logging all.
 			LoggerConfig.level=LogEventLevel.DEBUG;

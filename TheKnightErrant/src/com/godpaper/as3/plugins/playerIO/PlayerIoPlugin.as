@@ -310,17 +310,18 @@ package com.godpaper.as3.plugins.playerIO
 				conductVO.nextPosition = new Point(x,y);
 				//
 //				if(FlexGlobals.userModel.hosterRoleIndex != turn)
-//				if(state=="circle")
-				if(GameConfig.gameStateManager.isRedSide)
-				{
-					conductVO.target = PieceConfig.redPiecesBox.chessPieces.pop();
-					GameConfig.gameStateManager.isAnotherHumanTurnNow();
-				}else
+				if(state=="circle")
+//				if(GameConfig.gameStateManager.isRedSide)
 				{
 					conductVO.target = PieceConfig.bluePiecesBox.chessPieces.pop();
+					GameConfig.chessPieceManager.makeMove(conductVO);
 					GameConfig.gameStateManager.isHumanTurnNow();
+				}else
+				{
+					conductVO.target = PieceConfig.redPiecesBox.chessPieces.pop();
+					GameConfig.chessPieceManager.makeMove(conductVO);
+					GameConfig.gameStateManager.isAnotherHumanTurnNow();
 				}
-				GameConfig.chessPieceManager.makeMove(conductVO);
 			})
 			//
 			connection.addMessageHandler("spectator", function(m:Message, p1name:String, p2name:String):void{

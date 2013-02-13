@@ -186,6 +186,7 @@ package com.godpaper.as3.views.components
 			{
 				this.touchable = (value==DefaultConstants.FLAG_GREEN);//Another human flag is GREEN
 			}
+			LOG.info("hoster role index:{0},flag:{1},touchable:{2}",FlexGlobals.userModel.hosterRoleIndex,value,this.touchable);
 		}
 		//----------------------------------
 		//  omenVO

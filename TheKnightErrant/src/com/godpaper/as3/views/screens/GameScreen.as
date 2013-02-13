@@ -206,7 +206,10 @@ package com.godpaper.as3.views.screens
 			//Waiting indicatory as default under multiplay mode
 			if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
 			{
-				IndicatorConfig.waiting = true;
+				if(!FlexGlobals.userModel.hosterRoleIndex)//Only hoster shoulde be waiting.
+				{	
+					IndicatorConfig.waiting = true;
+				}
 				if(this.playerIoPlugin)
 				{
 					this.playerIoPlugin.signal_user_joined.addOnce(onOpponentJoined);
