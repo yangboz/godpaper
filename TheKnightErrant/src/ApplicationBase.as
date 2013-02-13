@@ -123,7 +123,7 @@ package
 		//			return new NonobaPlugin();
 		//			return new KongregatePlugin();
 		//			return new PlatogoPlugin("1146511093");
-		private var _pluginProvider:IPlug = new PlayerIoPlugin("tictactoe-dvrgkawregfyanwdnhtpa","TicTacToe");
+		protected var _pluginProvider:IPlug = new PlayerIoPlugin("tictactoe-dvrgkawregfyanwdnhtpa","TicTacToe");
 		/**
 		 * Override this for customize plugin provider.
 		 */

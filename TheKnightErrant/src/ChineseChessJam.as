@@ -28,6 +28,7 @@ package
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.configs.TextureConfig;
 	import com.godpaper.as3.core.IChessPieceManager;
+	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.chinese_chess_jam.business.PGN_Proxy;
 	import com.godpaper.chinese_chess_jam.business.factory.ChessFactory_ChineseChessJam;
@@ -131,16 +132,18 @@ package
 			GasketConfig.backgroundAlpha = 0.0;
 			GasketConfig.width = 30;
 			GasketConfig.height = 30;
+//			GasketConfig.borderVisible = true;
 			//about piece:
 			PieceConfig.factory = ChessFactory_ChineseChessJam;
 			PieceConfig.maxPoolSizeBlue = 16;
 			PieceConfig.maxPoolSizeRed = 16;
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
-			PieceConfig.scaleX = 1.5;
-			PieceConfig.scaleY = 1.5;
+			PieceConfig.scaleX = 1;
+			PieceConfig.scaleY = 1;
 			//about plugin:
-			PluginConfig.gameID = "47de4a85dd3e213a";//your custom game related id.
-			PluginConfig.boardID = "3a460211409897f4";//your custom game related board id.
+			PluginConfig.gameID = "chinesechessjam-msf2zuz0suaip7yhtzpaa";//your custom game related id.
+			PluginConfig.boardID = "TicTacToe";//your custom game related board id.
+			this._pluginProvider = new PlayerIoPlugin(PluginConfig.gameID,PluginConfig.boardID);//For playerIO plugin
 			this._mochiads_game_id = "47de4a85dd3e213a";//espical for mochi game platform.
 			//TextureConfig
 			TextureConfig.AssetEmbeds_1x_class = AssetEmbeds_1x_chinese_chess_jam;

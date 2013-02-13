@@ -212,9 +212,6 @@ package com.godpaper.as3.business.managers
 			//clean up firstly.
 			currentRemovedPieces.length = 0;
 			//conduct service transform
-			LOG.info("GameConfig.gameStateManager.isGreenSide:{0},host role index: {1}",GameConfig.gameStateManager.isGreenSide,FlexGlobals.userModel.hosterRoleIndex);
-			LOG.info("GameConfig.gameStateManager.isGreenSide && host role index: {0}",(GameConfig.gameStateManager.isGreenSide && FlexGlobals.userModel.hosterRoleIndex));
-			//
 			if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
 			{
 				if(FlexGlobals.userModel.moves.indexOf(conductVO.brevity)==-1)//Default index 0

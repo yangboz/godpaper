@@ -35,6 +35,7 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.core.IVisualElement;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.pools.ChessGasketsPool;
+	import com.godpaper.as3.views.components.ChessBoard;
 	
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
@@ -108,6 +109,9 @@ package com.godpaper.as3.tasks
 			//Add to starling stage(GameScene)
 //			FlexGlobals.gameStage.addChild(starling.display.DisplayObject(chessBoard));
 			FlexGlobals.gameScreen.addChild(starling.display.DisplayObject(chessBoard));
+			//Adjust background position by configuations
+//			(chessBoard as ChessBoard).x = BoardConfig.xAdjust;
+//			(chessBoard as ChessBoard).y = BoardConfig.yAdjust;
 			//
 			this.complete();
 		}

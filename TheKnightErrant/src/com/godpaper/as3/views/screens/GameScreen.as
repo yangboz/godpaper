@@ -214,6 +214,8 @@ package com.godpaper.as3.views.screens
 				{
 					this.playerIoPlugin.signal_user_joined.addOnce(onOpponentJoined);
 				}
+				//Transparent the header view for overlay display
+				this._header.alpha = 0.2;
 			}
 		}
 		//
