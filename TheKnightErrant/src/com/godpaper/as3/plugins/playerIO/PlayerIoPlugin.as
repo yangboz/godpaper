@@ -313,12 +313,12 @@ package com.godpaper.as3.plugins.playerIO
 				if(FlexGlobals.userModel.hosterRoleIndex != turn)
 //				if(state=="circle")//"cross","circle"
 				{
-					if(GameConfig.gameStateManager.isRedSide)//Default flag RED,Notice: the flag already has turnned
-					{
-						conductVO.target = PieceConfig.bluePiecesBox.chessPieces.pop();
-					}else
+					if(turn==DefaultConstants.FLAG_RED)//Default flag RED,Notice: the flag already has turnned
 					{
 						conductVO.target = PieceConfig.redPiecesBox.chessPieces.pop();
+					}else
+					{
+						conductVO.target = PieceConfig.bluePiecesBox.chessPieces.pop();
 					}
 					//Save stage to user model.
 					FlexGlobals.userModel.state = state;
