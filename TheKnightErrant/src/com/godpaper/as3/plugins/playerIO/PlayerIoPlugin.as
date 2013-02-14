@@ -269,97 +269,137 @@ package com.godpaper.as3.plugins.playerIO
 			//Add disconnect listener
 			connection.addDisconnectHandler(handleDisconnect);
 			//Add listener for messages of the type "init"
-			connection.addMessageHandler("init", function(m:Message, iAm:int, name:String):void{
-				LOG.info("Connection init,I am {0}, name is {1}",iAm,name);		
-				FlexGlobals.userModel.hosterRoleIndex = iAm;
-				FlexGlobals.userModel.hostRoleName = name;
-				//Game turn flag init.(0,1,2...)
-				GameConfig.turnFlag = !iAm?DefaultConstants.FLAG_RED:DefaultConstants.FLAG_GREEN;
-				//Broad cast signal
-				signal_user_joined.dispatch();
-			})
-				
+			connection.addMessageHandler("init", userInitMessageHandler);
 			//Add listener for messages of the type "hello"
 			connection.addMessageHandler("hello", function(m:Message):void{
 				LOG.info("Recived a message with the type hello from the server");			 
 			})
-			
 			//Add message listener for users leaving the room
-//			connection.addMessageHandler("UserLeft", function(m:Message, userid:uint):void{
-			connection.addMessageHandler("left", function(m:Message, p1name:String, p2name:String):void{	
-				LOG.info("Player with the userid {0},{1}", p1name,p2name, ",just left the room");
-				//User list delete
-				FlexGlobals.userModel.removeUser(p1name);
-				FlexGlobals.userModel.removeUser(p2name);
-			})
-			
+			connection.addMessageHandler("UserLeft", playerLeftMessageHandler);
+			connection.addMessageHandler("left", playerLeftMessageHandler);
 			//Listen to all messages using a private function
 			connection.addMessageHandler("*", handleMessages);
-			
 			//Add message listener for users joining the room
-			connection.addMessageHandler("join", function(m:Message, p1name:String, p2name:String):void{
-				LOG.info("Player joined in as {0} and {1}", p1name,p2name);
-				//User list insert.
-				FlexGlobals.userModel.addUser(p1name);
-				FlexGlobals.userModel.addUser(p2name);
-				//Broad cast signal
-				signal_user_joined.dispatch();
-			})
-				
+			connection.addMessageHandler("UserJoined", playerJoinMessageHandler);
+			connection.addMessageHandler("join", playerJoinMessageHandler);
 			//Listen to and handle messages of the type "move"
-			connection.addMessageHandler("place", function(m:Message, x:int, y:int, state:String, turn:int):void{
-				LOG.info("Player: State {0},Moved to {1},{2},Turn to {3}", state,x,y,turn);
-				//Broadcasting signal
-				if(signal_piece_placed.numListeners)
-				{
-					signal_piece_placed.dispatch(m,x,y,state,turn);
-					return;
-				}
-				//place the piece comes from other player's action broadcasting.
-				var conductVO:ConductVO = new ConductVO();
-				conductVO.nextPosition = new Point(x,y);
-				//
-				if(FlexGlobals.userModel.hosterRoleIndex != turn)
-//				if(state=="circle")//"cross","circle"
-				{
-					if(turn==DefaultConstants.FLAG_RED)//Default flag RED,Notice: the flag already has turnned
-					{
-						conductVO.target = PieceConfig.redPiecesBox.chessPieces.pop();
-					}else
-					{
-						conductVO.target = PieceConfig.bluePiecesBox.chessPieces.pop();
-					}
-					//Save stage to user model.
-					FlexGlobals.userModel.state = state;
-					FlexGlobals.userModel.moves.push(conductVO.brevity);
-					//Make chess piece move.
-					GameConfig.chessPieceManager.makeMove(conductVO);
-					//The opponent player can move piece again.
-					IndicatorConfig.waiting = false;
-				}else
-				{
-					IndicatorConfig.waiting = true;//Waiting for the player can move piece again.
-				}
-			})
+			connection.addMessageHandler("place", chessPiecePlacedMessageHandler);
 			//
-			connection.addMessageHandler("spectator", function(m:Message, p1name:String, p2name:String):void{
-				FlexGlobals.userModel.hosterRoleIndex = -1;//TODO:sepectator flow here.
-			})
+			connection.addMessageHandler("spectator", sepctatorJoinMessageHandler);
+			//
+			connection.addMessageHandler("full", function(m:Message):void{
+//				infoBox.Show("full");
+			});
+			//
+			connection.addMessageHandler("reset", function(m:Message, turn:int):void{
+//				infoBox.Hide();
+//				setTurn(turn == imPlayer, true);
+			});
+			//	
+			connection.addMessageHandler("win", function(m:Message, winner:int, winnerName:String):void{
+//				if(isSpectator){
+//					infoBox.Show("showWinner",winnerName); 
+//				}else{
+//					infoBox.Show(winner == imPlayer ? "won" : "lost");
+//				}
+//				setTurn(false)
+			});
+			//
+			connection.addMessageHandler("tie", function(m:Message):void{
+//				infoBox.Show("tie", isSpectator ? "" : "go");
+//				setTurn(false)
+			});	
 		}
-		
+		//--------------------------------------------------------------------------
+		//
+		//  Private message handlers
+		//
+		//--------------------------------------------------------------------------
+		//
 		private function handleMessages(m:Message):void{
 			LOG.info("Recived the message {0}", m);
 		}
-		
+		//
 		private function handleDisconnect():void{
 			LOG.info("Disconnected from server");
 		}
-		
+		//
 		private function handleError(error:PlayerIOError):void{
 //		private function handleError(error:*):void{	
 			LOG.info("Connection error:{0}",String(error.message));
 //TODO:			gotoAndStop(3);
 			
+		}
+		//
+		private function userInitMessageHandler(m:Message, iAm:int, name:String):void
+		{
+			LOG.info("Connection init,I am {0}, name is {1}",iAm,name);		
+			FlexGlobals.userModel.hosterRoleIndex = iAm;
+			FlexGlobals.userModel.hostRoleName = name;
+			//Game turn flag init.(0,1,2...)
+			GameConfig.turnFlag = !iAm?DefaultConstants.FLAG_RED:DefaultConstants.FLAG_GREEN;
+			//Broad cast signal
+			signal_user_joined.dispatch();
+		}
+		//
+		private function playerJoinMessageHandler(m:Message, p1name:String, p2name:String):void
+		{
+			LOG.info("Player joined in as {0} and {1}", p1name,p2name);
+			//User list insert.
+			FlexGlobals.userModel.addUser(p1name);
+			FlexGlobals.userModel.addUser(p2name);
+			//Broad cast signal
+			signal_user_joined.dispatch();
+		}
+		//
+		private function playerLeftMessageHandler(m:Message, p1name:String, p2name:String):void
+		{
+			LOG.info("Player with the userid {0},{1}", p1name,p2name, ",just left the room");
+			//User list delete
+			FlexGlobals.userModel.removeUser(p1name);
+			FlexGlobals.userModel.removeUser(p2name);
+		}
+		//
+		private function sepctatorJoinMessageHandler(m:Message, p1name:String, p2name:String):void
+		{
+			LOG.info("Sepctator: Pl: {0},P2: {1}", p1name,p2name);
+			FlexGlobals.userModel.hosterRoleIndex = -1;//TODO:sepectator flow here.
+		}
+		//
+		private function chessPiecePlacedMessageHandler(m:Message, x:int, y:int, state:String, turn:int):void
+		{
+			LOG.info("Player: State {0},Moved to {1},{2},Turn to {3}", state,x,y,turn);
+			//Broadcasting signal
+			if(signal_piece_placed.numListeners)
+			{
+				signal_piece_placed.dispatch(m,x,y,state,turn);
+				return;
+			}
+			//place the piece comes from other player's action broadcasting.
+			var conductVO:ConductVO = new ConductVO();
+			conductVO.nextPosition = new Point(x,y);
+			//
+			if(FlexGlobals.userModel.hosterRoleIndex != turn)
+				//				if(state=="circle")//"cross","circle"
+			{
+				if(turn==DefaultConstants.FLAG_RED)//Default flag RED,Notice: the flag already has turnned
+				{
+					conductVO.target = PieceConfig.redPiecesBox.chessPieces.pop();
+				}else
+				{
+					conductVO.target = PieceConfig.bluePiecesBox.chessPieces.pop();
+				}
+				//Save stage to user model.
+				FlexGlobals.userModel.state = state;
+				FlexGlobals.userModel.moves.push(conductVO.brevity);
+				//Make chess piece move.
+				GameConfig.chessPieceManager.makeMove(conductVO);
+				//The opponent player can move piece again.
+				IndicatorConfig.waiting = false;
+			}else
+			{
+				IndicatorConfig.waiting = true;//Waiting for the player can move piece again.
+			}
 		}
 	}
 	
