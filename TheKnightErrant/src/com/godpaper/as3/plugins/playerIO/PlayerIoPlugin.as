@@ -373,7 +373,7 @@ package com.godpaper.as3.plugins.playerIO
 			if(signal_piece_placed.numListeners)
 			{
 				signal_piece_placed.dispatch(m,x,y,state,turn);
-				return;
+				return;//The following flow is esp for the game of "TicTacToe"
 			}
 			//place the piece comes from other player's action broadcasting.
 			var conductVO:ConductVO = new ConductVO();

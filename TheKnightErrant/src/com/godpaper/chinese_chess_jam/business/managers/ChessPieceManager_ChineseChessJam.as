@@ -2,6 +2,9 @@ package com.godpaper.chinese_chess_jam.business.managers
 {
 	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
 	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.configs.IndicatorConfig;
+	import com.godpaper.as3.configs.PieceConfig;
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.vos.ConductVO;
@@ -11,9 +14,12 @@ package com.godpaper.chinese_chess_jam.business.managers
 	import com.godpaper.as3.views.components.ChessPiece;
 	import com.godpaper.chinese_chess_jam.consts.PiecesConstants_ChineseChessJam;
 	
+	import flash.geom.Point;
+	
 	import mx.logging.ILogger;
 	
 	import playerio.Message;
+
 	/**
 	 * The chess piece manager manage chess piece move's validation/makeMove/unMakeMove.</br>
 	 * Also a way for the originator to be responsible for saving and restoring its states.</br>
@@ -99,7 +105,7 @@ package com.godpaper.chinese_chess_jam.business.managers
 			//Signal listen
 			if(this.playerIoPlugin)
 			{
-				this.playerIoPlugin.signal_piece_placed.addOnce(onChessPiecePlaced);
+				this.playerIoPlugin.signal_piece_placed.add(onChessPiecePlaced);//Notice:the signal difference between addOnce() and add() 
 			}
 		}   
 		//--------------------------------------------------------------------------
@@ -111,6 +117,38 @@ package com.godpaper.chinese_chess_jam.business.managers
 		private function onChessPiecePlaced(m:Message, x:int, y:int, state:String, turn:int):void
 		{
 			LOG.info("Player: State {0},Moved to {1},{2},Turn to {3}", state,x,y,turn);
+			//place the piece comes from other player's action broadcasting.
+			var startX:int = int(String(x).charAt(0));
+			var startY:int = int(String(x).charAt(1));
+			var endX:int = int(String(y).charAt(0));
+			var endY:int = int(String(y).charAt(1));
+			var conductVO:ConductVO = new ConductVO();
+			conductVO.nextPosition = new Point(endX,endY);
+			//
+			if(FlexGlobals.userModel.hosterRoleIndex != turn)
+				//				if(state=="circle")//"cross","circle"
+			{
+				var target:ChessPiece = (FlexGlobals.chessGasketsModel.gaskets.gett(startX,startY) as ChessGasket).chessPiece as ChessPiece;
+				if(turn==DefaultConstants.FLAG_RED)//Default flag RED,Notice: the flag already has turnned
+				{
+					//Find red chess piece by state
+					
+				}else
+				{
+					//Find blue chess piece by state
+				}
+				conductVO.target = target;
+				//Save stage to user model.
+				FlexGlobals.userModel.state = state;
+				FlexGlobals.userModel.moves.push(conductVO.brevity);
+				//Make chess piece move.
+				GameConfig.chessPieceManager.makeMove(conductVO);
+				//The opponent player can move piece again.
+				IndicatorConfig.waiting = false;
+			}else
+			{
+				IndicatorConfig.waiting = true;//Waiting for the player can move piece again.
+			}
 		}
 	}
 
