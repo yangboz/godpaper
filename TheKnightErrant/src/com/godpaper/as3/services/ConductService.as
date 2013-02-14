@@ -84,7 +84,7 @@ package com.godpaper.as3.services
 		//
 		//--------------------------------------------------------------------------
 		//P2p initialization call .
-		public function initialization(server:String,devKey:String):void
+		public function initialization(...arg):void
 		{
 			//set up
 			this.netConnection = new NetConnection();

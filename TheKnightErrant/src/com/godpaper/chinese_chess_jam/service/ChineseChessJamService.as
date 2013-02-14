@@ -1,5 +1,5 @@
 /**
- *  GODPAPER Confidential,Copyright 2012. All rights reserved.
+ *  GODPAPER Confidential,Copyright 2013. All rights reserved.
  *
  *  Permission is hereby granted, free of charge, to any person obtaining
  *  a copy of this software and associated documentation files (the "Software"),
@@ -19,45 +19,27 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.as3.core
+package com.godpaper.chinese_chess_jam.service
 {
-	import com.godpaper.as3.configs.ServiceConfig;
-	import com.godpaper.as3.model.ChessBoardModel;
-	import com.godpaper.as3.model.ChessGasketsModel;
-	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.model.UserModel;
-	import com.godpaper.as3.services.ConductService;
-	import com.godpaper.as3.services.IConductService;
-	import com.godpaper.as3.plugins.playerIO.PlayerIoService;
-	import com.godpaper.as3.utils.SingletonFactory;
-	import com.godpaper.as3.views.components.PiecesBox;
-	import com.godpaper.as3.views.screens.GameScreen;
-	import com.lookbackon.AI.FSM.Message;
-	
-	import feathers.controls.Screen;
-	import feathers.controls.ScreenNavigator;
-	import feathers.controls.popups.IPopUpContentManager;
-	
-	import org.osflash.signals.Signal;
-	
-	import starling.display.Stage;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
+	import com.godpaper.as3.services.IConductService;
 	
+	import playerio.Message;
 	/**
-	 * A marshalling class which list the global variables and referecnes without access limitation.
-	 * Just like the "FlexGloabls.as" which located at FLEX4 framework.
+	 * ChineseChessJamService.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Apr 19, 2012 10:41:05 AM
+	 * Created Feb 14, 2013 11:57:57 AM
 	 */   	 
-	public class FlexGlobals
+	public class ChineseChessJamService implements IConductService
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -74,28 +56,18 @@ package com.godpaper.as3.core
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//Views.
-		public static var topLevelApplication:ApplicationBase;
-//		public static var gameScene:GameScene;//The scene of game.
-		public static var gameScreen:GameScreen;//The screen of game.
-		public static var gameStage:Stage;//The stage of game.
-		public static var bluePiecesBox:PiecesBox;//The pieces box(blue).
-		public static var redPiecesBox:PiecesBox;//The pieces box(red).
-		////pop-up views manager
-		public static var popupContentManager:IPopUpContentManager;
-		//Models.
-		public static var chessPiecesModel:ChessPiecesModel = SingletonFactory.produce(ChessPiecesModel);
-		public static var chessGasketsModel:ChessGasketsModel = SingletonFactory.produce(ChessGasketsModel);
-		public static var chessBoardModel:ChessBoardModel = SingletonFactory.produce(ChessBoardModel);
-		public static var userModel:UserModel = SingletonFactory.produce(UserModel);
-		//Signals.
-		public static var levelUpSignal:Signal = new Signal(int);//user level up signal.
-		public static var checkSignal:Signal = new Signal(Message);//chess check signal.
-		//Screen navigator
-		public static var screenNavigator:ScreenNavigator;
-		//Services
-//		public static var conductService:ConductService = SingletonFactory.produce(ConductService);
-		public static var conductService:IConductService = SingletonFactory.produce(ServiceConfig.wrapper);
+		public function get connected():Boolean
+		{
+			//TODO: implement function
+			return false;
+		}
+		//
+		public function get playerIoPlugin():PlayerIoPlugin
+		{
+			//Refresh game room with tables.
+			var playerIoPlugin:PlayerIoPlugin = (FlexGlobals.topLevelApplication.pluginProvider as PlayerIoPlugin);
+			return playerIoPlugin;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -107,13 +79,33 @@ package com.godpaper.as3.core
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		   	
+		public function ChineseChessJamService()
+		{
+			//TODO: implement function
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		//
+		public function initialization(...arg):void
+		{
+			//TODO: implement function
+		}
+		//
+		public function transforBrevity(value:String):String
+		{
+			//Create a message and send
+			//@example: "c7747"
+			var chessPieceType:String = value.charAt(0);
+			var startPosition:int = int(value.charAt(1).concat(value.charAt(2)));
+			var endPosition:int = int(value.charAt(3).concat(value.charAt(4)));
+			var message:Message = playerIoPlugin.connection.createMessage("move", chessPieceType, startPosition, endPosition);
+			playerIoPlugin.connection.sendMessage(message);
+			//
+			return null;
+		}     
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

@@ -32,10 +32,10 @@ package com.godpaper.as3.services
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		//
-		function initialization(server:String,devKey:String):void;
+		//Optional
+		function initialization(...arg):void;
 		/**
-		 * This function will transfor a string to Cirrus net group
+		 * This function will transfor a string to your game server
 		 * and notify the result in the chess piece manager.
 		 * @param value the value of conduct's brevity.
 		 */

@@ -19,13 +19,13 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.as3.services
+package com.godpaper.as3.plugins.playerIO
 {
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
-	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	
 	import playerio.Message;
+	import com.godpaper.as3.services.IConductService;
 
 	//--------------------------------------------------------------------------
 	//
@@ -42,7 +42,7 @@ package com.godpaper.as3.services
 	 * @airVersion 3.2+
 	 * Created Feb 9, 2013 5:08:06 PM
 	 */   	 
-	public class MessageService implements IConductService
+	public class PlayerIoService implements IConductService
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -65,6 +65,11 @@ package com.godpaper.as3.services
 			var playerIoPlugin:PlayerIoPlugin = (FlexGlobals.topLevelApplication.pluginProvider as PlayerIoPlugin);
 			return playerIoPlugin;
 		}
+		//
+		public function get connected():Boolean
+		{
+			return true;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -76,24 +81,24 @@ package com.godpaper.as3.services
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function MessageService()
+		public function PlayerIoService()
 		{
 		}
-		
-		public function get connected():Boolean
-		{
-			return true;
-		}
-		
-		public function initialization(server:String, devKey:String):void
+		//--------------------------------------------------------------------------
+		//
+		//  Public methods
+		//
+		//--------------------------------------------------------------------------
+		//
+		public function initialization(...arg):void
 		{
 			//TODO: implement function
 		}
-		
+		//
 		public function transforBrevity(value:String):String
 		{
 			//Create a message and send
-//			var message:Message = playerIoPlugin.connection.createMessage("click", value);//"+-1-111"
+			//			var message:Message = playerIoPlugin.connection.createMessage("click", value);//"+-1-111"
 			var xPosition:int = int(value.charAt(5));
 			var yPosition:int = int(value.charAt(6));
 			var message:Message = playerIoPlugin.connection.createMessage("click", xPosition,yPosition);
@@ -101,13 +106,6 @@ package com.godpaper.as3.services
 			//
 			return null;
 		}     	
-		
-		//--------------------------------------------------------------------------
-		//
-		//  Public methods
-		//
-		//--------------------------------------------------------------------------
-		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

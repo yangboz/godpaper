@@ -26,6 +26,7 @@ package
 	import com.godpaper.as3.configs.LoggerConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
+	import com.godpaper.as3.configs.ServiceConfig;
 	import com.godpaper.as3.configs.TextureConfig;
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
@@ -33,6 +34,7 @@ package
 	import com.godpaper.chinese_chess_jam.business.PGN_Proxy;
 	import com.godpaper.chinese_chess_jam.business.factory.ChessFactory_ChineseChessJam;
 	import com.godpaper.chinese_chess_jam.business.managers.ChessPieceManager_ChineseChessJam;
+	import com.godpaper.chinese_chess_jam.service.ChineseChessJamService;
 	
 	import mx.logging.ILogger;
 	import mx.logging.LogEventLevel;
@@ -133,6 +135,8 @@ package
 			GasketConfig.width = 30;
 			GasketConfig.height = 30;
 //			GasketConfig.borderVisible = true;
+			//about service:
+			ServiceConfig.wrapper = ChineseChessJamService;
 			//about piece:
 			PieceConfig.factory = ChessFactory_ChineseChessJam;
 			PieceConfig.maxPoolSizeBlue = 16;
@@ -142,7 +146,7 @@ package
 			PieceConfig.scaleY = 1;
 			//about plugin:
 			PluginConfig.gameID = "chinesechessjam-msf2zuz0suaip7yhtzpaa";//your custom game related id.
-			PluginConfig.boardID = "TicTacToe";//your custom game related board id.
+			PluginConfig.boardID = "ChineseChessJam";//your custom game related board id.
 			this._pluginProvider = new PlayerIoPlugin(PluginConfig.gameID,PluginConfig.boardID);//For playerIO plugin
 			this._mochiads_game_id = "47de4a85dd3e213a";//espical for mochi game platform.
 			//TextureConfig
