@@ -1,0 +1,24 @@
+Getting started
+==============
+Watch a getting started screencast here: http://playerio.com/showcase/tictactoe-flash-example/
+
+To launch the development server do the following:
+
+	a) Launch the Visual Studio 2010 Solution "Serverside Code.VS2010.sln"
+
+	b) Press F5. This should start the development server.
+	   If a windows Firewall dialog pops up, press allow.
+	
+To launch the client .swf file do the following
+	
+	a) Open the TicTacToe.fla file from the Flash folder
+
+	b) Put your gameid into the Flash/TicTacToe.as file where it says "[Enter your game id here]"
+		If you don't have a gameid, simply login into the player.io admin dashboard
+		and click "create game".
+
+	c) Press ctrl-enter inside flash to launch the client .swf file.
+
+If all goes well, you should see the client connect to the development
+server in both the client and the development server window.
+		
