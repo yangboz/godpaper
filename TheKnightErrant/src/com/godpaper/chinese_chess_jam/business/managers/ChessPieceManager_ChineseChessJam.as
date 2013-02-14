@@ -5,13 +5,15 @@ package com.godpaper.chinese_chess_jam.business.managers
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.vos.ConductVO;
+	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.components.ChessGasket;
 	import com.godpaper.as3.views.components.ChessPiece;
 	import com.godpaper.chinese_chess_jam.consts.PiecesConstants_ChineseChessJam;
 	
 	import mx.logging.ILogger;
-
+	
+	import playerio.Message;
 	/**
 	 * The chess piece manager manage chess piece move's validation/makeMove/unMakeMove.</br>
 	 * Also a way for the originator to be responsible for saving and restoring its states.</br>
@@ -34,8 +36,13 @@ package com.godpaper.chinese_chess_jam.business.managers
 		//  Properties
 		//
 		//--------------------------------------------------------------------------
-
-		//generation.
+		//playerIoPlugin.
+		public function get playerIoPlugin():PlayerIoPlugin
+		{
+			//Refresh game room with tables.
+			var playerIoPlugin:PlayerIoPlugin = (FlexGlobals.topLevelApplication.pluginProvider as PlayerIoPlugin);
+			return playerIoPlugin;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Methods
@@ -78,9 +85,33 @@ package com.godpaper.chinese_chess_jam.business.managers
 				}
 			}
 			//
+			//
 			super.applyMove(conductVO);
 		}
-
+		//--------------------------------------------------------------------------
+		//
+		//  Constructor
+		//
+		//--------------------------------------------------------------------------
+		public function ChessPieceManager_ChineseChessJam()
+		{
+			super();
+			//Signal listen
+			if(this.playerIoPlugin)
+			{
+				this.playerIoPlugin.signal_piece_placed.addOnce(onChessPiecePlaced);
+			}
+		}   
+		//--------------------------------------------------------------------------
+		//
+		//  Private methods
+		//
+		//--------------------------------------------------------------------------
+		//
+		private function onChessPiecePlaced(m:Message, x:int, y:int, state:String, turn:int):void
+		{
+			LOG.info("Player: State {0},Moved to {1},{2},Turn to {3}", state,x,y,turn);
+		}
 	}
 
 }

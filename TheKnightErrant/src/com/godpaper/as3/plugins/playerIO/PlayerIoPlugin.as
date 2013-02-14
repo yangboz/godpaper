@@ -35,6 +35,7 @@ package com.godpaper.as3.plugins.playerIO
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.IPlugData;
 	import com.godpaper.as3.utils.LogUtil;
+	import com.gskinner.motion.easing.Sine;
 	
 	import flash.geom.Point;
 	
@@ -73,6 +74,7 @@ package com.godpaper.as3.plugins.playerIO
 		public var signal_room_refreshed:Signal;
 		public var signal_hoster_joined:Signal;
 		public var signal_user_joined:Signal;
+		public var signal_piece_placed:Signal;
 		//
 		public var roomID:String;
 		public var connection:Connection;
@@ -106,6 +108,7 @@ package com.godpaper.as3.plugins.playerIO
 			this.signal_room_refreshed = new Signal(Array);
 			this.signal_hoster_joined = new Signal(String);
 			this.signal_user_joined = new Signal();
+			this.signal_piece_placed = new Signal(Message,int,int,String,int);
 		}
 		
 		public function get data():IPlugData
@@ -306,6 +309,12 @@ package com.godpaper.as3.plugins.playerIO
 			//Listen to and handle messages of the type "move"
 			connection.addMessageHandler("place", function(m:Message, x:int, y:int, state:String, turn:int):void{
 				LOG.info("Player: State {0},Moved to {1},{2},Turn to {3}", state,x,y,turn);
+				//Broadcasting signal
+				if(signal_piece_placed.numListeners)
+				{
+					signal_piece_placed.dispatch(m,x,y,state,turn);
+					return;
+				}
 				//place the piece comes from other player's action broadcasting.
 				var conductVO:ConductVO = new ConductVO();
 				conductVO.nextPosition = new Point(x,y);
