@@ -38,6 +38,8 @@ package com.godpaper.as3.views.popups
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.VerticalLayout;
 	import feathers.textures.Scale9Textures;
+	import feathers.themes.AzureTheme;
+	import feathers.themes.MinimalTheme;
 	
 	import flash.geom.Rectangle;
 	
@@ -77,8 +79,6 @@ package com.godpaper.as3.views.popups
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		[Embed(source="../../../../../assets/images/list-item-selected.png")]//color of gray.
-		private static const BACK_GROUND_TEXTURE:Class;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -135,7 +135,9 @@ package com.godpaper.as3.views.popups
 		override protected function initialize():void
 		{
 			//backgroundSkin
-			this._image = new Image(Texture.fromBitmap(new BACK_GROUND_TEXTURE(), false));
+			var bgTexture:Texture = AzureTheme.ATLAS.getTexture("list-item-up-skin");//list-item-selected,list-item-selected-skin
+//			this._image = new Image(Texture.fromBitmap(new BACK_GROUND_TEXTURE(), false));
+			this._image = new Image(bgTexture);
 			this.addChild(this._image);
 			//header title
 			this._header = new Header();

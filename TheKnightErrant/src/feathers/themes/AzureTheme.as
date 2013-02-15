@@ -58,7 +58,7 @@ package feathers.themes
 		[Embed(source="../../assets/images/azure.xml",mimeType="application/octet-stream")]
 		protected static const ATLAS_XML:Class;
 
-		protected static const ATLAS:TextureAtlas = new TextureAtlas(Texture.fromBitmap(new ATLAS_IMAGE(), false), XML(new ATLAS_XML()));
+		public static const ATLAS:TextureAtlas = new TextureAtlas(Texture.fromBitmap(new ATLAS_IMAGE(), false), XML(new ATLAS_XML()));
 
 		protected static const PROGRESS_BAR_SCALE_3_FIRST_REGION:Number = 12;
 		protected static const PROGRESS_BAR_SCALE_3_SECOND_REGION:Number = 12;
