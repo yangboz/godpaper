@@ -359,7 +359,8 @@ package com.godpaper.as3.business.managers
 				//cGasket.removeElementAt(0);
 				cGasket.chessPiece=null;
 				//Remove the chess pieces from game stage
-				FlexGlobals.gameStage.removeChild(piecee);
+//				FlexGlobals.gameStage.removeChild(piecee);
+				piecee.parent.removeChild(piecee);
 			}
 			//finally trigger make move.
 			this.makeMove(conductVO);
