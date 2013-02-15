@@ -173,8 +173,8 @@ package
 			GasketConfig.maxPoolSize=32; //Notices:Object pools full of objects with dangerously stale state are sometimes called object cesspools and regarded as an anti-pattern.
 			GasketConfig.tipsVisible=true; //Gasket label used to debugger.
 			GasketConfig.backgroundAlpha=1; //
-			GasketConfig.width=30;
-			GasketConfig.height=30;
+			GasketConfig.width=34;
+			GasketConfig.height=34;
 			GasketConfig.implement = ChessGasket_TheChessJam;
 			//about piece:
 			PieceConfig.factory=ChessFactory_TheChessJam; //your custom chess factory.
