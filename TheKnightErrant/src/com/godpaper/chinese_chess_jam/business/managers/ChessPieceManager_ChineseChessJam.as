@@ -128,15 +128,8 @@ package com.godpaper.chinese_chess_jam.business.managers
 			if(FlexGlobals.userModel.hosterRoleIndex != turn)
 				//				if(state=="circle")//"cross","circle"
 			{
+				//Find red chess piece by gasket position.
 				var target:ChessPiece = (FlexGlobals.chessGasketsModel.gaskets.gett(startX,startY) as ChessGasket).chessPiece as ChessPiece;
-				if(turn==DefaultConstants.FLAG_RED)//Default flag RED,Notice: the flag already has turnned
-				{
-					//Find red chess piece by state
-					
-				}else
-				{
-					//Find blue chess piece by state
-				}
 				conductVO.target = target;
 				//Save stage to user model.
 				FlexGlobals.userModel.state = state;

@@ -24,7 +24,7 @@ package com.lookbackon.AI.FSM
 		//--------------------------------------------------------------------------
 		private static const LOG:ILogger = LogUtil.getLogger(FiniteStateMachine);
 		//
-		private var _globalState:IState;//For globally track monster's state.
+		private var _globalState:IState;//For globally track angent's carries' state.
 		private var _currentState:IState;
 		private var _previousState:IState;
 		private var _nextState:IState;

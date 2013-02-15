@@ -1,8 +1,7 @@
 package com.lookbackon.AI.FSM
 {
 //	import mx.core.IVisualElement;
-	import com.godpaper.as3.core.IVisualElement;
-
+//	import com.godpaper.as3.core.IVisualElement;
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -37,11 +36,11 @@ package com.lookbackon.AI.FSM
 		function get name():String;
 		function set name(value:String):void;
 		
-		function get carrier():IVisualElement;
-		function set carrier(value:IVisualElement):void;
+		function get carrier():*;
+		function set carrier(value:*):void;
 		
-		function get traceTarget():IVisualElement;
-		function set traceTarget(value:IVisualElement):void;
+		function get traceTarget():*;
+		function set traceTarget(value:*):void;
 		
 		function get fsm():FiniteStateMachine;
 		//--------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 package com.lookbackon.AI.FSM
 {
 //	import mx.core.IVisualElement;
-	import com.godpaper.as3.core.IVisualElement;
+//	import com.godpaper.as3.core.IVisualElement;
 
 	/**
 	 * The agent uses an instance of the FiniteStateMachine class the handle its AI.</br>
@@ -22,7 +22,7 @@ package com.lookbackon.AI.FSM
 		 * @param the agen's traceTarget;
 		 *
 		 */
-		public function Agent(name:String, carrier:IVisualElement, traceTarget:IVisualElement=null)
+		public function Agent(name:String, carrier:*, traceTarget:*=null)
 		{
 			this._fsm=new FiniteStateMachine(this);
 			this._name=name;
@@ -61,34 +61,34 @@ package com.lookbackon.AI.FSM
 			_name=value;
 		}
 
-		private var _carrier:IVisualElement;
+		private var _carrier:*;
 		/**
 		 *
 		 * @return agent's carrier.
 		 *
 		 */
-		public function get carrier():IVisualElement
+		public function get carrier():*
 		{
 			return _carrier;
 		}
 
-		public function set carrier(value:IVisualElement):void
+		public function set carrier(value:*):void
 		{
 			_carrier=value;
 		}
 
-		private var _traceTarget:IVisualElement;
+		private var _traceTarget:*;
 		/**
 		 *
 		 * @return agent's trace target if neccessary.
 		 *
 		 */	
-		public function get traceTarget():IVisualElement
+		public function get traceTarget():*
 		{
 			return _traceTarget;
 		}
 
-		public function set traceTarget(value:IVisualElement):void
+		public function set traceTarget(value:*):void
 		{
 			_traceTarget=value;
 		}
