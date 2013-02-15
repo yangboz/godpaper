@@ -79,13 +79,20 @@ namespace ChineseChessJam {
                         Broadcast("place", start, end, type, player1 == hasTurn ? 0 : 1);
 						break;
 					}
+                case "win":
+                    {
+                        int winner = message.GetInt(0);
+                        String winnerName = message.GetString(1);
+                        Broadcast("win", winner, winnerName);
+                        break;
+                    }
+                case "tie":
+                    {
+                        Broadcast("tie");
+                        break;
+                    }
 				case "reset": {
-						if(player1 != null && player2 != null) {
-							player.IsReady = true;
-							if(player1.IsReady && player2.IsReady) {
-								resetGame(null);
-							}
-						}
+                        Broadcast("reset");
 						break;
 					}
 				case "join": {

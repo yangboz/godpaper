@@ -81,16 +81,33 @@ package com.godpaper.chinese_chess_jam.business.managers
 //				if (ChessPiece(cGasket.getChildAt(0)).label == PiecesConstants_ChineseChessJam.BLUE_MARSHAL.label)	
 				if (removedPiece.label == PiecesConstants_ChineseChessJam.BLUE_MARSHAL.label)	
 				{
+					//conduct service transform
+					if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
+					{
+						if(FlexGlobals.userModel.moves.indexOf(conductVO.brevity)==-1)//Default index 0
+						{
+							//Default flag RED,Notice: the flag already has turnned
+							FlexGlobals.conductService.transforBrevity("win",null);
+						}
+					}
 					return GameConfig.gameStateManager.humanWin();
 				}
 //				if (ChessPiece(cGasket.getElementAt(0)).label == PiecesConstants_ChineseChessJam.RED_MARSHAL.label)
 //				if (ChessPiece(cGasket.getChildAt(0)).label == PiecesConstants_ChineseChessJam.RED_MARSHAL.label)
 				if (removedPiece.label == PiecesConstants_ChineseChessJam.RED_MARSHAL.label)	
 				{
+					//conduct service transform
+					if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
+					{
+						if(FlexGlobals.userModel.moves.indexOf(conductVO.brevity)==-1)//Default index 0
+						{
+							//Default flag RED,Notice: the flag already has turnned
+							FlexGlobals.conductService.transforBrevity("win",null);
+						}
+					}
 					return GameConfig.gameStateManager.computerWin();
 				}
 			}
-			//
 			//
 			super.applyMove(conductVO);
 		}
@@ -105,7 +122,12 @@ package com.godpaper.chinese_chess_jam.business.managers
 			//Signal listen
 			if(this.playerIoPlugin)
 			{
-				this.playerIoPlugin.signal_piece_placed.add(onChessPiecePlaced);//Notice:the signal difference between addOnce() and add() 
+				//Notice:the signal difference between addOnce() and add() 
+				this.playerIoPlugin.signal_piece_placed.add(onChessPiecePlaced);
+				//
+				this.playerIoPlugin.signal_player_win.add(onPlayerWin);
+				this.playerIoPlugin.signal_game_tie.add(onGameTie);
+				this.playerIoPlugin.signal_game_reset.add(onGameReset);
 			}
 		}   
 		//--------------------------------------------------------------------------
@@ -135,13 +157,28 @@ package com.godpaper.chinese_chess_jam.business.managers
 				FlexGlobals.userModel.state = state;
 				FlexGlobals.userModel.moves.push(conductVO.brevity);
 				//Make chess piece move.
-				GameConfig.chessPieceManager.makeMove(conductVO);
+				this.applyMove(conductVO);
 				//The opponent player can move piece again.
 				IndicatorConfig.waiting = false;
 			}else
 			{
 				IndicatorConfig.waiting = true;//Waiting for the player can move piece again.
 			}
+		}
+		//
+		private function onGameTie():void
+		{
+			LOG.info("Game tie!");
+		}
+		//
+		private function onGameReset():void
+		{
+			LOG.info("Game reset!");
+		}
+		//
+		private function onPlayerWin(m:Message, winner:int, winnerName:String):void
+		{
+			LOG.info("Winner is: {0},{1}", winner,winnerName);
 		}
 	}
 

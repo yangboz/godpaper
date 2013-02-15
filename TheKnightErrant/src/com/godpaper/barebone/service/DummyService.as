@@ -86,7 +86,7 @@ package com.godpaper.barebone.service
 			//TODO: implement function
 		}
 		//
-		public function transforBrevity(value:String):String
+		public function transforBrevity(type:String,value:String):String
 		{
 			//TODO: implement function
 			return null;

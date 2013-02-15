@@ -217,10 +217,13 @@ package com.godpaper.as3.business.managers
 				if(FlexGlobals.userModel.moves.indexOf(conductVO.brevity)==-1)//Default index 0
 				{
 					//Default flag RED,Notice: the flag already has turnned
-					FlexGlobals.conductService.transforBrevity(conductVO.brevity);
+					FlexGlobals.conductService.transforBrevity("click",conductVO.brevity);
 					FlexGlobals.userModel.moves.push(conductVO.brevity);//Moves insert.
 				}
 			}
+			//Gasket.chessPiece reference update.
+			var cGasket:ChessGasket= chessGaketsModel.gaskets.gett(conductVO.nextPosition.x, conductVO.nextPosition.y) as ChessGasket;
+			cGasket.chessPiece = conductVO.target as ChessPiece;
 			//relatived side handlers.
 			if(GameConfig.gameStateManager.isBlueSide)
 			{

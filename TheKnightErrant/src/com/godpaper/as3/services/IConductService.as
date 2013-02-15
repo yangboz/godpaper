@@ -37,9 +37,10 @@ package com.godpaper.as3.services
 		/**
 		 * This function will transfor a string to your game server
 		 * and notify the result in the chess piece manager.
+		 * @param type the tpye of conduct's brevity.
 		 * @param value the value of conduct's brevity.
 		 */
-		function transforBrevity(value:String):String;
+		function transforBrevity(type:String,value:String):String;
 	}
 }
 

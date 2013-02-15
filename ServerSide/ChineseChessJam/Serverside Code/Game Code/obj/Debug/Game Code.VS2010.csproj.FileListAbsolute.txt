@@ -12,3 +12,10 @@ C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\ChineseChessJam\Serv
 C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\ChineseChessJam\Serverside Code\Game Code\bin\Debug\ChineseChessJam.pdb
 C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\ChineseChessJam\Serverside Code\Game Code\obj\Debug\ChineseChessJam.dll
 C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\ChineseChessJam\Serverside Code\Game Code\obj\Debug\ChineseChessJam.pdb
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\bin\Debug\ChineseChessJam.dll
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\bin\Debug\ChineseChessJam.pdb
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\bin\Debug\Player.IO GameLibrary.dll
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\bin\Debug\Player.IO GameLibrary.xml
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\obj\Debug\ChineseChessJam.dll
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\obj\Debug\ChineseChessJam.pdb

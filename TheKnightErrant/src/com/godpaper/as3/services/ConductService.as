@@ -116,7 +116,7 @@ package com.godpaper.as3.services
 			return null;
 		}
 		//
-		public function transforBrevity(value:String):String
+		public function transforBrevity(type:String,value:String):String
 		{
 			var message:PostVO = new PostVO();
 			message.peerID = this.netConnection.nearID;

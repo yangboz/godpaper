@@ -187,7 +187,6 @@ package com.godpaper.as3.business.managers
 			FlexGlobals.gameScreen.cleanUpSequenceTask.start();
 			//dump the end of game messages.
 			FlexGlobals.topLevelApplication.dumpFootSprint();
-			//
 			//put down chess pieces again
 			//no more create chess gasket again.
 			//no more using start up task at Main.mxml.

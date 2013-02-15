@@ -95,7 +95,7 @@ package com.godpaper.as3.plugins.playerIO
 			//TODO: implement function
 		}
 		//
-		public function transforBrevity(value:String):String
+		public function transforBrevity(type:String,value:String):String
 		{
 			//Create a message and send
 			//			var message:Message = playerIoPlugin.connection.createMessage("click", value);//"+-1-111"

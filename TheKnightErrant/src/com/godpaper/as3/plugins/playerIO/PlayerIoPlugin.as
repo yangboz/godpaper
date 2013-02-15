@@ -75,6 +75,9 @@ package com.godpaper.as3.plugins.playerIO
 		public var signal_hoster_joined:Signal;
 		public var signal_user_joined:Signal;
 		public var signal_piece_placed:Signal;
+		public var signal_game_tie:Signal;
+		public var signal_game_reset:Signal;
+		public var signal_player_win:Signal;
 		//
 		public var roomID:String;
 		public var connection:Connection;
@@ -109,6 +112,9 @@ package com.godpaper.as3.plugins.playerIO
 			this.signal_hoster_joined = new Signal(String);
 			this.signal_user_joined = new Signal();
 			this.signal_piece_placed = new Signal(Message,int,int,String,int);
+			this.signal_game_tie = new Signal();
+			this.signal_game_reset = new Signal();
+			this.signal_player_win = new Signal(int,String);//winner index,winner name.
 		}
 		
 		public function get data():IPlugData
@@ -264,8 +270,8 @@ package com.godpaper.as3.plugins.playerIO
 		
 		private function handleJoin(connection:Connection):void{
 			LOG.info("Sucessfully connected to the multiplayer server");
-//TODO:			gotoAndStop(2);
-			this.connection = connection;//Keef ref.
+			//Keef ref.
+			this.connection = connection;
 			//Add disconnect listener
 			connection.addDisconnectHandler(handleDisconnect);
 			//Add listener for messages of the type "init"
@@ -287,28 +293,15 @@ package com.godpaper.as3.plugins.playerIO
 			//
 			connection.addMessageHandler("spectator", sepctatorJoinMessageHandler);
 			//
-			connection.addMessageHandler("full", function(m:Message):void{
-//				infoBox.Show("full");
-			});
+//			connection.addMessageHandler("full", function(m:Message):void{
+////				infoBox.Show("full");
+//			});
 			//
-			connection.addMessageHandler("reset", function(m:Message, turn:int):void{
-//				infoBox.Hide();
-//				setTurn(turn == imPlayer, true);
-			});
+			connection.addMessageHandler("reset",gameResetMesageHandler);
 			//	
-			connection.addMessageHandler("win", function(m:Message, winner:int, winnerName:String):void{
-//				if(isSpectator){
-//					infoBox.Show("showWinner",winnerName); 
-//				}else{
-//					infoBox.Show(winner == imPlayer ? "won" : "lost");
-//				}
-//				setTurn(false)
-			});
+			connection.addMessageHandler("win", playerWinMessageHandler);
 			//
-			connection.addMessageHandler("tie", function(m:Message):void{
-//				infoBox.Show("tie", isSpectator ? "" : "go");
-//				setTurn(false)
-			});	
+			connection.addMessageHandler("tie", gameTieMesageHandler);	
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -327,8 +320,6 @@ package com.godpaper.as3.plugins.playerIO
 		private function handleError(error:PlayerIOError):void{
 //		private function handleError(error:*):void{	
 			LOG.info("Connection error:{0}",String(error.message));
-//TODO:			gotoAndStop(3);
-			
 		}
 		//
 		private function userInitMessageHandler(m:Message, iAm:int, name:String):void
@@ -393,13 +384,53 @@ package com.godpaper.as3.plugins.playerIO
 				FlexGlobals.userModel.state = state;
 				FlexGlobals.userModel.moves.push(conductVO.brevity);
 				//Make chess piece move.
-				GameConfig.chessPieceManager.makeMove(conductVO);
+				GameConfig.chessPieceManager.applyMove(conductVO);
 				//The opponent player can move piece again.
 				IndicatorConfig.waiting = false;
 			}else
 			{
 				IndicatorConfig.waiting = true;//Waiting for the player can move piece again.
 			}
+		}
+		//
+		private function gameResetMesageHandler(m:Message):void
+		{
+			LOG.info("Game reset!");
+			//Broadcasting signal
+			if(signal_game_reset.numListeners)
+			{
+				signal_game_reset.dispatch();
+				return;
+			}
+			//The following flow is esp for the game of "TicTacToe"
+		}
+		//
+		private function gameTieMesageHandler(m:Message):void
+		{
+			LOG.info("Game tie!");
+			//Broadcasting signal
+			if(signal_game_tie.numListeners)
+			{
+				signal_game_tie.dispatch();
+				return;
+			}
+			//The following flow is esp for the game of "TicTacToe"
+		}
+		//
+		private function playerWinMessageHandler(m:Message, winner:int, winnerName:String):void
+		{
+			LOG.info("Winner is: {0},{1}", winner,winnerName);
+			//
+			if(FlexGlobals.userModel.hosterRoleIndex != winner)
+			{
+				//Broadcasting signal
+				if(signal_player_win.numListeners)
+				{
+					signal_player_win.dispatch(winner,winnerName);
+					return;
+				}
+			}
+			//The following flow is esp for the game of "TicTacToe"
 		}
 	}
 	
