@@ -1,0 +1,28 @@
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\Example - Multiplayer - TicTacToe\Serverside Code\Game Code\bin\Debug\TicTacToe.dll
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\Example - Multiplayer - TicTacToe\Serverside Code\Game Code\bin\Debug\TicTacToe.pdb
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\Example - Multiplayer - TicTacToe\Serverside Code\Game Code\bin\Debug\Player.IO GameLibrary.dll
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\Example - Multiplayer - TicTacToe\Serverside Code\Game Code\bin\Debug\Player.IO GameLibrary.xml
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\Example - Multiplayer - TicTacToe\Serverside Code\Game Code\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\Example - Multiplayer - TicTacToe\Serverside Code\Game Code\obj\Debug\TicTacToe.dll
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\Example - Multiplayer - TicTacToe\Serverside Code\Game Code\obj\Debug\TicTacToe.pdb
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\ChineseChessJam\Serverside Code\Game Code\bin\Debug\Player.IO GameLibrary.dll
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\ChineseChessJam\Serverside Code\Game Code\bin\Debug\Player.IO GameLibrary.xml
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\ChineseChessJam\Serverside Code\Game Code\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\ChineseChessJam\Serverside Code\Game Code\bin\Debug\ChineseChessJam.dll
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\ChineseChessJam\Serverside Code\Game Code\bin\Debug\ChineseChessJam.pdb
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\ChineseChessJam\Serverside Code\Game Code\obj\Debug\ChineseChessJam.dll
+C:\Users\yangboz\Desktop\TheKnightErrant\PlayerIO2013\Flash\ChineseChessJam\Serverside Code\Game Code\obj\Debug\ChineseChessJam.pdb
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\bin\Debug\ChineseChessJam.dll
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\bin\Debug\ChineseChessJam.pdb
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\bin\Debug\Player.IO GameLibrary.dll
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\bin\Debug\Player.IO GameLibrary.xml
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\obj\Debug\ChineseChessJam.dll
+C:\Users\yangboz\git\godpaper\ServerSide\ChineseChessJam\Serverside Code\Game Code\obj\Debug\ChineseChessJam.pdb
+C:\Users\yangboz\git\godpaper\ServerSide\TheChessJam\Serverside Code\Game Code\bin\Debug\Player.IO GameLibrary.dll
+C:\Users\yangboz\git\godpaper\ServerSide\TheChessJam\Serverside Code\Game Code\bin\Debug\Player.IO GameLibrary.xml
+C:\Users\yangboz\git\godpaper\ServerSide\TheChessJam\Serverside Code\Game Code\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\yangboz\git\godpaper\ServerSide\TheChessJam\Serverside Code\Game Code\bin\Debug\TheChessJam.dll
+C:\Users\yangboz\git\godpaper\ServerSide\TheChessJam\Serverside Code\Game Code\bin\Debug\TheChessJam.pdb
+C:\Users\yangboz\git\godpaper\ServerSide\TheChessJam\Serverside Code\Game Code\obj\Debug\TheChessJam.dll
+C:\Users\yangboz\git\godpaper\ServerSide\TheChessJam\Serverside Code\Game Code\obj\Debug\TheChessJam.pdb
