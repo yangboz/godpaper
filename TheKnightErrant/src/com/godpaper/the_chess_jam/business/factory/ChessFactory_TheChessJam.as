@@ -37,12 +37,12 @@ package com.godpaper.the_chess_jam.business.factory
 	import com.godpaper.as3.views.components.ChessPiece;
 	import com.godpaper.the_chess_jam.consts.Constants_TheChessJam;
 	import com.godpaper.the_chess_jam.consts.PiecesConstants_TheChessJam;
-	import com.godpaper.the_chess_jam.vo.BishopVO;
-	import com.godpaper.the_chess_jam.vo.KnightVO;
-	import com.godpaper.the_chess_jam.vo.MarshalVO;
-	import com.godpaper.the_chess_jam.vo.PawnVO;
-	import com.godpaper.the_chess_jam.vo.QueenVO;
-	import com.godpaper.the_chess_jam.vo.RookVO;
+	import com.godpaper.the_chess_jam.model.vo.BishopVO;
+	import com.godpaper.the_chess_jam.model.vo.KnightVO;
+	import com.godpaper.the_chess_jam.model.vo.MarshalVO;
+	import com.godpaper.the_chess_jam.model.vo.PawnVO;
+	import com.godpaper.the_chess_jam.model.vo.QueenVO;
+	import com.godpaper.the_chess_jam.model.vo.RookVO;
 	
 	import flash.geom.Point;
 	

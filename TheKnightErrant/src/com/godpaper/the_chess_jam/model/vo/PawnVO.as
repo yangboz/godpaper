@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.the_chess_jam.vo
+package com.godpaper.the_chess_jam.model.vo
 {
 	//--------------------------------------------------------------------------
 	//
@@ -34,14 +34,14 @@ package com.godpaper.the_chess_jam.vo
 	
 	
 	/**
-	 * KnightVO.as class.   	
+	 * PawnVO.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Feb 16, 2013 12:52:59 AM
+	 * Created Feb 16, 2013 12:52:44 AM
 	 */   	 
-	public class KnightVO extends AbstractChessVO
+	public class PawnVO extends AbstractChessVO
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -52,7 +52,7 @@ package com.godpaper.the_chess_jam.vo
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(KnightVO);
+		private static const LOG:ILogger = LogUtil.getLogger(PawnVO);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -70,7 +70,7 @@ package com.godpaper.the_chess_jam.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function KnightVO(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=1, identifier:String="")
+		public function PawnVO(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=1, identifier:String="")
 		{
 			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag, identifier);
@@ -82,73 +82,42 @@ package com.godpaper.the_chess_jam.vo
 		//--------------------------------------------------------------------------
 		/**
 		 * @inheritDoc
-		 */
+		 */		
 		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
-			// * - -
-			// - - -
-			// - - *
+			//* -
+			//* -
 			//about occupies.
-			//serveral admental(象田心问题，象过河问题)
-			if(!chessPiecesModel.allPieces.getBitt(rowIndex+1,colIndex+1))
+			//Notice:serveral admental(兵横向移动问题,兵后退问题)
+			//right or left direction.
+			if(flag==DefaultConstants.FLAG_BLUE)
 			{
-				//serveral admental(象过河问题)
-				if(flag==DefaultConstants.FLAG_BLUE)
+				if(rowIndex>=5)
 				{
-					if(rowIndex<4)
-					{
-						this.occupies.setBitt(rowIndex+2,colIndex+2,true);
-					}
-				}else
-				{
-					this.occupies.setBitt(rowIndex+2,colIndex+2,true);
+					this.occupies.setBitt(rowIndex,colIndex+1,true);
+					this.occupies.setBitt(rowIndex,colIndex-1,true);
 				}
 			}
-			if(!chessPiecesModel.allPieces.getBitt(rowIndex+1,colIndex-1))
+			if(flag==DefaultConstants.FLAG_RED)
 			{
-				//serveral admental(象过河问题)
-				if(flag==DefaultConstants.FLAG_BLUE)
+				if(rowIndex<=4)
 				{
-					if(rowIndex<4)
-					{
-						this.occupies.setBitt(rowIndex+2,colIndex-2,true);
-					}
-				}else
-				{
-					this.occupies.setBitt(rowIndex+2,colIndex-2,true);
+					this.occupies.setBitt(rowIndex,colIndex+1,true);
+					this.occupies.setBitt(rowIndex,colIndex-1,true);
 				}
 			}
-			if(!chessPiecesModel.allPieces.getBitt(rowIndex-1,colIndex+1))
+			//serveral admental(兵后退问题)
+			//up direction
+			if(flag==DefaultConstants.FLAG_BLUE)
 			{
-				//serveral admental(象过河问题)
-				if(flag==DefaultConstants.FLAG_RED)
-				{
-					if(rowIndex>5)
-					{
-						this.occupies.setBitt(rowIndex-2,colIndex+2,true);
-					}
-				}else
-				{
-					this.occupies.setBitt(rowIndex-2,colIndex+2,true);
-				}
+				this.occupies.setBitt(rowIndex+1,colIndex,true);
 			}
-			if(!chessPiecesModel.allPieces.getBitt(rowIndex-1,colIndex-1))
+			//down direction
+			if(flag==DefaultConstants.FLAG_RED)
 			{
-				//serveral admental(象过河问题)
-				if(flag==DefaultConstants.FLAG_RED)
-				{
-					if(rowIndex>5)
-					{
-						this.occupies.setBitt(rowIndex-2,colIndex-2,true);
-					}
-				}else
-				{
-					this.occupies.setBitt(rowIndex-2,colIndex-2,true);
-				}
+				this.occupies.setBitt(rowIndex-1,colIndex,true);
 			}
 			//about legal moves.
-			//			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
-			//			LOG.info("bluePieces:{0}",ChessPositionModelLocator.getInstance().bluePieces.dump());
 			if(flag==DefaultConstants.FLAG_RED)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.redPieces));
@@ -167,9 +136,9 @@ package com.godpaper.the_chess_jam.vo
 				this.captures = this.moves.and(chessPiecesModel.redPieces);
 			}
 			//
-			LOG.debug("occupies:{0}",this.occupies.dump());
-			LOG.debug("moves:{0}",this.moves.dump());
-			LOG.debug("captures:{0}",this.captures.dump());
+			LOG.debug("[{0},{1}] occupies:{2}",colIndex,rowIndex,this.occupies.dump());
+			LOG.debug("[{0},{1}] moves:{2}",colIndex,rowIndex,this.moves.dump());
+			LOG.debug("[{0},{1}] captures:{2}",colIndex,rowIndex,this.captures.dump());
 		}
 		//--------------------------------------------------------------------------
 		//

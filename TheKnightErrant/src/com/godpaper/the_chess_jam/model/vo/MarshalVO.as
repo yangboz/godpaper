@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.the_chess_jam.vo
+package com.godpaper.the_chess_jam.model.vo
 {
 	//--------------------------------------------------------------------------
 	//
@@ -34,14 +34,14 @@ package com.godpaper.the_chess_jam.vo
 	
 	
 	/**
-	 * BishopVO.as class.   	
+	 * MarshalVO.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Feb 16, 2013 12:52:19 AM
+	 * Created Feb 16, 2013 12:53:34 AM
 	 */   	 
-	public class BishopVO extends AbstractChessVO
+	public class MarshalVO extends AbstractChessVO
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -52,7 +52,7 @@ package com.godpaper.the_chess_jam.vo
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(BishopVO);
+		private static const LOG:ILogger = LogUtil.getLogger(MarshalVO);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -70,7 +70,7 @@ package com.godpaper.the_chess_jam.vo
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function BishopVO(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=1, identifier:String="")
+		public function MarshalVO(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=1, identifier:String="")
 		{
 			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag, identifier);
