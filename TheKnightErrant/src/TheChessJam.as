@@ -28,6 +28,7 @@ package
 	import com.godpaper.as3.configs.LoggerConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
+	import com.godpaper.as3.configs.ServiceConfig;
 	import com.godpaper.as3.configs.TextureConfig;
 	import com.godpaper.as3.configs.ThemeConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
@@ -43,6 +44,7 @@ package
 	import com.godpaper.as3.views.scenes.MainScene;
 	import com.godpaper.the_chess_jam.business.factory.ChessFactory_TheChessJam;
 	import com.godpaper.the_chess_jam.business.managers.ChessPiecesManager_TheChessJam;
+	import com.godpaper.the_chess_jam.service.TheChessJamService;
 	import com.godpaper.the_chess_jam.views.components.ChessGasket_TheChessJam;
 	
 	import flash.display.MovieClip;
@@ -190,6 +192,8 @@ package
 			PluginConfig.boardID = "TheChessJam";//your custom game related board id.
 			this._pluginProvider = new PlayerIoPlugin(PluginConfig.gameID,PluginConfig.boardID);//For playerIO plugin
 			this._mochiads_game_id="dadc1bb72ac7ed7f"; //espical for mochi game platform.
+			//about service:
+			ServiceConfig.wrapper = TheChessJamService;
 			//TextureConfig
 			TextureConfig.AssetEmbeds_1x_class=AssetEmbeds_1x_the_chess_jam;
 //			TextureConfig.AssetEmbeds_2x_class=AssetEmbeds_2x;
