@@ -37,6 +37,7 @@ package
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.PluginUIComponent;
 	import com.godpaper.as3.plugins.kongregate.KongregatePlugin;
+	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
 	import com.godpaper.as3.views.scenes.MainScene;
@@ -108,9 +109,10 @@ package
 		 */
 		override public function get themeClass():Class
 		{
-			//			return ThemeConfig.THEME_AEON_DESKTOP;
-						return ThemeConfig.THEME_MINIMAL;
+//			return ThemeConfig.THEME_AEON_DESKTOP;
+			return ThemeConfig.THEME_MINIMAL;
 //			return ThemeConfig.THEME_AZURE;
+//			return ThemeConfig.THEME_METAL_WORK_MOBILE;
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -184,8 +186,9 @@ package
 			PieceConfig.scaleX=1;
 			PieceConfig.scaleY=1;
 			//about plugin:
-			PluginConfig.gameID="dadc1bb72ac7ed7f"; //your custom game related id.
-			PluginConfig.boardID="51c558cd0315f8e7"; //your custom game related board id.
+			PluginConfig.gameID = "chinesechessjam-msf2zuz0suaip7yhtzpaa";//your custom game related id.
+			PluginConfig.boardID = "ChineseChessJam";//your custom game related board id.
+			this._pluginProvider = new PlayerIoPlugin(PluginConfig.gameID,PluginConfig.boardID);//For playerIO plugin
 			this._mochiads_game_id="dadc1bb72ac7ed7f"; //espical for mochi game platform.
 			//TextureConfig
 			TextureConfig.AssetEmbeds_1x_class=AssetEmbeds_1x_the_chess_jam;

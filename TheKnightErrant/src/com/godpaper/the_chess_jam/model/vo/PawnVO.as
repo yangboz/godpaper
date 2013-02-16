@@ -89,7 +89,6 @@ package com.godpaper.the_chess_jam.model.vo
 			//about occupies.
 			//Notice:serveral admental(backword,forward,pass by)
 			//right or left direction.
-			trace(flag,DefaultConstants.FLAG_RED,flag==DefaultConstants.FLAG_RED);
 			//serveral admental
 			if(flag==DefaultConstants.FLAG_RED)//index-backward
 			{

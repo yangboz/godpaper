@@ -362,7 +362,7 @@ package com.godpaper.as3.views.components
 			var space:DisplayObject = FlexGlobals.gameStage;
 //			LOG.info("ChessPiece touch: {0}, space:{1}",touch,space);
 			var position:Point = touch.getLocation(space);
-			LOG.debug("touch position:{0}",position.toString());
+//			LOG.debug("touch position:{0}",position.toString());
 			// 
 			var dragEnterTargets:Vector.<ChessGasket>;
 			var dragDropTarget:ChessGasket;

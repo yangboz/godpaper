@@ -34,7 +34,8 @@ package com.godpaper.the_chess_jam.model.vo
 	
 	
 	/**
-	 * BishopVO.as class.   	
+	 * BishopVO.as class.X-Ray attacks.
+	 * @see http://chessprogramming.wikispaces.com/X-ray+Attacks+%28Bitboards%29   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
@@ -89,18 +90,57 @@ package com.godpaper.the_chess_jam.model.vo
 			// * - *
 			//about occupies on diagonal direction.
 			//serveral admental
-			if(flag==DefaultConstants.FLAG_RED)
+			//west north
+			var wn:int = 1;
+			while(rowIndex-wn)
 			{
-				if(colIndex>0 && rowIndex>0 )
+				if(colIndex-wn)
 				{
-					this.occupies.setBitt(rowIndex-1,colIndex-1,true);
+					this.occupies.setBitt(rowIndex-wn,colIndex-wn,true);
+				}else
+				{
+					break;
 				}
-			}else
+				wn++;
+			}
+			//west south
+			var ws:int = 1;
+			while((this.row-ws)>rowIndex)
 			{
-				if(rowIndex<7 && colIndex<7)
+				if(colIndex-ws)
 				{
-					this.occupies.setBitt(rowIndex+1,colIndex+1,true);
+					this.occupies.setBitt(rowIndex+ws,colIndex-ws,true);
+				}else
+				{
+					break;
 				}
+				ws++;
+			}
+			//east south
+			var es:int = 1;
+			while((this.row-es)>rowIndex)
+			{
+				if(colIndex+es<this.column)
+				{
+					this.occupies.setBitt(rowIndex+es,colIndex+es,true);
+				}else
+				{
+					break;
+				}
+				es++;
+			}
+			//east north
+			var en:int = 1;
+			while(rowIndex-en)
+			{
+				if(colIndex+en<this.column)
+				{
+					this.occupies.setBitt(rowIndex-en,colIndex+en,true);
+				}else
+				{
+					break;
+				}
+				en++;
 			}
 			//about legal moves.
 			//			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
