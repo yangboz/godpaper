@@ -74,21 +74,27 @@ package com.godpaper.as3.utils
 		//
 		public static function getRookOccupies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
-			var bb:BitBoard = new BitBoard(colMax,rowMax);
-			//TODO:
+			var west:BitBoard = getWestOccuipies(rowIndex, colIndex, rowMax, colMax);
+			var north:BitBoard = getNorthOccuipies(rowIndex, colIndex, rowMax, colMax);
+			var east:BitBoard = getEastOccuipies(rowIndex, colIndex, rowMax, colMax);
+			var south:BitBoard = getSouthOccuipies(rowIndex, colIndex, rowMax, colMax);
+			var bb:BitBoard = west.or(north.or(east.or(south)));
 			return bb;
 		}
 		//
 		public static function getBishopOccupies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
-			var bb:BitBoard = new BitBoard(colMax,rowMax);
-			//TODO:
+			var westNorth:BitBoard = getWestNorthOccuipies(rowIndex, colIndex, rowMax, colMax);
+			var eastNorth:BitBoard = getEastNorthOccuipies(rowIndex, colIndex, rowMax, colMax);
+			var eastSouth:BitBoard = getEastSouthOccuipies(rowIndex, colIndex, rowMax, colMax);
+			var westSouth:BitBoard = getWestSouthOccuipies(rowIndex, colIndex, rowMax, colMax);
+			var bb:BitBoard = westNorth.or(eastNorth.or(eastSouth.or(westSouth)));
 			return bb;
 		}
 		//@see http://en.wikipedia.org/wiki/Chess
 		public static function getQueenOccupies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
-			return getRookOccupies(rowIndex, colIndex).or(getBishopOccupies(rowIndex, colIndex));
+			return getRookOccupies(rowIndex, colIndex, rowMax, colMax).or(getBishopOccupies(rowIndex, colIndex, rowMax, colMax));
 		}
 		//----------------------------------
 		//  X-ray style
@@ -97,25 +103,103 @@ package com.godpaper.as3.utils
 		//west
 		public static function getWestOccuipies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			var west:int = colIndex;
+			while(west)
+			{
+				bb.setBitt(rowIndex,west,true);
+				west--;
+			}
 			return bb;
 		}
 		//north
 		public static function getNorthOccuipies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			var north:int = rowIndex;
+			while(north)
+			{
+				bb.setBitt(north,colIndex,true);
+				north--;
+			}
 			return bb;
 		}
 		//east
 		public static function getEastOccuipies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			var east:int = 0;
+			while(east<colMax)
+			{
+				bb.setBitt(rowIndex,east,true);
+				east++;
+			}
 			return bb;
 		}
 		//south
 		public static function getSouthOccuipies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			var south:int = 0;
+			while(south<rowIndex)
+			{
+				bb.setBitt(south,colIndex,true);
+				south++;
+			}
+			return bb;
+		}
+		//westNorth
+		public static function getWestNorthOccuipies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			for(var i:int=rowIndex;i>0;i--)
+			{
+				if(colIndex-i)
+				{
+					bb.setBitt(rowIndex-i,colIndex-i,true);
+				}
+			}
+			return bb;
+		}
+		//eastNorth
+		public static function getEastNorthOccuipies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			for(var i:int=rowIndex;i>0;i--)
+			{
+				if(colIndex+i<colMax)
+				{
+					bb.setBitt(rowIndex-i,colIndex+i,true);
+				}
+			}
+			return bb;
+		}
+		//eastSouth
+		public static function getEastSouthOccuipies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			var len:int = rowMax-rowIndex;
+			for(var i:int=0;i<len;i++)
+			{
+				if(colIndex+i<colMax)
+				{
+					bb.setBitt(rowIndex+i,colIndex+i,true);
+				}
+			}
+			return bb;
+		}
+		//westSouth
+		public static function getWestSouthOccuipies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			var len:int = rowMax-rowIndex;
+			for(var i:int=0;i<len;i++)
+			{
+				if(colIndex-i)
+				{
+					bb.setBitt(rowIndex+i,colIndex-i,true);
+				}
+			}
 			return bb;
 		}
 		//--------------------------------------------------------------------------

@@ -28,6 +28,7 @@ package com.godpaper.the_chess_jam.model.vo
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.impl.AbstractChessVO;
+	import com.godpaper.as3.utils.BitBoardUtil;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
 	
@@ -119,10 +120,16 @@ package com.godpaper.the_chess_jam.model.vo
 			{
 				LOG.debug("blocker:{0}",blocker.dump());
 				//
-				var east:BitBoard = this.getEast(rowIndex,colIndex);
-				var north:BitBoard = this.getNorth(rowIndex,colIndex);
-				var west:BitBoard = this.getWest(rowIndex,colIndex);
-				var south:BitBoard = this.getSouth(rowIndex,colIndex);
+//				var east:BitBoard = this.getEast(rowIndex,colIndex);
+//				var north:BitBoard = this.getNorth(rowIndex,colIndex);
+//				var west:BitBoard = this.getWest(rowIndex,colIndex);
+//				var south:BitBoard = this.getSouth(rowIndex,colIndex);
+				var rowMax:int = this.row;
+				var colMax:int = this.column;
+				var west:BitBoard = BitBoardUtil.getWestOccuipies(rowIndex, colIndex, rowMax, colMax);
+				var north:BitBoard = BitBoardUtil.getNorthOccuipies(rowIndex, colIndex, rowMax, colMax);
+				var east:BitBoard = BitBoardUtil.getEastOccuipies(rowIndex, colIndex, rowMax, colMax);
+				var south:BitBoard = BitBoardUtil.getSouthOccuipies(rowIndex, colIndex, rowMax, colMax);
 				LOG.debug("east:{0}",east.dump());
 				LOG.debug("north:{0}",north.dump());
 				LOG.debug("west:{0}",west.dump());
