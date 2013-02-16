@@ -197,40 +197,40 @@ package com.godpaper.the_chess_jam.business.factory
 			switch ((conductVO.target as ChessPiece).label)
 			{
 				case PiecesConstants_TheChessJam.BLUE_BISHOP.label:
-					chessVO=new BishopVO(8, 8, oRowIndex, oColIndex, 1);
-					break;
-				case PiecesConstants_TheChessJam.RED_BISHOP.label:
 					chessVO=new BishopVO(8, 8, oRowIndex, oColIndex);
 					break;
-				case PiecesConstants_TheChessJam.BLUE_ROOK.label:
-					chessVO=new RookVO(8, 8, oRowIndex, oColIndex, 1);
+				case PiecesConstants_TheChessJam.RED_BISHOP.label:
+					chessVO=new BishopVO(8, 8, oRowIndex, oColIndex, 0);
 					break;
-				case PiecesConstants_TheChessJam.RED_ROOK.label:
+				case PiecesConstants_TheChessJam.BLUE_ROOK.label:
 					chessVO=new RookVO(8, 8, oRowIndex, oColIndex);
 					break;
-				case PiecesConstants_TheChessJam.BLUE_KNIGHT.label:
-					chessVO=new KnightVO(8, 8, oRowIndex, oColIndex, 1);
+				case PiecesConstants_TheChessJam.RED_ROOK.label:
+					chessVO=new RookVO(8, 8, oRowIndex, oColIndex, 0);
 					break;
-				case PiecesConstants_TheChessJam.RED_KNIGHT.label:
+				case PiecesConstants_TheChessJam.BLUE_KNIGHT.label:
 					chessVO=new KnightVO(8, 8, oRowIndex, oColIndex);
 					break;
-				case PiecesConstants_TheChessJam.BLUE_MARSHAL.label:
-					chessVO=new MarshalVO(8, 8, oRowIndex, oColIndex, 1);
+				case PiecesConstants_TheChessJam.RED_KNIGHT.label:
+					chessVO=new KnightVO(8, 8, oRowIndex, oColIndex, 0);
 					break;
-				case PiecesConstants_TheChessJam.RED_MARSHAL.label:
+				case PiecesConstants_TheChessJam.BLUE_MARSHAL.label:
 					chessVO=new MarshalVO(8, 8, oRowIndex, oColIndex);
 					break;
-				case PiecesConstants_TheChessJam.BLUE_PAWN.label:
-					chessVO=new PawnVO(8, 8, oRowIndex, oColIndex, 1);
+				case PiecesConstants_TheChessJam.RED_MARSHAL.label:
+					chessVO=new MarshalVO(8, 8, oRowIndex, oColIndex, 0);
 					break;
-				case PiecesConstants_TheChessJam.RED_PAWN.label:
+				case PiecesConstants_TheChessJam.BLUE_PAWN.label:
 					chessVO=new PawnVO(8, 8, oRowIndex, oColIndex);
 					break;
-				case PiecesConstants_TheChessJam.RED_QUEEN.label:
-					chessVO=new QueenVO(8, 8, oRowIndex, oColIndex);
+				case PiecesConstants_TheChessJam.RED_PAWN.label:
+					chessVO=new PawnVO(8, 8, oRowIndex, oColIndex, 0);
 					break;
 				case PiecesConstants_TheChessJam.BLUE_QUEEN.label:
-					chessVO=new QueenVO(8, 8, oRowIndex, oColIndex,1);
+					chessVO=new QueenVO(8, 8, oRowIndex, oColIndex);
+					break;
+				case PiecesConstants_TheChessJam.RED_QUEEN.label:
+					chessVO=new QueenVO(8, 8, oRowIndex, oColIndex, 0);
 					break;
 				default:
 					break;
@@ -273,8 +273,8 @@ package com.godpaper.the_chess_jam.business.factory
 				case PiecesConstants_TheChessJam.BLUE_QUEEN.label:
 					omenVO=new OmenVO(PiecesConstants_TheChessJam.BLUE_QUEEN.strength, PiecesConstants_TheChessJam.BLUE_QUEEN.important, conductVO.target.chessVO.moves.celled, conductVO.target.chessVO.captures.celled, -1);
 					break;
-				case PiecesConstants_TheChessJam.BLUE_QUEEN.label:
-					omenVO=new OmenVO(PiecesConstants_TheChessJam.BLUE_QUEEN.strength, PiecesConstants_TheChessJam.BLUE_QUEEN.important, conductVO.target.chessVO.moves.celled, conductVO.target.chessVO.captures.celled, -1);
+				case PiecesConstants_TheChessJam.RED_QUEEN.label:
+					omenVO=new OmenVO(PiecesConstants_TheChessJam.RED_QUEEN.strength, PiecesConstants_TheChessJam.RED_QUEEN.important, conductVO.target.chessVO.moves.celled, conductVO.target.chessVO.captures.celled, -1);
 					break;
 				case PiecesConstants_TheChessJam.BLUE_PAWN.label:
 					omenVO=new OmenVO(PiecesConstants_TheChessJam.BLUE_PAWN.strength, PiecesConstants_TheChessJam.BLUE_PAWN.important, conductVO.target.chessVO.moves.celled, conductVO.target.chessVO.captures.celled, -1);

@@ -328,54 +328,6 @@ package com.godpaper.the_chess_jam.consts
 					this.convertedImportant.setXs(1, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
 					this.convertedImportant.setXs(0, [0, 0, 1, 0, 0, 0, 1, 0, 0]);
 					break;
-//				case "O":
-//					//important
-//					this.important.setXs(0, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(1, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(2, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(3, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(4, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(5, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(6, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(7, [0, 0, 0, 2, 0, 2, 0, 0, 0]);
-//					this.important.setXs(8, [0, 0, 0, 0, 6, 0, 0, 0, 0]);
-//					this.important.setXs(9, [0, 0, 0, 4, 0, 4, 0, 0, 0]);
-//					//convertedImportant
-//					this.convertedImportant.setXs(0, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(1, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(2, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(3, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(4, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(5, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(6, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(7, [0, 0, 0, 1, 0, 1, 0, 0, 0]);
-//					this.convertedImportant.setXs(8, [0, 0, 0, 0, 3, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(9, [0, 0, 0, 2, 0, 2, 0, 0, 0]);
-//					break;
-//				case "o":
-//					//important
-//					this.important.setXs(9, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(8, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(7, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(6, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(5, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(4, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(3, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.important.setXs(2, [0, 0, 0, 2, 0, 2, 0, 0, 0]);
-//					this.important.setXs(1, [0, 0, 0, 0, 6, 0, 0, 0, 0]);
-//					this.important.setXs(0, [0, 0, 0, 4, 0, 4, 0, 0, 0]);
-//					//convertedImportant
-//					this.convertedImportant.setXs(9, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(8, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(7, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(6, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(5, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(4, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(3, [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(2, [0, 0, 0, 1, 0, 1, 0, 0, 0]);
-//					this.convertedImportant.setXs(1, [0, 0, 0, 0, 3, 0, 0, 0, 0]);
-//					this.convertedImportant.setXs(0, [0, 0, 0, 2, 0, 2, 0, 0, 0]);
-//					break;
 				case "m":
 					//important
 					this.important.setXs(0, [0, 0, 0, 4, 8, 4, 0, 0, 0]);

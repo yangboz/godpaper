@@ -72,7 +72,6 @@ package com.godpaper.the_chess_jam.model.vo
 		//--------------------------------------------------------------------------
 		public function QueenVO(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=1, identifier:String="")
 		{
-			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag, identifier);
 		}     	
 		//--------------------------------------------------------------------------

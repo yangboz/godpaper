@@ -72,7 +72,6 @@ package com.godpaper.the_chess_jam.model.vo
 		//--------------------------------------------------------------------------
 		public function BishopVO(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=1, identifier:String="")
 		{
-			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag, identifier);
 		}     	
 		//--------------------------------------------------------------------------
@@ -85,65 +84,22 @@ package com.godpaper.the_chess_jam.model.vo
 		 */
 		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
-			// * - -
-			// - - -
-			// - - *
-			//about occupies.
-			//serveral admental(象田心问题，象过河问题)
-			if(!chessPiecesModel.allPieces.getBitt(rowIndex+1,colIndex+1))
+			// * - *
+			// - * -
+			// * - *
+			//about occupies on diagonal direction.
+			//serveral admental
+			if(flag==DefaultConstants.FLAG_RED)
 			{
-				//serveral admental(象过河问题)
-				if(flag==DefaultConstants.FLAG_BLUE)
+				if(colIndex>0 && rowIndex>0 )
 				{
-					if(rowIndex<4)
-					{
-						this.occupies.setBitt(rowIndex+2,colIndex+2,true);
-					}
-				}else
-				{
-					this.occupies.setBitt(rowIndex+2,colIndex+2,true);
+					this.occupies.setBitt(rowIndex-1,colIndex-1,true);
 				}
-			}
-			if(!chessPiecesModel.allPieces.getBitt(rowIndex+1,colIndex-1))
+			}else
 			{
-				//serveral admental(象过河问题)
-				if(flag==DefaultConstants.FLAG_BLUE)
+				if(rowIndex<7 && colIndex<7)
 				{
-					if(rowIndex<4)
-					{
-						this.occupies.setBitt(rowIndex+2,colIndex-2,true);
-					}
-				}else
-				{
-					this.occupies.setBitt(rowIndex+2,colIndex-2,true);
-				}
-			}
-			if(!chessPiecesModel.allPieces.getBitt(rowIndex-1,colIndex+1))
-			{
-				//serveral admental(象过河问题)
-				if(flag==DefaultConstants.FLAG_RED)
-				{
-					if(rowIndex>5)
-					{
-						this.occupies.setBitt(rowIndex-2,colIndex+2,true);
-					}
-				}else
-				{
-					this.occupies.setBitt(rowIndex-2,colIndex+2,true);
-				}
-			}
-			if(!chessPiecesModel.allPieces.getBitt(rowIndex-1,colIndex-1))
-			{
-				//serveral admental(象过河问题)
-				if(flag==DefaultConstants.FLAG_RED)
-				{
-					if(rowIndex>5)
-					{
-						this.occupies.setBitt(rowIndex-2,colIndex-2,true);
-					}
-				}else
-				{
-					this.occupies.setBitt(rowIndex-2,colIndex-2,true);
+					this.occupies.setBitt(rowIndex+1,colIndex+1,true);
 				}
 			}
 			//about legal moves.

@@ -212,7 +212,7 @@ package com.godpaper.as3.model
 		public function get bluePieces():BitBoard
 		{
 			//			return _bluePieces;
-			return BLUE.or(BLUE_ROOK).or(BLUE_KNIGHT).or(BLUE_BISHOP).or(BLUE_OFFICAL).or(BLUE_MARSHAL).or(BLUE_CANNON).or(BLUE_PAWN);
+			return BLUE.or(BLUE_ROOK).or(BLUE_KNIGHT).or(BLUE_BISHOP).or(BLUE_OFFICAL).or(BLUE_MARSHAL).or(BLUE_CANNON).or(BLUE_PAWN).or(BLUE_QUEEN);
 		}
 		
 		/**
@@ -248,7 +248,7 @@ package com.godpaper.as3.model
 		public function get redPieces():BitBoard
 		{
 			//			return 	_redPieces;
-			return RED.or(RED_ROOK).or(RED_KNIGHT).or(RED_BISHOP).or(RED_OFFICAL).or(RED_MARSHAL).or(RED_CANNON).or(RED_PAWN);
+			return RED.or(RED_ROOK).or(RED_KNIGHT).or(RED_BISHOP).or(RED_OFFICAL).or(RED_MARSHAL).or(RED_CANNON).or(RED_PAWN).or(RED_QUEEN);
 		}
 		
 		/**

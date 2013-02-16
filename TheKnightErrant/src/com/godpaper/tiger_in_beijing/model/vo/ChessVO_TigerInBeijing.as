@@ -15,7 +15,7 @@ package com.godpaper.tiger_in_beijing.model.vo
 
 
 	/**
-	 * YourChessVO.as class.
+	 * ChessVO_TigerInBeijing.as class.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0

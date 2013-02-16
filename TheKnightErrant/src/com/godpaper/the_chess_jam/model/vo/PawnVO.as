@@ -72,7 +72,6 @@ package com.godpaper.the_chess_jam.model.vo
 		//--------------------------------------------------------------------------
 		public function PawnVO(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=1, identifier:String="")
 		{
-			//TODO: implement function
 			super(width, height, rowIndex, colIndex, flag, identifier);
 		}     	
 		//--------------------------------------------------------------------------
@@ -88,34 +87,22 @@ package com.godpaper.the_chess_jam.model.vo
 			//* -
 			//* -
 			//about occupies.
-			//Notice:serveral admental(兵横向移动问题,兵后退问题)
+			//Notice:serveral admental(backword,forward,pass by)
 			//right or left direction.
-			if(flag==DefaultConstants.FLAG_BLUE)
+			trace(flag,DefaultConstants.FLAG_RED,flag==DefaultConstants.FLAG_RED);
+			//serveral admental
+			if(flag==DefaultConstants.FLAG_RED)//index-backward
 			{
-				if(rowIndex>=5)
+				if(colIndex>0 && rowIndex>0 )
 				{
-					this.occupies.setBitt(rowIndex,colIndex+1,true);
-					this.occupies.setBitt(rowIndex,colIndex-1,true);
+					this.occupies.setBitt(rowIndex-1,colIndex,true);
 				}
-			}
-			if(flag==DefaultConstants.FLAG_RED)
+			}else//index-forward
 			{
-				if(rowIndex<=4)
+				if(rowIndex<7 && colIndex<7)
 				{
-					this.occupies.setBitt(rowIndex,colIndex+1,true);
-					this.occupies.setBitt(rowIndex,colIndex-1,true);
+					this.occupies.setBitt(rowIndex+1,colIndex,true);
 				}
-			}
-			//serveral admental(兵后退问题)
-			//up direction
-			if(flag==DefaultConstants.FLAG_BLUE)
-			{
-				this.occupies.setBitt(rowIndex+1,colIndex,true);
-			}
-			//down direction
-			if(flag==DefaultConstants.FLAG_RED)
-			{
-				this.occupies.setBitt(rowIndex-1,colIndex,true);
 			}
 			//about legal moves.
 			if(flag==DefaultConstants.FLAG_RED)
