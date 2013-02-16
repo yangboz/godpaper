@@ -26,7 +26,11 @@ package com.godpaper.the_chess_jam.vo
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.impl.AbstractChessVO;
+	import com.godpaper.as3.utils.LogUtil;
+	
+	import mx.logging.ILogger;
 	
 	
 	/**
@@ -48,7 +52,7 @@ package com.godpaper.the_chess_jam.vo
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:ILogger = LogUtil.getLogger(RookVO);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -76,7 +80,97 @@ package com.godpaper.the_chess_jam.vo
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		/**
+		 * @inheritDoc
+		 */
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
+		{
+			// * - -
+			// - - -
+			// - - *
+			//about occupies.
+			//serveral admental(象田心问题，象过河问题)
+			if(!chessPiecesModel.allPieces.getBitt(rowIndex+1,colIndex+1))
+			{
+				//serveral admental(象过河问题)
+				if(flag==DefaultConstants.FLAG_BLUE)
+				{
+					if(rowIndex<4)
+					{
+						this.occupies.setBitt(rowIndex+2,colIndex+2,true);
+					}
+				}else
+				{
+					this.occupies.setBitt(rowIndex+2,colIndex+2,true);
+				}
+			}
+			if(!chessPiecesModel.allPieces.getBitt(rowIndex+1,colIndex-1))
+			{
+				//serveral admental(象过河问题)
+				if(flag==DefaultConstants.FLAG_BLUE)
+				{
+					if(rowIndex<4)
+					{
+						this.occupies.setBitt(rowIndex+2,colIndex-2,true);
+					}
+				}else
+				{
+					this.occupies.setBitt(rowIndex+2,colIndex-2,true);
+				}
+			}
+			if(!chessPiecesModel.allPieces.getBitt(rowIndex-1,colIndex+1))
+			{
+				//serveral admental(象过河问题)
+				if(flag==DefaultConstants.FLAG_RED)
+				{
+					if(rowIndex>5)
+					{
+						this.occupies.setBitt(rowIndex-2,colIndex+2,true);
+					}
+				}else
+				{
+					this.occupies.setBitt(rowIndex-2,colIndex+2,true);
+				}
+			}
+			if(!chessPiecesModel.allPieces.getBitt(rowIndex-1,colIndex-1))
+			{
+				//serveral admental(象过河问题)
+				if(flag==DefaultConstants.FLAG_RED)
+				{
+					if(rowIndex>5)
+					{
+						this.occupies.setBitt(rowIndex-2,colIndex-2,true);
+					}
+				}else
+				{
+					this.occupies.setBitt(rowIndex-2,colIndex-2,true);
+				}
+			}
+			//about legal moves.
+			//			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
+			//			LOG.info("bluePieces:{0}",ChessPositionModelLocator.getInstance().bluePieces.dump());
+			if(flag==DefaultConstants.FLAG_RED)
+			{
+				this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.redPieces));
+			}
+			if(flag==DefaultConstants.FLAG_BLUE)
+			{
+				this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.bluePieces));
+			}
+			//about attacked captures.
+			if(flag==DefaultConstants.FLAG_RED)
+			{
+				this.captures = this.moves.and(chessPiecesModel.bluePieces);
+			}
+			if(flag==DefaultConstants.FLAG_BLUE)
+			{
+				this.captures = this.moves.and(chessPiecesModel.redPieces);
+			}
+			//
+			LOG.debug("occupies:{0}",this.occupies.dump());
+			LOG.debug("moves:{0}",this.moves.dump());
+			LOG.debug("captures:{0}",this.captures.dump());
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
