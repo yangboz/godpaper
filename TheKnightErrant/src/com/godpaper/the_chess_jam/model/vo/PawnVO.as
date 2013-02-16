@@ -95,12 +95,20 @@ package com.godpaper.the_chess_jam.model.vo
 				if(colIndex>0 && rowIndex>0 )
 				{
 					this.occupies.setBitt(rowIndex-1,colIndex,true);
+					if(rowIndex==6)
+					{
+						this.occupies.setBitt(rowIndex-2,colIndex,true);
+					}
 				}
 			}else//index-forward
 			{
 				if(rowIndex<7 && colIndex<7)
 				{
 					this.occupies.setBitt(rowIndex+1,colIndex,true);
+				}
+				if(rowIndex==1)
+				{
+					this.occupies.setBitt(rowIndex+2,colIndex,true);
 				}
 			}
 			//about legal moves.
