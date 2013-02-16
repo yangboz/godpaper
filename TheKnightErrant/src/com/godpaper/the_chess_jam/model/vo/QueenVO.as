@@ -84,9 +84,9 @@ package com.godpaper.the_chess_jam.model.vo
 		 */
 		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
-			// * - -
-			// - - -
-			// - - *
+			// * * *
+			// * Q *
+			// * * *
 			//about occupies.
 			//serveral admental(象田心问题，象过河问题)
 			if(!chessPiecesModel.allPieces.getBitt(rowIndex+1,colIndex+1))
