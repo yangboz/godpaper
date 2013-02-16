@@ -38,7 +38,6 @@ package com.godpaper.chinese_chess_jam.vo
 		 */
 		public function RookVO(width:int, height:int, rowIndex:int, colIndex:int,flag:uint=0,identifier:String="")
 		{
-			//TODO: implement function
 			super(width, height,rowIndex,colIndex,flag);
 		}
 		/**
