@@ -93,11 +93,17 @@ package com.godpaper.the_chess_jam.model.vo
 			//about occupies on diagonal direction.
 			this.occupies = BitBoardUtil.getBishopOccupies(rowIndex,colIndex,this.row,this.column);
 //			LOG.info("occupies:{0}",this.occupies.dump());
-			//serveral admental
 			//about legal moves.
 			//			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
 			//			LOG.info("bluePieces:{0}",ChessPositionModelLocator.getInstance().bluePieces.dump());
-			//			LOG.info("moves:{0}",this.moves.dump());
+			if(flag==DefaultConstants.FLAG_RED)
+			{
+				this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.redPieces));
+			}
+			if(flag==DefaultConstants.FLAG_BLUE)
+			{
+				this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.bluePieces));
+			}
 			//blocker
 			//
 			blocker = this.occupies.xor(this.moves);
