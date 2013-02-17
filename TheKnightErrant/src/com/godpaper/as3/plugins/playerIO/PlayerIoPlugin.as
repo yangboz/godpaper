@@ -138,6 +138,8 @@ package com.godpaper.as3.plugins.playerIO
 				handleConnect,						//Function executed on successful connect
 				handleError							//Function executed if we recive an error
 			);   
+			//Disable the button triggers 
+			FlexGlobals.gameScreen.pluginButtonBar.isEnabled  = false;
 		}
 		
 		public function showData():Boolean
@@ -149,6 +151,7 @@ package com.godpaper.as3.plugins.playerIO
 		public function showStore():Boolean
 		{
 			//TODO: implement function
+//			trace(this._client.payVault);
 			return false;
 		}
 		
@@ -160,8 +163,26 @@ package com.godpaper.as3.plugins.playerIO
 		
 		public function showLoginWidget():Boolean
 		{
-			//TODO: implement function
-			return false;
+			//@see http://playerio.com/documentation/quickconnect/facebook
+			var gameid:String = this.data.gameID;//Player.IO game id
+			var access_token:String = "75a5b0aa80a8bf7e3bc3a560351f1bcd";//the access_token, given via flashvars,ChineseChessJam:776901860351285076251378212d7792,TheChessJam:75a5b0aa80a8bf7e3bc3a560351f1bcd
+			// called when connected to facebook
+			PlayerIO.quickConnect.facebookOAuthConnect(
+				FlexGlobals.topLevelApplication.stage,								//Referance to stage,
+				gameid,
+				access_token,
+				"",//partnerID,
+				function(client:Client, facebookUserId:String):void{
+					// you are now connected to
+					// Player.IO
+					trace("Facebook app connected,fb user id:",facebookUserId);
+				}, 
+				function(err:PlayerIOError):void{
+					trace("Error: ", err);
+				}
+			)
+
+			return true;
 		}
 		
 		public function saveData(value:Object):Boolean
@@ -249,7 +270,6 @@ package com.godpaper.as3.plugins.playerIO
 	
 		private function handleConnect(client:Client):void{
 			LOG.info("Sucessfully connected to player.io");
-			
 			//Set developmentsever (Comment out to connect to your server online)
 //			client.multiplayer.developmentServer = "localhost:8184";
 			this._client = client;//Keep client reference for the next step.
@@ -265,6 +285,8 @@ package com.godpaper.as3.plugins.playerIO
 //			);
 			//Broad cast signal
 			signal_hoster_joined.dispatch(client.connectUserId);
+			//Enable the button triggers 
+			FlexGlobals.gameScreen.pluginButtonBar.isEnabled  = true;
 		}
 		
 		

@@ -93,6 +93,8 @@ package com.godpaper.as3.views.screens
 		//
 		private var _button_back:Button;
 		private var _tabBar:TabBar;
+		//PluginButtonBar ref
+		public var pluginButtonBar:PluginButtonBar;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -218,7 +220,10 @@ package com.godpaper.as3.views.screens
 			{
 				//Transparent the header view for overlay display
 				this._header.alpha = 0.5;
+				//Enter up to game server by plugin initialization.
+				FlexGlobals.topLevelApplication.pluginProvider.initialization();
 			}
+			
 		}
 		//
 		override protected function draw():void

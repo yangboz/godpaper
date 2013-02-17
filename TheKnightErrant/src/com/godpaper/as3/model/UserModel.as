@@ -5,6 +5,8 @@ package com.godpaper.as3.model
 	import flash.net.SharedObject;
 	import flash.utils.Dictionary;
 	
+	import mx.utils.UIDUtil;
+	
 	import org.osflash.signals.Signal;
 	
 
@@ -74,6 +76,8 @@ package com.godpaper.as3.model
 			this.userList = new Dictionary();
 			//
 			this.signal_player_registed  = new Signal(String);
+			//Default role name generation
+			this.hostRoleName = UIDUtil.createUID().substr(0,8);
 		}     	
 		//--------------------------------------------------------------------------
 		//
