@@ -39,8 +39,8 @@ package com.godpaper.as3.utils
 		//  CONSTANTS
 		//----------------------------------
 		public static const CODE_NAME:String = "GODPAPER::TheKnightErrant";
-		public static const BUILD_DATE: String = '20130202';
-		public static const BUILD_NUMBER: String = '300';
+		public static const BUILD_DATE: String = '20130217';
+		public static const BUILD_NUMBER: String = '301';
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
