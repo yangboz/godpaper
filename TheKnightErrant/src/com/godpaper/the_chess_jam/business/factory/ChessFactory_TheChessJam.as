@@ -101,28 +101,33 @@ package com.godpaper.the_chess_jam.business.factory
 				//about blue
 				case "(x=0, y=0)":
 				case "(x=7, y=0)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_TheChessJam.BLUE_ROOK.label;
 					chessPieceValue=PiecesConstants_TheChessJam.BLUE_ROOK.value;
 					chessPieceType=Constants_TheChessJam.BLUE_ROOK;
 					break;
 				case "(x=1, y=0)":
 				case "(x=6, y=0)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_TheChessJam.BLUE_KNIGHT.label;
 					chessPieceValue=PiecesConstants_TheChessJam.BLUE_KNIGHT.value;
 					chessPieceType=Constants_TheChessJam.BLUE_KNIGHT;
 					break;
 				case "(x=2, y=0)":
 				case "(x=5, y=0)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_TheChessJam.BLUE_BISHOP.label;
 					chessPieceValue=PiecesConstants_TheChessJam.BLUE_BISHOP.value;
 					chessPieceType=Constants_TheChessJam.BLUE_BISHOP;
 					break;
 				case "(x=3, y=0)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_TheChessJam.BLUE_QUEEN.label;
 					chessPieceValue=PiecesConstants_TheChessJam.BLUE_QUEEN.value;
 					chessPieceType=Constants_TheChessJam.BLUE_QUEEN;
 					break;
 				case "(x=4, y=0)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_TheChessJam.BLUE_MARSHAL.label;
 					chessPieceValue=PiecesConstants_TheChessJam.BLUE_MARSHAL.value;
 					chessPieceType=Constants_TheChessJam.BLUE_MARSHAL;
@@ -135,6 +140,7 @@ package com.godpaper.the_chess_jam.business.factory
 				case "(x=5, y=1)":
 				case "(x=6, y=1)":
 				case "(x=7, y=1)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_TheChessJam.BLUE_PAWN.label;
 					chessPieceValue=PiecesConstants_TheChessJam.BLUE_PAWN.value;
 					chessPieceType=Constants_TheChessJam.BLUE_PAWN;
@@ -142,28 +148,33 @@ package com.godpaper.the_chess_jam.business.factory
 				//about red
 				case "(x=0, y=7)":
 				case "(x=7, y=7)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_TheChessJam.RED_ROOK.label;
 					chessPieceValue=PiecesConstants_TheChessJam.RED_ROOK.value;
 					chessPieceType=Constants_TheChessJam.RED_ROOK;
 					break;
 				case "(x=1, y=7)":
 				case "(x=6, y=7)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_TheChessJam.RED_KNIGHT.label;
 					chessPieceValue=PiecesConstants_TheChessJam.RED_KNIGHT.value;
 					chessPieceType=Constants_TheChessJam.RED_KNIGHT;
 					break;
 				case "(x=2, y=7)":
 				case "(x=5, y=7)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_TheChessJam.RED_BISHOP.label;
 					chessPieceValue=PiecesConstants_TheChessJam.RED_BISHOP.value;
 					chessPieceType=Constants_TheChessJam.RED_BISHOP;
 					break;
 				case "(x=3, y=7)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_TheChessJam.RED_QUEEN.label;
 					chessPieceValue=PiecesConstants_TheChessJam.RED_QUEEN.value;
 					chessPieceType=Constants_TheChessJam.RED_QUEEN;
 					break;
 				case "(x=4, y=7)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_TheChessJam.RED_MARSHAL.label;
 					chessPieceValue=PiecesConstants_TheChessJam.RED_MARSHAL.value;
 					chessPieceType=Constants_TheChessJam.RED_MARSHAL;
@@ -176,6 +187,7 @@ package com.godpaper.the_chess_jam.business.factory
 				case "(x=5, y=6)":
 				case "(x=6, y=6)":
 				case "(x=7, y=6)":
+					chessPieceName = 
 					chessPieceLabel=PiecesConstants_TheChessJam.RED_PAWN.label;
 					chessPieceValue=PiecesConstants_TheChessJam.RED_PAWN.value;
 					chessPieceType=Constants_TheChessJam.RED_PAWN;

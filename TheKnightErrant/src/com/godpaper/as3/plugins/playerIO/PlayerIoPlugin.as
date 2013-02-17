@@ -35,12 +35,10 @@ package com.godpaper.as3.plugins.playerIO
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.IPlugData;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.gskinner.motion.easing.Sine;
 	
 	import flash.geom.Point;
 	
 	import mx.logging.ILogger;
-	import mx.utils.UIDUtil;
 	
 	import org.osflash.signals.Signal;
 	
@@ -138,8 +136,6 @@ package com.godpaper.as3.plugins.playerIO
 				handleConnect,						//Function executed on successful connect
 				handleError							//Function executed if we recive an error
 			);   
-			//Disable the button triggers 
-			FlexGlobals.gameScreen.pluginButtonBar.isEnabled  = false;
 		}
 		
 		public function showData():Boolean
@@ -285,8 +281,6 @@ package com.godpaper.as3.plugins.playerIO
 //			);
 			//Broad cast signal
 			signal_hoster_joined.dispatch(client.connectUserId);
-			//Enable the button triggers 
-			FlexGlobals.gameScreen.pluginButtonBar.isEnabled  = true;
 		}
 		
 		
