@@ -28,6 +28,7 @@ package com.godpaper.the_chess_jam.model.vo
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.impl.AbstractChessVO;
+	import com.godpaper.as3.utils.BitBoardUtil;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.lookbackon.ds.BitBoard;
 	
@@ -90,16 +91,8 @@ package com.godpaper.the_chess_jam.model.vo
 			// - * -
 			// * - *
 			//about occupies on diagonal direction.
-			for(var r:int=0;r<rowIndex;r++)
-			{
-				this.occupies.setBitt(r,colIndex-r,true);
-				this.occupies.setBitt(r,colIndex+r,true);
-			}
-			for(var rr:int=rowIndex;rr<this.row;rr++)
-			{
-				this.occupies.setBitt(rr,colIndex-r,true);
-				this.occupies.setBitt(rr,colIndex+r,true);
-			}
+			this.occupies = BitBoardUtil.getBishopOccupies(rowIndex,colIndex,this.row,this.column);
+//			LOG.info("occupies:{0}",this.occupies.dump());
 			//serveral admental
 			//about legal moves.
 			//			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());

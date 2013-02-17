@@ -99,7 +99,7 @@ package com.godpaper.the_chess_jam.model.vo
 //				this.occupies.setBitt(rowIndex,c,true);
 //			}
 			this.occupies = BitBoardUtil.getRookOccupies(rowIndex,colIndex,this.row,this.column);
-			LOG.info("occupies:{0}",this.occupies.dump());
+//			LOG.info("occupies:{0}",this.occupies.dump());
 			//about legal moves.
 			//			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
 			//			LOG.info("bluePieces:{0}",ChessPositionModelLocator.getInstance().bluePieces.dump());

@@ -181,12 +181,13 @@ package com.godpaper.as3.utils
 		public static function getWestNorthOccuipies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(colMax,rowMax);
-			for(var i:int=rowIndex;i>0;i--)
+			//
+			for(var i:int=0;i<rowMax;i++)
 			{
-				if(colIndex-i)
-				{
-					bb.setBitt(rowIndex-i,colIndex-i,true);
-				}
+				if(!rowIndex) break;
+				if(!(rowIndex+1-i)) break;
+				if(!(colIndex+1-i)) break;
+				bb.setBitt(rowIndex-i,colIndex-i,true);
 			}
 			return bb;
 		}
@@ -194,12 +195,13 @@ package com.godpaper.as3.utils
 		public static function getEastNorthOccuipies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(colMax,rowMax);
-			for(var i:int=rowIndex;i>0;i--)
+			//
+			for(var i:int=0;i<rowMax;i++)
 			{
-				if(colIndex+i<colMax)
-				{
-					bb.setBitt(rowIndex-i,colIndex+i,true);
-				}
+				if(!rowIndex) break;
+				if(!(rowIndex+1-i)) break;
+				if(!(colMax-colIndex-i)) break;
+				bb.setBitt(rowIndex-i,colIndex+i,true);
 			}
 			return bb;
 		}
@@ -207,13 +209,12 @@ package com.godpaper.as3.utils
 		public static function getEastSouthOccuipies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(colMax,rowMax);
-			var len:int = rowMax-rowIndex;
-			for(var i:int=0;i<len;i++)
+			//
+			for(var i:int=0;i<rowMax;i++)
 			{
-				if(colIndex+i<colMax)
-				{
-					bb.setBitt(rowIndex+i,colIndex+i,true);
-				}
+				if(!(rowMax-rowIndex)) break;
+				if(!(colMax-colIndex-i)) break;
+				bb.setBitt(rowIndex+i,colIndex+i,true);
 			}
 			return bb;
 		}
@@ -221,13 +222,12 @@ package com.godpaper.as3.utils
 		public static function getWestSouthOccuipies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(colMax,rowMax);
-			var len:int = rowMax-rowIndex;
-			for(var i:int=0;i<len;i++)
+			//
+			for(var i:int=0;i<rowMax;i++)
 			{
-				if(colIndex-i)
-				{
-					bb.setBitt(rowIndex+i,colIndex-i,true);
-				}
+				if(!(rowMax-1-rowIndex)) break;
+				if(!(colIndex+1-i)) break;
+				bb.setBitt(rowIndex+i,colIndex-i,true);
 			}
 			return bb;
 		}
@@ -349,6 +349,13 @@ package com.godpaper.as3.utils
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		private static function getMinLength(rowIndex:int, colIndex:int, rowMax:int, colMax:int):int
+		{
+			var colLen:int = colMax-colIndex;
+			var rowLen:int = rowMax-rowIndex;
+			var len:int = colLen<=rowLen?colLen:rowMax;
+			return len;
+		}
 	}
 	
 }
