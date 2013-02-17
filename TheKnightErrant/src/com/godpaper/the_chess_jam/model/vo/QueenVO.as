@@ -30,6 +30,7 @@ package com.godpaper.the_chess_jam.model.vo
 	import com.godpaper.as3.impl.AbstractChessVO;
 	import com.godpaper.as3.utils.BitBoardUtil;
 	import com.godpaper.as3.utils.LogUtil;
+	import com.lookbackon.ds.BitBoard;
 	
 	import mx.logging.ILogger;
 	
@@ -102,6 +103,21 @@ package com.godpaper.the_chess_jam.model.vo
 			if(flag==DefaultConstants.FLAG_BLUE)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.bluePieces));
+			}
+			var bluePieces:BitBoard = chessPiecesModel.bluePieces;
+			var redPieces:BitBoard = chessPiecesModel.redPieces;
+			//blocker
+			//
+			blocker = this.occupies.xor(this.moves);
+			//			trace("blocker.reverse():",blocker.reverse().dump());
+			
+			LOG.debug("blocker.isEmpty:{0}",blocker.isEmpty.toString());
+			if(!blocker.isEmpty)
+			{
+				LOG.debug("blocker:{0}",blocker.dump());
+				//
+				this.moves = BitBoardUtil.getQueenMoves(rowIndex,colIndex,this.row,this.column,this.flag,bluePieces,redPieces);
+				LOG.debug("[{0},{1}] moves:{2}",rowIndex,colIndex,this.moves.dump());
 			}
 			//about attacked captures.
 			if(flag==DefaultConstants.FLAG_RED)

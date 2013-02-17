@@ -92,15 +92,14 @@ package com.godpaper.the_chess_jam.model.vo
 			// * - *
 			//about occupies on diagonal direction.
 			this.occupies = BitBoardUtil.getBishopOccupies(rowIndex,colIndex,this.row,this.column);
-//			LOG.info("occupies:{0}",this.occupies.dump());
+			LOG.info("occupies:{0}",this.occupies.dump());
 			//about legal moves.
 			//			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
 			//			LOG.info("bluePieces:{0}",ChessPositionModelLocator.getInstance().bluePieces.dump());
 			if(flag==DefaultConstants.FLAG_RED)
 			{
 				this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.redPieces));
-			}
-			if(flag==DefaultConstants.FLAG_BLUE)
+			}else
 			{
 				this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.bluePieces));
 			}
@@ -108,31 +107,15 @@ package com.godpaper.the_chess_jam.model.vo
 			//
 			blocker = this.occupies.xor(this.moves);
 			//			trace("blocker.reverse():",blocker.reverse().dump());
-			
+			var bluePieces:BitBoard = chessPiecesModel.bluePieces;
+			var redPieces:BitBoard = chessPiecesModel.redPieces;
 			LOG.debug("blocker.isEmpty:{0}",blocker.isEmpty.toString());
 			if(!blocker.isEmpty)
 			{
 				LOG.debug("blocker:{0}",blocker.dump());
 				//
-				var eastNorth:BitBoard = this.getEastNorth(rowIndex,colIndex);
-				var eastSouth:BitBoard = this.getEastSouth(rowIndex,colIndex);
-				var westNorth:BitBoard = this.getWestNorth(rowIndex,colIndex);
-				var westSouth:BitBoard = this.getWestSouth(rowIndex,colIndex);
-				LOG.debug("eastNorth:{0}",eastNorth.dump());
-				LOG.debug("eastSouth:{0}",eastSouth.dump());
-				LOG.debug("westNorth:{0}",westNorth.dump());
-				LOG.debug("westSouth:{0}",westSouth.dump());
-				this.moves = eastNorth.or(eastSouth.or(westNorth.or(westSouth)));
-				LOG.debug("moves:{0}",this.moves.dump());
-			}
-			//about attacked captures.
-			if(flag==DefaultConstants.FLAG_RED)
-			{
-				this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.redPieces));
-			}
-			if(flag==DefaultConstants.FLAG_BLUE)
-			{
-				this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.bluePieces));
+				this.moves = BitBoardUtil.getBishopMoves(rowIndex,colIndex,this.row,this.column,this.flag,bluePieces,redPieces);
+				LOG.debug("[{0},{1}] moves:{2}",rowIndex,colIndex,this.moves.dump());
 			}
 			//about attacked captures.
 			if(flag==DefaultConstants.FLAG_RED)
@@ -153,97 +136,6 @@ package com.godpaper.the_chess_jam.model.vo
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		protected function getEastNorth(rowIndex:int, colIndex:int):BitBoard
-		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
-			//east north
-			var en:int = 1;
-			while(rowIndex-en)
-			{
-				if(colIndex+en<this.column)
-				{
-					if(chessPiecesModel.bluePieces.getBitt(rowIndex-en,colIndex+en)) break;
-					if(chessPiecesModel.redPieces.getBitt(rowIndex-en,colIndex+en)) break;
-					//
-					this.occupies.setBitt(rowIndex-en,colIndex+en,true);
-				}else
-				{
-					break;
-				}
-				en++;
-			}
-			//
-			return bb;
-		}
-		//
-		protected function getEastSouth(rowIndex:int, colIndex:int):BitBoard
-		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
-			//east south
-			var es:int = 1;
-			while((this.row-es)>rowIndex)
-			{
-				if(colIndex+es<this.column)
-				{
-					if(chessPiecesModel.bluePieces.getBitt(rowIndex+es,colIndex+es)) break;
-					if(chessPiecesModel.redPieces.getBitt(rowIndex+es,colIndex+es)) break;
-					//
-					this.occupies.setBitt(rowIndex+es,colIndex+es,true);
-				}else
-				{
-					break;
-				}
-				es++;
-			}
-			//
-			return bb;
-		}
-		//
-		protected function getWestNorth(rowIndex:int, colIndex:int):BitBoard
-		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
-			//west north
-			var wn:int = 1;
-			while(rowIndex-wn)
-			{
-				if(colIndex-wn)
-				{
-					if(chessPiecesModel.bluePieces.getBitt(rowIndex-wn,colIndex-wn)) break;
-					if(chessPiecesModel.redPieces.getBitt(rowIndex-wn,colIndex-wn)) break;
-					//
-					this.occupies.setBitt(rowIndex-wn,colIndex-wn,true);
-				}else
-				{
-					break;
-				}
-				wn++;
-			}
-			//
-			return bb;
-		}
-		//
-		protected function getWestSouth(rowIndex:int, colIndex:int):BitBoard
-		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
-			//west south
-			var ws:int = 1;
-			while((this.row-ws)>rowIndex)
-			{
-				if(colIndex-ws)
-				{
-					if(chessPiecesModel.bluePieces.getBitt(rowIndex+ws,colIndex-ws)) break;
-					if(chessPiecesModel.redPieces.getBitt(rowIndex+ws,colIndex-ws)) break;
-					//
-					this.occupies.setBitt(rowIndex+ws,colIndex-ws,true);
-				}else
-				{
-					break;
-				}
-				ws++;
-			}
-			//
-			return bb;
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods

@@ -23,6 +23,8 @@ package com.godpaper.as3.utils
 {
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.lookbackon.ds.BitBoard;
+	
+	import mx.logging.ILogger;
 
 	//--------------------------------------------------------------------------
 	//
@@ -32,6 +34,7 @@ package com.godpaper.as3.utils
 	
 	/**
 	 * BitBoardUtil.as class. Esp for bishop/rook/queen move generation 	
+	 * @see http://chessprogramming.wikispaces.com/Sliding+Piece+Attacks
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
@@ -49,7 +52,7 @@ package com.godpaper.as3.utils
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:ILogger = LogUtil.getLogger(BitBoardUtil);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -241,10 +244,10 @@ package com.godpaper.as3.utils
 			var bb:BitBoard = new BitBoard(colMax,rowMax);
 			for(var w:int=colIndex-1;w>=0;w--)
 			{
-				if(flag==DefaultConstants.FLAG_BLUE)
+				if(flag!=DefaultConstants.FLAG_RED)
 				{
 					if(bluePieces.getBitt(rowIndex,w)) break;
-					//notice rook's blocker issue.
+					//
 					if(redPieces.getBitt(rowIndex,w))
 					{
 						bb.setBitt(rowIndex,w,true);
@@ -253,7 +256,7 @@ package com.godpaper.as3.utils
 				}else
 				{
 					if(redPieces.getBitt(rowIndex,w)) break;
-					//notice rook's blocker issue.
+					//
 					if(bluePieces.getBitt(rowIndex,w))
 					{
 						bb.setBitt(rowIndex,w,true);
@@ -270,10 +273,10 @@ package com.godpaper.as3.utils
 			var bb:BitBoard = new BitBoard(colMax,rowMax);
 			for(var n:int=rowIndex-1;n>=0;n--)
 			{
-				if(flag==DefaultConstants.FLAG_BLUE)
+				if(flag!=DefaultConstants.FLAG_RED)
 				{
 					if(bluePieces.getBitt(n,colIndex)) break;
-					//notice rook's blocker issue.
+					//
 					if(redPieces.getBitt(n,colIndex))
 					{
 						bb.setBitt(n,colIndex,true);
@@ -282,7 +285,7 @@ package com.godpaper.as3.utils
 				}else
 				{
 					if(redPieces.getBitt(n,colIndex)) break;
-					//notice rook's blocker issue.
+					//
 					if(bluePieces.getBitt(n,colIndex))
 					{
 						bb.setBitt(n,colIndex,true);
@@ -299,10 +302,10 @@ package com.godpaper.as3.utils
 			var bb:BitBoard = new BitBoard(colMax,rowMax);
 			for(var e:int=colIndex+1;e<colMax;e++)
 			{
-				if(flag==DefaultConstants.FLAG_BLUE)
+				if(flag!=DefaultConstants.FLAG_RED)
 				{
 					if(bluePieces.getBitt(rowIndex,e)) break;
-					//notice rook's blocker issue.
+					//
 					if(redPieces.getBitt(rowIndex,e))
 					{
 						bb.setBitt(rowIndex,e,true);
@@ -311,7 +314,7 @@ package com.godpaper.as3.utils
 				}else
 				{
 					if(redPieces.getBitt(rowIndex,e)) break;
-					//notice rook's blocker issue.
+					//
 					if(bluePieces.getBitt(rowIndex,e))
 					{
 						bb.setBitt(rowIndex,e,true);
@@ -329,10 +332,10 @@ package com.godpaper.as3.utils
 			var south:int = 0;
 			for(var s:int=rowIndex+1;s<rowMax;s++)
 			{
-				if(flag==DefaultConstants.FLAG_BLUE)
+				if(flag!=DefaultConstants.FLAG_RED)
 				{
 					if(bluePieces.getBitt(s,colIndex)) break;
-					//notice rook's blocker issue.
+					//
 					if(redPieces.getBitt(s,colIndex))
 					{
 						bb.setBitt(s,colIndex,true);
@@ -341,7 +344,7 @@ package com.godpaper.as3.utils
 				}else
 				{
 					if(redPieces.getBitt(s,colIndex)) break;
-					//notice rook's blocker issue.
+					//
 					if(bluePieces.getBitt(s,colIndex))
 					{
 						bb.setBitt(s,colIndex,true);
@@ -356,24 +359,141 @@ package com.godpaper.as3.utils
 		public static function getWestNorthMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int,  flag:int, bluePieces:BitBoard, redPieces:BitBoard):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			//
+			for(var i:int=1;i<rowMax;i++)
+			{
+				if(!(rowIndex-i+1)) break;
+				if(!(colIndex-i+1)) break;
+				//
+				if(flag!=DefaultConstants.FLAG_RED)
+				{
+					if(bluePieces.getBitt(rowIndex-i,colIndex-i)) break;
+					//
+					if(redPieces.getBitt(rowIndex-i,colIndex-i))
+					{
+						bb.setBitt(rowIndex-i,colIndex-i,true);
+						break;
+					}
+				}else
+				{
+					if(redPieces.getBitt(rowIndex-i,colIndex-i)) break;
+					//
+					if(bluePieces.getBitt(rowIndex-i,colIndex-i))
+					{
+						bb.setBitt(rowIndex-i,colIndex-i,true);
+						break;
+					}
+				}
+				bb.setBitt(rowIndex-i,colIndex-i,true);
+			}
+//			trace("[",rowIndex,",",colIndex,"]",",getWestNorthMoves:",bb.dump());
+			LOG.debug("[{0},{1}] westNorth:{2}",rowIndex,colIndex,bb.dump());
 			return bb;
 		}
 		//eastNorth
 		public static function getEastNorthMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int,  flag:int, bluePieces:BitBoard, redPieces:BitBoard):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			//
+			for(var i:int=1;i<rowMax;i++)
+			{
+				if(!(rowIndex-i+1)) break;
+				if(colIndex+i>=colMax) break;
+				//
+				if(flag!=DefaultConstants.FLAG_RED)
+				{
+					if(bluePieces.getBitt(rowIndex-i,colIndex+i)) break;
+					//
+					if(redPieces.getBitt(rowIndex-i,colIndex+i))
+					{
+						bb.setBitt(rowIndex-i,colIndex+i,true);
+						break;
+					}
+				}else
+				{
+					if(redPieces.getBitt(rowIndex-i,colIndex+i)) break;
+					//
+					if(bluePieces.getBitt(rowIndex-i,colIndex+i))
+					{
+						bb.setBitt(rowIndex-i,colIndex+i,true);
+						break;
+					}
+				}
+				bb.setBitt(rowIndex-i,colIndex+i,true);
+			}
+//			trace("[",rowIndex,",",colIndex,"]",",getEastNorthMoves:",bb.dump());
+			LOG.debug("[{0},{1}] eastNorth:{2}",rowIndex,colIndex,bb.dump());
 			return bb;
 		}
 		//eastSouth
 		public static function getEastSouthMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int, flag:int, bluePieces:BitBoard, redPieces:BitBoard):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			//
+			for(var i:int=1;i<rowMax;i++)
+			{
+				if(rowIndex+i>=rowMax) break;
+				if(colIndex+i>=colMax) break;
+				//
+				if(flag!=DefaultConstants.FLAG_RED)
+				{
+					if(bluePieces.getBitt(rowIndex+i,colIndex+i)) break;
+					//
+					if(redPieces.getBitt(rowIndex+i,colIndex+i))
+					{
+						bb.setBitt(rowIndex+i,colIndex+i,true);
+						break;
+					}
+				}else
+				{
+					if(redPieces.getBitt(rowIndex+i,colIndex+i)) break;
+					//
+					if(bluePieces.getBitt(rowIndex+i,colIndex+i))
+					{
+						bb.setBitt(rowIndex+i,colIndex+i,true);
+						break;
+					}
+				}
+				bb.setBitt(rowIndex+i,colIndex+i,true);
+			}
+//			trace("[",rowIndex,",",colIndex,"]",",getEastSouthMoves:",bb.dump());
+			LOG.debug("[{0},{1}] eastSouth:{2}",rowIndex,colIndex,bb.dump());
+			//
 			return bb;
 		}
 		//westSouth
 		public static function getWestSouthMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int, flag:int, bluePieces:BitBoard, redPieces:BitBoard):BitBoard
 		{
 			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			//
+			for(var i:int=1;i<rowMax;i++)
+			{
+				if(rowIndex+i>=rowMax) break;
+				if(!(colIndex-i+1)) break;
+				//
+				if(flag!=DefaultConstants.FLAG_RED)
+				{
+					if(bluePieces.getBitt(rowIndex+i,colIndex-i)) break;
+					//
+					if(redPieces.getBitt(rowIndex+i,colIndex-i))
+					{
+						bb.setBitt(rowIndex+i,colIndex-i,true);
+						break;
+					}
+				}else
+				{
+					if(redPieces.getBitt(rowIndex+i,colIndex-i)) break;
+					//
+					if(bluePieces.getBitt(rowIndex+i,colIndex-i))
+					{
+						bb.setBitt(rowIndex+i,colIndex-i,true);
+						break;
+					}
+				}
+				bb.setBitt(rowIndex+i,colIndex-i,true);
+			}
+//			trace("[",rowIndex,",",colIndex,"]",",getWestSouthMoves:",bb.dump());
+			LOG.debug("[{0},{1}] westSouth:{2}",rowIndex,colIndex,bb.dump());
 			return bb;
 		}
 		//--------------------------------------------------------------------------

@@ -113,7 +113,8 @@ package com.godpaper.the_chess_jam.model.vo
 			}
 			//			LOG.info("moves:{0}",this.moves.dump());
 			//blocker
-			//
+			var bluePieces:BitBoard = chessPiecesModel.bluePieces;
+			var redPieces:BitBoard = chessPiecesModel.redPieces;
 			blocker = this.occupies.xor(this.moves);
 			//			trace("blocker.reverse():",blocker.reverse().dump());
 			LOG.debug("blocker.isEmpty:{0}",blocker.isEmpty.toString());
@@ -121,20 +122,8 @@ package com.godpaper.the_chess_jam.model.vo
 			{
 				LOG.debug("blocker:{0}",blocker.dump());
 				//
-				var rowMax:int = this.row;
-				var colMax:int = this.column;
-				var bluePieces:BitBoard = FlexGlobals.chessPiecesModel.bluePieces;
-				var redPieces:BitBoard = FlexGlobals.chessPiecesModel.redPieces;
-				var west:BitBoard = BitBoardUtil.getWestMoves(rowIndex, colIndex, rowMax, colMax, flag, bluePieces, redPieces);
-				var north:BitBoard = BitBoardUtil.getNorthMoves(rowIndex, colIndex, rowMax, colMax, flag, bluePieces, redPieces);
-				var east:BitBoard = BitBoardUtil.getEastMoves(rowIndex, colIndex, rowMax, colMax, flag, bluePieces, redPieces);
-				var south:BitBoard = BitBoardUtil.getSouthMoves(rowIndex, colIndex, rowMax, colMax, flag, bluePieces, redPieces);
-				LOG.debug("east:{0}",east.dump());
-				LOG.debug("north:{0}",north.dump());
-				LOG.debug("west:{0}",west.dump());
-				LOG.debug("south:{0}",south.dump());
-				this.moves = east.or(north.or(west.or(south)));
-				LOG.debug("moves:{0}",this.moves.dump());
+				this.moves = BitBoardUtil.getRookMoves(rowIndex,colIndex,this.row,this.column,this.flag,bluePieces,redPieces);
+				LOG.debug("[{0},{1}] moves:{2}",rowIndex,colIndex,this.moves.dump());
 			}
 			//about attacked captures.
 			//TODO:(find Cannon moutain.)
