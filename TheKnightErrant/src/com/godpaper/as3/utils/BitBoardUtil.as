@@ -71,7 +71,8 @@ package com.godpaper.as3.utils
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		//
+		/////////Occupies/////////
+		//Rook
 		public static function getRookOccupies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
 			var west:BitBoard = getWestOccuipies(rowIndex, colIndex, rowMax, colMax);
@@ -81,7 +82,7 @@ package com.godpaper.as3.utils
 			var bb:BitBoard = west.or(north.or(east.or(south)));
 			return bb;
 		}
-		//
+		//Bishop
 		public static function getBishopOccupies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
 			var westNorth:BitBoard = getWestNorthOccuipies(rowIndex, colIndex, rowMax, colMax);
@@ -91,10 +92,38 @@ package com.godpaper.as3.utils
 			var bb:BitBoard = westNorth.or(eastNorth.or(eastSouth.or(westSouth)));
 			return bb;
 		}
+		//Queen
 		//@see http://en.wikipedia.org/wiki/Chess
 		public static function getQueenOccupies(rowIndex:int, colIndex:int, rowMax:int, colMax:int):BitBoard
 		{
 			return getRookOccupies(rowIndex, colIndex, rowMax, colMax).or(getBishopOccupies(rowIndex, colIndex, rowMax, colMax));
+		}
+		/////////Moves/////////
+		//Rook
+		public static function getRookMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int, allPieces:BitBoard):BitBoard
+		{
+			var west:BitBoard = getWestMoves(rowIndex, colIndex, rowMax, colMax, allPieces);
+			var north:BitBoard = getNorthMoves(rowIndex, colIndex, rowMax, colMax, allPieces);
+			var east:BitBoard = getEastMoves(rowIndex, colIndex, rowMax, colMax, allPieces);
+			var south:BitBoard = getSouthMoves(rowIndex, colIndex, rowMax, colMax, allPieces);
+			var bb:BitBoard = west.or(north.or(east.or(south)));
+			return bb;
+		}
+		//Bishop
+		public static function getBishopMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int, allPieces:BitBoard):BitBoard
+		{
+			var westNorth:BitBoard = getWestNorthMoves(rowIndex, colIndex, rowMax, colMax, allPieces);
+			var eastNorth:BitBoard = getEastNorthMoves(rowIndex, colIndex, rowMax, colMax, allPieces);
+			var eastSouth:BitBoard = getEastSouthMoves(rowIndex, colIndex, rowMax, colMax, allPieces);
+			var westSouth:BitBoard = getWestSouthMoves(rowIndex, colIndex, rowMax, colMax, allPieces);
+			var bb:BitBoard = westNorth.or(eastNorth.or(eastSouth.or(westSouth)));
+			return bb;
+		}
+		//Queen
+		//@see http://en.wikipedia.org/wiki/Chess
+		public static function getQueenMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int, allPieces:BitBoard):BitBoard
+		{
+			return getRookMoves(rowIndex, colIndex, rowMax, colMax, allPieces).or(getBishopMoves(rowIndex, colIndex, rowMax, colMax, allPieces));
 		}
 		//----------------------------------
 		//  X-ray style
@@ -141,7 +170,7 @@ package com.godpaper.as3.utils
 		{
 			var bb:BitBoard = new BitBoard(colMax,rowMax);
 			var south:int = 0;
-			while(south<rowIndex)
+			while(south<rowMax)
 			{
 				bb.setBitt(south,colIndex,true);
 				south++;
@@ -197,6 +226,119 @@ package com.godpaper.as3.utils
 			{
 				if(colIndex-i)
 				{
+					bb.setBitt(rowIndex+i,colIndex-i,true);
+				}
+			}
+			return bb;
+		}
+		//////////////////////////////
+		////////////Moves////////////
+		////////////////////////////
+		//west
+		public static function getWestMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int,  allPieces:BitBoard):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			var west:int = colIndex;
+			while(west)
+			{
+				if(allPieces && allPieces.getBitt(rowIndex,west)) break;//find blocker
+				bb.setBitt(rowIndex,west,true);
+				west--;
+			}
+			return bb;
+		}
+		//north
+		public static function getNorthMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int,  allPieces:BitBoard):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			var north:int = rowIndex;
+			while(north)
+			{
+				if(allPieces && allPieces.getBitt(north,colIndex)) break;//find blocker
+				bb.setBitt(north,colIndex,true);
+				north--;
+			}
+			return bb;
+		}
+		//east
+		public static function getEastMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int,  allPieces:BitBoard):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			var east:int = 0;
+			while(east<colMax)
+			{
+				if(allPieces && allPieces.getBitt(rowIndex,east)) break;//find blocker
+				bb.setBitt(rowIndex,east,true);
+				east++;
+			}
+			return bb;
+		}
+		//south
+		public static function getSouthMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int,  allPieces:BitBoard):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			var south:int = 0;
+			while(south<rowIndex)
+			{
+				if(allPieces && allPieces.getBitt(south,colIndex)) break;//find blocker
+				bb.setBitt(south,colIndex,true);
+				south++;
+			}
+			return bb;
+		}
+		//westNorth
+		public static function getWestNorthMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int,  allPieces:BitBoard):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			for(var i:int=rowIndex;i>0;i--)
+			{
+				if(colIndex-i)
+				{
+					if(allPieces && allPieces.getBitt(rowIndex-i,colIndex-i)) break;//find blocker
+					bb.setBitt(rowIndex-i,colIndex-i,true);
+				}
+			}
+			return bb;
+		}
+		//eastNorth
+		public static function getEastNorthMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int,  allPieces:BitBoard):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			for(var i:int=rowIndex;i>0;i--)
+			{
+				if(colIndex+i<colMax)
+				{
+					if(allPieces && allPieces.getBitt(rowIndex-i,colIndex+i)) break;//find blocker
+					bb.setBitt(rowIndex-i,colIndex+i,true);
+				}
+			}
+			return bb;
+		}
+		//eastSouth
+		public static function getEastSouthMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int, allPieces:BitBoard):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			var len:int = rowMax-rowIndex;
+			for(var i:int=0;i<len;i++)
+			{
+				if(colIndex+i<colMax)
+				{
+					if(allPieces && allPieces.getBitt(rowIndex+i,colIndex+i)) break;//find blocker
+					bb.setBitt(rowIndex+i,colIndex+i,true);
+				}
+			}
+			return bb;
+		}
+		//westSouth
+		public static function getWestSouthMoves(rowIndex:int, colIndex:int, rowMax:int, colMax:int, allPieces:BitBoard):BitBoard
+		{
+			var bb:BitBoard = new BitBoard(colMax,rowMax);
+			var len:int = rowMax-rowIndex;
+			for(var i:int=0;i<len;i++)
+			{
+				if(colIndex-i)
+				{
+					if(allPieces && allPieces.getBitt(rowIndex+i,colIndex-i)) break;//find blocker
 					bb.setBitt(rowIndex+i,colIndex-i,true);
 				}
 			}

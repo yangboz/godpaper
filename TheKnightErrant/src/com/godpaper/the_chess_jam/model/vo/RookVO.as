@@ -27,6 +27,7 @@ package com.godpaper.the_chess_jam.model.vo
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.impl.AbstractChessVO;
 	import com.godpaper.as3.utils.BitBoardUtil;
 	import com.godpaper.as3.utils.LogUtil;
@@ -89,15 +90,16 @@ package com.godpaper.the_chess_jam.model.vo
 			//    *
 			//TODO:serveral admental(Castling)
 			//about occupies.
-			for(var r:int=0;r<this.row;r++)
-			{
-				this.occupies.setBitt(r,colIndex,true);
-			}
-			for(var c:int=0;c<this.column;c++)
-			{
-				this.occupies.setBitt(rowIndex,c,true);
-			}
-			//			LOG.info("occupies:{0}",this.occupies.dump());
+//			for(var r:int=0;r<this.row;r++)
+//			{
+//				this.occupies.setBitt(r,colIndex,true);
+//			}
+//			for(var c:int=0;c<this.column;c++)
+//			{
+//				this.occupies.setBitt(rowIndex,c,true);
+//			}
+			this.occupies = BitBoardUtil.getRookOccupies(rowIndex,colIndex,this.row,this.column);
+			LOG.info("occupies:{0}",this.occupies.dump());
 			//about legal moves.
 			//			LOG.info("redPieces:{0}",ChessPositionModelLocator.getInstance().redPieces.dump());
 			//			LOG.info("bluePieces:{0}",ChessPositionModelLocator.getInstance().bluePieces.dump());
@@ -120,16 +122,17 @@ package com.godpaper.the_chess_jam.model.vo
 			{
 				LOG.debug("blocker:{0}",blocker.dump());
 				//
-//				var east:BitBoard = this.getEast(rowIndex,colIndex);
-//				var north:BitBoard = this.getNorth(rowIndex,colIndex);
-//				var west:BitBoard = this.getWest(rowIndex,colIndex);
-//				var south:BitBoard = this.getSouth(rowIndex,colIndex);
+				var east:BitBoard = this.getEast(rowIndex,colIndex);
+				var north:BitBoard = this.getNorth(rowIndex,colIndex);
+				var west:BitBoard = this.getWest(rowIndex,colIndex);
+				var south:BitBoard = this.getSouth(rowIndex,colIndex);
 				var rowMax:int = this.row;
 				var colMax:int = this.column;
-				var west:BitBoard = BitBoardUtil.getWestOccuipies(rowIndex, colIndex, rowMax, colMax);
-				var north:BitBoard = BitBoardUtil.getNorthOccuipies(rowIndex, colIndex, rowMax, colMax);
-				var east:BitBoard = BitBoardUtil.getEastOccuipies(rowIndex, colIndex, rowMax, colMax);
-				var south:BitBoard = BitBoardUtil.getSouthOccuipies(rowIndex, colIndex, rowMax, colMax);
+				var allPieces:BitBoard = FlexGlobals.chessPiecesModel.allPieces;
+//				var west:BitBoard = BitBoardUtil.getWestOccuipies(rowIndex, colIndex, rowMax, colMax, allPieces);
+//				var north:BitBoard = BitBoardUtil.getNorthOccuipies(rowIndex, colIndex, rowMax, colMax, allPieces);
+//				var east:BitBoard = BitBoardUtil.getEastOccuipies(rowIndex, colIndex, rowMax, colMax, allPieces);
+//				var south:BitBoard = BitBoardUtil.getSouthOccuipies(rowIndex, colIndex, rowMax, colMax, allPieces);
 				LOG.debug("east:{0}",east.dump());
 				LOG.debug("north:{0}",north.dump());
 				LOG.debug("west:{0}",west.dump());
