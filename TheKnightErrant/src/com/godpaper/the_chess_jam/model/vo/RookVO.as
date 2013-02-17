@@ -116,23 +116,19 @@ package com.godpaper.the_chess_jam.model.vo
 			//
 			blocker = this.occupies.xor(this.moves);
 			//			trace("blocker.reverse():",blocker.reverse().dump());
-			
 			LOG.debug("blocker.isEmpty:{0}",blocker.isEmpty.toString());
 			if(!blocker.isEmpty)
 			{
 				LOG.debug("blocker:{0}",blocker.dump());
 				//
-				var east:BitBoard = this.getEast(rowIndex,colIndex);
-				var north:BitBoard = this.getNorth(rowIndex,colIndex);
-				var west:BitBoard = this.getWest(rowIndex,colIndex);
-				var south:BitBoard = this.getSouth(rowIndex,colIndex);
 				var rowMax:int = this.row;
 				var colMax:int = this.column;
-				var allPieces:BitBoard = FlexGlobals.chessPiecesModel.allPieces;
-//				var west:BitBoard = BitBoardUtil.getWestOccuipies(rowIndex, colIndex, rowMax, colMax, allPieces);
-//				var north:BitBoard = BitBoardUtil.getNorthOccuipies(rowIndex, colIndex, rowMax, colMax, allPieces);
-//				var east:BitBoard = BitBoardUtil.getEastOccuipies(rowIndex, colIndex, rowMax, colMax, allPieces);
-//				var south:BitBoard = BitBoardUtil.getSouthOccuipies(rowIndex, colIndex, rowMax, colMax, allPieces);
+				var bluePieces:BitBoard = FlexGlobals.chessPiecesModel.bluePieces;
+				var redPieces:BitBoard = FlexGlobals.chessPiecesModel.redPieces;
+				var west:BitBoard = BitBoardUtil.getWestMoves(rowIndex, colIndex, rowMax, colMax, flag, bluePieces, redPieces);
+				var north:BitBoard = BitBoardUtil.getNorthMoves(rowIndex, colIndex, rowMax, colMax, flag, bluePieces, redPieces);
+				var east:BitBoard = BitBoardUtil.getEastMoves(rowIndex, colIndex, rowMax, colMax, flag, bluePieces, redPieces);
+				var south:BitBoard = BitBoardUtil.getSouthMoves(rowIndex, colIndex, rowMax, colMax, flag, bluePieces, redPieces);
 				LOG.debug("east:{0}",east.dump());
 				LOG.debug("north:{0}",north.dump());
 				LOG.debug("west:{0}",west.dump());
@@ -153,125 +149,6 @@ package com.godpaper.the_chess_jam.model.vo
 			LOG.debug("captures:{0}",this.captures.dump());
 		}	
 		
-		//----------------------------------
-		//  X-ray attacks
-		//----------------------------------
-		//west
-		override public function getWest(rowIndex:int, colIndex:int):BitBoard
-		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
-			for(var w:int=colIndex-1;w>=0;w--)
-			{
-				if(this.flag==DefaultConstants.FLAG_BLUE)
-				{
-					if(chessPiecesModel.bluePieces.getBitt(rowIndex,w)) break;
-					//notice rook's blocker issue.
-					if(chessPiecesModel.redPieces.getBitt(rowIndex,w))
-					{
-						bb.setBitt(rowIndex,w,true);
-						break;
-					}
-				}else
-				{
-					if(chessPiecesModel.redPieces.getBitt(rowIndex,w)) break;
-					//notice rook's blocker issue.
-					if(chessPiecesModel.bluePieces.getBitt(rowIndex,w))
-					{
-						bb.setBitt(rowIndex,w,true);
-						break;
-					}
-				}
-				bb.setBitt(rowIndex,w,true);
-			}
-			return bb;
-		}
-		//north
-		override public function getNorth(rowIndex:int, colIndex:int):BitBoard
-		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
-			for(var n:int=rowIndex-1;n>=0;n--)
-			{
-				if(this.flag==DefaultConstants.FLAG_BLUE)
-				{
-					if(chessPiecesModel.bluePieces.getBitt(n,colIndex)) break;
-					//notice rook's blocker issue.
-					if(chessPiecesModel.redPieces.getBitt(n,colIndex))
-					{
-						bb.setBitt(n,colIndex,true);
-						break;
-					}
-				}else
-				{
-					if(chessPiecesModel.redPieces.getBitt(n,colIndex)) break;
-					//notice rook's blocker issue.
-					if(chessPiecesModel.bluePieces.getBitt(n,colIndex))
-					{
-						bb.setBitt(n,colIndex,true);
-						break;
-					}
-				}
-				bb.setBitt(n,colIndex,true);
-			}
-			return bb;
-		}
-		//east
-		override public function getEast(rowIndex:int, colIndex:int):BitBoard
-		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
-			for(var e:int=colIndex+1;e<this.column;e++)
-			{
-				if(this.flag==DefaultConstants.FLAG_BLUE)
-				{
-					if(chessPiecesModel.bluePieces.getBitt(rowIndex,e)) break;
-					//notice rook's blocker issue.
-					if(chessPiecesModel.redPieces.getBitt(rowIndex,e))
-					{
-						bb.setBitt(rowIndex,e,true);
-						break;
-					}
-				}else
-				{
-					if(chessPiecesModel.redPieces.getBitt(rowIndex,e)) break;
-					//notice rook's blocker issue.
-					if(chessPiecesModel.bluePieces.getBitt(rowIndex,e))
-					{
-						bb.setBitt(rowIndex,e,true);
-						break;
-					}
-				}
-				bb.setBitt(rowIndex,e,true);
-			}
-			return bb;
-		}
-		//south
-		override public function getSouth(rowIndex:int, colIndex:int):BitBoard
-		{
-			var bb:BitBoard = new BitBoard(this.column,this.row);
-			for(var s:int=rowIndex+1;s<this.row;s++)
-			{
-				if(this.flag==DefaultConstants.FLAG_BLUE)
-				{
-					if(chessPiecesModel.bluePieces.getBitt(s,colIndex)) break;
-					//notice rook's blocker issue.
-					if(chessPiecesModel.redPieces.getBitt(s,colIndex))
-					{
-						bb.setBitt(s,colIndex,true);
-						break;
-					}
-				}else
-				{
-					if(chessPiecesModel.redPieces.getBitt(s,colIndex)) break;
-					//notice rook's blocker issue.
-					if(chessPiecesModel.bluePieces.getBitt(s,colIndex))
-					{
-						bb.setBitt(s,colIndex,true);
-						break;
-					}
-				}
-				bb.setBitt(s,colIndex,true);
-			}
-			return bb;
-		}
 	}
 	
 }
