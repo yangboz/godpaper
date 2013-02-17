@@ -41,9 +41,12 @@ I of course refer here to the constants of the physical world:
 **R**,Electrical resistance;
 
 # Games under "GODPAPER" framework
-<a href="https://www.mochimedia.com/games/play/_v331">https://www.mochimedia.com/games/play/_v331</a>
 
-<a href="https://www.mochimedia.com/games/play/_v801648">https://www.mochimedia.com/games/play/_v801648</a>
+##Flex MXML based
+
+Chinese Chess Jam: <a href="https://www.mochimedia.com/games/play/_v331">https://www.mochimedia.com/games/play/_v331</a>
+
+Two Hit One: <a href="https://www.mochimedia.com/games/play/_v801648">https://www.mochimedia.com/games/play/_v801648</a>
 
 <a href="https://www.mochimedia.com/games/play/_v317464">https://www.mochimedia.com/games/play/_v317464</a>
 
@@ -60,6 +63,8 @@ I of course refer here to the constants of the physical world:
 <a href="https://www.mochimedia.com/games/play/_v312167">https://www.mochimedia.com/games/play/_v312167</a>
 
 <a href="https://www.mochimedia.com/games/play/_v744572">https://www.mochimedia.com/games/play/_v744572</a>
+
+##AS3 Starling/Feathers based
 
 # Screen shots
 
