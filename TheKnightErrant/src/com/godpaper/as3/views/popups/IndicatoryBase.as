@@ -38,7 +38,7 @@ package com.godpaper.as3.views.popups
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.VerticalLayout;
 	import feathers.textures.Scale9Textures;
-	import feathers.themes.AzureTheme;
+	import the_chess_jam.src.feathers.themes.AzureTheme;
 	import feathers.themes.MinimalTheme;
 	
 	import flash.geom.Rectangle;

@@ -29,7 +29,7 @@ package com.godpaper.as3.configs
 	import com.godpaper.as3.core.FlexGlobals;
 	
 	import chinese_chess_jam.src.feathers.themes.AeonDesktopTheme;
-	import feathers.themes.AzureTheme;
+	import the_chess_jam.src.feathers.themes.AzureTheme;
 	import feathers.themes.MinimalTheme;
 	import the_bejeweled_jam.src.feathers.themes.MetalWorksMobileTheme;
 

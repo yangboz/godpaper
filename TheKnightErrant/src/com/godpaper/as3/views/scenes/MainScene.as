@@ -38,7 +38,7 @@ package com.godpaper.as3.views.scenes
 	import feathers.controls.ScreenNavigatorItem;
 	import feathers.motion.transitions.ScreenSlidingStackTransitionManager;
 	import feathers.skins.IFeathersTheme;
-	import feathers.themes.AzureTheme;
+	import the_chess_jam.src.feathers.themes.AzureTheme;
 	import feathers.themes.MinimalTheme;
 	
 	import flash.ui.Mouse;
