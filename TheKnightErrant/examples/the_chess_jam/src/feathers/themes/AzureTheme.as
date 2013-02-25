@@ -52,10 +52,10 @@ package the_chess_jam.src.feathers.themes
 
 	public class AzureTheme extends DisplayListWatcher implements IFeathersTheme
 	{
-		[Embed(source="../../assets/images/azure.png")]
+		[Embed(source="../../../assets/images/azure.png")]
 		protected static const ATLAS_IMAGE:Class;
 
-		[Embed(source="../../assets/images/azure.xml",mimeType="application/octet-stream")]
+		[Embed(source="../../../assets/images/azure.xml",mimeType="application/octet-stream")]
 		protected static const ATLAS_XML:Class;
 
 		public static const ATLAS:TextureAtlas = new TextureAtlas(Texture.fromBitmap(new ATLAS_IMAGE(), false), XML(new ATLAS_XML()));
@@ -139,7 +139,7 @@ package the_chess_jam.src.feathers.themes
 		protected static const RADIO_SELECTED_UP_ICON_TEXTURE:Texture = ATLAS.getTexture("radio-selected-up-icon");
 		protected static const RADIO_SELECTED_DISABLED_ICON_TEXTURE:Texture = ATLAS.getTexture("radio-selected-disabled-icon");
 
-		[Embed(source="../../assets/fonts/lato30.fnt",mimeType="application/octet-stream")]
+		[Embed(source="../../../assets/fonts/lato30.fnt",mimeType="application/octet-stream")]
 		protected static const ATLAS_FONT_XML:Class;
 
 		protected static const BITMAP_FONT:BitmapFont = new BitmapFont(ATLAS.getTexture("lato30_0"), XML(new ATLAS_FONT_XML()));
