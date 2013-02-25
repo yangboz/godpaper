@@ -64,7 +64,7 @@ Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 
 9.Merge the stand-alone chess board game to this main project,also with separated texture package;(Done)
 
-10.PvP mode implementation;(Start)
+10.PvP mode implementation;(Done,based-on PlayerIO)
 
 11."Facebook" plug-in implementation;(Plan)
 
