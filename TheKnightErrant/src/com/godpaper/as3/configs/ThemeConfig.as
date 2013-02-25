@@ -28,10 +28,10 @@ package com.godpaper.as3.configs
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.core.FlexGlobals;
 	
-	import feathers.themes.AeonDesktopTheme;
+	import chinese_chess_jam.src.feathers.themes.AeonDesktopTheme;
 	import feathers.themes.AzureTheme;
 	import feathers.themes.MinimalTheme;
-	import feathers.themes.MetalWorksMobileTheme;
+	import the_bejeweled_jam.src.feathers.themes.MetalWorksMobileTheme;
 
 	import feathers.skins.IFeathersTheme;
 	/**
@@ -56,9 +56,9 @@ package com.godpaper.as3.configs
 		//----------------------------------
 		//Theme class enum list.
 		public static var THEME_MINIMAL:Class = MinimalTheme;
-		public static var THEME_AZURE:Class = AzureTheme;
-		public static var THEME_AEON_DESKTOP:Class = AeonDesktopTheme;
-		public static var THEME_METAL_WORK_MOBILE:Class = MetalWorksMobileTheme;
+//		public static var THEME_AZURE:Class = AzureTheme;
+//		public static var THEME_AEON_DESKTOP:Class = AeonDesktopTheme;
+//		public static var THEME_METAL_WORK_MOBILE:Class = MetalWorksMobileTheme;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties

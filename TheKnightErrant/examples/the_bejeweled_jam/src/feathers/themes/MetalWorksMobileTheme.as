@@ -22,7 +22,7 @@
  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  OTHER DEALINGS IN THE SOFTWARE.
  */
-package feathers.themes
+package the_bejeweled_jam.src.feathers.themes
 {
 	import feathers.controls.Button;
 	import feathers.controls.ButtonGroup;

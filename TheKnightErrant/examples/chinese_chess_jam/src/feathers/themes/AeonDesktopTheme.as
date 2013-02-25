@@ -1,4 +1,4 @@
-package feathers.themes
+package chinese_chess_jam.src.feathers.themes
 {
 	import feathers.controls.Button;
 	import feathers.controls.Callout;

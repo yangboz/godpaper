@@ -42,11 +42,9 @@ package
 	import com.godpaper.as3.core.IGameStateManager;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.PluginUIComponent;
-	import com.godpaper.as3.plugins.kongregate.KongregatePlugin;
 	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
-	import com.godpaper.as3.views.popups.HumanWinIndicatory;
 	import com.godpaper.as3.views.scenes.MainScene;
 	import com.godpaper.tic_tac_toe.busniess.factory.ChessFactory_TicTacToe;
 	import com.godpaper.tic_tac_toe.busniess.managers.ChessPiecesManager_TicTacToe;
@@ -65,9 +63,6 @@ package
 	
 	import mx.logging.ILogger;
 	import mx.logging.LogEventLevel;
-	import mx.resources.IResourceManager;
-	import mx.resources.ResourceBundle;
-	import mx.resources.ResourceManager;
 	
 	import starling.core.Starling;
 
@@ -154,8 +149,8 @@ package
 		 */
 		public function get themeClass():Class
 		{
-			return ThemeConfig.THEME_AEON_DESKTOP;
-//			return ThemeConfig.THEME_MINIMAL;
+//			return ThemeConfig.THEME_AEON_DESKTOP;
+			return ThemeConfig.THEME_MINIMAL;
 //			return ThemeConfig.THEME_AZURE;
 //			return ThemeConfig.THEME_METAL_WORK_MOBILE;
 		}
