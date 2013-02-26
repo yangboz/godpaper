@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <!-- @ref:http://technophi.com/2011/03/08/using-ant-to-compile-a-flex-mobile-project-for-ios/ -->
-<project default="ApplicationBase" name="TheKnightErrant"> 
+<project default="4. Package Application" name="TheKnightErrant" basedir="."> 
 	<!-- Framework properties -->
-	<property name="FLEX_HOME" value="C:\Flex\sdks\flex_sdk_4.6.0.23201B" /> 
+	<property name="FLEX_HOME" value="C:\Flex\sdks\flex_sdk_4.6.0.23201BwithAIR3.3" /> 
 	<property name="AIR_GLOBAL" value="${FLEX_HOME}/frameworks/libs/air/airglobal.swc" /> 
 	<property name="ADL" value="${FLEX_HOME}/bin/adl" /> 
 	<property name="ADT" value="${FLEX_HOME}/lib/adt.jar" /> 
@@ -17,7 +17,7 @@
 	<property name="splash_path" value="${class_path}/Default.png" /> 
 	<property name="app_name" value="GODPAPER_ApplicationBase" /> 
 	<property name="app_root_dir" value="." /> 
-	<property name="app_type" value="as3" /> 
+	<property name="app_type" value="as" /> 
 	<property name="assets_dir_name" value="assets" />
 	<property name="debug_mode" value="false" />
  
@@ -68,10 +68,18 @@
 			debug="${debug_mode}" 
 			failonerror="true" 
 			fork="true" 
-			maxmemory="512m">
-			<source-path path-element="${class_path}"/>
+			maxmemory="512m"
+			static-link-runtime-shared-libraries="true"
+			allow-source-path-overlap="true"
+			>
+			<source-path path-element="${basedir}"/>
+			<source-path path-element="../locale/{locale}"/>
+			<compiler.library-path dir="../libs"
+								   append="true">
+				<include name="PlatogoAPI_1.4.9.swc"/>
+			</compiler.library-path>
 			<compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
-				<include name="libs/*" />
+				<include name="../libs/*" />
 			</compiler.library-path>
 			<library-path file="${FLEX_HOME}/frameworks/locale/${LOCALE}" append="true"/>
 			<library-path dir="${lib_path}" includes="*.swc" append="true"/>
