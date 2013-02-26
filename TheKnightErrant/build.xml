@@ -46,7 +46,7 @@
 	<target name="-starling" depends="-prepare">
 
 		<echo message="Building starling.swc"/>
-		<java jar="${compc}" dir="${starling.root}" fork="true" failonerror="true">
+		<java jar="${compc}" dir="${starling.root}" fork="true" failonerror="true" logError="true">
 			<arg line="+flexlib='${flexframework.root}'"/>
 			<arg line="--swf-version=${swf.version}"/>
 			<arg line="--target-player=${player.version}"/>
@@ -143,64 +143,14 @@
 
 		<echo message="Copying examples"/>
 
-		<copy overwrite="true" todir="${examples.output}/ComponentsExplorer">
-			<fileset dir="${examples.root}/ComponentsExplorer">
+		<copy overwrite="true" todir="${examples.output}/cat_and_mouse">
+			<fileset dir="${examples.root}/cat_and_mouse">
 				<include name="README.md"/>
-				<include name="source/**"/>
-				<include name="assets/**"/>
-				<exclude name="source/ComponentsExplorerWeb.as"/>
+				<include name="src/**"/>
+				<include name="src/assets/**"/>
+				<exclude name="src/CatAndMouse.as"/>
 			</fileset>
 		</copy>
 
-		<copy overwrite="true" todir="${examples.output}/DisplayObjectExplorer">
-			<fileset dir="${examples.root}/DisplayObjectExplorer">
-				<include name="README.md"/>
-				<include name="source/**"/>
-				<include name="assets/**"/>
-				<exclude name="source/DisplayObjectExplorerWeb.as"/>
-			</fileset>
-		</copy>
-
-		<copy overwrite="true" todir="${examples.output}/Gallery">
-			<fileset dir="${examples.root}/Gallery">
-				<include name="README.md"/>
-				<include name="source/**"/>
-				<exclude name="source/GalleryWeb.as"/>
-			</fileset>
-		</copy>
-
-		<copy overwrite="true" todir="${examples.output}/HelloWorld">
-			<fileset dir="${examples.root}/HelloWorld">
-				<include name="README.md"/>
-				<include name="source/**"/>
-				<include name="assets/**"/>
-				<exclude name="source/HelloWorldWeb.as"/>
-			</fileset>
-		</copy>
-
-		<copy overwrite="true" todir="${examples.output}/LayoutExplorer">
-			<fileset dir="${examples.root}/LayoutExplorer">
-				<include name="README.md"/>
-				<include name="source/**"/>
-				<exclude name="source/LayoutExplorerWeb.as"/>
-			</fileset>
-		</copy>
-
-		<copy overwrite="true" todir="${examples.output}/TileList">
-			<fileset dir="${examples.root}/TileList">
-				<include name="README.md"/>
-				<include name="source/**"/>
-				<include name="assets/**"/>
-				<exclude name="source/TileListWeb.as"/>
-			</fileset>
-		</copy>
-
-		<copy overwrite="true" todir="${examples.output}/YouTubeFeeds">
-			<fileset dir="${examples.root}/YouTubeFeeds">
-				<include name="README.md"/>
-				<include name="source/**"/>
-				<exclude name="source/YouTubeFeedsWeb.as"/>
-			</fileset>
-		</copy>
 	</target>
 </project>

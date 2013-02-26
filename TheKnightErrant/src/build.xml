@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="GODPAPER_AppliationBase"
+		 basedir="."
+		 default="main">
+	<property name="FLEX_HOME"
+			  value="C:\Flex\sdks\flex_sdk_4.6.0.23201B"/>
+	<property name="TARGET_PLAYER"
+			  value="11.3.0"/>
+	<property name="APP_ROOT"
+			  value="."/>
+	<property name="swf-debug"
+			  value="false"/>
+	<property name="bin.dir"
+			  value="${basedir}/bin-debug/"/>
+
+	<tstamp>
+		<format property="BUILD_TIME"
+				pattern="MM/dd/yyyy HH:mm"
+				locale="en"/>
+	</tstamp>
+	<echo message="BUILD_TIME = ${BUILD_TIME}"/>
+	<property name="DEPLOY_DIR"
+			  value="resources/"/>
+
+	<taskdef resource="flexTasks.tasks"
+			 classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
+
+	<target name="main"
+			depends="compile_main-app">
+	</target>
+
+	<target name="update-version">
+		<propertyset id="tdate">
+		</propertyset>
+		<tstamp>
+			<format property="tdate"
+					pattern="yyyyMMdd"/>
+		</tstamp>
+		<buildnumber file="build.number"/>
+		<echo>updating version to current datetime: ${tdate}</echo>
+		<replaceregexp byline="true">
+			<regexp pattern="public static const BUILD_DATE: String = \'([0-9]+)'"/>
+			<substitution expression="public static const BUILD_DATE: String = '${tdate}'"/>
+			<fileset dir="com/godpaper/as3/utils">
+				<include name="VersionController.as"/>
+			</fileset>
+		</replaceregexp>
+		<echo>updating build number to: ${build.number}</echo>
+		<replaceregexp byline="true">
+			<regexp pattern="public static const BUILD_NUMBER: String = \'([0-9\.]+)'"/>
+			<substitution expression="public static const BUILD_NUMBER: String = '${build.number}'"/>
+			<fileset dir="com/godpaper/as3/utils">
+				<include name="VersionController.as"/>
+			</fileset>
+		</replaceregexp>
+	</target>
+
+	<target name="compile_main-app"
+			depends="update-version">
+		<mxmlc file="${basedir}/ApplicationBase.as"
+			   output="${DEPLOY_DIR}/ApplicationBase.swf"
+			   keep-generated-actionscript="true"
+			   maxmemory="512m"
+			   static-link-runtime-shared-libraries="true"
+			   locale="zh_CN,en_US,ko_KR"
+			   allow-source-path-overlap="true"
+			>
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+			<source-path path-element="${basedir}"/>
+			<source-path path-element="../locale/{locale}"/>
+			<compiler.library-path dir="../libs"
+								   append="true">
+				<include name="PlatogoAPI_1.4.9.swc"/>
+			</compiler.library-path>
+		</mxmlc>
+	</target>
+
+</project>

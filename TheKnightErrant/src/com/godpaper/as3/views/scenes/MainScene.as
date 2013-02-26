@@ -21,7 +21,6 @@
  */
 package com.godpaper.as3.views.scenes
 {
-	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.ThemeConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
@@ -32,23 +31,17 @@ package com.godpaper.as3.views.scenes
 	import com.godpaper.as3.views.screens.MainMenuScreen;
 	import com.godpaper.as3.views.screens.SettingsScreen;
 	import com.godpaper.as3.views.screens.SplashScreen;
-	import com.gskinner.motion.easing.Cubic;
 	
 	import feathers.controls.ScreenNavigator;
 	import feathers.controls.ScreenNavigatorItem;
 	import feathers.motion.transitions.ScreenSlidingStackTransitionManager;
 	import feathers.skins.IFeathersTheme;
-	import the_chess_jam.src.feathers.themes.AzureTheme;
-	import feathers.themes.MinimalTheme;
 	
 	import flash.ui.Mouse;
 	
-	import mx.core.ClassFactory;
 	import mx.logging.ILogger;
 	
-	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.events.ResizeEvent;
 
 	//--------------------------------------------------------------------------
 	//

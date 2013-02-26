@@ -34,22 +34,14 @@ package com.godpaper.as3.views.popups
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.Scroller;
 	import feathers.display.Image;
-	import feathers.display.TiledImage;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.VerticalLayout;
-	import feathers.textures.Scale9Textures;
-	import the_chess_jam.src.feathers.themes.AzureTheme;
-	import feathers.themes.MinimalTheme;
-	
-	import flash.geom.Rectangle;
 	
 	import mx.resources.IResourceManager;
 	import mx.resources.ResourceManager;
 	
-	import starling.display.BlendMode;
 	import starling.display.Quad;
 	import starling.textures.Texture;
-	import starling.textures.TextureAtlas;
 
 	/**
 	 * IndicatoryBase.as class.The base class of all indicatory with popup behavior.   	
@@ -79,6 +71,8 @@ package com.godpaper.as3.views.popups
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
+		[Embed(source="/assets/images/minimal/list-item-selected.png")]
+		private static const BACK_GROUND_TEXTURE:Class;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -135,9 +129,9 @@ package com.godpaper.as3.views.popups
 		override protected function initialize():void
 		{
 			//backgroundSkin
-			var bgTexture:Texture = AzureTheme.ATLAS.getTexture("list-item-up-skin");//list-item-selected,list-item-selected-skin
-//			this._image = new Image(Texture.fromBitmap(new BACK_GROUND_TEXTURE(), false));
-			this._image = new Image(bgTexture);
+//			var bgTexture:Texture = AzureTheme.ATLAS.getTexture("list-item-up-skin");//list-item-selected,list-item-selected-skin
+			this._image = new Image(Texture.fromBitmap(new BACK_GROUND_TEXTURE(), false));
+//			this._image = new Image(bgTexture);
 			this.addChild(this._image);
 			//header title
 			this._header = new Header();
