@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- @ref:http://technophi.com/2011/03/08/using-ant-to-compile-a-flex-mobile-project-for-ios/ -->
+<project default="ApplicationBase" name="TheKnightErrant"> 
+	<!-- Framework properties -->
+	<property name="FLEX_HOME" value="C:\Flex\sdks\flex_sdk_4.6.0.23201B" /> 
+	<property name="AIR_GLOBAL" value="${FLEX_HOME}/frameworks/libs/air/airglobal.swc" /> 
+	<property name="ADL" value="${FLEX_HOME}/bin/adl" /> 
+	<property name="ADT" value="${FLEX_HOME}/lib/adt.jar" /> 
+	<property name="PFI" value="${FLEX_HOME}/lib/pfi.jar" /> 
+	<property name="FLEX_TASKS" value="${FLEX_HOME}/ant/lib/flexTasks.jar" /> 
+	<property name="LOCALE" value="en_US" /> 
+ 
+	<!-- Project properties --> 
+	<property name="project_root" value="C:\Users\yangboz\git\godpaper\TheKnightErrant" /> 
+	<property name="class_path" value="${project_root}/src" /> 
+	<property name="lib_path" value="${project_root}/libs" />
+	<property name="splash_path" value="${class_path}/Default.png" /> 
+	<property name="app_name" value="GODPAPER_ApplicationBase" /> 
+	<property name="app_root_dir" value="." /> 
+	<property name="app_type" value="as3" /> 
+	<property name="assets_dir_name" value="assets" />
+	<property name="debug_mode" value="false" />
+ 
+	<!-- Certificate properties --> 
+	<property name="cert_loc" value="${app_root_dir}/assets" />
+	<property name="ios_keystore" value="${cert_loc}/p12.p12" /> 
+	<property name="ios_pass" value="123456" />
+	<property name="ios_provisioning" value="${cert_loc}/mobileprovision.mobileprovision" />
+ 
+	<!-- Application properties -->
+	<property name="swf_file" value="${app_name}.swf" /> 
+	<property name="air_file" value="${app_name}.air" /> 
+	<property name="ipa_file" value="${app_name}.ipa" /> 
+	<property name="app_descriptor" value="${class_path}/${app_name}-app.xml" /> 
+	<property name="main_class" value="${class_path}/${app_name}.${app_type}" />
+	<property name="build_dir" location="${app_root_dir}/build" /> 
+	<property name="debug_dir" location="${app_root_dir}/build/debug" /> 
+	<property name="publish_dir" location="${app_root_dir}/build/deploy" /> 
+	<property name="assets_dir" location="${class_path}/${assets_dir_name}" />
+	<property name="output_loc" location="${publish_dir}/${swf_file}" />
+ 
+	<!-- Use the Flex ANT tasks for easier compilation -->
+	<taskdef name="mxmlc" classname="flex.ant.MxmlcTask" classpath="${FLEX_TASKS}"/>
+ 
+	<!-- Clean existing directories --> 
+	<target name="1. Cleanup Directories" description="clean up"> 
+		<delete dir="${debug_dir}" /> 
+		<delete dir="${publish_dir}" /> 
+		<delete dir="${build_dir}" /> 
+	</target> 
+ 
+	<!-- Create required directories --> 
+	<target name="2. Build New Directories" depends="1. Cleanup Directories"> 
+		<mkdir dir="${build_dir}" /> 
+		<mkdir dir="${debug_dir}" /> 
+		<mkdir dir="${publish_dir}" /> 
+	</target>
+ 
+	<!-- Compile SWF to build-directory for packaging --> 
+	<target name="3. Compile SWF" depends="2. Build New Directories"> 
+		<mxmlc 
+			file="${main_class}" 
+			output="${output_loc}" 
+			locale="${LOCALE}" 
+			static-rsls="false" 
+			accessible="false" 
+			configname="airmobile" 
+			debug="${debug_mode}" 
+			failonerror="true" 
+			fork="true" 
+			maxmemory="512m">
+			<source-path path-element="${class_path}"/>
+			<compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+				<include name="libs/*" />
+			</compiler.library-path>
+			<library-path file="${FLEX_HOME}/frameworks/locale/${LOCALE}" append="true"/>
+			<library-path dir="${lib_path}" includes="*.swc" append="true"/>
+			<external-library-path file="${AIR_GLOBAL}" append="true"/>
+		</mxmlc>
+	</target>
+ 
+	<!-- Package the application to an ipa file & save it in the publish directory --> 
+	<target name="4. Package Application" depends="3. Compile SWF"> 
+		<java jar="${ADT}" fork="true" failonerror="true"> 
+			<arg value="-package"/>
+			<arg value="-target"/>
+			<arg value="ipa-test"/>
+			<arg value="-provisioning-profile"/>
+			<arg value="${ios_provisioning}"/>
+ 
+      			<arg value="-storetype"/>
+			<arg value="pkcs12"/>
+			<arg value="-keystore"/>
+			<arg value="${ios_keystore}"/>
+			<arg value="-storepass"/>
+			<arg value="${ios_pass}"/>
+ 
+			<arg value="${ipa_file}"/>
+			<arg value="${app_descriptor}"/>
+			<arg value="${output_loc}"/>
+ 
+			<arg value="-C" /> 
+			<arg value="${class_path}"/>
+			<arg value="${splash_path}"/>
+ 
+			<arg value="-C" /> 
+			<arg value="${class_path}"/>
+			<arg value="${assets_dir}/icons/." /> 
+		</java> 
+	</target>
+</project>
