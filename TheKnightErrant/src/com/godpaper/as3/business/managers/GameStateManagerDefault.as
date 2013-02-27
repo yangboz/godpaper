@@ -24,6 +24,8 @@ package com.godpaper.as3.business.managers
 	
 	import mx.logging.ILogger;
 	import mx.utils.BitFlagUtil;
+	
+	import org.spicefactory.lib.task.SequentialTaskGroup;
 
 	/**
 	 * A player manager class to maintain turn-based game.
@@ -182,9 +184,13 @@ package com.godpaper.as3.business.managers
 			//reset game step number.
 			chessBoardModel.stepNumber=0;
 			//clear board,chess pieces
-			FlexGlobals.gameScreen.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
-			FlexGlobals.gameScreen.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());
-			FlexGlobals.gameScreen.cleanUpSequenceTask.start();
+			if(!FlexGlobals.cleanUpSequenceTask)
+			{
+				FlexGlobals.cleanUpSequenceTask = new SequentialTaskGroup("FlexGlobals.cleanUpSequenceTask");
+			}
+			FlexGlobals.cleanUpSequenceTask.addTask(new CleanUpChessPieceTask());
+			FlexGlobals.cleanUpSequenceTask.addTask(new CleanUpPiecesBitboardTask());
+			FlexGlobals.cleanUpSequenceTask.start();
 			//dump the end of game messages.
 			FlexGlobals.topLevelApplication.dumpFootSprint();
 			//put down chess pieces again

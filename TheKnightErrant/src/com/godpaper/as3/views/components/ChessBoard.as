@@ -299,7 +299,8 @@ package com.godpaper.as3.views.components
 			//			addChild(polygon);
 			//Put on lines if neccessray.
 			var shape:Shape = new Shape();
-			shape.graphics.beginFill(Color.BLACK);
+//			shape.graphics.beginFill(Color.BLACK);
+			shape.graphics.beginFill(bgColor);
 			//graphics.drawPath method takes two parameters: 
 			//a Vector of coordinates of consecutive points on the path and a Vector of commands. 
 			//(The last optional parameter 'winding' is not relevant to our experiment.) 
@@ -333,6 +334,7 @@ package com.godpaper.as3.views.components
 				var mX:Number = this.xAdjust+(j+1)*this.xOffset;
 				var mY:Number = this.yAdjust;
 				LOG.debug("xLines drawing:{0},{1},{2},{3}",lX,lY,mX,mY);
+//				shape.graphics.drawRect(lX, lY, 50, 50);
 				shape.graphics.lineTo(lX,lY);
 				shape.graphics.moveTo(mX,mY);
 			}

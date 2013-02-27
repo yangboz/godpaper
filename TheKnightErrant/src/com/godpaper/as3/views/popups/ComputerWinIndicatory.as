@@ -155,14 +155,14 @@ package com.godpaper.as3.views.popups
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function yesButtonOnRelease(button:Button):void
+		private function yesButtonOnRelease(event:Event):void
 		{
 			//restart game.
 			GameConfig.gameStateManager.restart();
 			//
 			IndicatorConfig.outcome = false;
 		}
-		private function noButtonOnRelease(button:Button):void
+		private function noButtonOnRelease(event:Event):void
 		{
 			IndicatorConfig.outcome = false;
 		}

@@ -30,7 +30,6 @@ package com.godpaper.as3.views.components
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;
-	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessGasket;
 	import com.godpaper.as3.core.IChessPiece;
@@ -41,25 +40,16 @@ package com.godpaper.as3.views.components
 	import com.lookbackon.ds.BitBoard;
 	
 	import flash.display.BitmapData;
-	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	
 	import mx.logging.ILogger;
-	import mx.utils.UIDUtil;
 	
-	import starling.display.Button;
-	import starling.display.DisplayObject;
-	import starling.display.DisplayObjectContainer;
 	import starling.display.Image;
-	import starling.events.Event;
-	import starling.events.Touch;
 	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
+	import starling.filters.BlurFilter;
 	import starling.textures.Texture;
-	import starling.textures.TextureAtlas;
 	import starling.utils.Color;
-	import starling.utils.Polygon;
 	
 	
 	/**
@@ -311,12 +301,14 @@ package com.godpaper.as3.views.components
 				//Update display effect.
 //				this.upState.dispose();
 //				this.upState = this.getUpStateTexture(Color.GREEN,this.backgroundAlpha,Color.GREEN,this.borderAlpha);
+//				this.filter = BlurFilter.createGlow(0xff0000);
 				//Update chess piece reference by UpdateChessPiecesTask.
 			}else
 			{
 				//Update display effect.
 //				this.upState.dispose();
 //				this.upState = this.getUpStateTexture(Color.RED,this.backgroundAlpha,Color.RED,this.borderAlpha);
+//				this.filter = BlurFilter.createGlow(0x00ff00);
 			}
 			//
 			event.stopImmediatePropagation();

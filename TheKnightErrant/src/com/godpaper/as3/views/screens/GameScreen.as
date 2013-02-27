@@ -79,9 +79,6 @@ package com.godpaper.as3.views.screens
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		//Tasks
-		public var cleanUpSequenceTask:SequentialTaskGroup;
-		public var startUpSequenceTask:SequenceTask;
 		//
 		private var _vehicle:SteeredVehicle;
 		private var _circles:Array;
@@ -148,29 +145,29 @@ package com.godpaper.as3.views.screens
 			//create chess pieces' chessVO;
 			//create chess pieces' omenVO;
 			//create plugin button bar.
-			this.startUpSequenceTask = new SequenceTask();
-			this.startUpSequenceTask.label = "startUpSequenceTask";//29.748M(debug)
+			FlexGlobals.startUpSequenceTask = new SequenceTask();
+			FlexGlobals.startUpSequenceTask.label = "startUpSequenceTask";//29.748M(debug)
 			//Display chess board at first.
-			this.startUpSequenceTask.addChild(new CreateChessBoardTask());//33.332M
+			FlexGlobals.startUpSequenceTask.addChild(new CreateChessBoardTask());//33.332M
 			//Display the pieces box if neccessary
 			if(BoardConfig.piecesBoxRequired)
 			{
-				this.startUpSequenceTask.addChild(new CreatePiecesBoxTask());
-				this.startUpSequenceTask.addChild(new FillInPiecesBoxTask());
+				FlexGlobals.startUpSequenceTask.addChild(new CreatePiecesBoxTask());
+				FlexGlobals.startUpSequenceTask.addChild(new FillInPiecesBoxTask());
 			}
-			this.startUpSequenceTask.addChild(new CreateChessGasketTask());//33.316M
+			FlexGlobals.startUpSequenceTask.addChild(new CreateChessGasketTask());//33.316M
 			//create pices box
 			if(!BoardConfig.piecesBoxRequired)
 			{
-				this.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.090M
+				FlexGlobals.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.090M
 			}
-			this.startUpSequenceTask.addChild(new CreateChessVoTask());//34.922M
+			FlexGlobals.startUpSequenceTask.addChild(new CreateChessVoTask());//34.922M
 			//Plugin button bar view init
-			this.startUpSequenceTask.addChild(new CreatePluginButtonBarTask());
+			FlexGlobals.startUpSequenceTask.addChild(new CreatePluginButtonBarTask());
 			//task complete
-			this.startUpSequenceTask.addEventListener(TaskEvent.TASK_COMPLETE,startUpTaskCompleteHandler);
+			FlexGlobals.startUpSequenceTask.addEventListener(TaskEvent.TASK_COMPLETE,startUpTaskCompleteHandler);
 			//task start
-			this.startUpSequenceTask.start();
+			FlexGlobals.startUpSequenceTask.start();
 			//Header view here.
 			//
 			this._button_back = new Button();
@@ -238,7 +235,7 @@ package com.godpaper.as3.views.screens
 		//--------------------------------------------------------------------------
 		private function startUpTaskCompleteHandler(event:TaskEvent):void
 		{
-			this.startUpSequenceTask.removeEventListener(TaskEvent.TASK_COMPLETE,startUpTaskCompleteHandler);
+			FlexGlobals.startUpSequenceTask.removeEventListener(TaskEvent.TASK_COMPLETE,startUpTaskCompleteHandler);
 			//
 			GameConfig.gameStateManager.start();
 		}

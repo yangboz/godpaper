@@ -21,14 +21,15 @@
  */
 package com.godpaper.as3.core
 {
+	import com.adobe.cairngorm.task.SequenceTask;
 	import com.godpaper.as3.configs.ServiceConfig;
 	import com.godpaper.as3.model.ChessBoardModel;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.UserModel;
+	import com.godpaper.as3.plugins.playerIO.PlayerIoService;
 	import com.godpaper.as3.services.ConductService;
 	import com.godpaper.as3.services.IConductService;
-	import com.godpaper.as3.plugins.playerIO.PlayerIoService;
 	import com.godpaper.as3.utils.SingletonFactory;
 	import com.godpaper.as3.views.components.PiecesBox;
 	import com.godpaper.as3.views.screens.GameScreen;
@@ -39,6 +40,7 @@ package com.godpaper.as3.core
 	import feathers.controls.popups.IPopUpContentManager;
 	
 	import org.osflash.signals.Signal;
+	import org.spicefactory.lib.task.SequentialTaskGroup;
 	
 	import starling.display.Stage;
 
@@ -96,6 +98,9 @@ package com.godpaper.as3.core
 		//Services
 //		public static var conductService:ConductService = SingletonFactory.produce(ConductService);
 		public static var conductService:IConductService = SingletonFactory.produce(ServiceConfig.wrapper);
+		//Task references
+		public static var cleanUpSequenceTask:SequentialTaskGroup;
+		public static var startUpSequenceTask:SequenceTask;
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
