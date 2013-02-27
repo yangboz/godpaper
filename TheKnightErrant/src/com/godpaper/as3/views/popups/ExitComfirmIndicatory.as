@@ -52,6 +52,12 @@ package com.godpaper.as3.views.popups
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Feb 10, 2013 11:51:52 PM
+	 * -----------------------------------</br>
+	 * ------------Exit confirm-----------</br>
+	 * -----------------------------------</br>
+	 * -----------------------------------</br>
+	 * --------Cancel-----Join Game-------</br>
+	 * -----------------------------------</br>
 	 */   	 
 //	public class ExitComfirmIndicatory extends PanelScreen
 	public class ExitComfirmIndicatory extends IndicatoryBase	

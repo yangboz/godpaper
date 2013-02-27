@@ -7,20 +7,21 @@ package com.godpaper.as3.tasks
 	//--------------------------------------------------------------------------
 //	import com.adobe.cairngorm.task.Task;
 	import com.godpaper.as3.configs.BoardConfig;
+	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.model.ChessGasketsModel;
 	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.components.ChessGasket;
 	import com.godpaper.as3.views.components.ChessPiece;
 	
-	import flash.display.DisplayObject;
 	import flash.geom.Point;
 	
 	import mx.logging.ILogger;
 	
 	import org.spicefactory.lib.task.Task;
+	
+	import starling.display.DisplayObject;
 
 	/**
 	 * CleanUpChessPieceTask.as class.
@@ -84,8 +85,10 @@ package com.godpaper.as3.tasks
 						try{
 							chessGasket.chessPiece.chessVO = null;
 							chessGasket.chessPiece.omenVO = null;
-							chessGasket.chessPiece = null;
 //							chessGasket.removeElement( chessGasket.chessPiece );
+							var chessPiece:DisplayObject = DisplayObject(chessGasket.chessPiece)
+							FlexGlobals.gameScreen.removeChild(chessPiece);
+							chessGasket.chessPiece = null;
 							//
 							chessPiecesModel.reds.length = 0;
 							chessPiecesModel.blues.length = 0;

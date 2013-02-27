@@ -29,6 +29,7 @@ package com.godpaper.as3.views.popups
 	import feathers.controls.Label;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.TextInput;
+	import feathers.core.PopUpManager;
 	
 	import mx.utils.UIDUtil;
 	
@@ -51,7 +52,7 @@ package com.godpaper.as3.views.popups
 	 * ------------TextInput--------------</br>
 	 * -----------------------------------</br>
 	 * -----------------------------------</br>
-	 * ------------Join Game--------------</br>
+	 * --------Cancel-----Join Game-------</br>
 	 * -----------------------------------</br>
 	 * @author yangboz
 	 * @langVersion 3.0
@@ -70,6 +71,7 @@ package com.godpaper.as3.views.popups
 		private var _inputsContainer:ScrollContainer;
 		private var _buttonsContainer:ScrollContainer;//submit,next button 
 		private var _joinBtn:Button;//join gamebutton.
+		private var _cancelBtn:Button;//camcel enter up game button.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -123,16 +125,20 @@ package com.godpaper.as3.views.popups
 			//Default name 
 			this._nameInput.text = UIDUtil.createUID().substr(0,8);
 			//buttons 
+			this._cancelBtn = new Button();
+			this._cancelBtn.label = "Cancel";
+			this._buttonsContainer.addChild(this._cancelBtn);
 			this._joinBtn = new Button();
-			this._joinBtn.label = "Enter Lobby";
+			this._joinBtn.label = "Enter";
 			this._buttonsContainer.addChild(this._joinBtn);
 			//event listener
 			//			this._submitBtn.onRelease.add(submitButtonOnRelease);
 			this._joinBtn.addEventListener(starling.events.Event.TRIGGERED,joinButtonOnRelease);
+			this._cancelBtn.addEventListener(starling.events.Event.TRIGGERED,cancelButtonOnRelease);
 			//
 			this._header.title = DefaultConstants.INDICATION_NAME_PROMPT_PLAYER;
 			this.width = 200;
-			this.height = 200;
+			this.height = 180;
 		}
 		//
 		override protected function draw():void
@@ -162,6 +168,13 @@ package com.godpaper.as3.views.popups
 			FlexGlobals.userModel.registerRole(peerID,1,FlexGlobals.userModel.ROLE_NAME_LIST[1]);
 			//Enter up to game server by plugin initialization.
 			FlexGlobals.topLevelApplication.pluginProvider.initialization();
+		}
+		//
+		private function cancelButtonOnRelease(event:Event):void
+		{
+			PopUpManager.removePopUp(this);
+			//Go back to main menu screen
+			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_MAIN_MENU);
 		}
 	}
 	
