@@ -59,7 +59,7 @@
 			depends="update-version">
 		<mxmlc file="${basedir}/ApplicationBase.as"
 			   output="${DEPLOY_DIR}/ApplicationBase.swf"
-			   keep-generated-actionscript="true"
+			   keep-generated-actionscript="false"
 			   maxmemory="512m"
 			   static-link-runtime-shared-libraries="true"
 			   locale="zh_CN,en_US,ko_KR"

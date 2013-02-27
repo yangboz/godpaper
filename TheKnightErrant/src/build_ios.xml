@@ -8,14 +8,14 @@
 	<property name="ADT" value="${FLEX_HOME}/lib/adt.jar" /> 
 	<property name="PFI" value="${FLEX_HOME}/lib/pfi.jar" /> 
 	<property name="FLEX_TASKS" value="${FLEX_HOME}/ant/lib/flexTasks.jar" /> 
-	<property name="LOCALE" value="en_US" /> 
+	<property name="LOCALE" value="en_US,zh_CN,ko_KR" /> 
  
 	<!-- Project properties --> 
 	<property name="project_root" value="C:\Users\yangboz\git\godpaper\TheKnightErrant" /> 
 	<property name="class_path" value="${project_root}/src" /> 
 	<property name="lib_path" value="${project_root}/libs" />
-	<property name="splash_path" value="${class_path}/Default.png" /> 
-	<property name="app_name" value="GODPAPER_ApplicationBase" /> 
+	<property name="splash_path" value="${project_root}/src/assets/images/Default.png" /> 
+	<property name="app_name" value="ApplicationBase" /> 
 	<property name="app_root_dir" value="." /> 
 	<property name="app_type" value="as" /> 
 	<property name="assets_dir_name" value="assets" />
@@ -24,7 +24,7 @@
 	<!-- Certificate properties --> 
 	<property name="cert_loc" value="${app_root_dir}/assets" />
 	<property name="ios_keystore" value="${cert_loc}/p12.p12" /> 
-	<property name="ios_pass" value="123456" />
+	<property name="ios_pass" value="1234" />
 	<property name="ios_provisioning" value="${cert_loc}/mobileprovision.mobileprovision" />
  
 	<!-- Application properties -->

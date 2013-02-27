@@ -82,8 +82,10 @@ Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 
 18.Chess board type implementation.(Start)
 
-19.Player.IO contest implementation.(Start)
+19.Player.IO contest implementation.(Done,multiple player feature implemented.)
 
 20.FlexMojo/Maven features.(Pendding,pom.xml added)
 
 21.FullScreen features.(Plan)
+
+22.Ant building with Android,iOS package deployment.(Start)
