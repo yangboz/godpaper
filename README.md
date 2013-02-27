@@ -1,20 +1,4 @@
-# License
-/*====================================================================
-Copyright (C) 2010 GODPAPER <Knight.zhou>
- 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
- 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
- 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-=====================================================================*/
+GODPAPER
 
 # About
 A flash & ios board game framework named GODPAPER(code name:"the real knight"&"the real bishop") by as3 & objective-c language.
@@ -137,3 +121,6 @@ Link(TheRealKnight for FLEX4):<a href="https://github.com/yangboz/godpaper/zipba
 See:<a href="http://www.lookbackon.com/qa/">http://www.lookbackon.com/qa/</a>
 # More
 See:<a href="http://www.godpaper.com/godpaper/index.php/Framework">http://www.godpaper.com/godpaper/index.php/Framework</a>
+
+# License
+Seee:https://github.com/yangboz/godpaper/blob/master/LICENSE.md
