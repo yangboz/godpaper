@@ -62,8 +62,8 @@ Two Hit One: <a href="https://www.mochimedia.com/games/play/_v801648">https://ww
 
 
 # Main features
-This wiki is for programmers. More precisely, it�s for programmers who favor the �learn by example� approach.
-I don�t know about you, but I�ve ready plenty of flash games where all they present are fragments of applications and small, contrived bits of code to illustrate a given point. Now, without question, that is sometimes precisely what you want. Oftentimes, however, what you really want is a whole application that is explained in its entirety so you can see how all the pieces fit together as you explore it little by little. This is precisely what this wiki seeks to do.
+This wiki is for programmers. More precisely, it's for programmers who favor the 'learn by example' approach.
+I don't know about you, but I�ve ready plenty of flash games where all they present are fragments of applications and small, contrived bits of code to illustrate a given point. Now, without question, that is sometimes precisely what you want. Oftentimes, however, what you really want is a whole application that is explained in its entirety so you can see how all the pieces fit together as you explore it little by little. This is precisely what this wiki seeks to do.
 
 # GODPAPER Roadmap
 
@@ -116,7 +116,7 @@ Hybrid Models
 # Tutorials
 See:<a href="http://blog.lookbackon.com/?p=2469">http://blog.lookbackon.com/?p=2469</a>
 # Downloads
-Link(TheRealKnight for FLEX4):<a href="https://github.com/yangboz/godpaper/zipball/master">https://github.com/yangboz/godpaper/zipball/master</a>
+Link(TheKnightErrant for AS3 project):<a href="https://github.com/yangboz/godpaper/zipball/master">https://github.com/yangboz/godpaper/zipball/master</a>
 # Q & A 
 See:<a href="http://www.lookbackon.com/qa/">http://www.lookbackon.com/qa/</a>
 # More
