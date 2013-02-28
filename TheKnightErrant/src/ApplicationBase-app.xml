@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<application xmlns="http://ns.adobe.com/air/application/3.5">
+<application xmlns="http://ns.adobe.com/air/application/3.6">
 	<id>com.gamevil.zenonia2</id>
 	<filename>GODPAPER ApplicationBase</filename>
 	<name>GODPAPER ApplicationBase</name>
@@ -8,7 +8,7 @@
 	<copyright>2013 GODPAPER</copyright>
 
 	<initialWindow>
-		<content>ApplicationBase.swf</content>
+		<content>build/deploy/ApplicationBase.swf</content>
 		<autoOrients>true</autoOrients>
 		<fullScreen>true</fullScreen>
 		<visible>true</visible>
@@ -18,16 +18,16 @@
 	<supportedLanguages>en</supportedLanguages>
 
 	<icon>
-		<image29x29>icon29.png</image29x29>
-		<image48x48>icon48.png</image48x48>
-		<image50x50>icon50.png</image50x50>
-		<image57x57>icon57.png</image57x57>
-		<image58x58>icon58.png</image58x58>
-		<image72x72>icon72.png</image72x72>
-		<image100x100>icon100.png</image100x100>
-		<image114x114>icon114.png</image114x114>
-		<image128x128>icon128.png</image128x128>
-		<image144x144>icon144.png</image144x144>
+		<image29x29>assets/icons/icon29.png</image29x29>
+		<image48x48>assets/icons/icon48.png</image48x48>
+		<image50x50>assets/icons/icon50.png</image50x50>
+		<image57x57>assets/icons/icon57.png</image57x57>
+		<image58x58>assets/icons/icon58.png</image58x58>
+		<image72x72>assets/icons/icon72.png</image72x72>
+		<image100x100>assets/icons/icon100.png</image100x100>
+		<image114x114>assets/icons/icon114.png</image114x114>
+		<image128x128>assets/icons/icon128.png</image128x128>
+		<image144x144>assets/icons/icon144.png</image144x144>
 	</icon>
 	<android>
 		<colorDepth>16bit</colorDepth>

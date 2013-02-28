@@ -2,7 +2,7 @@
 <!-- @ref:http://technophi.com/2011/03/08/using-ant-to-compile-a-flex-mobile-project-for-ios/ -->
 <project default="4. Package Application" name="TheKnightErrant" basedir="."> 
 	<!-- Framework properties -->
-	<property name="FLEX_HOME" value="C:\Flex\sdks\flex_sdk_4.6.0.23201BwithAIR3.3" /> 
+	<property name="FLEX_HOME" value="C:\Flex\sdks\flex_sdk_4.6.0.23201BwithAIR3.6" /> 
 	<property name="AIR_GLOBAL" value="${FLEX_HOME}/frameworks/libs/air/airglobal.swc" /> 
 	<property name="ADL" value="${FLEX_HOME}/bin/adl" /> 
 	<property name="ADT" value="${FLEX_HOME}/lib/adt.jar" /> 
