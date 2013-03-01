@@ -8,7 +8,7 @@
 	<copyright>2013 GODPAPER</copyright>
 
 	<initialWindow>
-		<content>build/deploy/ApplicationBase.swf</content>
+		<content>ApplicationBase.swf</content>
 		<autoOrients>true</autoOrients>
 		<fullScreen>true</fullScreen>
 		<visible>true</visible>

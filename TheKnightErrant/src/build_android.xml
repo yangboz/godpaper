@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ApplicationBase_Android" basedir="." default="build">
+	
+	<!-- file description -->
+	<description>Build Script for Android based applications.</description>
+	
+	<!--location of property file -->
+	<property file="${basedir}/base.properties" description="base properities for builds" />
+	
+	<!-- additional tasks -->
+	<taskdef name="mxmlc" classname="flex.ant.MxmlcTask" classpath="${FLEX_TASKS}"/>
+	<taskdef name="compc" classname="flex.ant.CompcTask" classpath="${FLEX_TASKS}"/>
+	<taskdef name="asdoc" classname="flex.ant.AsDocTask" classpath="${FLEX_TASKS}"/>
+    
+    <!-- Build-->
+    
+	<target name="build" 
+		description="Compiles and packages the application set in the properties file.">
+		<property name="app.file" value="${APP_NAME}.${APP_EXTENSION}"/>
+		<property name="app.name" value="${APP_NAME}"/>
+		<property name="apk.target" value="apk"/>
+		<antcall target="-init"/>
+        <available file="${KEYSTORE}" property="CERTIFICATE_FLAG"/>
+		<antcall target="-package"/>
+<!-- 		<antcall target="-postclean"/> -->
+	</target>
+	
+	<target name="build_by_prompt" depends="-prompt_for_app" 
+		description="Prompts for a user specified application then compiles and packages the application.">
+		<property name="apk.target" value="apk"/>
+		<antcall target="-init"/>
+        <available file="${KEYSTORE}" property="CERTIFICATE_FLAG"/>
+		<antcall target="-package"/>
+		<antcall target="-postclean"/>
+	</target>
+	
+	<target name="-compile">
+		<mxmlc 
+			file="${SOURCE_DIR}/${app.file}" 
+			output="${BUILD_DIR}/${app.name}.swf" 
+			locale="${LOCALE}" 
+			static-rsls="false" 
+			accessible="false" 
+			configname="air" 
+			debug="${DEBUG_FLAG}" 
+			failonerror="true" 
+			fork="true" 
+			maxmemory="512m"
+			static-link-runtime-shared-libraries="true"
+			allow-source-path-overlap="true"
+			>
+			<source-path path-element="${basedir}"/>
+			<source-path path-element="../locale/{locale}"/>
+			<compiler.library-path dir="../libs"
+								   append="true">
+				<include name="PlatogoAPI_1.4.9.swc"/>
+			</compiler.library-path>
+			<compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+				<include name="../libs/*" />
+			</compiler.library-path>
+			<library-path file="${FLEX_HOME}/frameworks/locale/${LOCALE}" append="true"/>
+			<library-path dir="${LIBRARIES_DIR}" includes="*.swc" append="true"/>
+			<external-library-path file="${AIR_GLOBAL}" append="true"/>
+		</mxmlc>
+	</target>
+	
+	<target name="-certificate" unless="CERTIFICATE_FLAG">
+		<java jar="${ADT}" fork="true" 
+			failonerror="true">
+			<arg value="-certificate"/>
+			<arg value="-cn"/>
+			<arg value="${CERT_NAME}"/>
+			<arg value="-ou"/>
+			<arg value="${CERT_ORG_UNIT}"/>
+			<arg value="-o"/>
+			<arg value="${CERT_ORG_NAME}"/>
+			<arg value="-c"/>
+			<arg value="${CERT_COUNTRY}"/>
+			<arg value="${CERT_KEY_TYPE}"/>
+			<arg value="${KEYSTORE}"/>
+			<arg value="${CERT_PASSWORD}"/>
+		</java>
+	</target>
+	
+	<target name="-package" depends="-compile, -certificate, -move_descriptor">
+		<java jar="${ADT}" fork="true" 
+			failonerror="true"
+			maxmemory="512m">
+			<arg value="-package"/>
+			<arg value="-target"/>
+			<arg value="${apk.target}"/>
+			<arg value="-storetype"/>
+			<arg value="${STORETYPE}"/>
+			<arg value="-keystore"/>
+			<arg value="${KEYSTORE}"/>
+			<arg value="-storepass"/>
+			<arg value="${CERT_PASSWORD}"/>
+			<arg value="${RELEASE_DIR}/${app.name}.${APP_RELEASE_EXTENSION}"/>
+			<arg value="${BUILD_DIR}/${app.descriptor}"/>
+			<arg value="-C"/>
+			<arg value="${BUILD_DIR}"/>
+			<arg value="${app.name}.swf"/>
+			<arg value="-C"/>
+			<arg value="${SOURCE_DIR}"/>
+			<arg value="assets"/>
+		</java>
+	</target>
+	
+	<target name="-move_descriptor">
+		<property name="app.descriptor" value="${app.name}-app.xml"/>
+		<copy todir="${BUILD_DIR}" file="${SOURCE_DIR}/${app.descriptor}" includeemptydirs="false" overwrite="true"/>
+		<replace file="${BUILD_DIR}/${app.descriptor}" token="${CONTENT_REPLACE_STRING}" value="${app.name}.swf"/>
+	</target>
+	
+	<target name="-init" depends="-preclean">
+		<mkdir dir="${BUILD_DIR}"/>
+		<mkdir dir="${RELEASE_DIR}"/>
+	</target>
+	
+	<target name="-preclean">
+		<delete dir="${BUILD_DIR}" failOnError="false" includeEmptyDirs="true" />
+		<delete dir="${RELEASE_DIR}" failOnError="false" includeEmptyDirs="true" />
+	</target>
+
+	<target name="-postclean">
+		<delete dir="${BUILD_DIR}" failOnError="false" includeEmptyDirs="true" />
+	</target>
+	
+	<!--
+    
+    
+        Prompts
+    
+    
+    -->
+	
+	<target name="-prompt_for_app"
+		depends="-get_applications">
+		<input message="Enter Application File To Compile:" 
+			addproperty="app.file"
+			validargs="${app_files_comma_sep}"
+			defaultvalue="${APP_NAME}.${APP_EXTENSION}"/>
+		<fileset id="app_file" file="${SOURCE_DIR}/${app.file}"/>
+		<pathconvert property="app.name" pathsep="" refid="app_file">
+			<chainedmapper>
+				<flattenmapper />
+				<mapper type="regexp" from="^(.*)\.[as|mxml]" to="\1"/>
+			</chainedmapper>
+		</pathconvert>
+	</target>
+	
+	<target name="-prompt_for_avd">
+		<input message="Enter AVD (by name) To Startup:" addproperty="avd.name"/>
+	</target>
+	
+	<target name="-prompt_for_device">
+		<input message="Enter Device To Test On:" addproperty="device.name"/>
+	</target>
+	
+	<!--
+    
+    
+        Application List
+    
+    
+    -->
+	
+	<target name="-get_applications">
+		<fileset id="application_files" dir="${SOURCE_DIR}">
+			<include name="*.as"/>
+			<include name="*.mxml"/>
+		</fileset>
+		<pathconvert property="app_files" pathsep="${line.separator}- " refid="application_files">
+			<chainedmapper>
+				<flattenmapper />
+			</chainedmapper>
+		</pathconvert>
+		<pathconvert property="app_files_comma_sep" pathsep="," refid="application_files">
+			<chainedmapper>
+				<flattenmapper />
+			</chainedmapper>
+		</pathconvert>
+		<echo message="Application List:"/>
+		<echo message="${line.separator}"/>
+		<echo message="- ${app_files}"/>
+	</target>
+	
+	<!--
+	
+	
+		Android Dev Targets
+	
+	
+	-->
+	
+	<target name="-get_devices">
+		<exec executable="${ADB}">
+			<arg line="devices"/>
+		</exec>
+		<echo>If no devices are listed you first need to start an emulator in the AVD Manager</echo>
+		<echo>or connect your android device.</echo>
+		<echo>Make sure that USB debugging is enabled on your device.</echo>
+	</target>
+	
+	<target name="-get_targets">
+		<exec executable="${ANDROID}">
+			<arg line="list"/>
+			<arg line="targets"/>
+		</exec>
+		<echo>If no targets are listed you first need to run 'start_up_manager' and download some platforms</echo>
+	</target>
+	
+	<target name="-get_avds">
+		<exec executable="${ANDROID}">
+			<arg line="list"/>
+			<arg line="avds"/>
+		</exec>
+		<echo>If no AVDs are listed you first need to run 'startup_manager' and create an android virtual device.</echo>
+	</target>
+	
+	<target name="startup_manager"
+		description="Starts up the Android Dev Manager.">
+		<exec executable="${ANDROID}"/>
+	</target>
+	
+	<!--
+	
+	
+		Install Targets
+	
+	
+	-->
+	
+	<target name="install_air_on_emulator"
+		description="Installs the air runtime on the emulator.">
+		<exec executable="${ADB}">
+			<arg line="install"/>
+			<arg line="-r"/>
+			<arg line="'${EMULATOR_RUNTIME_ZIP}'"/>
+		</exec>
+	</target>
+	
+	<target name="install_air_on_device"
+		description="Installs the air runtime on the device.">
+		<exec executable="${ADB}">
+			<arg line="install"/>
+			<arg line="-r"/>
+			<arg line="'${DEVICE_RUNTIME_ZIP}'"/>
+		</exec>
+	</target>
+	
+	<!--
+	
+	
+		Debug Targets
+	
+	
+	-->
+	
+	<target name="install_debug_on_device"
+		description="Sets up debug version on device.">
+		<property name="apk.target" value="apk"/>
+		<antcall target="-install_debug_on">
+			<param name="target.install" value="d"/>
+		</antcall>
+	</target>
+	
+	<target name="install_debug_on_emulator"
+		description="Sets up debug version on emulator.">
+		<property name="apk.target" value="apk-emulator"/>
+		<antcall target="-install_debug_on">
+			<param name="target.install" value="e"/>
+		</antcall>
+	</target>
+	
+	<target name="-install_debug_on" depends="-prompt_for_app">
+		<antcall target="-init"/>
+		<antcall target="-compile">
+			<param name="DEBUG_BOOLEAN" value="true"/>
+		</antcall>
+		<antcall target="-certificate"/>
+		<antcall target="-move_descriptor"/>
+		<java jar="${ADT}" fork="true" 
+			failonerror="true"
+			maxmemory="512m">
+			<arg value="-package"/>
+			<arg value="-target"/>
+			<arg value="apk-debug"/>
+			<arg value="-connect"/>
+			<arg value="${IP_ADDRESS}"/>
+			<arg value="-storetype"/>
+			<arg value="${STORETYPE}"/>
+			<arg value="-keystore"/>
+			<arg value="${KEYSTORE}"/>
+			<arg value="-storepass"/>
+			<arg value="${CERT_PASSWORD}"/>
+			<arg value="${RELEASE_DIR}/${app.name}.${APP_RELEASE_EXTENSION}"/>
+			<arg value="${BUILD_DIR}/${app.name}-app.xml"/>
+			<arg value="-C"/>
+			<arg value="${BUILD_DIR}"/>
+			<arg value="${app.name}.swf"/>
+			<arg value="-C"/>
+			<arg value="${SOURCE_DIR}"/>
+			<arg value="assets"/>
+		</java>
+		<antcall target="-postclean"/>
+		<antcall target="-get_devices"/>
+		<exec executable="${ADB}">
+			<arg line="-${target.install}"/>
+			<arg line="install"/>
+			<arg line="-r"/>
+			<arg line="${RELEASE_DIR}/${app.name}.${APP_RELEASE_EXTENSION}"/>
+		</exec>
+		<echo></echo>
+		<echo>=================================================</echo>
+		<echo>Next Steps:</echo>
+		<echo></echo>
+		<echo>On the device, turn Wi-Fi on and connect to the same</echo>
+		<echo>network as that of the development computer.</echo>
+		<echo>Next follow the steps described in 'Starting a Flash Builder Debugger Session'</echo>
+		<echo>at http://renaun.com/blog/2010/06/debug-air-apps-on-android-with-flash-builder-4/</echo>
+		<echo>Start up the debug app by launching the application from the standard launch screen.</echo>
+	</target>
+	
+	<!--
+	
+	
+		Install App Targets
+	
+	
+	-->
+	
+	<target name="install_app_on_emulator"
+		description="Installs the application on the emulator.">
+		<property name="apk.target" value="apk-emulator"/>
+		<antcall target="-install_app_on">
+			<param name="target.install" value="e"/>
+		</antcall>
+	</target>
+	
+	<target name="install_app_on_device"
+		description="Installs the applcation on the device.">
+		<property name="apk.target" value="apk"/>
+		<antcall target="-install_app_on">
+			<param name="target.install" value="d"/>
+		</antcall>
+	</target>
+	
+	<target name="-install_app_on" depends="-prompt_for_app">
+		<antcall target="build">
+			<param name="DEBUG_BOOLEAN" value="false"/>
+		</antcall>
+		<antcall target="-get_devices"/>
+		<exec executable="${ADB}">
+			<arg line="-${target.install}"/>
+			<arg line="install"/>
+			<arg line="-r"/>
+			<arg line="${RELEASE_DIR}/${app.name}.${APP_RELEASE_EXTENSION}"/>
+		</exec>
+	</target>
+	
+	
+</project>

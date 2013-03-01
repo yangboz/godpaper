@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <!-- @ref:http://technophi.com/2011/03/08/using-ant-to-compile-a-flex-mobile-project-for-ios/ -->
 <project default="4. Package Application" name="TheKnightErrant" basedir="."> 
+	<!--location of property file -->
+	<property file="${basedir}/base.properties" description="base properities for builds" />
 	<!-- Framework properties -->
 	<property name="FLEX_HOME" value="C:\Flex\sdks\flex_sdk_4.6.0.23201BwithAIR3.6" /> 
 	<property name="AIR_GLOBAL" value="${FLEX_HOME}/frameworks/libs/air/airglobal.swc" /> 
@@ -35,7 +37,7 @@
 	<property name="main_class" value="${class_path}/${app_name}.${app_type}" />
 	<property name="build_dir" location="${app_root_dir}/build" /> 
 	<property name="debug_dir" location="${app_root_dir}/build/debug" /> 
-	<property name="publish_dir" location="${app_root_dir}/build/deploy" /> 
+	<property name="publish_dir" location="${app_root_dir}/build" /> 
 	<property name="assets_dir" location="${class_path}/${assets_dir_name}" />
 	<property name="output_loc" location="${publish_dir}/${swf_file}" />
  
@@ -86,7 +88,7 @@
 			<external-library-path file="${AIR_GLOBAL}" append="true"/>
 		</mxmlc>
 	</target>
- 
+ 	
 	<!-- Package the application to an ipa file & save it in the publish directory --> 
 	<target name="4. Package Application" depends="3. Compile SWF"> 
 		<java jar="${ADT}" fork="true" failonerror="true"> 
