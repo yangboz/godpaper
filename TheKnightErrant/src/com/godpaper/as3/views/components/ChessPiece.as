@@ -242,8 +242,8 @@ package com.godpaper.as3.views.components
 			this.scaleX = PieceConfig.scaleX;
 			this.scaleY = PieceConfig.scaleY;
 			//Set properties
-			var MoveSound:Class = AssetEmbedsDefault.SOUND_CP_MOVE;
-			this.cpMoveSound = new MoveSound();
+//			var MoveSound:Class = AssetEmbedsDefault.SOUND_CP_MOVE;
+//			this.cpMoveSound = new MoveSound();
 			// finite state machine initialization.
 			this.agent=new ChessAgent(this.name, this, null);
 			//fsm enter to default state.

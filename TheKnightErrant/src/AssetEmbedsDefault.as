@@ -55,8 +55,8 @@ package
 
 		// Sounds
 		//Refs:http://soundrangers.com/index.cfm?currentpage=3&fuseaction=category.display&category_id=554
-		[Embed(source="/assets/audio/chess_piece_move.mp3")]
-		public static const SOUND_CP_MOVE:Class;
+//		[Embed(source="/assets/audio/chess_piece_move.mp3")]
+//		public static const SOUND_CP_MOVE:Class;
 		
 		//--------------------------------------------------------------------------
 		//
