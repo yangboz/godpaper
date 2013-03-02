@@ -26,19 +26,26 @@ package com.godpaper.as3.plugins.platogo
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.configs.IndicatorConfig;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.IPlugData;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.platogo.api.PlatogoAPI;
-	import com.platogo.api.enums.PlatogoStatus;
-	import com.platogo.api.vo.PlatogoResponse;
+//	import com.platogo.api.PlatogoAPI;
+//	import com.platogo.api.enums.PlatogoStatus;
+//	import com.platogo.api.vo.PlatogoResponse;
+//	import com.platogo.components.GameHighscore;
+	
+	import flash.display.MovieClip;
+	import flash.events.Event;
 	
 	import mx.logging.ILogger;
 	import mx.utils.ObjectUtil;
 	
+	[Deprecated]
 	/**
-	 * PlatogoPlugin.as class.   	
+	 * PlatogoPlugin.as class.Deprecated this which using flash movie clip based component.
+	 * @see http://www.platogo.com/wrapper/devcenter/articles/components
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
@@ -53,6 +60,7 @@ package com.godpaper.as3.plugins.platogo
 		//
 		//--------------------------------------------------------------------------
 		private var _model:PlatogoModel;
+//		private var platogoAnimation:MovieClip;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -88,12 +96,22 @@ package com.godpaper.as3.plugins.platogo
 		
 		public function initialization():void
 		{
-			PlatogoAPI.connect(uint(data.gameID),FlexGlobals.topLevelApplication.pluginStage.stage,connectedHandler);
+//			PlatogoAPI.connect(uint(data.gameID),FlexGlobals.topLevelApplication.pluginStage.stage,connectedHandler);
+			//
+			IndicatorConfig.waiting = true;
+			//
+//			platogoAnimation = new PlatogoAnimation();
+//			platogoAnimation.x = FlexGlobals.topLevelApplication.stage.stageWidth / 2;
+//			platogoAnimation.y = FlexGlobals.topLevelApplication.stage.stageHeight / 2;
+//			
+//			platogoAnimation.addEventListener(Event.COMPLETE, completeListener, false, 0, true);
+//			FlexGlobals.topLevelApplication.stage.addChild(platogoAnimation);
+			
 		}
 		
 		public function showData():Boolean
 		{
-			LOG.debug(ObjectUtil.toString(PlatogoAPI.gameInformation) );
+//			LOG.debug(ObjectUtil.toString(PlatogoAPI.gameInformation) );
 			return false;
 		}
 		
@@ -143,13 +161,23 @@ package com.godpaper.as3.plugins.platogo
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		private function connectedHandler( response : PlatogoResponse ) : void
-		{
-			if ( response.status == PlatogoStatus.OK )
-			{
-				LOG.debug( "You are now connected to Platogo & the API is ready to be used." );
-			}
-		}
+//		private function connectedHandler( response : PlatogoResponse ) : void
+//		{
+//			if ( response.status == PlatogoStatus.OK )
+//			{
+//				LOG.debug( "You are now connected to Platogo & the API is ready to be used." );
+//			}
+//			//
+//			IndicatorConfig.waiting = false;
+////			FlexGlobals.topLevelApplication.stage.removeChild(platogoAnimation);
+//		}
+		//
+//		private function completeListener(event:Event):void 
+//		{
+//			platogoAnimation.removeEventListener(Event.COMPLETE, completeListener);
+//			
+//			trace("Platogo animation is completed - ready to continue game.");
+//		}
 	}
 	
 }

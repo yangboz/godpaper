@@ -70,7 +70,7 @@
 			<source-path path-element="../locale/{locale}"/>
 			<compiler.library-path dir="../libs"
 								   append="true">
-				<include name="PlatogoAPI_1.4.9.swc"/>
+				<include name="*.swc"/>
 			</compiler.library-path>
 		</mxmlc>
 	</target>

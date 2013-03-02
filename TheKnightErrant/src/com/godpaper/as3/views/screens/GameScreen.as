@@ -191,7 +191,14 @@ package com.godpaper.as3.views.screens
 			this.addChild(this._tabBar);
 			//
 			this._header = new Header();
-			this._header.title = playerIoPlugin.roomID;
+			if(playerIoPlugin && playerIoPlugin.roomID)
+			{
+				this._header.title = playerIoPlugin.roomID;
+			}else
+			{
+				this._header.title = FlexGlobals.topLevelApplication.pluginProvider.data.boardID;
+			}
+			
 //			this._header.title = this.resourceManager.getString(this.bundleName,"HEADER_SETTINGS");
 			this.addChild(this._header);
 			this._header.rightItems = new <DisplayObject>
