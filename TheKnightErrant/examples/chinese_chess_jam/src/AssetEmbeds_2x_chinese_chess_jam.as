@@ -47,13 +47,13 @@ package chinese_chess_jam.src
 		//  CONSTANTS
 		//----------------------------------
 		// Texture Atlas
-		[Embed(source="/assets/textures/2x/chinese_chess_jam/AtlasTexture_chinese_chess_jam.xml", mimeType="application/octet-stream")]
+		[Embed(source="../assets/textures/2x/chinese_chess_jam/AtlasTexture_chinese_chess_jam.xml", mimeType="application/octet-stream")]
 		public static const AtlasTextureXml:Class;
 		
-		[Embed(source="/assets/textures/2x/chinese_chess_jam/AtlasTexture_chinese_chess_jam.png")]
+		[Embed(source="../assets/textures/2x/chinese_chess_jam/AtlasTexture_chinese_chess_jam.png")]
 		public static const AtlasTexture:Class;
 		
-		[Embed(source="/assets/textures/2x/chinese_chess_jam/background_chinese_chess_jam.png")]
+		[Embed(source="../assets/textures/2x/chinese_chess_jam/background_chinese_chess_jam.png")]
 		public static const IMG_BACK_GROUND:Class;
 		//--------------------------------------------------------------------------
 		//
