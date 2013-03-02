@@ -1,4 +1,4 @@
-package chinese_chess_jam.src.com.godpaper.chinese_chess_jam.consts
+package com.godpaper.chinese_chess_jam.consts
 {
 	//--------------------------------------------------------------------------
 	//

@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package chinese_chess_jam.src
+package
 {
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GasketConfig;
@@ -31,10 +31,10 @@ package chinese_chess_jam.src
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	import com.godpaper.as3.utils.LogUtil;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.business.PGN_Proxy;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.business.factory.ChessFactory_ChineseChessJam;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.business.managers.ChessPieceManager_ChineseChessJam;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.service.ChineseChessJamService;
+	import com.godpaper.chinese_chess_jam.business.PGN_Proxy;
+	import com.godpaper.chinese_chess_jam.business.factory.ChessFactory_ChineseChessJam;
+	import com.godpaper.chinese_chess_jam.business.managers.ChessPieceManager_ChineseChessJam;
+	import com.godpaper.chinese_chess_jam.service.ChineseChessJamService;
 	
 	import mx.logging.ILogger;
 	import mx.logging.LogEventLevel;

@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package chinese_chess_jam.src.com.godpaper.chinese_chess_jam.business
+package com.godpaper.chinese_chess_jam.business
 {
 	import com.godpaper.as3.utils.LogUtil;
 	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.serialization.PGN;

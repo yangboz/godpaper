@@ -1,4 +1,4 @@
-package chinese_chess_jam.src.com.godpaper.chinese_chess_jam.business.managers
+package com.godpaper.chinese_chess_jam.business.managers
 {
 	import com.godpaper.as3.business.managers.ChessPiecesManagerDefault;
 	import com.godpaper.as3.configs.GameConfig;
@@ -12,7 +12,7 @@ package chinese_chess_jam.src.com.godpaper.chinese_chess_jam.business.managers
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.components.ChessGasket;
 	import com.godpaper.as3.views.components.ChessPiece;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.consts.PiecesConstants_ChineseChessJam;
+	import com.godpaper.chinese_chess_jam.consts.PiecesConstants_ChineseChessJam;
 	
 	import flash.geom.Point;
 	

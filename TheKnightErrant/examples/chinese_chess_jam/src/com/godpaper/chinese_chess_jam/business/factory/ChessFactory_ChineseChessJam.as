@@ -1,4 +1,4 @@
-package chinese_chess_jam.src.com.godpaper.chinese_chess_jam.business.factory
+package com.godpaper.chinese_chess_jam.business.factory
 {
 	import com.godpaper.as3.business.factory.ChessFactoryBase;
 	import com.godpaper.as3.consts.DefaultConstants;
@@ -8,15 +8,15 @@ package chinese_chess_jam.src.com.godpaper.chinese_chess_jam.business.factory
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.views.components.ChessPiece;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.consts.Constants_ChineseChessJam;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.consts.PiecesConstants_ChineseChessJam;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.BishopVO;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.CannonVO;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.KnightVO;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.MarshalVO;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.OfficalVO;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.PawnVO;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.RookVO;
+	import com.godpaper.chinese_chess_jam.consts.Constants_ChineseChessJam;
+	import com.godpaper.chinese_chess_jam.consts.PiecesConstants_ChineseChessJam;
+	import com.godpaper.chinese_chess_jam.vo.BishopVO;
+	import com.godpaper.chinese_chess_jam.vo.CannonVO;
+	import com.godpaper.chinese_chess_jam.vo.KnightVO;
+	import com.godpaper.chinese_chess_jam.vo.MarshalVO;
+	import com.godpaper.chinese_chess_jam.vo.OfficalVO;
+	import com.godpaper.chinese_chess_jam.vo.PawnVO;
+	import com.godpaper.chinese_chess_jam.vo.RookVO;
 	
 	import flash.geom.Point;
 	

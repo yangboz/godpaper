@@ -1,4 +1,4 @@
-package chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo
+package com.godpaper.chinese_chess_jam.vo
 {
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.consts.DefaultConstants;

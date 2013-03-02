@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package chinese_chess_jam.src.com.godpaper.chinese_chess_jam.model
+package com.godpaper.chinese_chess_jam.model
 {
 	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.pgn.ChessBookVO;
 	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.pgn.PGN_VO;
