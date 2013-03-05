@@ -65,6 +65,12 @@ Two Hit One: <a href="https://www.mochimedia.com/games/play/_v801648">https://ww
 This wiki is for programmers. More precisely, it's for programmers who favor the 'learn by example' approach.
 I don't know about you, but I�ve ready plenty of flash games where all they present are fragments of applications and small, contrived bits of code to illustrate a given point. Now, without question, that is sometimes precisely what you want. Oftentimes, however, what you really want is a whole application that is explained in its entirety so you can see how all the pieces fit together as you explore it little by little. This is precisely what this wiki seeks to do.
 
+# Maven repository
+http://repository-godpaper.forge.cloudbees.com/snapshot/com/godpaper/as3/
+
+# Jenkins CI
+http://godpaper.ci.cloudbees.com/
+
 # GODPAPER Roadmap
 
 ## Current Releases
