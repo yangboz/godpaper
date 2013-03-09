@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:348aae805f9038427e7fcf50fd3cb1cc$ -->
+<!-- $TexturePacker:SmartUpdate:ebb8dc2d21c68169526a19d76d152f7a$ -->
 <TextureAtlas imagePath="defaultAtlasTexture.png">
-    <SubTexture name="BLUE" x="2" y="2" width="35" height="30"/>
-    <SubTexture name="BLUE_JEWEL" x="39" y="2" width="1" height="1"/>
-    <SubTexture name="BLUE_ROCK" x="42" y="2" width="50" height="36"/>
-    <SubTexture name="BLUE_STAR" x="94" y="2" width="50" height="41"/>
-    <SubTexture name="GREEN_JEWEL" x="39" y="2" width="1" height="1"/>
-    <SubTexture name="ICON_ACCOUNT" x="146" y="2" width="50" height="50"/>
-    <SubTexture name="ICON_COIN" x="198" y="2" width="50" height="50"/>
-    <SubTexture name="ICON_STORE" x="2" y="54" width="50" height="50"/>
-    <SubTexture name="ICON_TOLLGATE_0" x="54" y="54" width="50" height="50"/>
-    <SubTexture name="ICON_TOLLGATE_1" x="106" y="54" width="50" height="50"/>
-    <SubTexture name="ICON_TOLLGATE_2" x="158" y="54" width="50" height="50"/>
-    <SubTexture name="ICON_TOLLGATE_3" x="2" y="106" width="50" height="50"/>
-    <SubTexture name="ICON_TOLLGATE_4" x="54" y="106" width="50" height="50"/>
-    <SubTexture name="RED" x="106" y="106" width="36" height="32"/>
-    <SubTexture name="RED_JEWEL" x="39" y="2" width="1" height="1"/>
-    <SubTexture name="RED_ROCK" x="144" y="106" width="50" height="36"/>
-    <SubTexture name="RED_STAR" x="196" y="106" width="50" height="41"/>
-    <SubTexture name="TABLE" x="2" y="158" width="89" height="66"/>
-    <SubTexture name="YELLOW_JEWEL" x="39" y="2" width="1" height="1"/>
-    <SubTexture name="en_US" x="93" y="158" width="34" height="18"/>
-    <SubTexture name="ko_KR" x="129" y="158" width="34" height="18"/>
-    <SubTexture name="normal-page-symbol" x="165" y="158" width="12" height="12"/>
-    <SubTexture name="selected-page-symbol" x="179" y="158" width="12" height="12"/>
-    <SubTexture name="zh_CN" x="193" y="158" width="34" height="18"/>
+    <SubTexture name="BLUE" x="141" y="2" width="35" height="30"/>
+    <SubTexture name="BLUE_JEWEL" x="2" y="2" width="1" height="1"/>
+    <SubTexture name="BLUE_ROCK" x="138" y="36" width="50" height="36"/>
+    <SubTexture name="BLUE_STAR" x="54" y="74" width="50" height="41"/>
+    <SubTexture name="GREEN_JEWEL" x="2" y="2" width="1" height="1"/>
+    <SubTexture name="ICON_ACCOUNT" x="54" y="178" width="50" height="50"/>
+    <SubTexture name="ICON_COIN" x="158" y="126" width="50" height="50"/>
+    <SubTexture name="ICON_STORE" x="54" y="126" width="50" height="50"/>
+    <SubTexture name="ICON_TOLLGATE_0" x="106" y="126" width="50" height="50"/>
+    <SubTexture name="ICON_TOLLGATE_1" x="106" y="74" width="50" height="50"/>
+    <SubTexture name="ICON_TOLLGATE_2" x="158" y="74" width="50" height="50"/>
+    <SubTexture name="ICON_TOLLGATE_3" x="2" y="126" width="50" height="50"/>
+    <SubTexture name="ICON_TOLLGATE_4" x="2" y="178" width="50" height="50"/>
+    <SubTexture name="RED" x="178" y="2" width="36" height="32"/>
+    <SubTexture name="RED_JEWEL" x="2" y="2" width="1" height="1"/>
+    <SubTexture name="RED_ROCK" x="190" y="36" width="50" height="36"/>
+    <SubTexture name="RED_STAR" x="2" y="74" width="50" height="41"/>
+    <SubTexture name="TABLE" x="106" y="178" width="89" height="66"/>
+    <SubTexture name="YELLOW_JEWEL" x="2" y="2" width="1" height="1"/>
+    <SubTexture name="backward" x="70" y="36" width="32" height="32"/>
+    <SubTexture name="en_US" x="33" y="2" width="34" height="18"/>
+    <SubTexture name="forward" x="216" y="2" width="32" height="32"/>
+    <SubTexture name="ko_KR" x="69" y="2" width="34" height="18"/>
+    <SubTexture name="normal-page-symbol" x="19" y="2" width="12" height="12"/>
+    <SubTexture name="play" x="104" y="36" width="32" height="32"/>
+    <SubTexture name="selected-page-symbol" x="5" y="2" width="12" height="12"/>
+    <SubTexture name="skip-backward" x="36" y="36" width="32" height="32"/>
+    <SubTexture name="skip-forward" x="2" y="36" width="32" height="32"/>
+    <SubTexture name="zh_CN" x="105" y="2" width="34" height="18"/>
 </TextureAtlas>

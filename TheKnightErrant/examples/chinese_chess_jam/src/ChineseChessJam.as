@@ -31,6 +31,7 @@ package
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.as3.views.plugin.PGN_PluginButtonBar;
 	import com.godpaper.chinese_chess_jam.business.PGN_Proxy;
 	import com.godpaper.chinese_chess_jam.business.factory.ChessFactory_ChineseChessJam;
 	import com.godpaper.chinese_chess_jam.business.managers.ChessPieceManager_ChineseChessJam;
@@ -147,6 +148,8 @@ package
 			//about plugin:
 			PluginConfig.gameID = "chinesechessjam-msf2zuz0suaip7yhtzpaa";//your custom game related id.
 			PluginConfig.boardID = "ChineseChessJam";//your custom game related board id.
+			PluginConfig.tabbarImpl = PGN_PluginButtonBar;
+			//
 			this._pluginProvider = new PlayerIoPlugin(PluginConfig.gameID,PluginConfig.boardID);//For playerIO plugin
 			this._mochiads_game_id = "47de4a85dd3e213a";//espical for mochi game platform.
 			//TextureConfig

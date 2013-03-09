@@ -24,10 +24,13 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.as3.views.plugin.IPluginButtonBar;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
 	
 	import mx.logging.ILogger;
 	import mx.logging.Log;
+	
+	import starling.display.DisplayObject;
 
 	//--------------------------------------------------------------------------
 	//
@@ -90,10 +93,12 @@ package com.godpaper.as3.tasks
 		override protected function performTask():void
 		{
 			//Plugin button bar view init
-			var pluginButtonBar:PluginButtonBar = new PluginButtonBar();
+//			var pluginButtonBar:PluginButtonBar = new PluginButtonBar();
+			var implClass:Class = PluginConfig.tabbarImpl;
+			var pluginButtonBar:IPluginButtonBar = new implClass();
 			pluginButtonBar.height = PluginConfig.buttonBarHeight;
 //			FlexGlobals.gameStage.addChild(pluginButtonBar);
-			FlexGlobals.gameScreen.addChild(pluginButtonBar);
+			FlexGlobals.gameScreen.addChild(pluginButtonBar as DisplayObject);
 			FlexGlobals.gameScreen.pluginButtonBar = pluginButtonBar;//Keep ref.
 			//
 			this.complete();

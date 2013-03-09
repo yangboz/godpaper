@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:e8b088ab174c3337cf569e3ce139ed3f$ -->
+<!-- $TexturePacker:SmartUpdate:90df7a5b1fe97b574eff22fbb66af456$ -->
 <TextureAtlas imagePath="defaultAtlasTexture.png">
     <SubTexture name="BLUE" x="2" y="2" width="71" height="59"/>
     <SubTexture name="BLUE_JEWEL" x="75" y="2" width="1" height="1"/>
@@ -21,9 +21,14 @@
     <SubTexture name="RED_STAR" x="279" y="208" width="100" height="83"/>
     <SubTexture name="TABLE" x="381" y="208" width="89" height="66"/>
     <SubTexture name="YELLOW_JEWEL" x="75" y="2" width="1" height="1"/>
-    <SubTexture name="en_US" x="472" y="208" width="34" height="18"/>
-    <SubTexture name="ko_KR" x="2" y="308" width="34" height="18"/>
-    <SubTexture name="normal-page-symbol" x="38" y="308" width="12" height="12"/>
-    <SubTexture name="selected-page-symbol" x="52" y="308" width="12" height="12"/>
-    <SubTexture name="zh_CN" x="66" y="308" width="34" height="18"/>
+    <SubTexture name="backward" x="472" y="208" width="32" height="32"/>
+    <SubTexture name="en_US" x="2" y="308" width="34" height="18"/>
+    <SubTexture name="forward" x="38" y="308" width="32" height="32"/>
+    <SubTexture name="ko_KR" x="72" y="308" width="34" height="18"/>
+    <SubTexture name="normal-page-symbol" x="108" y="308" width="12" height="12"/>
+    <SubTexture name="play" x="122" y="308" width="32" height="32"/>
+    <SubTexture name="selected-page-symbol" x="156" y="308" width="12" height="12"/>
+    <SubTexture name="skip-backward" x="170" y="308" width="32" height="32"/>
+    <SubTexture name="skip-forward" x="204" y="308" width="32" height="32"/>
+    <SubTexture name="zh_CN" x="238" y="308" width="34" height="18"/>
 </TextureAtlas>

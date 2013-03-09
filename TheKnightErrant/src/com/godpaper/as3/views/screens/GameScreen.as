@@ -45,6 +45,7 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.tasks.FillInPiecesBoxTask;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.components.ChessBoard;
+	import com.godpaper.as3.views.plugin.IPluginButtonBar;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
 	import com.godpaper.as3.views.popups.ExitComfirmIndicatory;
 	import com.lookbackon.AI.steeringBehavior.SteeredVehicle;
@@ -91,7 +92,7 @@ package com.godpaper.as3.views.screens
 		private var _button_back:Button;
 		private var _tabBar:TabBar;
 		//PluginButtonBar ref
-		public var pluginButtonBar:PluginButtonBar;
+		public var pluginButtonBar:IPluginButtonBar;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

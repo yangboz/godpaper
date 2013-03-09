@@ -1,5 +1,5 @@
 /**
- *  GODPAPER Confidential,Copyright 2012. All rights reserved.
+ *  GODPAPER Confidential,Copyright 2013. All rights reserved.
  *
  *  Permission is hereby granted, free of charge, to any person obtaining
  *  a copy of this software and associated documentation files (the "Software"),
@@ -48,14 +48,14 @@ package com.godpaper.as3.views.plugin
 	
 	
 	/**
-	 * Extending the foxhole UI component(TabBar) with customzie data provider,make it configurable and plugin-able.
+	 * PGN_PluginButtonBar.as class.For PGN file reading and replaying with (tab bar) control components. 	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Jun 19, 2012 12:53:29 PM
+	 * Created Mar 9, 2013 3:44:14 PM
 	 */   	 
-	public class PluginButtonBar extends TabBar implements IPluginButtonBar
+	public class PGN_PluginButtonBar extends TabBar implements IPluginButtonBar
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -64,20 +64,23 @@ package com.godpaper.as3.views.plugin
 		//--------------------------------------------------------------------------
 		private var theme:IFeathersTheme;
 		//
-		private var _icon_avatar:Image;
-		private var _icon_store:Image;
-		private var _icon_coin:Image;
-		private var _icon_account:Image;
+		private var _icon_skip_backward:Image;
+		private var _icon_backward:Image;
+		private var _icon_play:Image;
+		private var _icon_forward:Image;
+		private var _icon_skip_forward:Image;
 		private var _selectedIcon:Image;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(PluginButtonBar);
+		private static const LOG:ILogger = LogUtil.getLogger(PGN_PluginButtonBar);
 		//Buttonbar action identifer;
-		private static const ICON_TOLLGATE:String = "ICON_TOLLGATE_";
-		private static const ICON_STORE:String = "ICON_STORE";
-		private static const ICON_COIN:String = "ICON_COIN";
-		private static const ICON_ACCOUNT:String = "ICON_ACCOUNT";
+		private static const ICON_PLAY:String = "play";
+		private static const ICON_FORWARD:String = "forward";
+		private static const ICON_BACKWARD:String = "backward";
+		private static const ICON_SKIP_FORWARD:String = "skip-forward";
+		private static const ICON_SKIP_BACKWARD:String = "skip-backward";
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -95,7 +98,7 @@ package com.godpaper.as3.views.plugin
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PluginButtonBar()
+		public function PGN_PluginButtonBar()
 		{
 			super();
 			//
@@ -116,25 +119,12 @@ package com.godpaper.as3.views.plugin
 			}
 			super.dispose();
 		}
-		//Signal message handler
-		public function levelUpHandler(level:int):void
-		{
-//			var btnBarBtn:ButtonBarButton=this.dataGroup.getElementAt(0) as ButtonBarButton;
-//			btnBarBtn.skin["iconImage"]["source"]=GameConfig.tollgates[GameConfig.gameStateManager.level].icon;
-//			btnBarBtn.toolTip = GameConfig.tollgates[GameConfig.gameStateManager.level].tips;
-			//TODO:level up handler.
-//			this.dataProvider.getItemAt(0).defaultIcon = 
-		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		//
-		protected function get iPlug():IPlug
-		{
-			return IPlug(FlexGlobals.topLevelApplication.pluginUIComponent.provider);
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
@@ -143,41 +133,44 @@ package com.godpaper.as3.views.plugin
 		private function addToStageHandler(event:Event):void
 		{
 			//Signal listener
-			FlexGlobals.levelUpSignal.add(levelUpHandler);
+//			FlexGlobals.levelUpSignal.add(levelUpHandler);
 			//Tab bar view initialize
 			const isDesktop:Boolean = Mouse.supportsCursor;
 			//			this._theme = new AzureTheme(this.stage, !isDesktop);
-//			this.theme = new MinimalTheme(this.stage, !isDesktop);
-//			this.theme = new AeonDesktopTheme(this.stage);
-//			this.theme = new AzureTheme(this.stage, !isDesktop);
+			//			this.theme = new MinimalTheme(this.stage, !isDesktop);
+			//			this.theme = new AeonDesktopTheme(this.stage);
+			//			this.theme = new AzureTheme(this.stage, !isDesktop);
 			this.theme = ThemeConfig.getThemeImpl(this.stage, !isDesktop);
 			//Custom tab bar data provider
 			var gameLevel:int = 0;//Should dynnamic and configurable.
 			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas();
-			this._icon_avatar = new Image(atlas.getTexture(ICON_TOLLGATE.concat(gameLevel)));
-			this._icon_avatar.smoothing = TextureSmoothing.NONE;
-//			this._icon.scaleX = this._icon.scaleY = this.dpiScale;
-//			this._icon_avatar.scaleX = this._icon_avatar.scaleY = .5;
-			this._icon_store = new Image(atlas.getTexture(ICON_STORE));
-			this._icon_store.smoothing = TextureSmoothing.NONE;
-			this._icon_coin = new Image(atlas.getTexture(ICON_COIN));
-			this._icon_coin.smoothing = TextureSmoothing.NONE;
-			this._icon_account = new Image(atlas.getTexture(ICON_ACCOUNT));
-			this._icon_account.smoothing = TextureSmoothing.NONE;
-			
+			this._icon_skip_backward = new Image(atlas.getTexture(ICON_SKIP_BACKWARD));
+			this._icon_skip_backward.smoothing = TextureSmoothing.NONE;
+			//			this._icon.scaleX = this._icon.scaleY = this.dpiScale;
+			//			this._icon_avatar.scaleX = this._icon_avatar.scaleY = .5;
+			this._icon_backward = new Image(atlas.getTexture(ICON_BACKWARD));
+			this._icon_backward.smoothing = TextureSmoothing.NONE;
+			this._icon_play = new Image(atlas.getTexture(ICON_PLAY));
+			this._icon_play.smoothing = TextureSmoothing.NONE;
+			this._icon_forward = new Image(atlas.getTexture(ICON_FORWARD));
+			this._icon_forward.smoothing = TextureSmoothing.NONE;
+			this._icon_skip_forward = new Image(atlas.getTexture(ICON_SKIP_FORWARD));
+			this._icon_skip_forward.smoothing = TextureSmoothing.NONE;
+			//
 			this._selectedIcon = new Image(atlas.getTexture(DefaultConstants.RED));
 			this._selectedIcon.smoothing = TextureSmoothing.NONE;
-//			this._selectedIcon.scaleX = this._selectedIcon.scaleY = this.dpiScale;
+			//			this._selectedIcon.scaleX = this._selectedIcon.scaleY = this.dpiScale;
 			this.dataProvider = new ListCollection(
 				[
-					{ label: "", action: ICON_TOLLGATE,defaultIcon:_icon_avatar,isToggle:true,useHandCursor:true},
-					{ label: "", action: ICON_STORE,defaultIcon:_icon_store,isToggle:true},
-					{ label: "", action: ICON_COIN,defaultIcon:_icon_coin,isToggle:true},
-					{ label: "", action: ICON_ACCOUNT,defaultIcon:_icon_account,isToggle:true}
+					{ label: "", action: ICON_SKIP_BACKWARD,defaultIcon:_icon_skip_backward,isToggle:true,useHandCursor:true},
+					{ label: "", action: ICON_BACKWARD,defaultIcon:_icon_backward,isToggle:true,useHandCursor:true},
+					{ label: "", action: ICON_PLAY,defaultIcon:_icon_play,isToggle:true,useHandCursor:true},
+					{ label: "", action: ICON_FORWARD,defaultIcon:_icon_forward,isToggle:true,useHandCursor:true},
+					{ label: "", action: ICON_SKIP_FORWARD,defaultIcon:_icon_skip_forward,isToggle:true,useHandCursor:true}
 				]
 			);
 			this.validate();
-//			this.onChange.add(tabBarChangeHandler);
+			//			this.onChange.add(tabBarChangeHandler);
 			this.addEventListener(starling.events.Event.CHANGE,tabBarChangeHandler);
 			//
 			this.relayout(this.stage.stageWidth, this.stage.stageHeight);
@@ -197,26 +190,26 @@ package com.godpaper.as3.views.plugin
 			this.y = h - this.height;
 		}
 		//
-//		private function tabBarChangeHandler(tabBar:TabBar):void
+		//		private function tabBarChangeHandler(tabBar:TabBar):void
 		private function tabBarChangeHandler(event:starling.events.Event):void
 		{
 			var tabBar:TabBar = event.target as TabBar;
-//			LOG.debug("change action:{0}",tabBar.selectedItem.action);
+			//			LOG.debug("change action:{0}",tabBar.selectedItem.action);
 			switch (tabBar.selectedItem.action)
 			{
-				case ICON_TOLLGATE: //tollgate
-					iPlug.showData();
-					break;
-				case ICON_STORE: //store
-					iPlug.showStore();
-					break;
-				case ICON_COIN: //coin,leadboard
-					iPlug.showLeaderboard({boardID: iPlug.data.boardID});
-					break;
-				case ICON_ACCOUNT: //account
-					//
-					iPlug.showLoginWidget();
-					break;
+//				case ICON_TOLLGATE: //tollgate
+//					iPlug.showData();
+//					break;
+//				case ICON_STORE: //store
+//					iPlug.showStore();
+//					break;
+//				case ICON_COIN: //coin,leadboard
+//					iPlug.showLeaderboard({boardID: iPlug.data.boardID});
+//					break;
+//				case ICON_ACCOUNT: //account
+//					//
+//					iPlug.showLoginWidget();
+//					break;
 				default:
 					break;
 			}

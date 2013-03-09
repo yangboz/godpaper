@@ -1,5 +1,6 @@
 package com.godpaper.as3.configs
 {
+	import com.godpaper.as3.views.plugin.IPluginButtonBar;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
 
 	//--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ package com.godpaper.as3.configs
 		public static var boardID:String;
 		//Plugin button bar relevant properties.
 		public static var buttonBarHeight:Number=50;
+		//Customize implementation define
+		public static var tabbarImpl:Class = PluginButtonBar;//Default
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
