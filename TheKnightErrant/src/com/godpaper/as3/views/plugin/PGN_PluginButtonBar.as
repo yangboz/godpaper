@@ -31,7 +31,10 @@ package com.godpaper.as3.views.plugin
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.utils.LogUtil;
+	import com.godpaper.chinese_chess_jam.model.PGN_Model;
 	
+	import feathers.controls.Callout;
+	import feathers.controls.Label;
 	import feathers.controls.TabBar;
 	import feathers.data.ListCollection;
 	import feathers.skins.IFeathersTheme;
@@ -40,6 +43,7 @@ package com.godpaper.as3.views.plugin
 	
 	import mx.logging.ILogger;
 	
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.events.Event;
 	import starling.events.ResizeEvent;
@@ -63,6 +67,8 @@ package com.godpaper.as3.views.plugin
 		//
 		//--------------------------------------------------------------------------
 		private var theme:IFeathersTheme;
+		//
+		private var pgnModel:PGN_Model = PGN_Model.getInstance();
 		//
 		private var _icon_skip_backward:Image;
 		private var _icon_backward:Image;
@@ -162,13 +168,14 @@ package com.godpaper.as3.views.plugin
 			//			this._selectedIcon.scaleX = this._selectedIcon.scaleY = this.dpiScale;
 			this.dataProvider = new ListCollection(
 				[
-					{ label: "", action: ICON_SKIP_BACKWARD,defaultIcon:_icon_skip_backward,isToggle:true,useHandCursor:true},
-					{ label: "", action: ICON_BACKWARD,defaultIcon:_icon_backward,isToggle:true,useHandCursor:true},
+					{ label: "", action: ICON_SKIP_BACKWARD,defaultIcon:_icon_skip_backward,isToggle:false,useHandCursor:true},
+					{ label: "", action: ICON_BACKWARD,defaultIcon:_icon_backward,isToggle:false,useHandCursor:true},
 					{ label: "", action: ICON_PLAY,defaultIcon:_icon_play,isToggle:true,useHandCursor:true},
-					{ label: "", action: ICON_FORWARD,defaultIcon:_icon_forward,isToggle:true,useHandCursor:true},
-					{ label: "", action: ICON_SKIP_FORWARD,defaultIcon:_icon_skip_forward,isToggle:true,useHandCursor:true}
+					{ label: "", action: ICON_FORWARD,defaultIcon:_icon_forward,isToggle:false,useHandCursor:true},
+					{ label: "", action: ICON_SKIP_FORWARD,defaultIcon:_icon_skip_forward,isToggle:false,useHandCursor:true}
 				]
 			);
+			this.selectedIndex = 2;//Default tabbar selection.
 			this.validate();
 			//			this.onChange.add(tabBarChangeHandler);
 			this.addEventListener(starling.events.Event.CHANGE,tabBarChangeHandler);
@@ -176,6 +183,10 @@ package com.godpaper.as3.views.plugin
 			this.relayout(this.stage.stageWidth, this.stage.stageHeight);
 			//
 			this.stage.addEventListener(ResizeEvent.RESIZE, stageResizeHandler);
+			//Default title
+			const content:Label = new Label();
+			content.text = pgnModel.chessbookVO.title;
+			Callout.show(DisplayObject(content), this.getChildAt(2), Callout.DIRECTION_UP);
 		}
 		//
 		private function stageResizeHandler(event:ResizeEvent):void
@@ -197,19 +208,24 @@ package com.godpaper.as3.views.plugin
 			//			LOG.debug("change action:{0}",tabBar.selectedItem.action);
 			switch (tabBar.selectedItem.action)
 			{
-//				case ICON_TOLLGATE: //tollgate
-//					iPlug.showData();
-//					break;
-//				case ICON_STORE: //store
-//					iPlug.showStore();
-//					break;
-//				case ICON_COIN: //coin,leadboard
-//					iPlug.showLeaderboard({boardID: iPlug.data.boardID});
-//					break;
-//				case ICON_ACCOUNT: //account
-//					//
-//					iPlug.showLoginWidget();
-//					break;
+				case ICON_SKIP_BACKWARD: //
+					//
+					break;
+				case ICON_BACKWARD: //
+					//
+					break;
+				case ICON_PLAY: //
+					//
+					const content:Label = new Label();
+					content.text = pgnModel.chessbookVO.title;
+					Callout.show(DisplayObject(content), tabBar.getChildAt(2), Callout.DIRECTION_UP);
+					break;
+				case ICON_FORWARD: //
+					//
+					break;
+				case ICON_SKIP_FORWARD: //
+					//
+					break;
 				default:
 					break;
 			}

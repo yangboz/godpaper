@@ -181,7 +181,8 @@ package com.godpaper.as3.views.components
 			//Set enable/disable under multi player mode.
 			if(!FlexGlobals.userModel.hosterRoleIndex)//Default index 0
 			{
-				this.touchable = (value==DefaultConstants.FLAG_RED);//Default flag RED
+				//Disable the user operation on PGN replay model.
+				this.touchable = (value==DefaultConstants.FLAG_RED) && (GameConfig.playMode!=GameConfig.HUMAN_READ_PGN);//Default flag RED
 			}else
 			{
 				this.touchable = (value==DefaultConstants.FLAG_GREEN);//Another human flag is GREEN
