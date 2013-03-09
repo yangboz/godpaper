@@ -22,8 +22,8 @@
 package com.godpaper.chinese_chess_jam.business
 {
 	import com.godpaper.as3.utils.LogUtil;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.serialization.PGN;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.serialization.PGNDecoder;
+	import com.godpaper.chinese_chess_jam.serialization.PGN;
+	import com.godpaper.chinese_chess_jam.serialization.PGNDecoder;
 	
 	import flash.display.Loader;
 	import flash.events.Event;

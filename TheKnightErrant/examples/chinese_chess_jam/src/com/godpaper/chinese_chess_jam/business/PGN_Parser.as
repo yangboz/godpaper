@@ -22,10 +22,10 @@
 package com.godpaper.chinese_chess_jam.business
 {
 	import com.godpaper.as3.utils.LogUtil;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.model.PGN_Model;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.pgn.ChessBookMoveVO;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.pgn.ChessBookVO;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.pgn.PGN_VO;
+	import com.godpaper.chinese_chess_jam.model.PGN_Model;
+	import com.godpaper.chinese_chess_jam.vo.pgn.ChessBookMoveVO;
+	import com.godpaper.chinese_chess_jam.vo.pgn.ChessBookVO;
+	import com.godpaper.chinese_chess_jam.vo.pgn.PGN_VO;
 	
 	import mx.logging.ILogger;
 	import mx.utils.StringUtil;

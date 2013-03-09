@@ -21,8 +21,8 @@
  */
 package com.godpaper.chinese_chess_jam.model
 {
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.pgn.ChessBookVO;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.vo.pgn.PGN_VO;
+	import com.godpaper.chinese_chess_jam.vo.pgn.ChessBookVO;
+	import com.godpaper.chinese_chess_jam.vo.pgn.PGN_VO;
 	
 	import mx.utils.ObjectUtil;
 

@@ -161,8 +161,8 @@ package
 			LoggerConfig.filters = ["*"];
 			LoggerConfig.level = LogEventLevel.DEBUG;
 			//PGNs testing
-//			var pgnProxy:PGN_Proxy = new PGN_Proxy();
-//			pgnProxy.load("assets/PGNs/N01顺炮横车破直车弃马局(UTF8).PGN");//和合二炮(utf8).PGN//N01顺炮横车破直车弃马局(UTF8).PGN
+			var pgnProxy:PGN_Proxy = new PGN_Proxy();
+			pgnProxy.load("../examples/chinese_chess_jam/assets/PGNs/N01顺炮横车破直车弃马局(UTF8).PGN");//和合二炮(utf8).PGN//N01顺炮横车破直车弃马局(UTF8).PGN
 		}
 		//--------------------------------------------------------------------------
 		//

@@ -65,7 +65,6 @@ package com.godpaper.chinese_chess_jam.business.factory
 		//--------------------------------------------------------------------------
 		public function ChessFactory_ChineseChessJam()
 		{
-			//TODO: implement function
 			super();
 		}
 
