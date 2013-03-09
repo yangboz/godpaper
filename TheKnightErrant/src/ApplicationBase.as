@@ -42,7 +42,6 @@ package
 	import com.godpaper.as3.core.IGameStateManager;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.plugins.PluginUIComponent;
-	import com.godpaper.as3.plugins.platogo.PlatogoPlugin;
 	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;

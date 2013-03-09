@@ -42,6 +42,7 @@ package com.godpaper.as3.configs
 		//----------------------------------
 		public static const HUMAN_VS_COMPUTER:String = "human vs computer.";
 		public static const HUMAN_VS_HUMAN:String = "human vs human.";
+		public static const HUMAN_READ_PGN:String = "human with PGN file.";
 		//
 		public static const DEFAULT_WIDTH:Number = 320;
 		public static const DEFUALT_HEIGHT:Number = 480;

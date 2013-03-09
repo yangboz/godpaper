@@ -27,8 +27,11 @@ package com.godpaper.as3.views.screens
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.views.plugin.PGN_PluginButtonBar;
+	import com.godpaper.as3.views.plugin.PluginButtonBar;
 	
 	import feathers.controls.Button;
 	import feathers.controls.Header;
@@ -65,6 +68,7 @@ package com.godpaper.as3.views.screens
 		private var _container:ScrollContainer;
 		private var _header:Header;
 		//Menu buttons
+		private var _singlePlayPgnButton:Button;//PGN file.
 		private var _singlePlayButton:Button;
 		private var _multiPlayButton:Button;
 		private var _creditButton:Button;
@@ -101,6 +105,16 @@ package com.godpaper.as3.views.screens
 			this._container.layout = layout;
 //			this._container.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			this.addChild(this._container);
+			//
+			_singlePlayPgnButton = new Button();
+			_singlePlayPgnButton.label = "PGN Replay";
+//			_singlePlayPgnButton.label = this.resourceManager.getString(this.bundleName,"BTN_SINGLE_PGN");
+			_singlePlayPgnButton.width =  200 * this.dpiScale;
+			_singlePlayPgnButton.height = 100 * this.dpiScale;
+			//			_singlePlayPgnButton.onRelease.addOnce(singlePlayButton_onRelease);
+			_singlePlayPgnButton.addEventListener(starling.events.Event.TRIGGERED,singlePlayPgnButton_onRelease);
+			this._container.addChild(_singlePlayPgnButton);
+			//			this.addChild(_singlePlayButton);
 			//
 			_singlePlayButton = new Button();
 //			_singlePlayButton.label = "Single Play";
@@ -189,10 +203,20 @@ package com.godpaper.as3.views.screens
 			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_SETTINGS);
 		}
 		//
+		private function singlePlayPgnButton_onRelease(event:Event):void
+		{
+			//Register the play mode of game.
+			GameConfig.playMode = GameConfig.HUMAN_READ_PGN;
+			PluginConfig.tabbarImpl = PGN_PluginButtonBar;//Another plugin button bar impl.
+			//Screen swither here.
+			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);
+		}
+		//
 		private function singlePlayButton_onRelease(event:Event):void
 		{
 			//Register the play mode of game.
 			GameConfig.playMode = GameConfig.HUMAN_VS_COMPUTER;
+			PluginConfig.tabbarImpl = PluginButtonBar;//Default plugin button bar impl.
 			//Screen swither here.
 			FlexGlobals.screenNavigator.showScreen(DefaultConstants.SCREEN_GAME);
 		}
@@ -201,6 +225,7 @@ package com.godpaper.as3.views.screens
 		{
 			//Register the play mode of game.
 			GameConfig.playMode = GameConfig.HUMAN_VS_HUMAN;
+			PluginConfig.tabbarImpl = PluginButtonBar;//Default plugin button bar impl.
 			var isUDPsupport:Boolean = false;//TODO:should dynamic check the UDP based p2p functionality.
 			//Screen swither here.
 			if(isUDPsupport)
