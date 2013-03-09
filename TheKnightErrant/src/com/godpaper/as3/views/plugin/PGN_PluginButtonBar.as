@@ -203,6 +203,7 @@ package com.godpaper.as3.views.plugin
 		}
 		//
 		//		private function tabBarChangeHandler(tabBar:TabBar):void
+		private var currentChessbookIndex:int = 0;
 		private function tabBarChangeHandler(event:starling.events.Event):void
 		{
 			var tabBar:TabBar = event.target as TabBar;
@@ -211,21 +212,33 @@ package com.godpaper.as3.views.plugin
 			{
 				case ICON_SKIP_BACKWARD: //
 					//
+					currentChessbookIndex  = 0;
+					const content0:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.body[currentChessbookIndex].redComments);
+					Callout.show(DisplayObject(content0), tabBar.getChildAt(0), Callout.DIRECTION_UP);
 					break;
 				case ICON_BACKWARD: //
 					//
+					if(currentChessbookIndex) currentChessbookIndex--;
+					const content1:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.body[currentChessbookIndex].redMove);
+					Callout.show(DisplayObject(content1), tabBar.getChildAt(1), Callout.DIRECTION_UP);
 					break;
 				case ICON_PLAY: //
 					//
 //					const content:Label = new Label();
-					const content:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.title);
-					Callout.show(DisplayObject(content), tabBar.getChildAt(2), Callout.DIRECTION_UP);
+					const content2:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.title);
+					Callout.show(DisplayObject(content2), tabBar.getChildAt(2), Callout.DIRECTION_UP);
 					break;
 				case ICON_FORWARD: //
 					//
+					if(currentChessbookIndex<pgnModel.chessbookVO.body.length-1) currentChessbookIndex++;
+					const content3:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.body[currentChessbookIndex].blackComments);
+					Callout.show(DisplayObject(content3), tabBar.getChildAt(3), Callout.DIRECTION_UP);
 					break;
 				case ICON_SKIP_FORWARD: //
 					//
+					currentChessbookIndex  = pgnModel.chessbookVO.body.length-1;
+					const content4:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.body[currentChessbookIndex].blackMove);
+					Callout.show(DisplayObject(content4), tabBar.getChildAt(4), Callout.DIRECTION_UP);
 					break;
 				default:
 					break;
