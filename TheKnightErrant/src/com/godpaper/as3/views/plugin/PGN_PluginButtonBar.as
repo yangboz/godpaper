@@ -47,6 +47,7 @@ package com.godpaper.as3.views.plugin
 	import starling.display.Image;
 	import starling.events.Event;
 	import starling.events.ResizeEvent;
+	import starling.text.TextField;
 	import starling.textures.TextureAtlas;
 	import starling.textures.TextureSmoothing;
 	
@@ -184,8 +185,8 @@ package com.godpaper.as3.views.plugin
 			//
 			this.stage.addEventListener(ResizeEvent.RESIZE, stageResizeHandler);
 			//Default title
-			const content:Label = new Label();
-			content.text = pgnModel.chessbookVO.title;
+//			const content:Label = new Label();
+			const content:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.title);
 			Callout.show(DisplayObject(content), this.getChildAt(2), Callout.DIRECTION_UP);
 		}
 		//
@@ -216,8 +217,8 @@ package com.godpaper.as3.views.plugin
 					break;
 				case ICON_PLAY: //
 					//
-					const content:Label = new Label();
-					content.text = pgnModel.chessbookVO.title;
+//					const content:Label = new Label();
+					const content:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.title);
 					Callout.show(DisplayObject(content), tabBar.getChildAt(2), Callout.DIRECTION_UP);
 					break;
 				case ICON_FORWARD: //
