@@ -26,6 +26,7 @@ package
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
+	import com.godpaper.as3.configs.TextureConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessPieceManager;
@@ -127,7 +128,7 @@ package
 			//			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 			//			BoardConfig.backgroundImage = new Image(texture);
 			//Pieces box config:
-			BoardConfig.piecesBoxRequired = true;
+//			BoardConfig.piecesBoxRequired = true;
 			//			BoardConfig.piecesBoxBgImage = null;
 			//gasket config:
 			GasketConfig.maxPoolSize = 361;
@@ -140,8 +141,8 @@ package
 			PieceConfig.maxPoolSizeBlue = 180;
 			PieceConfig.maxPoolSizeRed = 180;
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
-			PieceConfig.scaleX = 1;
-			PieceConfig.scaleY = 1;
+			PieceConfig.scaleX = .8;
+			PieceConfig.scaleY = .8;
 			//about plugin:
 			PluginConfig.gameID = "34331f335e39fb05";//your custom game related id.
 //			PluginConfig.boardID = "51c558cd0315f8e7";//your custom game related board id.
@@ -149,6 +150,9 @@ package
 			//Stats configure
 			//Displays the statistics box at a certain position.
 			PluginConfig.showStats = false;
+			//TextureConfig
+			TextureConfig.AssetEmbeds_1x_class=AssetEmbeds_1x_the_go;
+//			TextureConfig.AssetEmbeds_2x_class=AssetEmbeds_2x;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);

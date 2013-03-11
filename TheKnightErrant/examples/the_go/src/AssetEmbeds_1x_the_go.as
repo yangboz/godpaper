@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package the_chess_jam.src
+package 
 {
 	//--------------------------------------------------------------------------
 	//
@@ -28,7 +28,7 @@ package the_chess_jam.src
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * AssetEmbeds_1x_the_go.as class.   	
+	 * AssetEmbeds_1x_the_chess_jam.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
@@ -47,13 +47,13 @@ package the_chess_jam.src
 		//  CONSTANTS
 		//----------------------------------
 		// Texture Atlas
-		[Embed(source="/assets/textures/1x/AtlasTexture_the_go.xml", mimeType="application/octet-stream")]
+		[Embed(source="../assets/textures/1x/AtlasTexture_the_go.xml", mimeType="application/octet-stream")]
 		public static const AtlasTextureXml:Class;
 		
-		[Embed(source="/assets/textures/1x/AtlasTexture_the_go.png")]
+		[Embed(source="../assets/textures/1x/AtlasTexture_the_go.png")]
 		public static const AtlasTexture:Class;
 		
-//		[Embed(source="/assets/textures/1x/background_the_chess_jam.png")]
+//		[Embed(source="/assets/textures/1x/the_chess_jam/background_the_chess_jam.png")]
 //		public static const IMG_BACK_GROUND:Class;
 		//--------------------------------------------------------------------------
 		//

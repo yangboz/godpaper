@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:a17b5bd9c32cf028a09baa6df40b2185$ -->
+<TextureAtlas imagePath="AtlasTexture_the_go.png">
+    <SubTexture name="BLUE" x="2" y="2" width="28" height="28"/>
+    <SubTexture name="RED" x="32" y="2" width="28" height="28"/>
+</TextureAtlas>
