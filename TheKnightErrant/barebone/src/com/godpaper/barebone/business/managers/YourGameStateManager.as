@@ -28,7 +28,7 @@ package src.com.godpaper.barebone.business.managers
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 	import com.godpaper.as3.consts.DefaultConstants;
-	import src.com.godpaper.barebone.business.fsm.states.game.YourComputerState;
+	import com.godpaper.the_go.business.fsm.states.game.ComputerState_TheGo;
 	
 	/**
 	 * YourGameStateManager.as class.   	
@@ -82,7 +82,7 @@ package src.com.godpaper.barebone.business.managers
 			//don't forget set turn now flag.
 			_roles = TURN_NOW_COMPUTER;
 			//delegate fsm transition to computer state.
-			agent.fsm.changeState(new YourComputerState(agent, null, DefaultConstants.STATE_COMPUTER));
+			agent.fsm.changeState(new ComputerState_TheGo(agent, null, DefaultConstants.STATE_COMPUTER));
 		}
 		//--------------------------------------------------------------------------
 		//

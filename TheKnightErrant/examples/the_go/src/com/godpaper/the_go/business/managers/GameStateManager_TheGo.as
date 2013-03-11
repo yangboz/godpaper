@@ -19,24 +19,26 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.chinese_chess_jam.vo.pgn
+package com.godpaper.the_go.business.managers
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.business.managers.GameStateManagerDefault;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.the_go.business.fsm.states.game.ComputerState_TheGo;
 	
 	/**
-	 * ECCO（Encyclopedia of Chinese Chess Openings)，它是中国象棋开局类型的编号体系 。
-	 * @see http://www.xqbase.com/ecco/ecco_intro.htm
+	 * YourGameStateManager.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Aug 3, 2012 2:07:37 PM
+	 * Created Oct 10, 2012 2:04:06 PM
 	 */   	 
-	public class ECCO_VO
+	public class GameStateManager_TheGo extends GameStateManagerDefault
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -65,13 +67,23 @@ package com.godpaper.chinese_chess_jam.vo.pgn
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		
+		public function GameStateManager_TheGo()
+		{
+			//TODO: implement function
+			super();
+		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		
+		override public function isComputerTurnNow():void
+		{
+			//don't forget set turn now flag.
+			_roles = TURN_NOW_COMPUTER;
+			//delegate fsm transition to computer state.
+			agent.fsm.changeState(new ComputerState_TheGo(agent, null, DefaultConstants.STATE_COMPUTER));
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

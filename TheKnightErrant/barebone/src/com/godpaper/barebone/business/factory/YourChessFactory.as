@@ -36,7 +36,7 @@ package src.com.godpaper.barebone.business.factory
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.views.components.ChessPiece;
-	import src.com.godpaper.barebone.model.vo.YourChessVO;
+	import com.godpaper.the_go.model.vo.ChessVO_TheGo;
 	
 	import flash.geom.Point;
 	
@@ -130,10 +130,10 @@ package src.com.godpaper.barebone.business.factory
 			switch ((conductVO.target as ChessPiece).name)
 			{
 				case DefaultPiecesConstants.BLUE.label:
-					chessVO=new YourChessVO(4,4,oRowIndex, oColIndex,DefaultConstants.FLAG_BLUE);
+					chessVO=new ChessVO_TheGo(4,4,oRowIndex, oColIndex,DefaultConstants.FLAG_BLUE);
 					break;
 				case DefaultPiecesConstants.RED.label:
-					chessVO=new YourChessVO(4, 4, oRowIndex, oColIndex,DefaultConstants.FLAG_RED);
+					chessVO=new ChessVO_TheGo(4, 4, oRowIndex, oColIndex,DefaultConstants.FLAG_RED);
 					break;
 				default:
 					break;

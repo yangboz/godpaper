@@ -19,13 +19,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.chinese_chess_jam.model
+package com.godpaper.as3.model.vos.pgn
 {
-	import com.godpaper.chinese_chess_jam.vo.pgn.ChessBookVO;
-	import com.godpaper.chinese_chess_jam.vo.pgn.PGN_VO;
-	
-	import mx.utils.ObjectUtil;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -33,25 +28,22 @@ package com.godpaper.chinese_chess_jam.model
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * PGN_Model.as class.   	
+	 * ECCO（Encyclopedia of Chinese Chess Openings)，它是中国象棋开局类型的编号体系 。
+	 * @see http://www.xqbase.com/ecco/ecco_intro.htm
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Aug 14, 2012 3:26:12 PM
+	 * Created Aug 3, 2012 2:07:37 PM
 	 */   	 
-	public class PGN_Model
+	public class ECCO_VO
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		public var source:String;
-		public var pgnVO:PGN_VO;
-		public var chessbookVO:ChessBookVO;
-		//
-		private static var instance:PGN_Model = new PGN_Model();
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -73,24 +65,13 @@ package com.godpaper.chinese_chess_jam.model
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PGN_Model()
-		{
-			if( instance ) throw new Error( "PGN_Model and can only be accessed through PGN_Model.getInstance()" ); 
-		}     	
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		public static function getInstance():PGN_Model 
-		{
-			return instance;
-		}
-		//
-		public function toString():String
-		{
-			return ObjectUtil.toString(this);
-		}
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

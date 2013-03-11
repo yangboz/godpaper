@@ -19,48 +19,39 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package the_bejeweled_jam.src.com.godpaper.the_bejeweled_jam.business.fsm.states.game
+package com.godpaper.as3.model.vos.pgn
 {
+	import mx.utils.ObjectUtil;
+
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.adobe.cairngorm.task.SequenceTask;
-	import com.godpaper.as3.business.fsm.states.game.ComputerState;
-	import com.godpaper.as3.configs.GameConfig;
-	import com.godpaper.as3.model.ChessPiecesModel;
-	import com.godpaper.as3.model.vos.ConductVO;
-	import com.godpaper.as3.tasks.CreateChessPieceTask;
-	import com.godpaper.as3.tasks.CreateChessVoTask;
-	import com.godpaper.as3.utils.MathUtil;
-	import com.godpaper.as3.views.components.ChessPiece;
-	import com.godpaper.the_go.business.factory.ChessFactory_TheGo;
-	import com.lookbackon.AI.FSM.IAgent;
-	import com.masterbaboon.AdvancedMath;
-	
-	import flash.geom.Point;
 	
 	/**
-	 * ComputerState_TheBejeweledJam.as class.   	
+	 * ChessMoveVO.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Oct 10, 2012 1:44:35 PM
+	 * Created Aug 7, 2012 11:33:24 AM
 	 */   	 
-	public class ComputerState_TheBejeweledJam extends ComputerState
+	public class ChessBookMoveVO
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		public var redMove:String = "";
+		public var redComments:String = "";
+		public var blackMove:String = "";
+		public var blackComments:String = "";
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		public static const LEN_OF_MOVE_CHAR:int = 4;//"炮2平5"
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -78,42 +69,15 @@ package the_bejeweled_jam.src.com.godpaper.the_bejeweled_jam.business.fsm.states
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ComputerState_TheBejeweledJam(agent:IAgent, resource:Object, description:String=null)
-		{
-			//TODO: implement function
-			super(agent, resource, description);
-		}     	
+		     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function update(time:Number=0):void
+		public function toString():String
 		{
-			//None special algorithm searching here.
-			var blue0:ChessPiece = chessPiecesModel.blues[0];
-			var conductVO:ConductVO = new ConductVO();
-			conductVO.target = blue0;
-			conductVO.previousPosition = blue0.position;
-			conductVO.nextPosition = blue0.position;
-			GameConfig.chessPieceManager.applyMove(conductVO);
-			//reset this number of pieces and colors.
-//			YourChessFactory.dataProvider = ChessFacotryHelper_ColorLines.randomColorfulPieces();
-			//mark indicators
-			//FIXME: with invalid implmementation.
-			var mark:String = "Next: ";
-			for(var i:int=0;i<ChessFactory_TheGo.dataProvider.length;i++)
-			{
-				mark = mark.concat(ChessFactory_TheGo.dataProvider[i].color," , ");
-			}
-			//			Application.application.nextColorsLabel.text = mark;
-			//According to the color lines rule,just append 3 pieces on the board.
-			var task:SequenceTask = new SequenceTask();
-			var createChessPieceTask:CreateChessPieceTask = new  CreateChessPieceTask(ChessFactory_TheGo);
-			var createChessVoTask:CreateChessVoTask = new CreateChessVoTask(ChessFactory_TheGo);
-			task.addChild(createChessPieceTask);
-			task.addChild(createChessVoTask);
-			task.start();
+			return ObjectUtil.toString(this);
 		}
 		//--------------------------------------------------------------------------
 		//

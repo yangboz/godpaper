@@ -31,7 +31,7 @@ package com.godpaper.as3.views.plugin
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.chinese_chess_jam.model.PGN_Model;
+	import com.godpaper.as3.model.PGN_Model;
 	
 	import feathers.controls.Button;
 	import feathers.controls.ButtonGroup;

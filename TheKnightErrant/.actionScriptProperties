@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties analytics="false" mainApplicationPath="/TheKnightErrant/examples/chinese_chess_jam/TheKnightErrant/src/ApplicationBase.as" projectUUID="6f88bb7c-7e6a-4f46-9960-bdfbd372f854" version="11">
-  <compiler additionalCompilerArguments="-locale=en_US,zh_CN,ko_KR -source-path+=../locale/{locale} -allow-source-path-overlap=true" advancedTelemetry="false" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="examples/chinese_chess_jam/src" strict="true" targetPlayerVersion="11.1.0" useApolloConfig="false" useDebugRSLSwfs="true" useFlashSDK="true" verifyDigests="true" warn="true">
+<actionScriptProperties analytics="false" mainApplicationPath="TheGo.as" projectUUID="6f88bb7c-7e6a-4f46-9960-bdfbd372f854" version="10">
+  <compiler additionalCompilerArguments="-locale=en_US,zh_CN,ko_KR -source-path+=../locale/{locale} -allow-source-path-overlap=true" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="examples/the_go/src" strict="true" targetPlayerVersion="11.1.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="locale/{locale}"/>
-      <compilerSourcePathEntry kind="1" linkType="1" path="barebone"/>
-      <compilerSourcePathEntry kind="1" linkType="1" path="examples"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="src"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="0">
@@ -42,13 +40,13 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="ChineseChessJam.as"/>
+    <application path="TheKnightErrant/examples/chinese_chess_jam/TheKnightErrant/src/ApplicationBase.as"/>
     <application path="TheKnightErrant/examples/chinese_chess_jam/TheKnightErrant/src/FlexUnitCompilerApplication.as"/>
     <application path="TheKnightErrant/examples/chinese_chess_jam/TheKnightErrant/src/FlexUnitApplication.as"/>
-    <application path="TheKnightErrant/examples/chinese_chess_jam/TheKnightErrant/src/ApplicationBase.as"/>
+    <application path="ChineseChessJam.as"/>
+    <application path="TheGo.as"/>
   </applications>
   <modules/>
-  <workers/>
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
 </actionScriptProperties>

@@ -19,39 +19,36 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.chinese_chess_jam.vo.pgn
+package com.godpaper.the_go.model.vo
 {
-	import mx.utils.ObjectUtil;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.impl.AbstractChessVO;
+	
 	
 	/**
-	 * ChessMoveVO.as class.   	
+	 * YourChessVO.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Aug 7, 2012 11:33:24 AM
+	 * Created Oct 10, 2012 1:36:02 PM
 	 */   	 
-	public class ChessBookMoveVO
+	public class ChessVO_TheGo extends AbstractChessVO
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		public var redMove:String = "";
-		public var redComments:String = "";
-		public var blackMove:String = "";
-		public var blackComments:String = "";
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		public static const LEN_OF_MOVE_CHAR:int = 4;//"炮2平5"
+		
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -69,15 +66,18 @@ package com.godpaper.chinese_chess_jam.vo.pgn
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		     	
+		public function ChessVO_TheGo(width:int, height:int, rowIndex:int, colIndex:int, flag:uint=0, identifier:String="")
+		{
+			super(width, height, rowIndex, colIndex, flag, identifier);
+		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		public function toString():String
+		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
-			return ObjectUtil.toString(this);
+			//TODO: implement function
 		}
 		//--------------------------------------------------------------------------
 		//

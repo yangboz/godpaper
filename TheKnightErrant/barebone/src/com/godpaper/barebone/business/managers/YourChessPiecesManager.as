@@ -85,6 +85,7 @@ package src.com.godpaper.barebone.business.managers
 		override public function doMoveValidation(conductVO:ConductVO):Boolean
 		{
 			//TODO: implement function
+			return true;
 		}
 		//--------------------------------------------------------------------------
 		//

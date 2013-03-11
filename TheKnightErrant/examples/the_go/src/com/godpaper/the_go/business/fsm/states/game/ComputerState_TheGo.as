@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package the_bejeweled_jam.src.com.godpaper.the_bejeweled_jam.business.fsm.states.game
+package com.godpaper.the_go.business.fsm.states.game
 {
 	//--------------------------------------------------------------------------
 	//
@@ -42,14 +42,14 @@ package the_bejeweled_jam.src.com.godpaper.the_bejeweled_jam.business.fsm.states
 	import flash.geom.Point;
 	
 	/**
-	 * ComputerState_TheBejeweledJam.as class.   	
+	 * YourComputerState.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Oct 10, 2012 1:44:35 PM
 	 */   	 
-	public class ComputerState_TheBejeweledJam extends ComputerState
+	public class ComputerState_TheGo extends ComputerState
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -78,7 +78,7 @@ package the_bejeweled_jam.src.com.godpaper.the_bejeweled_jam.business.fsm.states
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ComputerState_TheBejeweledJam(agent:IAgent, resource:Object, description:String=null)
+		public function ComputerState_TheGo(agent:IAgent, resource:Object, description:String=null)
 		{
 			//TODO: implement function
 			super(agent, resource, description);

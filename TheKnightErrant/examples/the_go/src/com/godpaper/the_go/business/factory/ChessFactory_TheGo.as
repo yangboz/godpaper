@@ -19,44 +19,45 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package the_bejeweled_jam.src.com.godpaper.the_bejeweled_jam.business.fsm.states.game
+package com.godpaper.the_go.business.factory
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
-	import com.adobe.cairngorm.task.SequenceTask;
-	import com.godpaper.as3.business.fsm.states.game.ComputerState;
-	import com.godpaper.as3.configs.GameConfig;
+	import com.godpaper.as3.business.factory.ChessFactoryBase;
+	import com.godpaper.as3.consts.DefaultConstants;
+	import com.godpaper.as3.consts.DefaultPiecesConstants;
+	import com.godpaper.as3.core.IChessPiece;
+	import com.godpaper.as3.core.IChessVO;
 	import com.godpaper.as3.model.ChessPiecesModel;
+	import com.godpaper.as3.model.vos.ColorPositionVO;
 	import com.godpaper.as3.model.vos.ConductVO;
-	import com.godpaper.as3.tasks.CreateChessPieceTask;
-	import com.godpaper.as3.tasks.CreateChessVoTask;
-	import com.godpaper.as3.utils.MathUtil;
+	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.views.components.ChessPiece;
-	import com.godpaper.the_go.business.factory.ChessFactory_TheGo;
-	import com.lookbackon.AI.FSM.IAgent;
-	import com.masterbaboon.AdvancedMath;
+	import com.godpaper.the_go.model.vo.ChessVO_TheGo;
 	
 	import flash.geom.Point;
 	
 	/**
-	 * ComputerState_TheBejeweledJam.as class.   	
+	 * YourChessFactory.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Oct 10, 2012 1:44:35 PM
+	 * Created Oct 10, 2012 1:35:01 PM
 	 */   	 
-	public class ComputerState_TheBejeweledJam extends ComputerState
+	public class ChessFactory_TheGo extends ChessFactoryBase
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		//with initialization
+//		public static var dataProvider:Vector.<ColorPositionVO> = ChessFacotryHelper_ColorLines.randomColorfulPieces();
+		public static var dataProvider:Vector.<ColorPositionVO>;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -78,42 +79,85 @@ package the_bejeweled_jam.src.com.godpaper.the_bejeweled_jam.business.fsm.states
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function ComputerState_TheBejeweledJam(agent:IAgent, resource:Object, description:String=null)
+		public function ChessFactory_TheGo()
 		{
 			//TODO: implement function
-			super(agent, resource, description);
+			super();
 		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		override public function update(time:Number=0):void
+		override public function createChessPiece(position:Point, flag:uint=0):IChessPiece
 		{
-			//None special algorithm searching here.
-			var blue0:ChessPiece = chessPiecesModel.blues[0];
-			var conductVO:ConductVO = new ConductVO();
-			conductVO.target = blue0;
-			conductVO.previousPosition = blue0.position;
-			conductVO.nextPosition = blue0.position;
-			GameConfig.chessPieceManager.applyMove(conductVO);
-			//reset this number of pieces and colors.
-//			YourChessFactory.dataProvider = ChessFacotryHelper_ColorLines.randomColorfulPieces();
-			//mark indicators
-			//FIXME: with invalid implmementation.
-			var mark:String = "Next: ";
-			for(var i:int=0;i<ChessFactory_TheGo.dataProvider.length;i++)
+			//switch custom define properties.
+			switch (position.toString())
 			{
-				mark = mark.concat(ChessFactory_TheGo.dataProvider[i].color," , ");
+				//about blue
+				case "(x=1, y=0)":
+				case "(x=2, y=0)":
+				case "(x=1, y=1)":
+				case "(x=2, y=1)":
+					chessPieceLabel=DefaultPiecesConstants.BLUE.label;
+					chessPieceValue=16+int(position.x);
+					chessPieceType=DefaultConstants.BLUE;
+					break;
+				//about red
+				case "(x=1, y=2)":
+				case "(x=2, y=2)":
+				case "(x=1, y=3)":
+				case "(x=2, y=3)":
+					chessPieceLabel=DefaultPiecesConstants.RED.label;
+					chessPieceValue=8+int(position.x);
+					chessPieceType=DefaultConstants.RED;
+					break;
+				default:
+					return null;
+					break;
 			}
-			//			Application.application.nextColorsLabel.text = mark;
-			//According to the color lines rule,just append 3 pieces on the board.
-			var task:SequenceTask = new SequenceTask();
-			var createChessPieceTask:CreateChessPieceTask = new  CreateChessPieceTask(ChessFactory_TheGo);
-			var createChessVoTask:CreateChessVoTask = new CreateChessVoTask(ChessFactory_TheGo);
-			task.addChild(createChessPieceTask);
-			task.addChild(createChessVoTask);
-			task.start();
+			//call super functions.
+			return super.createChessPiece(position,flag);
+		}
+		//
+		override public function generateChessVO(conductVO:ConductVO):IChessVO
+		{
+			//TODO
+			var oColIndex:int=conductVO.currentPosition.x;
+			var oRowIndex:int=conductVO.currentPosition.y;
+			var chessVO:IChessVO;
+			//			LOG.info(conductVO.dump());
+			switch ((conductVO.target as ChessPiece).name)
+			{
+				case DefaultPiecesConstants.BLUE.label:
+					chessVO=new ChessVO_TheGo(4,4,oRowIndex, oColIndex,DefaultConstants.FLAG_BLUE);
+					break;
+				case DefaultPiecesConstants.RED.label:
+					chessVO=new ChessVO_TheGo(4, 4, oRowIndex, oColIndex,DefaultConstants.FLAG_RED);
+					break;
+				default:
+					break;
+			}
+			return chessVO;
+		}
+		//
+		override public function generateOmenVO(conductVO:ConductVO):OmenVO
+		{
+			var omenVO:OmenVO;
+			//TODO:importance initialization.
+			//			LOG.info(omenVO.dump());
+			switch ((conductVO.target as ChessPiece).name)
+			{
+				case DefaultPiecesConstants.BLUE.label:
+					omenVO=new OmenVO(DefaultPiecesConstants.BLUE_BISHOP.strength, DefaultPiecesConstants.BLUE.important, conductVO.target.chessVO.moves.celled, conductVO.target.chessVO.captures.celled, -1);
+					break;
+				case DefaultPiecesConstants.RED.label:
+					omenVO=new OmenVO(DefaultPiecesConstants.RED_BISHOP.strength, DefaultPiecesConstants.RED.important, conductVO.target.chessVO.moves.celled, conductVO.target.chessVO.captures.celled, -1);
+					break;
+				default:
+					break;
+			}
+			return omenVO;
 		}
 		//--------------------------------------------------------------------------
 		//

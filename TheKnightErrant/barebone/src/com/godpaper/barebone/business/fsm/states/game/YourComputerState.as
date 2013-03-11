@@ -35,7 +35,7 @@ package src.com.godpaper.barebone.business.fsm.states.game
 	import com.godpaper.as3.tasks.CreateChessVoTask;
 	import com.godpaper.as3.utils.MathUtil;
 	import com.godpaper.as3.views.components.ChessPiece;
-	import src.com.godpaper.barebone.business.factory.YourChessFactory;
+	import com.godpaper.the_go.business.factory.ChessFactory_TheGo;
 	import com.lookbackon.AI.FSM.IAgent;
 	import com.masterbaboon.AdvancedMath;
 	
@@ -102,15 +102,15 @@ package src.com.godpaper.barebone.business.fsm.states.game
 			//mark indicators
 			//FIXME: with invalid implmementation.
 			var mark:String = "Next: ";
-			for(var i:int=0;i<YourChessFactory.dataProvider.length;i++)
+			for(var i:int=0;i<ChessFactory_TheGo.dataProvider.length;i++)
 			{
-				mark = mark.concat(YourChessFactory.dataProvider[i].color," , ");
+				mark = mark.concat(ChessFactory_TheGo.dataProvider[i].color," , ");
 			}
 			//			Application.application.nextColorsLabel.text = mark;
 			//According to the color lines rule,just append 3 pieces on the board.
 			var task:SequenceTask = new SequenceTask();
-			var createChessPieceTask:CreateChessPieceTask = new  CreateChessPieceTask(YourChessFactory);
-			var createChessVoTask:CreateChessVoTask = new CreateChessVoTask(YourChessFactory);
+			var createChessPieceTask:CreateChessPieceTask = new  CreateChessPieceTask(ChessFactory_TheGo);
+			var createChessVoTask:CreateChessVoTask = new CreateChessVoTask(ChessFactory_TheGo);
 			task.addChild(createChessPieceTask);
 			task.addChild(createChessVoTask);
 			task.start();

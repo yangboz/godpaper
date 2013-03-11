@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package tiger_in_beijing.src
+package
 {
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
@@ -31,8 +31,8 @@ package tiger_in_beijing.src
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.plugins.IPlug;
 	import com.godpaper.as3.utils.LogUtil;
-	import tiger_in_beijing.src.com.godpaper.tiger_in_beijing.busniess.factory.ChessFactory_TigerInBeijing;
-	import tiger_in_beijing.src.com.godpaper.tiger_in_beijing.busniess.managers.ChessPiecesManager_TigerInBeijing;
+	import com.godpaper.the_go.business.factory.ChessFactory_TheGo;
+	import com.godpaper.the_go.business.managers.ChessPiecesManager_TheGo;
 	
 	import mx.logging.ILogger;
 
@@ -44,14 +44,14 @@ package tiger_in_beijing.src
 	
 	/**
 	 * TigerInBeijing.as class. 
-	 * @see http://www.godpaper.com/godpaper/index.php/北京老虎棋  	
+	 * @see http://www.godpaper.com/godpaper/index.php/围棋	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Jul 13, 2012 3:32:11 PM
 	 */   	 
-	[SWF(frameRate="60", width="320", height="480", backgroundColor="0xffffff")]//320×480 for iPhone devices
+	[SWF(frameRate="60", width="800", height="600", backgroundColor="0xffffff")]//320×480 for iPhone devices
 	//	[SWF(frameRate="60", width="384", height="512", backgroundColor="0xffffff")]//384×512 for iPad devices
 	public class TheGo extends ApplicationBase
 	{		
@@ -75,7 +75,7 @@ package tiger_in_beijing.src
 		 */ 
 		override public function get chessPiecesManager():IChessPieceManager
 		{
-			return new ChessPiecesManager_TigerInBeijing();
+			return new ChessPiecesManager_TheGo();
 		}
 		//--------------------------------------------------------------------------
 		//
@@ -90,7 +90,6 @@ package tiger_in_beijing.src
 		//--------------------------------------------------------------------------
 		public function TheGo()
 		{
-			//TODO: implement function
 			super();
 		}     	
 		//--------------------------------------------------------------------------
@@ -108,8 +107,8 @@ package tiger_in_beijing.src
 		{
 			//config initialization here.
 			//about chess board:
-			BoardConfig.xLines=5;
-			BoardConfig.yLines=7;
+			BoardConfig.xLines=19;
+			BoardConfig.yLines=19;
 			BoardConfig.xOffset=50;
 			BoardConfig.yOffset=50;	
 			//			BoardConfig.width=300;
@@ -137,7 +136,7 @@ package tiger_in_beijing.src
 			GasketConfig.width = 30;
 			GasketConfig.height = 30;
 			//about piece:
-			PieceConfig.factory = ChessFactory_TigerInBeijing;
+			PieceConfig.factory = ChessFactory_TheGo;
 			PieceConfig.maxPoolSizeBlue = 1;
 			PieceConfig.maxPoolSizeRed = 15;
 			//Notice:starling scaleX/Y seldom triggle touch event issues.

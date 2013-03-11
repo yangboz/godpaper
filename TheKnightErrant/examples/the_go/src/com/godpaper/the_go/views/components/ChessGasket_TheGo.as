@@ -19,24 +19,30 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.chinese_chess_jam.vo.pgn
+package com.godpaper.the_go.views.components
 {
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.views.components.ChessGasket;
+	
+	import flash.geom.Point;
+	
+	import starling.display.Image;
+	import starling.textures.Texture;
+	import starling.utils.Color;
 	
 	/**
-	 * FEN(Forsyth-Edwards Notation)是专门用来表示象棋局面的记录规范.  	
-	 * @see http://www.xqbase.com/protocol/cchess_fen.htm
+	 * YourChessGasket.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Aug 3, 2012 1:21:34 PM
+	 * Created Oct 16, 2012 11:16:07 AM
 	 */   	 
-	public class FEN_VO
+	public class ChessGasket_TheGo extends ChessGasket
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -53,7 +59,17 @@ package com.godpaper.chinese_chess_jam.vo.pgn
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		
+		override public function set position(value:Point):void
+		{
+			super.position = value;
+			//TODO:customize according to position condition.
+			//The chess board backgroud,with bishop position color categorylized.
+			var customBgColor:uint = Color.BLACK;
+			if( (position.x+position.y*8)%2 ) customBgColor = 0x000000;
+			var customBgColor:uint = Math.random() * 0xFFFFFF;
+			//Replace the background
+			this.background = new Image(this.getUpStateTexture(customBgColor,this.backgroundAlpha,Color.BLACK,this.borderAlpha));
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -65,7 +81,10 @@ package com.godpaper.chinese_chess_jam.vo.pgn
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		    	
+		public function ChessGasket_TheGo(upState:Texture=null, text:String="", downState:Texture=null)
+		{
+			super(upState, text, downState);
+		}     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -77,7 +96,12 @@ package com.godpaper.chinese_chess_jam.vo.pgn
 		//  Protected methods
 		//
 		//--------------------------------------------------------------------------
-		
+		override protected function getUpStateTexture(bgColor:uint, bgAlpha:Number, borderColor:uint, borderAlpha:Number):Texture
+		{
+			//Customize example:
+			var customBgColor:uint = Math.random() * 0xFFFFFF;
+			return super.getUpStateTexture(customBgColor,bgAlpha,borderColor,borderAlpha);
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Private methods
