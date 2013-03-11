@@ -51,7 +51,7 @@ package
 	 * @airVersion 3.2+
 	 * Created Jul 13, 2012 3:32:11 PM
 	 */   	 
-	[SWF(frameRate="60", width="800", height="600", backgroundColor="0xffffff")]//320×480 for iPhone devices
+	[SWF(frameRate="60", width="750", height="650", backgroundColor="0xffffff")]//320×480 for iPhone devices
 	//	[SWF(frameRate="60", width="384", height="512", backgroundColor="0xffffff")]//384×512 for iPad devices
 	public class TheGo extends ApplicationBase
 	{		
@@ -109,8 +109,8 @@ package
 			//about chess board:
 			BoardConfig.xLines=19;
 			BoardConfig.yLines=19;
-			BoardConfig.xOffset=50;
-			BoardConfig.yOffset=50;	
+			BoardConfig.xOffset=30;
+			BoardConfig.yOffset=30;	
 			//			BoardConfig.width=300;
 			//			BoardConfig.height=300;
 			BoardConfig.xScale=1;
@@ -127,18 +127,18 @@ package
 			//			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 			//			BoardConfig.backgroundImage = new Image(texture);
 			//Pieces box config:
-			BoardConfig.piecesBoxRequired = false;
+			BoardConfig.piecesBoxRequired = true;
 			//			BoardConfig.piecesBoxBgImage = null;
 			//gasket config:
-			GasketConfig.maxPoolSize = 35;
+			GasketConfig.maxPoolSize = 361;
 			GasketConfig.tipsVisible = true;
 			GasketConfig.backgroundAlpha = 0.2;
 			GasketConfig.width = 30;
 			GasketConfig.height = 30;
 			//about piece:
 			PieceConfig.factory = ChessFactory_TheGo;
-			PieceConfig.maxPoolSizeBlue = 1;
-			PieceConfig.maxPoolSizeRed = 15;
+			PieceConfig.maxPoolSizeBlue = 180;
+			PieceConfig.maxPoolSizeRed = 180;
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
 			PieceConfig.scaleX = 1;
 			PieceConfig.scaleY = 1;
