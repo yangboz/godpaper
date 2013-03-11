@@ -146,7 +146,6 @@ package com.godpaper.as3.tasks
 		//--------------------------------------------------------------------------
 		private function layoutPiecesBox():void
 		{
-			trace(FlexGlobals.topLevelApplication.stage.stageWidth,PluginConfig.buttonBarHeight,redPiecesBox.height,redPiecesBox.width,xGap,yGap);
 			switch(PluginConfig.piecesBoxPosition)
 			{
 				case PluginConfig.PBOX_AT_BOTTOM:

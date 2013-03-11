@@ -146,7 +146,7 @@ package
 			this._mochiads_game_id = "34331f335e39fb05";//espical for mochi game platform.
 			//Stats configure
 			//Displays the statistics box at a certain position.
-			PluginConfig.showStats = false;
+			PluginConfig.showStats = true;
 			//Pieces box config:
 			PluginConfig.piecesBoxRequired = true;
 			PluginConfig.piecesBoxBgImage = null;

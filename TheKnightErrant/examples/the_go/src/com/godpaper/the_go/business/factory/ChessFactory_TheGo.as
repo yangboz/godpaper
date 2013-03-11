@@ -31,7 +31,6 @@ package com.godpaper.the_go.business.factory
 	import com.godpaper.as3.consts.DefaultPiecesConstants;
 	import com.godpaper.as3.core.IChessPiece;
 	import com.godpaper.as3.core.IChessVO;
-	import com.godpaper.as3.model.ChessPiecesModel;
 	import com.godpaper.as3.model.vos.ColorPositionVO;
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
@@ -81,7 +80,6 @@ package com.godpaper.the_go.business.factory
 		//--------------------------------------------------------------------------
 		public function ChessFactory_TheGo()
 		{
-			//TODO: implement function
 			super();
 		}     	
 		//--------------------------------------------------------------------------
@@ -92,29 +90,18 @@ package com.godpaper.the_go.business.factory
 		override public function createChessPiece(position:Point, flag:uint=0):IChessPiece
 		{
 			//switch custom define properties.
-			switch (position.toString())
+			if(flag==DefaultConstants.FLAG_RED)
 			{
-				//about blue
-				case "(x=1, y=0)":
-				case "(x=2, y=0)":
-				case "(x=1, y=1)":
-				case "(x=2, y=1)":
-					chessPieceLabel=DefaultPiecesConstants.BLUE.label;
-					chessPieceValue=16+int(position.x);
-					chessPieceType=DefaultConstants.BLUE;
-					break;
-				//about red
-				case "(x=1, y=2)":
-				case "(x=2, y=2)":
-				case "(x=1, y=3)":
-				case "(x=2, y=3)":
-					chessPieceLabel=DefaultPiecesConstants.RED.label;
-					chessPieceValue=8+int(position.x);
-					chessPieceType=DefaultConstants.RED;
-					break;
-				default:
-					return null;
-					break;
+				chessPieceName = chessPieceLabel = DefaultPiecesConstants.RED.label;
+				chessPieceValue=8+int(position.x);
+				chessPieceType=DefaultConstants.RED;
+				chessPieceSubType = DefaultConstants.RED;//RED_ROCK,RED_STAR
+			}else
+			{
+				chessPieceName = chessPieceLabel = DefaultPiecesConstants.BLUE.label;
+				chessPieceValue=16+int(position.x);
+				chessPieceType=DefaultConstants.BLUE;
+				chessPieceSubType = DefaultConstants.BLUE;//BLUE_ROCK,BLUE_STAR
 			}
 			//call super functions.
 			return super.createChessPiece(position,flag);
@@ -122,7 +109,6 @@ package com.godpaper.the_go.business.factory
 		//
 		override public function generateChessVO(conductVO:ConductVO):IChessVO
 		{
-			//TODO
 			var oColIndex:int=conductVO.currentPosition.x;
 			var oRowIndex:int=conductVO.currentPosition.y;
 			var chessVO:IChessVO;
