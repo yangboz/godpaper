@@ -64,6 +64,8 @@ package com.godpaper.as3.views.screens
 	
 	import starling.display.DisplayObject;
 	import starling.events.Event;
+	
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * GameScreen accepts input from the user and instructs the model and a viewport to perform actions based on that input. 	
@@ -197,7 +199,8 @@ package com.godpaper.as3.views.screens
 				this._header.title = playerIoPlugin.roomID;
 			}else
 			{
-				this._header.title = FlexGlobals.topLevelApplication.pluginProvider.data.boardID;
+//				this._header.title = FlexGlobals.topLevelApplication.pluginProvider.data.boardID;
+				this._header.title = getQualifiedClassName(FlexGlobals.topLevelApplication);
 			}
 			
 //			this._header.title = this.resourceManager.getString(this.bundleName,"HEADER_SETTINGS");
