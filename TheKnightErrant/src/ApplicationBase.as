@@ -196,9 +196,6 @@ package
 			mStarling.simulateMultitouch=true;
 			mStarling.enableErrorChecking=Capabilities.isDebugger;
 			mStarling.start();
-			//Display stats.
-//			mStarling.showStats=true;
-			mStarling.showStatsAt("left","bottom");
 			//Multi-Resolution Development
 			//@see: http://wiki.starling-framework.org/manual/multi-resolution_development
 //			LOG.debug("Starling contentScaleFactor:{0}",mStarling.contentScaleFactor);
@@ -219,12 +216,8 @@ package
 			mStarling.stage3D.addEventListener(flash.events.Event.CONTEXT3D_CREATE, context3DCreatedHandler);
 //			mStarling.stage3D.addEventListener(starling.events.Event.ROOT_CREATED, rootCreatedHandler);
 			// signals initialization.
-
 			// Turn to framework's workflow
 			initializeHandler();
-			// Stats display
-//			var stats:Stats = new Stats();
-//			this.addChild(stats);
 			// Popup manager initialization
 			if(!FlexGlobals.popupContentManager)
 			{
@@ -301,6 +294,11 @@ package
 			this.removeEventListener(flash.events.Event.CONTEXT3D_CREATE, context3DCreatedHandler);
 			// turn to framework's workflow
 			applicationCompleteHandler();
+			// Stats display
+			//			var stats:Stats = new Stats();
+			//			this.addChild(stats);
+			mStarling.showStats = PluginConfig.showStats;//Read configurations.
+			if(mStarling.showStats) mStarling.showStatsAt("left","bottom");
 		}
 
 //		private function rootCreatedHandler(event:starling.events.Event):void

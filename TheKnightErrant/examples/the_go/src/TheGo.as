@@ -146,6 +146,9 @@ package
 			PluginConfig.gameID = "34331f335e39fb05";//your custom game related id.
 //			PluginConfig.boardID = "51c558cd0315f8e7";//your custom game related board id.
 			this._mochiads_game_id = "34331f335e39fb05";//espical for mochi game platform.
+			//Stats configure
+			//Displays the statistics box at a certain position.
+			PluginConfig.showStats = false;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);

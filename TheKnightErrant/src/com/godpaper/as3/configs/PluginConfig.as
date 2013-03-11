@@ -29,6 +29,7 @@ package com.godpaper.as3.configs
 		public static var buttonBarHeight:Number=50;
 		//Customize implementation define
 		public static var tabbarImpl:Class = PluginButtonBar;//Default
+		public static var showStats:Boolean = true;//Displays the statistics box at a certain position.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
