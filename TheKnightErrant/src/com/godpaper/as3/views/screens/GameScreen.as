@@ -32,6 +32,7 @@ package com.godpaper.as3.views.screens
 	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.IndicatorConfig;
+	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessBoard;
@@ -58,14 +59,14 @@ package com.godpaper.as3.views.screens
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayoutData;
 	
+	import flash.utils.getQualifiedClassName;
+	
 	import mx.logging.ILogger;
 	
 	import org.spicefactory.lib.task.SequentialTaskGroup;
 	
 	import starling.display.DisplayObject;
 	import starling.events.Event;
-	
-	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * GameScreen accepts input from the user and instructs the model and a viewport to perform actions based on that input. 	
@@ -152,21 +153,19 @@ package com.godpaper.as3.views.screens
 			FlexGlobals.startUpSequenceTask.label = "startUpSequenceTask";//29.748M(debug)
 			//Display chess board at first.
 			FlexGlobals.startUpSequenceTask.addChild(new CreateChessBoardTask());//33.332M
-			//Display the pieces box if neccessary
-			if(BoardConfig.piecesBoxRequired)
-			{
-				FlexGlobals.startUpSequenceTask.addChild(new CreatePiecesBoxTask());
-				FlexGlobals.startUpSequenceTask.addChild(new FillInPiecesBoxTask());
-			}
 			FlexGlobals.startUpSequenceTask.addChild(new CreateChessGasketTask());//33.316M
-			//create pices box
-			if(!BoardConfig.piecesBoxRequired)
-			{
-				FlexGlobals.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.090M
-			}
 			FlexGlobals.startUpSequenceTask.addChild(new CreateChessVoTask());//34.922M
 			//Plugin button bar view init
 			FlexGlobals.startUpSequenceTask.addChild(new CreatePluginButtonBarTask());
+			//Display the pieces box if neccessary
+			if(PluginConfig.piecesBoxRequired)
+			{
+				FlexGlobals.startUpSequenceTask.addChild(new CreatePiecesBoxTask());
+				FlexGlobals.startUpSequenceTask.addChild(new FillInPiecesBoxTask());
+			}else
+			{
+				FlexGlobals.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.090M
+			}
 			//task complete
 			FlexGlobals.startUpSequenceTask.addEventListener(TaskEvent.TASK_COMPLETE,startUpTaskCompleteHandler);
 			//task start

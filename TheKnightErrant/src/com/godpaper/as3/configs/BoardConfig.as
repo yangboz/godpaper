@@ -85,8 +85,6 @@ package com.godpaper.as3.configs
 			return new Image(AssetEmbedsDefault.getTexture_cp_bg(DefaultConstants.IMG_BACK_GROUND));
 		}
 		//Pieces box relevant variables.
-		public static var piecesBoxRequired:Boolean = false;//For partical chess board game with pieces box component view;
-		public static var piecesBoxBgImage:Image=null;//The chess pieces box 's backgroud texture;
 		public static var type:String = DefaultConstants.CHESS_BOARD_TYPE_INTERSECTION;//TODO:type customize.
 		//----------------------------------
 		//  CONSTANTS

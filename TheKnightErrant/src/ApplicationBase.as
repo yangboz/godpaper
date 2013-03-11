@@ -374,7 +374,6 @@ package
 //			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 //			BoardConfig.backgroundImage = new Image(texture);
 			//Pieces box config:
-			BoardConfig.piecesBoxRequired=true; //Pieces box used to obtain chess pieces as a container.
 			BoardConfig.backgroundImageRequired=false; //
 			//gasket config:
 			GasketConfig.maxPoolSize=9; //Notices:Object pools full of objects with dangerously stale state are sometimes called object cesspools and regarded as an anti-pattern.
@@ -392,6 +391,7 @@ package
 			//about plugin:
 			PluginConfig.gameID="dadc1bb72ac7ed7f"; //your custom game related id.
 			PluginConfig.boardID="51c558cd0315f8e7"; //your custom game related board id.
+			PluginConfig.piecesBoxRequired=true; //Pieces box used to obtain chess pieces as a container.
 			this._mochiads_game_id="dadc1bb72ac7ed7f"; //espical for mochi game platform.
 			//TextureConfig
 			TextureConfig.AssetEmbeds_1x_class=AssetEmbeds_1x;

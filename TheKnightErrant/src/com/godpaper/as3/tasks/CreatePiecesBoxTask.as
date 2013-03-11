@@ -50,7 +50,14 @@ package com.godpaper.as3.tasks
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		
+		private var bluePiecesBox:PiecesBox;
+		private var redPiecesBox:PiecesBox;
+		private var xGap:Number = 20;
+		private var yGap:Number = 50;
+		private var childAreaXOffset:Number = 20;
+		private var childAreaYOffset:Number = 0;
+		private var childAreaWidth:Number = 25;
+		private var childAreaHeight:Number = 25;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -103,37 +110,32 @@ package com.godpaper.as3.tasks
 //				
 //				backgroundImageFillMode="scale" borderVisible="false"
 //				childrenArea="{new Rectangle(20,0,25,25)}" type="{DefaultConstants.RED}"/>
-			var xGap:Number = 20;
-			var yGap:Number = 50;
-			var childAreaXOffset:Number = 20;
-			var childAreaYOffset:Number = 0;
-			var childAreaWidth:Number = 25;
-			var childAreaHeight:Number = 25;
-			var bluePiecesBox:PiecesBox = new PiecesBox();
+			this.bluePiecesBox = new PiecesBox();
 			bluePiecesBox.width = 100;
 			bluePiecesBox.height = 70;
-			bluePiecesBox.background = BoardConfig.piecesBoxBgImage;
+			bluePiecesBox.background = PluginConfig.piecesBoxBgImage;
 			bluePiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);//Default setting.
 			bluePiecesBox.type = DefaultConstants.BLUE;
 			//
 //			FlexGlobals.gameStage.addChild(bluePiecesBox);
 			FlexGlobals.gameScreen.addChild(bluePiecesBox);
-			bluePiecesBox.x = xGap;
-			bluePiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-PluginConfig.buttonBarHeight - childAreaHeight - yGap;
 			FlexGlobals.bluePiecesBox = bluePiecesBox;//keep ref.
 			//
-			var redPiecesBox:PiecesBox = new PiecesBox();
+			this.redPiecesBox = new PiecesBox();
 			redPiecesBox.width = 100;
 			redPiecesBox.height = 70;
-			redPiecesBox.background = BoardConfig.piecesBoxBgImage;
+			redPiecesBox.background = PluginConfig.piecesBoxBgImage;
 			redPiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);//Default setting.
 			redPiecesBox.type = DefaultConstants.RED;
 			//
 //			FlexGlobals.gameStage.addChild(redPiecesBox);
 			FlexGlobals.gameScreen.addChild(redPiecesBox);
-			redPiecesBox.x = FlexGlobals.topLevelApplication.stage.stageWidth-redPiecesBox.width - xGap;
-			redPiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-PluginConfig.buttonBarHeight - childAreaHeight - yGap;
 			FlexGlobals.redPiecesBox = redPiecesBox;//keep ref.
+			//do layout if required.
+			if(PluginConfig.piecesBoxRequired)
+			{
+				this.layoutPiecesBox();
+			}
 			//
 			this.complete();
 		}
@@ -142,6 +144,47 @@ package com.godpaper.as3.tasks
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		private function layoutPiecesBox():void
+		{
+			trace(FlexGlobals.topLevelApplication.stage.stageWidth,PluginConfig.buttonBarHeight,redPiecesBox.height,redPiecesBox.width,xGap,yGap);
+			switch(PluginConfig.piecesBoxPosition)
+			{
+				case PluginConfig.PBOX_AT_BOTTOM:
+					//
+					bluePiecesBox.x = xGap;
+					bluePiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-2*yGap;
+					//
+					redPiecesBox.x = FlexGlobals.topLevelApplication.stage.stageWidth-redPiecesBox.width - xGap;
+					redPiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight-2*yGap;
+					break;
+				case PluginConfig.PBOX_AT_LEFT:
+					//
+					bluePiecesBox.x = xGap;
+					bluePiecesBox.y = childAreaHeight + yGap;
+					//
+					redPiecesBox.x = xGap;
+					redPiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight - 2*yGap;
+					break;
+				case PluginConfig.PBOX_AT_RIGHT:
+					//
+					bluePiecesBox.x = FlexGlobals.topLevelApplication.stage.stageWidth - xGap - bluePiecesBox.width;
+					bluePiecesBox.y = yGap;
+					//
+					redPiecesBox.x = FlexGlobals.topLevelApplication.stage.stageWidth - xGap - redPiecesBox.width;
+					redPiecesBox.y = FlexGlobals.topLevelApplication.stage.stageHeight - 3*yGap;
+					break;
+				case PluginConfig.PBOX_AT_TOP:
+					//
+					bluePiecesBox.x = xGap;
+					bluePiecesBox.y = childAreaHeight + yGap;
+					//
+					redPiecesBox.x = FlexGlobals.topLevelApplication.stage.stageWidth-redPiecesBox.width - xGap;
+					redPiecesBox.y = childAreaHeight + yGap;
+					break;
+				default:
+					break;
+			}
+		}
 	}
 	
 }

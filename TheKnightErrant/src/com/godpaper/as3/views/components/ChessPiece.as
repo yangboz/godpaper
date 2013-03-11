@@ -32,6 +32,7 @@ package com.godpaper.as3.views.components
 	import com.godpaper.as3.configs.GameConfig;
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
+	import com.godpaper.as3.configs.PluginConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
 	import com.godpaper.as3.core.IChessPiece;
@@ -392,7 +393,7 @@ package com.godpaper.as3.views.components
 					//End sound effect.
 //					this.cpMoveSoundChannel.stop();
 					//drag out target(chess gasket) init.
-					if(BoardConfig.piecesBoxRequired)
+					if(PluginConfig.piecesBoxRequired)
 					{
 						dragOutTarget = this.piecesBox;
 						LOG.debug("drag out target @:{0}",dragOutTarget);
@@ -407,7 +408,7 @@ package com.godpaper.as3.views.components
 					if(!dragEnterTargets.length)
 					{
 						//Revert to the previous drag and drop operation.
-						if(BoardConfig.piecesBoxRequired)
+						if(PluginConfig.piecesBoxRequired)
 						{
 							//Original point record at FillInPiecesBox task.
 							this.x = originalX;
@@ -436,7 +437,7 @@ package com.godpaper.as3.views.components
 						}
 					}
 					//Default revert to the previous drag and drop operation.
-					if(BoardConfig.piecesBoxRequired)
+					if(PluginConfig.piecesBoxRequired)
 					{
 						//Original point record at FillInPiecesBox task.
 						this.x = originalX;

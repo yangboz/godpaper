@@ -52,7 +52,7 @@ package
 	 * @airVersion 3.2+
 	 * Created Jul 13, 2012 3:32:11 PM
 	 */   	 
-	[SWF(frameRate="60", width="750", height="650", backgroundColor="0xffffff")]//320×480 for iPhone devices
+	[SWF(frameRate="60", width="750", height="660", backgroundColor="0xffffff")]//320×480 for iPhone devices
 	//	[SWF(frameRate="60", width="384", height="512", backgroundColor="0xffffff")]//384×512 for iPad devices
 	public class TheGo extends ApplicationBase
 	{		
@@ -127,9 +127,6 @@ package
 			//Customize starling texture sample:
 			//			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 			//			BoardConfig.backgroundImage = new Image(texture);
-			//Pieces box config:
-//			BoardConfig.piecesBoxRequired = true;
-			//			BoardConfig.piecesBoxBgImage = null;
 			//gasket config:
 			GasketConfig.maxPoolSize = 361;
 			GasketConfig.tipsVisible = true;
@@ -150,6 +147,10 @@ package
 			//Stats configure
 			//Displays the statistics box at a certain position.
 			PluginConfig.showStats = false;
+			//Pieces box config:
+			PluginConfig.piecesBoxRequired = true;
+			PluginConfig.piecesBoxBgImage = null;
+			PluginConfig.piecesBoxPosition = PluginConfig.PBOX_AT_RIGHT;
 			//TextureConfig
 			TextureConfig.AssetEmbeds_1x_class=AssetEmbeds_1x_the_go;
 //			TextureConfig.AssetEmbeds_2x_class=AssetEmbeds_2x;
