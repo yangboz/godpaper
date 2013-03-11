@@ -113,7 +113,10 @@ package com.godpaper.as3.views.screens
 			_singlePlayPgnButton.height = 100 * this.dpiScale;
 			//			_singlePlayPgnButton.onRelease.addOnce(singlePlayButton_onRelease);
 			_singlePlayPgnButton.addEventListener(starling.events.Event.TRIGGERED,singlePlayPgnButton_onRelease);
-			this._container.addChild(_singlePlayPgnButton);
+			if(PluginConfig.PGN_file)//PGN_file path required.
+			{
+				this._container.addChild(_singlePlayPgnButton);
+			}
 			//			this.addChild(_singlePlayButton);
 			//
 			_singlePlayButton = new Button();

@@ -30,6 +30,7 @@ package com.godpaper.as3.configs
 		//Customize implementation define
 		public static var tabbarImpl:Class = PluginButtonBar;//Default
 		public static var showStats:Boolean = true;//Displays the statistics box at a certain position.
+		public static var PGN_file:String = null;//PGN file path required.
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
