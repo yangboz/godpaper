@@ -33,6 +33,8 @@ package com.godpaper.as3.views.plugin
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.chinese_chess_jam.model.PGN_Model;
 	
+	import feathers.controls.Button;
+	import feathers.controls.ButtonGroup;
 	import feathers.controls.Callout;
 	import feathers.controls.Label;
 	import feathers.controls.TabBar;
@@ -60,7 +62,7 @@ package com.godpaper.as3.views.plugin
 	 * @airVersion 3.2+
 	 * Created Mar 9, 2013 3:44:14 PM
 	 */   	 
-	public class PGN_PluginButtonBar extends TabBar implements IPluginButtonBar
+	public class PGN_PluginButtonBar extends ButtonGroup implements IPluginButtonBar
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -110,6 +112,8 @@ package com.godpaper.as3.views.plugin
 			super();
 			//
 			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
+			//
+			this.direction = ButtonGroup.DIRECTION_HORIZONTAL;
 		}     	
 		//--------------------------------------------------------------------------
 		//
@@ -169,25 +173,22 @@ package com.godpaper.as3.views.plugin
 			//			this._selectedIcon.scaleX = this._selectedIcon.scaleY = this.dpiScale;
 			this.dataProvider = new ListCollection(
 				[
-					{ label: "", action: ICON_SKIP_BACKWARD,defaultIcon:_icon_skip_backward,isToggle:false,useHandCursor:true},
-					{ label: "", action: ICON_BACKWARD,defaultIcon:_icon_backward,isToggle:false,useHandCursor:true},
-					{ label: "", action: ICON_PLAY,defaultIcon:_icon_play,isToggle:true,useHandCursor:true},
-					{ label: "", action: ICON_FORWARD,defaultIcon:_icon_forward,isToggle:false,useHandCursor:true},
-					{ label: "", action: ICON_SKIP_FORWARD,defaultIcon:_icon_skip_forward,isToggle:false,useHandCursor:true}
+					{ label: "", action: ICON_SKIP_BACKWARD,defaultIcon:_icon_skip_backward,isToggle:false,useHandCursor:true,triggered: button_skip_backward_triggeredHandler},
+					{ label: "", action: ICON_BACKWARD,defaultIcon:_icon_backward,isToggle:false,useHandCursor:true,triggered: button_backward_triggeredHandler},
+					{ label: "", action: ICON_PLAY,defaultIcon:_icon_play,isToggle:false,useHandCursor:true,triggered: button_play_triggeredHandler},
+					{ label: "", action: ICON_FORWARD,defaultIcon:_icon_forward,isToggle:false,useHandCursor:true,triggered: button_forward_triggeredHandler},
+					{ label: "", action: ICON_SKIP_FORWARD,defaultIcon:_icon_skip_forward,isToggle:false,useHandCursor:true,triggered: button_skip_forward_triggeredHandler}
 				]
 			);
-			this.selectedIndex = 2;//Default tabbar selection.
 			this.validate();
-			//			this.onChange.add(tabBarChangeHandler);
-			this.addEventListener(starling.events.Event.CHANGE,tabBarChangeHandler);
 			//
 			this.relayout(this.stage.stageWidth, this.stage.stageHeight);
 			//
 			this.stage.addEventListener(ResizeEvent.RESIZE, stageResizeHandler);
 			//Default title
 //			const content:Label = new Label();
-			const content:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.title);
-			Callout.show(DisplayObject(content), this.getChildAt(2), Callout.DIRECTION_UP);
+//			const content:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.title);
+//			Callout.show(DisplayObject(content), this.getChildAt(2), Callout.DIRECTION_UP);
 		}
 		//
 		private function stageResizeHandler(event:ResizeEvent):void
@@ -202,47 +203,70 @@ package com.godpaper.as3.views.plugin
 			this.y = h - this.height;
 		}
 		//
-		//		private function tabBarChangeHandler(tabBar:TabBar):void
 		private var currentChessbookIndex:int = 0;
-		private function tabBarChangeHandler(event:starling.events.Event):void
+		private function button_skip_backward_triggeredHandler(event:starling.events.Event):void
 		{
-			var tabBar:TabBar = event.target as TabBar;
-			//			LOG.debug("change action:{0}",tabBar.selectedItem.action);
-			switch (tabBar.selectedItem.action)
-			{
-				case ICON_SKIP_BACKWARD: //
-					//
-					currentChessbookIndex  = 0;
-					const content0:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.body[currentChessbookIndex].redComments);
-					Callout.show(DisplayObject(content0), tabBar.getChildAt(0), Callout.DIRECTION_UP);
-					break;
-				case ICON_BACKWARD: //
-					//
-					if(currentChessbookIndex) currentChessbookIndex--;
-					const content1:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.body[currentChessbookIndex].redMove);
-					Callout.show(DisplayObject(content1), tabBar.getChildAt(1), Callout.DIRECTION_UP);
-					break;
-				case ICON_PLAY: //
-					//
-//					const content:Label = new Label();
-					const content2:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.title);
-					Callout.show(DisplayObject(content2), tabBar.getChildAt(2), Callout.DIRECTION_UP);
-					break;
-				case ICON_FORWARD: //
-					//
-					if(currentChessbookIndex<pgnModel.chessbookVO.body.length-1) currentChessbookIndex++;
-					const content3:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.body[currentChessbookIndex].blackComments);
-					Callout.show(DisplayObject(content3), tabBar.getChildAt(3), Callout.DIRECTION_UP);
-					break;
-				case ICON_SKIP_FORWARD: //
-					//
-					currentChessbookIndex  = pgnModel.chessbookVO.body.length-1;
-					const content4:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.body[currentChessbookIndex].blackMove);
-					Callout.show(DisplayObject(content4), tabBar.getChildAt(4), Callout.DIRECTION_UP);
-					break;
-				default:
-					break;
-			}
+			const button:Button = Button(event.currentTarget);
+			//
+			currentChessbookIndex  = 0;
+			const content0:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.body[currentChessbookIndex].redComments);
+			Callout.show(DisplayObject(content0), button, Callout.DIRECTION_UP);
+			//Apply chess piece move
+			this.getChessMoves(currentChessbookIndex);
+		}
+		//
+		private function button_backward_triggeredHandler(event:starling.events.Event):void
+		{
+			const button:Button = Button(event.currentTarget);
+			//
+			if(currentChessbookIndex) currentChessbookIndex--;
+			const content1:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.body[currentChessbookIndex].redMove);
+			Callout.show(DisplayObject(content1), button, Callout.DIRECTION_UP);
+			//Apply chess piece move
+			this.getChessMoves(currentChessbookIndex);
+		}
+		//
+		private function button_play_triggeredHandler(event:starling.events.Event):void
+		{
+			const button:Button = Button(event.currentTarget);
+			//
+			//					const content:Label = new Label();
+			const content2:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.title);
+			Callout.show(DisplayObject(content2), button, Callout.DIRECTION_UP);
+		}
+		//
+		private function button_forward_triggeredHandler(event:starling.events.Event):void
+		{
+			const button:Button = Button(event.currentTarget);
+			//
+			if(currentChessbookIndex<pgnModel.chessbookVO.body.length-1) currentChessbookIndex++;
+			const content3:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.body[currentChessbookIndex].blackComments);
+			Callout.show(DisplayObject(content3), button, Callout.DIRECTION_UP);
+			//Apply chess piece move
+			this.getChessMoves(currentChessbookIndex);
+		}
+		//
+		private function button_skip_forward_triggeredHandler(event:starling.events.Event):void
+		{
+			const button:Button = Button(event.currentTarget);
+			//
+			currentChessbookIndex  = pgnModel.chessbookVO.body.length-1;
+			const content4:TextField = new TextField(pgnModel.chessbookVO.title.length*10,30,pgnModel.chessbookVO.body[currentChessbookIndex].blackMove);
+			Callout.show(DisplayObject(content4), button, Callout.DIRECTION_UP);
+			//Apply chess piece move
+			this.getChessMoves(currentChessbookIndex);
+		}
+		//
+		private function getChessMoves(index:int):Vector.<String>
+		{
+			var results:Vector.<String> = new Vector.<String>();
+			var redMove:String = pgnModel.chessbookVO.body[index].redMove;
+			var blackMove:String = pgnModel.chessbookVO.body[index].blackMove;
+			LOG.info("redMove:{0}",redMove);
+			LOG.info("blackMove:{0}",blackMove);
+			results.push(redMove);
+			results.push(blackMove);
+			return results;
 		}
 	}
 	
