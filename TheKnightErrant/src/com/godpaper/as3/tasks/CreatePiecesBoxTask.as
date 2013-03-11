@@ -28,6 +28,9 @@ package com.godpaper.as3.tasks
 	import com.godpaper.as3.views.components.PiecesBox;
 	
 	import flash.geom.Rectangle;
+	
+	import starling.display.Image;
+	import starling.textures.TextureAtlas;
 
 	//--------------------------------------------------------------------------
 	//
@@ -113,7 +116,8 @@ package com.godpaper.as3.tasks
 			this.bluePiecesBox = new PiecesBox();
 			bluePiecesBox.width = 100;
 			bluePiecesBox.height = 70;
-			bluePiecesBox.background = PluginConfig.piecesBoxBgImage;
+			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas_cp();
+			bluePiecesBox.background = new Image(atlas.getTexture(PluginConfig.piecesBoxBgBlue));
 			bluePiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);//Default setting.
 			bluePiecesBox.type = DefaultConstants.BLUE;
 			//
@@ -124,7 +128,8 @@ package com.godpaper.as3.tasks
 			this.redPiecesBox = new PiecesBox();
 			redPiecesBox.width = 100;
 			redPiecesBox.height = 70;
-			redPiecesBox.background = PluginConfig.piecesBoxBgImage;
+			//
+			redPiecesBox.background = new Image(atlas.getTexture(PluginConfig.piecesBoxBgRed));
 			redPiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);//Default setting.
 			redPiecesBox.type = DefaultConstants.RED;
 			//

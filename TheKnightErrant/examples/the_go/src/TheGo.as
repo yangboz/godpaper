@@ -36,6 +36,9 @@ package
 	import com.godpaper.the_go.business.managers.ChessPiecesManager_TheGo;
 	
 	import mx.logging.ILogger;
+	
+	import starling.display.Image;
+	import starling.textures.TextureAtlas;
 
 	//--------------------------------------------------------------------------
 	//
@@ -135,8 +138,8 @@ package
 			GasketConfig.height = 30;
 			//about piece:
 			PieceConfig.factory = ChessFactory_TheGo;
-			PieceConfig.maxPoolSizeBlue = 180;
-			PieceConfig.maxPoolSizeRed = 180;
+			PieceConfig.maxPoolSizeBlue = 100;
+			PieceConfig.maxPoolSizeRed = 100;
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
 			PieceConfig.scaleX = .8;
 			PieceConfig.scaleY = .8;
@@ -144,16 +147,17 @@ package
 			PluginConfig.gameID = "34331f335e39fb05";//your custom game related id.
 //			PluginConfig.boardID = "51c558cd0315f8e7";//your custom game related board id.
 			this._mochiads_game_id = "34331f335e39fb05";//espical for mochi game platform.
+			//TextureConfig
+			TextureConfig.AssetEmbeds_1x_class=AssetEmbeds_1x_the_go;
+			//			TextureConfig.AssetEmbeds_2x_class=AssetEmbeds_2x;
+//			TextureConfig.altalsTexture_img_name = "AtlasTexture_the_go";
+//			TextureConfig.altalsTexture_xml_name = "AtlasTexture_the_go";
 			//Stats configure
 			//Displays the statistics box at a certain position.
 			PluginConfig.showStats = true;
 			//Pieces box config:
-			PluginConfig.piecesBoxRequired = true;
-			PluginConfig.piecesBoxBgImage = null;
+			PluginConfig.piecesBoxRequired = false;
 			PluginConfig.piecesBoxPosition = PluginConfig.PBOX_AT_RIGHT;
-			//TextureConfig
-			TextureConfig.AssetEmbeds_1x_class=AssetEmbeds_1x_the_go;
-//			TextureConfig.AssetEmbeds_2x_class=AssetEmbeds_2x;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);

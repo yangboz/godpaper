@@ -3,7 +3,7 @@ package com.godpaper.as3.configs
 	import com.godpaper.as3.views.plugin.IPluginButtonBar;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
 	
-	import feathers.display.Image;
+	import starling.display.Image;
 
 	//--------------------------------------------------------------------------
 	//
@@ -35,7 +35,8 @@ package com.godpaper.as3.configs
 		public static var PGN_file:String = null;//PGN file path required.
 		public static var piecesBoxPosition:String = PBOX_AT_BOTTOM;
 		public static var piecesBoxRequired:Boolean = false;//For partical chess board game with pieces box component view;
-		public static var piecesBoxBgImage:Image=null;//The chess pieces box 's backgroud texture;
+		public static var piecesBoxBgRed:String="PBOX_RED";//The chess pieces box 's backgroud texture;
+		public static var piecesBoxBgBlue:String="PBOX_BLUE";//The chess pieces box 's backgroud texture;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------

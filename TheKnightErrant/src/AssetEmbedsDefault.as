@@ -63,7 +63,25 @@ package
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-
+		public static function get contentScaleFactor():Number { return sContentScaleFactor; }
+		public static function set contentScaleFactor(value:Number):void 
+		{
+			for each (var texture:Texture in sTextures)
+			texture.dispose();
+			
+			sTextures = new Dictionary();
+			sContentScaleFactor = value < 1.5 ? 1 : 2; // assets are available for factor 1 and 2 
+		}
+		//esp for chess pieces
+		public static function get contentScaleFactor_cp():Number { return sContentScaleFactor_cp; }
+		public static function set contentScaleFactor_cp(value:Number):void 
+		{
+			for each (var texture:Texture in sTextures)
+			texture.dispose();
+			
+			sTextures_cp = new Dictionary();
+			sContentScaleFactor_cp = value < 1.5 ? 1 : 2; // assets are available for factor 1 and 2 
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -159,7 +177,6 @@ package
 			
 			return cpTextureAtlas;
 		}
-
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods
@@ -184,25 +201,6 @@ package
 			return new textureClass[name];
 		}
 		
-		public static function get contentScaleFactor():Number { return sContentScaleFactor; }
-		public static function set contentScaleFactor(value:Number):void 
-		{
-			for each (var texture:Texture in sTextures)
-			texture.dispose();
-			
-			sTextures = new Dictionary();
-			sContentScaleFactor = value < 1.5 ? 1 : 2; // assets are available for factor 1 and 2 
-		}
-		//esp for chess pieces
-		public static function get contentScaleFactor_cp():Number { return sContentScaleFactor_cp; }
-		public static function set contentScaleFactor_cp(value:Number):void 
-		{
-			for each (var texture:Texture in sTextures)
-			texture.dispose();
-			
-			sTextures_cp = new Dictionary();
-			sContentScaleFactor_cp = value < 1.5 ? 1 : 2; // assets are available for factor 1 and 2 
-		}
 	}
 
 }
