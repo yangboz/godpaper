@@ -52,13 +52,15 @@ Two Hit One: <a href="https://www.mochimedia.com/games/play/_v801648">https://ww
 
 # Screen shots
 
-![Screenshot of "TicTacToe"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/src/assets/screenshots/tic_tac_toe.jpg)
+![Screenshot of "TheChessJam"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/resources/screenshots/the_chess_jam.jpg)
 
-![Screenshot of "ChineseChessJam"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/src/assets/screenshots/chinese_chess_jam.jpg)
+![Screenshot of "TheGo"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/resources/screenshots/the_go.jpg)
 
-![Screenshot of "TheChessJam"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/src/assets/screenshots/the_chess_jam.jpg)
+![Screenshot of "ChineseChessJam"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/resources/screenshots/chinese_chess_jam.jpg)
 
-![Screenshot of "TheBejeweledJam"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/src/assets/screenshots/the_bejewel_jam.jpg)
+![Screenshot of "TicTacToe"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/resources/screenshots/tic_tac_toe.jpg)
+
+![Screenshot of "TheBejeweledJam"](https://raw.github.com/yangboz/godpaper/master/TheKnightErrant/resources/screenshots/the_bejewel_jam.jpg)
 
 
 # Main features
