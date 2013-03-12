@@ -26,9 +26,11 @@ package com.godpaper.the_go.service
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.core.FlexGlobals;
+	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	import com.godpaper.as3.services.IConductService;
 	
-	
+	import playerio.Message;
 	/**
 	 * DummyService.as class.A customized service example, make this implementation effective at ServiceConfig.wrapper;  	
 	 * @author yangboz
@@ -37,7 +39,7 @@ package com.godpaper.the_go.service
 	 * @airVersion 3.2+
 	 * Created Feb 14, 2013 11:52:58 AM
 	 */   	 
-	public class DummyService implements IConductService
+	public class TheGoService implements IConductService
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -60,6 +62,13 @@ package com.godpaper.the_go.service
 			//TODO: implement function
 			return false;
 		}
+		//
+		public function get playerIoPlugin():PlayerIoPlugin
+		{
+			//Refresh game room with tables.
+			var playerIoPlugin:PlayerIoPlugin = (FlexGlobals.topLevelApplication.pluginProvider as PlayerIoPlugin);
+			return playerIoPlugin;
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties
@@ -71,7 +80,7 @@ package com.godpaper.the_go.service
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function DummyService()
+		public function TheGoService()
 		{
 			//TODO: implement function
 		}
@@ -88,9 +97,36 @@ package com.godpaper.the_go.service
 		//
 		public function transforBrevity(type:String,value:String):String
 		{
-			//TODO: implement function
+			//Create a message and send
+			//@example: "c7747"
+			switch(type)
+			{
+				case "move":
+				case "click":	
+					var chessPieceType:String = value.charAt(0);
+					var startPosition:int = int(value.charAt(1).concat(value.charAt(2)));
+					var endPosition:int = int(value.charAt(3).concat(value.charAt(4)));
+					var moveMsg:Message = playerIoPlugin.connection.createMessage("move", chessPieceType, startPosition, endPosition);
+					playerIoPlugin.connection.sendMessage(moveMsg);
+					break;
+				case "tie":
+				case "reset":
+					var tieMsg:Message = playerIoPlugin.connection.createMessage(type);
+					playerIoPlugin.connection.sendMessage(moveMsg);
+					break;
+				case "win":
+					var winner:int = FlexGlobals.userModel.hosterRoleIndex;
+					var winnerName:String = FlexGlobals.userModel.hostRoleName;
+					var winMsg:Message = playerIoPlugin.connection.createMessage(type, winner, winnerName);
+					playerIoPlugin.connection.sendMessage(winMsg);
+					break;
+				default:
+					break;
+			}
+			
+			//
 			return null;
-		} 
+		}     
 		//--------------------------------------------------------------------------
 		//
 		//  Protected methods

@@ -26,7 +26,12 @@ package com.godpaper.the_go.model.vo
 	//  Imports
 	//
 	//--------------------------------------------------------------------------
+	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.impl.AbstractChessVO;
+	import com.godpaper.as3.utils.LogUtil;
+	import com.lookbackon.ds.BitBoard;
+	
+	import mx.logging.ILogger;
 	
 	
 	/**
@@ -48,7 +53,7 @@ package com.godpaper.the_go.model.vo
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		
+		private static const LOG:ILogger = LogUtil.getLogger(ChessVO_TheGo);
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -77,7 +82,36 @@ package com.godpaper.the_go.model.vo
 		//--------------------------------------------------------------------------
 		override public function initialization(rowIndex:int, colIndex:int, flag:uint=0, identifier:String=""):void
 		{
-			//TODO: implement function
+			//Define chess occupy/move/capture even defend bitboard here.
+			//@see http://www.godpaper.com/godpaper/index.php/%E5%B0%8F%E7%A0%96%E6%A0%BC%E6%A3%8B
+			// *
+			// *s*
+			// *
+			//Notice:Don't worry about bitboard over-fence issues,that it wouble be handle it as default.
+			//about occupies.set all cells on this big triangle.
+			for(var row:int=0;row<chessGasketModel.gaskets.height;row++)
+			{
+				for(var col:int=0;col<chessGasketModel.gaskets.width;col++)
+				{
+					if(chessGasketModel.gaskets.gett(col,row))
+					{
+						if(rowIndex==-1 && colIndex==-1)
+						{
+							this.occupies.setBitt(row,col,true);
+						}
+					}
+				}
+			}
+			LOG.info("occupies:{0}",this.occupies.dump());
+			//about legal moves.
+			LOG.info("allPieces:{0}",chessPiecesModel.allPieces.dump());
+			this.moves = this.occupies.xor(this.occupies.and(chessPiecesModel.allPieces));
+			//
+			LOG.info("moves:{0}",this.moves.dump());
+			//blocker
+			//about attacked captures.
+//			this.captures = new BitBoard(BoardConfig.xLines,BoardConfig.yLines);
+			//about defends.
 		}
 		//--------------------------------------------------------------------------
 		//

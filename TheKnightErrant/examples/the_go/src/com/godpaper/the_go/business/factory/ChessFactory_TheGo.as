@@ -27,6 +27,7 @@ package com.godpaper.the_go.business.factory
 	//
 	//--------------------------------------------------------------------------
 	import com.godpaper.as3.business.factory.ChessFactoryBase;
+	import com.godpaper.as3.configs.BoardConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.consts.DefaultPiecesConstants;
 	import com.godpaper.as3.core.IChessPiece;
@@ -116,10 +117,10 @@ package com.godpaper.the_go.business.factory
 			switch ((conductVO.target as ChessPiece).name)
 			{
 				case DefaultPiecesConstants.BLUE.label:
-					chessVO=new ChessVO_TheGo(4,4,oRowIndex, oColIndex,DefaultConstants.FLAG_BLUE);
+					chessVO=new ChessVO_TheGo(BoardConfig.xLines,BoardConfig.yLines,oRowIndex, oColIndex,DefaultConstants.FLAG_BLUE);
 					break;
 				case DefaultPiecesConstants.RED.label:
-					chessVO=new ChessVO_TheGo(4, 4, oRowIndex, oColIndex,DefaultConstants.FLAG_RED);
+					chessVO=new ChessVO_TheGo(BoardConfig.xLines,BoardConfig.yLines, oRowIndex, oColIndex,DefaultConstants.FLAG_RED);
 					break;
 				default:
 					break;

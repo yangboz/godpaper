@@ -26,6 +26,7 @@ package
 	import com.godpaper.as3.configs.GasketConfig;
 	import com.godpaper.as3.configs.PieceConfig;
 	import com.godpaper.as3.configs.PluginConfig;
+	import com.godpaper.as3.configs.ServiceConfig;
 	import com.godpaper.as3.configs.TextureConfig;
 	import com.godpaper.as3.consts.DefaultConstants;
 	import com.godpaper.as3.core.FlexGlobals;
@@ -34,6 +35,7 @@ package
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.the_go.business.factory.ChessFactory_TheGo;
 	import com.godpaper.the_go.business.managers.ChessPiecesManager_TheGo;
+	import com.godpaper.the_go.service.TheGoService;
 	
 	import mx.logging.ILogger;
 	
@@ -158,6 +160,8 @@ package
 			//Pieces box config:
 			PluginConfig.piecesBoxRequired = true;
 			PluginConfig.piecesBoxPosition = PluginConfig.PBOX_AT_RIGHT;
+			//about service:
+			ServiceConfig.wrapper = TheGoService;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());
 			LOG.debug("SigletonFactory(cg) test:{0}",FlexGlobals.chessGasketsModel.gaskets);
