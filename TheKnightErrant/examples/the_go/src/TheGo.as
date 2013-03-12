@@ -140,8 +140,8 @@ package
 			GasketConfig.height = 30;
 			//about piece:
 			PieceConfig.factory = ChessFactory_TheGo;
-			PieceConfig.maxPoolSizeBlue = 100;
-			PieceConfig.maxPoolSizeRed = 100;
+			PieceConfig.maxPoolSizeBlue = 181;
+			PieceConfig.maxPoolSizeRed = 181;
 			//Notice:starling scaleX/Y seldom triggle touch event issues.
 			PieceConfig.scaleX = .8;
 			PieceConfig.scaleY = .8;

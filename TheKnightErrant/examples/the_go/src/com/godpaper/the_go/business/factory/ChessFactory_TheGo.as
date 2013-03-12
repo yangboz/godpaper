@@ -113,7 +113,7 @@ package com.godpaper.the_go.business.factory
 			var oColIndex:int=conductVO.currentPosition.x;
 			var oRowIndex:int=conductVO.currentPosition.y;
 			var chessVO:IChessVO;
-			//			LOG.info(conductVO.dump());
+			//			LOG.info(condu,ctVO.dump());
 			switch ((conductVO.target as ChessPiece).name)
 			{
 				case DefaultPiecesConstants.BLUE.label:

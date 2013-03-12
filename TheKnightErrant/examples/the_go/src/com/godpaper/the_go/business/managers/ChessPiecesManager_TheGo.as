@@ -79,12 +79,13 @@ package com.godpaper.the_go.business.managers
 		//
 		override public function applyMove(conductVO:ConductVO):void
 		{
-			//TODO: implement function
+			//super call here.
+			super.applyMove(conductVO);
+			//Apply your chess game rule here.
 		}
 		//
 		override public function doMoveValidation(conductVO:ConductVO):Boolean
 		{
-			//TODO: implement function
 			return true;
 		}
 		//--------------------------------------------------------------------------

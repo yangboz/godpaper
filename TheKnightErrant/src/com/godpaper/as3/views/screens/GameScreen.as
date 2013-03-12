@@ -154,7 +154,6 @@ package com.godpaper.as3.views.screens
 			//Display chess board at first.
 			FlexGlobals.startUpSequenceTask.addChild(new CreateChessBoardTask());//33.332M
 			FlexGlobals.startUpSequenceTask.addChild(new CreateChessGasketTask());//33.316M
-			FlexGlobals.startUpSequenceTask.addChild(new CreateChessVoTask());//34.922M
 			//Plugin button bar view init
 			FlexGlobals.startUpSequenceTask.addChild(new CreatePluginButtonBarTask());
 			//Display the pieces box if neccessary
@@ -166,6 +165,8 @@ package com.godpaper.as3.views.screens
 			{
 				FlexGlobals.startUpSequenceTask.addChild(new CreateChessPieceTask());//34.090M
 			}
+			//Chess piece vo.
+			FlexGlobals.startUpSequenceTask.addChild(new CreateChessVoTask());//34.922M
 			//task complete
 			FlexGlobals.startUpSequenceTask.addEventListener(TaskEvent.TASK_COMPLETE,startUpTaskCompleteHandler);
 			//task start
