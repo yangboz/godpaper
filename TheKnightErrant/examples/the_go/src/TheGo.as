@@ -156,7 +156,7 @@ package
 			//Displays the statistics box at a certain position.
 			PluginConfig.showStats = true;
 			//Pieces box config:
-			PluginConfig.piecesBoxRequired = false;
+			PluginConfig.piecesBoxRequired = true;
 			PluginConfig.piecesBoxPosition = PluginConfig.PBOX_AT_RIGHT;
 			//
 			LOG.debug("SigletonFactory(cp) test:{0}",FlexGlobals.chessPiecesModel.BLUE_BISHOP.dump());

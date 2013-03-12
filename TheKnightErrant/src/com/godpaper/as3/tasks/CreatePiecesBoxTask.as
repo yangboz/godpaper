@@ -58,9 +58,9 @@ package com.godpaper.as3.tasks
 		private var xGap:Number = 20;
 		private var yGap:Number = 50;
 		private var childAreaXOffset:Number = 20;
-		private var childAreaYOffset:Number = 0;
-		private var childAreaWidth:Number = 25;
-		private var childAreaHeight:Number = 25;
+		private var childAreaYOffset:Number = 20;
+		private var childAreaWidth:Number = 70;
+		private var childAreaHeight:Number = 45;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -116,6 +116,8 @@ package com.godpaper.as3.tasks
 			this.bluePiecesBox = new PiecesBox();
 			bluePiecesBox.width = 100;
 			bluePiecesBox.height = 70;
+			bluePiecesBox.scaleX = 1;
+			bluePiecesBox.scaleY = 1;
 			var atlas:TextureAtlas = AssetEmbedsDefault.getTextureAtlas_cp();
 			bluePiecesBox.background = new Image(atlas.getTexture(PluginConfig.piecesBoxBgBlue));
 			bluePiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);//Default setting.
@@ -128,6 +130,8 @@ package com.godpaper.as3.tasks
 			this.redPiecesBox = new PiecesBox();
 			redPiecesBox.width = 100;
 			redPiecesBox.height = 70;
+			redPiecesBox.scaleX = 1;
+			redPiecesBox.scaleY = 1;
 			//
 			redPiecesBox.background = new Image(atlas.getTexture(PluginConfig.piecesBoxBgRed));
 			redPiecesBox.childrenArea = new Rectangle(childAreaXOffset,childAreaYOffset,childAreaWidth,childAreaHeight);//Default setting.

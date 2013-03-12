@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://texturepacker.com-->
-<!-- $TexturePacker:SmartUpdate:e723362d61141ad680b1d2f61d7b90e6$ -->
+<!-- $TexturePacker:SmartUpdate:36583ae3e1153aa486ef862f614acf06$ -->
 <TextureAtlas imagePath="AtlasTexture_the_go.png">
     <SubTexture name="BLUE" x="2" y="2" width="28" height="28"/>
     <SubTexture name="PBOX_BLUE" x="32" y="2" width="100" height="70"/>
-    <SubTexture name="PBOX_RED" x="134" y="2" width="100" height="70"/>
-    <SubTexture name="RED" x="2" y="74" width="28" height="28"/>
+    <SubTexture name="PBOX_RED" x="32" y="2" width="100" height="70"/>
+    <SubTexture name="RED" x="134" y="2" width="28" height="28"/>
 </TextureAtlas>
