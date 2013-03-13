@@ -21,12 +21,12 @@
  */
 package com.godpaper.chinese_chess_jam.business
 {
+	import com.godpaper.as3.model.PGN_Model;
+	import com.godpaper.as3.model.vos.pgn.ChessBookMoveVO;
+	import com.godpaper.as3.model.vos.pgn.ChessBookVO;
+	import com.godpaper.as3.model.vos.pgn.PGN_VO;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.chinese_chess_jam.model.PGN_Model;
-	import com.godpaper.chinese_chess_jam.vo.pgn.ChessBookMoveVO;
-	import com.godpaper.chinese_chess_jam.vo.pgn.ChessBookVO;
-	import com.godpaper.chinese_chess_jam.vo.pgn.PGN_VO;
-	
+
 	import mx.logging.ILogger;
 	import mx.utils.StringUtil;
 	

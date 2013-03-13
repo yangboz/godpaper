@@ -2,6 +2,7 @@ package com.godpaper.as3.configs
 {
 	import com.godpaper.as3.views.plugin.IPluginButtonBar;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
+	import com.godpaper.chinese_chess_jam.business.PGN_Proxy;
 	
 	import starling.display.Image;
 
@@ -32,7 +33,7 @@ package com.godpaper.as3.configs
 		//Customize implementation define
 		public static var tabbarImpl:Class = PluginButtonBar;//Default
 		public static var showStats:Boolean = true;//Displays the statistics box at a certain position.
-		public static var PGN_file:String = null;//PGN file path required.
+		private static var _PGN_file:String = null;//PGN file path required.
 		public static var piecesBoxPosition:String = PBOX_AT_BOTTOM;
 		public static var piecesBoxRequired:Boolean = false;//For partical chess board game with pieces box component view;
 		public static var piecesBoxBgRed:String="PBOX_RED";//The chess pieces box 's backgroud texture;
@@ -49,7 +50,22 @@ package com.godpaper.as3.configs
 		//  Public properties
 		//
 		//-------------------------------------------------------------------------- 
-		//
+		//PGN_file
+		public static function get PGN_file():String
+		{
+			return _PGN_file;
+		}
+		
+		public static function set PGN_file(value:String):void
+		{
+			_PGN_file = value;
+			//PGNs testing
+			if(value)
+			{
+				var pgnProxy:PGN_Proxy = new PGN_Proxy();
+				pgnProxy.load(value);
+			}
+		}
 		//--------------------------------------------------------------------------
 		//
 		//  Protected properties

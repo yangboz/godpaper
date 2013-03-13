@@ -31,7 +31,6 @@ package
 	import com.godpaper.as3.core.IChessPieceManager;
 	import com.godpaper.as3.plugins.playerIO.PlayerIoPlugin;
 	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.chinese_chess_jam.business.PGN_Proxy;
 	import com.godpaper.chinese_chess_jam.business.factory.ChessFactory_ChineseChessJam;
 	import com.godpaper.chinese_chess_jam.business.managers.ChessPieceManager_ChineseChessJam;
 	import com.godpaper.chinese_chess_jam.service.ChineseChessJamService;
@@ -147,6 +146,7 @@ package
 			//about plugin:
 			PluginConfig.gameID = "chinesechessjam-msf2zuz0suaip7yhtzpaa";//your custom game related id.
 			PluginConfig.boardID = "ChineseChessJam";//your custom game related board id.
+			PluginConfig.PGN_file = "../examples/chinese_chess_jam/assets/PGNs/N01顺炮横车破直车弃马局(UTF8).PGN";////和合二炮(utf8).PGN//N01顺炮横车破直车弃马局(UTF8).PGN
 			//
 			this._pluginProvider = new PlayerIoPlugin(PluginConfig.gameID,PluginConfig.boardID);//For playerIO plugin
 			this._mochiads_game_id = "47de4a85dd3e213a";//espical for mochi game platform.
@@ -161,9 +161,6 @@ package
 //			LoggerConfig.filters = ["com.godpaper.chinese_chess_jam.business.*"];
 			LoggerConfig.filters = ["*"];
 			LoggerConfig.level = LogEventLevel.DEBUG;
-			//PGNs testing
-			var pgnProxy:PGN_Proxy = new PGN_Proxy();
-			pgnProxy.load("../examples/chinese_chess_jam/assets/PGNs/N01顺炮横车破直车弃马局(UTF8).PGN");//和合二炮(utf8).PGN//N01顺炮横车破直车弃马局(UTF8).PGN
 		}
 		//--------------------------------------------------------------------------
 		//
