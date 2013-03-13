@@ -125,7 +125,7 @@ function ajax_get_chess_categories()
 	var api_url = API_BASE_URL
         +"action=query&list=allcategories&aclimit=200&acdir=descending"
         +API_RETURN_FORMAT;
-	console.log("api_url:",api_url);
+	// console.log("api_url:",api_url);
 	$.ajax({
 		url: api_url,// URL for the data
 		type: 'GET',
@@ -368,32 +368,70 @@ $(document).live("pageinit", function(event){
 });
 </script>
 
+<script type="text/javascript" language="javascript" >
+function popup_item_detail(thisRef)
+{
+	//
+	var target = $( thisRef );
+	url = target.attr( "url" );
+	title = target.attr( "title" );
+	console.log("item thisRef attr[url]:",url," attr[title]:",title);
+	//
+	closebtn = '<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-btn-right">Close</a>',
+	header = '<div data-role="header"><h2>' + title + '</h2></div>',
+	img = "'<iframe src='" + url + "' width='100%' height='100%'></iframe>";
+	popup = '<div data-role="popup" id="popup-' + title + '" data-short="' + title +'" data-theme="none" data-overlay-theme="a" data-corners="false" data-tolerance="15">' + closebtn + header + img + '</div>';
+
+	// Create the popup. Trigger "pagecreate" instead of "create" because currently the framework doesn't bind the enhancement of toolbars to the "create" event (js/widgets/page.sections.js).
+	$.mobile.activePage.append( popup ).trigger( "pagecreate" );
+	// Wait with opening the popup until the popup image has been loaded in the DOM.
+	// This ensures the popup gets the correct size and position
+	$( ".photo", "#popup-" + title ).load(function() {
+		var height = $( this ).height(),
+			width = $( this ).width();
+		// Set height and width attribute of the image
+		$( this ).attr({ "height": height, "width": width });
+		// Open the popup
+		$( "#popup-" + title ).popup( "open" );
+		// Clear the fallback
+		clearTimeout( fallback );
+	});
+	// Fallback in case the browser doesn't fire a load event
+	var fallback = setTimeout(function() {
+		$( "#popup-" + title ).popup( "open" );
+	}, 2000);
+}
+// Set a max-height to make large images shrink to fit the screen.
+$( document ).on( "popupbeforeposition", ".ui-popup", function() {
+	// 68px: 2 * 15px for top/bottom tolerance, 38px for the header.
+	var maxHeight = $( window ).height() - 68 + "px";
+	var maxWidth = $( window ).width() - 68 + "px";
+
+	$( ".item-detail-iframe", this ).css( "max-height", maxHeight );
+	$( ".item-detail-iframe", this ).css( "max-width", maxWidth );
+});
+
+// Remove the popup after it has been closed to manage DOM size
+$( document ).on( "popupafterclose", ".ui-popup", function() {
+	$( this ).remove();
+});
+</script>
+<style>
+	/* Reduce the height of the header on smaller screens. */
+	@media all and (max-width: 48em){
+		.ui-popup .ui-title {
+			font-size: .75em;
+		}
+	}
+</style>
 <body> 
 
 <div id="pageDiv" data-role="page">
 
 	<div data-role="header">
 		<h1>Godpaper Mobile Wiki</h1>
-		<!--  
-		<a data-role='actionsheet' 
-						data-sheet='loginForm' 
-						data-icon='star' 
-						id='login_form_toggle'
-                        onclick="$('a#login_form_toggle').actionsheet('close');"
-						>Login</a>
-		<a data-role='actionsheet' 
-						data-sheet='feedbackForm' 
-						data-icon='star' 
-						id='feedback_form_toggle'
-                        onclick="$('a#feedback_form_toggle').actionsheet('close');"
-						>Feedback</a>
-		<a data-role='actionsheet' 
-						data-sheet='actionSheetsForm' 
-						data-icon='grid'
-						id='gotogoogle_toggle'
-						onclick="$('a#gotogoogle_toggle').actionsheet('close');">External Link</a>		
-		-->						
-	</div><!-- /header -->
+	</div>
+	<!-- /header -->
 
 	<!-- /header -->
 	
@@ -403,26 +441,6 @@ $(document).live("pageinit", function(event){
         	</li>
         </ul>		
 	</div>
-    <!-- action sheets -->
-    <!-- 
-     <form id='actionSheetsForm'>
-     	<a data-role='button' data-icon="forward">View Site</a>
-		<a data-role='button' data-icon="forward">Play Online</a>
-		<a data-role='button' data-icon="forward">App Store</a>
-	</form>
-    <form id='loginForm'>
-		<input name='user' type='text' placeholder='Username' autocomplete='off'/>
-		<input name='pass' type='password' placeholder='Passphrase' autocomplete='off'/>
-		<br/>
-		<a data-role='button' data-rel='close'>Login</a>
-	</form>
-    <form id='feedbackForm'>
-		<input name='user' type='text' placeholder='Username' autocomplete='off'/>
-		<input name='pass' type='password' placeholder='Passphrase' autocomplete='off'/>
-		<br/>
-		<a data-role='button' data-rel='close'>Send Feedback</a>
-	</form>
-	-->
     <!-- /content -->
     <!-- group list view templ/content -->
     <script id="cCategoriesTemplate" type="text/x-jquery-tmpl">
@@ -432,7 +450,9 @@ $(document).live("pageinit", function(event){
 	<script id="cCategoryMembersTemplate" type="text/x-jquery-tmpl">
 		<li style="vertical-align:middle;">
 			<a  
-				href="${href}" 
+				url="${href}"
+				title="${title}"
+				onclick="popup_item_detail(this)"
 			>
 				<img src="${icon}" width="75" height="75"
                             			style="background-color:#FFF;
@@ -451,8 +471,10 @@ $(document).live("pageinit", function(event){
     
     <div data-role="footer">
 		<h4><a href="http://www.gnu.org/licenses/old-licenses/fdl-1.2.txt" data-rel="dialog">GNU Free Documentation License 1.2</a></h4>
-	</div><!-- /footer -->
-</div><!-- /page -->
+	</div>
+	<!-- /footer -->
+</div>
+<!-- /page -->
 
 <!-- Start of third page: #popup -->
 <div data-role="page" id="popup">
@@ -468,6 +490,7 @@ $(document).live("pageinit", function(event){
 	<div data-role="footer">
 		<h4>Page Footer</h4>
 	</div><!-- /footer -->
-</div><!-- /page popup -->
+</div>
+<!-- /page popup -->
 </body>
 </html>
