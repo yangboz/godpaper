@@ -3,7 +3,7 @@
 	<head> 
 	<title>Godpaper Mobile Wiki</title> 
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" 
     	content = "width=device-width, 
@@ -118,7 +118,7 @@ function endsWith(str, suffix)
 }
 </script>
 
-<script type="text/javascript" language="javascript" charset="gb2312">
+<script type="text/javascript" language="javascript" charset="UTF-8">
 function ajax_get_chess_categories()
 {
 	var suffix = "类";
@@ -132,20 +132,22 @@ function ajax_get_chess_categories()
 		//mode: 'queue', 
 		// dataType: "xml",
 		success: function(data) {
-			console.log("ajax_get_chess_categories data:",data);
+			// console.log("ajax_get_chess_categories data:",data);
 			var xml = $( data );
-			console.log("ajax_get_chess_categories xml:",xml);
+			// console.log("ajax_get_chess_categories xml:",xml);
 			var categoryMembersElement = xml.find("allcategories");
 			// console.log(categoryMembersElement.children("cm"));
 			xml.find("c").each(function(index, element) {
-				console.log("find('c'):",index+element.textContent);
+				// console.log("find('c'):",index+element.textContent);
 				var nodeValue = element.textContent;
+				// console.log("suffix:",suffix);
 				//if(nodeValue.indexOf(suffix)!=-1)
 				if(endsWith(nodeValue,suffix))
 				{
 					//var categoryUrl = "http://www.godpaper.com/godpaper/index.php/"+nodeValue;
 					//Store it.
 					chessCategories.push(nodeValue);
+					// console.log("chessCategories:",chessCategories);
 					//Next process.
 					ajax_get_category_members(nodeValue);
 					//
