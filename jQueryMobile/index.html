@@ -1,0 +1,468 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>Godpaper Mobile Wiki</title> 
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" 
+    	content = "width=device-width, 
+    			initial-scale=1, 
+    			minimum-scale = 1, 
+   				maximum-scale = 5" 
+    />
+    <link rel="apple-touch-startup-image" href="images/ajax-loader.gif" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png"/>  
+    <link rel="apple-touch-startup-image" href="" />
+    <link rel="stylesheet" href="./css/jquery.mobile.actionsheet.css" />
+
+<!--Copy-and-Paste Snippet for CDN-hosted files-->
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"></script>
+
+<!--jQuery templ library-->
+<script type="text/javascript" src="./js/jquery.tmpl.js"></script>
+<!--jQuery repeater-->
+<script type="text/javascript" src="./js/jquery.jsrepeater.js"></script>
+<!--jQuery ajax queue links-->
+<script type="text/javascript" src="./js/jquery.ajax-queue-1.0.js"></script>
+<!--jQuery block UI-->
+<script type="text/javascript" src="./js/jquery.blockUI.js"></script>
+<!--jQuery dynamic list view-->
+<script type="text/javascript" src="./js/jquery.mobile.listview.js"></script>
+<!--jQuery action sheet-->
+<script type="text/javascript" src="./js/jquery.mobile.actionsheet.js"></script>
+</head> 
+<!--custom scripts-->
+<script type="text/javascript" language="javascript" >
+//Constants list
+var SITE_BASE_URL = "http://www.godpaper.com/godpaper/index.php/";
+var API_BASE_URL = "http://www.lookbackon.com/godpaper/api.php?";
+var API_RETURN_FORMAT = "&format=xml";
+//
+var chessCategories = new Array();//[string,string,...]
+var chessAllImages = new Array();//[{name:string,url:string},]
+var chessCategoryMembers = new Array();//[{category:string,members:[string,...]},...]
+var chessCategoryMemberTimestamp = new Array();//[{title:timestamp},...]
+var chessAllSummaries = new Array();//[{title:string,summary:string},]
+var chessCategoryMembersWithObjs = new Array();//[{"label":string,"summary":string,"count":number,"Members":Object{icon/href/title/label/timestamp}},]
+//
+function getChessImageUrl($name)
+{
+	var findUrl = "";
+	for(var i=0;i<chessAllImages.length;i++)
+	{
+		var obj = chessAllImages[i];
+		if(obj.name.indexOf($name)!=-1)
+		{
+			//Find matched object;
+			findUrl = obj.url;
+		}
+	}
+	return findUrl;
+}
+//
+function getChessSummary($title)
+{
+	var findSummary = "";
+	for(var i=0;i<chessAllSummaries.length;i++)
+	{
+		var obj = chessAllSummaries[i];
+		if(obj.title.indexOf($title)!=-1)
+		{
+			//Find matched object;
+			findSummary = obj.summary;
+		}
+	}
+	return findSummary;
+}
+//
+function getChessSiteUrl($title)
+{
+	return SITE_BASE_URL+$title;
+}
+//@see:http://stackoverflow.com/questions/5223/length-of-javascript-associative-array
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+//
+function getChessCategoryMembers($category)
+{
+	var findMembers = new Array();
+	//Get the size of an object/associative array
+	var size = Object.size(chessCategoryMembers);
+	var obj = chessCategoryMembers[$category];
+	//Find matched object;
+	findMembers = obj;
+	return findMembers;
+}
+//
+function getChessCategoryMemberTimestamp($title)
+{
+	return chessCategoryMemberTimestamp[$title];
+}
+//
+function endsWith(str, suffix) 
+{
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+</script>
+
+<script type="text/javascript" language="javascript" charset="gb2312">
+function ajax_get_chess_categories()
+{
+	var suffix = "类";
+	var api_url = API_BASE_URL
+        +"action=query&list=allcategories&aclimit=200&acdir=descending"
+        +API_RETURN_FORMAT;
+	//alert(api_url);
+	$.ajax({
+		url: api_url,// URL for the data
+		type: 'GET',
+		//mode: 'queue', 
+		//dataType: "xml",
+		success: function(data) {
+			//alert(data);
+			var xml = $( data );
+			var categoryMembersElement = xml.find("allcategories");
+			//alert(categoryMembersElement.children("cm"));
+			xml.find("c").each(function(index, element) {
+				//alert(index+element.textContent);
+				var nodeValue = element.textContent;
+				//if(nodeValue.indexOf(suffix)!=-1)
+				if(endsWith(nodeValue,suffix))
+				{
+					//var categoryUrl = "http://www.godpaper.com/godpaper/index.php/"+nodeValue;
+					//Store it.
+					chessCategories.push(nodeValue);
+					//Next process.
+					ajax_get_category_members(nodeValue);
+					//
+				}
+            });
+			
+		}
+	});
+	//return chessCategories;
+}
+</script>
+
+<script type="text/javascript" language="javascript" charset="gb2312">
+function ajax_get_chess_summaries($cmTitle)
+{
+	var api_url = API_BASE_URL
+	+"action=summaries&prop=text&pages="
+	+$cmTitle
+	+API_RETURN_FORMAT;
+	//
+	$.ajax({
+		url: api_url,// URL for the data
+		type: 'GET',
+		//mode: 'queue', 
+		//dataType: "xml",
+		success: function(data) {
+			//alert(data);
+			var xml = $( data );
+			var summaries = xml.find("summaries");
+			//alert(summaries.children("article"));
+			var element = summaries.children("article");
+			var articleElem = element[0];
+			var titleObj = articleElem.attributes["title"];
+			var titleValue = titleObj.nodeValue;
+			var summaryObj = articleElem.attributes["summary"];
+			var summaryValue = summaryObj.nodeValue;
+			//Store it.
+			chessAllSummaries.push(
+				{
+					"title":titleValue,
+					"summary":summaryValue
+				}
+			);
+			//alert(chessAllSummaries);
+		}
+	});
+	//
+}
+</script>
+
+<script type="text/javascript" language="javascript" charset="gb2312">
+function ajax_get_category_members(category)
+{
+	var api_url = API_BASE_URL
+	+"action=query&list=categorymembers&cmtitle=Category:"
+	+category
+	+"&cmsort=timestamp&cmdir=desc&cmprop=ids|title|timestamp"
+	+API_RETURN_FORMAT;
+	//
+	$.ajax({
+		url: api_url,// URL for the data
+		type: 'GET',
+		//mode: 'queue', 
+		//dataType: "xml",
+		success: function(data) {
+			//alert(data);
+			var xml = $( data );
+			var summaries = xml.find("categorymembers");
+			//alert(summaries.children("summary"));
+			xml.find("cm").each(function(index, element) {
+                //alert(index+element.textContent);
+				var nodeValue = element.textContent;
+				//member title
+				var titleObj = element.attributes["title"];
+				var titleValue = titleObj.nodeValue; 
+				//member timestamp
+				var timestampObj = element.attributes["timestamp"];
+				var timestampValue = timestampObj.nodeValue; 
+				//Store it.
+				if(chessCategoryMembers[category]==undefined)
+				{
+					chessCategoryMembers[category] = new Array();
+				}
+				if(chessCategoryMemberTimestamp[titleValue]==undefined)
+				{
+					chessCategoryMemberTimestamp[titleValue] = new Array();
+				}
+				chessCategoryMembers[category].push(titleValue);
+				chessCategoryMemberTimestamp[titleValue].push(timestampValue);
+				//Get chess summary for list view cell descriptions.
+				ajax_get_chess_summaries(titleValue);
+				//
+            });
+			//alert(chessCategoryMembers);
+		}
+	});
+}
+</script>
+
+
+<script type="text/javascript" language="javascript" >
+function ajax_display_categories_members_objs()
+{
+	//
+	for(var i=0;i<chessCategories.length;i++)
+	{	
+		//
+		var categoryWithMembers = getChessCategoryMembers(chessCategories[i]);
+		var categoryMemberObjs = new Array();
+		//
+		for(var j=0;j<categoryWithMembers.length;j++)
+		{
+			$cmTitle = categoryWithMembers[j];
+			//
+			//Assemble the hierarchical grouped data.
+			//@example: categories>>category{icon/lable/summary/link}
+			var iconUrl = getChessImageUrl($cmTitle);
+			var siteUrl = getChessSiteUrl($cmTitle);
+			var titleValue = $cmTitle;
+			var summaryValue = getChessSummary($cmTitle);
+			var timestampValue = getChessCategoryMemberTimestamp($cmTitle);
+			//
+			categoryMemberObjs.push(
+				{
+					"icon":iconUrl,
+					"href":siteUrl,
+					"title":titleValue,
+					"summary":summaryValue,
+					"timestamp":timestampValue
+				}
+			);
+		}
+		//
+		chessCategoryMembersWithObjs.push(
+			{
+				"label":chessCategories[i],
+				"count":categoryWithMembers.length,
+				"Members":categoryMemberObjs
+			}
+		);
+	}
+	//alert(chessCategoryMembersWithObjs);
+	$("#cCategoriesUl").empty().append($( "#cCategoriesTemplate" ).tmpl( chessCategoryMembersWithObjs ));
+	//$("#cCategoriesUl").listView('fresh');
+	//$("#cCategoriesUl").fillTemplate(chessCategoryMembersWithObjs);
+	//$("#cCategoriesUl").listView();
+	//@see:http://forum.jquery.com/topic/wish-listview-refresh-would-go-away
+	$("#cCategoriesUl").each(function() {
+		$(this).listview();
+		$(this).listview("refresh");
+		//$(this).actionsheet();
+	});  
+	//Finally show page div
+	$("#pageDiv").show();
+}
+</script>
+
+<script type="text/javascript" language="javascript" >
+function ajax_get_chess_images()
+{
+	//Get all images.
+	var api_url = API_BASE_URL
+	+"action=query&list=allimages&ailimit=200"
+	+API_RETURN_FORMAT;
+	//alert(api_url);
+	$.ajax({
+		url: api_url,// URL for the data
+		type: 'GET',
+		//mode: 'queue', 
+		//dataType: "xml",
+		success: function(data) {
+			//alert(data);
+			var xml = $( data );
+			var allImagesElement = xml.find("allimages");
+			//alert(allImagesElement);
+			xml.find("img").each(function(index, element) {
+                //alert(index+element);
+				//
+				var imgName = element.attributes.name;
+				var imgUrl = element.attributes.url;
+				//var imgNamePrefix = imgName.split(".");//@example:xxx.png;
+				chessAllImages.push(
+					{
+						"name":imgName.nodeValue,
+						//"name":imgNamePrefix[0],
+						"url":imgUrl.nodeValue
+					}
+				);
+				//
+            });
+		}
+	});
+}
+</script>
+
+<script type="text/javascript" language="javascript" >
+$(document).ready(function() {
+	//$.mobile.pageLoading();
+	//Default view behavior(blockUI)
+	$(document).ajaxStart(function () {
+        $.blockUI();
+		$("#pageDiv").hide();
+    });
+	$(document).ajaxStop(function () {
+        $.unblockUI();
+		//Next process
+		ajax_display_categories_members_objs();
+    });
+	//
+	ajax_get_chess_images();
+	//
+	ajax_get_chess_categories();
+	//
+});
+$(document).live("pageinit", function(event){
+	//
+	$("#pageDiv").hide();
+});
+</script>
+
+<body> 
+
+<div id="pageDiv" data-role="page">
+
+	<div data-role="header">
+		<h1>Godpaper Mobile Wiki</h1>
+		<!--  
+		<a data-role='actionsheet' 
+						data-sheet='loginForm' 
+						data-icon='star' 
+						id='login_form_toggle'
+                        onclick="$('a#login_form_toggle').actionsheet('close');"
+						>Login</a>
+		<a data-role='actionsheet' 
+						data-sheet='feedbackForm' 
+						data-icon='star' 
+						id='feedback_form_toggle'
+                        onclick="$('a#feedback_form_toggle').actionsheet('close');"
+						>Feedback</a>
+		<a data-role='actionsheet' 
+						data-sheet='actionSheetsForm' 
+						data-icon='grid'
+						id='gotogoogle_toggle'
+						onclick="$('a#gotogoogle_toggle').actionsheet('close');">External Link</a>		
+		-->						
+	</div><!-- /header -->
+
+	<!-- /header -->
+	
+	<div id="listView" data-role="content" data-theme="a">	
+		<ul id="cCategoriesUl" data-role="listview" data-theme="c" data-divider-theme="b" data-count-theme="c" data-filter="true"> 
+        	<li data-role="list-divider">${label}<span class="ui-li-count">${count}</span>
+        	</li>
+        </ul>		
+	</div>
+    <!-- action sheets -->
+    <!-- 
+     <form id='actionSheetsForm'>
+     	<a data-role='button' data-icon="forward">View Site</a>
+		<a data-role='button' data-icon="forward">Play Online</a>
+		<a data-role='button' data-icon="forward">App Store</a>
+	</form>
+    <form id='loginForm'>
+		<input name='user' type='text' placeholder='Username' autocomplete='off'/>
+		<input name='pass' type='password' placeholder='Passphrase' autocomplete='off'/>
+		<br/>
+		<a data-role='button' data-rel='close'>Login</a>
+	</form>
+    <form id='feedbackForm'>
+		<input name='user' type='text' placeholder='Username' autocomplete='off'/>
+		<input name='pass' type='password' placeholder='Passphrase' autocomplete='off'/>
+		<br/>
+		<a data-role='button' data-rel='close'>Send Feedback</a>
+	</form>
+	-->
+    <!-- /content -->
+    <!-- group list view templ/content -->
+    <script id="cCategoriesTemplate" type="text/x-jquery-tmpl">
+		<li data-role="list-divider">${label} <span class="ui-li-count">${count}</span></li>
+        {{tmpl(Members) "#cCategoryMembersTemplate"}}
+	</script>
+	<script id="cCategoryMembersTemplate" type="text/x-jquery-tmpl">
+		<li style="vertical-align:middle;">
+			<a  
+				href="${href}" 
+			>
+				<img src="${icon}" width="75" height="75"
+                            			style="background-color:#FFF;
+                                				background-image:url(./images/ajax-loader-transparent.gif);
+                            					background-repeat:no-repeat;
+                            					background-position: center center;
+                        					   "
+                            			/>
+				<h3>${title}</h3>
+				<p>${summary}</p>
+				<!-- class="ui-li-aside" -->
+				<p  style="color:gray;font-style:italic;">${timestamp}</p>
+			</a>
+		</li>
+	</script>
+    
+    <div data-role="footer">
+		<h4><a href="http://www.gnu.org/licenses/old-licenses/fdl-1.2.txt" data-rel="dialog">GNU Free Documentation License 1.2</a></h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<!-- Start of third page: #popup -->
+<div data-role="page" id="popup">
+
+	<div data-role="header">
+		<h1>Dialog</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<iframe src="http://www.godpaper.com/godpaper/index.php/%E9%A6%96%E9%A1%B5" width="100%" height="100%"></iframe>
+	</div><!-- /content -->
+	
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page popup -->
+</body>
+</html>

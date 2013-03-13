@@ -1,0 +1,16 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+  GodpaperWiki: Knight.zhou(YoungWelle@gmail.com)
+  Site: http://blog.lookbackon.com
+  Twitter: http://twitter.com/smartkit
+  Location: China
+
+/* THANKS */
+      Mediawiki Mobile: http://www.mediawiki.org/wiki/Mobile_browser_testing
+
+/* SITE */
+  Components: jQuery Mobile(action sheet,blockUI)
+  Software: DreamWaverCS5.5
