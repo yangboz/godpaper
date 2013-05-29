@@ -80,7 +80,7 @@ Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 
 17.Fractal board game implementation.(Plan)
 
-18.Chess board type implementation.(Start)
+18.Chess board type implementation.(Done,type of checking or not[intersection/segament/fractal] implemented.)
 
 19.Player.IO contest implementation.(Done,multiple player feature implemented.)
 
@@ -88,4 +88,4 @@ Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 
 21.FullScreen features.(Plan)
 
-22.Ant building with Android,iOS package deployment.(Start)
+22.Ant building with Android,iOS package deployment.(Done.Android/iOS/Web support.)
