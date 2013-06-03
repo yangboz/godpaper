@@ -32,23 +32,25 @@ Chinese Chess Jam: <a href="https://www.mochimedia.com/games/play/_v331">https:/
 
 Two Hit One: <a href="https://www.mochimedia.com/games/play/_v801648">https://www.mochimedia.com/games/play/_v801648</a>
 
-The Three Horse<a href="https://www.mochimedia.com/games/play/_v317464">https://www.mochimedia.com/games/play/_v317464</a>
+The Three Horse: <a href="https://www.mochimedia.com/games/play/_v317464">https://www.mochimedia.com/games/play/_v317464</a>
 
-Cat And Mouse<a href="https://www.mochimedia.com/games/play/_v93665">https://www.mochimedia.com/games/play/_v93665</a>
+Cat And Mouse: <a href="https://www.mochimedia.com/games/play/_v93665">https://www.mochimedia.com/games/play/_v93665</a>
 
-The Four Seasons<a href="https://www.mochimedia.com/games/play/_v977037">https://www.mochimedia.com/games/play/_v977037</a>
+The Four Seasons: <a href="https://www.mochimedia.com/games/play/_v977037">https://www.mochimedia.com/games/play/_v977037</a>
 
 <a href="https://www.mochimedia.com/games/play/_v687814">https://www.mochimedia.com/games/play/_v687814</a>
 
 <a href="https://www.mochimedia.com/games/play/_v776899">https://www.mochimedia.com/games/play/_v776899</a>
 
-The Color Lines<a href="https://www.mochimedia.com/games/play/the-color-lines">https://www.mochimedia.com/games/play/the-color-lines</a>
+The Color Lines: <a href="https://www.mochimedia.com/games/play/the-color-lines">https://www.mochimedia.com/games/play/the-color-lines</a>
 
 <a href="https://www.mochimedia.com/games/play/_v312167">https://www.mochimedia.com/games/play/_v312167</a>
 
 <a href="https://www.mochimedia.com/games/play/_v744572">https://www.mochimedia.com/games/play/_v744572</a>
 
 ##AS3 Starling/Feathers based
+
+Player IO: <a href="http://cdn.playerio.com/thechessjam-pvatyplso0eghswccsjq9w/TheChessJam.swf">http://cdn.playerio.com/thechessjam-pvatyplso0eghswccsjq9w/TheChessJam.swf</a>
 
 # Screen shots
 
