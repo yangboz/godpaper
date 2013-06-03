@@ -24,6 +24,14 @@ I of course refer here to the constants of the physical world:
 
 **R**,Electrical resistance;
 
+# What-if:
+
+![Screenshot of "GodpaperFacts"](http://www.godpaper.com/godpaper/images/1/1d/GodpaperFacts.png)
+
+# UML Diagram:
+
+![Screenshot of "UML Diagram"](http://www.godpaper.com/godpaper/images/1/1d/GodpaperUMLDiagram.jpg)
+
 # Games under "GODPAPER" framework
 
 ##Flex MXML based
