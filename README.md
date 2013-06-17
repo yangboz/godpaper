@@ -24,6 +24,12 @@ I of course refer here to the constants of the physical world:
 
 **R**,Electrical resistance;
 
+# GODPAPER on Magazine:
+
+(Software Developer's Journal)Everything You Need To Get Started with GODPAPER(page 20): 
+
+http://sdjournal.org/the-upcoming-iphone-development-issues-teaser/
+
 # What-if:
 
 ![Screenshot of "GodpaperFacts"](http://www.godpaper.com/godpaper/images/1/1d/GodpaperFacts.png)
