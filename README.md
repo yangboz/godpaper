@@ -1,4 +1,4 @@
-GODPAPER
+GODPAPER: http://www.godpaper.com (民间棋类游戏WIKI)
 
 # About
 A flash & ios board game framework named GODPAPER(code name:"the real knight"&"the real bishop") by as3 & objective-c language.
