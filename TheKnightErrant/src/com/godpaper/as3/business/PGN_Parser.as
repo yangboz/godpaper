@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.chinese_chess_jam.business
+package com.godpaper.as3.business
 {
 	import com.godpaper.as3.model.PGN_Model;
 	import com.godpaper.as3.model.vos.pgn.ChessBookMoveVO;

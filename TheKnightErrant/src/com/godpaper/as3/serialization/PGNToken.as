@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.chinese_chess_jam.serialization
+package com.godpaper.as3.serialization
 {
 	//--------------------------------------------------------------------------
 	//
@@ -28,61 +28,41 @@ package com.godpaper.chinese_chess_jam.serialization
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * Class containing constant values for the different types
-	 * of tokens in a JSON encoded string.
+	 * PGNToken.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Aug 6, 2012 11:26:23 AM
+	 * Created Aug 6, 2012 11:24:55 AM
 	 */   	 
-	public final class PGNTokenType
+	public final class PGNToken
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
+		/**
+		 * The type of the token.
+		 *
+		 * @langversion ActionScript 3.0
+		 * @playerversion Flash 9.0
+		 * @tiptext
+		 */
+		public var type:int;
 		
+		/**
+		 * The value of the token
+		 *
+		 * @langversion ActionScript 3.0
+		 * @playerversion Flash 9.0
+		 * @tiptext
+		 */
+		public var value:Object;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		public static const UNKNOWN:int = -1;
 		
-		public static const COMMA:int = 0;//,
-		
-		public static const LEFT_BRACE:int = 1;//{
-		
-		public static const RIGHT_BRACE:int = 2;//}
-		
-		public static const LEFT_BRACKET:int = 3;//[
-		
-		public static const RIGHT_BRACKET:int = 4;//]
-		
-		public static const COLON:int = 6;//:
-		
-		public static const TRUE:int = 7;//true
-		
-		public static const FALSE:int = 8;//false
-		
-		public static const NULL:int = 9;//null
-		
-		public static const STRING:int = 10;
-		
-		public static const NUMBER:int = 11;
-		
-		public static const NAN:int = 12;
-		
-		public static const QUOTATION_MARK:int = 13;//"
-		
-		public static const ELLIPSIS:int = 14;//...
-		
-		public static const EXCLAMATION_POINT:int = 15;//!
-		
-		public static const QUESTION_MARK:int = 16;//?
-		
-		//Meda keys.
-		public static const META_KEY_GAME:int = 17;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -100,7 +80,20 @@ package com.godpaper.chinese_chess_jam.serialization
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		     	
+		/**
+		 * Creates a new PGNToken with a specific token type and value.
+		 *
+		 * @param type The PGNTokenType of the token
+		 * @param value The value of the token
+		 * @langversion ActionScript 3.0
+		 * @playerversion Flash 9.0
+		 * @tiptext
+		 */
+		public function PGNToken( type:int = -1 /* PGNTokenType.UNKNOWN */, value:Object = null )
+		{
+			this.type = type;
+			this.value = value;
+		}    	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
@@ -118,6 +111,25 @@ package com.godpaper.chinese_chess_jam.serialization
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
+		/**
+		 * Reusable token instance.
+		 *
+		 * @see #create()
+		 */
+		internal static const token:PGNToken = new PGNToken();
+		
+		/**
+		 * Factory method to create instances. Because we don't need more than one instance
+		 * of a token at a time, we can always use the same instance to improve performance
+		 * and reduce memory consumption during decoding.
+		 */
+		internal static function create( type:int = -1 /* PGNTokenType.UNKNOWN */, value:Object = null ):PGNToken
+		{
+			token.type = type;
+			token.value = value;
+			
+			return token;
+		}
 	}
 	
 }

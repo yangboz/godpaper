@@ -2,7 +2,7 @@ package com.godpaper.as3.configs
 {
 	import com.godpaper.as3.views.plugin.IPluginButtonBar;
 	import com.godpaper.as3.views.plugin.PluginButtonBar;
-	import com.godpaper.chinese_chess_jam.business.PGN_Proxy;
+	import com.godpaper.as3.business.PGN_Proxy;
 	
 	import starling.display.Image;
 

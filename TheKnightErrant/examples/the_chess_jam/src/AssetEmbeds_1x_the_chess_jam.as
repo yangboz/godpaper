@@ -35,7 +35,7 @@ package the_chess_jam.src
 	 * @airVersion 3.2+
 	 * Created Sep 18, 2012 3:56:50 PM
 	 */   	 
-	public class AssetEmbeds_1x_the_go
+	public class AssetEmbeds_1x_the_chess_jam
 	{		
 		//--------------------------------------------------------------------------
 		//
@@ -47,10 +47,10 @@ package the_chess_jam.src
 		//  CONSTANTS
 		//----------------------------------
 		// Texture Atlas
-		[Embed(source="/assets/textures/1x/AtlasTexture_the_go.xml", mimeType="application/octet-stream")]
+		[Embed(source="assets/textures/1x/AtlasTexture_the_chess_jam.xml", mimeType="application/octet-stream")]
 		public static const AtlasTextureXml:Class;
 		
-		[Embed(source="/assets/textures/1x/AtlasTexture_the_go.png")]
+		[Embed(source="assets/textures/1x/AtlasTexture_the_chess_jam.png")]
 		public static const AtlasTexture:Class;
 		
 //		[Embed(source="/assets/textures/1x/background_the_chess_jam.png")]

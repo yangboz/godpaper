@@ -19,26 +19,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.chinese_chess_jam.business
+package com.godpaper.as3.serialization
 {
-	import com.godpaper.as3.utils.LogUtil;
-	import com.godpaper.chinese_chess_jam.serialization.PGN;
-	import com.godpaper.chinese_chess_jam.serialization.PGNDecoder;
-	
-	import flash.display.Loader;
-	import flash.events.Event;
-	import flash.events.IEventDispatcher;
-	import flash.events.IOErrorEvent;
-	import flash.events.ProgressEvent;
-	import flash.net.URLLoader;
-	import flash.net.URLRequest;
-	import flash.utils.ByteArray;
-	
-	import mx.logging.ILogger;
-	import mx.utils.StringUtil;
-	
-	import org.osflash.signals.natives.NativeSignal;
-
 	//--------------------------------------------------------------------------
 	//
 	//  Imports
@@ -46,31 +28,61 @@ package com.godpaper.chinese_chess_jam.business
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * The Proxy pattern does not have different class diagrams for the different types of proxies.  	
-	 * @see http://www.as3dp.com/2008/08/actionscript-proxy-design-pattern-the-virtual-proxy-a-minimal-abstract-example/
+	 * Class containing constant values for the different types
+	 * of tokens in a JSON encoded string.
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Aug 6, 2012 10:48:31 AM
+	 * Created Aug 6, 2012 11:26:23 AM
 	 */   	 
-	public class PGN_Proxy
+	public final class PGNTokenType
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
-		private var request:URLRequest;
-		private var loader:URLLoader;//interface of IEventDispatcher
-		//
-		private var loadedSignal:NativeSignal;
-		private var progressSignal:NativeSignal;
-		private var ioErrorSignal:NativeSignal;
+		
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
-		private static const LOG:ILogger = LogUtil.getLogger(PGN_Proxy);
+		public static const UNKNOWN:int = -1;
+		
+		public static const COMMA:int = 0;//,
+		
+		public static const LEFT_BRACE:int = 1;//{
+		
+		public static const RIGHT_BRACE:int = 2;//}
+		
+		public static const LEFT_BRACKET:int = 3;//[
+		
+		public static const RIGHT_BRACKET:int = 4;//]
+		
+		public static const COLON:int = 6;//:
+		
+		public static const TRUE:int = 7;//true
+		
+		public static const FALSE:int = 8;//false
+		
+		public static const NULL:int = 9;//null
+		
+		public static const STRING:int = 10;
+		
+		public static const NUMBER:int = 11;
+		
+		public static const NAN:int = 12;
+		
+		public static const QUOTATION_MARK:int = 13;//"
+		
+		public static const ELLIPSIS:int = 14;//...
+		
+		public static const EXCLAMATION_POINT:int = 15;//!
+		
+		public static const QUESTION_MARK:int = 16;//?
+		
+		//Meda keys.
+		public static const META_KEY_GAME:int = 17;
 		//--------------------------------------------------------------------------
 		//
 		//  Public properties
@@ -88,35 +100,12 @@ package com.godpaper.chinese_chess_jam.business
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
-		public function PGN_Proxy()
-		{
-			//
-		}     	
+		     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
-		public function load(pgnSrc:String):void
-		{
-			if(null==loader)
-			{
-				//			var request:URLRequest = new URLRequest("http://www.lookbackon.com/resources/N01_for_testing.PGN");
-				this.loader = new URLLoader();
-			}
-			//
-			request = new URLRequest(pgnSrc);
-			//
-			var signalTarget:IEventDispatcher = loader;
-			loadedSignal = new NativeSignal(signalTarget,Event.COMPLETE,Event);
-			loadedSignal.addOnce(pgnLoadedHandler);
-			progressSignal = new NativeSignal(signalTarget,ProgressEvent.PROGRESS,ProgressEvent);
-			progressSignal.addOnce(pgnProgressHandler);
-			ioErrorSignal = new NativeSignal(signalTarget,IOErrorEvent.IO_ERROR,IOErrorEvent);
-			ioErrorSignal.addOnce(pgnIoErrorHandler);
-			//
-			loader.load(request);
-		}
 		
 		//--------------------------------------------------------------------------
 		//
@@ -129,30 +118,6 @@ package com.godpaper.chinese_chess_jam.business
 		//  Private methods
 		//
 		//--------------------------------------------------------------------------
-		//
-		private function pgnIoErrorHandler(event:IOErrorEvent):void
-		{
-			progressSignal.removeAll();
-			// 			trace(event.toString());
-		}
-		//
-		private function pgnProgressHandler(event:ProgressEvent):void
-		{
-			//			trace((event.bytesLoaded / event.bytesTotal) * 100);
-		}
-		//
-		private function pgnLoadedHandler(event:Event):void
-		{
-			loadedSignal.removeAll();
-			LOG.info(event.target.data);
-			var _pgnStr:String = StringUtil.trim(event.target.data);	
-//			var _pgnStr:String = PGN.decode(event.target.data);	
-//			LOG.info(_pgnStr);
-			//
-			var parser:PGN_Parser = new PGN_Parser(_pgnStr);
-			parser.parse();
-			//
-		}
 	}
 	
 }

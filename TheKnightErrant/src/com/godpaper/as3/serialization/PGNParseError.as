@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package com.godpaper.chinese_chess_jam.serialization
+package com.godpaper.as3.serialization
 {
 	//--------------------------------------------------------------------------
 	//
@@ -28,34 +28,25 @@ package com.godpaper.chinese_chess_jam.serialization
 	//--------------------------------------------------------------------------
 	
 	/**
-	 * This class provides encoding and decoding of the PGN format.
-	 *
-	 * Example usage:
-	 * <code>
-	 * // create a PGN string from an internal object
-	 * PGN.encode( myObject );
-	 *
-	 * // read a PGN string into an internal object
-	 * var myObject:Object = PGN.decode( pgnString );
-	 * </code>
-	 * 
-	 * @see http://www.xqbase.com/protocol/cchess_pgn.htm
-	 * @see http://www.xqbase.com/protocol/pgnfen1.htm
-	 * 
+	 * PGNParseError.as class.   	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
-	 * Created Aug 6, 2012 11:16:11 AM
+	 * Created Aug 6, 2012 11:23:55 AM
 	 */   	 
-	public final class PGN
+	public class PGNParseError extends Error
 	{		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
 		//
 		//--------------------------------------------------------------------------
+		/** The location in the string where the error occurred */
+		private var _location:int;
 		
+		/** The string in which the parse error occurred */
+		private var _text:String;
 		//----------------------------------
 		//  CONSTANTS
 		//----------------------------------
@@ -77,43 +68,50 @@ package com.godpaper.chinese_chess_jam.serialization
 		//  Constructor
 		//
 		//--------------------------------------------------------------------------
+		/**
+		 * Constructs a new PGNParseError.
+		 *
+		 * @param message The error message that occured during parsing
+		 * @langversion ActionScript 3.0
+		 * @playerversion Flash 9.0
+		 * @tiptext
+		 */
+		public function PGNParseError( message:String = "", location:int = 0, text:String = "" )
+		{
+			super( message );
+			name = "PGNParseError";
+			_location = location;
+			_text = text;
+		}  	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods
 		//
 		//--------------------------------------------------------------------------
 		/**
-		 * Encodes a object into a PGN string.
+		 * Provides read-only access to the location variable.
 		 *
-		 * @param o The object to create a PGN string for
-		 * @return the PGN string representing o
+		 * @return The location in the string where the error occurred
 		 * @langversion ActionScript 3.0
 		 * @playerversion Flash 9.0
 		 * @tiptext
 		 */
-		public static function encode( o:Object ):String
+		public function get location():int
 		{
-			return new PGNEncoder( o ).getString();
+			return _location;
 		}
 		
 		/**
-		 * Decodes a PGN string into a native object.
+		 * Provides read-only access to the text variable.
 		 *
-		 * @param s The PGN string representing the object
-		 * @param strict Flag indicating if the decoder should strictly adhere
-		 * to the PGN standard or not. The default of <code>true</code>
-		 * throws errors if the format does not match the PGN syntax exactly.
-		 * Pass <code>false</code> to allow for non-properly-formatted PGN
-		 * strings to be decoded with more leniancy.
-		 * @return A native object as specified by s
-		 * @throw PGNParseError
+		 * @return The string in which the error occurred
 		 * @langversion ActionScript 3.0
 		 * @playerversion Flash 9.0
 		 * @tiptext
 		 */
-		public static function decode( s:String, strict:Boolean = true ):*
+		public function get text():String
 		{
-			return new PGNDecoder( s, strict ).getValue();
+			return _text;
 		}
 		//--------------------------------------------------------------------------
 		//

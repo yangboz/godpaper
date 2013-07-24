@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package the_chess_jam.src
+package 
 {
 	import com.godpaper.as3.business.managers.GameStateManagerDefault;
 	import com.godpaper.as3.configs.BoardConfig;
