@@ -902,7 +902,8 @@ package feathers.controls.text
 					const texture:starling.textures.Texture = this.textSnapshot.texture;
 					if(Starling.handleLostContext && texture is ConcreteTexture)
 					{
-						ConcreteTexture(texture).restoreOnLostContext(this.textSnapshotBitmapData);
+//						ConcreteTexture(texture).restoreOnLostContext(this.textSnapshotBitmapData);
+						ConcreteTexture(texture).uploadBitmapData(this.textSnapshotBitmapData);
 					}
 					flash.display3D.textures.Texture(texture.base).uploadFromBitmapData(this.textSnapshotBitmapData);
 				}

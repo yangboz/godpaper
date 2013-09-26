@@ -47,12 +47,12 @@ package feathers.core
 	{
 		private var _clipRect:Rectangle;
 
-		public function get clipRect():Rectangle
+		override public function get clipRect():Rectangle
 		{
 			return _clipRect;
 		}
 
-		public function set clipRect(value:Rectangle):void
+		override public function set clipRect(value:Rectangle):void
 		{
 			_clipRect = value;
 		}

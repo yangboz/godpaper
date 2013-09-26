@@ -56,7 +56,7 @@ package starling.display
             mVertexData.setPosition(0, 0.0, 0.0);
             mVertexData.setPosition(1, width, 0.0);
             mVertexData.setPosition(2, 0.0, height);
-            mVertexData.setPosition(3, width, height);            
+            mVertexData.setPosition(3, width, height);
             mVertexData.setUniformColor(color);
             
             onVertexDataChanged();
@@ -160,6 +160,14 @@ package starling.display
             mVertexData.copyTo(targetData, targetVertexID);
         }
         
+        /** Transforms the vertex positions of the raw vertex data by a certain matrix and
+         *  copies the result to another VertexData instance. */
+        public function copyVertexDataTransformedTo(targetData:VertexData, targetVertexID:int=0,
+                                                    matrix:Matrix=null):void
+        {
+            mVertexData.copyTransformedTo(targetData, targetVertexID, matrix, 0, 4);
+        }
+        
         /** @inheritDoc */
         public override function render(support:RenderSupport, parentAlpha:Number):void
         {
@@ -168,5 +176,9 @@ package starling.display
         
         /** Returns true if the quad (or any of its vertices) is non-white or non-opaque. */
         public function get tinted():Boolean { return mTinted; }
+        
+        /** Indicates if the rgb values are stored premultiplied with the alpha value; this can
+         *  affect the rendering. (Most developers don't have to care, though.) */
+        public function get premultipliedAlpha():Boolean { return mVertexData.premultipliedAlpha; }
     }
 }

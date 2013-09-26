@@ -19,8 +19,7 @@ package starling.textures
      *  <p>Using a texture atlas for your textures solves two problems:</p>
      *  
      *  <ul>
-     *    <li>There is always one texture active at a given moment. Whenever you change the active
-     *        texture, a "texture-switch" has to be executed, and that switch takes time.</li>
+     *    <li>Whenever you switch between textures, the batching of image objects is disrupted.</li>
      *    <li>Any Stage3D texture has to have side lengths that are powers of two. Starling hides 
      *        this limitation from you, but at the cost of additional graphics memory.</li>
      *  </ul>
@@ -60,7 +59,7 @@ package starling.textures
         private var mTextureFrames:Dictionary;
         
         /** helper objects */
-        private var sNames:Vector.<String> = new <String>[];
+        private static var sNames:Vector.<String> = new <String>[];
         
         /** Create a texture atlas from a texture by parsing the regions from an XML file. */
         public function TextureAtlas(texture:Texture, atlasXml:XML=null)
@@ -168,5 +167,8 @@ package starling.textures
             delete mTextureRegions[name];
             delete mTextureFrames[name];
         }
+        
+        /** The base texture that makes up the atlas. */
+        public function get texture():Texture { return mAtlasTexture; }
     }
 }

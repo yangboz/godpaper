@@ -14,6 +14,7 @@ package starling.core
     
     import flash.display3D.Context3D;
     import flash.display3D.Context3DProgramType;
+    import flash.display3D.Context3DTextureFormat;
     import flash.display3D.Program3D;
     import flash.geom.Matrix;
     import flash.geom.Matrix3D;
@@ -26,8 +27,10 @@ package starling.core
     import starling.display.QuadBatch;
     import starling.errors.MissingContextError;
     import starling.textures.Texture;
+    import starling.textures.TextureSmoothing;
     import starling.utils.Color;
     import starling.utils.MatrixUtil;
+    import starling.utils.RectangleUtil;
 
     /** A class that contains helper methods simplifying Stage3D rendering.
      *
@@ -45,13 +48,13 @@ package starling.core
         private var mMvpMatrix3D:Matrix3D;
         private var mMatrixStack:Vector.<Matrix>;
         private var mMatrixStackSize:int;
+        
         private var mDrawCount:int;
         private var mBlendMode:String;
-
         private var mRenderTarget:Texture;
-        private var mBackBufferWidth:int;
-        private var mBackBufferHeight:int;
-        private var mScissorRectangle:Rectangle;
+        
+        private var mClipRectStack:Vector.<Rectangle>;
+        private var mClipRectStackSize:int;
         
         private var mQuadBatches:Vector.<QuadBatch>;
         private var mCurrentQuadBatchID:int;
@@ -75,7 +78,7 @@ package starling.core
             mDrawCount = 0;
             mRenderTarget = null;
             mBlendMode = BlendMode.NORMAL;
-            mScissorRectangle = new Rectangle();
+            mClipRectStack = new <Rectangle>[];
             
             mCurrentQuadBatchID = 0;
             mQuadBatches = new <QuadBatch>[new QuadBatch()];
@@ -98,6 +101,8 @@ package starling.core
         {
             mProjectionMatrix.setTo(2.0/width, 0, 0, -2.0/height, 
                 -(2*x + width) / width, (2*y + height) / height);
+            
+            applyClipRect();
         }
         
         /** Changes the modelview matrix to the identity matrix. */
@@ -124,7 +129,7 @@ package starling.core
             MatrixUtil.prependScale(mModelViewMatrix, sx, sy);
         }
         
-        /** Prepends a matrix to the modelview matrix by multiplying it another matrix. */
+        /** Prepends a matrix to the modelview matrix by multiplying it with another matrix. */
         public function prependMatrix(matrix:Matrix):void
         {
             MatrixUtil.prependMatrix(mModelViewMatrix, matrix);
@@ -165,26 +170,33 @@ package starling.core
         }
         
         /** Calculates the product of modelview and projection matrix. 
-         *  CAUTION: Don't save a reference to this object! Each call returns the same instance. */
+         *  CAUTION: Use with care! Each call returns the same instance. */
         public function get mvpMatrix():Matrix
         {
-			mMvpMatrix.copyFrom(mModelViewMatrix);
+            mMvpMatrix.copyFrom(mModelViewMatrix);
             mMvpMatrix.concat(mProjectionMatrix);
             return mMvpMatrix;
         }
         
         /** Calculates the product of modelview and projection matrix and saves it in a 3D matrix. 
-         *  CAUTION: Don't save a reference to this object! Each call returns the same instance. */
+         *  CAUTION: Use with care! Each call returns the same instance. */
         public function get mvpMatrix3D():Matrix3D
         {
             return MatrixUtil.convertTo3D(mvpMatrix, mMvpMatrix3D);
         }
         
-        /** Returns the current modelview matrix. CAUTION: not a copy -- use with care! */
+        /** Returns the current modelview matrix.
+         *  CAUTION: Use with care! Each call returns the same instance. */
         public function get modelViewMatrix():Matrix { return mModelViewMatrix; }
         
-        /** Returns the current projection matrix. CAUTION: not a copy -- use with care! */
+        /** Returns the current projection matrix.
+         *  CAUTION: Use with care! Each call returns the same instance. */
         public function get projectionMatrix():Matrix { return mProjectionMatrix; }
+        public function set projectionMatrix(value:Matrix):void 
+        {
+            mProjectionMatrix.copyFrom(value);
+            applyClipRect();
+        }
         
         // blending
         
@@ -210,74 +222,95 @@ package starling.core
         public function set renderTarget(target:Texture):void 
         {
             mRenderTarget = target;
+            applyClipRect();
             
             if (target) Starling.context.setRenderToTexture(target.base);
             else        Starling.context.setRenderToBackBuffer();
         }
         
-        /** Configures the back buffer on the current context3D. By using this method, Starling
-         *  can store the size of the back buffer and utilize this information in other methods
-         *  (e.g. the scissor rectangle property). Back buffer width and height can later be
-         *  accessed using the properties with the same name. */
-        public function configureBackBuffer(width:int, height:int, antiAlias:int, 
-                                            enableDepthAndStencil:Boolean):void
+        // clipping
+        
+        /** The clipping rectangle can be used to limit rendering in the current render target to
+         *  a certain area. This method expects the rectangle in stage coordinates. Internally,
+         *  it uses the 'scissorRectangle' of stage3D, which works with pixel coordinates. 
+         *  Any pushed rectangle is intersected with the previous rectangle; the method returns
+         *  that intersection. */ 
+        public function pushClipRect(rectangle:Rectangle):Rectangle
         {
-            mBackBufferWidth  = width;
-            mBackBufferHeight = height;
-            Starling.context.configureBackBuffer(width, height, antiAlias, enableDepthAndStencil);
+            if (mClipRectStack.length < mClipRectStackSize + 1)
+                mClipRectStack.push(new Rectangle());
+            
+            mClipRectStack[mClipRectStackSize].copyFrom(rectangle);
+            rectangle = mClipRectStack[mClipRectStackSize];
+            
+            // intersect with the last pushed clip rect
+            if (mClipRectStackSize > 0)
+                RectangleUtil.intersect(rectangle, mClipRectStack[mClipRectStackSize-1], 
+                                        rectangle);
+            
+            ++mClipRectStackSize;
+            applyClipRect();
+            
+            // return the intersected clip rect so callers can skip draw calls if it's empty
+            return rectangle;
         }
         
-        /** The width of the back buffer, as it was configured in the last call to 
-         *  'RenderSupport.configureBackBuffer()'. Beware: changing this value does not actually
-         *  resize the back buffer; the setter should only be used to inform Starling about the
-         *  size of a back buffer it can't control (shared context situations).
-         */
-        public function get backBufferWidth():int { return mBackBufferWidth; }
-        public function set backBufferWidth(value:int):void { mBackBufferWidth = value; }
-        
-        /** The height of the back buffer, as it was configured in the last call to 
-         *  'RenderSupport.configureBackBuffer()'. Beware: changing this value does not actually
-         *  resize the back buffer; the setter should only be used to inform Starling about the
-         *  size of a back buffer it can't control (shared context situations).
-         */
-        public function get backBufferHeight():int { return mBackBufferHeight; }
-        public function set backBufferHeight(value:int):void { mBackBufferHeight = value; }
-        
-        // scissor rect
-        
-        /** The scissor rectangle can be used to limit rendering in the current render target to
-         *  a certain area. This method expects the rectangle in stage coordinates
-         *  (different to the context3D method with the same name, which expects pixels).
-         *  Pass <code>null</code> to turn off scissoring.
-         *  CAUTION: not a copy -- use with care! */ 
-        public function get scissorRectangle():Rectangle 
-        { 
-            return mScissorRectangle.isEmpty() ? null : mScissorRectangle; 
-        }
-        
-        public function set scissorRectangle(value:Rectangle):void
+        /** Restores the clipping rectangle that was last pushed to the stack. */
+        public function popClipRect():void
         {
-            if (value)
+            if (mClipRectStackSize > 0)
             {
-                mScissorRectangle.setTo(value.x, value.y, value.width, value.height);
-
-                var width:int  = mRenderTarget ? mRenderTarget.root.nativeWidth  : mBackBufferWidth;
-                var height:int = mRenderTarget ? mRenderTarget.root.nativeHeight : mBackBufferHeight;
-                
-                MatrixUtil.transformCoords(mProjectionMatrix, value.x, value.y, sPoint);
-                sRectangle.x = Math.max(0, ( sPoint.x + 1) / 2) * width;
-                sRectangle.y = Math.max(0, (-sPoint.y + 1) / 2) * height;
-                
-                MatrixUtil.transformCoords(mProjectionMatrix, value.right, value.bottom, sPoint);
-                sRectangle.right  = Math.min(1, ( sPoint.x + 1) / 2) * width;
-                sRectangle.bottom = Math.min(1, (-sPoint.y + 1) / 2) * height;
-                
-                Starling.context.setScissorRectangle(sRectangle);
+                --mClipRectStackSize;
+                applyClipRect();
             }
-            else 
+        }
+        
+        /** Updates the context3D scissor rectangle using the current clipping rectangle. This
+         *  method is called automatically when either the render target, the projection matrix,
+         *  or the clipping rectangle changes. */
+        public function applyClipRect():void
+        {
+            finishQuadBatch();
+            
+            var context:Context3D = Starling.context;
+            if (context == null) return;
+            
+            if (mClipRectStackSize > 0)
             {
-                mScissorRectangle.setEmpty();
-                Starling.context.setScissorRectangle(null);
+                var width:int, height:int;
+                var rect:Rectangle = mClipRectStack[mClipRectStackSize-1];
+                sRectangle.setTo(rect.x, rect.y, rect.width, rect.height);
+                
+                if (mRenderTarget)
+                {
+                    width  = mRenderTarget.root.nativeWidth;
+                    height = mRenderTarget.root.nativeHeight;
+                }
+                else
+                {
+                    width  = Starling.current.backBufferWidth;
+                    height = Starling.current.backBufferHeight;
+                }
+                
+                // convert to pixel coordinates (matrix transformation ends up in range [-1, 1])
+                MatrixUtil.transformCoords(mProjectionMatrix, rect.x, rect.y, sPoint);
+                sRectangle.x = sPoint.x > -1 ? (( sPoint.x + 1) / 2) * width  : 0.0;
+                sRectangle.y = sPoint.y > -1 ? ((-sPoint.y + 1) / 2) * height : 0.0;
+                
+                MatrixUtil.transformCoords(mProjectionMatrix, rect.right, rect.bottom, sPoint);
+                sRectangle.right  = sPoint.x < 1 ? (( sPoint.x + 1) / 2) * width  : width;
+                sRectangle.bottom = sPoint.y < 1 ? ((-sPoint.y + 1) / 2) * height : height;
+                
+                // an empty rectangle is not allowed, so we set it to the smallest possible size
+                // if the bounds are outside the visible area.
+                if (sRectangle.right < 1 || sRectangle.bottom < 1)
+                    sRectangle.setTo(0, 0, 1, 1);
+                
+                context.setScissorRectangle(sRectangle);
+            }
+            else
+            {
+                context.setScissorRectangle(null);
             }
         }
         
@@ -296,6 +329,24 @@ package starling.core
             
             mQuadBatches[mCurrentQuadBatchID].addQuad(quad, parentAlpha, texture, smoothing, 
                                                       mModelViewMatrix, mBlendMode);
+        }
+        
+        /** Adds a batch of quads to the current batch of unrendered quads. If there is a state 
+         *  change, all previous quads are rendered at once. 
+         *  
+         *  <p>Note that you should call this method only for objects with a small number of quads 
+         *  (we recommend no more than 16). Otherwise, the additional CPU effort will be more
+         *  expensive than what you save by avoiding the draw call.</p> */
+        public function batchQuadBatch(quadBatch:QuadBatch, parentAlpha:Number):void
+        {
+            if (mQuadBatches[mCurrentQuadBatchID].isStateChange(
+                quadBatch.tinted, parentAlpha, quadBatch.texture, quadBatch.smoothing, mBlendMode))
+            {
+                finishQuadBatch();
+            }
+            
+            mQuadBatches[mCurrentQuadBatchID].addQuadBatch(quadBatch, parentAlpha, 
+                                                           mModelViewMatrix, mBlendMode);
         }
         
         /** Renders the current quad batch and resets it. */
@@ -320,9 +371,26 @@ package starling.core
         public function nextFrame():void
         {
             resetMatrix();
-            mBlendMode = BlendMode.NORMAL;
+            trimQuadBatches();
+            
             mCurrentQuadBatchID = 0;
+            mBlendMode = BlendMode.NORMAL;
             mDrawCount = 0;
+        }
+
+        /** Disposes redundant quad batches if the number of allocated batches is more than
+         *  twice the number of used batches. Only executed when there are at least 16 batches. */
+        private function trimQuadBatches():void
+        {
+            var numUsedBatches:int  = mCurrentQuadBatchID + 1;
+            var numTotalBatches:int = mQuadBatches.length;
+            
+            if (numTotalBatches >= 16 && numTotalBatches > 2*numUsedBatches)
+            {
+                var numToRemove:int = numTotalBatches - numUsedBatches;
+                for (var i:int=0; i<numToRemove; ++i)
+                    mQuadBatches.pop().dispose();
+            }
         }
         
         // other helper methods
@@ -376,6 +444,29 @@ package starling.core
             return resultProgram;
         }
         
+        /** Returns the flags that are required for AGAL texture lookup, 
+         *  including the '&lt;' and '&gt;' delimiters. */
+        public static function getTextureLookupFlags(format:String, mipMapping:Boolean,
+                                                     repeat:Boolean=false,
+                                                     smoothing:String="bilinear"):String
+        {
+            var options:Array = ["2d", repeat ? "repeat" : "clamp"];
+            
+            if (format == Context3DTextureFormat.COMPRESSED)
+                options.push("dxt1");
+            else if (format == "compressedAlpha")
+                options.push("dxt5");
+            
+            if (smoothing == TextureSmoothing.NONE)
+                options.push("nearest", mipMapping ? "mipnearest" : "mipnone");
+            else if (smoothing == TextureSmoothing.BILINEAR)
+                options.push("linear", mipMapping ? "mipnearest" : "mipnone");
+            else
+                options.push("linear", mipMapping ? "miplinear" : "mipnone");
+            
+            return "<" + options.join() + ">";
+        }
+        
         // statistics
         
         /** Raises the draw count by a specific value. Call this method in custom render methods
@@ -384,6 +475,5 @@ package starling.core
         
         /** Indicates the number of stage3D draw calls. */
         public function get drawCount():int { return mDrawCount; }
-        
     }
 }

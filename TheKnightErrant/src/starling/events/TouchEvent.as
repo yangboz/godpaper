@@ -100,18 +100,34 @@ package starling.events
                 var correctPhase:Boolean = (phase == null || phase == touch.phase);
                     
                 if (correctTarget && correctPhase)
-                    result.push(touch);
+                    result[result.length] = touch; // avoiding 'push'
             }
             return result;
         }
         
-        /** Returns a touch that originated over a certain target. */
-        public function getTouch(target:DisplayObject, phase:String=null):Touch
+        /** Returns a touch that originated over a certain target. 
+         * 
+         *  @param target   The object that was touched; may also be a parent of the actual
+         *                  touch-target.
+         *  @param phase    The phase the touch must be in, or null if you don't care.
+         *  @param id       The ID of the requested touch, or -1 if you don't care.
+         */
+        public function getTouch(target:DisplayObject, phase:String=null, id:int=-1):Touch
         {
             getTouches(target, phase, sTouches);
-            if (sTouches.length) 
+            var numTouches:int = sTouches.length;
+            
+            if (numTouches > 0) 
             {
-                var touch:Touch = sTouches[0];
+                var touch:Touch = null;
+                
+                if (id < 0) touch = sTouches[0];
+                else
+                {
+                    for (var i:int=0; i<numTouches; ++i)
+                        if (sTouches[i].id == id) { touch = sTouches[i]; break; }
+                }
+                
                 sTouches.length = 0;
                 return touch;
             }
@@ -121,26 +137,28 @@ package starling.events
         /** Indicates if a target is currently being touched or hovered over. */
         public function interactsWith(target:DisplayObject):Boolean
         {
-            if (getTouch(target) == null)
-                return false;
-            else
+            var result:Boolean = false;
+            getTouches(target, null, sTouches);
+            
+            for (var i:int=sTouches.length-1; i>=0; --i)
             {
-                var touches:Vector.<Touch> = getTouches(target);
-                
-                for (var i:int=touches.length-1; i>=0; --i)
-                    if (touches[i].phase != TouchPhase.ENDED)
-                        return true;
-                
-                return false;
+                if (sTouches[i].phase != TouchPhase.ENDED)
+                {
+                    result = true;
+                    break;
+                }
             }
+            
+            sTouches.length = 0;
+            return result;
         }
-
+        
         // custom dispatching
         
         /** @private
          *  Dispatches the event along a custom bubble chain. During the lifetime of the event,
          *  each object is visited only once. */
-        starling_internal function dispatch(chain:Vector.<EventDispatcher>):void
+        internal function dispatch(chain:Vector.<EventDispatcher>):void
         {
             if (chain && chain.length)
             {
@@ -154,7 +172,7 @@ package starling.events
                     if (mVisitedObjects.indexOf(chainElement) == -1)
                     {
                         var stopPropagation:Boolean = chainElement.invokeEvent(this);
-                        mVisitedObjects.push(chainElement);
+                        mVisitedObjects[mVisitedObjects.length] = chainElement;
                         if (stopPropagation) break;
                     }
                 }

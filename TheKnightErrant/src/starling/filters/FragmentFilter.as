@@ -66,6 +66,9 @@ package starling.filters
      */ 
     public class FragmentFilter
     {
+        /** The minimum size of a filter texture. */
+        private const MIN_TEXTURE_SIZE:int = 64;
+        
         /** All filter processing is expected to be done with premultiplied alpha. */
         protected const PMA:Boolean = true;
         
@@ -105,6 +108,7 @@ package starling.filters
         /** helper objects. */
         private var mProjMatrix:Matrix = new Matrix();
         private static var sBounds:Rectangle  = new Rectangle();
+        private static var sBoundsPot:Rectangle = new Rectangle();
         private static var sStageBounds:Rectangle = new Rectangle();
         private static var sTransformationMatrix:Matrix = new Matrix();
         
@@ -195,6 +199,7 @@ package starling.filters
         private function renderPasses(object:DisplayObject, support:RenderSupport, 
                                       parentAlpha:Number, intoCache:Boolean=false):QuadBatch
         {
+            var passTexture:Texture;
             var cacheTexture:Texture = null;
             var stage:Stage = object.stage;
             var context:Context3D = Starling.context;
@@ -204,7 +209,7 @@ package starling.filters
             if (context == null) throw new MissingContextError();
             
             // the bounds of the object in stage coordinates 
-            calculateBounds(object, stage, !intoCache, sBounds);
+            calculateBounds(object, stage, mResolution * scale, !intoCache, sBounds, sBoundsPot);
             
             if (sBounds.isEmpty())
             {
@@ -212,9 +217,9 @@ package starling.filters
                 return intoCache ? new QuadBatch() : null; 
             }
             
-            updateBuffers(context, sBounds);
-            updatePassTextures(sBounds.width, sBounds.height, mResolution * scale);
-
+            updateBuffers(context, sBoundsPot);
+            updatePassTextures(sBoundsPot.width, sBoundsPot.height, mResolution * scale);
+            
             support.finishQuadBatch();
             support.raiseDrawCount(mNumPasses);
             support.pushMatrix();
@@ -229,20 +234,21 @@ package starling.filters
                     "This limitation will be removed in a future Stage3D version.");
             
             if (intoCache) 
-                cacheTexture = Texture.empty(sBounds.width, sBounds.height, PMA, true, 
+                cacheTexture = Texture.empty(sBoundsPot.width, sBoundsPot.height, PMA, false, true, 
                                              mResolution * scale);
             
             // draw the original object into a texture
             support.renderTarget = mPassTextures[0];
             support.clear();
             support.blendMode = BlendMode.NORMAL;
-            support.setOrthographicProjection(sBounds.x, sBounds.y, sBounds.width, sBounds.height);
+            support.setOrthographicProjection(sBounds.x, sBounds.y, sBoundsPot.width, sBoundsPot.height);
             object.render(support, parentAlpha);
             support.finishQuadBatch();
             
             // prepare drawing of actual filter passes
             RenderSupport.setBlendFactors(PMA);
             support.loadIdentity();  // now we'll draw in stage coordinates!
+            support.pushClipRect(sBounds);
             
             context.setVertexBufferAt(mVertexPosAtID, mVertexBuffer, VertexData.POSITION_OFFSET, 
                                       Context3DVertexBufferFormat.FLOAT_2);
@@ -269,16 +275,15 @@ package starling.filters
                     else
                     {
                         // draw into back buffer, at original (stage) coordinates
+                        support.projectionMatrix = mProjMatrix;
                         support.renderTarget = previousRenderTarget;
-                        support.projectionMatrix.copyFrom(mProjMatrix); // restore projection matrix
                         support.translateMatrix(mOffsetX, mOffsetY);
                         support.blendMode = object.blendMode;
                         support.applyBlendMode(PMA);
                     }
                 }
                 
-                var passTexture:Texture = getPassTexture(i);
-                
+                passTexture = getPassTexture(i);
                 context.setProgramConstantsFromMatrix(Context3DProgramType.VERTEX, mMvpConstantID, 
                                                       support.mvpMatrix3D, true);
                 context.setTextureAt(mBaseTextureID, passTexture.base);
@@ -294,6 +299,7 @@ package starling.filters
             context.setTextureAt(mBaseTextureID, null);
             
             support.popMatrix();
+            support.popClipRect();
             
             if (intoCache)
             {
@@ -340,7 +346,6 @@ package starling.filters
         private function updatePassTextures(width:int, height:int, scale:Number):void
         {
             var numPassTextures:int = mNumPasses > 1 ? 2 : 1;
-            
             var needsUpdate:Boolean = mPassTextures == null || 
                 mPassTextures.length != numPassTextures ||
                 mPassTextures[0].width != width || mPassTextures[0].height != height;  
@@ -360,7 +365,7 @@ package starling.filters
                 }
                 
                 for (var i:int=0; i<numPassTextures; ++i)
-                    mPassTextures[i] = Texture.empty(width, height, PMA, true, scale);
+                    mPassTextures[i] = Texture.empty(width, height, PMA, false, true, scale);
             }
         }
         
@@ -369,16 +374,29 @@ package starling.filters
             return mPassTextures[pass % 2];
         }
         
-        /** Calculates the bounds of the filter in stage coordinates, while making sure that the 
-         *  according textures will have powers of two. */
-        private function calculateBounds(object:DisplayObject, stage:Stage, 
-                                         intersectWithStage:Boolean, resultRect:Rectangle):void
+        /** Calculates the bounds of the filter in stage coordinates. The method calculates two
+         *  rectangles: one with the exact filter bounds, the other with an extended rectangle that
+         *  will yield to a POT size when multiplied with the current scale factor / resolution.
+         */
+        private function calculateBounds(object:DisplayObject, stage:Stage, scale:Number, 
+                                         intersectWithStage:Boolean, 
+                                         resultRect:Rectangle,
+                                         resultPotRect:Rectangle):void
         {
-            // optimize for full-screen effects
+            var marginX:Number, marginY:Number;
+            
             if (object == stage || object == Starling.current.root)
+            {
+                // optimize for full-screen effects
+                marginX = marginY = 0;
                 resultRect.setTo(0, 0, stage.stageWidth, stage.stageHeight);
+            }
             else
+            {
+                marginX = mMarginX;
+                marginY = mMarginY;
                 object.getBounds(stage, resultRect);
+            }
             
             if (intersectWithStage)
             {
@@ -389,15 +407,17 @@ package starling.filters
             if (!resultRect.isEmpty())
             {    
                 // the bounds are a rectangle around the object, in stage coordinates,
-                // and with an optional margin. To fit into a POT-texture, it will grow towards
-                // the right and bottom.
-                var deltaMargin:Number = mResolution == 1.0 ? 0.0 : 1.0 / mResolution; // avoid hard edges
-                resultRect.x -= mMarginX + deltaMargin;
-                resultRect.y -= mMarginY + deltaMargin;
-                resultRect.width  += 2 * (mMarginX + deltaMargin);
-                resultRect.height += 2 * (mMarginY + deltaMargin);
-                resultRect.width  = getNextPowerOfTwo(resultRect.width  * mResolution) / mResolution;
-                resultRect.height = getNextPowerOfTwo(resultRect.height * mResolution) / mResolution;
+                // and with an optional margin. 
+                resultRect.inflate(marginX, marginY);
+                
+                // To fit into a POT-texture, we extend it towards the right and bottom.
+                var minSize:int = MIN_TEXTURE_SIZE / scale;
+                var minWidth:Number  = resultRect.width  > minSize ? resultRect.width  : minSize;
+                var minHeight:Number = resultRect.height > minSize ? resultRect.height : minSize;
+                resultPotRect.setTo(
+                    resultRect.x, resultRect.y,
+                    getNextPowerOfTwo(minWidth  * scale) / scale,
+                    getNextPowerOfTwo(minHeight * scale) / scale);
             }
         }
         

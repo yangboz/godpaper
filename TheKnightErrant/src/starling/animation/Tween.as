@@ -62,6 +62,7 @@ package starling.animation
         
         private var mTotalTime:Number;
         private var mCurrentTime:Number;
+        private var mProgress:Number;
         private var mDelay:Number;
         private var mRoundToInt:Boolean;
         private var mNextTween:Tween;
@@ -72,7 +73,7 @@ package starling.animation
         
         /** Creates a tween with a target, duration (in seconds) and a transition function.
          *  @param target the object that you want to animate
-         *  @param time the duration of the Tween
+         *  @param time the duration of the Tween (in seconds)
          *  @param transition can be either a String (e.g. one of the constants defined in the
          *         Transitions class) or a function. Look up the 'Transitions' class for a   
          *         documentation about the required function signature. */ 
@@ -85,8 +86,9 @@ package starling.animation
         public function reset(target:Object, time:Number, transition:Object="linear"):Tween
         {
             mTarget = target;
-            mCurrentTime = 0;
+            mCurrentTime = 0.0;
             mTotalTime = Math.max(0.0001, time);
+            mProgress = 0.0;
             mDelay = mRepeatDelay = 0.0;
             mOnStart = mOnUpdate = mOnComplete = null;
             mOnStartArgs = mOnUpdateArgs = mOnCompleteArgs = null;
@@ -108,15 +110,15 @@ package starling.animation
             return this;
         }
         
-        /** Animates the property of an object to a target value. You can call this method multiple
+        /** Animates the property of the target to a certain value. You can call this method multiple
          *  times on one tween. */
-        public function animate(property:String, targetValue:Number):void
+        public function animate(property:String, endValue:Number):void
         {
             if (mTarget == null) return; // tweening null just does nothing.
                    
             mProperties.push(property);
             mStartValues.push(Number.NaN);
-            mEndValues.push(targetValue);
+            mEndValues.push(endValue);
         }
         
         /** Animates the 'scaleX' and 'scaleY' properties of an object simultaneously. */
@@ -149,10 +151,13 @@ package starling.animation
             var restTime:Number = mTotalTime - mCurrentTime;
             var carryOverTime:Number = time > restTime ? time - restTime : 0.0;
             
-            mCurrentTime = Math.min(mTotalTime, mCurrentTime + time);
+            mCurrentTime += time;
             
-            if (mCurrentTime <= 0) return; // the delay is not over yet
-
+            if (mCurrentTime <= 0) 
+                return; // the delay is not over yet
+            else if (mCurrentTime > mTotalTime) 
+                mCurrentTime = mTotalTime;
+            
             if (mCurrentCycle < 0 && previousTime <= 0 && mCurrentTime > 0)
             {
                 mCurrentCycle++;
@@ -162,19 +167,18 @@ package starling.animation
             var ratio:Number = mCurrentTime / mTotalTime;
             var reversed:Boolean = mReverse && (mCurrentCycle % 2 == 1);
             var numProperties:int = mStartValues.length;
+            mProgress = reversed ? mTransitionFunc(1.0 - ratio) : mTransitionFunc(ratio);
 
             for (i=0; i<numProperties; ++i)
             {                
-                if (isNaN(mStartValues[i])) 
+                if (mStartValues[i] != mStartValues[i]) // isNaN check - "isNaN" causes allocation! 
                     mStartValues[i] = mTarget[mProperties[i]] as Number;
                 
                 var startValue:Number = mStartValues[i];
                 var endValue:Number = mEndValues[i];
                 var delta:Number = endValue - startValue;
-                var transitionValue:Number = reversed ?
-                    mTransitionFunc(1.0 - ratio) : mTransitionFunc(ratio);
+                var currentValue:Number = startValue + mProgress * delta;
                 
-                var currentValue:Number = startValue + transitionValue * delta;
                 if (mRoundToInt) currentValue = Math.round(currentValue);
                 mTarget[mProperties[i]] = currentValue;
             }
@@ -209,6 +213,15 @@ package starling.animation
                 advanceTime(carryOverTime);
         }
         
+        /** The end value a certain property is animated to. Throws an ArgumentError if the 
+         *  property is not being animated. */
+        public function getEndValue(property:String):Number
+        {
+            var index:int = mProperties.indexOf(property);
+            if (index == -1) throw new ArgumentError("The property '" + property + "' is not animated");
+            else return mEndValues[index] as Number;
+        }
+        
         /** Indicates if the tween is finished. */
         public function get isComplete():Boolean 
         { 
@@ -240,10 +253,13 @@ package starling.animation
         /** The total time the tween will take per repetition (in seconds). */
         public function get totalTime():Number { return mTotalTime; }
         
-        /** The time that has passed since the tween was created. */
+        /** The time that has passed since the tween was created (in seconds). */
         public function get currentTime():Number { return mCurrentTime; }
         
-        /** The delay before the tween is started. @default 0 */
+        /** The current progress between 0 and 1, as calculated by the transition function. */
+        public function get progress():Number { return mProgress; } 
+        
+        /** The delay before the tween is started (in seconds). @default 0 */
         public function get delay():Number { return mDelay; }
         public function set delay(value:Number):void 
         { 
@@ -256,7 +272,7 @@ package starling.animation
         public function get repeatCount():int { return mRepeatCount; }
         public function set repeatCount(value:int):void { mRepeatCount = value; }
         
-        /** The amount of time to wait between repeat cycles, in seconds. @default 0 */
+        /** The amount of time to wait between repeat cycles (in seconds). @default 0 */
         public function get repeatDelay():Number { return mRepeatDelay; }
         public function set repeatDelay(value:Number):void { mRepeatDelay = value; }
         

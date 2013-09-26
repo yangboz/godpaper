@@ -19,25 +19,40 @@ package starling.display
     import flash.utils.getQualifiedClassName;
     
     import starling.core.RenderSupport;
+    import starling.core.Starling;
     import starling.errors.AbstractClassError;
     import starling.errors.AbstractMethodError;
+    import starling.events.Event;
     import starling.events.EventDispatcher;
     import starling.events.TouchEvent;
     import starling.filters.FragmentFilter;
+    import starling.utils.HAlign;
     import starling.utils.MatrixUtil;
+    import starling.utils.VAlign;
     
     /** Dispatched when an object is added to a parent. */
     [Event(name="added", type="starling.events.Event")]
+    
     /** Dispatched when an object is connected to the stage (directly or indirectly). */
     [Event(name="addedToStage", type="starling.events.Event")]
+    
     /** Dispatched when an object is removed from its parent. */
     [Event(name="removed", type="starling.events.Event")]
+    
     /** Dispatched when an object is removed from the stage and won't be rendered any longer. */ 
     [Event(name="removedFromStage", type="starling.events.Event")]
+    
     /** Dispatched once every frame on every object that is connected to the stage. */ 
     [Event(name="enterFrame", type="starling.events.EnterFrameEvent")]
+    
     /** Dispatched when an object is touched. Bubbles. */
     [Event(name="touch", type="starling.events.TouchEvent")]
+    
+    /** Dispatched when a key on the keyboard is released. */
+    [Event(name="keyUp", type="starling.events.KeyboardEvent")]
+    
+    /** Dispatched when a key on the keyboard is pressed. */
+    [Event(name="keyDown", type="starling.events.KeyboardEvent")]
     
     /**
      *  The DisplayObject class is the base class for all objects that are rendered on the 
@@ -161,10 +176,11 @@ package starling.display
             removeEventListeners();
         }
         
-        /** Removes the object from its parent, if it has one. */
+        /** Removes the object from its parent, if it has one, and optionally disposes it. */
         public function removeFromParent(dispose:Boolean=false):void
         {
             if (mParent) mParent.removeChild(this, dispose);
+            else if (dispose) this.dispose();
         }
         
         /** Creates a matrix that represents the transformation from the local coordinate system 
@@ -217,7 +233,7 @@ package starling.display
             
             while (currentObject)
             {
-                sAncestors.push(currentObject);
+                sAncestors[sAncestors.length] = currentObject; // avoiding 'push'
                 currentObject = currentObject.mParent;
             }
             
@@ -265,7 +281,7 @@ package starling.display
          *  rectangle instead of creating a new object. */ 
         public function getBounds(targetSpace:DisplayObject, resultRect:Rectangle=null):Rectangle
         {
-            throw new AbstractMethodError("Method needs to be implemented in subclass");
+            throw new AbstractMethodError();
             return null;
         }
         
@@ -307,7 +323,7 @@ package starling.display
          *  @param parentAlpha The accumulated alpha value from the object's parent up to the stage. */
         public function render(support:RenderSupport, parentAlpha:Number):void
         {
-            throw new AbstractMethodError("Method needs to be implemented in subclass");
+            throw new AbstractMethodError();
         }
         
         /** Indicates if an object occupies any visible area. (Which is the case when its 'alpha', 
@@ -315,6 +331,24 @@ package starling.display
         public function get hasVisibleArea():Boolean
         {
             return mAlpha != 0.0 && mVisible && mScaleX != 0.0 && mScaleY != 0.0;
+        }
+        
+        /** Moves the pivot point to a certain position within the local coordinate system
+         *  of the object. If you pass no arguments, it will be centered. */ 
+        public function alignPivot(hAlign:String="center", vAlign:String="center"):void
+        {
+            var bounds:Rectangle = getBounds(this);
+            mOrientationChanged = true;
+            
+            if (hAlign == HAlign.LEFT)        mPivotX = bounds.x;
+            else if (hAlign == HAlign.CENTER) mPivotX = bounds.x + bounds.width / 2.0;
+            else if (hAlign == HAlign.RIGHT)  mPivotX = bounds.x + bounds.width; 
+            else throw new ArgumentError("Invalid horizontal alignment: " + hAlign);
+            
+            if (vAlign == VAlign.TOP)         mPivotY = bounds.y;
+            else if (vAlign == VAlign.CENTER) mPivotY = bounds.y + bounds.height / 2.0;
+            else if (vAlign == VAlign.BOTTOM) mPivotY = bounds.y + bounds.height;
+            else throw new ArgumentError("Invalid vertical alignment: " + vAlign);
         }
         
         // internal methods
@@ -349,6 +383,60 @@ package starling.display
             return angle;
         }
         
+        // enter frame event optimization
+        
+        // To avoid looping through the complete display tree each frame to find out who's
+        // listening to ENTER_FRAME events, we manage a list of them manually in the Stage class.
+        // We need to take care that (a) it must be dispatched only when the object is
+        // part of the stage, (b) it must not cause memory leaks when the user forgets to call
+        // dispose and (c) there might be multiple listeners for this event.
+        
+        public override function addEventListener(type:String, listener:Function):void
+        {
+            if (type == Event.ENTER_FRAME && !hasEventListener(type))
+            {
+                addEventListener(Event.ADDED_TO_STAGE, addEnterFrameListenerToStage);
+                addEventListener(Event.REMOVED_FROM_STAGE, removeEnterFrameListenerFromStage);
+                if (this.stage) addEnterFrameListenerToStage();
+            }
+            
+            super.addEventListener(type, listener);
+        }
+        
+        public override function removeEventListener(type:String, listener:Function):void
+        {
+            super.removeEventListener(type, listener);
+            
+            if (type == Event.ENTER_FRAME && !hasEventListener(type))
+            {
+                removeEventListener(Event.ADDED_TO_STAGE, addEnterFrameListenerToStage);
+                removeEventListener(Event.REMOVED_FROM_STAGE, removeEnterFrameListenerFromStage);
+                removeEnterFrameListenerFromStage();
+            }
+        }
+        
+        public override function removeEventListeners(type:String=null):void
+        {
+            super.removeEventListeners(type);
+            
+            if (type == null || type == Event.ENTER_FRAME)
+            {
+                removeEventListener(Event.ADDED_TO_STAGE, addEnterFrameListenerToStage);
+                removeEventListener(Event.REMOVED_FROM_STAGE, removeEnterFrameListenerFromStage);
+                removeEnterFrameListenerFromStage();
+            }
+        }
+        
+        private function addEnterFrameListenerToStage():void
+        {
+            Starling.current.stage.addEnterFrameListener(this);
+        }
+        
+        private function removeEnterFrameListenerFromStage():void
+        {
+            Starling.current.stage.removeEnterFrameListener(this);
+        }
+        
         // properties
  
         /** The transformation matrix of the object relative to its parent.
@@ -365,20 +453,46 @@ package starling.display
             if (mOrientationChanged)
             {
                 mOrientationChanged = false;
-                mTransformationMatrix.identity();
                 
-                if (mScaleX != 1.0 || mScaleY != 1.0) mTransformationMatrix.scale(mScaleX, mScaleY);
-                if (mSkewX  != 0.0 || mSkewY  != 0.0) MatrixUtil.skew(mTransformationMatrix, mSkewX, mSkewY);
-                if (mRotation != 0.0)                 mTransformationMatrix.rotate(mRotation);
-                if (mX != 0.0 || mY != 0.0)           mTransformationMatrix.translate(mX, mY);
-                
-                if (mPivotX != 0.0 || mPivotY != 0.0)
+                if (mSkewX == 0.0 && mSkewY == 0.0)
                 {
-                    // prepend pivot transformation
-                    mTransformationMatrix.tx = mX - mTransformationMatrix.a * mPivotX
-                                                  - mTransformationMatrix.c * mPivotY;
-                    mTransformationMatrix.ty = mY - mTransformationMatrix.b * mPivotX 
-                                                  - mTransformationMatrix.d * mPivotY;
+                    // optimization: no skewing / rotation simplifies the matrix math
+                    
+                    if (mRotation == 0.0)
+                    {
+                        mTransformationMatrix.setTo(mScaleX, 0.0, 0.0, mScaleY, 
+                            mX - mPivotX * mScaleX, mY - mPivotY * mScaleY);
+                    }
+                    else
+                    {
+                        var cos:Number = Math.cos(mRotation);
+                        var sin:Number = Math.sin(mRotation);
+                        var a:Number   = mScaleX *  cos;
+                        var b:Number   = mScaleX *  sin;
+                        var c:Number   = mScaleY * -sin;
+                        var d:Number   = mScaleY *  cos;
+                        var tx:Number  = mX - mPivotX * a - mPivotY * c;
+                        var ty:Number  = mY - mPivotX * b - mPivotY * d;
+                        
+                        mTransformationMatrix.setTo(a, b, c, d, tx, ty);
+                    }
+                }
+                else
+                {
+                    mTransformationMatrix.identity();
+                    mTransformationMatrix.scale(mScaleX, mScaleY);
+                    MatrixUtil.skew(mTransformationMatrix, mSkewX, mSkewY);
+                    mTransformationMatrix.rotate(mRotation);
+                    mTransformationMatrix.translate(mX, mY);
+                    
+                    if (mPivotX != 0.0 || mPivotY != 0.0)
+                    {
+                        // prepend pivot transformation
+                        mTransformationMatrix.tx = mX - mTransformationMatrix.a * mPivotX
+                                                      - mTransformationMatrix.c * mPivotY;
+                        mTransformationMatrix.ty = mY - mTransformationMatrix.b * mPivotX 
+                                                      - mTransformationMatrix.d * mPivotY;
+                    }
                 }
             }
             
@@ -389,10 +503,10 @@ package starling.display
         {
             mOrientationChanged = false;
             mTransformationMatrix.copyFrom(matrix);
-
+            mPivotX = mPivotY = 0;
+            
             mX = matrix.tx;
             mY = matrix.ty;
-            
             mScaleX = Math.sqrt(matrix.a * matrix.a + matrix.b * matrix.b);
             mSkewY  = Math.acos(matrix.a / mScaleX);
             
@@ -600,7 +714,7 @@ package starling.display
         public function get name():String { return mName; }
         public function set name(value:String):void { mName = value; }
         
-        /** The filter or filter group that is attached to the display object. The starling.filters 
+        /** The filter that is attached to the display object. The starling.filters 
          *  package contains several classes that define specific filters you can use. 
          *  Beware that you should NOT use the same filter on more than one object (for 
          *  performance reasons). */ 
