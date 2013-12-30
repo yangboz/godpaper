@@ -93,3 +93,5 @@ Marek Obitko, http://labe.felk.cvut.cz/~obitko/
 23.Using AppWarp,which is a cloud container for realtime multiplayer games and applications.(Plan)
 
 24.App42 based BAAS implementation.(Plan,ref:http://appwarp.shephertz.com/game-development-center/ebook-turn-based-games/)
+
+25.PMD,CPD,CheckStyle,FindBugs,UnitTest,CodeCoverage,Stress/IntegrateTest,NCSSTest,Emma Reporting,ASDOC,Flash log Artifact.(For Jenkins CI server,Start).
