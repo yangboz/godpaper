@@ -1,0 +1,46 @@
+<project name="GODPAPER_Flex_Metrics"
+		 default="run">
+
+	<description>
+		GODPAPER Flex Metrics
+    </description>
+
+	<property name="projecthome"
+			  value="${basedir}"/>
+	<property name="flexMetrics.version"
+			  value="1.1"/>
+	<property name="flexMetrics.dir"
+			  value="${basedir}/libs/flexMetrics"/>
+	<property name="src.dir"
+			  value="${basedir}/src"/>
+	<property name="bin.dir"
+			  value="${basedir}/target/metrics"/>
+
+	<!--****************************************************
+				FlexMetrics
+		*****************************************************-->
+
+	<taskdef name="flexMetrics"
+			 classname="com.adobe.ac.pmd.metrics.ant.FlexMetricsAntTask"
+			 classpath="${flexMetrics.dir}/flex-pmd-metrics-ant-task-${flexMetrics.version}.jar">
+		<classpath>
+			<pathelement location="${flexMetrics.dir}/flex-pmd-files-${flexMetrics.version}.jar"/>
+			<pathelement location="${flexMetrics.dir}/flex-pmd-metrics-${flexMetrics.version}.jar"/>
+			<pathelement location="${flexMetrics.dir}/as3-plugin-utils-${flexMetrics.version}.jar"/>
+			<pathelement location="${flexMetrics.dir}/as3-parser-${flexMetrics.version}.jar"/>
+			<pathelement location="${flexMetrics.dir}/as3-parser-api-${flexMetrics.version}.jar"/>
+			<pathelement location="${flexMetrics.dir}/commons-lang-2.4.jar"/>
+			<pathelement location="${flexMetrics.dir}/flex-pmd-ruleset-api-${flexMetrics.version}.jar"/>
+			<pathelement location="${flexMetrics.dir}/pmd-4.2.5.jar"/>
+			<pathelement location="${flexMetrics.dir}/dom4j-1.6.1.jar"/>
+		</classpath>
+	</taskdef>
+
+	<target name="run">
+		<flexMetrics sourceDirectory="${src.dir}/"
+					 outputfile="${bin.dir}/flexncss.xml"/>
+
+	</target>
+
+
+</project>

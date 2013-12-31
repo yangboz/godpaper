@@ -1,0 +1,71 @@
+<project name="GODPAPER_Flex_PMD"
+		 default="flexPmdWithCustomRuleset">
+
+	<description>
+		GODPAPER Flex PMD
+    </description>
+
+	<property name="projecthome"
+			  value="${basedir}"/>
+	<property name="flexpmd.version"
+			  value="1.2"/>
+	<property name="flexpmd.dir"
+			  value="${basedir}/libs/flexpmd"/>
+	<property name="src.dir"
+			  value="${basedir}/src"/>
+	<property name="bin.dir"
+			  value="${basedir}/target/pmd"/>
+
+	<!--****************************************************
+				FlexPMD
+		*****************************************************-->
+
+	<taskdef name="flexPmd"
+			 classname="com.adobe.ac.pmd.ant.FlexPmdAntTask"
+			 classpath="${flexpmd.dir}/flex-pmd-ant-task-${flexpmd.version}.jar">
+		
+		<classpath>
+			<pathelement location="${flexpmd.dir}/flex-pmd-ruleset-api-${flexpmd.version}.jar"/>
+			<pathelement location="${flexpmd.dir}/flex-pmd-ruleset-${flexpmd.version}.jar"/>
+			<pathelement location="${flexpmd.dir}/flex-pmd-core-${flexpmd.version}.jar"/>
+			<pathelement location="${flexpmd.dir}/as3-plugin-utils-${flexpmd.version}.jar"/>
+			<pathelement location="${flexpmd.dir}/as3-parser-${flexpmd.version}.jar"/>
+			<pathelement location="${flexpmd.dir}/pmd-4.2.5.jar"/>
+			<pathelement location="${flexpmd.dir}/commons-lang-2.4.jar"/>
+			<pathelement location="${flexpmd.dir}/flex-pmd-files-${flexpmd.version}.jar"/>
+			<pathelement location="${flexpmd.dir}/as3-parser-api-${flexpmd.version}.jar"/>
+			<pathelement location="${flexpmd.dir}/plexus-utils-1.0.2.jar"/>
+		</classpath>
+	</taskdef>
+
+
+	<target name="flexPmdWithCustomRuleset">
+		<flexPmd sourceDirectory="${src.dir}"
+				 outputDirectory="${bin.dir}"
+				 ruleSet="${flexpmd.dir}/pmd.xml"/>
+	</target>
+
+	<target name="flexPmdWithDefaultRuleset">
+		<!-- Create directories needed for the pmd process -->
+		<mkdir dir="${basedir}/avoidPMD" />
+		<!-- Move avoid PMD files -->
+		<move todir="${basedir}/avoidPMD/flexUnitTests">
+		    <fileset dir="${src.dir}/flexUnitTests"/>
+		 </move>
+		<!--Wait file IO time-->
+		<echo>Sleep 10 seconds for file IO</echo>
+		<sleep seconds="10"/>
+		<!-- Run PMD -->
+		<flexPmd sourceDirectory="${src.dir}"
+				 outputDirectory="${bin.dir}"
+				 />
+		<!-- Move back -->
+		<move todir="${src.dir}/flexUnitTests">
+			<fileset dir="${basedir}/avoidPMD/flexUnitTests"/>
+		</move>
+		<!-- Remove all directories created during the PMD process -->
+		<delete dir="${basedir}/avoidPMD" />
+		
+	</target>
+	
+</project>

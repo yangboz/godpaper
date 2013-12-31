@@ -1,0 +1,47 @@
+<project name="GODPAPER_Flex_CPD"
+		 default="run">
+
+	<description>
+        GODPAPER Flex CPD
+    </description>
+
+	<property name="projecthome"
+			  value="${basedir}"/>
+	<property name="flexcpd.version"
+			  value="1.2"/>
+	<property name="flexcpd.dir"
+			  value="${basedir}/libs/flexpmd"/>
+	<property name="src.dir"
+			  value="${basedir}/src"/>
+	<property name="bin.dir"
+			  value="${basedir}/target/cpd"/>
+
+	<!--****************************************************
+				FlexCPD
+		*****************************************************-->
+
+    <taskdef name="flexCpd" classname="com.adobe.ac.cpd.ant.FlexCpdAntTask"
+         classpath="${flexcpd.dir}/flex-pmd-cpd-ant-task-${flexcpd.version}.jar">
+      <classpath>
+         <pathelement location="${flexcpd.dir}/flex-pmd-files-${flexcpd.version}.jar" />
+         <pathelement location="${flexcpd.dir}/flex-pmd-cpd-${flexcpd.version}.jar" />
+         <pathelement location="${flexcpd.dir}/as3-plugin-utils-${flexcpd.version}.jar" />
+         <pathelement location="${flexcpd.dir}/as3-parser-${flexcpd.version}.jar" />
+         <pathelement location="${flexcpd.dir}/as3-parser-api-${flexcpd.version}.jar" />
+         <pathelement location="${flexcpd.dir}/pmd-4.2.5.jar" />
+      	 <pathelement location="${flexcpd.dir}/dom4j-1.6.1.jar" />
+      	<pathelement location="${flexcpd.dir}/flex-pmd-cpd-command-line-${flexcpd.version}.jar" />
+      </classpath>
+     </taskdef>
+
+    <target name="run">
+       <flexCpd minimumTokenCount="50" outputFile="${basedir}/target/cpd/cpd.xml">
+          <fileset dir="${src.dir}">
+             <include name="**/*.as"/>
+             <include name="**/*.mxml"/>
+          </fileset>
+       </flexCpd>
+    </target>
+
+	
+</project>

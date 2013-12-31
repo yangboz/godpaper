@@ -1,21 +1,46 @@
-<project name="TheKnightErrant_ASDOC" basedir="." default="docs">
-	<property name="FLEX_HOME" value="C:\Flex\sdks\flex_sdk_4.6.0.23201B" />
-	<property name="OUTPUT_DIR" value="${basedir}/asdoc" />
-	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
-	<!-- DELETE the existing output folder and files and then re-generate the 
-		output folder -->
+<project name="AutoPhotoBook_ASDOC"
+		 basedir="."
+		 default="docs">
+	<property name="FLEX_HOME"
+			  value="C:\Flex\sdks\flex_sdk_4.1.0.16032"/>
+	<property name="OUTPUT_DIR" 
+			  value="${basedir}/asdoc"/>
+	<taskdef resource="flexTasks.tasks"
+			 classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
+	<!--
+		DELETE the existing output folder and files and then re-generate the output folder
+	-->
 	<target name="docs" depends="clean">
-		<asdoc window-title="GODPAPER TheKnightErrant Action Script API Document"
-			main-title="GODPAPER::TheKnightErrant"
-			footer="Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER."
-			output="${OUTPUT_DIR}" failonerror="true" lenient="true" strict="false"
-			report-invalid-styles-as-warnings="true"
-			templates-path="C:\Program Files\Adobe\Adobe Flash Builder 4.6\sdks\4.6.0\asdoc\templates_godpaper">
-			<!--<exclude-classes class="ResourceManager"/> -->
+		<asdoc 
+			   window-title="HP Labs AutoPhotobook Action Script API Document"
+			   main-title="AutoPhotoBook"
+			   footer="Information on this site is by default visible to everyone within AutoPhotobook. Please ensure you apply appropriate access controls when posting HP Confidential information.Copyright © by AutoPhotobook. All material on this collaboration platform is the property of HP."
+			   output="${OUTPUT_DIR}" 
+			   failonerror="true"
+			   lenient="true"
+			   strict="false"
+			   report-invalid-styles-as-warnings="true"
+			   templates-path="C:\Program Files\Adobe\Adobe Flash Builder 4.6\sdks\4.6.0\asdoc\templates_autophotobook"
+			   >
+			<!-- don't try to generate asdoc for
+							ViewPort.mxml/DesignTheme.mxml/PhotoThumb.mxml/
+							PicPreview.mxml/CropWindow.mxml/BookCover.mxml/
+							PosterPage.mxml/SaveWindow.mxml/FootView.mxml
+							(its an in-compatiable css style with FLEX4.1
+							and can't be independently compiled),
+							currently we downgrade this report from error to warnning -->
+			<exclude-sources path-element="${basedir}/src\com\autophotobook\www\oldStreet\view\helpers\BookIndexViewAs.as" />
+			<exclude-sources path-element="${basedir}/src\com\autophotobook\www\oldStreet\view\components\BookCoverAs.as" />
+			<exclude-sources path-element="${basedir}/src\com\autophotobook\www\oldStreet\view\helpers\BookCoverAs.as" />
+			<exclude-sources path-element="${basedir}/src\com\autophotobook\www\oldStreet\view\helpers\PosterPageAs.as" />
+			<exclude-sources path-element="${basedir}/src\com\autophotobook\www\oldStreet\view\helpers\ViewPortAs.as" />
+			<exclude-sources path-element="${basedir}/src\com\autophotobook\www\oldStreet\utils\Vector.as" />
+			<exclude-sources path-element="${basedir}/src\com\autophotobook\www\oldStreet\view\helpers\BookViewAs.as" />
+			<exclude-sources path-element="${basedir}/src\com\autophotobook\www\oldStreet\view\FootView.mxml" />
 			<!-- generate asdoc for all as/mxml files in the doc-sources -->
-			<doc-sources path-element="src/com" />
+			<doc-sources path-element="src/com/autophotobook/www/oldStreet/" />
 			<!-- source path for asdoc -->
-			<compiler.source-path path-element="src" />
+			<compiler.source-path path-element="src"/>
 
 			<external-library-path dir="libs">
 				<include name="*.swc" />
@@ -26,7 +51,7 @@
 	</target>
 	<target name="clean">
 		<delete includeEmptyDirs="true">
-			<fileset dir="${OUTPUT_DIR}" includes="**/*" />
+			<fileset dir="${OUTPUT_DIR}" includes="**/*"/>
 		</delete>
 	</target>
 </project>
