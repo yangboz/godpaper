@@ -1,4 +1,4 @@
-[NEW]:Upgrade the Starling version from 1.0 to 1.1;
+[NEW]:Upgrade the Starling version from 1.0 to 1.1 to 1.2 to 1.3 to 1.4;
 
 [CHANGE]:AS3 mouse event to Starling touch event;
 
