@@ -17,7 +17,7 @@ package com.godpaper.as3.core
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Jan 27, 2011 4:34:33 PM
-	 * @history 04/27/2012 createChessBoard func added.
+	 * </time> 04/27/2012 createChessBoard func added.
 	 */
 	public interface IChessFactory
 	{

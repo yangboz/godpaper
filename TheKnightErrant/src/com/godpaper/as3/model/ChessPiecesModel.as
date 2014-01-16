@@ -18,7 +18,7 @@ package com.godpaper.as3.model
 	 * A singleton model hold all Chess Pieces's informations.
 	 *
 	 * @author Knight.zhou
-	 * @history 08/02/2011 added the current selected chess piece property.
+	 * </time> 08/02/2011 added the current selected chess piece property.
 	 */
 	public class ChessPiecesModel
 	{

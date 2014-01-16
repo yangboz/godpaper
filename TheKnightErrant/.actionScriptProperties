@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties analytics="false" mainApplicationPath="TheChessJam.as" projectUUID="6f88bb7c-7e6a-4f46-9960-bdfbd372f854" version="11">
-  <compiler additionalCompilerArguments="-locale=en_US,zh_CN,ko_KR -source-path+=../locale/{locale} -allow-source-path-overlap=true" advancedTelemetry="false" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="examples/the_go/src" strict="true" targetPlayerVersion="11.1.0" useApolloConfig="false" useDebugRSLSwfs="true" useFlashSDK="true" verifyDigests="true" warn="true">
+  <compiler additionalCompilerArguments="-locale=en_US,zh_CN,ko_KR -source-path+=../../../locale/{locale} -allow-source-path-overlap=true" advancedTelemetry="false" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="examples/the_go/src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" useFlashSDK="true" verifyDigests="true" warn="true">
     <compilerSourcePath>
-      <compilerSourcePathEntry kind="1" linkType="1" path="locale/{locale}"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="src"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="0">

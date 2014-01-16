@@ -35,7 +35,7 @@ package com.godpaper.as3.plugins.playerIO
 	
 	/**
 	 * MessageService.as class.   	
-	 * @see: http://playerio.com/documentation/multiplayer/messages
+	 * link: http://playerio.com/documentation/multiplayer/messages
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 11.2+

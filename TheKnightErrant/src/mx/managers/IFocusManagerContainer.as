@@ -14,7 +14,7 @@ package mx.managers
 
 import flash.display.DisplayObject;
 import flash.events.IEventDispatcher;
-import mx.core.IFlexDisplayObject;
+import mx.managers.IFlexDisplayObject;
 import mx.managers.IFocusManager;
 import mx.managers.ISystemManager;
 

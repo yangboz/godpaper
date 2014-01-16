@@ -49,7 +49,7 @@
 		* @playerVersion 11.2+
 		* @airVersion 3.2+
 		* Created ${date} ${time}
-		* @history 05/00/12,
+		* </time> 05/00/12,
 		*/
 		${class_declaration}
 		{

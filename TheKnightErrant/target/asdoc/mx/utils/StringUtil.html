@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../override.css" type="text/css"><meta name="keywords" content="StringUtil,mx.utils.StringUtil,addEventListener,callProperty,clone,compare,copy,createUID,dateCompare,deleteProperty,dispatchEvent,fromByteArray,getClassInfo,getComplexProperty,getInstance,getProperty,getUID,hasEventListener,hasMetadata,isDynamicObject,isSimple,isUID,isWhitespace,numericCompare,propertyChangeHandler,readExternal,removeEventListener,repeat,restrict,setProperty,setupPropertyList,stringCompare,substitute,toByteArray,toString,trim,trimArrayElements,unwatchXML,watchXML,willTrigger,writeExternal"><title>mx.utils.StringUtil</title></head><body><script language="javascript" type="text/javascript" src="../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../help.js"></script><script language="javascript" type="text/javascript" src="../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'StringUtil - GODPAPER Action Script API Document';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">GODPAPER</td><td class="titleTableTopNav" align="right"><a href="../../package-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../class-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../all-index-A.html" onclick="loadClassListFrame('../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../index.html?mx/utils/StringUtil.html&amp;mx/utils/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">StringUtil</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("StringUtil"); titleBar_setSubNav(false,false,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">mx.utils</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  StringUtil</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">StringUtil  <img src="../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p></p>
+  The StringUtil utility class is an all-static class with methods for
+  working with String objects within Flex.
+  You do not create instances of StringUtil;
+  instead you call methods such as 
+  the <code>StringUtil.substitute()</code> method.  
+  
+  <p></p><br/><hr></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isWhitespace()" class="signatureLink">isWhitespace</a>(character:String):Boolean</div><div class="summaryTableDescription">[static] 
+      Returns true if the specified string is
+      a single space, tab, carriage return, newline, or formfeed character.</div></td><td class="summaryTableOwnerCol">StringUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#repeat()" class="signatureLink">repeat</a>(str:String, n:int):String</div><div class="summaryTableDescription">[static] 
+      Returns a string consisting of a specified string
+      concatenated with itself a specified number of times.</div></td><td class="summaryTableOwnerCol">StringUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#restrict()" class="signatureLink">restrict</a>(str:String, restrict:String):String</div><div class="summaryTableDescription">[static] 
+      Removes "unallowed" characters from a string.</div></td><td class="summaryTableOwnerCol">StringUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#substitute()" class="signatureLink">substitute</a>(str:String, ... rest):String</div><div class="summaryTableDescription">[static] 
+      Substitutes "{n}" tokens within the specified string
+      with the respective arguments passed in.</div></td><td class="summaryTableOwnerCol">StringUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#trim()" class="signatureLink">trim</a>(str:String):String</div><div class="summaryTableDescription">[static] 
+      Removes all whitespace characters from the beginning and end
+      of the specified string.</div></td><td class="summaryTableOwnerCol">StringUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#trimArrayElements()" class="signatureLink">trimArrayElements</a>(value:String, delimiter:String):String</div><div class="summaryTableDescription">[static] 
+      Removes all whitespace characters from the beginning and end
+      of each element in an Array, where the Array is stored as a String.</div></td><td class="summaryTableOwnerCol">StringUtil</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="isWhitespace()"></a><a name="isWhitespace(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isWhitespace</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public static function isWhitespace(character:String):Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Returns <code>true</code> if the specified string is
+      a single space, tab, carriage return, newline, or formfeed character.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">character</span>:String</code> &mdash; The String that is is being queried. 
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the specified string is
+      a single space, tab, carriage return, newline, or formfeed character.
+      
+      </td></tr></table></div><a name="repeat()"></a><a name="repeat(String,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">repeat</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function repeat(str:String, n:int):String</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 4.1</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  10, AIR 1.5</td></tr></table><p></p><p></p><p>
+      Returns a string consisting of a specified string
+      concatenated with itself a specified number of times.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">str</span>:String</code> &mdash; The string to be repeated.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">n</span>:int</code> &mdash; The repeat count.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>String</code> &mdash; The repeated string.
+      
+      </td></tr></table></div><a name="restrict()"></a><a name="restrict(String,String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">restrict</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function restrict(str:String, restrict:String):String</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 4.1</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  10, AIR 1.5</td></tr></table><p></p><p></p><p>
+      Removes "unallowed" characters from a string.
+      A "restriction string" such as <code>"A-Z0-9"</code>
+      is used to specify which characters are allowed.
+      This method uses the same logic as the <code>restrict</code>
+      property of TextField.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">str</span>:String</code> &mdash; The input string.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">restrict</span>:String</code> &mdash; The restriction string.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>String</code> &mdash; The input string, minus any characters
+      that are not allowed by the restriction string.
+      
+      </td></tr></table></div><a name="substitute()"></a><a name="substitute(String,restParam)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">substitute</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function substitute(str:String, ... rest):String</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Substitutes "{n}" tokens within the specified string
+      with the respective arguments passed in.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">str</span>:String</code> &mdash; The string to make substitutions in.
+      This string can contain special tokens of the form
+      <code>{n}</code>, where <code>n</code> is a zero based index,
+      that will be replaced with the additional parameters
+      found at that index if specified.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code>... <span class="label">rest</span></code> &mdash; Additional parameters that can be substituted
+      in the <code>str</code> parameter at each <code>{n}</code>
+      location, where <code>n</code> is an integer (zero based)
+      index value into the array of values specified.
+      If the first parameter is an array this array will be used as
+      a parameter list.
+      This allows reuse of this routine in other methods that want to
+      use the ... rest signature.
+      For example <pre>
+         public function myTracer(str:String, ... rest):void
+         { 
+             label.text += StringUtil.substitute(str, rest) + "\n";
+         } </pre>
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>String</code> &mdash; New string with all of the <code>{n}</code> tokens
+      replaced with the respective arguments specified.
+     
+      </td></tr></table></div><a name="trim()"></a><a name="trim(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">trim</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function trim(str:String):String</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Removes all whitespace characters from the beginning and end
+      of the specified string.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">str</span>:String</code> &mdash; The String whose whitespace should be trimmed. 
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>String</code> &mdash; Updated String where whitespace was removed from the 
+      beginning and end. 
+      
+      </td></tr></table></div><a name="trimArrayElements()"></a><a name="trimArrayElements(String,String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">trimArrayElements</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function trimArrayElements(value:String, delimiter:String):String</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Removes all whitespace characters from the beginning and end
+      of each element in an Array, where the Array is stored as a String. 
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:String</code> &mdash; The String whose whitespace should be trimmed. 
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">delimiter</span>:String</code> &mdash; The String that delimits each Array element in the string.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>String</code> &mdash; Updated String where whitespace was removed from the 
+      beginning and end of each element. 
+      
+      </td></tr></table></div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.</footer><br/>Thu Jan 16 2014, 01:11 PM +08:00  </center></div></body></html><!--Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.<br/>Thu Jan 16 2014, 01:11 PM +08:00  -->

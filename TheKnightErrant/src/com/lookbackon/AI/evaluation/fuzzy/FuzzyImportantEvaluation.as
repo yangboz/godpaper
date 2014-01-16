@@ -12,7 +12,7 @@ package com.lookbackon.AI.evaluation.fuzzy
 	
 	/**
 	 * FuzzyImportantEvaluation.as class.   
-	 * @see: https://www.box.com/s/g24knm8b4kqpftf66i40	
+	 * link: https://www.box.com/s/g24knm8b4kqpftf66i40	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0

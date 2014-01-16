@@ -191,6 +191,7 @@ package
 //			var screenWidth:int  = stage.fullScreenWidth;
 //			var screenHeight:int = stage.fullScreenHeight;
 			var viewPort:Rectangle=new Rectangle(0, 0, screenWidth, screenHeight);
+			Starling.handleLostContext = true;
 //			mStarling = new Starling(GameScene, stage,viewPort);
 			mStarling=new Starling(MainScene, stage, viewPort);
 			mStarling.simulateMultitouch=true;

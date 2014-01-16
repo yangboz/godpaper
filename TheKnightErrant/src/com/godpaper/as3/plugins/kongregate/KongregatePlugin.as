@@ -49,7 +49,7 @@ package com.godpaper.as3.plugins.kongregate
 	 * The Server API allows your remote server to integrate with our back-end using simple web-service calls.All developers should become familiar with the Client API, 
 	 * as it is required for all integrations. If you have your own game server, you should read the documentation for both the client and server APIs. 
 	 * 
-	 * @see:http://www.kongregate.com/developer_center/docs/as3-api 	
+	 * link:http://www.kongregate.com/developer_center/docs/as3-api
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
@@ -64,7 +64,7 @@ package com.godpaper.as3.plugins.kongregate
 		//--------------------------------------------------------------------------
 		// Kongregate API reference
 		private var kongregate:*;
-		//@see: http://www.kongregate.com/developer_center/docs/chat-integration-api  
+		//reference:http://www.kongregate.com/developer_center/docs/chat-integration-api 
 		//showTab(name:String,description:String,options:Object):void
 		private var _model:KongregateModel;
 		//----------------------------------

@@ -19,7 +19,7 @@ package com.godpaper.as3.core
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Feb 14, 2011 11:42:29 AM
-	 * @history 05/11/2011 split the indicateGaskets to indicateGasketsMove and indicateGasketsCapture functions;
+	 * </time> 05/11/2011 split the indicateGaskets to indicateGasketsMove and indicateGasketsCapture functions;
 	 */
 	public interface IChessPieceManager
 	{

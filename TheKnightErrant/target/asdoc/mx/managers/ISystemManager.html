@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../override.css" type="text/css"><meta name="keywords" content="ISystemManager,mx.managers.ISystemManager,accessibilityProperties,alpha,baselinePosition,blendMode,cacheAsBitmap,cursorChildren,defaultButton,defaultButton,defaultButtonEnabled,document,document,emphasized,enabled,explicitHeight,explicitMaxHeight,explicitMaxWidth,explicitMinHeight,explicitMinWidth,explicitWidth,filters,focusManager,focusPane,focusPane,focusPane,height,includeInLayout,isPopUp,isProxy,loaderInfo,loaderInfo,mask,maxHeight,maxWidth,measuredHeight,measuredMinHeight,measuredMinWidth,measuredWidth,minHeight,minWidth,mouseX,mouseY,name,nextTabIndex,numModalWindows,opaqueBackground,owner,parent,percentHeight,percentWidth,popUpChildren,rawChildren,root,rotation,scale9Grid,scaleX,scaleY,screen,scrollRect,showFocusIndicator,stage,stage,systemManager,systemManager,toolTipChildren,topLevelSystemManager,transform,tweeningProperties,visible,width,x,y,activate,callLater,contains,deactivate,deployMouseShields,findFocusManagerComponent,getBounds,getDefinitionByName,getExplicitOrMeasuredHeight,getExplicitOrMeasuredWidth,getFocus,getNextFocusManagerComponent,getRect,getSandboxRoot,getTopLevelRoot,getVisibleApplicationRect,globalToLocal,hideFocus,hitTestObject,hitTestPoint,initialize,invalidateParentSizeAndDisplayList,isFontFaceEmbedded,isTopLevel,isTopLevelRoot,localToGlobal,move,owns,parentChanged,setActualSize,setFocus,setVisible,showFocus"><title>mx.managers.ISystemManager</title></head><body><script language="javascript" type="text/javascript" src="../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../help.js"></script><script language="javascript" type="text/javascript" src="../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'ISystemManager - GODPAPER Action Script API Document';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">GODPAPER</td><td class="titleTableTopNav" align="right"><a href="../../package-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../class-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../all-index-A.html" onclick="loadClassListFrame('../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../index.html?mx/managers/ISystemManager.html&amp;mx/managers/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">ISystemManager</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("ISystemManager"); titleBar_setSubNav(false,true,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">mx.managers</a></td></tr><tr><td class="classHeaderTableLabel">Interface</td><td class="classSignature">public  interface  ISystemManager extends  flash.events.IEventDispatcher,  <a href="../../mx/core/IChildList.html">IChildList</a>,  mx.core.IFlexModuleFactory</td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p></p>
+  An ISystemManager manages an "application window".
+  Every application that runs on the desktop or in a browser
+  has an area where the visuals of the application will be
+  displayed.  It may be a window in the operating system
+  or an area within the browser.  That is an "application window"
+  and different from an instance of <code>mx.core.Application</code>, which
+  is the main "top-level" window within an application.
+ 
+  <p>Every application has an ISystemManager.  
+  The ISystemManager  sends an event if
+  the size of the application window changes (you cannot change it from
+  within the application, but only through interaction with the operating
+  system window or browser).  It parents all displayable items within the
+  application, such as the main mx.core.Application instance and all popups, 
+  tooltips, cursors, an so on.  Any object parented by the ISystemManager is
+  considered to be a "top-level" window, even tooltips and cursors.</p>
+ 
+               <p>The ISystemManager also switches focus between top-level windows
+  if there  are more than one IFocusManagerContainer displayed and users
+  are interacting with components within the IFocusManagerContainers.</p>
+ 
+               <p>All keyboard and mouse activity that is not expressly trapped is seen
+  by the ISystemManager, making it a good place to monitor activity
+  should you need to do so.</p>
+ 
+               <p>If an application is loaded into another application, an ISystemManager
+  will still be created, but will not manage an "application window",
+  depending on security and domain rules.
+  Instead, it will be the <code>content</code> of the <code>Loader</code> 
+  that loaded it and simply serve as the parent of the sub-application</p>
+ 
+               <p>The ISystemManager maintains multiple lists of children, one each for
+  tooltips, cursors, popup windows.
+  This is how it ensures that popup windows "float" above the main
+  application windows and that tooltips "float" above that
+  and cursors above that.
+  If you examine the <code>numChildren</code> property 
+  or <code>getChildAt()</code> method on the ISystemManager
+  you are accessing the main application window and any other windows
+  that aren't popped up.
+  To get the list of all windows, including popups, tooltips and cursors,
+  use the <code>rawChildren</code> property.</p>
+  
+            <p></p><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><div class="showHideLinks"><div id="hideInheritedProperty" class="hideInheritedProperty"><a class="showHideLink" href="#propertySummary" onclick="javascript:setInheritedVisible(false,'Property');"><img class="showHideLinkImage" src="../../images/expanded.gif"> Hide Inherited Public Properties</a></div><div id="showInheritedProperty" class="showInheritedProperty"><a class="showHideLink" href="#propertySummary" onclick="javascript:setInheritedVisible(true,'Property');"><img class="showHideLinkImage" src="../../images/collapsed.gif"> Show Inherited Public Properties</a></div></div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#cursorChildren" class="signatureLink">cursorChildren</a> : <a href="../../mx/core/IChildList.html">IChildList</a><div class="summaryTableDescription">[read-only] 
+	  An list of the custom cursors
+	  being parented by this ISystemManager.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#document" class="signatureLink">document</a> : Object<div class="summaryTableDescription">
+	  A reference to the document object.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#focusPane" class="signatureLink">focusPane</a> : Sprite<div class="summaryTableDescription">
+	  A single Sprite shared among components used as an overlay for drawing focus.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#isProxy" class="signatureLink">isProxy</a> : Boolean<div class="summaryTableDescription">[read-only] 
+	  True if the ISystemManager is a proxy and not a root class.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#loaderInfo" class="signatureLink">loaderInfo</a> : LoaderInfo<div class="summaryTableDescription">[read-only] 
+	  The LoaderInfo object that represents information about the application.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class="hideInheritedProperty"><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img src="../../images/inheritedSummary.gif" alt="Inherited" title="Inherited" class="inheritedSummaryImage"></td><td class="summaryTableSignatureCol"><a href="../../mx/core/IChildList.html#numChildren" class="signatureLink">numChildren</a> : int<div class="summaryTableDescription">[read-only] 
+	  The number of children in this child list.</div></td><td class="summaryTableOwnerCol"><a href="../../mx/core/IChildList.html">IChildList</a></td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#numModalWindows" class="signatureLink">numModalWindows</a> : int<div class="summaryTableDescription">
+      The number of modal windows.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#popUpChildren" class="signatureLink">popUpChildren</a> : <a href="../../mx/core/IChildList.html">IChildList</a><div class="summaryTableDescription">[read-only] 
+	  An list of the topMost (popup)
+	  windows being parented by this ISystemManager.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#rawChildren" class="signatureLink">rawChildren</a> : <a href="../../mx/core/IChildList.html">IChildList</a><div class="summaryTableDescription">[read-only] 
+	  A list of all children
+	  being parented by this ISystemManager.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#screen" class="signatureLink">screen</a> : Rectangle<div class="summaryTableDescription">[read-only] 
+	  The size and position of the application window.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#stage" class="signatureLink">stage</a> : Stage<div class="summaryTableDescription">[read-only] 
+	  The flash.display.Stage that represents the application window
+	  mapped to this SystemManager
+	  
+	  </div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#toolTipChildren" class="signatureLink">toolTipChildren</a> : <a href="../../mx/core/IChildList.html">IChildList</a><div class="summaryTableDescription">[read-only] 
+	  A list of the tooltips
+	  being parented by this ISystemManager.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#topLevelSystemManager" class="signatureLink">topLevelSystemManager</a> : <a href="../../mx/managers/ISystemManager.html">ISystemManager</a><div class="summaryTableDescription">[read-only] 
+	  The ISystemManager responsible for the application window.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><div class="showHideLinks"><div id="hideInheritedMethod" class="hideInheritedMethod"><a class="showHideLink" href="#methodSummary" onclick="javascript:setInheritedVisible(false,'Method');"><img class="showHideLinkImage" src="../../images/expanded.gif"> Hide Inherited Public Methods</a></div><div id="showInheritedMethod" class="showInheritedMethod"><a class="showHideLink" href="#methodSummary" onclick="javascript:setInheritedVisible(true,'Method');"><img class="showHideLinkImage" src="../../images/collapsed.gif"> Show Inherited Public Methods</a></div></div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class="hideInheritedMethod"><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img src="../../images/inheritedSummary.gif" alt="Inherited" title="Inherited" class="inheritedSummaryImage"></td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="../../mx/core/IChildList.html#addChild()" class="signatureLink">addChild</a>(child:DisplayObject):DisplayObject</div><div class="summaryTableDescription">
+      Adds a child DisplayObject after the end of this child list.</div></td><td class="summaryTableOwnerCol"><a href="../../mx/core/IChildList.html">IChildList</a></td></tr><tr class="hideInheritedMethod"><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img src="../../images/inheritedSummary.gif" alt="Inherited" title="Inherited" class="inheritedSummaryImage"></td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="../../mx/core/IChildList.html#addChildAt()" class="signatureLink">addChildAt</a>(child:DisplayObject, index:int):DisplayObject</div><div class="summaryTableDescription">
+      Adds a child DisplayObject to this child list at the index specified.</div></td><td class="summaryTableOwnerCol"><a href="../../mx/core/IChildList.html">IChildList</a></td></tr><tr class="hideInheritedMethod"><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img src="../../images/inheritedSummary.gif" alt="Inherited" title="Inherited" class="inheritedSummaryImage"></td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="../../mx/core/IChildList.html#contains()" class="signatureLink">contains</a>(child:DisplayObject):Boolean</div><div class="summaryTableDescription">
+	  Determines if a DisplayObject is in this child list,
+	  or is a descendant of an child in this child list.</div></td><td class="summaryTableOwnerCol"><a href="../../mx/core/IChildList.html">IChildList</a></td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#deployMouseShields()" class="signatureLink">deployMouseShields</a>(deploy:Boolean):void</div><div class="summaryTableDescription">
+      Deploy or remove mouse shields.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class="hideInheritedMethod"><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img src="../../images/inheritedSummary.gif" alt="Inherited" title="Inherited" class="inheritedSummaryImage"></td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="../../mx/core/IChildList.html#getChildAt()" class="signatureLink">getChildAt</a>(index:int):DisplayObject</div><div class="summaryTableDescription">
+	  Gets the child DisplayObject at the specified index in this child list.</div></td><td class="summaryTableOwnerCol"><a href="../../mx/core/IChildList.html">IChildList</a></td></tr><tr class="hideInheritedMethod"><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img src="../../images/inheritedSummary.gif" alt="Inherited" title="Inherited" class="inheritedSummaryImage"></td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="../../mx/core/IChildList.html#getChildByName()" class="signatureLink">getChildByName</a>(name:String):DisplayObject</div><div class="summaryTableDescription">
+      Gets the child DisplayObject with the specified name
+	  in this child list.</div></td><td class="summaryTableOwnerCol"><a href="../../mx/core/IChildList.html">IChildList</a></td></tr><tr class="hideInheritedMethod"><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img src="../../images/inheritedSummary.gif" alt="Inherited" title="Inherited" class="inheritedSummaryImage"></td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="../../mx/core/IChildList.html#getChildIndex()" class="signatureLink">getChildIndex</a>(child:DisplayObject):int</div><div class="summaryTableDescription">
+	  Gets the index of a specific child in this child list.</div></td><td class="summaryTableOwnerCol"><a href="../../mx/core/IChildList.html">IChildList</a></td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getDefinitionByName()" class="signatureLink">getDefinitionByName</a>(name:String):Object</div><div class="summaryTableDescription">
+	  Converts the given String to a Class or package-level Function.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class="hideInheritedMethod"><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img src="../../images/inheritedSummary.gif" alt="Inherited" title="Inherited" class="inheritedSummaryImage"></td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="../../mx/core/IChildList.html#getObjectsUnderPoint()" class="signatureLink">getObjectsUnderPoint</a>(point:Point):Array</div><div class="summaryTableDescription">
+      Returns an array of DisplayObjects that lie under the specified point
+	  and are in this child list.</div></td><td class="summaryTableOwnerCol"><a href="../../mx/core/IChildList.html">IChildList</a></td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getSandboxRoot()" class="signatureLink">getSandboxRoot</a>():DisplayObject</div><div class="summaryTableDescription">
+      Gets the system manager that is the root of all
+      top level system managers in this SecurityDomain.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getTopLevelRoot()" class="signatureLink">getTopLevelRoot</a>():DisplayObject</div><div class="summaryTableDescription">
+      Attempts to get the system manager that is the in the main application.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getVisibleApplicationRect()" class="signatureLink">getVisibleApplicationRect</a>(bounds:Rectangle = null, skipToSandboxRoot:Boolean = false):Rectangle</div><div class="summaryTableDescription">
+      Get the bounds of the loaded application that are visible to the user
+      on the screen.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#invalidateParentSizeAndDisplayList()" class="signatureLink">invalidateParentSizeAndDisplayList</a>():void</div><div class="summaryTableDescription">
+      Attempt to notify the parent SWFLoader that the application's size may
+      have changed.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isFontFaceEmbedded()" class="signatureLink">isFontFaceEmbedded</a>(tf:TextFormat):Boolean</div><div class="summaryTableDescription">
+      Returns true if the required font face is embedded
+	  in this application, or has been registered globally by using the 
+	  Font.registerFont() method.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isTopLevel()" class="signatureLink">isTopLevel</a>():Boolean</div><div class="summaryTableDescription">
+	  Returns true if this ISystemManager is responsible
+	  for an application window, and false if this
+	  application has been loaded into another application.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isTopLevelRoot()" class="signatureLink">isTopLevelRoot</a>():Boolean</div><div class="summaryTableDescription">
+      Tests if this system manager is the root of all
+      top level system managers.</div></td><td class="summaryTableOwnerCol">ISystemManager</td></tr><tr class="hideInheritedMethod"><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img src="../../images/inheritedSummary.gif" alt="Inherited" title="Inherited" class="inheritedSummaryImage"></td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="../../mx/core/IChildList.html#removeChild()" class="signatureLink">removeChild</a>(child:DisplayObject):DisplayObject</div><div class="summaryTableDescription">
+      Removes the specified child DisplayObject from this child list.</div></td><td class="summaryTableOwnerCol"><a href="../../mx/core/IChildList.html">IChildList</a></td></tr><tr class="hideInheritedMethod"><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img src="../../images/inheritedSummary.gif" alt="Inherited" title="Inherited" class="inheritedSummaryImage"></td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="../../mx/core/IChildList.html#removeChildAt()" class="signatureLink">removeChildAt</a>(index:int):DisplayObject</div><div class="summaryTableDescription">
+      Removes the child DisplayObject at the specified index
+	  from this child list.</div></td><td class="summaryTableOwnerCol"><a href="../../mx/core/IChildList.html">IChildList</a></td></tr><tr class="hideInheritedMethod"><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img src="../../images/inheritedSummary.gif" alt="Inherited" title="Inherited" class="inheritedSummaryImage"></td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="../../mx/core/IChildList.html#setChildIndex()" class="signatureLink">setChildIndex</a>(child:DisplayObject, newIndex:int):void</div><div class="summaryTableDescription">
+	  Changes the index of a particular child in this child list.</div></td><td class="summaryTableOwnerCol"><a href="../../mx/core/IChildList.html">IChildList</a></td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="cursorChildren"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">cursorChildren</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>cursorChildren:<a href="../../mx/core/IChildList.html">IChildList</a></code>&nbsp;&nbsp;[read-only] <p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  An list of the custom cursors
+	  being parented by this ISystemManager.
+	 
+	  <p>An ISystemManager has various types of children,
+	  such as the Application, popups, top-most windows,
+	  tooltips, and custom cursors.
+	  You can access the custom cursors through
+	  the <code>cursorChildren</code> property.</p>
+	 
+	  <p>The IChildList object has methods like <code>getChildAt()</code>
+	  and properties like <code>numChildren</code>.
+	  For example, <code>cursorChildren.numChildren</code> gives
+	  the number of custom cursors (which will be either 0 or 1)
+	  and, if a custom cursor exists, you can access it as
+	  <code>cursorChildren.getChildAt(0)</code>.</p>
+	  
+	  </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get cursorChildren():<a href="../../mx/core/IChildList.html">IChildList</a></code><br/></div><a name="propertyDetail"></a><a name="document"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">document</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>document:Object</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  A reference to the document object. 
+	  A document object is an Object at the top of the hierarchy of a 
+	  Flex application, MXML component, or AS component.
+	  
+	  </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get document():Object</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set document(value:Object):void</code><br/></div><a name="propertyDetail"></a><a name="focusPane"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">focusPane</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>focusPane:Sprite</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  A single Sprite shared among components used as an overlay for drawing focus.
+	  You share it if you parent a focused component, not if you are IFocusManagerComponent.
+	  
+	  </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get focusPane():Sprite</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set focusPane(value:Sprite):void</code><br/></div><a name="propertyDetail"></a><a name="isProxy"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isProxy</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>isProxy:Boolean</code>&nbsp;&nbsp;[read-only] <p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  True if the ISystemManager is a proxy and not a root class.
+	  
+	  </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isProxy():Boolean</code><br/></div><a name="propertyDetail"></a><a name="loaderInfo"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">loaderInfo</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>loaderInfo:LoaderInfo</code>&nbsp;&nbsp;[read-only] <p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  The LoaderInfo object that represents information about the application.
+     
+	  </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get loaderInfo():LoaderInfo</code><br/></div><a name="propertyDetail"></a><a name="numModalWindows"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">numModalWindows</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>numModalWindows:int</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      The number of modal windows.  
+     
+      <p>Modal windows don't allow
+      clicking in another windows which would normally 
+      activate the FocusManager in that window.  The PopUpManager
+      modifies this count as it creates and destroy modal windows.</p>
+      
+      </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get numModalWindows():int</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set numModalWindows(value:int):void</code><br/></div><a name="propertyDetail"></a><a name="popUpChildren"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">popUpChildren</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>popUpChildren:<a href="../../mx/core/IChildList.html">IChildList</a></code>&nbsp;&nbsp;[read-only] <p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  An list of the topMost (popup)
+	  windows being parented by this ISystemManager.
+	 
+	  <p>An ISystemManager has various types of children,
+	  such as the Application, popups,
+	  tooltips, and custom cursors.
+	  You can access the top-most windows through
+	  the <code>popUpChildren</code> property.</p>
+	 
+	  <p>The IChildList object has methods like <code>getChildAt()</code>
+	  and properties like <code>numChildren</code>.
+	  For example, <code>popUpChildren.numChildren</code> gives
+	  the number of topmost windows and you can access them as
+	  <code>popUpChildren.getChildAt(i)</code>.</p>
+	 
+	  
+	  </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get popUpChildren():<a href="../../mx/core/IChildList.html">IChildList</a></code><br/></div><a name="propertyDetail"></a><a name="rawChildren"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">rawChildren</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>rawChildren:<a href="../../mx/core/IChildList.html">IChildList</a></code>&nbsp;&nbsp;[read-only] <p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  A list of all children
+	  being parented by this ISystemManager.
+	 
+	  <p>An ISystemManager has various types of children,
+	  such as the Application, popups, 
+	  tooltips, and custom cursors.</p>
+	 
+	  <p>The IChildList object has methods like <code>getChildAt()</code>
+	  and properties like <code>numChildren</code>.</p>
+	  
+	  </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get rawChildren():<a href="../../mx/core/IChildList.html">IChildList</a></code><br/></div><a name="propertyDetail"></a><a name="screen"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">screen</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>screen:Rectangle</code>&nbsp;&nbsp;[read-only] <p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  The size and position of the application window.
+	 
+	  The Rectangle object contains <code>x</code>, <code>y</code>,
+	  <code>width</code>, and <code>height</code> properties.
+     
+      The Rectangle is in sandbox root coordinates.
+	  
+	  </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get screen():Rectangle</code><br/></div><a name="propertyDetail"></a><a name="stage"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">stage</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>stage:Stage</code>&nbsp;&nbsp;[read-only] <p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  The flash.display.Stage that represents the application window
+	  mapped to this SystemManager
+	  
+	  </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get stage():Stage</code><br/></div><a name="propertyDetail"></a><a name="toolTipChildren"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toolTipChildren</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>toolTipChildren:<a href="../../mx/core/IChildList.html">IChildList</a></code>&nbsp;&nbsp;[read-only] <p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  A list of the tooltips
+	  being parented by this ISystemManager.
+	 
+	  <p>An ISystemManager has various types of children,
+	  such as the Application, popups, topmost windows,
+	  tooltips, and custom cursors.</p>
+	 
+	  <p>The IChildList object has methods like <code>getChildAt()</code>
+	  and properties like <code>numChildren</code>.
+	  For example, <code>toolTipChildren.numChildren</code> gives
+	  the number of tooltips (which will be either 0 or 1)
+	  and, if a tooltip exists, you can access it as
+	  <code>toolTipChildren.getChildAt(0)</code>.</p>
+	  
+	  </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get toolTipChildren():<a href="../../mx/core/IChildList.html">IChildList</a></code><br/></div><a name="propertyDetail"></a><a name="topLevelSystemManager"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">topLevelSystemManager</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>topLevelSystemManager:<a href="../../mx/managers/ISystemManager.html">ISystemManager</a></code>&nbsp;&nbsp;[read-only] <p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  The ISystemManager responsible for the application window.
+	  This will be the same ISystemManager unless this application
+	  has been loaded into another application.
+	  
+	  </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get topLevelSystemManager():<a href="../../mx/managers/ISystemManager.html">ISystemManager</a></code><br/></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="deployMouseShields()"></a><a name="deployMouseShields(Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">deployMouseShields</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function deployMouseShields(deploy:Boolean):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Deploy or remove mouse shields. Mouse shields block mouse input to untrusted
+      applications. The reason you would want to block mouse input is because
+      when you are dragging over an untrusted application you would normally not
+      receive any mouse move events. The Flash Player does not send events
+      across trusted/untrusted boundries due to security concerns. By covering
+      the untrusted application with a mouse shield (assuming you are its parent)
+      you can get mouse move message and the drag operation will work as expected. 
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">deploy</span>:Boolean</code> &mdash; <code>true</code> to deploy the mouse shields, <code>false</code>
+      to remove the mouse shields.
+      
+      </td></tr></table></p></div><a name="getDefinitionByName()"></a><a name="getDefinitionByName(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getDefinitionByName</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getDefinitionByName(name:String):Object</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  Converts the given String to a Class or package-level Function.
+	  Calls the appropriate <code>ApplicationDomain.getDefinition()</code> 
+	  method based on
+	  whether you are loaded into another application or not.
+	 
+	  </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">name</span>:String</code> &mdash; Name of class, for example "mx.video.VideoManager".
+	 
+	  </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Object</code> &mdash; The Class represented by the <code>name</code>, or null.
+	  
+	  </td></tr></table></div><a name="getSandboxRoot()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getSandboxRoot</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getSandboxRoot():DisplayObject</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Gets the system manager that is the root of all
+      top level system managers in this SecurityDomain.
+     
+      </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>DisplayObject</code> &mdash; the highest-level systemManager in the sandbox
+      
+      </td></tr></table></div><a name="getTopLevelRoot()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getTopLevelRoot</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getTopLevelRoot():DisplayObject</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Attempts to get the system manager that is the in the main application.
+     
+      </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>DisplayObject</code> &mdash; The main application's systemManager if allowed by
+	  security restrictions or null if it is in a different SecurityDomain.
+      
+      </td></tr></table></div><a name="getVisibleApplicationRect()"></a><a name="getVisibleApplicationRect(flash.geom.Rectangle,Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getVisibleApplicationRect</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getVisibleApplicationRect(bounds:Rectangle = null, skipToSandboxRoot:Boolean = false):Rectangle</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Get the bounds of the loaded application that are visible to the user
+      on the screen.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">bounds</span>:Rectangle</code> (default = <code>null</code>)<code></code> &mdash; Optional. The starting bounds for the visible rect. The
+      bounds are in global coordinates. If <code>bounds</code> is null the 
+      starting bounds is defined by the <code>screen</code> property of the 
+      system manager. 
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">skipToSandboxRoot</span>:Boolean</code> (default = <code>false</code>)<code></code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Rectangle</code> &mdash; a <code>Rectangle</code> including the visible portion of the this 
+      object. The rectangle is in global coordinates.
+      
+      </td></tr></table></div><a name="invalidateParentSizeAndDisplayList()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">invalidateParentSizeAndDisplayList</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function invalidateParentSizeAndDisplayList():void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 4</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  10, AIR 1.5</td></tr></table><p></p><p></p><p>
+      Attempt to notify the parent SWFLoader that the application's size may
+      have changed.
+      
+      </p></div><a name="isFontFaceEmbedded()"></a><a name="isFontFaceEmbedded(flash.text.TextFormat)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isFontFaceEmbedded</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function isFontFaceEmbedded(tf:TextFormat):Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Returns <code>true</code> if the required font face is embedded
+	  in this application, or has been registered globally by using the 
+	  <code>Font.registerFont()</code> method.
+	 
+	  </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">tf</span>:TextFormat</code> &mdash; The TextFormat class representing character formatting information.
+	 
+	  </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the required font face is embedded
+	  in this application, or has been registered globally by using the 
+	  <code>Font.registerFont()</code> method.
+      
+      </td></tr></table></div><a name="isTopLevel()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isTopLevel</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function isTopLevel():Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  Returns <code>true</code> if this ISystemManager is responsible
+	  for an application window, and <code>false</code> if this
+	  application has been loaded into another application.
+	 
+	  </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if this ISystemManager is responsible
+	  for an application window.
+	  
+	  </td></tr></table></div><a name="isTopLevelRoot()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isTopLevelRoot</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function isTopLevelRoot():Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Tests if this system manager is the root of all
+      top level system managers.
+     
+      </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the SystemManager
+      is the root of all SystemManagers on the display list,
+      and <code>false</code> otherwise.
+      
+      </td></tr></table></div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.</footer><br/>Thu Jan 16 2014, 01:11 PM +08:00  </center></div></body></html><!--Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.<br/>Thu Jan 16 2014, 01:11 PM +08:00  -->

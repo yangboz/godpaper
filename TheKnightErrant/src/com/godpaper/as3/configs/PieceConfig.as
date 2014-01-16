@@ -16,9 +16,9 @@ package com.godpaper.as3.configs
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Jan 30, 2011 2:18:35 PM
-	 * @history 06/17/2011 added scaleX/Y properties.
-	 * @history 07/02/2011 added maxPoolSize(BLUE/RED),growthValue properties;
-	 * @history 06/05/2012 deprecated the usingDragProxy,always using;
+	 * </time> 06/17/2011 added scaleX/Y properties.
+	 * </time> 07/02/2011 added maxPoolSize(BLUE/RED),growthValue properties;
+	 * </time> 06/05/2012 deprecated the usingDragProxy,always using;
 	 */
 	public class PieceConfig
 	{

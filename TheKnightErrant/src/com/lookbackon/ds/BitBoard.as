@@ -20,7 +20,7 @@ package com.lookbackon.ds
 	 * Possible increased documentation requirements.</p>
 	 * @see http://blog.lookbackon.com/?p=371
 	 * @author Knight.zhou
-	 * @history 05/16/2011 added the implementation of IAStar;
+	 * </time> 05/16/2011 added the implementation of IAStar;
 	 */	
 	public class BitBoard extends BitVector implements IBitBoard
 	{

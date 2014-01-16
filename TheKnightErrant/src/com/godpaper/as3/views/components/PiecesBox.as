@@ -56,7 +56,7 @@ package com.godpaper.as3.views.components
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Apr 18, 2012 9:54:47 AM
-	 * @history,using the starling(stage3d) version.
+	 * </time>,using the starling(stage3d) version.
 	 */   	 
 	public class PiecesBox extends ChessGasket implements IPiecesBox
 	{		

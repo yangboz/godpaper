@@ -7,7 +7,7 @@ package com.lookbackon.AI.FSM
 	 * 
 	 * @author Knight.zhou
 	 * 
-	 * @history 01/04/2011 agent with message handler,for multi-agent communication.
+	 * </time> 01/04/2011 agent with message handler,for multi-agent communication.
 	 */    
 	public interface IFiniteStateMachine
 	{

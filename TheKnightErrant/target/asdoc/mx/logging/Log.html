@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../override.css" type="text/css"><meta name="keywords" content="Log,mx.logging.Log,addLogger,addLogger,addTarget,debug,debug,error,error,fatal,fatal,flush,getLevelString,getLogger,hasIllegalCharacters,info,info,initialized,isDebug,isError,isFatal,isInfo,isWarn,log,log,logEvent,removeLogger,removeLogger,removeTarget,warn,warn"><title>mx.logging.Log</title></head><body><script language="javascript" type="text/javascript" src="../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../help.js"></script><script language="javascript" type="text/javascript" src="../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'Log - GODPAPER Action Script API Document';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">GODPAPER</td><td class="titleTableTopNav" align="right"><a href="../../package-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../class-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../all-index-A.html" onclick="loadClassListFrame('../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../index.html?mx/logging/Log.html&amp;mx/logging/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">Log</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Log"); titleBar_setSubNav(false,false,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">mx.logging</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  Log</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">Log  <img src="../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p></p>
+  Provides pseudo-hierarchical logging capabilities with multiple format and
+  output options.
+  The log system consists of two major components, the logger and a target.
+  You can use the logger to send information to a target.
+  The target is responsible for formatting and general output of the log data.
+  <p>
+  Loggers are singleton instances created for a particular category of
+  information.
+  Typically, the category is the package name of the component
+  that desires to log information.
+  The category provides users the ability to specify what log information they
+  are interested in.
+  Multiple categories can be selected and combined with regular expressions.
+  This allows for both broad and narrow logging information to be acquired.
+  For example, you might be interested in all logging information under
+  the "mx.messaging" and "mx.rpc" packages and want the output from these
+  packages to be formatted as XML.
+  To get the all of the logging information under the "mx.messaging" category
+  including sub-packages and components a wildcard expression is required, such as
+  "mx.messaging.*".
+  See the code example below for more details.
+  </p>
+               <p>Targets provide the output mechanism of the data being logged.
+  This mechanism typically includes formatting, transmission, or storage, but
+  can be anything possible under the VM.
+  There are two targets provided: <code>MiniDebugTarget</code> and 
+  <code>TraceTarget</code>.
+  Each of these writers take the current log information and "sends" it
+  somewhere for display and/or storage.
+  Targets also provide the specification of what log data to output.
+  </p>
+ 
+            <p></p><br/><hr></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#addTarget()" class="signatureLink">addTarget</a>(target:<a href="../../mx/logging/ILoggingTarget.html">ILoggingTarget</a>):void</div><div class="summaryTableDescription">[static] 
+      Allows the specified target to begin receiving notification of log
+      events.</div></td><td class="summaryTableOwnerCol">Log</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#flush()" class="signatureLink">flush</a>():void</div><div class="summaryTableDescription">[static] 
+      This method removes all of the current loggers from the cache.</div></td><td class="summaryTableOwnerCol">Log</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getLogger()" class="signatureLink">getLogger</a>(category:String):<a href="../../mx/logging/ILogger.html">ILogger</a></div><div class="summaryTableDescription">[static] 
+      Returns the logger associated with the specified category.</div></td><td class="summaryTableOwnerCol">Log</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#hasIllegalCharacters()" class="signatureLink">hasIllegalCharacters</a>(value:String):Boolean</div><div class="summaryTableDescription">[static] 
+      This method checks the specified string value for illegal characters.</div></td><td class="summaryTableOwnerCol">Log</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isDebug()" class="signatureLink">isDebug</a>():Boolean</div><div class="summaryTableDescription">[static] 
+      Indicates whether a debug level log event will be processed by a
+      log target.</div></td><td class="summaryTableOwnerCol">Log</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isError()" class="signatureLink">isError</a>():Boolean</div><div class="summaryTableDescription">[static] 
+      Indicates whether an error level log event will be processed by a
+      log target.</div></td><td class="summaryTableOwnerCol">Log</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isFatal()" class="signatureLink">isFatal</a>():Boolean</div><div class="summaryTableDescription">[static] 
+      Indicates whether a fatal level log event will be processed by a
+      log target.</div></td><td class="summaryTableOwnerCol">Log</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isInfo()" class="signatureLink">isInfo</a>():Boolean</div><div class="summaryTableDescription">[static] 
+      Indicates whether an info level log event will be processed by a
+      log target.</div></td><td class="summaryTableOwnerCol">Log</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isWarn()" class="signatureLink">isWarn</a>():Boolean</div><div class="summaryTableDescription">[static] 
+      Indicates whether a warn level log event will be processed by a
+      log target.</div></td><td class="summaryTableOwnerCol">Log</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#removeTarget()" class="signatureLink">removeTarget</a>(target:<a href="../../mx/logging/ILoggingTarget.html">ILoggingTarget</a>):void</div><div class="summaryTableDescription">[static] 
+      Stops the specified target from receiving notification of log
+      events.</div></td><td class="summaryTableOwnerCol">Log</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="addTarget()"></a><a name="addTarget(mx.logging.ILoggingTarget)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">addTarget</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public static function addTarget(target:<a href="../../mx/logging/ILoggingTarget.html">ILoggingTarget</a>):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Allows the specified target to begin receiving notification of log
+      events.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">target</span>:<a href="../../mx/logging/ILoggingTarget.html">ILoggingTarget</a></code> &mdash; specific target that should capture log events.
+      
+      </td></tr></table></p></div><a name="flush()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">flush</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function flush():void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      This method removes all of the current loggers from the cache.
+      Subsquent calls to the <code>getLogger()</code> method return new instances
+      of loggers rather than any previous instances with the same category.
+      This method is intended for use in debugging only.
+      
+      </p></div><a name="getLogger()"></a><a name="getLogger(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getLogger</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function getLogger(category:String):<a href="../../mx/logging/ILogger.html">ILogger</a></code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Returns the logger associated with the specified category.
+      If the category given doesn't exist a new instance of a logger will be
+      returned and associated with that category.
+      Categories must be at least one character in length and may not contain
+      any blanks or any of the following characters:
+      []~$^&\/(){}&lt;>+=`!#%?,:;'"@
+      This method will throw an <code>InvalidCategoryError</code> if the
+      category specified is malformed.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">category</span>:String</code> &mdash; The category of the logger that should be returned.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../mx/logging/ILogger.html">ILogger</a></code> &mdash; An instance of a logger object for the specified name.
+      If the name doesn't exist, a new instance with the specified
+      name is returned.
+      
+      </td></tr></table></div><a name="hasIllegalCharacters()"></a><a name="hasIllegalCharacters(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">hasIllegalCharacters</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function hasIllegalCharacters(value:String):Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      This method checks the specified string value for illegal characters.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:String</code> &mdash; The String to check for illegal characters.
+                The following characters are not valid:
+                    []~$^&\/(){}&lt;>+=`!#%?,:;'"@
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if there are any illegal characters found,
+                <code>false</code> otherwise
+      
+      </td></tr></table></div><a name="isDebug()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isDebug</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function isDebug():Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Indicates whether a debug level log event will be processed by a
+      log target.
+     
+      </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if a debug level log event will be logged; otherwise false.
+      
+      </td></tr></table></div><a name="isError()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isError</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function isError():Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Indicates whether an error level log event will be processed by a
+      log target.
+     
+      </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if an error level log event will be logged; otherwise false.
+      
+      </td></tr></table></div><a name="isFatal()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isFatal</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function isFatal():Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Indicates whether a fatal level log event will be processed by a
+      log target.
+     
+      </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if a fatal level log event will be logged; otherwise false.
+      
+      </td></tr></table></div><a name="isInfo()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isInfo</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function isInfo():Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Indicates whether an info level log event will be processed by a
+      log target.
+     
+      </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if an info level log event will be logged; otherwise false.
+      
+      </td></tr></table></div><a name="isWarn()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isWarn</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function isWarn():Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Indicates whether a warn level log event will be processed by a
+      log target.
+     
+      </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if a warn level log event will be logged; otherwise false.
+      
+      </td></tr></table></div><a name="removeTarget()"></a><a name="removeTarget(mx.logging.ILoggingTarget)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">removeTarget</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function removeTarget(target:<a href="../../mx/logging/ILoggingTarget.html">ILoggingTarget</a>):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Stops the specified target from receiving notification of log
+      events.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">target</span>:<a href="../../mx/logging/ILoggingTarget.html">ILoggingTarget</a></code> &mdash; specific target that should capture log events.
+      
+      </td></tr></table></p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.</footer><br/>Thu Jan 16 2014, 01:11 PM +08:00  </center></div></body></html><!--Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.<br/>Thu Jan 16 2014, 01:11 PM +08:00  -->

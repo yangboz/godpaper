@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../override.css" type="text/css"><meta name="keywords" content="IChildList,mx.core.IChildList,baselinePosition,document,enabled,explicitHeight,explicitMaxHeight,explicitMaxWidth,explicitMinHeight,explicitMinWidth,explicitWidth,focusPane,generator,includeInLayout,isPopUp,maxHeight,maxWidth,measuredMinHeight,measuredMinWidth,minHeight,minWidth,numChildren,owner,percentHeight,percentWidth,properties,systemManager,tweeningProperties,uid,addChild,addChildAt,contains,getChildAt,getChildByName,getChildIndex,getExplicitOrMeasuredHeight,getExplicitOrMeasuredWidth,getObjectsUnderPoint,initialize,newInstance,newInstance,owns,parentChanged,removeChild,removeChildAt,setChildIndex,setVisible"><title>mx.core.IChildList</title></head><body><script language="javascript" type="text/javascript" src="../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../help.js"></script><script language="javascript" type="text/javascript" src="../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'IChildList - GODPAPER Action Script API Document';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">GODPAPER</td><td class="titleTableTopNav" align="right"><a href="../../package-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../class-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../all-index-A.html" onclick="loadClassListFrame('../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../index.html?mx/core/IChildList.html&amp;mx/core/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">IChildList</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IChildList"); titleBar_setSubNav(false,true,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">mx.core</a></td></tr><tr><td class="classHeaderTableLabel">Interface</td><td class="classSignature">public  interface  IChildList</td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p></p>
+  The IChildList interface defines the properties and methods
+  for accessing and manipulating child lists, which are subsets
+  of a DisplayObjectContainer's children.
+ 
+  <p>As an example, consider the Container class.
+  It overrides DisplayObjectContainer APIs such as the 
+  <code>numChildren</code> and <code>getChildAt()</code> methods
+  to access only "content" children, which are the controls
+  and other containers that you put inside it.
+  But a Container can also have additional children
+  created automatically by the framework, such as a background or border
+  skin and scrollbars.
+  So Container exposes a property called <code>rawChildren</code> 
+  of type IChildList, which lets you access all its children,
+  not just the content children.</p>
+ 
+               <p>As another example, the SystemManager class is a DisplayObjectContainer
+  whose children are partitioned into various layers:
+  normal children like the Application are on the bottom,
+  popups above them, tooltips above them, and cursors on the top.
+  The SystemManager class has properties named <code>popUpChildren</code>,
+  <code>toolTipChildren</code>, and <code>cursorChildren</code>
+  which let you access these layers, and the type of each of these
+  properties is IChildList.
+  Therefore, you can count the number of popups using the 
+  <code>systemManager.popUpChildren.numChildren</code> property,
+  insert another DisplayObject into the tooltip layer using the 
+  <code>systemManager.toolTipChildren.addChild()</code> method, and so on.</p>
+ 
+            <p></p><p><span class="classHeaderTableLabel">See also</span></p><div class="seeAlso">mx.core.Container.rawChildren<br/>mx.managers.SystemManager.rawChildren<br/>mx.managers.SystemManager.popUpChildren<br/>mx.managers.SystemManager.toolTipChildren<br/>mx.managers.SystemManager.cursorChildren</div><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#numChildren" class="signatureLink">numChildren</a> : int<div class="summaryTableDescription">[read-only] 
+	  The number of children in this child list.</div></td><td class="summaryTableOwnerCol">IChildList</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#addChild()" class="signatureLink">addChild</a>(child:DisplayObject):DisplayObject</div><div class="summaryTableDescription">
+      Adds a child DisplayObject after the end of this child list.</div></td><td class="summaryTableOwnerCol">IChildList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#addChildAt()" class="signatureLink">addChildAt</a>(child:DisplayObject, index:int):DisplayObject</div><div class="summaryTableDescription">
+      Adds a child DisplayObject to this child list at the index specified.</div></td><td class="summaryTableOwnerCol">IChildList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#contains()" class="signatureLink">contains</a>(child:DisplayObject):Boolean</div><div class="summaryTableDescription">
+	  Determines if a DisplayObject is in this child list,
+	  or is a descendant of an child in this child list.</div></td><td class="summaryTableOwnerCol">IChildList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getChildAt()" class="signatureLink">getChildAt</a>(index:int):DisplayObject</div><div class="summaryTableDescription">
+	  Gets the child DisplayObject at the specified index in this child list.</div></td><td class="summaryTableOwnerCol">IChildList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getChildByName()" class="signatureLink">getChildByName</a>(name:String):DisplayObject</div><div class="summaryTableDescription">
+      Gets the child DisplayObject with the specified name
+	  in this child list.</div></td><td class="summaryTableOwnerCol">IChildList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getChildIndex()" class="signatureLink">getChildIndex</a>(child:DisplayObject):int</div><div class="summaryTableDescription">
+	  Gets the index of a specific child in this child list.</div></td><td class="summaryTableOwnerCol">IChildList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getObjectsUnderPoint()" class="signatureLink">getObjectsUnderPoint</a>(point:Point):Array</div><div class="summaryTableDescription">
+      Returns an array of DisplayObjects that lie under the specified point
+	  and are in this child list.</div></td><td class="summaryTableOwnerCol">IChildList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#removeChild()" class="signatureLink">removeChild</a>(child:DisplayObject):DisplayObject</div><div class="summaryTableDescription">
+      Removes the specified child DisplayObject from this child list.</div></td><td class="summaryTableOwnerCol">IChildList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#removeChildAt()" class="signatureLink">removeChildAt</a>(index:int):DisplayObject</div><div class="summaryTableDescription">
+      Removes the child DisplayObject at the specified index
+	  from this child list.</div></td><td class="summaryTableOwnerCol">IChildList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setChildIndex()" class="signatureLink">setChildIndex</a>(child:DisplayObject, newIndex:int):void</div><div class="summaryTableDescription">
+	  Changes the index of a particular child in this child list.</div></td><td class="summaryTableOwnerCol">IChildList</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="numChildren"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">numChildren</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>numChildren:int</code>&nbsp;&nbsp;[read-only] <p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  The number of children in this child list.
+	  
+	  </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get numChildren():int</code><br/></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="addChild()"></a><a name="addChild(flash.display.DisplayObject)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">addChild</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function addChild(child:DisplayObject):DisplayObject</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Adds a child DisplayObject after the end of this child list.
+     
+	  <p>Calling <code>childList.addChild(child)</code> is the same as calling
+	  <code>childList.addChild(child, childList.numChildren)</code>
+	  After it has been added, its index of the new child
+	  will be <code>(child.numChildren - 1)</code></p>
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">child</span>:DisplayObject</code> &mdash; The DisplayObject to add as a child.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>DisplayObject</code> &mdash; The child that was added; this is the same
+	  as the argument passed in.
+      
+      </td></tr></table></div><a name="addChildAt()"></a><a name="addChildAt(flash.display.DisplayObject,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">addChildAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function addChildAt(child:DisplayObject, index:int):DisplayObject</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Adds a child DisplayObject to this child list at the index specified.
+	  An index of 0 represents the beginning of the DisplayList,
+	  and an index of <code>numChildren</code> represents the end.
+	 
+	  <p>Adding a child anywhere except at the end of a child list
+	  will increment the indexes of children that were previously
+	  at that index or at higher indices.</p>
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">child</span>:DisplayObject</code> &mdash; The DisplayObject to add as a child.
+	 
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">index</span>:int</code> &mdash; The index to add the child at.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>DisplayObject</code> &mdash; The child that was added; this is the same
+	  as the <code>child</code> argument passed in.
+      
+      </td></tr></table></div><a name="contains()"></a><a name="contains(flash.display.DisplayObject)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">contains</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function contains(child:DisplayObject):Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  Determines if a DisplayObject is in this child list,
+	  or is a descendant of an child in this child list.
+	 
+	  </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">child</span>:DisplayObject</code> &mdash; The DisplayObject to test.
+	 
+	  </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the DisplayObject is in this child list
+	  or is a descendant of an child in this child list;
+	  <code>false</code> otherwise.
+	  
+	  </td></tr></table></div><a name="getChildAt()"></a><a name="getChildAt(int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getChildAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getChildAt(index:int):DisplayObject</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  Gets the child DisplayObject at the specified index in this child list.
+	 
+	  </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">index</span>:int</code> &mdash; An integer from 0 to <code>(numChildren - 1)</code>
+	  that specifies the index of a child in this child list.
+	 
+	  </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>DisplayObject</code> &mdash; The child at the specified index.
+	  
+	  </td></tr></table></div><a name="getChildByName()"></a><a name="getChildByName(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getChildByName</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getChildByName(name:String):DisplayObject</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Gets the child DisplayObject with the specified name
+	  in this child list.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">name</span>:String</code> &mdash; The name of the child to return.
+	 
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>DisplayObject</code> &mdash; The child with the specified name.
+      
+      </td></tr></table></div><a name="getChildIndex()"></a><a name="getChildIndex(flash.display.DisplayObject)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getChildIndex</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getChildIndex(child:DisplayObject):int</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  Gets the index of a specific child in this child list.
+	 
+	  <p>The first child in the child list has an index of 0,
+	  the second child has an index of 1, and the last child
+	  has an index of <code>(numChildren - 1)</code>.</p>
+	 
+	  <p>If <code>getChildIndex(myChild)</code> returns 5,
+	  then <code>myView.getChildAt(5)</code> returns
+	  <code>myChild</code>.</p>
+	 
+	  <p>If you add a child by calling the <code>addChild()</code> method,
+	  the new child's index is equal to the largest index among the
+	  existing children plus one.</p>
+	 
+	  <p>You can insert a child at a specified index by using the
+	  <code>addChildAt()</code> method
+	  In that case the children previously at that index and higher
+	  indices have their index increased by 1 so that all
+	  children are indexed from 0 to <code>(numChildren - 1)</code>.</p>
+	 
+	  <p>If you remove a child by calling the <code>removeChild()</code>
+	  or <code>removeChildAt()</code> method, then the children
+	  at higher indices have their index decreased by 1 so that
+	  all children are indexed from 0 to <code>(numChildren - 1)</code>.</p>
+	 
+	  <p>If you change a child's index by calling the
+	  <code>setChildIndex()</code> method, then the children between
+	  the old index and the new index, inclusive, have their indexes
+	  adjusted so that all children are indexed from
+	  0 to <code>(numChildren - 1)</code>.</p>
+	 
+	  </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">child</span>:DisplayObject</code> &mdash; The child whose index to get.
+	 
+	  </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>int</code> &mdash; The index of the child, which is an integer
+	  between 0 and <code>(numChildren - 1)</code>.
+	  
+	  </td></tr></table></div><a name="getObjectsUnderPoint()"></a><a name="getObjectsUnderPoint(flash.geom.Point)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getObjectsUnderPoint</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getObjectsUnderPoint(point:Point):Array</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Returns an array of DisplayObjects that lie under the specified point
+	  and are in this child list.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">point</span>:Point</code> &mdash; The point under which to look.
+	 
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; An array of object that lie under the specified point
+	  that are children of this Container.
+      
+      </td></tr></table></div><a name="removeChild()"></a><a name="removeChild(flash.display.DisplayObject)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">removeChild</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function removeChild(child:DisplayObject):DisplayObject</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Removes the specified child DisplayObject from this child list.
+	 
+	  <p>Removing a child anywhere except from the end of a child list
+	  will decrement the indexes of children that were at higher indices.</p>
+     
+	  <p>The removed child will have its parent set to null and will be
+	  garbage collected if no other references to it exist.</p>
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">child</span>:DisplayObject</code> &mdash; The DisplayObject to remove.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>DisplayObject</code> &mdash; The child that was removed; this is the same
+	  as the argument passed in.
+      
+      </td></tr></table></div><a name="removeChildAt()"></a><a name="removeChildAt(int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">removeChildAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function removeChildAt(index:int):DisplayObject</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Removes the child DisplayObject at the specified index
+	  from this child list.
+	 
+	  <p>Removing a child anywhere except from the end of a child list
+	  will decrement the indexes of children that were at higher indices.</p>
+     
+      <p>The removed child will have its parent set to null and will be
+	  garbage collected if no other references to it exist.</p>
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">index</span>:int</code> &mdash; The child index of the DisplayObject to remove.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>DisplayObject</code> &mdash; The child that was removed.
+      
+      </td></tr></table></div><a name="setChildIndex()"></a><a name="setChildIndex(flash.display.DisplayObject,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setChildIndex</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function setChildIndex(child:DisplayObject, newIndex:int):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  Changes the index of a particular child in this child list.
+	  See the <code>getChildIndex()</code> method for a
+	  description of the child's index.
+	 
+	  </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">child</span>:DisplayObject</code> &mdash; The child whose index to set.
+	 
+	  </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">newIndex</span>:int</code> &mdash; The new index for the specified child.
+	  This must be an integer between zero and <code>(numChildren - 1)</code>.
+	  
+	  </td></tr></table></p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.</footer><br/>Thu Jan 16 2014, 01:11 PM +08:00  </center></div></body></html><!--Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.<br/>Thu Jan 16 2014, 01:11 PM +08:00  -->

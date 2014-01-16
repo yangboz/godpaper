@@ -33,8 +33,8 @@ package
 	//--------------------------------------------------------------------------
 	import flash.display.Sprite;
 	
-	import flexUnitTests.BitFieldTest;
-	import flexUnitTests.NumberBoardTest;
+//	import flexUnitTests.BitFieldTest;
+//	import flexUnitTests.NumberBoardTest;
 	
 	
 	/**
@@ -47,7 +47,7 @@ package
 	 */   	 
 	public class FlexUnitCompilerApplication extends Sprite
 	{
-		private var flexUnitTests_NumberBoardTest_obj:flexUnitTests.NumberBoardTest;		
+//		private var flexUnitTests_NumberBoardTest_obj:flexUnitTests.NumberBoardTest;		
 		//--------------------------------------------------------------------------
 		//
 		//  Variables
@@ -76,7 +76,7 @@ package
 		//
 		//--------------------------------------------------------------------------
 		
-		private var flexUnitTests_BitFieldTest_obj:flexUnitTests.BitFieldTest;     	
+//		private var flexUnitTests_BitFieldTest_obj:flexUnitTests.BitFieldTest;     	
 		//--------------------------------------------------------------------------
 		//
 		//  Public methods

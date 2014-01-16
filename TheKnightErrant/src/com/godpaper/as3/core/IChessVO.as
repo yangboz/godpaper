@@ -5,8 +5,8 @@ package com.godpaper.as3.core
 	 * The interface of chess pieces,about occupy,moves,captures.
 	 * @see http://chess.dubmun.com/bitboard.html
 	 * @author Knight.zhou
-	 * @history 01/07/2011 ADDED:defends bitboard property.
-	 * @history 08/18/2011 ADDED:identifier property for ChessVO.
+	 * </time> 01/07/2011 ADDED:defends bitboard property.
+	 * </time> 08/18/2011 ADDED:identifier property for ChessVO.
 	 */	
 	public interface IChessVO
 	{

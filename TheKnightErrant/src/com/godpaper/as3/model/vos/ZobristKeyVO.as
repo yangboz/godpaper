@@ -16,7 +16,7 @@ package com.godpaper.as3.model.vos
 	 * @see http://chessprogramming.wikispaces.com/Zobrist+Hashing
 	 * 
 	 * @author Knight.zhou
-	 * @history 2012-06-05,code comments added.
+	 * </time> 2012-06-05,code comments added.
 	 * 
 	 */
 //	public class ZobristKeyVO extends EventDispatcher

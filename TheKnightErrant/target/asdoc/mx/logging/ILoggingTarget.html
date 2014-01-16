@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../override.css" type="text/css"><meta name="keywords" content="ILoggingTarget,mx.logging.ILoggingTarget,ALL,DEBUG,ERROR,FATAL,INFO,LOG,WARN,category,category,filters,filters,id,level,level,level,message,addLogger,addLogger,addTarget,debug,debug,error,error,fatal,fatal,flush,getLevelString,getLogger,hasIllegalCharacters,info,info,initialized,isDebug,isError,isFatal,isInfo,isWarn,log,log,logEvent,removeLogger,removeLogger,removeTarget,warn,warn"><title>mx.logging.ILoggingTarget</title></head><body><script language="javascript" type="text/javascript" src="../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../help.js"></script><script language="javascript" type="text/javascript" src="../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'ILoggingTarget - GODPAPER Action Script API Document';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">GODPAPER</td><td class="titleTableTopNav" align="right"><a href="../../package-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../class-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../all-index-A.html" onclick="loadClassListFrame('../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../index.html?mx/logging/ILoggingTarget.html&amp;mx/logging/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">ILoggingTarget</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("ILoggingTarget"); titleBar_setSubNav(false,true,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">mx.logging</a></td></tr><tr><td class="classHeaderTableLabel">Interface</td><td class="classSignature">public  interface  ILoggingTarget</td></tr><tr><td class="classHeaderTableLabel">Implementors</td><td> <a href="../../mx/logging/AbstractTarget.html">AbstractTarget</a></td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p></p>
+  All logger target implementations within the logging framework
+  must implement this interface.
+  
+  <p></p><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#filters" class="signatureLink">filters</a> : Array<div class="summaryTableDescription">
+      In addition to the level setting, filters are used to
+      provide a psuedo-hierarchical mapping for processing only those events
+      for a given category.</div></td><td class="summaryTableOwnerCol">ILoggingTarget</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#level" class="signatureLink">level</a> : int<div class="summaryTableDescription">
+      Provides access to the level this target is currently set at.</div></td><td class="summaryTableOwnerCol">ILoggingTarget</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#addLogger()" class="signatureLink">addLogger</a>(logger:<a href="../../mx/logging/ILogger.html">ILogger</a>):void</div><div class="summaryTableDescription">
+      Sets up this target with the specified logger.</div></td><td class="summaryTableOwnerCol">ILoggingTarget</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#removeLogger()" class="signatureLink">removeLogger</a>(logger:<a href="../../mx/logging/ILogger.html">ILogger</a>):void</div><div class="summaryTableDescription">
+      Stops this target from receiving events from the specified logger.</div></td><td class="summaryTableOwnerCol">ILoggingTarget</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="filters"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">filters</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>filters:Array</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      In addition to the <code>level</code> setting, filters are used to
+      provide a psuedo-hierarchical mapping for processing only those events
+      for a given category.
+      
+      <p>Each logger belongs to a category.
+      By convention these categories map to the fully qualified class name
+      in which the logger is used.
+      For example, a logger that is logging messages for the
+      <code>mx.rpc.soap.WebService</code> class would use 
+      <code>"mx.rpc.soap.WebService"</code> as the parameter
+      to the <code>Log.getLogger()</code> call.
+      When messages are sent under this category only those targets that have
+      a filter which matches that category will receive notification of those
+      events.
+      Filter expressions may include a wildcard match, indicated with an
+      asterisk.
+      The wildcard must be the right most character in the expression.
+      For example: rpc*, mx.*, or *.
+      If an invalid expression is specified a <code>InvalidFilterError</code>
+      will be thrown.
+      No spaces or any of the following characters are valid within a filter
+      expression: []~$^&\/(){}&lt;>+=`!#%?,:;'"@.</p>
+      
+      </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get filters():Array</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set filters(value:Array):void</code><br/><br/><span class="label"> Example </span><br/>
+      <pre>
+      var traceLogger:ILoggingTarget = new TraceTarget();
+      traceLogger.filters = [ "mx.rpc.*", "mx.messaging.*" ];
+      Log.addTarget(traceLogger);
+      </pre>
+      
+      </div><a name="propertyDetail"></a><a name="level"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">level</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>level:int</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Provides access to the level this target is currently set at.
+      Value values are:
+      <ul>
+        <li><code>LogEventLevel.FATAL</code> designates events that are very
+        harmful and will eventually lead to application failure</li>
+     
+        <li><code>LogEventLevel.ERROR</code> designates error events that might
+        still allow the application to continue running.</li>
+     
+        <li><code>LogEventLevel.WARN</code> designates events that could be
+        harmful to the application operation</li>
+     
+        <li><code>LogEventLevel.INFO</code> designates informational messages
+        that highlight the progress of the application at
+        coarse-grained level.</li>
+     
+        <li><code>LogEventLevel.DEBUG</code> designates informational
+        level messages that are fine grained and most helpful when
+        debugging an application.</li>
+     
+        <li><code>LogEventLevel.ALL</code> intended to force a target to
+        process all messages.</li>
+      </ul>
+      
+      </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get level():int</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set level(value:int):void</code><br/></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="addLogger()"></a><a name="addLogger(mx.logging.ILogger)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">addLogger</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function addLogger(logger:<a href="../../mx/logging/ILogger.html">ILogger</a>):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Sets up this target with the specified logger.
+      This allows this target to receive log events from the specified logger.
+      
+      <p><b>Note:</b> This method is called by the framework
+      and should not be called by you directly.</p>
+      
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">logger</span>:<a href="../../mx/logging/ILogger.html">ILogger</a></code> &mdash; The ILogger that this target listens to.
+      
+      </td></tr></table></p></div><a name="removeLogger()"></a><a name="removeLogger(mx.logging.ILogger)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">removeLogger</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function removeLogger(logger:<a href="../../mx/logging/ILogger.html">ILogger</a>):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Stops this target from receiving events from the specified logger.
+      
+      <p><b>Note:</b> This method is called by the framework
+      and should not be called by you directly.</p>
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">logger</span>:<a href="../../mx/logging/ILogger.html">ILogger</a></code> &mdash; The ILogger that this target ignores.
+      
+      </td></tr></table></p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.</footer><br/>Thu Jan 16 2014, 01:11 PM +08:00  </center></div></body></html><!--Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.<br/>Thu Jan 16 2014, 01:11 PM +08:00  -->

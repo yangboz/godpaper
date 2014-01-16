@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../override.css" type="text/css"><meta name="keywords" content="IList,mx.collections.IList,length,addItem,addItemAt,getItemAt,getItemIndex,itemUpdated,removeAll,removeItemAt,setItemAt,toArray"><title>mx.collections.IList</title></head><body><script language="javascript" type="text/javascript" src="../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../help.js"></script><script language="javascript" type="text/javascript" src="../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'IList - GODPAPER Action Script API Document';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">GODPAPER</td><td class="titleTableTopNav" align="right"><a href="../../package-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../class-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../all-index-A.html" onclick="loadClassListFrame('../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../index.html?mx/collections/IList.html&amp;mx/collections/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">IList</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IList"); titleBar_setSubNav(false,true,false,false,false,false,true,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">mx.collections</a></td></tr><tr><td class="classHeaderTableLabel">Interface</td><td class="classSignature">public  interface  IList extends  flash.events.IEventDispatcher</td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p></p>
+  A collection of items organized in an ordinal fashion.  
+  Provides access and manipulation methods based on index.  
+  
+  <p>An <code>IList</code> may be a view onto data
+  that has been retrieved from a  remote location.  
+  When writing for a collection that may be remote,
+  it is important to handle the case where data
+  may not yet be available, which is indicated
+  by the  <code>ItemPendingError</code>.</p>
+  
+               <p>The <code>ICollectionView</code> is an alternative
+  to the <code>IList</code>.</p>
+ 
+            <p></p><p><span class="classHeaderTableLabel">See also</span></p><div class="seeAlso">mx.collections.errors.ItemPendingError<br/>mx.collections.ICollectionView<br/>mx.collections.ListCollectionView</div><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#length" class="signatureLink">length</a> : int<div class="summaryTableDescription">[read-only] 
+      The number of items in this collection.</div></td><td class="summaryTableOwnerCol">IList</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#addItem()" class="signatureLink">addItem</a>(item:Object):void</div><div class="summaryTableDescription">
+      Adds the specified item to the end of the list.</div></td><td class="summaryTableOwnerCol">IList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#addItemAt()" class="signatureLink">addItemAt</a>(item:Object, index:int):void</div><div class="summaryTableDescription">
+      Adds the item at the specified index.</div></td><td class="summaryTableOwnerCol">IList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getItemAt()" class="signatureLink">getItemAt</a>(index:int, prefetch:int = 0):Object</div><div class="summaryTableDescription">
+      Gets the item at the specified index.</div></td><td class="summaryTableOwnerCol">IList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getItemIndex()" class="signatureLink">getItemIndex</a>(item:Object):int</div><div class="summaryTableDescription">
+      Returns the index of the item if it is in the list such that
+      getItemAt(index) == item.</div></td><td class="summaryTableOwnerCol">IList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#itemUpdated()" class="signatureLink">itemUpdated</a>(item:Object, property:Object = null, oldValue:Object = null, newValue:Object = null):void</div><div class="summaryTableDescription">
+      Notifies the view that an item has been updated.</div></td><td class="summaryTableOwnerCol">IList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#removeAll()" class="signatureLink">removeAll</a>():void</div><div class="summaryTableDescription"> 
+      Removes all items from the list.</div></td><td class="summaryTableOwnerCol">IList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#removeItemAt()" class="signatureLink">removeItemAt</a>(index:int):Object</div><div class="summaryTableDescription">
+      Removes the item at the specified index and returns it.</div></td><td class="summaryTableOwnerCol">IList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setItemAt()" class="signatureLink">setItemAt</a>(item:Object, index:int):Object</div><div class="summaryTableDescription">
+      Places the item at the specified index.</div></td><td class="summaryTableOwnerCol">IList</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#toArray()" class="signatureLink">toArray</a>():Array</div><div class="summaryTableDescription">
+      Returns an Array that is populated in the same order as the IList
+      implementation.</div></td><td class="summaryTableOwnerCol">IList</td></tr></table></div><a name="eventSummary"></a><div class="summarySection"><div class="summaryTableTitle">Events</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableEvent"><tr><th>&nbsp;</th><th colspan="2">Event</th><th> Summary </th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#event:collectionChange" class="signatureLink">collectionChange</a></div></td><td class="summaryTableDescription summaryTableCol">Dispatched when the IList has been updated in some way.</td><td class="summaryTableOwnerCol">IList</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="length"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">length</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>length:int</code>&nbsp;&nbsp;[read-only] <p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      The number of items in this collection. 
+      0 means no items while -1 means the length is unknown. 
+      
+      </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get length():int</code><br/></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="addItem()"></a><a name="addItem(Object)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">addItem</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function addItem(item:Object):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Adds the specified item to the end of the list.
+      Equivalent to <code>addItemAt(item, length)</code>.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">item</span>:Object</code> &mdash; The item to add.
+      
+      </td></tr></table></p></div><a name="addItemAt()"></a><a name="addItemAt(Object,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">addItemAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function addItemAt(item:Object, index:int):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Adds the item at the specified index.  
+      The index of any item greater than the index of the added item is increased by one.  
+      If the the specified index is less than zero or greater than the length
+      of the list, a RangeError is thrown.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">item</span>:Object</code> &mdash; The item to place at the index.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">index</span>:int</code> &mdash; The index at which to place the item.
+     
+      </td></tr></table></p><br/><span class="label">Throws</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>RangeError </code> &mdash; if index is less than 0 or greater than the length of the list. 
+      
+      </td></tr></table></div><a name="getItemAt()"></a><a name="getItemAt(int,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getItemAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getItemAt(index:int, prefetch:int = 0):Object</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Gets the item at the specified index.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">index</span>:int</code> &mdash; The index in the list from which to retrieve the item.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">prefetch</span>:int</code> (default = <code>0</code>)<code></code> &mdash; An <code>int</code> indicating both the direction
+      and number of items to fetch during the request if the item is
+      not local.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Object</code> &mdash; The item at that index, or <code>null</code> if there is none.
+     
+      </td></tr></table><br/><span class="label">Throws</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>mx.collections.errors:ItemPendingError </code> &mdash; if the data for that index needs to be 
+      loaded from a remote location.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20"></td><td><code>RangeError </code> &mdash; if <code>index &lt; 0</code>
+      or <code>index >= length</code>.
+      
+      </td></tr></table></div><a name="getItemIndex()"></a><a name="getItemIndex(Object)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getItemIndex</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getItemIndex(item:Object):int</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Returns the index of the item if it is in the list such that
+      getItemAt(index) == item.
+     
+      <p>Note: unlike <code>IViewCursor.find<i>xxx</i>()</code> methods,
+      The <code>getItemIndex()</code> method cannot take a parameter with 
+      only a subset of the fields in the item being serched for; 
+      this method always searches for an item that exactly matches
+      the input parameter.</p>
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">item</span>:Object</code> &mdash; The item to find.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>int</code> &mdash; The index of the item, or -1 if the item is not in the list.
+      
+      </td></tr></table></div><a name="itemUpdated()"></a><a name="itemUpdated(Object,Object,Object,Object)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">itemUpdated</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function itemUpdated(item:Object, property:Object = null, oldValue:Object = null, newValue:Object = null):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Notifies the view that an item has been updated.  
+      This is useful if the contents of the view do not implement 
+      <code>IEventDispatcher</code> and dispatches a 
+      <code>PropertyChangeEvent</code>.  
+      If a property is specified the view may be able to optimize its 
+      notification mechanism.
+      Otherwise it may choose to simply refresh the whole view.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">item</span>:Object</code> &mdash; The item within the view that was updated.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">property</span>:Object</code> (default = <code>null</code>)<code></code> &mdash; The name of the property that was updated.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">oldValue</span>:Object</code> (default = <code>null</code>)<code></code> &mdash; The old value of that property. (If property was null,
+      this can be the old value of the item.)
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">newValue</span>:Object</code> (default = <code>null</code>)<code></code> &mdash; The new value of that property. (If property was null,
+      there's no need to specify this as the item is assumed to be
+      the new value.)
+     
+      </td></tr></table></p><p><span class="label">See also</span></p><div class="seeAlso"><a href="../../mx/events/CollectionEvent.html" target="">mx.events.CollectionEvent</a><br/><a href="../../mx/events/PropertyChangeEvent.html" target="">mx.events.PropertyChangeEvent</a></div></div><a name="removeAll()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">removeAll</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function removeAll():void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p> 
+      Removes all items from the list.
+     
+      <p>If any item is not local and an asynchronous operation must be
+      performed, an <code>ItemPendingError</code> will be thrown.</p>
+     
+      <p>See the ItemPendingError documentation as well as
+      the collections documentation for more information
+       on using the <code>ItemPendingError</code>.</p>
+      
+      </p></div><a name="removeItemAt()"></a><a name="removeItemAt(int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">removeItemAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function removeItemAt(index:int):Object</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Removes the item at the specified index and returns it.  
+      Any items that were after this index are now one index earlier.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">index</span>:int</code> &mdash; The index from which to remove the item.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Object</code> &mdash; The item that was removed.
+     
+      </td></tr></table><br/><span class="label">Throws</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>RangeError </code> &mdash; is index is less than 0 or greater than length. 
+      
+      </td></tr></table></div><a name="setItemAt()"></a><a name="setItemAt(Object,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setItemAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function setItemAt(item:Object, index:int):Object</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Places the item at the specified index.  
+      If an item was already at that index the new item will replace it
+      and it will be returned.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">item</span>:Object</code> &mdash; The new item to be placed at the specified index.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">index</span>:int</code> &mdash; The index at which to place the item.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Object</code> &mdash; The item that was replaced, or <code>null</code> if none.
+     
+      </td></tr></table><br/><span class="label">Throws</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>RangeError </code> &mdash; if index is less than 0 or greater than length.
+      
+      </td></tr></table></div><a name="toArray()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function toArray():Array</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Returns an Array that is populated in the same order as the IList
+      implementation.
+      This method can throw an ItemPendingError.
+     
+      </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; The array.
+      
+      </td></tr></table><br/><span class="label">Throws</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>mx.collections.errors:ItemPendingError </code> &mdash; If the data is not yet completely loaded
+      from a remote location.
+      
+      </td></tr></table></div><div class="detailSectionHeader"> Event Detail </div><a name="event:collectionChange"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">collectionChange</td><td class="detailHeaderType"> Event </td></tr></table><div class="detailBody"><span class="label">Event Object Type: </span><a href="../../mx/events/CollectionEvent.html"><code>mx.events.CollectionEvent</code></a><br/><span class="label">CollectionEvent.type property = </span><a href="../../mx/events/CollectionEvent.html#COLLECTION_CHANGE"><code>mx.events.CollectionEvent.COLLECTION_CHANGE</code></a><br/><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+  Dispatched when the IList has been updated in some way.
+ 
+  </p>
+      The CollectionEvent.COLLECTION_CHANGE constant defines the value of the
+      <code>type</code> property of the event object for an event that is
+      dispatched when a collection has changed.
+     
+      <p>The properties of the event object have the following values.
+      Not all properties are meaningful for all kinds of events.
+	  See the detailed property descriptions for more information.</p>
+      <table class="innertable" ><tr><th>Property</th><th>Value</th></tr><tr><td><code>bubbles</code></td><td>false</td></tr><tr><td><code>cancelable</code></td><td>false</td></tr><tr><td><code>currentTarget</code></td><td>The Object that defines the
+           event listener that handles the event. For example, if you use
+           <code>myButton.addEventListener()</code> to register an event listener,
+           myButton is the value of the <code>currentTarget</code>. </td></tr><tr><td><code>items</code></td><td>An Array of objects with
+           information about the items affected by the event.
+	 		 The contents of this field depend on the event kind;
+	       for details see the <code>items</code> property</td></tr><tr><td><code>kind</code></td><td>The kind of event.
+           The valid values are defined in the CollectionEventKind 
+	       class as constants.</td></tr><tr><td><code>location</code></td><td>Location within the target collection
+             of the item(s) specified in the <code>items</code> property.</td></tr><tr><td><code>oldLocation</code></td><td>the previous location in the collection
+             of the item specified in the <code>items</code> property.</td></tr><tr><td><code>target</code></td><td>The Object that dispatched the event;
+           it is not always the Object listening for the event.
+           Use the <code>currentTarget</code> property to always access the
+           Object listening for the event.</td></tr><tr><td><code>type</code></td><td>CollectionEvent.COLLECTION_CHANGE</td></tr></table>
+     
+      </div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.</footer><br/>Thu Jan 16 2014, 01:11 PM +08:00  </center></div></body></html><!--Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.<br/>Thu Jan 16 2014, 01:11 PM +08:00  -->

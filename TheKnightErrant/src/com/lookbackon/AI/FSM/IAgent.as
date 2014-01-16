@@ -14,7 +14,7 @@ package com.lookbackon.AI.FSM
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Dec 10, 2010 11:14:57 AM
-	 * @history 01/04/2011 agent with message handler,for multi-agent communication.
+	 * </time> 01/04/2011 agent with message handler,for multi-agent communication.
 	 */   	 
 	public interface IAgent
 	{		

@@ -82,7 +82,7 @@ package org.generalrelativity.thread
 	 * </listing>
 	 * 
 	 * @author Drew Cummins
-	 * @since 11.12.08
+	 * </time> 11.12.08
 	 * 
 	 * @see IRunnable
 	 * @see GreenThreadDiagnostic

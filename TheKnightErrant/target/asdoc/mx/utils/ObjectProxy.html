@@ -1,0 +1,302 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../override.css" type="text/css"><meta name="keywords" content="ObjectProxy,mx.utils.ObjectProxy,dispatcher,notifiers,object,propertyList,proxyClass,type,uid,addEventListener,callProperty,clone,compare,copy,createUID,dateCompare,deleteProperty,dispatchEvent,fromByteArray,getClassInfo,getComplexProperty,getInstance,getProperty,getUID,hasEventListener,hasMetadata,isDynamicObject,isSimple,isUID,isWhitespace,numericCompare,propertyChangeHandler,readExternal,removeEventListener,repeat,restrict,setProperty,setupPropertyList,stringCompare,substitute,toByteArray,toString,trim,trimArrayElements,unwatchXML,watchXML,willTrigger,writeExternal"><title>mx.utils.ObjectProxy</title></head><body><script language="javascript" type="text/javascript" src="../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../help.js"></script><script language="javascript" type="text/javascript" src="../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'ObjectProxy - GODPAPER Action Script API Document';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">GODPAPER</td><td class="titleTableTopNav" align="right"><a href="../../package-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../class-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../all-index-A.html" onclick="loadClassListFrame('../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../index.html?mx/utils/ObjectProxy.html&amp;mx/utils/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">ObjectProxy</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("ObjectProxy"); titleBar_setSubNav(false,true,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">mx.utils</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public dynamic   class  ObjectProxy</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">ObjectProxy  <img src="../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> flash.utils.Proxy</td></tr><tr><td class="classHeaderTableLabel">Implements</td><td> flash.utils.IExternalizable,  <a href="../../mx/core/IPropertyChangeNotifier.html">IPropertyChangeNotifier</a></td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p></p>
+  This class provides the ability to track changes to an item
+  managed by this proxy.
+  Any number of objects can "listen" for changes on this
+  object, by using the <code>addEventListener()</code> method.
+ 
+  <p></p><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#uid" class="signatureLink">uid</a> : String<div class="summaryTableDescription">
+      The unique identifier for this object.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr></table></div><a name="protectedPropertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Protected Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProtectedProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#dispatcher" class="signatureLink">dispatcher</a> : EventDispatcher<div class="summaryTableDescription">
+      A reference to the EventDispatcher for this proxy.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#notifiers" class="signatureLink">notifiers</a> : Object<div class="summaryTableDescription">
+      A hashmap of property change notifiers that this proxy is 
+      listening for changes from; the key of the map is the property name.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#object" class="signatureLink">object</a> : Object<div class="summaryTableDescription">[read-only] 
+      The object being proxied.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#propertyList" class="signatureLink">propertyList</a> : Array<div class="summaryTableDescription">
+      Contains a list of all of the property names for the proxied object.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#proxyClass" class="signatureLink">proxyClass</a> : Class<div class="summaryTableDescription">
+      Indicates what kind of proxy to create
+      when proxying complex properties.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#type" class="signatureLink">type</a> : QName<div class="summaryTableDescription">
+      The qualified type name associated with this object.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#ObjectProxy()" class="signatureLink">ObjectProxy</a>(item:Object = null, uid:String = null, proxyDepth:int = -1)</div><div class="summaryTableDescription">
+      Initializes this proxy with the specified object, id and proxy depth.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#addEventListener()" class="signatureLink">addEventListener</a>(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void</div><div class="summaryTableDescription">
+      Registers an event listener object  
+      so that the listener receives notification of an event.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#dispatchEvent()" class="signatureLink">dispatchEvent</a>(event:Event):Boolean</div><div class="summaryTableDescription">
+      Dispatches an event into the event flow.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#hasEventListener()" class="signatureLink">hasEventListener</a>(type:String):Boolean</div><div class="summaryTableDescription">
+      Checks whether there are any event listeners registered 
+      for a specific type of event.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#propertyChangeHandler()" class="signatureLink">propertyChangeHandler</a>(event:<a href="../../mx/events/PropertyChangeEvent.html">PropertyChangeEvent</a>):void</div><div class="summaryTableDescription">
+      Called when a complex property is updated.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#readExternal()" class="signatureLink">readExternal</a>(input:IDataInput):void</div><div class="summaryTableDescription">
+      Since Flex only uses ObjectProxy to wrap anonymous objects,
+      the server flex.messaging.io.ObjectProxy instance serializes itself
+      as a Map that will be returned as a plain ActionScript object.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#removeEventListener()" class="signatureLink">removeEventListener</a>(type:String, listener:Function, useCapture:Boolean = false):void</div><div class="summaryTableDescription">
+      Removes an event listener.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#willTrigger()" class="signatureLink">willTrigger</a>(type:String):Boolean</div><div class="summaryTableDescription">
+      Checks whether an event listener is registered with this object 
+      or any of its ancestors for the specified event type.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#writeExternal()" class="signatureLink">writeExternal</a>(output:IDataOutput):void</div><div class="summaryTableDescription">
+      Since Flex only serializes the inner ActionScript object that it wraps,
+      the server flex.messaging.io.ObjectProxy populates itself
+      with this anonymous object's contents and appears to the user
+      as a Map.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr></table></div><a name="protectedMethodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Protected Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProtectedMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#callProperty()" class="signatureLink">callProperty</a>(name:*, ... rest):*</div><div class="summaryTableDescription">[override] 
+      Returns the value of the proxied object's method with the specified name.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#deleteProperty()" class="signatureLink">deleteProperty</a>(name:*):Boolean</div><div class="summaryTableDescription">[override] 
+      Deletes the specified property on the proxied object and
+      sends notification of the delete to the handler.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getComplexProperty()" class="signatureLink">getComplexProperty</a>(name:*, value:*):*</div><div class="summaryTableDescription">
+      Provides a place for subclasses to override how a complex property that
+      needs to be either proxied or daisy chained for event bubbling is managed.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getProperty()" class="signatureLink">getProperty</a>(name:*):*</div><div class="summaryTableDescription">[override] 
+      Returns the specified property value of the proxied object.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setProperty()" class="signatureLink">setProperty</a>(name:*, value:*):void</div><div class="summaryTableDescription">[override] 
+      Updates the specified property on the proxied object
+      and sends notification of the update to the handler.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setupPropertyList()" class="signatureLink">setupPropertyList</a>():void</div><div class="summaryTableDescription">
+      This method creates an array of all of the property names for the 
+      proxied object.</div></td><td class="summaryTableOwnerCol">ObjectProxy</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="dispatcher"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">dispatcher</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>protected var dispatcher:EventDispatcher</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      A reference to the EventDispatcher for this proxy.
+      
+      </p></div><a name="propertyDetail"></a><a name="notifiers"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">notifiers</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>protected var notifiers:Object</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      A hashmap of property change notifiers that this proxy is 
+      listening for changes from; the key of the map is the property name.
+      
+      </p></div><a name="propertyDetail"></a><a name="object"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">object</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>object:Object</code>&nbsp;&nbsp;[read-only] <p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      The object being proxied.
+      
+      </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;object_proxy function get object():Object</code><br/></div><a name="propertyDetail"></a><a name="propertyList"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">propertyList</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>protected var propertyList:Array</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Contains a list of all of the property names for the proxied object.
+      Descendants need to fill this list by overriding the
+      <code>setupPropertyList()</code> method.
+      
+      </p></div><a name="propertyDetail"></a><a name="proxyClass"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">proxyClass</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>protected var proxyClass:Class</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Indicates what kind of proxy to create
+      when proxying complex properties.
+      Subclasses should assign this value appropriately.
+      
+      </p></div><a name="propertyDetail"></a><a name="type"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">type</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>type:QName</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      The qualified type name associated with this object.
+      
+      </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;object_proxy function get type():QName</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;object_proxy function set type(value:QName):void</code><br/></div><a name="propertyDetail"></a><a name="uid"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">uid</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>uid:String</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      The unique identifier for this object.
+      
+      </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get uid():String</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set uid(value:String):void</code><br/></div><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="ObjectProxy()"></a><a name="ObjectProxy(Object,String,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">ObjectProxy</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function ObjectProxy(item:Object = null, uid:String = null, proxyDepth:int = -1)</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p>
+      Initializes this proxy with the specified object, id and proxy depth.
+     
+      </p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">item</span>:Object</code> (default = <code>null</code>)<code></code> &mdash; Object to proxy.
+      If no item is specified, an anonymous object will be constructed
+      and assigned.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">uid</span>:String</code> (default = <code>null</code>)<code></code> &mdash; String containing the unique id
+      for this object instance.
+      Required for IPropertyChangeNotifier compliance as every object must 
+      provide a unique way of identifying it.
+      If no value is specified, a random id will be assigned.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">proxyDepth</span>:int</code> (default = <code>-1</code>)<code></code> &mdash; An integer indicating how many levels in a complex
+      object graph should have a proxy created during property access.
+      The default is -1, meaning "proxy to infinite depth".
+      
+      </td></tr></table><br/><span class="label"> Example </span><br/>
+     
+      <pre>
+      import mx.events.PropertyChangeEvent;
+      import mx.utils.ObjectUtil;
+      import mx.utils.ObjectProxy;
+      import mx.utils.StringUtil;
+     
+      var a:Object = { name: "Tyler", age: 5, ssnum: "555-55-5555" };
+      var p:ObjectProxy = new ObjectProxy(a);
+      p.addEventListener(PropertyChangeEvent.PROPERTY_CHANGE, updateHandler);
+      p.name = "Jacey";
+      p.age = 2;
+      delete p.ssnum;
+     
+      // handler function
+      function updateHandler(event:PropertyChangeEvent):void
+      {
+          trace(StringUtil.substitute("updateHandler('{0}', {1}, {2}, {3}, '{4}')",
+                                         event.kind,
+                                         event.property,
+                                         event.oldValue,
+                                         event.newValue,
+                                         event.target.uid));
+      }
+     
+      // trace output
+      updateHandler('opUpdate', name, Jacey, '698AF8CB-B3D9-21A3-1AFFDGHT89075CD2')
+      updateHandler('opUpdate', age, 2, '698AF8CB-B3D9-21A3-1AFFDGHT89075CD2')
+      updateHandler('opDelete', ssnum, null, '698AF8CB-B3D9-21A3-1AFFDGHT89075CD2')
+      </pre>
+      
+      </div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="addEventListener()"></a><a name="addEventListener(String,Function,Boolean,int,Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">addEventListener</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function addEventListener(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Registers an event listener object  
+      so that the listener receives notification of an event. 
+      For more information, including descriptions of the parameters see 
+      <code>addEventListener()</code> in the 
+      flash.events.EventDispatcher class.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">type</span>:String</code> &mdash; The type of event.
+      
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">listener</span>:Function</code> &mdash; The listener function that processes the event. This function must accept
+      an Event object as its only parameter and must return nothing.
+      
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">useCapture</span>:Boolean</code> (default = <code>false</code>)<code></code> &mdash; Determines whether the listener works in the capture phase or the 
+      target and bubbling phases. If <code>useCapture</code> is set to <code>true</code>, 
+      the listener processes the event only during the capture phase and not in the 
+      target or bubbling phase. If <code>useCapture</code> is <code>false</code>, the
+      listener processes the event only during the target or bubbling phase. To listen for
+      the event in all three phases, call <code>addEventListener</code> twice, once with 
+      <code>useCapture</code> set to <code>true</code>, then again with
+      <code>useCapture</code> set to <code>false</code>.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">priority</span>:int</code> (default = <code>0</code>)<code></code> &mdash; The priority level of the event listener. 
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">useWeakReference</span>:Boolean</code> (default = <code>false</code>)<code></code> &mdash; Determines whether the reference to the listener is strong or
+      weak. A strong reference (the default) prevents your listener from being garbage-collected.
+      A weak reference does not. 
+     
+      </td></tr></table></p><p><span class="label">See also</span></p><div class="seeAlso">flash.events.EventDispatcher.addEventListener()</div></div><a name="callProperty()"></a><a name="callProperty(any,restParam)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">callProperty</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>override flash_proxy function callProperty(name:*, ... rest):*</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Returns the value of the proxied object's method with the specified name.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">name</span>:*</code> &mdash; The name of the method being invoked.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code>... <span class="label">rest</span></code> &mdash; An array specifying the arguments to the
+      called method.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>*</code> &mdash; The return value of the called method.
+      
+      </td></tr></table></div><a name="deleteProperty()"></a><a name="deleteProperty(any)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">deleteProperty</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>override flash_proxy function deleteProperty(name:*):Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Deletes the specified property on the proxied object and
+      sends notification of the delete to the handler.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">name</span>:*</code> &mdash; Typically a string containing the name of the property,
+      or possibly a QName where the property name is found by 
+      inspecting the <code>localName</code> property.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; A Boolean indicating if the property was deleted.
+      
+      </td></tr></table></div><a name="dispatchEvent()"></a><a name="dispatchEvent(flash.events.Event)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">dispatchEvent</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function dispatchEvent(event:Event):Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Dispatches an event into the event flow. 
+      For more information, see
+      the flash.events.EventDispatcher class.
+      
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">event</span>:Event</code> &mdash; The Event object that is dispatched into the event flow. If the 
+      event is being redispatched, a clone of the event is created automatically. 
+      After an event is dispatched, its target property cannot be changed, so you 
+      must create a new copy of the event for redispatching to work.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; Returns <code>true</code> if the event was successfully dispatched. 
+      A value 
+      of <code>false</code> indicates failure or that <code>preventDefault()</code>
+      was called on the event.
+     
+      </td></tr></table><p><span class="label">See also</span></p><div class="seeAlso">flash.events.EventDispatcher.dispatchEvent()</div></div><a name="getComplexProperty()"></a><a name="getComplexProperty(any,any)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getComplexProperty</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> object_proxy function getComplexProperty(name:*, value:*):*</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Provides a place for subclasses to override how a complex property that
+      needs to be either proxied or daisy chained for event bubbling is managed.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">name</span>:*</code> &mdash; Typically a string containing the name of the property,
+      or possibly a QName where the property name is found by 
+      inspecting the <code>localName</code> property.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">value</span>:*</code> &mdash; The property value.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>*</code> &mdash; The property value or an instance of <code>ObjectProxy</code>.
+      
+      </td></tr></table></div><a name="getProperty()"></a><a name="getProperty(any)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getProperty</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>override flash_proxy function getProperty(name:*):*</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Returns the specified property value of the proxied object.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">name</span>:*</code> &mdash; Typically a string containing the name of the property,
+      or possibly a QName where the property name is found by 
+      inspecting the <code>localName</code> property.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>*</code> &mdash; The value of the property.
+      In some instances this value may be an instance of 
+      <code>ObjectProxy</code>.
+      
+      </td></tr></table></div><a name="hasEventListener()"></a><a name="hasEventListener(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">hasEventListener</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function hasEventListener(type:String):Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Checks whether there are any event listeners registered 
+      for a specific type of event. 
+      This allows you to determine where an object has altered handling 
+      of an event type in the event flow hierarchy. 
+      For more information, see
+      the flash.events.EventDispatcher class.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">type</span>:String</code> &mdash; The type of event
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; Returns <code>true</code> if a listener of the specified type is 
+      registered; <code>false</code> otherwise.
+     
+      </td></tr></table><p><span class="label">See also</span></p><div class="seeAlso">flash.events.EventDispatcher.hasEventListener()</div></div><a name="propertyChangeHandler()"></a><a name="propertyChangeHandler(mx.events.PropertyChangeEvent)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">propertyChangeHandler</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function propertyChangeHandler(event:<a href="../../mx/events/PropertyChangeEvent.html">PropertyChangeEvent</a>):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Called when a complex property is updated.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">event</span>:<a href="../../mx/events/PropertyChangeEvent.html">PropertyChangeEvent</a></code> &mdash; An event object that has changed.
+      
+      </td></tr></table></p></div><a name="readExternal()"></a><a name="readExternal(flash.utils.IDataInput)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">readExternal</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function readExternal(input:IDataInput):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Since Flex only uses ObjectProxy to wrap anonymous objects,
+      the server flex.messaging.io.ObjectProxy instance serializes itself
+      as a Map that will be returned as a plain ActionScript object. 
+      You can then set the object_proxy object property to this value.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">input</span>:IDataInput</code> &mdash; The source object from which the ObjectProxy is
+      deserialized. 
+      
+      </td></tr></table></p></div><a name="removeEventListener()"></a><a name="removeEventListener(String,Function,Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">removeEventListener</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function removeEventListener(type:String, listener:Function, useCapture:Boolean = false):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Removes an event listener. 
+      If there is no matching listener registered with the EventDispatcher object, 
+      a call to this method has no effect.
+      For more information, see 
+      the flash.events.EventDispatcher class.
+      
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">type</span>:String</code> &mdash; The type of event.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">listener</span>:Function</code> &mdash; The listener object to remove.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">useCapture</span>:Boolean</code> (default = <code>false</code>)<code></code> &mdash; Specifies whether the listener was registered for the capture 
+      phase or the target and bubbling phases. If the listener was registered for both 
+      the capture phase and the target and bubbling phases, two calls to 
+      <code>removeEventListener()</code> are required to remove both, one call with 
+      <code>useCapture</code> 
+      set to <code>true</code>, and another call with <code>useCapture</code>
+      set to <code>false</code>.
+     
+      </td></tr></table></p><p><span class="label">See also</span></p><div class="seeAlso">flash.events.EventDispatcher.removeEventListener()</div></div><a name="setProperty()"></a><a name="setProperty(any,any)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setProperty</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>override flash_proxy function setProperty(name:*, value:*):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Updates the specified property on the proxied object
+      and sends notification of the update to the handler.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">name</span>:*</code> &mdash; Object containing the name of the property that
+      should be updated on the proxied object.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">value</span>:*</code> &mdash; Value that should be set on the proxied object.
+      
+      </td></tr></table></p></div><a name="setupPropertyList()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setupPropertyList</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function setupPropertyList():void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      This method creates an array of all of the property names for the 
+      proxied object.
+      Descendants must override this method if they wish to add more 
+      properties to this list.
+      Be sure to call <code>super.setupPropertyList</code> before making any
+      changes to the <code>propertyList</code> property.
+      
+      </p></div><a name="willTrigger()"></a><a name="willTrigger(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">willTrigger</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function willTrigger(type:String):Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Checks whether an event listener is registered with this object 
+      or any of its ancestors for the specified event type. 
+      This method returns <code>true</code> if an event listener is triggered 
+      during any phase of the event flow when an event of the specified 
+      type is dispatched to this object or any of its descendants.
+      For more information, see the flash.events.EventDispatcher class.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">type</span>:String</code> &mdash; The type of event.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; Returns <code>true</code> if a listener of the specified type will 
+      be triggered; <code>false</code> otherwise.
+     
+      </td></tr></table><p><span class="label">See also</span></p><div class="seeAlso">flash.events.EventDispatcher.willTrigger()</div></div><a name="writeExternal()"></a><a name="writeExternal(flash.utils.IDataOutput)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">writeExternal</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function writeExternal(output:IDataOutput):void</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Since Flex only serializes the inner ActionScript object that it wraps,
+      the server flex.messaging.io.ObjectProxy populates itself
+      with this anonymous object's contents and appears to the user
+      as a Map.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">output</span>:IDataOutput</code> &mdash; The source object from which the ObjectProxy is
+      deserialized.
+      
+      </td></tr></table></p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.</footer><br/>Thu Jan 16 2014, 01:11 PM +08:00  </center></div></body></html><!--Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.<br/>Thu Jan 16 2014, 01:11 PM +08:00  -->

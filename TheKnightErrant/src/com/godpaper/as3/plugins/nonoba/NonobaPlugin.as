@@ -40,7 +40,7 @@ package com.godpaper.as3.plugins.nonoba
 	
 	/**
 	 * NonobaPlugin.as class.
-	 * @see:http://www.nonoba.com/developers/documentation/actionscript3
+	 * link:http://www.nonoba.com/developers/documentation/actionscript3
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0

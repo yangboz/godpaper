@@ -23,10 +23,10 @@ package com.godpaper.as3.model.vos
 	 * 4."eat off" reference on be eatten off chess pieces;</br>
 	 * 5.crossValue the current conductVO's zobrist key value;</br>
 	 * @author Knight.zhou
-	 * @history 2010-6-24,re-construct:newPositon to currentPosition,keep previousPosition.
-	 * @history 2010-7-12,add-construct:eatOff,crossValue.
-	 * @history 2010-12-02,reverse() added.
-	 * @history 2012-06-05,simplify the class and properties.
+	 * </time> 2010-6-24,re-construct:newPositon to currentPosition,keep previousPosition.
+	 * </time> 2010-7-12,add-construct:eatOff,crossValue.
+	 * </time> 2010-12-02,reverse() added.
+	 * </time> 2012-06-05,simplify the class and properties.
 	 */
 //	public class ConductVO extends EventDispatcher
     public class ConductVO

@@ -1,0 +1,395 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../override.css" type="text/css"><meta name="keywords" content="ObjectUtil,mx.utils.ObjectUtil,addEventListener,callProperty,clone,compare,copy,createUID,dateCompare,deleteProperty,dispatchEvent,fromByteArray,getClassInfo,getComplexProperty,getInstance,getProperty,getUID,hasEventListener,hasMetadata,isDynamicObject,isSimple,isUID,isWhitespace,numericCompare,propertyChangeHandler,readExternal,removeEventListener,repeat,restrict,setProperty,setupPropertyList,stringCompare,substitute,toByteArray,toString,trim,trimArrayElements,unwatchXML,watchXML,willTrigger,writeExternal"><title>mx.utils.ObjectUtil</title></head><body><script language="javascript" type="text/javascript" src="../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../help.js"></script><script language="javascript" type="text/javascript" src="../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'ObjectUtil - GODPAPER Action Script API Document';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">GODPAPER</td><td class="titleTableTopNav" align="right"><a href="../../package-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../class-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../all-index-A.html" onclick="loadClassListFrame('../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../index.html?mx/utils/ObjectUtil.html&amp;mx/utils/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">ObjectUtil</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("ObjectUtil"); titleBar_setSubNav(false,false,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">mx.utils</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  ObjectUtil</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">ObjectUtil  <img src="../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p></p>
+  The ObjectUtil class is an all-static class with methods for
+  working with Objects within Flex.
+  You do not create instances of ObjectUtil;
+  instead you simply call static methods such as the 
+  <code>ObjectUtil.isSimple()</code> method.
+  
+  <p></p><br/><hr></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#clone()" class="signatureLink">clone</a>(value:Object):Object</div><div class="summaryTableDescription">[static] 
+      Clones the specified Object and returns a reference to the clone.</div></td><td class="summaryTableOwnerCol">ObjectUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#compare()" class="signatureLink">compare</a>(a:Object, b:Object, depth:int = -1):int</div><div class="summaryTableDescription">[static] 
+      Compares the Objects and returns an integer value 
+      indicating if the first item is less than greater than or equal to
+      the second item.</div></td><td class="summaryTableOwnerCol">ObjectUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#copy()" class="signatureLink">copy</a>(value:Object):Object</div><div class="summaryTableDescription">[static] 
+      Copies the specified Object and returns a reference to the copy.</div></td><td class="summaryTableOwnerCol">ObjectUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#dateCompare()" class="signatureLink">dateCompare</a>(a:Date, b:Date):int</div><div class="summaryTableDescription">[static] 
+      Compares the two Date objects and returns an integer value 
+      indicating if the first Date object is before, equal to, 
+      or after the second item.</div></td><td class="summaryTableOwnerCol">ObjectUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getClassInfo()" class="signatureLink">getClassInfo</a>(obj:Object, excludes:Array = null, options:Object = null):Object</div><div class="summaryTableDescription">[static] 
+      Returns information about the class, and properties of the class, for
+      the specified Object.</div></td><td class="summaryTableOwnerCol">ObjectUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#hasMetadata()" class="signatureLink">hasMetadata</a>(obj:Object, propName:String, metadataName:String, excludes:Array = null, options:Object = null):Boolean</div><div class="summaryTableDescription">[static] 
+     Uses getClassInfo and examines the metadata information to
+     determine whether a property on a given object has the specified 
+     metadata.</div></td><td class="summaryTableOwnerCol">ObjectUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isDynamicObject()" class="signatureLink">isDynamicObject</a>(obj:Object):Boolean</div><div class="summaryTableDescription">[static] 
+      Returns true if the object is an instance of a dynamic class.</div></td><td class="summaryTableOwnerCol">ObjectUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#isSimple()" class="signatureLink">isSimple</a>(value:Object):Boolean</div><div class="summaryTableDescription">[static] 
+      Returns true if the object reference specified
+      is a simple data type.</div></td><td class="summaryTableOwnerCol">ObjectUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#numericCompare()" class="signatureLink">numericCompare</a>(a:Number, b:Number):int</div><div class="summaryTableDescription">[static] 
+      Compares two numeric values.</div></td><td class="summaryTableOwnerCol">ObjectUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#stringCompare()" class="signatureLink">stringCompare</a>(a:String, b:String, caseInsensitive:Boolean = false):int</div><div class="summaryTableDescription">[static] 
+      Compares two String values.</div></td><td class="summaryTableOwnerCol">ObjectUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#toString()" class="signatureLink">toString</a>(value:Object, namespaceURIs:Array = null, exclude:Array = null):String</div><div class="summaryTableDescription">[static] 
+      Pretty-prints the specified Object into a String.</div></td><td class="summaryTableOwnerCol">ObjectUtil</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="clone()"></a><a name="clone(Object)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">clone</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public static function clone(value:Object):Object</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 4</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Clones the specified Object and returns a reference to the clone.
+      The clone is made using a native serialization technique. 
+      This means that custom serialization will be respected during the
+      cloning.  clone() differs from copy() in that the uid property of
+      each object instance is retained.
+     
+      <p>This method is designed for cloning data objects, 
+      such as elements of a collection. It is not intended for cloning 
+      a UIComponent object, such as a TextInput control. If you want to clone
+      specific UIComponent objects, you can create a subclass of the component
+      and implement a <code>clone()</code> method.</p>
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:Object</code> &mdash; Object that should be cloned.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Object</code> &mdash; Clone of the specified Object.
+      
+      </td></tr></table></div><a name="compare()"></a><a name="compare(Object,Object,int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">compare</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function compare(a:Object, b:Object, depth:int = -1):int</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Compares the Objects and returns an integer value 
+      indicating if the first item is less than greater than or equal to
+      the second item.
+      This method will recursively compare properties on nested objects and
+      will return as soon as a non-zero result is found.
+      By default this method will recurse to the deepest level of any property.
+      To change the depth for comparison specify a non-negative value for
+      the <code>depth</code> parameter.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">a</span>:Object</code> &mdash; Object.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">b</span>:Object</code> &mdash; Object.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">depth</span>:int</code> (default = <code>-1</code>)<code></code> &mdash; Indicates how many levels should be 
+      recursed when performing the comparison.
+      Set this value to 0 for a shallow comparison of only the primitive 
+      representation of each property.
+      For example:<pre>
+      var a:Object = {name:"Bob", info:[1,2,3]};
+      var b:Object = {name:"Alice", info:[5,6,7]};
+      var c:int = ObjectUtil.compare(a, b, 0);</pre>
+     
+      <p>In the above example the complex properties of <code>a</code> and 
+      <code>b</code> will be flattened by a call to <code>toString()</code>
+      when doing the comparison.
+      In this case the <code>info</code> property will be turned into a string
+      when performing the comparison.</p>
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>int</code> &mdash; Return 0 if a and b are null, NaN, or equal. 
+      Return 1 if a is null or greater than b. 
+      Return -1 if b is null or greater than a. 
+      
+      </td></tr></table></div><a name="copy()"></a><a name="copy(Object)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">copy</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function copy(value:Object):Object</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Copies the specified Object and returns a reference to the copy.
+      The copy is made using a native serialization technique. 
+      This means that custom serialization will be respected during the copy.
+     
+      <p>This method is designed for copying data objects, 
+      such as elements of a collection. It is not intended for copying 
+      a UIComponent object, such as a TextInput control. If you want to create copies 
+      of specific UIComponent objects, you can create a subclass of the component and implement 
+      a <code>clone()</code> method, or other method to perform the copy.</p>
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:Object</code> &mdash; Object that should be copied.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Object</code> &mdash; Copy of the specified Object.
+      
+      </td></tr></table></div><a name="dateCompare()"></a><a name="dateCompare(Date,Date)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">dateCompare</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function dateCompare(a:Date, b:Date):int</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Compares the two Date objects and returns an integer value 
+      indicating if the first Date object is before, equal to, 
+      or after the second item.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">a</span>:Date</code> &mdash; Date object.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">b</span>:Date</code> &mdash; Date object.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>int</code> &mdash; 0 if <code>a</code> and <code>b</code> are equal
+      (or both are <code>null</code>);
+      -1 if <code>a</code> is before <code>b</code>
+      (or <code>b</code> is <code>null</code>);
+      1 if <code>a</code> is after <code>b</code>
+      (or <code>a</code> is <code>null</code>).     
+      
+      </td></tr></table></div><a name="getClassInfo()"></a><a name="getClassInfo(Object,Array,Object)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getClassInfo</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function getClassInfo(obj:Object, excludes:Array = null, options:Object = null):Object</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Returns information about the class, and properties of the class, for
+      the specified Object.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">obj</span>:Object</code> &mdash; The Object to inspect.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">excludes</span>:Array</code> (default = <code>null</code>)<code></code> &mdash; Array of Strings specifying the property names that should be 
+      excluded from the returned result. For example, you could specify 
+      <code>["currentTarget", "target"]</code> for an Event object since these properties 
+      can cause the returned result to become large.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">options</span>:Object</code> (default = <code>null</code>)<code></code> &mdash; An Object containing one or more properties 
+      that control the information returned by this method. 
+      The properties include the following:
+     
+      <ul>
+        <li><code>includeReadOnly</code>: If <code>false</code>, 
+          exclude Object properties that are read-only. 
+          The default value is <code>true</code>.</li>
+      <li><code>includeTransient</code>: If <code>false</code>, 
+          exclude Object properties and variables that have <code>[Transient]</code> metadata.
+          The default value is <code>true</code>.</li>
+      <li><code>uris</code>: Array of Strings of all namespaces that should be included in the output.
+          It does allow for a wildcard of "*". 
+          By default, it is null, meaning no namespaces should be included. 
+          For example, you could specify <code>["mx_internal", "mx_object"]</code> 
+          or <code>["*"]</code>.</li>
+      </ul>
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Object</code> &mdash; An Object containing the following properties:
+      <ul>
+        <li><code>name</code>: String containing the name of the class.</li>
+        <li><code>properties</code>: Sorted list of the property names of the specified object,
+        or references to the original key if the specified object is a Dictionary. The individual
+        array elements are QName instances, which contain both the local name of the property as well as the URI.</li>
+      </ul>
+     
+     </td></tr></table></div><a name="hasMetadata()"></a><a name="hasMetadata(Object,String,String,Array,Object)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">hasMetadata</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function hasMetadata(obj:Object, propName:String, metadataName:String, excludes:Array = null, options:Object = null):Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+     Uses <code>getClassInfo</code> and examines the metadata information to
+     determine whether a property on a given object has the specified 
+     metadata.
+     
+     </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">obj</span>:Object</code> &mdash; The object holding the property.
+     </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">propName</span>:String</code> &mdash; The property to check for metadata.
+     </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">metadataName</span>:String</code> &mdash; The name of the metadata to check on the property.
+     </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">excludes</span>:Array</code> (default = <code>null</code>)<code></code> &mdash; If any properties need to be excluded when generating class info. (Optional)
+     </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">options</span>:Object</code> (default = <code>null</code>)<code></code> &mdash; If any options flags need to changed when generating class info. (Optional)
+     </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if the property has the specified metadata.
+      
+      </td></tr></table></div><a name="isDynamicObject()"></a><a name="isDynamicObject(Object)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isDynamicObject</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function isDynamicObject(obj:Object):Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Returns <code>true</code> if the object is an instance of a dynamic class.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">obj</span>:Object</code> &mdash; The object.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the object is an instance of a dynamic class.
+      
+      </td></tr></table></div><a name="isSimple()"></a><a name="isSimple(Object)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isSimple</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function isSimple(value:Object):Boolean</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Returns <code>true</code> if the object reference specified
+      is a simple data type. The simple data types include the following:
+      <ul>
+        <li><code>String</code></li>
+        <li><code>Number</code></li>
+        <li><code>uint</code></li>
+        <li><code>int</code></li>
+        <li><code>Boolean</code></li>
+        <li><code>Date</code></li>
+        <li><code>Array</code></li>
+      </ul>
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:Object</code> &mdash; Object inspected.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the object specified
+      is one of the types above; <code>false</code> otherwise.
+      
+      </td></tr></table></div><a name="numericCompare()"></a><a name="numericCompare(Number,Number)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">numericCompare</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function numericCompare(a:Number, b:Number):int</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Compares two numeric values.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">a</span>:Number</code> &mdash; First number.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">b</span>:Number</code> &mdash; Second number.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>int</code> &mdash; 0 is both numbers are NaN. 
+      1 if only <code>a</code> is a NaN.
+      -1 if only <code>b</code> is a NaN.
+      -1 if <code>a</code> is less than <code>b</code>.
+      1 if <code>a</code> is greater than <code>b</code>.
+      
+      </td></tr></table></div><a name="stringCompare()"></a><a name="stringCompare(String,String,Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">stringCompare</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function stringCompare(a:String, b:String, caseInsensitive:Boolean = false):int</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Compares two String values.
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">a</span>:String</code> &mdash; First String value.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">b</span>:String</code> &mdash; Second String value.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">caseInsensitive</span>:Boolean</code> (default = <code>false</code>)<code></code> &mdash; Specifies to perform a case insensitive compare, 
+      <code>true</code>, or not, <code>false</code>.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>int</code> &mdash; 0 is both Strings are null. 
+      1 if only <code>a</code> is null.
+      -1 if only <code>b</code> is null.
+      -1 if <code>a</code> precedes <code>b</code>.
+      1 if <code>b</code> precedes <code>a</code>.
+      
+      </td></tr></table></div><a name="toString()"></a><a name="toString(Object,Array,Array)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function toString(value:Object, namespaceURIs:Array = null, exclude:Array = null):String</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Pretty-prints the specified Object into a String.
+      All properties will be in alpha ordering.
+      Each object will be assigned an id during printing;
+      this value will be displayed next to the object type token
+      preceded by a '#', for example:
+     
+      <pre>
+      (mx.messaging.messages::AsyncMessage)#2.</pre>
+     
+      <p>This id is used to indicate when a circular reference occurs.
+      Properties of an object that are of the <code>Class</code> type will
+      appear only as the assigned type.
+      For example a custom definition like the following:</p>
+     
+      <pre>
+        public class MyCustomClass {
+          public var clazz:Class;
+        }</pre>
+     
+      <p>With the <code>clazz</code> property assigned to <code>Date</code>
+      will display as shown below:</p>
+     
+      <pre>
+       (somepackage::MyCustomClass)#0
+          clazz = (Date)</pre>
+     
+      </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:Object</code> &mdash; Object to be pretty printed.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">namespaceURIs</span>:Array</code> (default = <code>null</code>)<code></code> &mdash; Array of namespace URIs for properties 
+      that should be included in the output.
+      By default only properties in the public namespace will be included in
+      the output.
+      To get all properties regardless of namespace pass an array with a 
+      single element of ".
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">exclude</span>:Array</code> (default = <code>null</code>)<code></code> &mdash; Array of the property names that should be 
+      excluded from the output.
+      Use this to remove data from the formatted string.
+     
+      </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>String</code> &mdash; String containing the formatted version
+      of the specified object.
+     
+      </td></tr></table><br/><span class="label"> Example </span><br/>
+      <pre>
+      // example 1
+      var obj:AsyncMessage = new AsyncMessage();
+      obj.body = [];
+      obj.body.push(new AsyncMessage());
+      obj.headers["1"] = { name: "myName", num: 15.3};
+      obj.headers["2"] = { name: "myName", num: 15.3};
+      obj.headers["10"] = { name: "myName", num: 15.3};
+      obj.headers["11"] = { name: "myName", num: 15.3};
+      trace(ObjectUtil.toString(obj));
+     
+      // will output to flashlog.txt
+      (mx.messaging.messages::AsyncMessage)#0
+        body = (Array)#1
+          [0] (mx.messaging.messages::AsyncMessage)#2
+            body = (Object)#3
+            clientId = (Null)
+            correlationId = ""
+            destination = ""
+            headers = (Object)#4
+            messageId = "378CE96A-68DB-BC1B-BCF7FFFFFFFFB525"
+            sequenceId = (Null)
+            sequencePosition = 0
+            sequenceSize = 0
+            timeToLive = 0
+            timestamp = 0
+        clientId = (Null)
+        correlationId = ""
+        destination = ""
+        headers = (Object)#5
+          1 = (Object)#6
+            name = "myName"
+            num = 15.3
+          10 = (Object)#7
+            name = "myName"
+            num = 15.3
+          11 = (Object)#8
+            name = "myName"
+            num = 15.3
+          2 = (Object)#9
+            name = "myName"
+            num = 15.3
+        messageId = "1D3E6E96-AC2D-BD11-6A39FFFFFFFF517E"
+        sequenceId = (Null)
+        sequencePosition = 0
+        sequenceSize = 0
+        timeToLive = 0
+        timestamp = 0
+     
+      // example 2 with circular references
+      obj = {};
+      obj.prop1 = new Date();
+      obj.prop2 = [];
+      obj.prop2.push(15.2);
+      obj.prop2.push("testing");
+      obj.prop2.push(true);
+      obj.prop3 = {};
+      obj.prop3.circular = obj;
+      obj.prop3.deeper = new ErrorMessage();
+      obj.prop3.deeper.rootCause = obj.prop3.deeper;
+      obj.prop3.deeper2 = {};
+      obj.prop3.deeper2.deeperStill = {};
+      obj.prop3.deeper2.deeperStill.yetDeeper = obj;
+      trace(ObjectUtil.toString(obj));
+     
+      // will output to flashlog.txt
+      (Object)#0
+        prop1 = Tue Apr 26 13:59:17 GMT-0700 2005
+        prop2 = (Array)#1
+          [0] 15.2
+          [1] "testing"
+          [2] true
+        prop3 = (Object)#2
+          circular = (Object)#0
+          deeper = (mx.messaging.messages::ErrorMessage)#3
+            body = (Object)#4
+            clientId = (Null)
+            code = (Null)
+            correlationId = ""
+            destination = ""
+            details = (Null)
+            headers = (Object)#5
+            level = (Null)
+            message = (Null)
+            messageId = "14039376-2BBA-0D0E-22A3FFFFFFFF140A"
+            rootCause = (mx.messaging.messages::ErrorMessage)#3
+            sequenceId = (Null)
+            sequencePosition = 0
+            sequenceSize = 0
+            timeToLive = 0
+            timestamp = 0
+          deeper2 = (Object)#6
+            deeperStill = (Object)#7
+              yetDeeper = (Object)#0
+     
+     // example 3 with Dictionary
+     var point:Point = new Point(100, 100);
+     var point2:Point = new Point(100, 100);
+     var obj:Dictionary = new Dictionary();
+     obj[point] = "point";
+     obj[point2] = "point2";
+     obj["1"] = { name: "one", num: 1};
+     obj["two"] = { name: "2", num: 2};
+     obj[3] = 3;
+     trace(ObjectUtil.toString(obj));
+     
+     // will output to flashlog.txt
+     (flash.utils::Dictionary)#0
+       {(flash.geom::Point)#1
+         length = 141.4213562373095
+         x = 100
+         y = 100} = "point2"
+       {(flash.geom::Point)#2
+         length = 141.4213562373095
+         x = 100
+         y = 100} = "point"
+       {1} = (Object)#3
+         name = "one"
+         num = 1
+       {3} = 3
+       {"two"} = (Object)#4
+         name = "2"
+         num = 2
+     
+     </pre>
+      
+      </div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.</footer><br/>Thu Jan 16 2014, 01:11 PM +08:00  </center></div></body></html><!--Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.<br/>Thu Jan 16 2014, 01:11 PM +08:00  -->

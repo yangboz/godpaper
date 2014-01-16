@@ -20,9 +20,9 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /**
- * @history 2010-01-21 rename set/get function name to sett/gett.
- * @history 2010-06-10 added setXs/setYs help functions. 
- * @history 2010-07-15 added celled property. 
+ * </time> 2010-01-21 rename set/get function name to sett/gett.
+ * </time> 2010-06-10 added setXs/setYs help functions. 
+ * </time> 2010-07-15 added celled property. 
  */
 package de.polygonal.ds
 {

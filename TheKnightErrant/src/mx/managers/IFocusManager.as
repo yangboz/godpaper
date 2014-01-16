@@ -12,12 +12,12 @@
 package mx.managers
 {
 
-import flash.display.DisplayObject;
+//import flash.display.DisplayObject;
 import flash.events.IEventDispatcher;
 import flash.display.InteractiveObject;
 import flash.display.Sprite;
-import mx.core.IButton;
-import mx.core.IUIComponent;
+//import mx.core.IButton;
+//import mx.core.IUIComponent;
 
 /**
  *  The IFocusManager interface defines the interface that components must implement 

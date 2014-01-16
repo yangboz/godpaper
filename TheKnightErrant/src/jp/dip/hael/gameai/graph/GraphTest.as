@@ -1,13 +1,10 @@
 // ActionScript file
 package jp.dip.hael.gameai.graph
 {
-	import flash.display.Sprite;
 	import flash.utils.getTimer;
 	
 	import jp.dip.hael.gameai.graph.searcher.BFS;
 	import jp.dip.hael.gameai.graph.searcher.Dijkstra;
-	import jp.dip.hael.gameai.util.PriorityQueueDsc;
-	import jp.dip.hael.gameai.util.Rand;
 	
 
 	/**
@@ -17,8 +14,7 @@ package jp.dip.hael.gameai.graph
 	{
 		public function GraphTest()
 		{
-			
-			var g:Graph = new Graph();
+			var g:GraphEx = new GraphEx();
 			g.addNode(new Node(1));
 			g.addNode(new Node(2));
 			g.addNode(new Node(3));

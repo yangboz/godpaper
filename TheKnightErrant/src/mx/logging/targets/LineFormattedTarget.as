@@ -34,7 +34,7 @@ package mx.logging.targets
 	 *  @playerversion Flash 9
 	 *  @playerversion AIR 1.1
 	 *  @productversion Flex 3
-	 *  @history add line number display.
+	 *  </time> add line number display.
 	 */
 	public class LineFormattedTarget extends AbstractTarget
 	{

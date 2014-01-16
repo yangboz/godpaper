@@ -15,7 +15,7 @@ package com.godpaper.as3.configs
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Feb 15, 2011 2:35:39 PM
-	 * @history 07/02/2011 added maxPoolSize,growthValue properties;
+	 * </time> 07/02/2011 added maxPoolSize,growthValue properties;
 	 */   	 
 	public class GasketConfig
 	{		

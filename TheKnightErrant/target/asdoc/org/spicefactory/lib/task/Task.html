@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../../override.css" type="text/css"><meta name="keywords" content="Task,org.spicefactory.lib.task.Task,autoStart,cancelable,data,ignoreChildErrors,parent,restartable,result,root,size,skippable,state,suspendable,timeout,timeout,addTask,cancel,complete,doCancel,doError,doResume,doSkip,doStart,doSuspend,doTimeout,error,getTask,handleAddedTask,handleRemoveAll,handleRemovedTask,handleTaskComplete,removeAllTasks,removeTask,resume,setCancelable,setName,setRestartable,setResult,setSkippable,setSuspendable,setTimeout,skip,start,startTask,suspend"><title>org.spicefactory.lib.task.Task</title></head><body><script language="javascript" type="text/javascript" src="../../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'Task - GODPAPER Action Script API Document';
+				var baseRef = '../../../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">GODPAPER</td><td class="titleTableTopNav" align="right"><a href="../../../../package-summary.html" onclick="loadClassListFrame('../../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../../class-summary.html" onclick="loadClassListFrame('../../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../../all-index-A.html" onclick="loadClassListFrame('../../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../../index.html?org/spicefactory/lib/task/Task.html&amp;org/spicefactory/lib/task/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">Task</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Task"); titleBar_setSubNav(false,true,false,false,false,false,true,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">org.spicefactory.lib.task</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  Task</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">Task  <img src="../../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> flash.events.EventDispatcher</td></tr><tr><td class="classHeaderTableLabel">Subclasses</td><td> <a href="../../../../com/godpaper/as3/tasks/CleanUpChessPieceTask.html">CleanUpChessPieceTask</a>,  <a href="../../../../com/godpaper/as3/tasks/CleanUpPiecesBitboardTask.html">CleanUpPiecesBitboardTask</a>,  <a href="../../../../org/spicefactory/lib/task/util/DelegateTask.html">DelegateTask</a>,  <a href="../../../../org/spicefactory/lib/task/ResultTask.html">ResultTask</a>,  <a href="../../../../org/spicefactory/lib/task/util/SynchronousDelegateTask.html">SynchronousDelegateTask</a>,  <a href="../../../../org/spicefactory/lib/task/TaskGroup.html">TaskGroup</a></td></tr></table><p></p><p></p><p></p>
+ Abstract base class of the Task Framework representing an asynchronous operation. 
+ This may be an animation, a loading operation, a remote call, WebService invocation 
+ or playback of Video/Audio or anything else with asynchronous nature.
+ The concrete functionality (loading, animating, etc.) would be implemented in a subclass of Task.
+ That alone does not generate added value. But thanks to the generic set of events fired
+ by Task implementations (<code>START</code>, <code>SUSPEND</code>, <code>RESUME</code>,
+ <code>CANCEL</code>, <code>COMPLETE</code> and <code>ERROR</code>), multiple Tasks can be
+ chained in a <code>SequentialTaskGroup</code> or executed concurrently in a 
+ <code>ConcurrentTaskGroup</code>. Both classes fire their <code>COMPLETE</code> event when all
+ their child Tasks have completed and both extend the abstract <code>TaskGroup</code> class.
+ Since <code>TaskGroup</code> is a subclass of Task itself,
+ it can be nested too.  This type of nesting can be cumbersome to implement without Tasks
+ if you work with a lot of different types of asynchronous operations which all have
+ their individual event sets for notifying observers that they have completed or that an
+ error occured.
+ 
+ <p>A minimal subclass of Task would
+ at least overwrite the <code>doStart</code> method, do its work and then call <code>complete</code>
+ when the operation is done. The Task class comes with several properties to control 
+ the behaviour. A Task can be <code>restartable</code> or <code>cancelable</code>, if
+ the <code>suspendable</code> property is true, a Task can be suspended and resumed.
+ If the <code>skippable</code> property is set, a Task can be forced to move to its
+ final state (which may make sense in asynchronous operations like animations, but
+ obviously not in Tasks like loading operations). All these properties are true by
+ default and are protected so they must be set by subclasses.</p> You can also set
+ a timeout for the operation or assign it a name for log output.
+ 
+ <p></p><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#cancelable" class="signatureLink">cancelable</a> : Boolean<div class="summaryTableDescription">[read-only] 
+	 Indicates whether this Task can be cancelled.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#data" class="signatureLink">data</a> : *<div class="summaryTableDescription">
+	 An arbitrary value associated with this Task.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#parent" class="signatureLink">parent</a> : <a href="../../../../org/spicefactory/lib/task/TaskGroup.html">TaskGroup</a><div class="summaryTableDescription">[read-only] 
+	 The parent of this Task.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#restartable" class="signatureLink">restartable</a> : Boolean<div class="summaryTableDescription">[read-only] 
+	 Indicates whether this Task can be restarted.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#root" class="signatureLink">root</a> : <a href="../../../../org/spicefactory/lib/task/Task.html">Task</a><div class="summaryTableDescription">[read-only] 
+	 The root TaskGroup in case this Task is nested in one or more TaskGroups.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#skippable" class="signatureLink">skippable</a> : Boolean<div class="summaryTableDescription">[read-only] 
+	 Indicates whether this Task can be forced to skip to its final state.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#state" class="signatureLink">state</a> : <a href="../../../../org/spicefactory/lib/task/enum/TaskState.html">TaskState</a><div class="summaryTableDescription">[read-only] 
+	 The current state of this Task.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#suspendable" class="signatureLink">suspendable</a> : Boolean<div class="summaryTableDescription">[read-only] 
+	 Indicates whether this Task can be suspended.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#timeout" class="signatureLink">timeout</a> : uint<div class="summaryTableDescription">[read-only] 
+	 The timeout for this Task in milliseconds.</div></td><td class="summaryTableOwnerCol">Task</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#cancel()" class="signatureLink">cancel</a>():Boolean</div><div class="summaryTableDescription">
+	 Cancels this Task.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#resume()" class="signatureLink">resume</a>():Boolean</div><div class="summaryTableDescription">
+	 Resumes this Task if it is suspended.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#skip()" class="signatureLink">skip</a>():Boolean</div><div class="summaryTableDescription">
+	 Forces this Task to move to its final state.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#start()" class="signatureLink">start</a>():Boolean</div><div class="summaryTableDescription">
+	 Starts this Task.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#suspend()" class="signatureLink">suspend</a>():Boolean</div><div class="summaryTableDescription">
+	 Suspends this Task.</div></td><td class="summaryTableOwnerCol">Task</td></tr></table></div><a name="protectedMethodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Protected Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProtectedMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#complete()" class="signatureLink">complete</a>():Boolean</div><div class="summaryTableDescription">
+	 Signals that this Task has completed.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#doCancel()" class="signatureLink">doCancel</a>():void</div><div class="summaryTableDescription">
+	 Called before the CANCEL event gets fired.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#doError()" class="signatureLink">doError</a>(message:String):void</div><div class="summaryTableDescription">
+	 Called before the ERROR event gets fired.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#doResume()" class="signatureLink">doResume</a>():void</div><div class="summaryTableDescription">
+	 Called before the RESUME event gets fired.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#doSkip()" class="signatureLink">doSkip</a>():void</div><div class="summaryTableDescription">
+	 Called after skip has been called but before the COMPLETE event gets fired.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#doStart()" class="signatureLink">doStart</a>():void</div><div class="summaryTableDescription">
+	 Called before the START event gets fired.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#doSuspend()" class="signatureLink">doSuspend</a>():void</div><div class="summaryTableDescription">
+	 Called before the SUSPEND event gets fired.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#doTimeout()" class="signatureLink">doTimeout</a>():void</div><div class="summaryTableDescription">
+	 Called before the ERROR event gets fired after a timeout occurred.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#error()" class="signatureLink">error</a>(message:String):Boolean</div><div class="summaryTableDescription">
+	 Signals an error condition and cancels the Task.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setCancelable()" class="signatureLink">setCancelable</a>(value:Boolean):void</div><div class="summaryTableDescription">
+	 Specifies whether this Task can be cancelled.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setName()" class="signatureLink">setName</a>(name:String):void</div><div class="summaryTableDescription">
+	 Sets the name of this Task.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setRestartable()" class="signatureLink">setRestartable</a>(value:Boolean):void</div><div class="summaryTableDescription">
+	 Specifies whether this Task can be restarted.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setSkippable()" class="signatureLink">setSkippable</a>(value:Boolean):void</div><div class="summaryTableDescription">
+	 Specifies whether this Task can be forced to skip to its final state.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setSuspendable()" class="signatureLink">setSuspendable</a>(value:Boolean):void</div><div class="summaryTableDescription">
+	 Specifies whether this Task can be suspended.</div></td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setTimeout()" class="signatureLink">setTimeout</a>(value:uint):void</div><div class="summaryTableDescription">
+	 Sets the timeout for this Task in milliseconds.</div></td><td class="summaryTableOwnerCol">Task</td></tr></table></div><a name="eventSummary"></a><div class="summarySection"><div class="summaryTableTitle">Events</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableEvent"><tr><th>&nbsp;</th><th colspan="2">Event</th><th> Summary </th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#event:cancel" class="signatureLink">cancel</a></div></td><td class="summaryTableDescription summaryTableCol">Dispatched when a Task is cancelled.</td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#event:complete" class="signatureLink">complete</a></div></td><td class="summaryTableDescription summaryTableCol">Dispatched when a Task has completed its execution.</td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#event:error" class="signatureLink">error</a></div></td><td class="summaryTableDescription summaryTableCol">Dispatched when a Task has aborted due to an error condition.</td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#event:resume" class="signatureLink">resume</a></div></td><td class="summaryTableDescription summaryTableCol">Dispatched when a suspended Task is resumed.</td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#event:start" class="signatureLink">start</a></div></td><td class="summaryTableDescription summaryTableCol">Dispatched when a Task is started.</td><td class="summaryTableOwnerCol">Task</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#event:suspend" class="signatureLink">suspend</a></div></td><td class="summaryTableDescription summaryTableCol">Dispatched when a Task is suspended.</td><td class="summaryTableOwnerCol">Task</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="cancelable"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">cancelable</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>cancelable:Boolean</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+	 Indicates whether this Task can be cancelled.
+	 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get cancelable():Boolean</code><br/></div><a name="propertyDetail"></a><a name="data"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">data</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>data:*</code><p></p><p></p><p>
+	 An arbitrary value associated with this Task.
+	 This may be useful if a Task is nested in a <code>TaskGroup</code>
+	 for example and produces or loads data that is needed by subsequent Tasks.
+	 If the value for this Task is null and the Task has a parent, the 
+	 parents data value will be used.
+	 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get data():*</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set data(value:any):void</code><br/></div><a name="propertyDetail"></a><a name="parent"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parent</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>parent:<a href="../../../../org/spicefactory/lib/task/TaskGroup.html">TaskGroup</a></code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+	 The parent of this Task. The value is null if this Task is not nested
+	 in a <code>TaskGroup</code>.
+	 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get parent():<a href="../../../../org/spicefactory/lib/task/TaskGroup.html">TaskGroup</a></code><br/></div><a name="propertyDetail"></a><a name="restartable"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">restartable</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>restartable:Boolean</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+	 Indicates whether this Task can be restarted. If true the <code>start</code>
+	 method can be invoked again after either the <code>COMPLETE</code>, <code>CANCEL</code>
+	 or <code>ERROR</code> events were fired. If it is false calling <code>start</code> after
+	 these event were fired will cause an Error to be thrown.
+	 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get restartable():Boolean</code><br/></div><a name="propertyDetail"></a><a name="root"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">root</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>root:<a href="../../../../org/spicefactory/lib/task/Task.html">Task</a></code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+	 The root TaskGroup in case this Task is nested in one or more TaskGroups.
+	 If this Task is not nested then this property points to the Task itself.
+	 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get root():<a href="../../../../org/spicefactory/lib/task/Task.html">Task</a></code><br/></div><a name="propertyDetail"></a><a name="skippable"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">skippable</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>skippable:Boolean</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+	 Indicates whether this Task can be forced to skip to its final state.
+	 This may be useful in asynchronous operations like animations, but
+     not in Tasks like loading operations. For the difference between
+     <code>cancelable</code> and <code>skippable</code> see 
+     <a href="../../../../skip().html" target="">skip()</a>.
+	 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get skippable():Boolean</code><br/></div><a name="propertyDetail"></a><a name="state"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">state</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>state:<a href="../../../../org/spicefactory/lib/task/enum/TaskState.html">TaskState</a></code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+	 The current state of this Task.
+	 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get state():<a href="../../../../org/spicefactory/lib/task/enum/TaskState.html">TaskState</a></code><br/></div><a name="propertyDetail"></a><a name="suspendable"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">suspendable</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>suspendable:Boolean</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+	 Indicates whether this Task can be suspended.
+	 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get suspendable():Boolean</code><br/></div><a name="propertyDetail"></a><a name="timeout"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">timeout</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>timeout:uint</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+	 The timeout for this Task in milliseconds. A value of 0 disables the timeout.
+	 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get timeout():uint</code><br/></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="cancel()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">cancel</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function cancel():Boolean</code><p></p><p></p><p>
+	 Cancels this Task. For this method to succeed the cancelable property of this Task
+	 must be set to true and the current state of the Task must be <code>ACTIVE</code> or
+	 <code>SUSPENDED</code>.
+     If this method executes successfully the <code>CANCEL</code> event will be fired.
+	 
+	 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if the Task successfully switched its internal state, false if otherwise
+	 </td></tr></table></div><a name="complete()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">complete</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function complete():Boolean</code><p></p><p></p><p>
+	 Signals that this Task has completed. Subclasses should call this method
+	 when the asynchronous operation has completed. If this method executes successfully
+	 the <code>COMPLETE</code> event will be fired.
+	 
+	 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if the Task successfully switched its internal state, false if otherwise
+	 </td></tr></table></div><a name="doCancel()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">doCancel</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function doCancel():void</code><p></p><p></p><p>
+	 Called before the <code>CANCEL</code> event gets fired. 
+	 Subclasses for cancelable Tasks should overwrite this method and cancel the actual operation
+	 this Task performs.
+	 </p></div><a name="doError()"></a><a name="doError(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">doError</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function doError(message:String):void</code><p></p><p></p><p>
+	 Called before the <code>ERROR</code> event gets fired. 
+	 Subclasses may optionally overwrite this method to do some cleanup.
+	 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">message</span>:String</code></td></tr></table></p></div><a name="doResume()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">doResume</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function doResume():void</code><p></p><p></p><p>
+	 Called before the <code>RESUME</code> event gets fired. 
+	 Subclasses for suspendable Tasks should overwrite this method and resume the suspended operation
+	 this Task performs.
+	 </p></div><a name="doSkip()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">doSkip</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function doSkip():void</code><p></p><p></p><p>
+	 Called after <code>skip</code> has been called but before the <code>COMPLETE</code> event gets fired. 
+	 Subclasses for skippable Tasks should overwrite this method and put this Task
+	 into its final state.
+	 </p></div><a name="doStart()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">doStart</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function doStart():void</code><p></p><p></p><p>
+	 Called before the <code>START</code> event gets fired. 
+	 Subclasses should overwrite this method to start with the actual operation
+	 this Task should perform.
+	 </p></div><a name="doSuspend()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">doSuspend</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function doSuspend():void</code><p></p><p></p><p>
+	 Called before the <code>SUSPEND</code> event gets fired. 
+	 Subclasses for suspendable Tasks should overwrite this method and suspend the actual operation
+	 this Task performs.
+	 </p></div><a name="doTimeout()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">doTimeout</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function doTimeout():void</code><p></p><p></p><p>
+	 Called before the <code>ERROR</code> event gets fired after a timeout occurred. 
+	 Subclasses should overwrite this method and cancel the operation this Task performs.
+	 In many cases this method can be handled the same way like the <code>doCancel</code> hook. 
+	 </p></div><a name="error()"></a><a name="error(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">error</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function error(message:String):Boolean</code><p></p><p></p><p>
+	 Signals an error condition and cancels the Task. Subclasses should call this method
+	 when the asynchronous operation cannot be successfully completed.
+     If this method executes successfully the <code>ERROR</code> event will be fired.
+     
+     </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">message</span>:String</code> &mdash; the error description
+	 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if the Task successfully switched its internal state, false if otherwise
+	 </td></tr></table></div><a name="resume()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">resume</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function resume():Boolean</code><p></p><p></p><p>
+	 Resumes this Task if it is suspended. For this method to succeed the suspendable property of this Task
+	 must be set to true and the current state of the Task must be <code>SUSPENDED</code>.
+	 If this Task is member of a <code>TaskGroup</code> it cannot
+	 be resumed if the parent <code>TaskGroup</code> is still suspended.
+     If this method executes successfully the <code>RESUME</code> event will be fired.
+	 
+	 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if the Task successfully switched its internal state, false if otherwise
+	 </td></tr></table></div><a name="setCancelable()"></a><a name="setCancelable(Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setCancelable</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function setCancelable(value:Boolean):void</code><p></p><p></p><p>
+	 Specifies whether this Task can be cancelled.
+	 
+	 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:Boolean</code> &mdash; whether this Task can be cancelled
+	 </td></tr></table></p></div><a name="setName()"></a><a name="setName(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setName</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function setName(name:String):void</code><p></p><p></p><p>
+	 Sets the name of this Task. This name will not be used internally
+	 by the Task Framework except for log output.
+	 
+	 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">name</span>:String</code> &mdash; the new name of this Task
+	 </td></tr></table></p></div><a name="setRestartable()"></a><a name="setRestartable(Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setRestartable</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function setRestartable(value:Boolean):void</code><p></p><p></p><p>
+	 Specifies whether this Task can be restarted. If true the <code>start</code>
+	 method can be invoked again after either the <code>COMPLETE</code>, <code>CANCEL</code>
+	 or <code>ERROR</code> events were fired. If it is false calling <code>start</code> after
+	 these event were fired will cause an Error to be thrown.
+	 
+	 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:Boolean</code> &mdash; whether this Task can be restarted
+	 </td></tr></table></p></div><a name="setSkippable()"></a><a name="setSkippable(Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setSkippable</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function setSkippable(value:Boolean):void</code><p></p><p></p><p>
+	 Specifies whether this Task can be forced to skip to its final state. 
+	 This may be useful in asynchronous operations like animations, but
+     not in Tasks like loading operations.
+	 
+	 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:Boolean</code> &mdash; whether this Task can be forced to skip/move to its final state
+	 </td></tr></table></p></div><a name="setSuspendable()"></a><a name="setSuspendable(Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setSuspendable</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function setSuspendable(value:Boolean):void</code><p></p><p></p><p>
+	 Specifies whether this Task can be suspended.
+	 
+	 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:Boolean</code> &mdash; whether this Task can be suspended
+	 </td></tr></table></p></div><a name="setTimeout()"></a><a name="setTimeout(uint)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setTimeout</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function setTimeout(value:uint):void</code><p></p><p></p><p>
+	 Sets the timeout for this Task in milliseconds. A value of 0 disables the timeout.
+	 
+	 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:uint</code> &mdash; the timeout for this Task in milliseconds
+	 </td></tr></table></p></div><a name="skip()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">skip</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function skip():Boolean</code><p></p><p></p><p>
+	 Forces this Task to move to its final state.	
+     If this method executes successfully the <code>COMPLETE</code> event will be fired.
+     The method is somewhat similar to the <code>cancel</code> method but with a few subtle
+     differences:
+     <ul>
+     <li>The semantics of <code>cancel</code> would imply that the asynchronous operation just aborts
+     and optionally rewinds to its initial state. In constrast the semantics of <code>skip</code>
+     would rather imply to move the operation to its final state and skip the remaining progress.
+     This is applicable for operations like animations, but
+     obviously not feasible in Tasks like loading operations.</li>
+     <li>To underline the different semantics the <code>cancel</code> method would cause a
+     <code>CANCEL</code> event to be fired, while the <code>skip</code> method would just cause a
+     <code>COMPLETE</code> event to be fired as if the Task completed normally.</li>
+     </ul>
+     
+	 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if the Task successfully switched its internal state, false if otherwise
+	 </td></tr></table></div><a name="start()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">start</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function start():Boolean</code><p></p><p></p><p>
+	 Starts this Task. If this Task is member of a TaskGroup
+	 this method should not be called by application code.
+	 
+	 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if the Task was started successfully, false if it was in an illegal state
+	 </td></tr></table></div><a name="suspend()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">suspend</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function suspend():Boolean</code><p></p><p></p><p>
+	 Suspends this Task. For this method to succeed the suspendable property of this Task
+	 must be set to true and the current state of the Task must be <code>ACTIVE</code>.
+     If this method executes successfully the <code>SUSPEND</code> event will be fired.
+	 
+	 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code> &mdash; true if the Task successfully switched its internal state, false if otherwise
+	 </td></tr></table></div><div class="detailSectionHeader"> Event Detail </div><a name="event:cancel"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">cancel</td><td class="detailHeaderType"> Event </td></tr></table><div class="detailBody"><span class="label">Event Object Type: </span><a href="../../../../org/spicefactory/lib/task/events/TaskEvent.html"><code>org.spicefactory.lib.task.events.TaskEvent</code></a><br/><span class="label">TaskEvent.type property = </span><a href="../../../../org/spicefactory/lib/task/events/TaskEvent.html#CANCEL"><code>org.spicefactory.lib.task.events.TaskEvent.CANCEL</code></a><br/><p></p><p></p><p>
+ Dispatched when a Task is cancelled.
+ 
+ </p>
+	 Constant for the type of event fired when a Task is cancelled.
+	 
+	 </div><a name="event:complete"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">complete</td><td class="detailHeaderType"> Event </td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><span class="label">Event Object Type: </span><a href="../../../../org/spicefactory/lib/task/events/TaskEvent.html"><code>org.spicefactory.lib.task.events.TaskEvent</code></a><br/><span class="label">TaskEvent.type property = </span><a href="../../../../org/spicefactory/lib/task/events/TaskEvent.html#COMPLETE"><code>org.spicefactory.lib.task.events.TaskEvent.COMPLETE</code></a><br/><p></p><p></p><p>
+ Dispatched when a Task has completed its execution.
+ 
+ </p>
+	 Constant for the type of event fired when a Task is completed.
+	 
+	 </div><a name="event:error"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">error</td><td class="detailHeaderType"> Event </td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><span class="label">Event Object Type: </span><code>flash.events.ErrorEvent</code><br/><span class="label">ErrorEvent.type property = </span><code>flash.events.ErrorEvent.ERROR</code><br/><p></p><p></p><p>
+ Dispatched when a Task has aborted due to an error condition.
+ 
+ </p></div><a name="event:resume"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">resume</td><td class="detailHeaderType"> Event </td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><span class="label">Event Object Type: </span><a href="../../../../org/spicefactory/lib/task/events/TaskEvent.html"><code>org.spicefactory.lib.task.events.TaskEvent</code></a><br/><span class="label">TaskEvent.type property = </span><a href="../../../../org/spicefactory/lib/task/events/TaskEvent.html#RESUME"><code>org.spicefactory.lib.task.events.TaskEvent.RESUME</code></a><br/><p></p><p></p><p>
+ Dispatched when a suspended Task is resumed.
+ 
+ </p>
+	 Constant for the type of event fired when a Task is resumed.
+	 
+	 </div><a name="event:start"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">start</td><td class="detailHeaderType"> Event </td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><span class="label">Event Object Type: </span><a href="../../../../org/spicefactory/lib/task/events/TaskEvent.html"><code>org.spicefactory.lib.task.events.TaskEvent</code></a><br/><span class="label">TaskEvent.type property = </span><a href="../../../../org/spicefactory/lib/task/events/TaskEvent.html#START"><code>org.spicefactory.lib.task.events.TaskEvent.START</code></a><br/><p></p><p></p><p>
+ Dispatched when a Task is started.
+ 
+ </p>
+	 Constant for the type of event fired when a Task is started.
+	 
+	 </div><a name="event:suspend"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">suspend</td><td class="detailHeaderType"> Event </td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><span class="label">Event Object Type: </span><a href="../../../../org/spicefactory/lib/task/events/TaskEvent.html"><code>org.spicefactory.lib.task.events.TaskEvent</code></a><br/><span class="label">TaskEvent.type property = </span><a href="../../../../org/spicefactory/lib/task/events/TaskEvent.html#SUSPEND"><code>org.spicefactory.lib.task.events.TaskEvent.SUSPEND</code></a><br/><p></p><p></p><p>
+ Dispatched when a Task is suspended.
+ 
+ </p>
+	 Constant for the type of event fired when a Task is suspended.
+	 
+	 </div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.</footer><br/>Thu Jan 16 2014, 01:11 PM +08:00  </center></div></body></html><!--Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.<br/>Thu Jan 16 2014, 01:11 PM +08:00  -->

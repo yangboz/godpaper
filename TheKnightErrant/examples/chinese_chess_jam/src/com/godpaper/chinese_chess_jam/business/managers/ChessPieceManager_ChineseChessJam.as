@@ -24,7 +24,7 @@ package com.godpaper.chinese_chess_jam.business.managers
 	 * The chess piece manager manage chess piece move's validation/makeMove/unMakeMove.</br>
 	 * Also a way for the originator to be responsible for saving and restoring its states.</br>
 	 * @author Knight.zhou
-	 * @history 2010-12-02 using memento design pattern to implment make/unmake functions.
+	 * </time> 2010-12-02 using memento design pattern to implment make/unmake functions.
 	 */
 	public class ChessPieceManager_ChineseChessJam extends ChessPiecesManagerDefault
 	{

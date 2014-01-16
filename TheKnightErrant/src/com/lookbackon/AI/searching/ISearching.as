@@ -8,10 +8,10 @@ package com.lookbackon.AI.searching
 	/**
 	 * The basic chess game AI behaviors to be implemented.
 	 * @author Knight.zhou
-	 * @history before 2010-7-12 generateMoves/makeMove/unmakeMove/applyMove
-	 * @history 2010-7-12 noneMove/willNoneMove.
-	 * @history 2010-7-13 moves/captures/orderingMoves.
-	 * @history 2010-7-14 evaluation.
+	 * </time> before 2010-7-12 generateMoves/makeMove/unmakeMove/applyMove
+	 * </time> 2010-7-12 noneMove/willNoneMove.
+	 * </time> 2010-7-13 moves/captures/orderingMoves.
+	 * </time> 2010-7-14 evaluation.
 	 */	
 	public interface ISearching
 	{

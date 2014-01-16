@@ -15,7 +15,7 @@ package com.godpaper.as3.plugins
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
 	 * Created Apr 20, 2011 6:23:12 PM
-	 * @history 05/11/2011 add hasMoveIndicator property
+	 * </time> 05/11/2011 add hasMoveIndicator property
 	 */
 	public interface IPlugData
 	{

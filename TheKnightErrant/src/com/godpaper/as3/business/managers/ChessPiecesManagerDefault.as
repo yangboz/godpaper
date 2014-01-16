@@ -37,8 +37,8 @@ package com.godpaper.as3.business.managers
 	 * The default chess piece manager, manage chess piece move's validation/makeMove/unMakeMove.</br>
 	 * Also a way for the originator to be responsible for saving and restoring its states.</br>
 	 * @author Knight.zhou
-	 * @history 2010-12-02 using memento design pattern to implment make/unmake functions.
-	 * @history 2011-07-20 add default the side handlers at make move function.
+	 * </time> 2010-12-02 using memento design pattern to implment make/unmake functions.</br>
+	 * </time> 2011-07-20 add default the side handlers at make move function.</br>
 	 */
 	public class ChessPiecesManagerDefault implements IChessPieceManager
 	{

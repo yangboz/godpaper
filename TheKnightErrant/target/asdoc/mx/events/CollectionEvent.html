@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../override.css" type="text/css"><meta name="keywords" content="CollectionEvent,mx.events.CollectionEvent,COLLECTION_CHANGE,CURRENT_STATE_CHANGE,CURRENT_STATE_CHANGING,DELETE,PROPERTY_CHANGE,UPDATE,items,kind,kind,location,newState,newValue,oldLocation,oldState,oldValue,property,source"><title>mx.events.CollectionEvent</title></head><body><script language="javascript" type="text/javascript" src="../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../help.js"></script><script language="javascript" type="text/javascript" src="../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'CollectionEvent - GODPAPER Action Script API Document';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">GODPAPER</td><td class="titleTableTopNav" align="right"><a href="../../package-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../class-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../all-index-A.html" onclick="loadClassListFrame('../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../index.html?mx/events/CollectionEvent.html&amp;mx/events/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">CollectionEvent</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#constantSummary">Constants</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("CollectionEvent"); titleBar_setSubNav(true,true,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">mx.events</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  CollectionEvent</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">CollectionEvent  <img src="../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> flash.events.Event</td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p></p>
+  The mx.events.CollectionEvent class represents an event that is  
+  dispatched when the associated collection changes.
+ 
+  <p></p><p><span class="classHeaderTableLabel">See also</span></p><div class="seeAlso">FlexEvent.CURSOR_UPDATE</div><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#items" class="signatureLink">items</a> : Array<div class="summaryTableDescription">
+	  When the kind is CollectionEventKind.ADD
+      or CollectionEventKind.REMOVE the items property
+      is an Array of added/removed items.</div></td><td class="summaryTableOwnerCol">CollectionEvent</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#kind" class="signatureLink">kind</a> : String<div class="summaryTableDescription">
+      Indicates the kind of event that occurred.</div></td><td class="summaryTableOwnerCol">CollectionEvent</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#location" class="signatureLink">location</a> : int<div class="summaryTableDescription">
+      When the kind value is CollectionEventKind.ADD,
+      CollectionEventKind.MOVE,
+      CollectionEventKind.REMOVE, or
+      CollectionEventKind.REPLACE, this property is the 
+	  zero-base index in the collection of the item(s) specified in the 
+	  items property.</div></td><td class="summaryTableOwnerCol">CollectionEvent</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#oldLocation" class="signatureLink">oldLocation</a> : int<div class="summaryTableDescription">
+      When the kind value is CollectionEventKind.MOVE,
+      this property is the zero-based index in the target collection of the
+      previous location of the item(s) specified by the items property.</div></td><td class="summaryTableOwnerCol">CollectionEvent</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#CollectionEvent()" class="signatureLink">CollectionEvent</a>(type:String, bubbles:Boolean = false, cancelable:Boolean = false, kind:String = null, location:int = -1, oldLocation:int = -1, items:Array = null)</div><div class="summaryTableDescription">
+      Constructor.</div></td><td class="summaryTableOwnerCol">CollectionEvent</td></tr></table></div><a name="constantSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Constants</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableConstant"><tr><th>&nbsp;</th><th colspan="2">Constant</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#COLLECTION_CHANGE" class="signatureLink">COLLECTION_CHANGE</a> : String = collectionChange<div class="summaryTableDescription">[static] 
+      The CollectionEvent.COLLECTION_CHANGE constant defines the value of the
+      type property of the event object for an event that is
+      dispatched when a collection has changed.</div></td><td class="summaryTableOwnerCol">CollectionEvent</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="items"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">items</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>public var items:Array</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+	  When the <code>kind</code> is <code>CollectionEventKind.ADD</code>
+      or <code>CollectionEventKind.REMOVE</code> the <code>items</code> property
+      is an Array of added/removed items.
+	  When the <code>kind</code> is <code>CollectionEventKind.REPLACE</code>
+      or <code>CollectionEventKind.UPDATE</code> the <code>items</code> property
+      is an Array of PropertyChangeEvent objects with information about the items
+      affected by the event.
+      When a value changes, query the <code>newValue</code> and
+      <code>oldValue</code> fields of the PropertyChangeEvent objects
+      to find out what the old and new values were.
+      When the <code>kind</code> is <code>CollectionEventKind.REFRESH</code>
+      or <code>CollectionEventKind.RESET</code>, this array has zero length.
+     
+      </p><p> The default value is <code>[ ]</code>.</p><p><span class="label">See also</span></p><div class="seeAlso"><a href="PropertyChangeEvent.html" target="">PropertyChangeEvent</a></div></div><a name="propertyDetail"></a><a name="kind"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">kind</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>public var kind:String</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      Indicates the kind of event that occurred.
+      The property value can be one of the values in the 
+	  CollectionEventKind class, 
+	  or <code>null</code>, which indicates that the kind is unknown.
+	 
+      </p><p> The default value is <code>null</code>.</p><p><span class="label">See also</span></p><div class="seeAlso">CollectionEventKind</div></div><a name="propertyDetail"></a><a name="location"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">location</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>public var location:int</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      When the <code>kind</code> value is <code>CollectionEventKind.ADD</code>,
+      <code>CollectionEventKind.MOVE</code>,
+      <code>CollectionEventKind.REMOVE</code>, or
+      <code>CollectionEventKind.REPLACE</code>, this property is the 
+	  zero-base index in the collection of the item(s) specified in the 
+	  <code>items</code> property.
+     
+      </p><p> The default value is <code>-1</code>.</p><p><span class="label">See also</span></p><div class="seeAlso">CollectionEventKind</div></div><a name="propertyDetail"></a><a name="oldLocation"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">oldLocation</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>public var oldLocation:int</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      When the <code>kind</code> value is <code>CollectionEventKind.MOVE</code>,
+      this property is the zero-based index in the target collection of the
+      previous location of the item(s) specified by the <code>items</code> property.
+     
+      </p><p> The default value is <code>-1</code>.</p></div><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="CollectionEvent()"></a><a name="CollectionEvent(String,Boolean,Boolean,String,int,int,Array)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">CollectionEvent</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function CollectionEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false, kind:String = null, location:int = -1, oldLocation:int = -1, items:Array = null)</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p>
+      Constructor.
+	 
+      </p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">type</span>:String</code> &mdash; The event type; indicates the action that triggered the event.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">bubbles</span>:Boolean</code> (default = <code>false</code>)<code></code> &mdash; Specifies whether the event can bubble
+      up the display list hierarchy.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">cancelable</span>:Boolean</code> (default = <code>false</code>)<code></code> &mdash; Specifies whether the behavior
+      associated with the event can be prevented.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">kind</span>:String</code> (default = <code>null</code>)<code></code> &mdash; Indicates the kind of event that occured.
+      The parameter value can be one of the values in the CollectionEventKind 
+	  class, or <code>null</code>, which indicates that the kind is unknown.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">location</span>:int</code> (default = <code>-1</code>)<code></code> &mdash; When the <code>kind</code> is
+      <code>CollectionEventKind.ADD</code>,
+      <code>CollectionEventKind.MOVE</code>,
+      <code>CollectionEventKind.REMOVE</code>, or
+      <code>CollectionEventKind.REPLACE</code>,
+      this value indicates at what location the item(s) specified
+      in the <code>items property</code> can be found
+      within the target collection.
+     
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">oldLocation</span>:int</code> (default = <code>-1</code>)<code></code> &mdash; When the <code>kind</code> is
+      <code>CollectionEventKind.MOVE</code>, this value indicates
+      the old location within the target collection
+      of the item(s) specified in the <code>items</code> property.
+      
+      </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">items</span>:Array</code> (default = <code>null</code>)<code></code> &mdash; Array of objects with information about the items 
+	  affected by the event, as described in the <code>items</code> property.
+      When the <code>kind</code> is <code>CollectionEventKind.REFRESH</code>
+      or <code>CollectionEventKind.RESET</code>, this Array has zero length.
+      
+      </td></tr></table></div><div class="detailSectionHeader">Constant Detail</div><a name="constantDetail"></a><a name="COLLECTION_CHANGE"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">COLLECTION_CHANGE</td><td class="detailHeaderType">Constant</td></tr></table><div class="detailBody"><code>public static const COLLECTION_CHANGE:String = collectionChange</code><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Language Version :&nbsp;</b></td><td>ActionScript 3.0</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Flex 3</td></tr></table><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Runtime Versions :&nbsp;</b></td><td>Flash Player  9, AIR 1.1</td></tr></table><p></p><p></p><p>
+      The CollectionEvent.COLLECTION_CHANGE constant defines the value of the
+      <code>type</code> property of the event object for an event that is
+      dispatched when a collection has changed.
+     
+      <p>The properties of the event object have the following values.
+      Not all properties are meaningful for all kinds of events.
+	  See the detailed property descriptions for more information.</p>
+      <table class="innertable" ><tr><th>Property</th><th>Value</th></tr><tr><td><code>bubbles</code></td><td>false</td></tr><tr><td><code>cancelable</code></td><td>false</td></tr><tr><td><code>currentTarget</code></td><td>The Object that defines the
+           event listener that handles the event. For example, if you use
+           <code>myButton.addEventListener()</code> to register an event listener,
+           myButton is the value of the <code>currentTarget</code>. </td></tr><tr><td><code>items</code></td><td>An Array of objects with
+           information about the items affected by the event.
+	 		 The contents of this field depend on the event kind;
+	       for details see the <code>items</code> property</td></tr><tr><td><code>kind</code></td><td>The kind of event.
+           The valid values are defined in the CollectionEventKind 
+	       class as constants.</td></tr><tr><td><code>location</code></td><td>Location within the target collection
+             of the item(s) specified in the <code>items</code> property.</td></tr><tr><td><code>oldLocation</code></td><td>the previous location in the collection
+             of the item specified in the <code>items</code> property.</td></tr><tr><td><code>target</code></td><td>The Object that dispatched the event;
+           it is not always the Object listening for the event.
+           Use the <code>currentTarget</code> property to always access the
+           Object listening for the event.</td></tr><tr><td><code>type</code></td><td>CollectionEvent.COLLECTION_CHANGE</td></tr></table>
+     
+      </p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.</footer><br/>Thu Jan 16 2014, 01:11 PM +08:00  </center></div></body></html><!--Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.<br/>Thu Jan 16 2014, 01:11 PM +08:00  -->

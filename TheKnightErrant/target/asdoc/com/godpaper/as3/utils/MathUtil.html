@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../../override.css" type="text/css"><meta name="keywords" content="MathUtil,com.godpaper.as3.utils.MathUtil,GetConstants,ParseConstant,callProperty,clear,extendClass,factorial,getBishopMoves,getBishopOccupies,getEastMoves,getEastNorthMoves,getEastNorthOccuipies,getEastOccuipies,getEastSouthMoves,getEastSouthOccuipies,getInstance,getLogger,getNorthMoves,getNorthOccuipies,getProperty,getQueenMoves,getQueenOccupies,getRookMoves,getRookOccupies,getSouthMoves,getSouthOccuipies,getValue,getWestMoves,getWestNorthMoves,getWestNorthOccuipies,getWestOccuipies,getWestSouthMoves,getWestSouthOccuipies,get,initEnum,intXORrandom,mixinMembers,mixinStatics,onCaptures,onDefends,onEatOff,onNonNull,onSuicide,permutateArray,permutation,premutate,produce,randomPremutate,randomPremutates,setProperty,set,sortOnCaptures,sortOnMoves,sortOnOccupies,toFactoradic,toFactoradic2,toString,transactAbs,transactDiffRandomNumberInRange,transactRandomNumberInRange,uintXORrandom"><title>com.godpaper.as3.utils.MathUtil</title></head><body><script language="javascript" type="text/javascript" src="../../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'MathUtil - GODPAPER Action Script API Document';
+				var baseRef = '../../../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">GODPAPER</td><td class="titleTableTopNav" align="right"><a href="../../../../package-summary.html" onclick="loadClassListFrame('../../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../../class-summary.html" onclick="loadClassListFrame('../../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../../all-index-A.html" onclick="loadClassListFrame('../../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../../index.html?com/godpaper/as3/utils/MathUtil.html&amp;com/godpaper/as3/utils/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">MathUtil</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("MathUtil"); titleBar_setSubNav(false,false,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">com.godpaper.as3.utils</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  MathUtil</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">MathUtil  <img src="../../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr></table><p></p><p></p><p></p>
+	 
+	 
+	 Permutation Utility class version 1.
+	 
+	 Copyright (c) 2008 H. Melih Elibol
+	 
+	 Permission is hereby granted, free of charge, to any person obtaining a copy
+	 of this software and associated documentation files (the "Software"), to deal
+	 in the Software without restriction, including without limitation the rights
+	 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	 copies of the Software, and to permit persons to whom the Software is
+	 furnished to do so, subject to the following conditions:
+	 
+	 The above copyright notice and this permission notice shall be included in
+	 all copies or substantial portions of the Software.
+	 
+	 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	 THE SOFTWARE.
+	 
+	 /
+	 /
+	 
+	 <p></p><br/><hr></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#factorial()" class="signatureLink">factorial</a>(n:Number):Number</div><div class="summaryTableDescription">[static] 
+		 Computes the factorial of parameter n.</div></td><td class="summaryTableOwnerCol">MathUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#intXORrandom()" class="signatureLink">intXORrandom</a>():Number</div><div class="summaryTableDescription">[static] 
+		 Using XOR algorithm with integer, 
+		 primarily because AS3 is lightning-quick with bit operations, 
+		 and the algorithm is only 4 lines of code.</div></td><td class="summaryTableOwnerCol">MathUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#permutateArray()" class="signatureLink">permutateArray</a>(n:Array, k:Number):Array</div><div class="summaryTableDescription">[static] 
+		 
+		 </div></td><td class="summaryTableOwnerCol">MathUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#permutation()" class="signatureLink">permutation</a>(n:Number, k:Number):Array</div><div class="summaryTableDescription">[static] 
+		 </div></td><td class="summaryTableOwnerCol">MathUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#premutate()" class="signatureLink">premutate</a>(n:Number, r:Number):Number</div><div class="summaryTableDescription">[static] 
+		 
+		 </div></td><td class="summaryTableOwnerCol">MathUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#randomPremutate()" class="signatureLink">randomPremutate</a>(n:Array, r:Number):Array</div><div class="summaryTableDescription">[static] 
+		 
+		 </div></td><td class="summaryTableOwnerCol">MathUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#randomPremutates()" class="signatureLink">randomPremutates</a>(n:Array, r:Number, s:Boolean = true):Array</div><div class="summaryTableDescription">[static] 
+		 
+		 </div></td><td class="summaryTableOwnerCol">MathUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#toFactoradic()" class="signatureLink">toFactoradic</a>(n:Number):Array</div><div class="summaryTableDescription">[static] 
+		 
+		 logic (lsd = least significant digit):
+		 
+		 j++; //move to next digit
+		 n/=(j-1); //move "decimal place" of n (this is to create the next lsd) by previous base j-1, which does not move (since j is 1)
+		 Number(n)%j; //get the lsd of n in base j
+		 
+		 </div></td><td class="summaryTableOwnerCol">MathUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#toFactoradic2()" class="signatureLink">toFactoradic2</a>(n:Number, k:Number):Array</div><div class="summaryTableDescription">[static] 
+		 
+		 This function can be used with a permutation generator.</div></td><td class="summaryTableOwnerCol">MathUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#transactAbs()" class="signatureLink">transactAbs</a>(value:Number):Number</div><div class="summaryTableDescription">[static] 
+		 
+		 </div></td><td class="summaryTableOwnerCol">MathUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#transactDiffRandomNumberInRange()" class="signatureLink">transactDiffRandomNumberInRange</a>(min:Number, max:Number):Number</div><div class="summaryTableDescription">[static] 
+		 
+		 </div></td><td class="summaryTableOwnerCol">MathUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#transactRandomNumberInRange()" class="signatureLink">transactRandomNumberInRange</a>(min:Number, max:Number):Number</div><div class="summaryTableDescription">[static] 
+		 
+		 </div></td><td class="summaryTableOwnerCol">MathUtil</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#uintXORrandom()" class="signatureLink">uintXORrandom</a>():Number</div><div class="summaryTableDescription">[static] 
+		 Using XOR algorithm with un-integer, 
+		 primarily because AS3 is lightning-quick with bit operations, 
+		 and the algorithm is only 4 lines of code.</div></td><td class="summaryTableOwnerCol">MathUtil</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="factorial()"></a><a name="factorial(Number)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">factorial</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public static function factorial(n:Number):Number</code><p></p><p></p><p>
+		 Computes the factorial of parameter n.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">n</span>:Number</code> &mdash; the number
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Number</code> &mdash; the factorial of n
+		 
+		 </td></tr></table></div><a name="intXORrandom()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">intXORrandom</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function intXORrandom():Number</code><p></p><p></p><p>
+		 Using XOR algorithm with integer, 
+		 primarily because AS3 is lightning-quick with bit operations, 
+		 and the algorithm is only 4 lines of code. 
+		 Notice: it is 2 time faster than Math.random();
+		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Number</code> &mdash; random number between 0~1.
+		 
+		 </td></tr></table></div><a name="permutateArray()"></a><a name="permutateArray(Array,Number)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">permutateArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function permutateArray(n:Array, k:Number):Array</code><p></p><p></p><p>
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">n</span>:Array</code> &mdash; Order as an array
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">k</span>:Number</code> &mdash; Factoradic
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; kth permutation of order n
+		 
+		 </td></tr></table></div><a name="permutation()"></a><a name="permutation(Number,Number)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">permutation</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function permutation(n:Number, k:Number):Array</code><p></p><p></p><p>
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">n</span>:Number</code> &mdash; Order
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">k</span>:Number</code> &mdash; Factoradic
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; kth permutation of order n
+		 </td></tr></table></div><a name="premutate()"></a><a name="premutate(Number,Number)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">premutate</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function premutate(n:Number, r:Number):Number</code><p></p><p></p><p>
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">n</span>:Number</code> &mdash; number of blanket elements.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">r</span>:Number</code> &mdash; number of picking elements from blanket.
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Number</code> &mdash; the premutated number with picked elements.
+		 
+		 </td></tr></table></div><a name="randomPremutate()"></a><a name="randomPremutate(Array,Number)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">randomPremutate</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function randomPremutate(n:Array, r:Number):Array</code><p></p><p></p><p>
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">n</span>:Array</code> &mdash; number of blanket elements.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">r</span>:Number</code> &mdash; number of picking elements from blanket.
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; one of posibilities of the premutated number with picked elements.
+		 
+		 </td></tr></table></div><a name="randomPremutates()"></a><a name="randomPremutates(Array,Number,Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">randomPremutates</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function randomPremutates(n:Array, r:Number, s:Boolean = true):Array</code><p></p><p></p><p>
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">n</span>:Array</code> &mdash; number of blanket elements.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">r</span>:Number</code> &mdash; number of picking elements from blanket.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">s</span>:Boolean</code> (default = <code>true</code>)<code></code> &mdash; whether the picked elements is successional.
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; all of posibilities of the premutated number with picked elements.
+		 
+		 </td></tr></table></div><a name="toFactoradic()"></a><a name="toFactoradic(Number)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toFactoradic</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function toFactoradic(n:Number):Array</code><p></p><p></p><p>
+		 
+		 logic (lsd = least significant digit):
+		 
+		 j++; //move to next digit
+		 n/=(j-1); //move "decimal place" of n (this is to create the next lsd) by previous base j-1, which does not move (since j is 1)
+		 Number(n)%j; //get the lsd of n in base j
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">n</span>:Number</code> &mdash; positive integer to represent
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; Factoradic representation of integer k as an Array
+		 
+		 </td></tr></table></div><a name="toFactoradic2()"></a><a name="toFactoradic2(Number,Number)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toFactoradic2</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function toFactoradic2(n:Number, k:Number):Array</code><p></p><p></p><p>
+		 
+		 This function can be used with a permutation generator.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">n</span>:Number</code> &mdash; positive integer to represent
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">k</span>:Number</code> &mdash; factoradic length
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; Factoradic representation of integer k as an Array
+		 
+		 </td></tr></table></div><a name="transactAbs()"></a><a name="transactAbs(Number)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">transactAbs</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function transactAbs(value:Number):Number</code><p></p><p></p><p>
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:Number</code> &mdash; wheather negative or postive number.
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Number</code> &mdash; postive number.
+		 
+		 </td></tr></table></div><a name="transactDiffRandomNumberInRange()"></a><a name="transactDiffRandomNumberInRange(Number,Number)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">transactDiffRandomNumberInRange</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function transactDiffRandomNumberInRange(min:Number, max:Number):Number</code><p></p><p></p><p>
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">min</span>:Number</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">max</span>:Number</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Number</code> &mdash; the random number between min and max but diff from previous result.
+		 
+		 </td></tr></table></div><a name="transactRandomNumberInRange()"></a><a name="transactRandomNumberInRange(Number,Number)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">transactRandomNumberInRange</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function transactRandomNumberInRange(min:Number, max:Number):Number</code><p></p><p></p><p>
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">min</span>:Number</code> &mdash; minium of random ranges.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">max</span>:Number</code> &mdash; maxium of random ranges.
+		 </td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Number</code> &mdash; the random number between min and max.
+		 
+		 </td></tr></table></div><a name="uintXORrandom()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">uintXORrandom</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public static function uintXORrandom():Number</code><p></p><p></p><p>
+		 Using XOR algorithm with un-integer, 
+		 primarily because AS3 is lightning-quick with bit operations, 
+		 and the algorithm is only 4 lines of code. 
+		 Notice: it is 4 time faster than Math.random();
+		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Number</code> &mdash; random number between 0~1.
+		 
+		 </td></tr></table></div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.</footer><br/>Thu Jan 16 2014, 01:11 PM +08:00  </center></div></body></html><!--Information on this site is by default visible to everyone within GODPAPER. Please ensure you apply appropriate access controls when posting GODPAPER Confidential information.Copyright © by GODPAPER. All material on this collaboration platform is the property of GODPAPER.<br/>Thu Jan 16 2014, 01:11 PM +08:00  -->

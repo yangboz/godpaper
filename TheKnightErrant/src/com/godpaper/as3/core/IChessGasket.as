@@ -10,8 +10,8 @@ package com.godpaper.as3.core
 	 * The interface of ChessGasket.Abstarct the chess gasket foundation and properties.
 	 *
 	 * @author Knight.zhou
-	 * @history 2011-2-18 current conductVO property added.
-	 * @history 2012-5-11 added the global configure variables.
+	 * </time> 2011-2-18 current conductVO property added.
+	 * </time> 2012-5-11 added the global configure variables.
 	 */	
 	public interface IChessGasket extends IVisualElement,IPosition,IDragdropable
 	{

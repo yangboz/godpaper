@@ -73,8 +73,8 @@ package com.godpaper.as3.views.components
 	 * @playerVersion 11.2+
 	 * @airVersion 3.2+
 	 * Created Apr 16, 2012 3:17:37 PM
-	 * @history 08/02/2011 added the button click event handler to toggle chess piece move functions.
-	 * @history 18/04/2012 extend the starling button for high performance solution.
+	 * </time> 08/02/2011 added the button click event handler to toggle chess piece move functions.
+	 * </time> 18/04/2012 extend the starling button for high performance solution.
 	 */   	 
 	public class ChessPiece extends VisualElement implements IChessPiece
 	{		

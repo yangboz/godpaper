@@ -21,7 +21,7 @@ package com.godpaper.as3.plugins.mochi
 
 	/**
 	 * MochiPlugin.as class.   
-	 * @see:http://www.mochigames.com/	
+	 * link:http://www.mochigames.com/	
 	 * @author yangboz
 	 * @langVersion 3.0
 	 * @playerVersion 9.0
