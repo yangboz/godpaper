@@ -1,0 +1,123 @@
+Text for description in com.godpaper.as3.consts:ZobristConstants is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for description in com.godpaper.as3.consts:DefaultPiecesConstants is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for description in com.lookbackon.AI.searching:SearchingBase is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for description in com.gskinner.motion:GTween is not valid.
+org.xml.sax.SAXParseException: 元素类型“LI”必须以匹配的结束标签“</LI>”结束。
+
+Text for description in com.gskinner.motion:GTweenTimeline is not valid.
+org.xml.sax.SAXParseException: 元素类型“hr”必须以匹配的结束标签“</hr>”结束。
+
+Text for description in com.gskinner.motion:GTweener is not valid.
+org.xml.sax.SAXParseException: 元素类型“hr”必须以匹配的结束标签“</hr>”结束。
+
+Text for description in com.gskinner.motion.plugins:SnappingPlugin is not valid.
+org.xml.sax.SAXParseException: 元素类型“LI”必须以匹配的结束标签“</LI>”结束。
+
+Text for description in com.gskinner.motion.plugins:SmartRotationPlugin is not valid.
+org.xml.sax.SAXParseException: 元素类型“LI”必须以匹配的结束标签“</LI>”结束。
+
+Text for description in com.gskinner.motion.plugins:SoundTransformPlugin is not valid.
+org.xml.sax.SAXParseException: 元素类型“LI”必须以匹配的结束标签“</LI>”结束。
+
+Text for description in com.gskinner.motion.plugins:ColorTransformPlugin is not valid.
+org.xml.sax.SAXParseException: 元素类型“LI”必须以匹配的结束标签“</LI>”结束。
+
+Text for description in com.gskinner.motion.plugins:CurrentFramePlugin is not valid.
+org.xml.sax.SAXParseException: 元素类型“LI”必须以匹配的结束标签“</LI>”结束。
+
+Text for description in com.gskinner.motion.plugins:MotionBlurPlugin is not valid.
+org.xml.sax.SAXParseException: 在实体引用中实体名称必须紧跟在“&”之后。
+
+Text for description in com.gskinner.motion.plugins:MatrixPlugin is not valid.
+org.xml.sax.SAXParseException: 元素类型“LI”必须以匹配的结束标签“</LI>”结束。
+
+Text for description in com.gskinner.motion.plugins:ColorAdjustPlugin is not valid.
+org.xml.sax.SAXParseException: 元素类型“LI”必须以匹配的结束标签“</LI>”结束。
+
+Text for description in com.gskinner.motion.plugins:BlurPlugin is not valid.
+org.xml.sax.SAXParseException: 元素类型“LI”必须以匹配的结束标签“</LI>”结束。
+
+Text for description in com.gskinner.motion.plugins:AutoHidePlugin is not valid.
+org.xml.sax.SAXParseException: 元素类型“LI”必须以匹配的结束标签“</LI>”结束。
+
+Text for description in com.lookbackon.ds:BitBoard is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for description in com.lookbackon.ds:ZobristHashTable is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for description in com.lookbackon.AI.fuzzyLogicSystem:FuzzyRule is not valid.
+org.xml.sax.SAXParseException: 与元素类型“linguistic”相关联的属性名称“variable”必须后跟“=”字符。
+
+Text for example in org.generalrelativity.thread:GreenThread is not valid.
+org.xml.sax.SAXParseException: 元素类型“IRunnable”必须以匹配的结束标签“</IRunnable>”结束。
+
+Text for description in com.godpaper.as3.model.vos:ConductVO is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for description in com.godpaper.as3.model:OpeningBookModel is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for description in com.godpaper.as3.model:EndingGameModel is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for description in com.godpaper.as3.tasks:CreateChessVoTask is not valid.
+org.xml.sax.SAXParseException: 元素类型“conduct”必须后跟属性规范“>”或“/>”。
+
+Text for description in com.godpaper.as3.impl:AbstractChessVO is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for description in de.polygonal.ds.null is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for description in de.polygonal.math.null is not valid.
+org.xml.sax.SAXParseException: 在实体引用中实体名称必须紧跟在“&”之后。
+
+Text for return in com.suckatmath.machinelearning.genetic.core:EvolvableComparator/com.suckatmath.machinelearning.genetic.core:EvolvableComparator:compareFitness is not valid.
+org.xml.sax.SAXParseException: 元素的内容必须由格式正确的字符数据或标记组成。
+
+Text for description in com.suckatmath.machinelearning.genetic.core:GeneticEngine/setCrossoverNumParents is not valid.
+org.xml.sax.SAXParseException: 元素的内容必须由格式正确的字符数据或标记组成。
+
+Text for param in de.polygonal.ds:DLinkedList/sort is not valid.
+org.xml.sax.SAXParseException: 元素的内容必须由格式正确的字符数据或标记组成。
+
+Text for param in de.polygonal.ds:SLinkedList/sort is not valid.
+org.xml.sax.SAXParseException: 元素的内容必须由格式正确的字符数据或标记组成。
+
+Text for param in mochi.as3:MochiSocial/showLoginWidget is not valid.
+org.xml.sax.SAXParseException: 元素或属性与 QName 生产: QName::=(NCName':')?NCName 不匹配。 
+
+Text for param in mochi.as3:MochiScores/showLeaderboard is not valid.
+org.xml.sax.SAXParseException: 元素或属性与 QName 生产: QName::=(NCName':')?NCName 不匹配。 
+
+Text for param in mochi.as3:MochiCoins/showItem is not valid.
+org.xml.sax.SAXParseException: 元素或属性与 QName 生产: QName::=(NCName':')?NCName 不匹配。 
+
+Text for param in mochi.as3:MochiCoins/showStore is not valid.
+org.xml.sax.SAXParseException: 元素或属性与 QName 生产: QName::=(NCName':')?NCName 不匹配。 
+
+Text for param in mochi.as3:MochiCoins/showVideo is not valid.
+org.xml.sax.SAXParseException: 元素或属性与 QName 生产: QName::=(NCName':')?NCName 不匹配。 
+
+Text for description in com.lookbackon.AI.searching:SearchingBase/SearchingBase is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for description in com.lookbackon.AI.searching:SearchingBase/makeMove is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for description in com.lookbackon.AI.searching:SearchingBase/orderingMoves/get is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for description in com.lookbackon.ds:ZobristHashTable/xor is not valid.
+org.xml.sax.SAXParseException: 元素类型“test”必须以匹配的结束标签“</test>”结束。
+
+Text for example in org.generalrelativity.thread.util:ThreadUtil/open is not valid.
+org.xml.sax.SAXParseException: 元素类型“IRunnable”必须以匹配的结束标签“</IRunnable>”结束。
+
