@@ -40,7 +40,7 @@
 	</target>
 
 	<target name="-cleanup">
-		<delete dir="${dependency.output}"/>
+		<delete dir="${dependency.output}" includeemptydirs="true" failonerror="false"/>
 	</target>
 
 	<target name="-starling" depends="-prepare">
