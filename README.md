@@ -153,3 +153,7 @@ See:<a href="http://www.godpaper.com/godpaper/index.php/Framework">http://www.go
 
 # License
 Seee:https://github.com/yangboz/godpaper/blob/master/LICENSE.md
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yangboz/godpaper/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
