@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package the_chess_jam.src
+package
 {
 	//--------------------------------------------------------------------------
 	//
@@ -47,10 +47,10 @@ package the_chess_jam.src
 		//  CONSTANTS
 		//----------------------------------
 		// Texture Atlas
-		[Embed(source="assets/textures/1x/AtlasTexture_the_chess_jam.xml", mimeType="application/octet-stream")]
+		[Embed(source="../assets/textures/1x/the_chess_jam/AtlasTexture_the_chess_jam.xml", mimeType="application/octet-stream")]
 		public static const AtlasTextureXml:Class;
 		
-		[Embed(source="assets/textures/1x/AtlasTexture_the_chess_jam.png")]
+		[Embed(source="../assets/textures/1x/the_chess_jam/AtlasTexture_the_chess_jam.png")]
 		public static const AtlasTexture:Class;
 		
 //		[Embed(source="/assets/textures/1x/background_the_chess_jam.png")]

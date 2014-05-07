@@ -30,7 +30,7 @@ package com.godpaper.as3.business
 	import mx.logging.ILogger;
 	import mx.utils.StringUtil;
 	
-	import org.hamcrest.text.RegExpMatcher;
+//	import org.hamcrest.text.RegExpMatcher;
 
 	//--------------------------------------------------------------------------
 	//

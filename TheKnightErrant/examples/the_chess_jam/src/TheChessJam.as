@@ -42,10 +42,10 @@ package
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.utils.VersionController;
 	import com.godpaper.as3.views.scenes.MainScene;
-	import the_chess_jam.src.com.godpaper.the_chess_jam.business.factory.ChessFactory_TheChessJam;
-	import the_chess_jam.src.com.godpaper.the_chess_jam.business.managers.ChessPiecesManager_TheChessJam;
-	import the_chess_jam.src.com.godpaper.the_chess_jam.service.TheChessJamService;
-	import the_chess_jam.src.com.godpaper.the_chess_jam.views.components.ChessGasket_TheChessJam;
+	import com.godpaper.the_chess_jam.business.factory.ChessFactory_TheChessJam;
+	import com.godpaper.the_chess_jam.business.managers.ChessPiecesManager_TheChessJam;
+	import com.godpaper.the_chess_jam.service.TheChessJamService;
+	import com.godpaper.the_chess_jam.views.components.ChessGasket_TheChessJam;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -171,7 +171,6 @@ package
 			//			var texture:Texture = AssetEmbedsDefault.getTexture(DefaultConstants.IMG_BACK_GROUND);
 			//			BoardConfig.backgroundImage = new Image(texture);
 			//Pieces box config:
-			BoardConfig.piecesBoxRequired=false; //Pieces box used to obtain chess pieces as a container.
 			BoardConfig.backgroundImageRequired=false; //
 			//gasket config:
 			GasketConfig.maxPoolSize=32; //Notices:Object pools full of objects with dangerously stale state are sometimes called object cesspools and regarded as an anti-pattern.
@@ -180,6 +179,8 @@ package
 			GasketConfig.width=34;
 			GasketConfig.height=34;
 			GasketConfig.implement = ChessGasket_TheChessJam;
+			//Pieces box config:
+			PluginConfig.piecesBoxRequired = false;//Pieces box used to obtain chess pieces as a container.
 			//about piece:
 			PieceConfig.factory=ChessFactory_TheChessJam; //your custom chess factory.
 			PieceConfig.maxPoolSizeBlue=5; //What's the number of blue(computer) chess pieces?

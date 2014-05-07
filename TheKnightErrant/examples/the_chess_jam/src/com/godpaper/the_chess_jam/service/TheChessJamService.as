@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package the_chess_jam.src.com.godpaper.the_chess_jam.service
+package com.godpaper.the_chess_jam.service
 {
 	//--------------------------------------------------------------------------
 	//

@@ -1,4 +1,4 @@
-package the_chess_jam.src.com.godpaper.the_chess_jam.consts
+package com.godpaper.the_chess_jam.consts
 {
 	//--------------------------------------------------------------------------
 	//

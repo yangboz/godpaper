@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package the_chess_jam.src.com.godpaper.the_chess_jam.business.factory
+package com.godpaper.the_chess_jam.business.factory
 {
 	//--------------------------------------------------------------------------
 	//
@@ -35,14 +35,14 @@ package the_chess_jam.src.com.godpaper.the_chess_jam.business.factory
 	import com.godpaper.as3.model.vos.ConductVO;
 	import com.godpaper.as3.model.vos.OmenVO;
 	import com.godpaper.as3.views.components.ChessPiece;
-	import the_chess_jam.src.com.godpaper.the_chess_jam.consts.Constants_TheChessJam;
-	import the_chess_jam.src.com.godpaper.the_chess_jam.consts.PiecesConstants_TheChessJam;
-	import the_chess_jam.src.com.godpaper.the_chess_jam.model.vo.BishopVO;
-	import the_chess_jam.src.com.godpaper.the_chess_jam.model.vo.KnightVO;
-	import the_chess_jam.src.com.godpaper.the_chess_jam.model.vo.MarshalVO;
-	import the_chess_jam.src.com.godpaper.the_chess_jam.model.vo.PawnVO;
-	import the_chess_jam.src.com.godpaper.the_chess_jam.model.vo.QueenVO;
-	import the_chess_jam.src.com.godpaper.the_chess_jam.model.vo.RookVO;
+	import com.godpaper.the_chess_jam.consts.Constants_TheChessJam;
+	import com.godpaper.the_chess_jam.consts.PiecesConstants_TheChessJam;
+	import com.godpaper.the_chess_jam.model.vo.BishopVO;
+	import com.godpaper.the_chess_jam.model.vo.KnightVO;
+	import com.godpaper.the_chess_jam.model.vo.MarshalVO;
+	import com.godpaper.the_chess_jam.model.vo.PawnVO;
+	import com.godpaper.the_chess_jam.model.vo.QueenVO;
+	import com.godpaper.the_chess_jam.model.vo.RookVO;
 	
 	import flash.geom.Point;
 	

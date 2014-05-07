@@ -19,7 +19,7 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  */
-package the_chess_jam.src.com.godpaper.the_chess_jam.business.managers
+package com.godpaper.the_chess_jam.business.managers
 {
 	//--------------------------------------------------------------------------
 	//
@@ -38,7 +38,7 @@ package the_chess_jam.src.com.godpaper.the_chess_jam.business.managers
 	import com.godpaper.as3.utils.LogUtil;
 	import com.godpaper.as3.views.components.ChessGasket;
 	import com.godpaper.as3.views.components.ChessPiece;
-	import chinese_chess_jam.src.com.godpaper.chinese_chess_jam.consts.PiecesConstants_ChineseChessJam;
+	import com.godpaper.the_chess_jam.consts.PiecesConstants_TheChessJam;
 	
 	import flash.geom.Point;
 	
@@ -108,7 +108,7 @@ package the_chess_jam.src.com.godpaper.the_chess_jam.business.managers
 				//Checkmate condition
 				//				if (ChessPiece(cGasket.getElementAt(0)).label == PiecesConstants_ChineseChessJam.BLUE_MARSHAL.label)
 				//				if (ChessPiece(cGasket.getChildAt(0)).label == PiecesConstants_ChineseChessJam.BLUE_MARSHAL.label)	
-				if (removedPiece.label == PiecesConstants_ChineseChessJam.BLUE_MARSHAL.label)	
+				if (removedPiece.label == PiecesConstants_TheChessJam.BLUE_MARSHAL.label)	
 				{
 					//conduct service transform
 					if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
@@ -123,7 +123,7 @@ package the_chess_jam.src.com.godpaper.the_chess_jam.business.managers
 				}
 				//				if (ChessPiece(cGasket.getElementAt(0)).label == PiecesConstants_ChineseChessJam.RED_MARSHAL.label)
 				//				if (ChessPiece(cGasket.getChildAt(0)).label == PiecesConstants_ChineseChessJam.RED_MARSHAL.label)
-				if (removedPiece.label == PiecesConstants_ChineseChessJam.RED_MARSHAL.label)	
+				if (removedPiece.label == PiecesConstants_TheChessJam.RED_MARSHAL.label)	
 				{
 					//conduct service transform
 					if(GameConfig.playMode==GameConfig.HUMAN_VS_HUMAN)
