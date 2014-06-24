@@ -1,3 +1,7 @@
+#Notice:
+
+Migrate to standalone repository: https://github.com/yangboz/TheRealBishop
+
 #About:
 
 TheRealBishop project code base translated on TheKnightErrant by ActionScript3 language.
