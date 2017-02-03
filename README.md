@@ -157,3 +157,8 @@ Seee:https://github.com/yangboz/godpaper/blob/master/LICENSE.md
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yangboz/godpaper/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/yangboz/godpaper/badge.svg?style=beer-square)](https://beerpay.io/yangboz/godpaper)  [![Beerpay](https://beerpay.io/yangboz/godpaper/make-wish.svg?style=flat-square)](https://beerpay.io/yangboz/godpaper?focus=wish)
