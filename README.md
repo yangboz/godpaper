@@ -137,6 +137,10 @@ Biologically Inspired
 
 Hybrid Models
 
+*Deep Learning AI*
+
+Tensorflow: https://github.com/Elucidation/tensorflow_chessbot
+
 # Tutorials
 See:<a href="http://blog.lookbackon.com/?p=2469">http://blog.lookbackon.com/?p=2469</a>
 # Downloads
