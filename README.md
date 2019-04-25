@@ -141,6 +141,8 @@ Hybrid Models
 
 Tensorflow: https://github.com/Elucidation/tensorflow_chessbot
 
+ReactJS & ReactNative: https://www.npmjs.com/package/react-native-game-engine
+
 # Tutorials
 See:<a href="http://blog.lookbackon.com/?p=2469">http://blog.lookbackon.com/?p=2469</a>
 # Downloads
