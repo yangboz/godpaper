@@ -164,7 +164,8 @@ Seee:https://github.com/yangboz/godpaper/blob/master/LICENSE.md
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yangboz/godpaper/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 
-## Support on Beerpay
-Hey dude! Help me out for a couple of :beers:!
+## next step
 
-[![Beerpay](https://beerpay.io/yangboz/godpaper/badge.svg?style=beer-square)](https://beerpay.io/yangboz/godpaper)  [![Beerpay](https://beerpay.io/yangboz/godpaper/make-wish.svg?style=flat-square)](https://beerpay.io/yangboz/godpaper?focus=wish)
+based on boardgame.io as game interface  and game logic ,customize and  train muzero  AI engine for customized boardgame.io's AI player, publish board games to freeboardgames.org.
+please move to https://github.com/godpaper
+
