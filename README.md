@@ -1,4 +1,4 @@
-GODPAPER:http://smartkit.tech/website/godpaper (民间棋类游戏WIKI)
+GODPAPER:[http://smartkit.tech/website/godpaper](http://123.207.143.33:84/godpaper/) (民间棋类游戏WIKI)
 
 # About
 A flash & ios board game framework named GODPAPER(code name:"the real knight"&"the real bishop") by as3 & objective-c language.
