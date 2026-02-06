@@ -3,5 +3,5 @@ numpy
 pygtp>=0.4
 sgf==0.5
 tensorflow>=1.0
-protobuf==4.25.8
+protobuf==5.29.6
 six==1.10.0
